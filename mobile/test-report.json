@@ -1,0 +1,75 @@
+{
+  "startTime": "2025-11-07T12:52:52.740Z",
+  "endTime": "2025-11-07T12:52:53.311Z",
+  "tests": [
+    {
+      "name": "User Registration Flow",
+      "category": "auth",
+      "status": "failed",
+      "error": "Registration should return a response",
+      "timestamp": "2025-11-07T12:52:52.895Z"
+    },
+    {
+      "name": "Customer Login",
+      "category": "auth",
+      "status": "passed",
+      "error": null,
+      "timestamp": "2025-11-07T12:52:52.953Z"
+    },
+    {
+      "name": "Existing User Auth",
+      "category": "auth",
+      "status": "failed",
+      "error": "Cannot read properties of undefined (reading 'email')",
+      "timestamp": "2025-11-07T12:52:52.953Z"
+    },
+    {
+      "name": "Category List",
+      "category": "menu",
+      "status": "passed",
+      "error": null,
+      "timestamp": "2025-11-07T12:52:53.003Z"
+    },
+    {
+      "name": "Food List",
+      "category": "menu",
+      "status": "passed",
+      "error": null,
+      "timestamp": "2025-11-07T12:52:53.060Z"
+    },
+    {
+      "name": "Menu System",
+      "category": "menu",
+      "status": "failed",
+      "error": "Should get search results",
+      "timestamp": "2025-11-07T12:52:53.124Z"
+    },
+    {
+      "name": "Table System",
+      "category": "tables",
+      "status": "failed",
+      "error": "Should get table list",
+      "timestamp": "2025-11-07T12:52:53.224Z"
+    },
+    {
+      "name": "Kitchen System",
+      "category": "kitchen",
+      "status": "failed",
+      "error": "Should get kitchen orders",
+      "timestamp": "2025-11-07T12:52:53.280Z"
+    },
+    {
+      "name": "Settings System",
+      "category": "settings",
+      "status": "failed",
+      "error": "Should get restaurant settings",
+      "timestamp": "2025-11-07T12:52:53.311Z"
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "passed": 3,
+    "failed": 6,
+    "skipped": 0
+  }
+}

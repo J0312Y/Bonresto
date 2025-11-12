@@ -1,0 +1,22 @@
+"use strict";
+var today = $("#today").val();
+var csrf = $("#csrf").val();
+$(document).ready(function () {
+  "use strict";
+
+  var view_name = $("#view_name").val();
+  console.log({ view_name });
+
+  var myurl = baseurl + "report/reports/" + view_name;
+  var csrf = $("#csrfhashresarvation").val();
+  var dataString =
+    "from_date=" + today + "&to_date=" + today + "&csrf_test_name=" + csrf;
+  $.ajax({
+    type: "POST",
+    url: myurl,
+    data: dataString,
+    success: function (data) {
+      $("#getresult2").html(data);
+    },
+  });
+});
