@@ -554,7 +554,7 @@ CREATE TABLE `accesslog` (
   `user_name` varchar(50) DEFAULT NULL,
   `entry_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sl_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=427 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=452 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('1', 'Add Category', 'Insert Data', 'Category is Created', 'John Doe', '2025-10-30 20:41:53');
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('2', 'Add Category', 'Insert Data', 'Category is Created', 'John Doe', '2025-10-30 20:42:36');
@@ -982,6 +982,31 @@ INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('424', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-12 01:40:50');
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('425', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-12 01:40:54');
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('426', 'Pending Order', 'Insert Data', 'Pending Order is Update', 'John Doe', '2025-11-12 01:41:21');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('427', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-12 19:41:32');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('428', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-12 19:54:52');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('429', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-12 19:56:15');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('430', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-12 19:56:36');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('431', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-12 22:36:00');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('432', 'reservation List', 'Delete Data', 'reservation Deleted', 'John Doe', '2025-11-12 23:23:09');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('433', 'Reservation List', 'Insert Data', 'New Reservation Created', 'John Doe', '2025-11-12 23:34:00');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('434', 'Reservation List', 'Update Data', 'Reservation Updated', 'John Doe', '2025-11-12 23:34:21');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('435', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-12 23:36:04');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('436', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-12 23:37:38');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('437', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 00:18:48');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('438', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 00:18:57');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('439', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 00:19:11');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('440', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-13 00:19:45');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('441', 'Reservation List', 'Update Data', 'Reservation Updated', 'John Doe', '2025-11-13 19:21:27');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('442', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 20:06:00');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('443', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-13 20:09:02');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('444', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-13 20:09:19');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('445', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 20:11:56');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('446', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 20:15:27');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('447', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-13 20:15:31');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('448', 'Reservation List', 'Insert Data', 'New Reservation Created', 'John Doe', '2025-11-13 22:19:18');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('449', 'Reservation List', 'Insert Data', 'New Reservation Created', 'John Doe', '2025-11-13 22:20:29');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('450', 'Reservation List', 'Update Data', 'Reservation Updated', 'John Doe', '2025-11-13 22:20:52');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('451', 'Reservation List', 'Update Data', 'Reservation Updated', 'John Doe', '2025-11-13 22:20:58');
 
 
 #
@@ -1093,7 +1118,7 @@ CREATE TABLE `bill` (
   PRIMARY KEY (`bill_id`),
   KEY `order_id` (`order_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('1', '55', '1', '0', '0', '0', '3', NULL, '0', '0', '2025-10-31', '10:05:29', '2025-10-31 22:34:40', '1', '4', '2', '2025-10-31', '0', '0000-00-00');
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('2', '54', '2', '20', '1.275', '4', '1', NULL, '1.5', '24.225', '2025-10-31', '12:18:17', '2025-10-31 23:32:11', '1', '4', '2', '2025-10-31', '0', '0000-00-00');
@@ -1163,6 +1188,21 @@ INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `disco
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('66', '68', '66', '470', '66.25', '0', '2', NULL, '31.875', '403.75', '2025-11-12', '01:01:48', '2025-11-12 01:35:22', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('67', '68', '67', '450', '68.25', '60', '1', NULL, '30.375', '441.75', '2025-11-12', '01:04:43', '2025-11-12 01:35:17', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('68', '67', '68', '270', '16.2', '54', NULL, NULL, '20.25', '307.8', '2025-11-12', '01:07:18', '2025-11-12 01:36:17', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('69', '54', '69', '20', '1.2', '4', NULL, NULL, '1.5', '22.8', '2025-11-12', '19:41:34', '2025-11-12 19:56:15', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('70', '1', '70', '60', '3.6', '12', NULL, NULL, '4.5', '68.4', '2025-11-12', '19:54:53', '2025-11-12 19:56:36', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('71', '1', '71', '130', '7.8', '26', NULL, NULL, '9.75', '148.2', '2025-11-12', '22:36:03', '2025-11-13 00:18:48', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('72', '54', '72', '390', '65.7', '69', NULL, NULL, '25.875', '393.3', '2025-11-12', '23:36:06', '2025-11-13 00:19:11', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('73', '1', '73', '300', '60.3', '51', NULL, NULL, '19.125', '290.7', '2025-11-12', '23:37:39', '2025-11-13 00:18:57', '1', '4', '2', '2025-11-12', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('74', '56', '74', '10', '0', '2', NULL, NULL, '0.75', '12', '2025-11-13', '00:19:48', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('75', '70', '75', '130', '7.8', '26', '3', NULL, '9.75', '148.2', '2025-11-13', '18:41:51', '2025-11-13 20:06:00', '1', '4', '2', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('76', '70', '76', '20', '0', '60', '1', NULL, '1.5', '80', '2025-11-13', '18:44:29', '1970-01-01 01:01:01', '0', '4', '70', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('77', '70', '77', '40', '0', '60', '1', NULL, '3', '100', '2025-11-13', '19:19:32', '1970-01-01 01:01:01', '0', '4', '70', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('78', '71', '78', '110', '0', '22', '3', NULL, '8.25', '132', '2025-11-13', '19:20:09', '1970-01-01 01:01:01', '0', '4', '71', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('79', '72', '79', '100', '0', '20', '3', NULL, '7.5', '120', '2025-11-13', '19:20:29', '1970-01-01 01:01:01', '0', '4', '72', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('80', '56', '80', '20', '0', '60', '1', NULL, '1.5', '80', '2025-11-13', '19:39:26', '1970-01-01 01:01:01', '0', '4', '56', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('81', '56', '81', '110', '17', '60', '1', NULL, '8.25', '161.5', '2025-11-13', '20:07:48', '2025-11-13 20:15:31', '1', '4', '2', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('82', '1', '82', '20', '1.2', '4', NULL, NULL, '1.5', '22.8', '2025-11-13', '20:09:05', '2025-11-13 20:11:56', '1', '4', '2', '2025-11-13', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('83', '1', '83', '20', '0', '4', NULL, NULL, '1.5', '24', '2025-11-13', '20:09:22', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-13', '0', '0000-00-00');
 
 
 #
@@ -1395,7 +1435,7 @@ CREATE TABLE `customer_info` (
   `crdate` date DEFAULT NULL,
   `is_active` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('1', 'cusL-0001', NULL, '2', 'Walkin', 'test@gmail.com', NULL, 'cO_Sa2fwscE:APA91bEFDD0sbV52pZPwJEl8MEUCcHBg2wIGjKfelfbiytAj4nJlPsKf8sSupfElBq-nm36DCkjYDEoUcA7qvtzKu4vDqjutF23f6Y_0uw4L_PlJIrtl61y4s-t5OKFAmdaU9OUQTtYS', 'dhaka', '8801717426371', NULL, 'ddd', NULL, '1');
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('36', 'cusL-0004', NULL, '1', 'Kabir khan', 'kabir@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'DDD sgfsrgrg', '1732432434', 'assets/img/icons/2021-11-10/m.png', NULL, '2021-08-31', '1');
@@ -1414,6 +1454,12 @@ INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membe
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('66', 'cusL-0017', NULL, '0', 'simon', '1324@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '1324', NULL, 'Not Set', '2025-11-08', '1');
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('67', 'cusL-0018', NULL, '0', 'tes', 'tes@gmail.com', NULL, NULL, 'Avenue ngamaba', '050489037', NULL, '', NULL, '1');
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('68', 'cusL-0019', NULL, '0', 'tes', '0988787287392@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '0988787287392', NULL, 'Not Set', '2025-11-12', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('69', '', NULL, NULL, 'joeldytsina', 'joeldytsina94@gmail.com', NULL, NULL, 't', '+242050489039', NULL, 't', NULL, '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('70', 'cusL-0020', NULL, '0', 'joeldtsina', '064663473@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '064663473', NULL, 'Not Set', '2025-11-13', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('71', 'cusL-0021', NULL, '0', 'sfdfdh', '12342@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '12342', NULL, 'Not Set', '2025-11-13', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('72', 'cusL-0022', NULL, '0', 'dsdfgf', '23224<@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '23224<', NULL, 'Not Set', '2025-11-13', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('73', '', NULL, NULL, 'joeldytsina', 'joeldytsina94@gmail.com', NULL, NULL, 't', '+242064663463', NULL, 't', NULL, '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('74', '', NULL, NULL, 'joeldytsina9', 'joeldytsina94@gmail.com', NULL, NULL, 't', '242050489037', NULL, 't', NULL, '1');
 
 
 #
@@ -1470,7 +1516,7 @@ CREATE TABLE `customer_order` (
   KEY `waiter_id` (`waiter_id`),
   KEY `kitchen` (`kitchen`),
   KEY `thirdpartyinvoiceid` (`thirdpartyinvoiceid`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('1', '0001', NULL, '55', '99', '0', NULL, '0', NULL, '2025-10-31', '10:05:29', '00:15:00', NULL, NULL, '0.00', '0.00', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('2', '0002', NULL, '54', '2', '0', NULL, '0', NULL, '2025-10-31', '12:18:17', '00:15:00', '0', '01', '24.23', '24.23', '', '', '4', '1', '1', '0', NULL, '2025-10-31 12:17:00', '0', NULL);
@@ -1535,10 +1581,24 @@ INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `cust
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('62', '0062', NULL, '67', '1', '0', NULL, '179', NULL, '2025-11-12', '00:39:43', '00:15:00', '9', '14', '22.80', '22.80', '', NULL, '4', '1', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('63', '0063', NULL, '67', '1', '0', NULL, '179', NULL, '2025-11-12', '00:40:09', '00:15:00', '7', '15', '461.70', '461.70', '', NULL, '4', '1', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('64', '0064', NULL, '67', '99', '0', NULL, '178', NULL, '2025-11-12', '00:41:39', '00:15:00', '11', '16', '125.40', '125.40', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
-INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('65', '0065', NULL, '68', '99', '0', NULL, '178', NULL, '2025-11-12', '01:00:16', '00:15:00', '2', NULL, '0.00', '0.00', '', '', '5', '1', '0', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('66', '0066', NULL, '68', '2', '0', NULL, '0', NULL, '2025-11-12', '01:01:48', '00:15:00', '0', '01', '403.75', '403.75', '', '', '4', '1', '1', '0', NULL, '2025-11-12 09:55:00', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('67', '0067', NULL, '68', '2', '0', NULL, '0', NULL, '2025-11-12', '01:04:43', '00:15:00', '0', '02', '441.75', '441.75', '', '', '4', '1', '1', '0', NULL, '2025-11-12 11:05:00', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('68', '0068', NULL, '67', '1', '0', NULL, '178', NULL, '2025-11-12', '01:07:17', '00:15:00', '11', '03', '307.80', '307.80', '', NULL, '4', '1', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('69', '0069', NULL, '54', '2', '0', NULL, '178', NULL, '2025-11-12', '19:41:32', '00:15:00', '0', '04', '22.80', '22.80', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('70', '0070', NULL, '1', '1', '0', NULL, '178', NULL, '2025-11-12', '19:54:52', '00:15:00', '2', '05', '68.40', '68.40', '', NULL, '4', '1', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('71', '0071', NULL, '1', '1', '0', NULL, '179', NULL, '2025-11-12', '22:36:00', '00:15:00', '2', '06', '148.20', '148.20', '', NULL, '4', '1', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('72', '0072', NULL, '54', '2', '0', NULL, '179', NULL, '2025-11-12', '23:36:04', '00:15:00', '0', '07', '393.30', '393.30', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('73', '0073', NULL, '1', '1', '0', NULL, '179', NULL, '2025-11-12', '23:37:38', '00:15:00', '3', '08', '290.70', '290.70', '', NULL, '4', '1', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('74', '0074', NULL, '56', '2', '0', NULL, '179', NULL, '2025-11-13', '00:19:45', '00:15:00', '0', '01', '12.00', '0.00', '', '', '3', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('75', '0075', NULL, '70', '99', '0', NULL, '0', NULL, '2025-11-13', '18:41:51', '00:15:00', NULL, NULL, '148.20', '148.20', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('76', '0076', NULL, '70', '2', '0', NULL, '0', NULL, '2025-11-13', '18:44:29', '00:15:00', '0', '01', '80.00', '0.00', '', '', '1', '1', '1', '0', NULL, '2025-11-13 18:44:00', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('77', '0077', NULL, '70', '2', '0', NULL, '0', NULL, '2025-11-13', '19:19:32', '00:15:00', '0', '02', '100.00', '0.00', '', '', '1', '1', '1', '0', NULL, '2025-11-13 19:19:00', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('78', '0078', NULL, '71', '99', '0', NULL, '0', NULL, '2025-11-13', '19:20:09', '00:15:00', NULL, NULL, '132.00', '0.00', '', '', '1', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('79', '0079', NULL, '72', '99', '0', NULL, '0', NULL, '2025-11-13', '19:20:29', '00:15:00', NULL, NULL, '120.00', '0.00', '', '', '1', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('80', '0080', NULL, '56', '2', '0', NULL, '0', NULL, '2025-11-13', '19:39:26', '00:15:00', '0', '01', '80.00', '0.00', '', '', '1', '1', '1', '0', NULL, '2025-11-13 19:39:00', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('81', '0081', NULL, '56', '2', '0', NULL, '0', NULL, '2025-11-13', '20:07:48', '00:15:00', '0', '02', '161.50', '161.50', '', '', '4', '1', '1', '0', NULL, '2025-11-13 20:07:00', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('82', '0082', NULL, '1', '2', '0', NULL, '178', NULL, '2025-11-13', '20:09:02', '00:15:00', '0', '03', '22.80', '22.80', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('83', '0083', NULL, '1', '99', '0', NULL, '178', NULL, '2025-11-13', '20:09:19', '00:15:00', '2', '04', '24.00', '0.00', '', '', '1', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 
 
 #
@@ -1895,7 +1955,7 @@ CREATE TABLE `fcm_tokens` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('1', NULL, 'egWXc5aoQO_l4FM4EWk3uy:APA91bGdppgUgWU5nRlXmv0IigH2TMOk6y7p5DAzIk3nvOtW_Tvo4Z_Hrc6PV4hiKzoWEG-xxPHQwAg4-TUcuU4cgtfeYZeMqrCOAjcheatLJc-GZflWSWc', '2025-11-01 02:51:06', NULL);
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('2', NULL, 'egWXc5aoQO_l4FM4EWk3uy:APA91bGdppgUgWU5nRlXmv0IigH2TMOk6y7p5DAzIk3nvOtW_Tvo4Z_Hrc6PV4hiKzoWEG-xxPHQwAg4-TUcuU4cgtfeYZeMqrCOAjcheatLJc-GZflWSWc', '2025-11-01 03:27:47', NULL);
@@ -1986,6 +2046,15 @@ INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) 
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('87', NULL, 'fEbCun9GYYM8Bwg3fmpGdq:APA91bHsKT1rXwJEp1hleLCK2pxTa3GDABznJn88IOQmlnj8dMIGvclg5a0w0VpIzVClHuc6ILAC4cIi7s_3uqL8N4zUERmqq1gNyxdQhR0_TRGCjuAMx7A', '2025-11-09 20:46:24', NULL);
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('88', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-12 01:00:20', NULL);
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('89', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-12 01:24:51', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('90', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-12 10:23:33', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('91', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-12 19:41:03', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('92', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 18:41:23', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('93', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 18:41:54', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('94', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 18:43:04', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('95', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:19:54', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('96', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:20:12', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('97', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:20:32', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('98', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:20:42', NULL);
 
 
 #
@@ -2256,7 +2325,7 @@ CREATE TABLE `language` (
   `french` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `phrase` (`phrase`)
-) ENGINE=InnoDB AUTO_INCREMENT=2480 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2481 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2', 'login', 'Login', NULL);
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('3', 'email', 'Email Address', NULL);
@@ -3834,6 +3903,7 @@ INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2475', 'ad
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2476', 'secret_key', 'Secret Key', NULL);
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2477', 'facebook_api', 'Facebook Api', NULL);
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2478', 'facebook_login', 'Facebook Login', NULL);
+INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2480', 'free', 'Free', NULL);
 
 
 #
@@ -4076,7 +4146,7 @@ CREATE TABLE `multipay_bill` (
   `payment_type_id` int(11) NOT NULL,
   `amount` float NOT NULL,
   PRIMARY KEY (`multipay_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('1', '1', NULL, '4', '0');
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('2', '1', NULL, '4', '0');
@@ -4146,6 +4216,15 @@ INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_t
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('66', '54', NULL, '4', '250.8');
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('67', '53', NULL, '4', '524.4');
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('68', '51', NULL, '4', '216.6');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('69', '69', NULL, '4', '22.8');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('70', '70', NULL, '4', '68.4');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('71', '71', NULL, '4', '148.2');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('72', '73', NULL, '4', '290.7');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('73', '72', NULL, '4', '393.3');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('74', '75', NULL, '4', '148.2');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('75', '82', NULL, '4', '22.8');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('76', '81', NULL, '4', '161.5');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('77', '81', NULL, '4', '161.5');
 
 
 #
@@ -4173,7 +4252,7 @@ CREATE TABLE `order_menu` (
   `allfoodready` int(11) DEFAULT NULL,
   `isupdate` int(11) DEFAULT NULL,
   PRIMARY KEY (`row_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('1', '1', '1', '0.000', '0', '', '1', '', '', '0', NULL, '1', NULL, '0', '1', '1', NULL);
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('2', '2', '1', '0.000', '0', '', '1', '', '', '0', NULL, '1', NULL, '0', '1', '1', NULL);
@@ -4311,6 +4390,27 @@ INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, 
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('135', '67', '7', '0.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '1', '1', NULL);
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('136', '68', '9', '120.000', '0', '', '1', '', '', '59', NULL, '959', NULL, '0', '1', '1', NULL);
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('137', '68', '10', '150.000', '0', '', '1', '', '', '60', NULL, '1060', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('138', '69', '1', '20.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('139', '70', '1', '20.000', '0', '', '3', '', '', '1', NULL, '11', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('140', '71', '1', '20.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('141', '71', '2', '110.000', '0', '', '1', '', '', '3', NULL, '23', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('142', '72', '1', '20.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('143', '72', '3', '20.000', '0', '', '1', '', '', '4', NULL, '34', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('144', '72', '7', '300.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('145', '72', '6', '20.000', '0', '', '1', '', '', '55', NULL, '655', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('146', '72', '5', '10.000', '0', '', '3', '', '', '2', NULL, '52', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('147', '73', '7', '300.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('148', '74', '5', '10.000', '0', '', '1', '', '', '2', NULL, '52', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('149', '75', '1', '0.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('150', '75', '2', '0.000', '0', '', '1', '', '', '3', NULL, '23', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('151', '76', '1', '0.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('152', '77', '1', '0.000', '0', '', '2', '', '', '1', NULL, '11', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('153', '78', '2', '0.000', '0', '', '1', '', '', '3', NULL, '23', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('154', '79', '80', '0.000', '0', '', '1', '', '', '62', NULL, '8062', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('155', '80', '1', '0.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('156', '81', '2', '0.000', '0', '', '1', '', '', '3', NULL, '23', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('157', '82', '6', '20.000', '0', '', '1', '', '', '55', NULL, '655', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('158', '83', '6', '20.000', '0', '', '1', '', '', '55', NULL, '655', NULL, '0', '0', NULL, NULL);
 
 
 #
@@ -4743,7 +4843,7 @@ INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, 
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('6', '6', '3', 'table_6.png', 'assets/img/icons/resttable/3.png', '1', '0');
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('7', '7', '8', 'table_7.png', 'assets/img/icons/resttable/8.png', '1', '1');
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('8', '8', '4', 'table_8.png', 'assets/img/icons/resttable/4.png', '3', '1');
-INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('9', '9', '3', 'table_9.png', 'assets/img/icons/resttable/3.png', '1', '0');
+INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('9', '9', '3', 'table_9.png', 'assets/img/icons/resttable/3.png', '1', '1');
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('10', 'VIP', '8', 'table_10.png', 'assets/img/icons/resttable/7.png', '2', '1');
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('11', 'Single', '1', 'table_11.png', 'assets/img/icons/resttable/loading.gif', '1', '0');
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('12', 'Family', '10', 'table_12.png', 'assets/img/icons/resttable/7.png', '4', '0');
@@ -5631,6 +5731,22 @@ INSERT INTO `setting` (`id`, `title`, `storename`, `address`, `email`, `phone`, 
 
 
 #
+# TABLE STRUCTURE FOR: shift_management
+#
+
+DROP TABLE IF EXISTS `shift_management`;
+
+CREATE TABLE `shift_management` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `shift_name` varchar(100) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+#
 # TABLE STRUCTURE FOR: shipping_method
 #
 
@@ -5832,7 +5948,7 @@ CREATE TABLE `table_details` (
   `delete_at` int(11) NOT NULL DEFAULT 0,
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('3', '3', '1', '16', '18:04:42', '2', '0', '2025-11-01');
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('4', '2', '1', '17', '18:05:25', '4', '0', '2025-11-01');
@@ -5882,6 +5998,20 @@ CREATE TABLE `tablelist` (
   `qr_code` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`tableid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+#
+# TABLE STRUCTURE FOR: tax_settings
+#
+
+DROP TABLE IF EXISTS `tax_settings`;
+
+CREATE TABLE `tax_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `taxname` varchar(100) NOT NULL,
+  `rate` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 #
 # TABLE STRUCTURE FOR: tbl_assign_kitchen
@@ -5942,7 +6072,7 @@ CREATE TABLE `tbl_billingaddress` (
   `address2` text DEFAULT NULL,
   `DateInserted` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`billaddressid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('1', '1', 'simon', 'simon', 'Not Set', '', '064663469', '', '', '', '', 'Not Set', NULL, '2025-10-31 10:05:29');
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('2', '2', 'Simon Joeldy', 'TSINA', NULL, 'joeldytsina94@gmail.com', '064663469', '', 'Nagaland', 'India', '', 'Congo Brazzaville', NULL, '2025-10-31 12:18:17');
@@ -5966,6 +6096,13 @@ INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `last
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('20', '65', 'tes', 'tes', 'Not Set', '', '0988787287392', '', '', '', '', 'Not Set', NULL, '2025-11-12 01:00:16');
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('21', '66', 'Joeldy', 'tes', NULL, 'joeldytsina94@gmail.com', '0988787287392', 'Brazzaville', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-12 01:01:48');
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('22', '67', 'tes', 'tes', NULL, 'tes@gmail.com', '0988787287392', 'Brazzaville', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-12 01:04:43');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('23', '75', 'joeldtsina', 'joeldtsina', 'Not Set', '', '064663473', '', '', '', '', 'Not Set', NULL, '2025-11-13 18:41:51');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('24', '76', 'Joeldy', 'joeldtsina', NULL, 'joeldytsina94@gmail.com', '064663473', 'Ewo', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-13 18:44:29');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('25', '77', 'Joeldy', 'joeldtsina', NULL, 'joeldytsina94@gmail.com', '064663473', 'Brazzaville', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-13 19:19:32');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('26', '78', 'sfdfdh', 'sfdfdh', 'Not Set', '', '12342', '', '', '', '', 'Not Set', NULL, '2025-11-13 19:20:09');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('27', '79', 'dsdfgf', 'dsdfgf', 'Not Set', '', '23224<', '', '', '', '', 'Not Set', NULL, '2025-11-13 19:20:29');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('28', '80', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', 'Pointe-Noire', 'Pointe-Noire', 'Congo Brazzaville', '', 'Avenue ngamaba', NULL, '2025-11-13 19:39:26');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('29', '81', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', '', '', '', '', 'Avenue ngamaba', NULL, '2025-11-13 20:07:48');
 
 
 #
@@ -6252,7 +6389,7 @@ CREATE TABLE `tbl_itemaccepted` (
   `varient` int(11) NOT NULL,
   `accepttime` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`acid`)
-) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('1', '1', '1', '0', '2025-10-31 10:10:48');
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('2', '1', '0', '0', '2025-10-31 10:11:20');
@@ -6455,6 +6592,12 @@ INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `acceptt
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('199', '66', '0', '0', '2025-11-12 01:13:18');
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('200', '67', '8', '54', '2025-11-12 01:13:19');
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('201', '67', '0', '0', '2025-11-12 01:13:19');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('202', '70', '1', '1', '2025-11-12 19:55:12');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('203', '70', '0', '0', '2025-11-12 19:55:12');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('204', '69', '1', '1', '2025-11-12 19:55:14');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('205', '69', '0', '0', '2025-11-12 19:55:14');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('206', '74', '5', '2', '2025-11-13 00:20:45');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('207', '74', '0', '0', '2025-11-13 00:20:45');
 
 
 #
@@ -6497,7 +6640,7 @@ CREATE TABLE `tbl_kitchen_order` (
   `varient` int(11) DEFAULT NULL,
   `addonsuid` int(11) DEFAULT NULL,
   PRIMARY KEY (`ktid`)
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('1', '1', '1', '1', '0', NULL);
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('2', '1', '1', '0', '0', NULL);
@@ -6712,6 +6855,24 @@ INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `vari
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('211', '16', '66', '0', '0', NULL);
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('212', '16', '67', '8', '54', NULL);
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('213', '16', '67', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('214', '1', '70', '1', '1', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('215', '1', '70', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('216', '1', '69', '1', '1', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('217', '1', '69', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('218', '1', '71', '1', '1', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('219', '1', '71', '2', '3', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('220', '14', '73', '7', '56', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('221', '1', '72', '1', '1', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('222', '11', '72', '3', '4', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('223', '14', '72', '7', '56', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('224', '11', '72', '6', '55', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('225', '11', '72', '5', '2', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('226', '11', '74', '5', '2', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('227', '11', '74', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('228', '1', '75', '1', '1', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('229', '1', '75', '2', '3', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('230', '11', '82', '6', '55', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('231', '1', '81', '2', '3', NULL);
 
 
 #
@@ -6801,7 +6962,7 @@ CREATE TABLE `tbl_orderprepare` (
   `varient` int(11) NOT NULL,
   `preparetime` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`opid`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('1', '6', '1', '1', '2025-11-01 03:42:46');
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('2', '6', '0', '1', '2025-11-01 03:42:46');
@@ -6903,6 +7064,13 @@ INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `prepare
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('98', '59', '0', '65', '2025-11-12 01:32:18');
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('99', '66', '6', '55', '2025-11-12 01:32:20');
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('100', '66', '0', '55', '2025-11-12 01:32:20');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('101', '69', '1', '1', '2025-11-12 19:55:22');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('102', '69', '0', '1', '2025-11-12 19:55:22');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('103', '70', '1', '1', '2025-11-12 19:55:25');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('104', '70', '0', '1', '2025-11-12 19:55:25');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('105', '70', '0', '1', '2025-11-12 19:55:27');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('106', '74', '5', '2', '2025-11-13 18:40:49');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('107', '74', '0', '2', '2025-11-13 18:40:49');
 
 
 #
@@ -6922,7 +7090,7 @@ CREATE TABLE `tbl_posetting` (
   PRIMARY KEY (`possettingid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `tbl_posetting` (`possettingid`, `waiter`, `tableid`, `cooktime`, `productionsetting`, `tablemaping`, `soundenable`) VALUES ('1', '1', '1', '1', '0', '1', '1');
+INSERT INTO `tbl_posetting` (`possettingid`, `waiter`, `tableid`, `cooktime`, `productionsetting`, `tablemaping`, `soundenable`) VALUES ('1', '1', '1', '0', '0', '1', '1');
 
 
 #
@@ -6941,7 +7109,7 @@ CREATE TABLE `tbl_quickordersetting` (
   PRIMARY KEY (`quickordid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `tbl_quickordersetting` (`quickordid`, `waiter`, `tableid`, `cooktime`, `soundenable`, `tablemaping`) VALUES ('1', '1', '1', '1', '1', '1');
+INSERT INTO `tbl_quickordersetting` (`quickordid`, `waiter`, `tableid`, `cooktime`, `soundenable`, `tablemaping`) VALUES ('1', '1', '1', '0', '1', '1');
 
 
 #
@@ -7037,7 +7205,7 @@ CREATE TABLE `tbl_shippingaddress` (
   `address2` text DEFAULT NULL,
   `DateInserted` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`shipaddressid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('1', '1', 'simon', 'simon', 'Not Set', '', '064663469', '', '', '', '', 'Not Set', NULL, '2025-10-31 10:05:29');
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('2', '2', 'Simon Joeldy', 'TSINA', NULL, 'joeldytsina94@gmail.com', '064663469', '', 'Nagaland', 'India', '', 'Congo Brazzaville', NULL, '2025-10-31 12:18:17');
@@ -7061,6 +7229,13 @@ INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `las
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('20', '65', 'tes', 'tes', 'Not Set', '', '0988787287392', '', '', '', '', 'Not Set', NULL, '2025-11-12 01:00:16');
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('21', '66', 'Joeldy', 'tes', NULL, 'joeldytsina94@gmail.com', '0988787287392', 'Brazzaville', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-12 01:01:48');
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('22', '67', 'tes', 'tes', NULL, 'tes@gmail.com', '0988787287392', 'Brazzaville', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-12 01:04:43');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('23', '75', 'joeldtsina', 'joeldtsina', 'Not Set', '', '064663473', '', '', '', '', 'Not Set', NULL, '2025-11-13 18:41:51');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('24', '76', 'Joeldy', 'joeldtsina', NULL, 'joeldytsina94@gmail.com', '064663473', 'Ewo', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-13 18:44:29');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('25', '77', 'Joeldy', 'joeldtsina', NULL, 'joeldytsina94@gmail.com', '064663473', 'Brazzaville', 'Brazzaville', 'Congo Brazzaville', '', 'Not Set', NULL, '2025-11-13 19:19:32');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('26', '78', 'sfdfdh', 'sfdfdh', 'Not Set', '', '12342', '', '', '', '', 'Not Set', NULL, '2025-11-13 19:20:09');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('27', '79', 'dsdfgf', 'dsdfgf', 'Not Set', '', '23224<', '', '', '', '', 'Not Set', NULL, '2025-11-13 19:20:29');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('28', '80', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', 'Pointe-Noire', 'Pointe-Noire', 'Congo Brazzaville', '', 'Avenue ngamaba', NULL, '2025-11-13 19:39:26');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('29', '81', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', '', '', '', '', 'Avenue ngamaba', NULL, '2025-11-13 20:07:48');
 
 
 #
@@ -7431,10 +7606,13 @@ CREATE TABLE `tblreservation` (
   `status` int(11) NOT NULL COMMENT '1=free,2=booked',
   `notif` int(11) NOT NULL DEFAULT 0 COMMENT '0=unseen,1=seen',
   PRIMARY KEY (`reserveid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('1', '54', '3', '2', '21:10:00', '21:40:00', '2025-11-01', '', '2', '1');
-INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('2', '58', '0', '3', '15:10:00', '15:40:00', '2025-11-01', '', '1', '1');
+INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('3', '69', '9', '3', '12:00:00', '12:30:00', '2025-11-13', NULL, '2', '1');
+INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('4', '70', '2', '2', '12:05:00', '12:35:00', '2025-11-18', '', '2', '1');
+INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('5', '73', '3', '2', '04:00:00', '04:30:00', '2025-11-15', NULL, '2', '1');
+INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('6', '74', '9', '3', '07:00:00', '07:30:00', '2025-11-14', NULL, '2', '1');
 
 
 #
@@ -7593,7 +7771,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('2', 'John', 'Doe', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '', 'admin@example.com', '827ccb0eea8a706c4c34a16891f84e7b', '', './assets/img/user/m2.png', '2025-11-09 21:36:46', '2025-11-09 21:36:38', '::1', NULL, '1', '1');
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('2', 'John', 'Doe', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '', 'admin@example.com', '827ccb0eea8a706c4c34a16891f84e7b', '', './assets/img/user/m2.png', '2025-11-13 19:51:35', '2025-11-12 10:34:51', '::1', NULL, '1', '1');
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('165', 'Hm', 'Isahaq', NULL, NULL, 'hmisahaq@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, './application/modules/hrm/assets/images/2025-10-31/P1.png', NULL, NULL, NULL, NULL, '1', '0');
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('166', 'Ainal', 'Haque', NULL, NULL, 'ainal@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, '2020-12-17 12:30:42', '2020-12-17 12:30:31', '::1', NULL, '1', '0');
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('168', 'Manik ', 'Hassan', NULL, NULL, 'manik@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, NULL, NULL, NULL, NULL, '1', '0');
@@ -7669,6 +7847,23 @@ INSERT INTO `variant` (`variantid`, `menuid`, `variantName`, `price`) VALUES ('9
 INSERT INTO `variant` (`variantid`, `menuid`, `variantName`, `price`) VALUES ('97', '8', 'Tawa Naan', '35.00');
 INSERT INTO `variant` (`variantid`, `menuid`, `variantName`, `price`) VALUES ('98', '81', 'Set', '520.00');
 
+
+#
+# TABLE STRUCTURE FOR: waste_tracking
+#
+
+DROP TABLE IF EXISTS `waste_tracking`;
+
+CREATE TABLE `waste_tracking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(100) NOT NULL,
+  `quantity` int(11) DEFAULT 0,
+  `unit` varchar(50) DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 #
 # TABLE STRUCTURE FOR: weekly_holiday

@@ -7,7 +7,7 @@ async function test() {
     // example sign_in
     const form = new URLSearchParams();
     form.append('email', 'joeldytsina94@gmail.com');
-    form.append('password', 'password');
+    form.append('password', '12345');
     form.append('token', 'sample-token');
 
     const sign = await fetch(base + '/V3/sign_in', { method: 'POST', body: form });

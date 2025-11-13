@@ -123,6 +123,108 @@
             </div>
         </div>
     </div>
+<!-- Pending Order (adapted to Latest Online Order style) -->
+<div class="col-sm-12 col-md-6">
+    <div class="panel panel-bd shadow-1 border-none rounded-10">
+        <div class="panel-body">
+            <div class="bg-soft-warning p-12 rounded-10 mb-13">
+                <h4 class="m-0 fw-600"><?php echo display('pending_ord'); ?></h4>
+            </div>
+
+            <div class="message_inner1">
+                <div class="message_widgets">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th><?php echo display('name'); ?></th>
+                                <th><?php echo display('phone'); ?></th>
+                                <th><?php echo display('ord_number'); ?></th>
+                                <th><?php echo display('tabltno'); ?></th>
+                                <th><?php echo display('time'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($latestpending)) { ?>
+                                <?php foreach ($latestpending as $order) { ?>
+                                    <tr>
+                                        <td><strong><?php echo html_escape($order->customer_name); ?></strong></td>
+                                        <td><?php echo html_escape($order->customer_phone); ?></td>
+                                        <td>
+                                            <a href="<?php echo base_url('ordermanage/order/orderdetails/' . $order->order_id); ?>"
+                                               class="text-primary fw-bold">
+                                                (<?php echo html_escape($order->saleinvoice); ?>)
+                                            </a>
+                                        </td>
+                                        <td><?php echo html_escape($order->tablename); ?></td>
+                                        <td><?php echo html_escape($order->order_time); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-3">
+                                        <?php echo display('no_pending_order_found'); ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!-- Latest Reservation (adapted to Latest Online Order style) -->
+<div class="col-sm-12 col-md-6">
+    <div class="panel panel-bd shadow-1 border-none rounded-10">
+        <div class="panel-body">
+            <div class="bg-soft-warning p-12 rounded-10 mb-13">
+                <h4 class="m-0 fw-600"><?php echo display('latest_reser'); ?></h4>
+            </div>
+
+            <div class="message_inner1">
+                <div class="message_widgets">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th><?php echo display('name'); ?></th>
+                                <th><?php echo display('phone'); ?></th>
+                                <th><?php echo display('date'); ?></th>
+                                <th><?php echo display('tabltno'); ?></th>
+                                <th><?php echo display('time'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($latestreservation)) { ?>
+                                <?php foreach ($latestreservation as $order) { ?>
+                                    <tr>
+                                        <td><?php echo html_escape($order->customer_name); ?></td>
+                                        <td><?php echo html_escape($order->customer_phone); ?></td>
+                                        <td>
+                                            <a href="<?php echo base_url('reservation/reservation/index'); ?>"
+                                               class="text-primary fw-bold">
+                                                (<?php echo html_escape($order->reserveday); ?>)
+                                            </a>
+                                        </td>
+                                        <td><?php echo html_escape($order->tablename); ?></td>
+                                        <td><?php echo html_escape($order->formtime); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-3">
+                                        <?php echo display('no_reservation_found'); ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Online Order new-->
     <div class="col-sm-12 col-md-6">
         <div class="panel panel-bd shadow-1 border-none rounded-10">
@@ -211,6 +313,8 @@
     </div>
 
     <!-- Purchase -->
+   <!-- Sales Report -->
+<!-- Purchase -->
     <div class="col-sm-12 col-md-6">
         <div class="panel panel-bd shadow-1 border-none rounded-10 p-15">
             <div class="bg-soft-green d-flex align-center justify-content-between p-12 rounded-10 mb-13">
@@ -222,11 +326,12 @@
                 </ul>
             </div>
             <div class="panel-body">
-                <canvas id="purchaseChart" height="180"></canvas>
+                <canvas id="purchaseChart" height="324"></canvas>
             </div>
         </div>
     </div>
 </div>
+
 <div class="row">
     <!-- Top Selling Items new -->
     <div class="col-sm-12 col-md-6">
@@ -281,7 +386,7 @@
                 </ul>
             </div>
             <div class="panel-body" id="salechart">
-                <canvas id="lineChart" height="155"></canvas>
+                <canvas id="lineChart" height="275"></canvas>
             </div>
         </div>
     </div>
