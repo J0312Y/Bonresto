@@ -1,8 +1,7 @@
 // JavaScript Document
 $(document).ready(function () {
   "use strict";
-
-  var todayOrderTable = $("#todayorder").DataTable({
+  $("#onprocessing").DataTable({
     responsive: true,
     paging: true,
     language: {
@@ -12,6 +11,7 @@ $(document).ready(function () {
       sInfo: lang.sInfo,
       sInfoEmpty: lang.sInfoEmpty,
       sInfoFiltered: lang.sInfoFiltered,
+      sInfoPostFix: "",
       sLoadingRecords: lang.sLoadingRecords,
       sZeroRecords: lang.sZeroRecords,
       sEmptyTable: lang.sEmptyTable,
@@ -48,9 +48,25 @@ $(document).ready(function () {
     ],
     buttons: [
       { extend: "copy", className: "btn-sm", footer: true },
-      { extend: "csv", title: "TodayOrder", className: "btn-sm", footer: true },
-      { extend: "excel", title: "TodayOrder", className: "btn-sm", footer: true },
-      { extend: "pdf", title: "TodayOrder", className: "btn-sm", footer: true },
+      {
+        extend: "csv",
+        title: "ExampleFile",
+        className: "btn-sm",
+        footer: true,
+      },
+      {
+        extend: "excel",
+        title: "ExampleFile",
+        className: "btn-sm",
+        title: "exportTitle",
+        footer: true,
+      },
+      {
+        extend: "pdf",
+        title: "ExampleFile",
+        className: "btn-sm",
+        footer: true,
+      },
       { extend: "print", className: "btn-sm", footer: true },
       { extend: "colvis", className: "btn-sm", footer: true },
     ],
@@ -58,14 +74,17 @@ $(document).ready(function () {
     processing: true,
     serverSide: true,
     ajax: {
-      url: basicinfo.baseurl + "ordermanage/order/todayallorder",
-      type: "post",
+      url: basicinfo.baseurl + "ordermanage/order/todayallorder", // json datasource
+      type: "post", // type of method  ,GET/POST/DELETE
       data: function (data) {
         data.csrf_test_name = $("#csrfhashresarvation").val();
       },
     },
     footerCallback: function (row, data, start, end, display) {
-      var api = this.api();
+      var api = this.api(),
+        data;
+
+      // Remove the formatting to get integer data for summation
       var intVal = function (i) {
         return typeof i === "string"
           ? i.replace(/[\$,]/g, "") * 1
@@ -74,29 +93,25 @@ $(document).ready(function () {
           : 0;
       };
 
-      var total = api
+      // Total over all pages
+      total = api
         .column(7)
         .data()
         .reduce(function (a, b) {
           return intVal(a) + intVal(b);
         }, 0);
 
-      var pageTotal = api
+      // Total over this page
+      pageTotal = api
         .column(7, { page: "current" })
         .data()
         .reduce(function (a, b) {
           return intVal(a) + intVal(b);
         }, 0);
-
-      pageTotal = pageTotal.toFixed(2);
-      total = total.toFixed(2);
-
+      var pageTotal = pageTotal.toFixed(2);
+      var total = total.toFixed(2);
+      // Update footer
       $(api.column(7).footer()).html(pageTotal + " ( " + total + " total)");
     },
   });
-
-  // --- REFRESH AUTOMATIQUE toutes les 30 secondes (30000 ms) ---
-  setInterval(function () {
-    todayOrderTable.ajax.reload(null, false); // false = ne pas réinitialiser la pagination
-  }, 30000);
 });

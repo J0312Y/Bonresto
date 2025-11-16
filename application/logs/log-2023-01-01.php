@@ -6988,3 +6988,5505 @@ DEBUG - 2023-01-01 07:00:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdo
 INFO - 2023-01-01 07:00:54 --> Model Class Initialized
 INFO - 2023-01-01 07:00:54 --> Final output sent to browser
 DEBUG - 2023-01-01 07:00:54 --> Total execution time: 0.0349
+INFO - 2023-01-01 01:03:51 --> Config Class Initialized
+INFO - 2023-01-01 01:03:51 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:03:51 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:03:51 --> URI Class Initialized
+INFO - 2023-01-01 01:03:51 --> Router Class Initialized
+INFO - 2023-01-01 01:03:51 --> Output Class Initialized
+INFO - 2023-01-01 01:03:51 --> Security Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:03:51 --> CSRF cookie sent
+INFO - 2023-01-01 01:03:51 --> Input Class Initialized
+INFO - 2023-01-01 01:03:51 --> Language Class Initialized
+INFO - 2023-01-01 01:03:51 --> Language Class Initialized
+INFO - 2023-01-01 01:03:51 --> Config Class Initialized
+INFO - 2023-01-01 01:03:51 --> Loader Class Initialized
+INFO - 2023-01-01 01:03:51 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:03:51 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:03:51 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:03:51 --> Email Class Initialized
+INFO - 2023-01-01 01:03:51 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:03:51 --> Cart Class Initialized
+INFO - 2023-01-01 01:03:51 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:03:51 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:03:51 --> Pagination Class Initialized
+INFO - 2023-01-01 01:03:51 --> Controller Class Initialized
+ERROR - 2023-01-01 01:03:51 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:03:51 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:03:51 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:03:51 --> Model Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:03:51 --> Model Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:03:51 --> Model Class Initialized
+INFO - 2023-01-01 01:03:51 --> Config Class Initialized
+INFO - 2023-01-01 01:03:51 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:03:51 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:03:51 --> URI Class Initialized
+INFO - 2023-01-01 01:03:51 --> Router Class Initialized
+INFO - 2023-01-01 01:03:51 --> Output Class Initialized
+INFO - 2023-01-01 01:03:51 --> Security Class Initialized
+DEBUG - 2023-01-01 01:03:51 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:03:51 --> CSRF cookie sent
+INFO - 2023-01-01 01:03:51 --> Input Class Initialized
+INFO - 2023-01-01 01:03:51 --> Language Class Initialized
+INFO - 2023-01-01 01:03:51 --> Language Class Initialized
+INFO - 2023-01-01 01:03:51 --> Config Class Initialized
+INFO - 2023-01-01 01:03:51 --> Loader Class Initialized
+INFO - 2023-01-01 01:03:51 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:03:51 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:03:52 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:03:52 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:03:52 --> Email Class Initialized
+INFO - 2023-01-01 01:03:52 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:03:52 --> Cart Class Initialized
+INFO - 2023-01-01 01:03:52 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:03:52 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:03:52 --> Pagination Class Initialized
+INFO - 2023-01-01 01:03:52 --> Controller Class Initialized
+ERROR - 2023-01-01 01:03:52 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:03:52 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:03:52 --> Model Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:03:52 --> Model Class Initialized
+ERROR - 2023-01-01 01:03:52 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:03:52 --> Config Class Initialized
+INFO - 2023-01-01 01:03:52 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:03:52 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:03:52 --> URI Class Initialized
+INFO - 2023-01-01 01:03:52 --> Router Class Initialized
+INFO - 2023-01-01 01:03:52 --> Output Class Initialized
+INFO - 2023-01-01 01:03:52 --> Security Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:03:52 --> CSRF cookie sent
+INFO - 2023-01-01 01:03:52 --> Input Class Initialized
+INFO - 2023-01-01 01:03:52 --> Language Class Initialized
+INFO - 2023-01-01 01:03:52 --> Language Class Initialized
+INFO - 2023-01-01 01:03:52 --> Config Class Initialized
+INFO - 2023-01-01 01:03:52 --> Loader Class Initialized
+INFO - 2023-01-01 01:03:52 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:03:52 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:03:52 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:03:52 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:03:52 --> Email Class Initialized
+INFO - 2023-01-01 01:03:52 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:03:52 --> Cart Class Initialized
+INFO - 2023-01-01 01:03:52 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:03:52 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:03:52 --> Pagination Class Initialized
+INFO - 2023-01-01 01:03:52 --> Controller Class Initialized
+ERROR - 2023-01-01 01:03:52 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:03:52 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:03:52 --> Model Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:03:52 --> Model Class Initialized
+ERROR - 2023-01-01 01:03:52 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:03:52 --> Helper loaded: captcha_helper
+DEBUG - 2023-01-01 01:03:52 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:03:52 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:03:52 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:03:52 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:03:52 --> Model Class Initialized
+DEBUG - 2023-01-01 01:03:52 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/login.php
+INFO - 2023-01-01 01:03:52 --> Final output sent to browser
+DEBUG - 2023-01-01 01:03:52 --> Total execution time: 0.2499
+INFO - 2023-01-01 01:04:42 --> Config Class Initialized
+INFO - 2023-01-01 01:04:42 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:04:42 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:04:42 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:04:42 --> URI Class Initialized
+INFO - 2023-01-01 01:04:42 --> Router Class Initialized
+INFO - 2023-01-01 01:04:42 --> Output Class Initialized
+INFO - 2023-01-01 01:04:42 --> Security Class Initialized
+DEBUG - 2023-01-01 01:04:42 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:04:42 --> CSRF cookie sent
+INFO - 2023-01-01 01:04:42 --> Input Class Initialized
+INFO - 2023-01-01 01:04:42 --> Language Class Initialized
+INFO - 2023-01-01 01:04:42 --> Language Class Initialized
+INFO - 2023-01-01 01:04:42 --> Config Class Initialized
+INFO - 2023-01-01 01:04:42 --> Loader Class Initialized
+INFO - 2023-01-01 01:04:42 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:04:42 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:04:42 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:04:42 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:04:42 --> Email Class Initialized
+INFO - 2023-01-01 01:04:42 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:04:42 --> Cart Class Initialized
+INFO - 2023-01-01 01:04:42 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:04:42 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:04:42 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:04:42 --> Pagination Class Initialized
+INFO - 2023-01-01 01:04:42 --> Controller Class Initialized
+ERROR - 2023-01-01 01:04:42 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:04:42 --> Model Class Initialized
+ERROR - 2023-01-01 01:04:42 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:04:42 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/views/themes/defaults/menu.php
+DEBUG - 2023-01-01 01:04:42 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/views/themes/defaults/index.php
+INFO - 2023-01-01 01:04:42 --> Final output sent to browser
+DEBUG - 2023-01-01 01:04:42 --> Total execution time: 0.3725
+INFO - 2023-01-01 01:04:45 --> Config Class Initialized
+INFO - 2023-01-01 01:04:45 --> Hooks Class Initialized
+INFO - 2023-01-01 01:04:45 --> Config Class Initialized
+DEBUG - 2023-01-01 01:04:45 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:04:45 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:04:45 --> URI Class Initialized
+INFO - 2023-01-01 01:04:45 --> Hooks Class Initialized
+INFO - 2023-01-01 01:04:45 --> Router Class Initialized
+INFO - 2023-01-01 01:04:45 --> Output Class Initialized
+INFO - 2023-01-01 01:04:45 --> Security Class Initialized
+DEBUG - 2023-01-01 01:04:45 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:04:45 --> CSRF cookie sent
+INFO - 2023-01-01 01:04:45 --> Input Class Initialized
+INFO - 2023-01-01 01:04:45 --> Language Class Initialized
+DEBUG - 2023-01-01 01:04:45 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:04:45 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:04:45 --> URI Class Initialized
+INFO - 2023-01-01 01:04:45 --> Router Class Initialized
+INFO - 2023-01-01 01:04:45 --> Output Class Initialized
+INFO - 2023-01-01 01:04:45 --> Security Class Initialized
+DEBUG - 2023-01-01 01:04:45 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:04:45 --> CSRF cookie sent
+INFO - 2023-01-01 01:04:45 --> Input Class Initialized
+INFO - 2023-01-01 01:04:45 --> Language Class Initialized
+INFO - 2023-01-01 01:04:45 --> Language Class Initialized
+INFO - 2023-01-01 01:04:45 --> Config Class Initialized
+INFO - 2023-01-01 01:04:45 --> Language Class Initialized
+INFO - 2023-01-01 01:04:45 --> Config Class Initialized
+INFO - 2023-01-01 01:04:45 --> Loader Class Initialized
+INFO - 2023-01-01 01:04:45 --> Loader Class Initialized
+INFO - 2023-01-01 01:04:46 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:04:46 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:04:46 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:04:46 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:04:46 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:04:46 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:04:46 --> Email Class Initialized
+INFO - 2023-01-01 01:04:46 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:04:46 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:04:46 --> Cart Class Initialized
+INFO - 2023-01-01 01:04:46 --> Email Class Initialized
+INFO - 2023-01-01 01:04:46 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:04:46 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:04:46 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:04:46 --> Pagination Class Initialized
+INFO - 2023-01-01 01:04:46 --> Controller Class Initialized
+ERROR - 2023-01-01 01:04:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:04:46 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:04:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:04:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:04:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:04:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:04:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:04:46 --> Model Class Initialized
+INFO - 2023-01-01 01:04:46 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:04:46 --> Cart Class Initialized
+INFO - 2023-01-01 01:04:46 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:04:46 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:04:46 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:04:46 --> Pagination Class Initialized
+INFO - 2023-01-01 01:04:46 --> Controller Class Initialized
+ERROR - 2023-01-01 01:04:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:04:46 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:04:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:04:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:04:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:04:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:04:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:04:46 --> Model Class Initialized
+INFO - 2023-01-01 01:05:31 --> Config Class Initialized
+INFO - 2023-01-01 01:05:31 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:31 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:31 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:31 --> URI Class Initialized
+INFO - 2023-01-01 01:05:31 --> Router Class Initialized
+INFO - 2023-01-01 01:05:31 --> Output Class Initialized
+INFO - 2023-01-01 01:05:31 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:31 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:31 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:31 --> CSRF token verified
+INFO - 2023-01-01 01:05:31 --> Input Class Initialized
+INFO - 2023-01-01 01:05:31 --> Language Class Initialized
+INFO - 2023-01-01 01:05:31 --> Language Class Initialized
+INFO - 2023-01-01 01:05:31 --> Config Class Initialized
+INFO - 2023-01-01 01:05:31 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:31 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:31 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:31 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:31 --> Email Class Initialized
+INFO - 2023-01-01 01:05:31 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:31 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:31 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:31 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:31 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:31 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:31 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:31 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:31 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:05:31 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:31 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:05:31 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:31 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:31 --> Helper loaded: captcha_helper
+INFO - 2023-01-01 01:05:31 --> Language file loaded: language/english/form_validation_lang.php
+ERROR - 2023-01-01 01:05:31 --> Severity: 8192 --> filter_var(): Passing null to parameter #3 ($options) of type array|int is deprecated /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/core/Input.php 574
+ERROR - 2023-01-01 01:05:31 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:31 --> Config Class Initialized
+INFO - 2023-01-01 01:05:31 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:31 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:31 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:31 --> URI Class Initialized
+INFO - 2023-01-01 01:05:31 --> Router Class Initialized
+INFO - 2023-01-01 01:05:31 --> Output Class Initialized
+INFO - 2023-01-01 01:05:31 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:31 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:31 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:31 --> Input Class Initialized
+INFO - 2023-01-01 01:05:31 --> Language Class Initialized
+INFO - 2023-01-01 01:05:31 --> Language Class Initialized
+INFO - 2023-01-01 01:05:31 --> Config Class Initialized
+INFO - 2023-01-01 01:05:31 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:31 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:31 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:32 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:32 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:32 --> Email Class Initialized
+INFO - 2023-01-01 01:05:32 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:32 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:32 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:32 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:32 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:32 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:32 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:32 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:32 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:05:32 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:05:32 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:32 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:05:32 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:05:32 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:05:32 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/views/home/home.php
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:05:32 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:05:32 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:32 --> Total execution time: 0.9597
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:33 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:33 --> Utf8 Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:33 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:33 --> URI Class Initialized
+INFO - 2023-01-01 01:05:33 --> URI Class Initialized
+INFO - 2023-01-01 01:05:33 --> Router Class Initialized
+INFO - 2023-01-01 01:05:33 --> Router Class Initialized
+INFO - 2023-01-01 01:05:33 --> Output Class Initialized
+INFO - 2023-01-01 01:05:33 --> Output Class Initialized
+INFO - 2023-01-01 01:05:33 --> Security Class Initialized
+INFO - 2023-01-01 01:05:33 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:33 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:33 --> Input Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:33 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Input Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:33 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:33 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:33 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:33 --> Email Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:33 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:33 --> URI Class Initialized
+INFO - 2023-01-01 01:05:33 --> Email Class Initialized
+INFO - 2023-01-01 01:05:33 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:33 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:33 --> Router Class Initialized
+INFO - 2023-01-01 01:05:33 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:05:33 --> Output Class Initialized
+INFO - 2023-01-01 01:05:33 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2023-01-01 01:05:33 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:33 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:33 --> Input Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:33 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:33 --> Controller Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:33 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+INFO - 2023-01-01 01:05:33 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: html_helper
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:33 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:33 --> Email Class Initialized
+INFO - 2023-01-01 01:05:33 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:33 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:33 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:33 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:33 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:33 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:33 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+INFO - 2023-01-01 01:05:33 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:33 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:33 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:33 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:33 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:33 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:33 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:33 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:33 --> URI Class Initialized
+INFO - 2023-01-01 01:05:33 --> Router Class Initialized
+INFO - 2023-01-01 01:05:33 --> Output Class Initialized
+INFO - 2023-01-01 01:05:33 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:33 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:33 --> CSRF token verified
+INFO - 2023-01-01 01:05:33 --> Input Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Language Class Initialized
+INFO - 2023-01-01 01:05:33 --> Config Class Initialized
+INFO - 2023-01-01 01:05:33 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:33 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:33 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:33 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:33 --> Email Class Initialized
+INFO - 2023-01-01 01:05:33 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:33 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:33 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:33 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:33 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:33 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:33 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:05:33 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:33 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:05:33 --> Model Class Initialized
+INFO - 2023-01-01 01:05:33 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:33 --> Total execution time: 0.1164
+INFO - 2023-01-01 01:05:34 --> Config Class Initialized
+INFO - 2023-01-01 01:05:34 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:34 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:34 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:34 --> URI Class Initialized
+INFO - 2023-01-01 01:05:34 --> Router Class Initialized
+INFO - 2023-01-01 01:05:34 --> Output Class Initialized
+INFO - 2023-01-01 01:05:34 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:34 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:34 --> Input Class Initialized
+INFO - 2023-01-01 01:05:34 --> Language Class Initialized
+INFO - 2023-01-01 01:05:34 --> Language Class Initialized
+INFO - 2023-01-01 01:05:34 --> Config Class Initialized
+INFO - 2023-01-01 01:05:34 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:34 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:34 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:34 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:34 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:34 --> Email Class Initialized
+INFO - 2023-01-01 01:05:34 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:34 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:34 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:34 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:34 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:34 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:34 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:05:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:05:34 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:34 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:34 --> Total execution time: 0.5382
+INFO - 2023-01-01 01:05:43 --> Config Class Initialized
+INFO - 2023-01-01 01:05:43 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:43 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:43 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:43 --> URI Class Initialized
+INFO - 2023-01-01 01:05:43 --> Router Class Initialized
+INFO - 2023-01-01 01:05:43 --> Output Class Initialized
+INFO - 2023-01-01 01:05:43 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:43 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:43 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:43 --> CSRF token verified
+INFO - 2023-01-01 01:05:43 --> Input Class Initialized
+INFO - 2023-01-01 01:05:43 --> Language Class Initialized
+INFO - 2023-01-01 01:05:43 --> Language Class Initialized
+INFO - 2023-01-01 01:05:43 --> Config Class Initialized
+INFO - 2023-01-01 01:05:43 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:43 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:43 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:43 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:43 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:43 --> Email Class Initialized
+INFO - 2023-01-01 01:05:43 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:43 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:43 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:43 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:43 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:43 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:43 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:43 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:43 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:05:43 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:43 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:43 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:05:43 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:43 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:05:43 --> Model Class Initialized
+INFO - 2023-01-01 01:05:43 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:43 --> Total execution time: 0.1271
+INFO - 2023-01-01 01:05:48 --> Config Class Initialized
+INFO - 2023-01-01 01:05:48 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:48 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:48 --> URI Class Initialized
+INFO - 2023-01-01 01:05:48 --> Router Class Initialized
+INFO - 2023-01-01 01:05:48 --> Output Class Initialized
+INFO - 2023-01-01 01:05:48 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:48 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:48 --> Input Class Initialized
+INFO - 2023-01-01 01:05:48 --> Language Class Initialized
+INFO - 2023-01-01 01:05:48 --> Language Class Initialized
+INFO - 2023-01-01 01:05:48 --> Config Class Initialized
+INFO - 2023-01-01 01:05:48 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:48 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:48 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:48 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:48 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:48 --> Email Class Initialized
+INFO - 2023-01-01 01:05:48 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:48 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:48 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:48 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:48 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:48 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:48 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:48 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:48 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:48 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:48 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:48 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:05:48 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:05:48 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:48 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:05:48 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:48 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:05:48 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:05:48 --> File already loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:48 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/views/posorder.php
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:05:49 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:49 --> Total execution time: 1.2125
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:49 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:49 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:49 --> URI Class Initialized
+INFO - 2023-01-01 01:05:49 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:49 --> URI Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:49 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:49 --> Router Class Initialized
+INFO - 2023-01-01 01:05:49 --> URI Class Initialized
+INFO - 2023-01-01 01:05:49 --> Router Class Initialized
+INFO - 2023-01-01 01:05:49 --> Output Class Initialized
+INFO - 2023-01-01 01:05:49 --> Output Class Initialized
+INFO - 2023-01-01 01:05:49 --> Security Class Initialized
+INFO - 2023-01-01 01:05:49 --> Router Class Initialized
+INFO - 2023-01-01 01:05:49 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:49 --> Output Class Initialized
+INFO - 2023-01-01 01:05:49 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:49 --> Input Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:49 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Input Class Initialized
+INFO - 2023-01-01 01:05:49 --> Security Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:49 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:49 --> Input Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:49 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:49 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:49 --> Email Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:49 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:49 --> Email Class Initialized
+INFO - 2023-01-01 01:05:49 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:49 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:49 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: dompdf_helper
+DEBUG - 2023-01-01 01:05:49 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:49 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:49 --> URI Class Initialized
+INFO - 2023-01-01 01:05:49 --> Router Class Initialized
+INFO - 2023-01-01 01:05:49 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:49 --> Output Class Initialized
+INFO - 2023-01-01 01:05:49 --> Security Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: sslc_helper
+DEBUG - 2023-01-01 01:05:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:49 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:49 --> Input Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Email Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:49 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:49 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:49 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:49 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Loader Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:49 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:49 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:49 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:49 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:49 --> Helper loaded: directory_helper
+DEBUG - 2023-01-01 01:05:49 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:49 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:49 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:49 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:49 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:49 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+INFO - 2023-01-01 01:05:49 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:49 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:49 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:49 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:49 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:49 --> Controller Class Initialized
+INFO - 2023-01-01 01:05:49 --> Database Driver Class Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:49 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+INFO - 2023-01-01 01:05:49 --> Helper loaded: sslc_helper
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:49 --> Email Class Initialized
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+INFO - 2023-01-01 01:05:49 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:49 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:49 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:49 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:49 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:49 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:49 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:49 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:49 --> Model Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:49 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:49 --> URI Class Initialized
+INFO - 2023-01-01 01:05:49 --> Router Class Initialized
+INFO - 2023-01-01 01:05:49 --> Output Class Initialized
+INFO - 2023-01-01 01:05:49 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:49 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:49 --> CSRF token verified
+INFO - 2023-01-01 01:05:49 --> Input Class Initialized
+INFO - 2023-01-01 01:05:49 --> Language Class Initialized
+INFO - 2023-01-01 01:05:49 --> Config Class Initialized
+INFO - 2023-01-01 01:05:49 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:49 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:49 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:49 --> URI Class Initialized
+INFO - 2023-01-01 01:05:49 --> Router Class Initialized
+INFO - 2023-01-01 01:05:50 --> Output Class Initialized
+INFO - 2023-01-01 01:05:50 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:50 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:50 --> Language Class Initialized
+INFO - 2023-01-01 01:05:50 --> CSRF token verified
+INFO - 2023-01-01 01:05:50 --> Input Class Initialized
+INFO - 2023-01-01 01:05:50 --> Config Class Initialized
+INFO - 2023-01-01 01:05:50 --> Language Class Initialized
+INFO - 2023-01-01 01:05:50 --> Language Class Initialized
+INFO - 2023-01-01 01:05:50 --> Config Class Initialized
+INFO - 2023-01-01 01:05:50 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:50 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:50 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:50 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:50 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:50 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:50 --> Email Class Initialized
+INFO - 2023-01-01 01:05:50 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:50 --> Email Class Initialized
+INFO - 2023-01-01 01:05:50 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:50 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:50 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:50 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:50 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:50 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:50 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:05:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+INFO - 2023-01-01 01:05:50 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:50 --> Total execution time: 0.1377
+INFO - 2023-01-01 01:05:50 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:50 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:50 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:50 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:50 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:50 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:50 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+INFO - 2023-01-01 01:05:50 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:50 --> Total execution time: 0.2688
+INFO - 2023-01-01 01:05:50 --> Config Class Initialized
+INFO - 2023-01-01 01:05:50 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:50 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:50 --> URI Class Initialized
+INFO - 2023-01-01 01:05:50 --> Router Class Initialized
+INFO - 2023-01-01 01:05:50 --> Output Class Initialized
+INFO - 2023-01-01 01:05:50 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:50 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:50 --> Input Class Initialized
+INFO - 2023-01-01 01:05:50 --> Language Class Initialized
+INFO - 2023-01-01 01:05:50 --> Language Class Initialized
+INFO - 2023-01-01 01:05:50 --> Config Class Initialized
+INFO - 2023-01-01 01:05:50 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:50 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:50 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:50 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:50 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:50 --> Email Class Initialized
+INFO - 2023-01-01 01:05:50 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:50 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:50 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:50 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:50 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:50 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:50 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:50 --> Model Class Initialized
+INFO - 2023-01-01 01:05:54 --> Config Class Initialized
+INFO - 2023-01-01 01:05:54 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:54 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:54 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:54 --> URI Class Initialized
+INFO - 2023-01-01 01:05:54 --> Router Class Initialized
+INFO - 2023-01-01 01:05:54 --> Output Class Initialized
+INFO - 2023-01-01 01:05:54 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:54 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:54 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:54 --> Input Class Initialized
+INFO - 2023-01-01 01:05:54 --> Language Class Initialized
+INFO - 2023-01-01 01:05:54 --> Language Class Initialized
+INFO - 2023-01-01 01:05:54 --> Config Class Initialized
+INFO - 2023-01-01 01:05:54 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:54 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:54 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:54 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:54 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:54 --> Email Class Initialized
+INFO - 2023-01-01 01:05:54 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:54 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:54 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:54 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:54 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:54 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:54 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:54 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:05:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:05:54 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:05:54 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:05:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:05:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/views/home/home.php
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:05:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:05:54 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:54 --> Total execution time: 0.8648
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:55 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:55 --> URI Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:55 --> Router Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:55 --> Hooks Class Initialized
+INFO - 2023-01-01 01:05:55 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:55 --> URI Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:55 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:55 --> URI Class Initialized
+INFO - 2023-01-01 01:05:55 --> Router Class Initialized
+INFO - 2023-01-01 01:05:55 --> Output Class Initialized
+INFO - 2023-01-01 01:05:55 --> Router Class Initialized
+INFO - 2023-01-01 01:05:55 --> Output Class Initialized
+INFO - 2023-01-01 01:05:55 --> Security Class Initialized
+INFO - 2023-01-01 01:05:55 --> Output Class Initialized
+INFO - 2023-01-01 01:05:55 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:55 --> Security Class Initialized
+INFO - 2023-01-01 01:05:55 --> CSRF cookie sent
+DEBUG - 2023-01-01 01:05:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:55 --> Input Class Initialized
+INFO - 2023-01-01 01:05:55 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:55 --> Input Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:55 --> Input Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:55 --> Email Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:55 --> Email Class Initialized
+INFO - 2023-01-01 01:05:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:55 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:05:55 --> Email Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:55 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:55 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:55 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+INFO - 2023-01-01 01:05:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:55 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:55 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:55 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:55 --> URI Class Initialized
+INFO - 2023-01-01 01:05:55 --> Router Class Initialized
+INFO - 2023-01-01 01:05:55 --> Output Class Initialized
+INFO - 2023-01-01 01:05:55 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:55 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:55 --> CSRF token verified
+INFO - 2023-01-01 01:05:55 --> Input Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:55 --> Email Class Initialized
+INFO - 2023-01-01 01:05:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:55 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:55 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+INFO - 2023-01-01 01:05:55 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:55 --> Total execution time: 0.0926
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:05:55 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:05:55 --> URI Class Initialized
+INFO - 2023-01-01 01:05:55 --> Router Class Initialized
+INFO - 2023-01-01 01:05:55 --> Output Class Initialized
+INFO - 2023-01-01 01:05:55 --> Security Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:05:55 --> CSRF cookie sent
+INFO - 2023-01-01 01:05:55 --> Input Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Language Class Initialized
+INFO - 2023-01-01 01:05:55 --> Config Class Initialized
+INFO - 2023-01-01 01:05:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:05:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:05:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:05:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:05:55 --> Email Class Initialized
+INFO - 2023-01-01 01:05:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:05:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:05:55 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:05:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:05:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:05:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:05:55 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:05:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:05:55 --> Model Class Initialized
+ERROR - 2023-01-01 01:05:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:05:55 --> Final output sent to browser
+DEBUG - 2023-01-01 01:05:55 --> Total execution time: 0.1435
+INFO - 2023-01-01 01:06:05 --> Config Class Initialized
+INFO - 2023-01-01 01:06:05 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:05 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:05 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:05 --> URI Class Initialized
+INFO - 2023-01-01 01:06:05 --> Router Class Initialized
+INFO - 2023-01-01 01:06:05 --> Output Class Initialized
+INFO - 2023-01-01 01:06:05 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:05 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:05 --> CSRF token verified
+INFO - 2023-01-01 01:06:05 --> Input Class Initialized
+INFO - 2023-01-01 01:06:05 --> Language Class Initialized
+INFO - 2023-01-01 01:06:05 --> Language Class Initialized
+INFO - 2023-01-01 01:06:05 --> Config Class Initialized
+INFO - 2023-01-01 01:06:05 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:05 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:05 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:05 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:05 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:05 --> Email Class Initialized
+INFO - 2023-01-01 01:06:05 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:05 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:05 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:05 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:05 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:05 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:05 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:05 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:05 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:05 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:05 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:05 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:05 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:05 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:05 --> Model Class Initialized
+INFO - 2023-01-01 01:06:05 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:05 --> Total execution time: 0.0696
+INFO - 2023-01-01 01:06:06 --> Config Class Initialized
+INFO - 2023-01-01 01:06:06 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:06 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:06 --> URI Class Initialized
+INFO - 2023-01-01 01:06:06 --> Router Class Initialized
+INFO - 2023-01-01 01:06:06 --> Output Class Initialized
+INFO - 2023-01-01 01:06:06 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:06 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:06 --> Input Class Initialized
+INFO - 2023-01-01 01:06:06 --> Language Class Initialized
+INFO - 2023-01-01 01:06:06 --> Language Class Initialized
+INFO - 2023-01-01 01:06:06 --> Config Class Initialized
+INFO - 2023-01-01 01:06:06 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:06 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:06 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:06 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:06 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:06 --> Email Class Initialized
+INFO - 2023-01-01 01:06:06 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:06 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:06 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:06 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:06 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:06 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:06 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:06 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:06:06 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:06 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:06:06 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:06:06 --> Model Class Initialized
+ERROR - 2023-01-01 01:06:06 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:06:06 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:06:06 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:06:06 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/views/details.php
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:06:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:06:06 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:06 --> Total execution time: 0.6061
+INFO - 2023-01-01 01:06:06 --> Config Class Initialized
+INFO - 2023-01-01 01:06:06 --> Hooks Class Initialized
+INFO - 2023-01-01 01:06:06 --> Config Class Initialized
+INFO - 2023-01-01 01:06:06 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:06 --> Utf8 Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:06 --> URI Class Initialized
+INFO - 2023-01-01 01:06:06 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:06 --> URI Class Initialized
+INFO - 2023-01-01 01:06:06 --> Router Class Initialized
+INFO - 2023-01-01 01:06:06 --> Router Class Initialized
+INFO - 2023-01-01 01:06:06 --> Output Class Initialized
+INFO - 2023-01-01 01:06:06 --> Security Class Initialized
+INFO - 2023-01-01 01:06:06 --> Output Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:06 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:06 --> Security Class Initialized
+INFO - 2023-01-01 01:06:06 --> Input Class Initialized
+INFO - 2023-01-01 01:06:06 --> Language Class Initialized
+DEBUG - 2023-01-01 01:06:06 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:06 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:06 --> Input Class Initialized
+INFO - 2023-01-01 01:06:06 --> Language Class Initialized
+INFO - 2023-01-01 01:06:07 --> Language Class Initialized
+INFO - 2023-01-01 01:06:07 --> Config Class Initialized
+INFO - 2023-01-01 01:06:07 --> Language Class Initialized
+INFO - 2023-01-01 01:06:07 --> Config Class Initialized
+INFO - 2023-01-01 01:06:07 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:07 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:07 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:07 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:07 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:07 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:07 --> Email Class Initialized
+INFO - 2023-01-01 01:06:07 --> Email Class Initialized
+INFO - 2023-01-01 01:06:07 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:07 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:07 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:07 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:07 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:07 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:07 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:07 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:06:07 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+INFO - 2023-01-01 01:06:07 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:07 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:07 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:07 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:07 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:07 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:07 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:07 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:06:07 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+INFO - 2023-01-01 01:06:07 --> Config Class Initialized
+INFO - 2023-01-01 01:06:07 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:07 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:07 --> URI Class Initialized
+INFO - 2023-01-01 01:06:07 --> Router Class Initialized
+INFO - 2023-01-01 01:06:07 --> Output Class Initialized
+INFO - 2023-01-01 01:06:07 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:07 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:07 --> CSRF token verified
+INFO - 2023-01-01 01:06:07 --> Input Class Initialized
+INFO - 2023-01-01 01:06:07 --> Language Class Initialized
+INFO - 2023-01-01 01:06:07 --> Language Class Initialized
+INFO - 2023-01-01 01:06:07 --> Config Class Initialized
+INFO - 2023-01-01 01:06:07 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:07 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:07 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:07 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:07 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:07 --> Email Class Initialized
+INFO - 2023-01-01 01:06:07 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:07 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:07 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:07 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:07 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:07 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:07 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:07 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:07 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:07 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:07 --> Model Class Initialized
+INFO - 2023-01-01 01:06:07 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:07 --> Total execution time: 0.1254
+INFO - 2023-01-01 01:06:15 --> Config Class Initialized
+INFO - 2023-01-01 01:06:15 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:15 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:15 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:15 --> URI Class Initialized
+INFO - 2023-01-01 01:06:15 --> Router Class Initialized
+INFO - 2023-01-01 01:06:15 --> Output Class Initialized
+INFO - 2023-01-01 01:06:15 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:15 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:15 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:15 --> Input Class Initialized
+INFO - 2023-01-01 01:06:15 --> Language Class Initialized
+INFO - 2023-01-01 01:06:15 --> Language Class Initialized
+INFO - 2023-01-01 01:06:15 --> Config Class Initialized
+INFO - 2023-01-01 01:06:15 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:15 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:15 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:15 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:15 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:15 --> Email Class Initialized
+INFO - 2023-01-01 01:06:15 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:15 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:15 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:15 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:15 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:15 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:15 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:15 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:15 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:06:15 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:06:15 --> Model Class Initialized
+ERROR - 2023-01-01 01:06:15 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:06:15 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:06:15 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:06:15 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:06:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/views/home/home.php
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:06:16 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:16 --> Total execution time: 0.7376
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Hooks Class Initialized
+INFO - 2023-01-01 01:06:16 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> UTF-8 Support Enabled
+DEBUG - 2023-01-01 01:06:16 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:16 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:16 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:16 --> URI Class Initialized
+INFO - 2023-01-01 01:06:16 --> URI Class Initialized
+INFO - 2023-01-01 01:06:16 --> Router Class Initialized
+INFO - 2023-01-01 01:06:16 --> Router Class Initialized
+INFO - 2023-01-01 01:06:16 --> Output Class Initialized
+INFO - 2023-01-01 01:06:16 --> Output Class Initialized
+INFO - 2023-01-01 01:06:16 --> Security Class Initialized
+INFO - 2023-01-01 01:06:16 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2023-01-01 01:06:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:16 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:16 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:16 --> Input Class Initialized
+INFO - 2023-01-01 01:06:16 --> Input Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:16 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:16 --> URI Class Initialized
+INFO - 2023-01-01 01:06:16 --> Router Class Initialized
+INFO - 2023-01-01 01:06:16 --> Output Class Initialized
+INFO - 2023-01-01 01:06:16 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:16 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:16 --> Input Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:16 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Email Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:16 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:16 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:16 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:16 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:16 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: directory_helper
+DEBUG - 2023-01-01 01:06:16 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:16 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:16 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:16 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:16 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:16 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: sslc_helper
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:16 --> Email Class Initialized
+INFO - 2023-01-01 01:06:16 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:16 --> Email Class Initialized
+INFO - 2023-01-01 01:06:16 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:16 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:16 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:16 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:16 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:16 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:16 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+INFO - 2023-01-01 01:06:16 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:16 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:16 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:16 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:16 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:16 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:16 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:16 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:16 --> URI Class Initialized
+INFO - 2023-01-01 01:06:16 --> Router Class Initialized
+INFO - 2023-01-01 01:06:16 --> Output Class Initialized
+INFO - 2023-01-01 01:06:16 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:16 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:16 --> CSRF token verified
+INFO - 2023-01-01 01:06:16 --> Input Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:16 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:16 --> Email Class Initialized
+INFO - 2023-01-01 01:06:16 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:16 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:16 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:16 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:16 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:16 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:16 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+INFO - 2023-01-01 01:06:16 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:16 --> Total execution time: 0.0936
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:16 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:16 --> URI Class Initialized
+INFO - 2023-01-01 01:06:16 --> Router Class Initialized
+INFO - 2023-01-01 01:06:16 --> Output Class Initialized
+INFO - 2023-01-01 01:06:16 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:16 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:16 --> Input Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Language Class Initialized
+INFO - 2023-01-01 01:06:16 --> Config Class Initialized
+INFO - 2023-01-01 01:06:16 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:16 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:16 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:16 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:16 --> Email Class Initialized
+INFO - 2023-01-01 01:06:16 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:16 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:16 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:16 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:16 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:16 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:16 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:16 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:06:16 --> Model Class Initialized
+ERROR - 2023-01-01 01:06:16 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:16 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:16 --> Total execution time: 0.0937
+INFO - 2023-01-01 01:06:26 --> Config Class Initialized
+INFO - 2023-01-01 01:06:26 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:26 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:26 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:26 --> URI Class Initialized
+INFO - 2023-01-01 01:06:26 --> Router Class Initialized
+INFO - 2023-01-01 01:06:26 --> Output Class Initialized
+INFO - 2023-01-01 01:06:26 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:26 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:26 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:26 --> CSRF token verified
+INFO - 2023-01-01 01:06:26 --> Input Class Initialized
+INFO - 2023-01-01 01:06:26 --> Language Class Initialized
+INFO - 2023-01-01 01:06:26 --> Language Class Initialized
+INFO - 2023-01-01 01:06:26 --> Config Class Initialized
+INFO - 2023-01-01 01:06:26 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:26 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:26 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:26 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:26 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:26 --> Email Class Initialized
+INFO - 2023-01-01 01:06:26 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:26 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:26 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:26 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:26 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:26 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:26 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:26 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:26 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:26 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:26 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:26 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:26 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:26 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:26 --> Model Class Initialized
+INFO - 2023-01-01 01:06:26 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:26 --> Total execution time: 0.0644
+INFO - 2023-01-01 01:06:36 --> Config Class Initialized
+INFO - 2023-01-01 01:06:36 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:36 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:36 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:36 --> URI Class Initialized
+INFO - 2023-01-01 01:06:36 --> Router Class Initialized
+INFO - 2023-01-01 01:06:36 --> Output Class Initialized
+INFO - 2023-01-01 01:06:36 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:36 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:36 --> CSRF token verified
+INFO - 2023-01-01 01:06:36 --> Input Class Initialized
+INFO - 2023-01-01 01:06:36 --> Language Class Initialized
+INFO - 2023-01-01 01:06:36 --> Language Class Initialized
+INFO - 2023-01-01 01:06:36 --> Config Class Initialized
+INFO - 2023-01-01 01:06:36 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:36 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:36 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:36 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:36 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:36 --> Email Class Initialized
+INFO - 2023-01-01 01:06:36 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:36 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:36 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:36 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:36 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:36 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:36 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:36 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:36 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:36 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:36 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:36 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:36 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:36 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:36 --> Model Class Initialized
+INFO - 2023-01-01 01:06:36 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:36 --> Total execution time: 0.0935
+INFO - 2023-01-01 01:06:46 --> Config Class Initialized
+INFO - 2023-01-01 01:06:46 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:46 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:46 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:46 --> URI Class Initialized
+INFO - 2023-01-01 01:06:46 --> Router Class Initialized
+INFO - 2023-01-01 01:06:46 --> Output Class Initialized
+INFO - 2023-01-01 01:06:46 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:46 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:46 --> CSRF token verified
+INFO - 2023-01-01 01:06:46 --> Input Class Initialized
+INFO - 2023-01-01 01:06:46 --> Language Class Initialized
+INFO - 2023-01-01 01:06:46 --> Language Class Initialized
+INFO - 2023-01-01 01:06:46 --> Config Class Initialized
+INFO - 2023-01-01 01:06:46 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:46 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:46 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:46 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:46 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:46 --> Email Class Initialized
+INFO - 2023-01-01 01:06:46 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:46 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:46 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:46 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:46 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:46 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:46 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:46 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:46 --> Model Class Initialized
+INFO - 2023-01-01 01:06:46 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:46 --> Total execution time: 0.0782
+INFO - 2023-01-01 01:06:56 --> Config Class Initialized
+INFO - 2023-01-01 01:06:56 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:56 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:56 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:56 --> URI Class Initialized
+INFO - 2023-01-01 01:06:56 --> Router Class Initialized
+INFO - 2023-01-01 01:06:56 --> Output Class Initialized
+INFO - 2023-01-01 01:06:56 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:56 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:56 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:56 --> CSRF token verified
+INFO - 2023-01-01 01:06:56 --> Input Class Initialized
+INFO - 2023-01-01 01:06:56 --> Language Class Initialized
+INFO - 2023-01-01 01:06:56 --> Language Class Initialized
+INFO - 2023-01-01 01:06:56 --> Config Class Initialized
+INFO - 2023-01-01 01:06:56 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:56 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:56 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:56 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:56 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:56 --> Email Class Initialized
+INFO - 2023-01-01 01:06:56 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:56 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:56 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:56 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:56 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:56 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:56 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:56 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:56 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:06:56 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:56 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:56 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:06:56 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:56 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:06:56 --> Model Class Initialized
+INFO - 2023-01-01 01:06:56 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:56 --> Total execution time: 0.0600
+INFO - 2023-01-01 01:06:59 --> Config Class Initialized
+INFO - 2023-01-01 01:06:59 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:06:59 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:06:59 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:06:59 --> URI Class Initialized
+INFO - 2023-01-01 01:06:59 --> Router Class Initialized
+INFO - 2023-01-01 01:06:59 --> Output Class Initialized
+INFO - 2023-01-01 01:06:59 --> Security Class Initialized
+DEBUG - 2023-01-01 01:06:59 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:06:59 --> CSRF cookie sent
+INFO - 2023-01-01 01:06:59 --> Input Class Initialized
+INFO - 2023-01-01 01:06:59 --> Language Class Initialized
+INFO - 2023-01-01 01:06:59 --> Language Class Initialized
+INFO - 2023-01-01 01:06:59 --> Config Class Initialized
+INFO - 2023-01-01 01:06:59 --> Loader Class Initialized
+INFO - 2023-01-01 01:06:59 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:06:59 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:06:59 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:06:59 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:06:59 --> Email Class Initialized
+INFO - 2023-01-01 01:06:59 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:06:59 --> Cart Class Initialized
+INFO - 2023-01-01 01:06:59 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:06:59 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:06:59 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:06:59 --> Pagination Class Initialized
+INFO - 2023-01-01 01:06:59 --> Controller Class Initialized
+ERROR - 2023-01-01 01:06:59 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:06:59 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:06:59 --> Model Class Initialized
+DEBUG - 2023-01-01 01:06:59 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:06:59 --> Model Class Initialized
+ERROR - 2023-01-01 01:06:59 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:06:59 --> Final output sent to browser
+DEBUG - 2023-01-01 01:06:59 --> Total execution time: 0.1399
+INFO - 2023-01-01 01:07:06 --> Config Class Initialized
+INFO - 2023-01-01 01:07:06 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:06 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:06 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:06 --> URI Class Initialized
+INFO - 2023-01-01 01:07:06 --> Router Class Initialized
+INFO - 2023-01-01 01:07:06 --> Output Class Initialized
+INFO - 2023-01-01 01:07:06 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:06 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:06 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:06 --> CSRF token verified
+INFO - 2023-01-01 01:07:06 --> Input Class Initialized
+INFO - 2023-01-01 01:07:06 --> Language Class Initialized
+INFO - 2023-01-01 01:07:06 --> Language Class Initialized
+INFO - 2023-01-01 01:07:06 --> Config Class Initialized
+INFO - 2023-01-01 01:07:06 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:06 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:06 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:06 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:06 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:06 --> Email Class Initialized
+INFO - 2023-01-01 01:07:06 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:06 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:06 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:06 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:06 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:06 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:06 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:06 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:06 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:06 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:06 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:06 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:06 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:06 --> Model Class Initialized
+INFO - 2023-01-01 01:07:06 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:06 --> Total execution time: 0.0845
+INFO - 2023-01-01 01:07:08 --> Config Class Initialized
+INFO - 2023-01-01 01:07:08 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:08 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:08 --> URI Class Initialized
+INFO - 2023-01-01 01:07:08 --> Router Class Initialized
+INFO - 2023-01-01 01:07:08 --> Output Class Initialized
+INFO - 2023-01-01 01:07:08 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:08 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:08 --> Input Class Initialized
+INFO - 2023-01-01 01:07:08 --> Language Class Initialized
+INFO - 2023-01-01 01:07:08 --> Language Class Initialized
+INFO - 2023-01-01 01:07:08 --> Config Class Initialized
+INFO - 2023-01-01 01:07:08 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:08 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:08 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:08 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:08 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:08 --> Email Class Initialized
+INFO - 2023-01-01 01:07:08 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:08 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:08 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:08 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:08 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:08 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:08 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:08 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:08 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:08 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:08 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:08 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:07:08 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:07:08 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:07:08 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/views/reservationlist.php
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:07:08 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:07:08 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:08 --> Total execution time: 0.7806
+INFO - 2023-01-01 01:07:09 --> Config Class Initialized
+INFO - 2023-01-01 01:07:09 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:09 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:09 --> URI Class Initialized
+INFO - 2023-01-01 01:07:09 --> Router Class Initialized
+INFO - 2023-01-01 01:07:09 --> Output Class Initialized
+INFO - 2023-01-01 01:07:09 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:09 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:09 --> Input Class Initialized
+INFO - 2023-01-01 01:07:09 --> Config Class Initialized
+INFO - 2023-01-01 01:07:09 --> Hooks Class Initialized
+INFO - 2023-01-01 01:07:09 --> Language Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:09 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:09 --> URI Class Initialized
+INFO - 2023-01-01 01:07:09 --> Router Class Initialized
+INFO - 2023-01-01 01:07:09 --> Output Class Initialized
+INFO - 2023-01-01 01:07:09 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:09 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:09 --> Input Class Initialized
+INFO - 2023-01-01 01:07:09 --> Language Class Initialized
+INFO - 2023-01-01 01:07:09 --> Language Class Initialized
+INFO - 2023-01-01 01:07:09 --> Config Class Initialized
+INFO - 2023-01-01 01:07:09 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:09 --> Language Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:09 --> Config Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:09 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:09 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:09 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:09 --> Email Class Initialized
+INFO - 2023-01-01 01:07:09 --> Email Class Initialized
+INFO - 2023-01-01 01:07:09 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:09 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:09 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:09 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:09 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:09 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:09 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:09 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:09 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+INFO - 2023-01-01 01:07:09 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:09 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:09 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:09 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:09 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:09 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:09 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:09 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:09 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+INFO - 2023-01-01 01:07:09 --> Config Class Initialized
+INFO - 2023-01-01 01:07:09 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:09 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:09 --> URI Class Initialized
+INFO - 2023-01-01 01:07:09 --> Router Class Initialized
+INFO - 2023-01-01 01:07:09 --> Output Class Initialized
+INFO - 2023-01-01 01:07:09 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:09 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:09 --> CSRF token verified
+INFO - 2023-01-01 01:07:09 --> Input Class Initialized
+INFO - 2023-01-01 01:07:09 --> Language Class Initialized
+INFO - 2023-01-01 01:07:09 --> Language Class Initialized
+INFO - 2023-01-01 01:07:09 --> Config Class Initialized
+INFO - 2023-01-01 01:07:09 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:09 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:09 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:09 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:09 --> Email Class Initialized
+INFO - 2023-01-01 01:07:09 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:09 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:09 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:09 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:09 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:09 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:09 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:09 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:09 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:09 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:09 --> Model Class Initialized
+INFO - 2023-01-01 01:07:09 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:09 --> Total execution time: 0.2311
+INFO - 2023-01-01 01:07:12 --> Config Class Initialized
+INFO - 2023-01-01 01:07:12 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:12 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:12 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:12 --> URI Class Initialized
+INFO - 2023-01-01 01:07:12 --> Router Class Initialized
+INFO - 2023-01-01 01:07:12 --> Output Class Initialized
+INFO - 2023-01-01 01:07:12 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:12 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:12 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:12 --> Input Class Initialized
+INFO - 2023-01-01 01:07:12 --> Language Class Initialized
+INFO - 2023-01-01 01:07:12 --> Language Class Initialized
+INFO - 2023-01-01 01:07:12 --> Config Class Initialized
+INFO - 2023-01-01 01:07:12 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:12 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:12 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:12 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:12 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:12 --> Email Class Initialized
+INFO - 2023-01-01 01:07:12 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:12 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:12 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:12 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:12 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:12 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:12 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:12 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:12 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:07:12 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:12 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:07:12 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:12 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:12 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:07:12 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:07:12 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:12 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:07:12 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/views/home/home.php
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:07:13 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:13 --> Total execution time: 0.9035
+INFO - 2023-01-01 01:07:13 --> Config Class Initialized
+INFO - 2023-01-01 01:07:13 --> Hooks Class Initialized
+INFO - 2023-01-01 01:07:13 --> Config Class Initialized
+INFO - 2023-01-01 01:07:13 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:13 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:13 --> URI Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:13 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:13 --> URI Class Initialized
+INFO - 2023-01-01 01:07:13 --> Router Class Initialized
+INFO - 2023-01-01 01:07:13 --> Output Class Initialized
+INFO - 2023-01-01 01:07:13 --> Router Class Initialized
+INFO - 2023-01-01 01:07:13 --> Security Class Initialized
+INFO - 2023-01-01 01:07:13 --> Output Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:13 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:13 --> Input Class Initialized
+INFO - 2023-01-01 01:07:13 --> Security Class Initialized
+INFO - 2023-01-01 01:07:13 --> Language Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:13 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:13 --> Input Class Initialized
+INFO - 2023-01-01 01:07:13 --> Config Class Initialized
+INFO - 2023-01-01 01:07:13 --> Hooks Class Initialized
+INFO - 2023-01-01 01:07:13 --> Language Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:13 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:13 --> URI Class Initialized
+INFO - 2023-01-01 01:07:13 --> Router Class Initialized
+INFO - 2023-01-01 01:07:13 --> Output Class Initialized
+INFO - 2023-01-01 01:07:13 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:13 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:13 --> Input Class Initialized
+INFO - 2023-01-01 01:07:13 --> Language Class Initialized
+INFO - 2023-01-01 01:07:13 --> Language Class Initialized
+INFO - 2023-01-01 01:07:13 --> Language Class Initialized
+INFO - 2023-01-01 01:07:13 --> Config Class Initialized
+INFO - 2023-01-01 01:07:13 --> Config Class Initialized
+INFO - 2023-01-01 01:07:13 --> Language Class Initialized
+INFO - 2023-01-01 01:07:13 --> Config Class Initialized
+INFO - 2023-01-01 01:07:13 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:13 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:13 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:13 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:13 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:13 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:13 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:13 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:13 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:13 --> Email Class Initialized
+INFO - 2023-01-01 01:07:13 --> Email Class Initialized
+INFO - 2023-01-01 01:07:13 --> Email Class Initialized
+INFO - 2023-01-01 01:07:13 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:13 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:13 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:13 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:13 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:13 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:13 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:13 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:13 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+INFO - 2023-01-01 01:07:13 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:13 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:13 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:13 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:13 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:13 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:13 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:13 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:13 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+INFO - 2023-01-01 01:07:13 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:13 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:13 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:13 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:13 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:13 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:13 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:13 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:13 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:07:13 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:13 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:14 --> Config Class Initialized
+INFO - 2023-01-01 01:07:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:14 --> URI Class Initialized
+INFO - 2023-01-01 01:07:14 --> Router Class Initialized
+INFO - 2023-01-01 01:07:14 --> Output Class Initialized
+INFO - 2023-01-01 01:07:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:14 --> CSRF token verified
+INFO - 2023-01-01 01:07:14 --> Input Class Initialized
+INFO - 2023-01-01 01:07:14 --> Language Class Initialized
+INFO - 2023-01-01 01:07:14 --> Language Class Initialized
+INFO - 2023-01-01 01:07:14 --> Config Class Initialized
+INFO - 2023-01-01 01:07:14 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:14 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:14 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:14 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:14 --> Email Class Initialized
+INFO - 2023-01-01 01:07:14 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:14 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:14 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:14 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:14 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:14 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:14 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:14 --> Model Class Initialized
+INFO - 2023-01-01 01:07:14 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:14 --> Total execution time: 0.0848
+INFO - 2023-01-01 01:07:14 --> Config Class Initialized
+INFO - 2023-01-01 01:07:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:14 --> URI Class Initialized
+INFO - 2023-01-01 01:07:14 --> Router Class Initialized
+INFO - 2023-01-01 01:07:14 --> Output Class Initialized
+INFO - 2023-01-01 01:07:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:14 --> Input Class Initialized
+INFO - 2023-01-01 01:07:14 --> Language Class Initialized
+INFO - 2023-01-01 01:07:14 --> Language Class Initialized
+INFO - 2023-01-01 01:07:14 --> Config Class Initialized
+INFO - 2023-01-01 01:07:14 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:14 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:14 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:14 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:14 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:14 --> Email Class Initialized
+INFO - 2023-01-01 01:07:14 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:14 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:14 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:14 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:14 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:14 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:14 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:07:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:07:14 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:14 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:14 --> Total execution time: 0.3108
+INFO - 2023-01-01 01:07:24 --> Config Class Initialized
+INFO - 2023-01-01 01:07:24 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:24 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:24 --> URI Class Initialized
+INFO - 2023-01-01 01:07:24 --> Router Class Initialized
+INFO - 2023-01-01 01:07:24 --> Output Class Initialized
+INFO - 2023-01-01 01:07:24 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:24 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:24 --> CSRF token verified
+INFO - 2023-01-01 01:07:24 --> Input Class Initialized
+INFO - 2023-01-01 01:07:24 --> Language Class Initialized
+INFO - 2023-01-01 01:07:24 --> Language Class Initialized
+INFO - 2023-01-01 01:07:24 --> Config Class Initialized
+INFO - 2023-01-01 01:07:24 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:24 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:24 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:24 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:24 --> Email Class Initialized
+INFO - 2023-01-01 01:07:24 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:24 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:24 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:24 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:24 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:24 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:24 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:24 --> Model Class Initialized
+INFO - 2023-01-01 01:07:24 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:24 --> Total execution time: 0.0733
+INFO - 2023-01-01 01:07:24 --> Config Class Initialized
+INFO - 2023-01-01 01:07:24 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:24 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:24 --> URI Class Initialized
+INFO - 2023-01-01 01:07:24 --> Router Class Initialized
+INFO - 2023-01-01 01:07:24 --> Output Class Initialized
+INFO - 2023-01-01 01:07:24 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:24 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:24 --> Input Class Initialized
+INFO - 2023-01-01 01:07:24 --> Language Class Initialized
+INFO - 2023-01-01 01:07:24 --> Language Class Initialized
+INFO - 2023-01-01 01:07:24 --> Config Class Initialized
+INFO - 2023-01-01 01:07:24 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:24 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:24 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:24 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:24 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:24 --> Email Class Initialized
+INFO - 2023-01-01 01:07:24 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:24 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:24 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:24 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:24 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:24 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:24 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:07:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:07:24 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:24 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:24 --> Total execution time: 0.1181
+INFO - 2023-01-01 01:07:30 --> Config Class Initialized
+INFO - 2023-01-01 01:07:30 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:30 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:30 --> URI Class Initialized
+INFO - 2023-01-01 01:07:30 --> Router Class Initialized
+INFO - 2023-01-01 01:07:30 --> Output Class Initialized
+INFO - 2023-01-01 01:07:30 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:30 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:30 --> Input Class Initialized
+INFO - 2023-01-01 01:07:30 --> Language Class Initialized
+INFO - 2023-01-01 01:07:30 --> Language Class Initialized
+INFO - 2023-01-01 01:07:30 --> Config Class Initialized
+INFO - 2023-01-01 01:07:30 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:30 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:30 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:30 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:30 --> Email Class Initialized
+INFO - 2023-01-01 01:07:30 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:30 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:30 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:30 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:30 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:30 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:30 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:30 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:07:30 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:07:30 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:30 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:30 --> Helper loaded: captcha_helper
+ERROR - 2023-01-01 01:07:30 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:30 --> Config Class Initialized
+INFO - 2023-01-01 01:07:30 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:30 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:30 --> URI Class Initialized
+INFO - 2023-01-01 01:07:30 --> Router Class Initialized
+INFO - 2023-01-01 01:07:30 --> Output Class Initialized
+INFO - 2023-01-01 01:07:30 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:30 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:30 --> Input Class Initialized
+INFO - 2023-01-01 01:07:30 --> Language Class Initialized
+INFO - 2023-01-01 01:07:30 --> Language Class Initialized
+INFO - 2023-01-01 01:07:30 --> Config Class Initialized
+INFO - 2023-01-01 01:07:30 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:30 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:30 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:30 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:30 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:30 --> Email Class Initialized
+INFO - 2023-01-01 01:07:30 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:30 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:30 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:30 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:30 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:30 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:30 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:30 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:07:30 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:07:30 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:30 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:30 --> Helper loaded: captcha_helper
+DEBUG - 2023-01-01 01:07:30 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:07:30 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:07:30 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:30 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:07:30 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:30 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/login.php
+INFO - 2023-01-01 01:07:30 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:30 --> Total execution time: 0.1178
+INFO - 2023-01-01 01:07:36 --> Config Class Initialized
+INFO - 2023-01-01 01:07:36 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:36 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:36 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:36 --> URI Class Initialized
+INFO - 2023-01-01 01:07:36 --> Router Class Initialized
+INFO - 2023-01-01 01:07:36 --> Output Class Initialized
+INFO - 2023-01-01 01:07:36 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:36 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:36 --> CSRF token verified
+INFO - 2023-01-01 01:07:36 --> Input Class Initialized
+INFO - 2023-01-01 01:07:36 --> Language Class Initialized
+INFO - 2023-01-01 01:07:36 --> Language Class Initialized
+INFO - 2023-01-01 01:07:36 --> Config Class Initialized
+INFO - 2023-01-01 01:07:36 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:36 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:36 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:36 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:36 --> Email Class Initialized
+INFO - 2023-01-01 01:07:36 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:36 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:36 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:36 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:36 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:36 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:36 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:36 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:36 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:07:36 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:36 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:07:36 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:36 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:36 --> Helper loaded: captcha_helper
+INFO - 2023-01-01 01:07:36 --> Language file loaded: language/english/form_validation_lang.php
+ERROR - 2023-01-01 01:07:36 --> Severity: 8192 --> filter_var(): Passing null to parameter #3 ($options) of type array|int is deprecated /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/core/Input.php 574
+ERROR - 2023-01-01 01:07:36 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:36 --> Config Class Initialized
+INFO - 2023-01-01 01:07:36 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:36 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:36 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:36 --> URI Class Initialized
+INFO - 2023-01-01 01:07:36 --> Router Class Initialized
+INFO - 2023-01-01 01:07:36 --> Output Class Initialized
+INFO - 2023-01-01 01:07:36 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:36 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:36 --> Input Class Initialized
+INFO - 2023-01-01 01:07:36 --> Language Class Initialized
+INFO - 2023-01-01 01:07:36 --> Language Class Initialized
+INFO - 2023-01-01 01:07:36 --> Config Class Initialized
+INFO - 2023-01-01 01:07:36 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:36 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:36 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:36 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:36 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:36 --> Email Class Initialized
+INFO - 2023-01-01 01:07:36 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:36 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:36 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:37 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:37 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:37 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:37 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:07:37 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:07:37 --> File already loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/views/allkitchen.php
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:07:37 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:37 --> Total execution time: 0.2972
+INFO - 2023-01-01 01:07:37 --> Config Class Initialized
+INFO - 2023-01-01 01:07:37 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:37 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:37 --> Config Class Initialized
+INFO - 2023-01-01 01:07:37 --> URI Class Initialized
+INFO - 2023-01-01 01:07:37 --> Hooks Class Initialized
+INFO - 2023-01-01 01:07:37 --> Router Class Initialized
+INFO - 2023-01-01 01:07:37 --> Output Class Initialized
+INFO - 2023-01-01 01:07:37 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> UTF-8 Support Enabled
+DEBUG - 2023-01-01 01:07:37 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:37 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:37 --> Input Class Initialized
+INFO - 2023-01-01 01:07:37 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:37 --> Language Class Initialized
+INFO - 2023-01-01 01:07:37 --> URI Class Initialized
+INFO - 2023-01-01 01:07:37 --> Router Class Initialized
+INFO - 2023-01-01 01:07:37 --> Output Class Initialized
+INFO - 2023-01-01 01:07:37 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:37 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:37 --> Input Class Initialized
+INFO - 2023-01-01 01:07:37 --> Language Class Initialized
+INFO - 2023-01-01 01:07:37 --> Language Class Initialized
+INFO - 2023-01-01 01:07:37 --> Config Class Initialized
+INFO - 2023-01-01 01:07:37 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:37 --> Language Class Initialized
+INFO - 2023-01-01 01:07:37 --> Config Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:37 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:37 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:37 --> Email Class Initialized
+INFO - 2023-01-01 01:07:37 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:37 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:37 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:37 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: sslc_helper
+DEBUG - 2023-01-01 01:07:37 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:37 --> Email Class Initialized
+INFO - 2023-01-01 01:07:37 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:37 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:37 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:37 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+INFO - 2023-01-01 01:07:37 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:37 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:37 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:37 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:37 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:37 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:37 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+INFO - 2023-01-01 01:07:37 --> Config Class Initialized
+INFO - 2023-01-01 01:07:37 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:37 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:37 --> URI Class Initialized
+INFO - 2023-01-01 01:07:37 --> Router Class Initialized
+INFO - 2023-01-01 01:07:37 --> Output Class Initialized
+INFO - 2023-01-01 01:07:37 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:37 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:37 --> CSRF token verified
+INFO - 2023-01-01 01:07:37 --> Input Class Initialized
+INFO - 2023-01-01 01:07:37 --> Language Class Initialized
+INFO - 2023-01-01 01:07:37 --> Language Class Initialized
+INFO - 2023-01-01 01:07:37 --> Config Class Initialized
+INFO - 2023-01-01 01:07:37 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:37 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:37 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:37 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:37 --> Email Class Initialized
+INFO - 2023-01-01 01:07:37 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:37 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:37 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:37 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:37 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:37 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:37 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:37 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:37 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:37 --> Model Class Initialized
+INFO - 2023-01-01 01:07:37 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:37 --> Total execution time: 0.0866
+INFO - 2023-01-01 01:07:38 --> Config Class Initialized
+INFO - 2023-01-01 01:07:38 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:38 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:38 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:38 --> URI Class Initialized
+INFO - 2023-01-01 01:07:38 --> Router Class Initialized
+INFO - 2023-01-01 01:07:38 --> Output Class Initialized
+INFO - 2023-01-01 01:07:38 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:38 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:38 --> CSRF token verified
+INFO - 2023-01-01 01:07:38 --> Input Class Initialized
+INFO - 2023-01-01 01:07:38 --> Language Class Initialized
+INFO - 2023-01-01 01:07:38 --> Language Class Initialized
+INFO - 2023-01-01 01:07:38 --> Config Class Initialized
+INFO - 2023-01-01 01:07:38 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:38 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:38 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:38 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:38 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:38 --> Email Class Initialized
+INFO - 2023-01-01 01:07:38 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:38 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:38 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:38 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:38 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:38 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:38 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:38 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:38 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:38 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:38 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:38 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:38 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:38 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:38 --> Model Class Initialized
+INFO - 2023-01-01 01:07:38 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:38 --> Total execution time: 0.1603
+INFO - 2023-01-01 01:07:39 --> Config Class Initialized
+INFO - 2023-01-01 01:07:39 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:39 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:39 --> URI Class Initialized
+INFO - 2023-01-01 01:07:39 --> Router Class Initialized
+INFO - 2023-01-01 01:07:39 --> Output Class Initialized
+INFO - 2023-01-01 01:07:39 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:39 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:39 --> CSRF token verified
+INFO - 2023-01-01 01:07:39 --> Input Class Initialized
+INFO - 2023-01-01 01:07:39 --> Language Class Initialized
+INFO - 2023-01-01 01:07:39 --> Language Class Initialized
+INFO - 2023-01-01 01:07:39 --> Config Class Initialized
+INFO - 2023-01-01 01:07:39 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:39 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:39 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:39 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:39 --> Email Class Initialized
+INFO - 2023-01-01 01:07:39 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:39 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:39 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:39 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:39 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:39 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:39 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:39 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:39 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:39 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:39 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:39 --> Model Class Initialized
+INFO - 2023-01-01 01:07:39 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:39 --> Total execution time: 0.1204
+INFO - 2023-01-01 01:07:39 --> Config Class Initialized
+INFO - 2023-01-01 01:07:39 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:39 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:39 --> URI Class Initialized
+INFO - 2023-01-01 01:07:39 --> Router Class Initialized
+INFO - 2023-01-01 01:07:39 --> Output Class Initialized
+INFO - 2023-01-01 01:07:39 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:39 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:39 --> CSRF token verified
+INFO - 2023-01-01 01:07:39 --> Input Class Initialized
+INFO - 2023-01-01 01:07:39 --> Language Class Initialized
+INFO - 2023-01-01 01:07:39 --> Language Class Initialized
+INFO - 2023-01-01 01:07:39 --> Config Class Initialized
+INFO - 2023-01-01 01:07:39 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:39 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:39 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:39 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:39 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:39 --> Email Class Initialized
+INFO - 2023-01-01 01:07:39 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:39 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:39 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:39 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:39 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:39 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:39 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:39 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:39 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:39 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:39 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:39 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:39 --> Model Class Initialized
+INFO - 2023-01-01 01:07:39 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:39 --> Total execution time: 0.0882
+INFO - 2023-01-01 01:07:40 --> Config Class Initialized
+INFO - 2023-01-01 01:07:40 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:40 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:40 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:40 --> URI Class Initialized
+INFO - 2023-01-01 01:07:40 --> Router Class Initialized
+INFO - 2023-01-01 01:07:40 --> Output Class Initialized
+INFO - 2023-01-01 01:07:40 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:40 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:40 --> CSRF token verified
+INFO - 2023-01-01 01:07:40 --> Input Class Initialized
+INFO - 2023-01-01 01:07:40 --> Language Class Initialized
+INFO - 2023-01-01 01:07:40 --> Language Class Initialized
+INFO - 2023-01-01 01:07:40 --> Config Class Initialized
+INFO - 2023-01-01 01:07:40 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:40 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:40 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:40 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:40 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:40 --> Email Class Initialized
+INFO - 2023-01-01 01:07:40 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:40 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:40 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:40 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:40 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:40 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:40 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:40 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:40 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:40 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:40 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:40 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:40 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:40 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:40 --> Model Class Initialized
+INFO - 2023-01-01 01:07:40 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:40 --> Total execution time: 0.1035
+INFO - 2023-01-01 01:07:41 --> Config Class Initialized
+INFO - 2023-01-01 01:07:41 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:41 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:41 --> URI Class Initialized
+INFO - 2023-01-01 01:07:41 --> Router Class Initialized
+INFO - 2023-01-01 01:07:41 --> Output Class Initialized
+INFO - 2023-01-01 01:07:41 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:41 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:41 --> CSRF token verified
+INFO - 2023-01-01 01:07:41 --> Input Class Initialized
+INFO - 2023-01-01 01:07:41 --> Language Class Initialized
+INFO - 2023-01-01 01:07:41 --> Language Class Initialized
+INFO - 2023-01-01 01:07:41 --> Config Class Initialized
+INFO - 2023-01-01 01:07:41 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:41 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:41 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:41 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:41 --> Email Class Initialized
+INFO - 2023-01-01 01:07:41 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:41 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:41 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:41 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:41 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:41 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:41 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:41 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:41 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:41 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:41 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:41 --> Model Class Initialized
+INFO - 2023-01-01 01:07:41 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:41 --> Total execution time: 0.1287
+INFO - 2023-01-01 01:07:41 --> Config Class Initialized
+INFO - 2023-01-01 01:07:41 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:41 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:41 --> URI Class Initialized
+INFO - 2023-01-01 01:07:41 --> Router Class Initialized
+INFO - 2023-01-01 01:07:41 --> Output Class Initialized
+INFO - 2023-01-01 01:07:41 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:41 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:41 --> CSRF token verified
+INFO - 2023-01-01 01:07:41 --> Input Class Initialized
+INFO - 2023-01-01 01:07:41 --> Language Class Initialized
+INFO - 2023-01-01 01:07:41 --> Language Class Initialized
+INFO - 2023-01-01 01:07:41 --> Config Class Initialized
+INFO - 2023-01-01 01:07:41 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:41 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:41 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:41 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:41 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:42 --> Email Class Initialized
+INFO - 2023-01-01 01:07:42 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:42 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:42 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:42 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:42 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:42 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:42 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:42 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:42 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:42 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:42 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:42 --> Model Class Initialized
+INFO - 2023-01-01 01:07:42 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:42 --> Total execution time: 0.1461
+INFO - 2023-01-01 01:07:42 --> Config Class Initialized
+INFO - 2023-01-01 01:07:42 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:42 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:42 --> URI Class Initialized
+INFO - 2023-01-01 01:07:42 --> Router Class Initialized
+INFO - 2023-01-01 01:07:42 --> Output Class Initialized
+INFO - 2023-01-01 01:07:42 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:42 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:42 --> CSRF token verified
+INFO - 2023-01-01 01:07:42 --> Input Class Initialized
+INFO - 2023-01-01 01:07:42 --> Language Class Initialized
+INFO - 2023-01-01 01:07:42 --> Language Class Initialized
+INFO - 2023-01-01 01:07:42 --> Config Class Initialized
+INFO - 2023-01-01 01:07:42 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:42 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:42 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:42 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:42 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:42 --> Email Class Initialized
+INFO - 2023-01-01 01:07:42 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:42 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:42 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:42 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:42 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:42 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:42 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:42 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:42 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:42 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:42 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:42 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:42 --> Model Class Initialized
+INFO - 2023-01-01 01:07:42 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:42 --> Total execution time: 0.1058
+INFO - 2023-01-01 01:07:43 --> Config Class Initialized
+INFO - 2023-01-01 01:07:43 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:43 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:43 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:43 --> URI Class Initialized
+INFO - 2023-01-01 01:07:43 --> Router Class Initialized
+INFO - 2023-01-01 01:07:43 --> Output Class Initialized
+INFO - 2023-01-01 01:07:43 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:43 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:43 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:43 --> CSRF token verified
+INFO - 2023-01-01 01:07:43 --> Input Class Initialized
+INFO - 2023-01-01 01:07:43 --> Language Class Initialized
+INFO - 2023-01-01 01:07:43 --> Language Class Initialized
+INFO - 2023-01-01 01:07:43 --> Config Class Initialized
+INFO - 2023-01-01 01:07:43 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:43 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:43 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:43 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:43 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:43 --> Email Class Initialized
+INFO - 2023-01-01 01:07:43 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:43 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:43 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:43 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:43 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:43 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:43 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:43 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:43 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:43 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:43 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:43 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:43 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:43 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:43 --> Model Class Initialized
+INFO - 2023-01-01 01:07:43 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:43 --> Total execution time: 0.2520
+INFO - 2023-01-01 01:07:43 --> Config Class Initialized
+INFO - 2023-01-01 01:07:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:44 --> URI Class Initialized
+INFO - 2023-01-01 01:07:44 --> Router Class Initialized
+INFO - 2023-01-01 01:07:44 --> Output Class Initialized
+INFO - 2023-01-01 01:07:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:44 --> CSRF token verified
+INFO - 2023-01-01 01:07:44 --> Input Class Initialized
+INFO - 2023-01-01 01:07:44 --> Language Class Initialized
+INFO - 2023-01-01 01:07:44 --> Language Class Initialized
+INFO - 2023-01-01 01:07:44 --> Config Class Initialized
+INFO - 2023-01-01 01:07:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:44 --> Email Class Initialized
+INFO - 2023-01-01 01:07:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:44 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:44 --> Model Class Initialized
+INFO - 2023-01-01 01:07:44 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:44 --> Total execution time: 0.1384
+INFO - 2023-01-01 01:07:44 --> Config Class Initialized
+INFO - 2023-01-01 01:07:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:44 --> URI Class Initialized
+INFO - 2023-01-01 01:07:44 --> Router Class Initialized
+INFO - 2023-01-01 01:07:44 --> Output Class Initialized
+INFO - 2023-01-01 01:07:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:44 --> CSRF token verified
+INFO - 2023-01-01 01:07:44 --> Input Class Initialized
+INFO - 2023-01-01 01:07:44 --> Language Class Initialized
+INFO - 2023-01-01 01:07:44 --> Language Class Initialized
+INFO - 2023-01-01 01:07:44 --> Config Class Initialized
+INFO - 2023-01-01 01:07:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:44 --> Email Class Initialized
+INFO - 2023-01-01 01:07:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:44 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:44 --> Model Class Initialized
+INFO - 2023-01-01 01:07:44 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:44 --> Total execution time: 0.1871
+INFO - 2023-01-01 01:07:45 --> Config Class Initialized
+INFO - 2023-01-01 01:07:45 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:45 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:45 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:45 --> URI Class Initialized
+INFO - 2023-01-01 01:07:45 --> Router Class Initialized
+INFO - 2023-01-01 01:07:45 --> Output Class Initialized
+INFO - 2023-01-01 01:07:45 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:45 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:45 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:45 --> CSRF token verified
+INFO - 2023-01-01 01:07:45 --> Input Class Initialized
+INFO - 2023-01-01 01:07:45 --> Language Class Initialized
+INFO - 2023-01-01 01:07:45 --> Language Class Initialized
+INFO - 2023-01-01 01:07:45 --> Config Class Initialized
+INFO - 2023-01-01 01:07:45 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:45 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:45 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:45 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:45 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:45 --> Email Class Initialized
+INFO - 2023-01-01 01:07:45 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:45 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:45 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:45 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:45 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:45 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:45 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:45 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:45 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:45 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:45 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:45 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:45 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:45 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:45 --> Model Class Initialized
+INFO - 2023-01-01 01:07:45 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:45 --> Total execution time: 0.1739
+INFO - 2023-01-01 01:07:46 --> Config Class Initialized
+INFO - 2023-01-01 01:07:46 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:46 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:46 --> URI Class Initialized
+INFO - 2023-01-01 01:07:46 --> Router Class Initialized
+INFO - 2023-01-01 01:07:46 --> Output Class Initialized
+INFO - 2023-01-01 01:07:46 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:46 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:46 --> CSRF token verified
+INFO - 2023-01-01 01:07:46 --> Input Class Initialized
+INFO - 2023-01-01 01:07:46 --> Language Class Initialized
+INFO - 2023-01-01 01:07:46 --> Language Class Initialized
+INFO - 2023-01-01 01:07:46 --> Config Class Initialized
+INFO - 2023-01-01 01:07:46 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:46 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:46 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:46 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:46 --> Email Class Initialized
+INFO - 2023-01-01 01:07:46 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:46 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:46 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:46 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:46 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:46 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:46 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+INFO - 2023-01-01 01:07:46 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:46 --> Total execution time: 0.1101
+INFO - 2023-01-01 01:07:46 --> Config Class Initialized
+INFO - 2023-01-01 01:07:46 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:46 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:46 --> URI Class Initialized
+INFO - 2023-01-01 01:07:46 --> Router Class Initialized
+INFO - 2023-01-01 01:07:46 --> Config Class Initialized
+INFO - 2023-01-01 01:07:46 --> Hooks Class Initialized
+INFO - 2023-01-01 01:07:46 --> Output Class Initialized
+INFO - 2023-01-01 01:07:46 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:46 --> Utf8 Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:46 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:46 --> URI Class Initialized
+INFO - 2023-01-01 01:07:46 --> CSRF token verified
+INFO - 2023-01-01 01:07:46 --> Input Class Initialized
+INFO - 2023-01-01 01:07:46 --> Language Class Initialized
+INFO - 2023-01-01 01:07:46 --> Router Class Initialized
+INFO - 2023-01-01 01:07:46 --> Output Class Initialized
+INFO - 2023-01-01 01:07:46 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:46 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:46 --> Input Class Initialized
+INFO - 2023-01-01 01:07:46 --> Language Class Initialized
+INFO - 2023-01-01 01:07:46 --> Language Class Initialized
+INFO - 2023-01-01 01:07:46 --> Config Class Initialized
+INFO - 2023-01-01 01:07:46 --> Language Class Initialized
+INFO - 2023-01-01 01:07:46 --> Config Class Initialized
+INFO - 2023-01-01 01:07:46 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:46 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:46 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:46 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:46 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:46 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:46 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:46 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:46 --> Email Class Initialized
+INFO - 2023-01-01 01:07:46 --> Email Class Initialized
+INFO - 2023-01-01 01:07:46 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:46 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:46 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:46 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:46 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:46 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:46 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+INFO - 2023-01-01 01:07:46 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:46 --> Total execution time: 0.1197
+INFO - 2023-01-01 01:07:46 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:46 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:46 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:46 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:46 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:46 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:46 --> Reports MX_Controller Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/report/models/Report_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/report/models/Logs_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:07:46 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:07:46 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:46 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:07:46 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 06:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/report/views/ingredient_wise_report.php
+DEBUG - 2023-01-01 06:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 06:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 06:07:47 --> Final output sent to browser
+DEBUG - 2023-01-01 06:07:47 --> Total execution time: 0.4021
+INFO - 2023-01-01 01:07:47 --> Config Class Initialized
+INFO - 2023-01-01 01:07:47 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:47 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:47 --> URI Class Initialized
+INFO - 2023-01-01 01:07:47 --> Config Class Initialized
+INFO - 2023-01-01 01:07:47 --> Hooks Class Initialized
+INFO - 2023-01-01 01:07:47 --> Router Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:47 --> Output Class Initialized
+INFO - 2023-01-01 01:07:47 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:47 --> URI Class Initialized
+INFO - 2023-01-01 01:07:47 --> Security Class Initialized
+INFO - 2023-01-01 01:07:47 --> Router Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:47 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:47 --> Input Class Initialized
+INFO - 2023-01-01 01:07:47 --> Language Class Initialized
+INFO - 2023-01-01 01:07:47 --> Output Class Initialized
+INFO - 2023-01-01 01:07:47 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:47 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:47 --> Input Class Initialized
+INFO - 2023-01-01 01:07:47 --> Language Class Initialized
+INFO - 2023-01-01 01:07:47 --> Language Class Initialized
+INFO - 2023-01-01 01:07:47 --> Config Class Initialized
+INFO - 2023-01-01 01:07:47 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:47 --> Language Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:47 --> Config Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:47 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:47 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:47 --> Email Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:47 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:47 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:47 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:47 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:47 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:47 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:47 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:47 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:47 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:47 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:47 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+INFO - 2023-01-01 01:07:47 --> Email Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+INFO - 2023-01-01 01:07:47 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:47 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:47 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:47 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:47 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:47 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:47 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:47 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:07:47 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+INFO - 2023-01-01 01:07:47 --> Config Class Initialized
+INFO - 2023-01-01 01:07:47 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:47 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:47 --> URI Class Initialized
+INFO - 2023-01-01 01:07:47 --> Router Class Initialized
+INFO - 2023-01-01 01:07:47 --> Output Class Initialized
+INFO - 2023-01-01 01:07:47 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:47 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:47 --> CSRF token verified
+INFO - 2023-01-01 01:07:47 --> Input Class Initialized
+INFO - 2023-01-01 01:07:47 --> Language Class Initialized
+INFO - 2023-01-01 01:07:47 --> Language Class Initialized
+INFO - 2023-01-01 01:07:47 --> Config Class Initialized
+INFO - 2023-01-01 01:07:47 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:47 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:47 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:47 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:47 --> Email Class Initialized
+INFO - 2023-01-01 01:07:47 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:47 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:47 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:47 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:47 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:47 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:47 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:47 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:07:47 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:47 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:07:47 --> Model Class Initialized
+INFO - 2023-01-01 01:07:47 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:47 --> Total execution time: 0.1863
+INFO - 2023-01-01 01:07:50 --> Config Class Initialized
+INFO - 2023-01-01 01:07:50 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:50 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:50 --> URI Class Initialized
+INFO - 2023-01-01 01:07:50 --> Router Class Initialized
+INFO - 2023-01-01 01:07:50 --> Output Class Initialized
+INFO - 2023-01-01 01:07:50 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:50 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:50 --> Input Class Initialized
+INFO - 2023-01-01 01:07:50 --> Language Class Initialized
+INFO - 2023-01-01 01:07:50 --> Language Class Initialized
+INFO - 2023-01-01 01:07:50 --> Config Class Initialized
+INFO - 2023-01-01 01:07:50 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:50 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:50 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:50 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:50 --> Email Class Initialized
+INFO - 2023-01-01 01:07:50 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:50 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:50 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:50 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:50 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:50 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:50 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:07:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:07:50 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:50 --> Helper loaded: captcha_helper
+ERROR - 2023-01-01 01:07:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:50 --> Config Class Initialized
+INFO - 2023-01-01 01:07:50 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:07:50 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:07:50 --> URI Class Initialized
+INFO - 2023-01-01 01:07:50 --> Router Class Initialized
+INFO - 2023-01-01 01:07:50 --> Output Class Initialized
+INFO - 2023-01-01 01:07:50 --> Security Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:07:50 --> CSRF cookie sent
+INFO - 2023-01-01 01:07:50 --> Input Class Initialized
+INFO - 2023-01-01 01:07:50 --> Language Class Initialized
+INFO - 2023-01-01 01:07:50 --> Language Class Initialized
+INFO - 2023-01-01 01:07:50 --> Config Class Initialized
+INFO - 2023-01-01 01:07:50 --> Loader Class Initialized
+INFO - 2023-01-01 01:07:50 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:07:50 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:07:50 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:07:50 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:07:50 --> Email Class Initialized
+INFO - 2023-01-01 01:07:50 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:07:50 --> Cart Class Initialized
+INFO - 2023-01-01 01:07:50 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:07:50 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:07:50 --> Pagination Class Initialized
+INFO - 2023-01-01 01:07:50 --> Controller Class Initialized
+ERROR - 2023-01-01 01:07:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:50 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:07:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:07:50 --> Model Class Initialized
+ERROR - 2023-01-01 01:07:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:07:50 --> Helper loaded: captcha_helper
+DEBUG - 2023-01-01 01:07:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:07:50 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:07:50 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:07:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:07:50 --> Model Class Initialized
+DEBUG - 2023-01-01 01:07:50 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/login.php
+INFO - 2023-01-01 01:07:50 --> Final output sent to browser
+DEBUG - 2023-01-01 01:07:50 --> Total execution time: 0.1070
+INFO - 2023-01-01 01:08:03 --> Config Class Initialized
+INFO - 2023-01-01 01:08:03 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:03 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:03 --> URI Class Initialized
+INFO - 2023-01-01 01:08:03 --> Router Class Initialized
+INFO - 2023-01-01 01:08:03 --> Output Class Initialized
+INFO - 2023-01-01 01:08:03 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:03 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:03 --> CSRF token verified
+INFO - 2023-01-01 01:08:03 --> Input Class Initialized
+INFO - 2023-01-01 01:08:03 --> Language Class Initialized
+INFO - 2023-01-01 01:08:03 --> Language Class Initialized
+INFO - 2023-01-01 01:08:03 --> Config Class Initialized
+INFO - 2023-01-01 01:08:03 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:03 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:03 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:03 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:03 --> Email Class Initialized
+INFO - 2023-01-01 01:08:03 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:03 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:03 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:03 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:03 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:03 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:03 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:03 --> Auth MX_Controller Initialized
+INFO - 2023-01-01 01:08:03 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Auth_model.php
+INFO - 2023-01-01 01:08:03 --> Model Class Initialized
+ERROR - 2023-01-01 01:08:03 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:03 --> Helper loaded: captcha_helper
+INFO - 2023-01-01 01:08:03 --> Language file loaded: language/english/form_validation_lang.php
+ERROR - 2023-01-01 01:08:03 --> Severity: 8192 --> filter_var(): Passing null to parameter #3 ($options) of type array|int is deprecated /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/core/Input.php 574
+ERROR - 2023-01-01 01:08:03 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:03 --> Config Class Initialized
+INFO - 2023-01-01 01:08:03 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:03 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:03 --> URI Class Initialized
+INFO - 2023-01-01 01:08:03 --> Router Class Initialized
+INFO - 2023-01-01 01:08:03 --> Output Class Initialized
+INFO - 2023-01-01 01:08:03 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:03 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:03 --> Input Class Initialized
+INFO - 2023-01-01 01:08:03 --> Language Class Initialized
+INFO - 2023-01-01 01:08:03 --> Language Class Initialized
+INFO - 2023-01-01 01:08:03 --> Config Class Initialized
+INFO - 2023-01-01 01:08:03 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:03 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:03 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:03 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:03 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:03 --> Email Class Initialized
+INFO - 2023-01-01 01:08:03 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:03 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:03 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:03 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:03 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:03 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:03 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:03 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:08:03 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:08:03 --> Model Class Initialized
+ERROR - 2023-01-01 01:08:03 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:03 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/controllers/../modules/template/controllers/Template.php
+DEBUG - 2023-01-01 01:08:03 --> Template MX_Controller Initialized
+ERROR - 2023-01-01 01:08:03 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:03 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/models/Template_model.php
+INFO - 2023-01-01 01:08:03 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:03 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/head.php
+DEBUG - 2023-01-01 01:08:03 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/header.php
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/sidebar.php
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/messages.php
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/views/home/home.php
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/includes/js.php
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/template/views/layout.php
+INFO - 2023-01-01 01:08:04 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:04 --> Total execution time: 0.6715
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Hooks Class Initialized
+INFO - 2023-01-01 01:08:04 --> Hooks Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:04 --> URI Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:04 --> Utf8 Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:04 --> URI Class Initialized
+INFO - 2023-01-01 01:08:04 --> URI Class Initialized
+INFO - 2023-01-01 01:08:04 --> Router Class Initialized
+INFO - 2023-01-01 01:08:04 --> Output Class Initialized
+INFO - 2023-01-01 01:08:04 --> Router Class Initialized
+INFO - 2023-01-01 01:08:04 --> Router Class Initialized
+INFO - 2023-01-01 01:08:04 --> Security Class Initialized
+INFO - 2023-01-01 01:08:04 --> Output Class Initialized
+INFO - 2023-01-01 01:08:04 --> Output Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:04 --> Security Class Initialized
+INFO - 2023-01-01 01:08:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:04 --> Input Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:04 --> Input Class Initialized
+INFO - 2023-01-01 01:08:04 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:04 --> Input Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:04 --> Email Class Initialized
+INFO - 2023-01-01 01:08:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:04 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:08:04 --> Email Class Initialized
+INFO - 2023-01-01 01:08:04 --> Email Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:04 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:04 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:04 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+INFO - 2023-01-01 01:08:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:04 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:04 --> Order MX_Controller Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Order_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/ordermanage/models/Logs_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:04 --> URI Class Initialized
+INFO - 2023-01-01 01:08:04 --> Router Class Initialized
+INFO - 2023-01-01 01:08:04 --> Output Class Initialized
+INFO - 2023-01-01 01:08:04 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:04 --> CSRF token verified
+INFO - 2023-01-01 01:08:04 --> Input Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:04 --> Email Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Hooks Class Initialized
+INFO - 2023-01-01 01:08:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:04 --> Cart Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:04 --> Form Validation Class Initialized
+INFO - 2023-01-01 01:08:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:04 --> URI Class Initialized
+INFO - 2023-01-01 01:08:04 --> Router Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:04 --> Output Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:04 --> Security Class Initialized
+INFO - 2023-01-01 01:08:04 --> Controller Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:04 --> CSRF cookie sent
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:04 --> Input Class Initialized
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:04 --> Language Class Initialized
+INFO - 2023-01-01 01:08:04 --> Config Class Initialized
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+INFO - 2023-01-01 01:08:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:04 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:04 --> Total execution time: 0.0805
+INFO - 2023-01-01 01:08:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:04 --> Email Class Initialized
+INFO - 2023-01-01 01:08:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:04 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:04 --> Home MX_Controller Initialized
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/dashboard/models/Home_model.php
+INFO - 2023-01-01 01:08:04 --> Model Class Initialized
+ERROR - 2023-01-01 01:08:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:04 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:04 --> Total execution time: 0.1114
+INFO - 2023-01-01 01:08:14 --> Config Class Initialized
+INFO - 2023-01-01 01:08:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:14 --> URI Class Initialized
+INFO - 2023-01-01 01:08:14 --> Router Class Initialized
+INFO - 2023-01-01 01:08:14 --> Output Class Initialized
+INFO - 2023-01-01 01:08:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:14 --> CSRF token verified
+INFO - 2023-01-01 01:08:14 --> Input Class Initialized
+INFO - 2023-01-01 01:08:14 --> Language Class Initialized
+INFO - 2023-01-01 01:08:14 --> Language Class Initialized
+INFO - 2023-01-01 01:08:14 --> Config Class Initialized
+INFO - 2023-01-01 01:08:14 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:14 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:14 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:14 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:14 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:14 --> Email Class Initialized
+INFO - 2023-01-01 01:08:14 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:14 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:14 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:14 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:14 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:14 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:14 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:14 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:08:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:08:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:08:14 --> Model Class Initialized
+INFO - 2023-01-01 01:08:14 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:14 --> Total execution time: 0.1066
+INFO - 2023-01-01 01:08:24 --> Config Class Initialized
+INFO - 2023-01-01 01:08:24 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:24 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:24 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:24 --> URI Class Initialized
+INFO - 2023-01-01 01:08:24 --> Router Class Initialized
+INFO - 2023-01-01 01:08:24 --> Output Class Initialized
+INFO - 2023-01-01 01:08:24 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:24 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:24 --> CSRF token verified
+INFO - 2023-01-01 01:08:24 --> Input Class Initialized
+INFO - 2023-01-01 01:08:24 --> Language Class Initialized
+INFO - 2023-01-01 01:08:24 --> Language Class Initialized
+INFO - 2023-01-01 01:08:24 --> Config Class Initialized
+INFO - 2023-01-01 01:08:24 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:24 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:24 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:24 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:24 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:24 --> Email Class Initialized
+INFO - 2023-01-01 01:08:24 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:24 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:24 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:24 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:24 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:24 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:24 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:24 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:08:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:08:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:08:24 --> Model Class Initialized
+INFO - 2023-01-01 01:08:24 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:24 --> Total execution time: 0.0966
+INFO - 2023-01-01 01:08:34 --> Config Class Initialized
+INFO - 2023-01-01 01:08:34 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:34 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:34 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:34 --> URI Class Initialized
+INFO - 2023-01-01 01:08:34 --> Router Class Initialized
+INFO - 2023-01-01 01:08:34 --> Output Class Initialized
+INFO - 2023-01-01 01:08:34 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:34 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:34 --> CSRF token verified
+INFO - 2023-01-01 01:08:34 --> Input Class Initialized
+INFO - 2023-01-01 01:08:34 --> Language Class Initialized
+INFO - 2023-01-01 01:08:34 --> Language Class Initialized
+INFO - 2023-01-01 01:08:34 --> Config Class Initialized
+INFO - 2023-01-01 01:08:34 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:34 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:34 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:34 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:34 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:34 --> Email Class Initialized
+INFO - 2023-01-01 01:08:34 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:34 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:34 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:34 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:34 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:34 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:34 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:08:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:08:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:08:34 --> Model Class Initialized
+INFO - 2023-01-01 01:08:34 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:34 --> Total execution time: 0.0715
+INFO - 2023-01-01 01:08:44 --> Config Class Initialized
+INFO - 2023-01-01 01:08:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:44 --> URI Class Initialized
+INFO - 2023-01-01 01:08:44 --> Router Class Initialized
+INFO - 2023-01-01 01:08:44 --> Output Class Initialized
+INFO - 2023-01-01 01:08:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:44 --> CSRF token verified
+INFO - 2023-01-01 01:08:44 --> Input Class Initialized
+INFO - 2023-01-01 01:08:44 --> Language Class Initialized
+INFO - 2023-01-01 01:08:44 --> Language Class Initialized
+INFO - 2023-01-01 01:08:44 --> Config Class Initialized
+INFO - 2023-01-01 01:08:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:44 --> Email Class Initialized
+INFO - 2023-01-01 01:08:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:44 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:08:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:08:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:08:44 --> Model Class Initialized
+INFO - 2023-01-01 01:08:44 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:44 --> Total execution time: 0.0801
+INFO - 2023-01-01 01:08:55 --> Config Class Initialized
+INFO - 2023-01-01 01:08:55 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:08:55 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:08:55 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:08:55 --> URI Class Initialized
+INFO - 2023-01-01 01:08:55 --> Router Class Initialized
+INFO - 2023-01-01 01:08:55 --> Output Class Initialized
+INFO - 2023-01-01 01:08:55 --> Security Class Initialized
+DEBUG - 2023-01-01 01:08:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:08:55 --> CSRF cookie sent
+INFO - 2023-01-01 01:08:55 --> CSRF token verified
+INFO - 2023-01-01 01:08:55 --> Input Class Initialized
+INFO - 2023-01-01 01:08:55 --> Language Class Initialized
+INFO - 2023-01-01 01:08:55 --> Language Class Initialized
+INFO - 2023-01-01 01:08:55 --> Config Class Initialized
+INFO - 2023-01-01 01:08:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:08:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:08:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:08:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:08:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:08:55 --> Email Class Initialized
+INFO - 2023-01-01 01:08:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:08:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:08:55 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:08:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:08:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:08:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:08:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:08:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:08:55 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:08:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:08:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:08:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:08:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:08:55 --> Model Class Initialized
+INFO - 2023-01-01 01:08:55 --> Final output sent to browser
+DEBUG - 2023-01-01 01:08:55 --> Total execution time: 0.0898
+INFO - 2023-01-01 01:09:04 --> Config Class Initialized
+INFO - 2023-01-01 01:09:04 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:09:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:09:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:09:04 --> URI Class Initialized
+INFO - 2023-01-01 01:09:04 --> Router Class Initialized
+INFO - 2023-01-01 01:09:04 --> Output Class Initialized
+INFO - 2023-01-01 01:09:04 --> Security Class Initialized
+DEBUG - 2023-01-01 01:09:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:09:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:09:04 --> CSRF token verified
+INFO - 2023-01-01 01:09:04 --> Input Class Initialized
+INFO - 2023-01-01 01:09:04 --> Language Class Initialized
+INFO - 2023-01-01 01:09:04 --> Language Class Initialized
+INFO - 2023-01-01 01:09:04 --> Config Class Initialized
+INFO - 2023-01-01 01:09:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:09:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:09:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:09:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:09:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:09:04 --> Email Class Initialized
+INFO - 2023-01-01 01:09:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:09:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:09:05 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:09:05 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:09:05 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:09:05 --> Pagination Class Initialized
+INFO - 2023-01-01 01:09:05 --> Controller Class Initialized
+ERROR - 2023-01-01 01:09:05 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:09:05 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:09:05 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:09:05 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:05 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:09:05 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:05 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:09:05 --> Model Class Initialized
+INFO - 2023-01-01 01:09:05 --> Final output sent to browser
+DEBUG - 2023-01-01 01:09:05 --> Total execution time: 0.0896
+INFO - 2023-01-01 01:09:14 --> Config Class Initialized
+INFO - 2023-01-01 01:09:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:09:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:09:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:09:14 --> URI Class Initialized
+INFO - 2023-01-01 01:09:14 --> Router Class Initialized
+INFO - 2023-01-01 01:09:14 --> Output Class Initialized
+INFO - 2023-01-01 01:09:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:09:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:09:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:09:14 --> CSRF token verified
+INFO - 2023-01-01 01:09:14 --> Input Class Initialized
+INFO - 2023-01-01 01:09:15 --> Language Class Initialized
+INFO - 2023-01-01 01:09:15 --> Language Class Initialized
+INFO - 2023-01-01 01:09:15 --> Config Class Initialized
+INFO - 2023-01-01 01:09:15 --> Loader Class Initialized
+INFO - 2023-01-01 01:09:15 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:09:15 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:09:15 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:09:15 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:09:15 --> Email Class Initialized
+INFO - 2023-01-01 01:09:15 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:09:15 --> Cart Class Initialized
+INFO - 2023-01-01 01:09:15 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:09:15 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:09:15 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:09:15 --> Pagination Class Initialized
+INFO - 2023-01-01 01:09:15 --> Controller Class Initialized
+ERROR - 2023-01-01 01:09:15 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:09:15 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:09:15 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:09:15 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:09:15 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:15 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:09:15 --> Model Class Initialized
+INFO - 2023-01-01 01:09:15 --> Final output sent to browser
+DEBUG - 2023-01-01 01:09:15 --> Total execution time: 0.1314
+INFO - 2023-01-01 01:09:27 --> Config Class Initialized
+INFO - 2023-01-01 01:09:27 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:09:27 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:09:27 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:09:27 --> URI Class Initialized
+INFO - 2023-01-01 01:09:27 --> Router Class Initialized
+INFO - 2023-01-01 01:09:27 --> Output Class Initialized
+INFO - 2023-01-01 01:09:27 --> Security Class Initialized
+DEBUG - 2023-01-01 01:09:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:09:27 --> CSRF cookie sent
+INFO - 2023-01-01 01:09:27 --> CSRF token verified
+INFO - 2023-01-01 01:09:27 --> Input Class Initialized
+INFO - 2023-01-01 01:09:27 --> Language Class Initialized
+INFO - 2023-01-01 01:09:27 --> Language Class Initialized
+INFO - 2023-01-01 01:09:27 --> Config Class Initialized
+INFO - 2023-01-01 01:09:27 --> Loader Class Initialized
+INFO - 2023-01-01 01:09:27 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:09:27 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:09:27 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:09:27 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:09:27 --> Email Class Initialized
+INFO - 2023-01-01 01:09:27 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:09:27 --> Cart Class Initialized
+INFO - 2023-01-01 01:09:27 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:09:27 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:09:27 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:09:27 --> Pagination Class Initialized
+INFO - 2023-01-01 01:09:27 --> Controller Class Initialized
+ERROR - 2023-01-01 01:09:27 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:09:27 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:09:27 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:09:27 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:27 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:09:27 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:27 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:09:27 --> Model Class Initialized
+INFO - 2023-01-01 01:09:27 --> Final output sent to browser
+DEBUG - 2023-01-01 01:09:27 --> Total execution time: 0.0838
+INFO - 2023-01-01 01:09:34 --> Config Class Initialized
+INFO - 2023-01-01 01:09:34 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:09:34 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:09:34 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:09:34 --> URI Class Initialized
+INFO - 2023-01-01 01:09:34 --> Router Class Initialized
+INFO - 2023-01-01 01:09:34 --> Output Class Initialized
+INFO - 2023-01-01 01:09:34 --> Security Class Initialized
+DEBUG - 2023-01-01 01:09:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:09:34 --> CSRF cookie sent
+INFO - 2023-01-01 01:09:34 --> CSRF token verified
+INFO - 2023-01-01 01:09:34 --> Input Class Initialized
+INFO - 2023-01-01 01:09:34 --> Language Class Initialized
+INFO - 2023-01-01 01:09:34 --> Language Class Initialized
+INFO - 2023-01-01 01:09:34 --> Config Class Initialized
+INFO - 2023-01-01 01:09:34 --> Loader Class Initialized
+INFO - 2023-01-01 01:09:34 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:09:34 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:09:34 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:09:34 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:09:34 --> Email Class Initialized
+INFO - 2023-01-01 01:09:34 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:09:34 --> Cart Class Initialized
+INFO - 2023-01-01 01:09:34 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:09:34 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:09:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:09:34 --> Pagination Class Initialized
+INFO - 2023-01-01 01:09:34 --> Controller Class Initialized
+ERROR - 2023-01-01 01:09:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:09:34 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:09:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:09:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:09:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:09:34 --> Model Class Initialized
+INFO - 2023-01-01 01:09:34 --> Final output sent to browser
+DEBUG - 2023-01-01 01:09:34 --> Total execution time: 0.0663
+INFO - 2023-01-01 01:09:44 --> Config Class Initialized
+INFO - 2023-01-01 01:09:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:09:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:09:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:09:44 --> URI Class Initialized
+INFO - 2023-01-01 01:09:44 --> Router Class Initialized
+INFO - 2023-01-01 01:09:44 --> Output Class Initialized
+INFO - 2023-01-01 01:09:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:09:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:09:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:09:44 --> CSRF token verified
+INFO - 2023-01-01 01:09:44 --> Input Class Initialized
+INFO - 2023-01-01 01:09:44 --> Language Class Initialized
+INFO - 2023-01-01 01:09:44 --> Language Class Initialized
+INFO - 2023-01-01 01:09:44 --> Config Class Initialized
+INFO - 2023-01-01 01:09:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:09:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:09:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:09:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:09:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:09:44 --> Email Class Initialized
+INFO - 2023-01-01 01:09:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:09:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:09:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:09:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:09:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:09:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:09:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:09:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:09:44 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:09:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:09:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:09:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:09:44 --> Model Class Initialized
+INFO - 2023-01-01 01:09:45 --> Final output sent to browser
+DEBUG - 2023-01-01 01:09:45 --> Total execution time: 0.1210
+INFO - 2023-01-01 01:09:54 --> Config Class Initialized
+INFO - 2023-01-01 01:09:54 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:09:54 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:09:54 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:09:54 --> URI Class Initialized
+INFO - 2023-01-01 01:09:54 --> Router Class Initialized
+INFO - 2023-01-01 01:09:54 --> Output Class Initialized
+INFO - 2023-01-01 01:09:54 --> Security Class Initialized
+DEBUG - 2023-01-01 01:09:55 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:09:55 --> CSRF cookie sent
+INFO - 2023-01-01 01:09:55 --> CSRF token verified
+INFO - 2023-01-01 01:09:55 --> Input Class Initialized
+INFO - 2023-01-01 01:09:55 --> Language Class Initialized
+INFO - 2023-01-01 01:09:55 --> Language Class Initialized
+INFO - 2023-01-01 01:09:55 --> Config Class Initialized
+INFO - 2023-01-01 01:09:55 --> Loader Class Initialized
+INFO - 2023-01-01 01:09:55 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:09:55 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:09:55 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:09:55 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:09:55 --> Email Class Initialized
+INFO - 2023-01-01 01:09:55 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:09:55 --> Cart Class Initialized
+INFO - 2023-01-01 01:09:55 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:09:55 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:09:55 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:09:55 --> Pagination Class Initialized
+INFO - 2023-01-01 01:09:55 --> Controller Class Initialized
+ERROR - 2023-01-01 01:09:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:09:55 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:09:55 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:09:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:09:55 --> Model Class Initialized
+DEBUG - 2023-01-01 01:09:55 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:09:55 --> Model Class Initialized
+INFO - 2023-01-01 01:09:55 --> Final output sent to browser
+DEBUG - 2023-01-01 01:09:55 --> Total execution time: 0.0784
+INFO - 2023-01-01 01:10:04 --> Config Class Initialized
+INFO - 2023-01-01 01:10:04 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:10:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:10:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:10:04 --> URI Class Initialized
+INFO - 2023-01-01 01:10:04 --> Router Class Initialized
+INFO - 2023-01-01 01:10:04 --> Output Class Initialized
+INFO - 2023-01-01 01:10:04 --> Security Class Initialized
+DEBUG - 2023-01-01 01:10:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:10:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:10:04 --> CSRF token verified
+INFO - 2023-01-01 01:10:04 --> Input Class Initialized
+INFO - 2023-01-01 01:10:04 --> Language Class Initialized
+INFO - 2023-01-01 01:10:04 --> Language Class Initialized
+INFO - 2023-01-01 01:10:04 --> Config Class Initialized
+INFO - 2023-01-01 01:10:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:10:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:10:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:10:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:10:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:10:04 --> Email Class Initialized
+INFO - 2023-01-01 01:10:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:10:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:10:04 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:10:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:10:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:10:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:10:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:10:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:10:04 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:10:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:10:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:10:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:10:04 --> Model Class Initialized
+INFO - 2023-01-01 01:10:04 --> Final output sent to browser
+DEBUG - 2023-01-01 01:10:04 --> Total execution time: 0.0773
+INFO - 2023-01-01 01:10:14 --> Config Class Initialized
+INFO - 2023-01-01 01:10:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:10:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:10:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:10:14 --> URI Class Initialized
+INFO - 2023-01-01 01:10:14 --> Router Class Initialized
+INFO - 2023-01-01 01:10:14 --> Output Class Initialized
+INFO - 2023-01-01 01:10:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:10:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:10:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:10:14 --> CSRF token verified
+INFO - 2023-01-01 01:10:14 --> Input Class Initialized
+INFO - 2023-01-01 01:10:14 --> Language Class Initialized
+INFO - 2023-01-01 01:10:14 --> Language Class Initialized
+INFO - 2023-01-01 01:10:14 --> Config Class Initialized
+INFO - 2023-01-01 01:10:14 --> Loader Class Initialized
+INFO - 2023-01-01 01:10:14 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:10:14 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:10:14 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:10:14 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:10:14 --> Email Class Initialized
+INFO - 2023-01-01 01:10:14 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:10:14 --> Cart Class Initialized
+INFO - 2023-01-01 01:10:14 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:10:14 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:10:14 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:10:14 --> Pagination Class Initialized
+INFO - 2023-01-01 01:10:14 --> Controller Class Initialized
+ERROR - 2023-01-01 01:10:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:10:14 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:10:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:10:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:10:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:10:14 --> Model Class Initialized
+INFO - 2023-01-01 01:10:14 --> Final output sent to browser
+DEBUG - 2023-01-01 01:10:14 --> Total execution time: 0.0745
+INFO - 2023-01-01 01:10:24 --> Config Class Initialized
+INFO - 2023-01-01 01:10:24 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:10:24 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:10:24 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:10:24 --> URI Class Initialized
+INFO - 2023-01-01 01:10:24 --> Router Class Initialized
+INFO - 2023-01-01 01:10:24 --> Output Class Initialized
+INFO - 2023-01-01 01:10:24 --> Security Class Initialized
+DEBUG - 2023-01-01 01:10:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:10:24 --> CSRF cookie sent
+INFO - 2023-01-01 01:10:24 --> CSRF token verified
+INFO - 2023-01-01 01:10:24 --> Input Class Initialized
+INFO - 2023-01-01 01:10:24 --> Language Class Initialized
+INFO - 2023-01-01 01:10:24 --> Language Class Initialized
+INFO - 2023-01-01 01:10:24 --> Config Class Initialized
+INFO - 2023-01-01 01:10:24 --> Loader Class Initialized
+INFO - 2023-01-01 01:10:24 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:10:24 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:10:24 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:10:24 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:10:24 --> Email Class Initialized
+INFO - 2023-01-01 01:10:24 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:10:24 --> Cart Class Initialized
+INFO - 2023-01-01 01:10:24 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:10:24 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:10:24 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:10:24 --> Pagination Class Initialized
+INFO - 2023-01-01 01:10:24 --> Controller Class Initialized
+ERROR - 2023-01-01 01:10:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:10:24 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:10:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:10:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:10:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:10:24 --> Model Class Initialized
+INFO - 2023-01-01 01:10:24 --> Final output sent to browser
+DEBUG - 2023-01-01 01:10:24 --> Total execution time: 0.0839
+INFO - 2023-01-01 01:10:34 --> Config Class Initialized
+INFO - 2023-01-01 01:10:34 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:10:34 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:10:34 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:10:34 --> URI Class Initialized
+INFO - 2023-01-01 01:10:34 --> Router Class Initialized
+INFO - 2023-01-01 01:10:34 --> Output Class Initialized
+INFO - 2023-01-01 01:10:34 --> Security Class Initialized
+DEBUG - 2023-01-01 01:10:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:10:34 --> CSRF cookie sent
+INFO - 2023-01-01 01:10:34 --> CSRF token verified
+INFO - 2023-01-01 01:10:34 --> Input Class Initialized
+INFO - 2023-01-01 01:10:34 --> Language Class Initialized
+INFO - 2023-01-01 01:10:34 --> Language Class Initialized
+INFO - 2023-01-01 01:10:34 --> Config Class Initialized
+INFO - 2023-01-01 01:10:34 --> Loader Class Initialized
+INFO - 2023-01-01 01:10:34 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:10:34 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:10:34 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:10:34 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:10:34 --> Email Class Initialized
+INFO - 2023-01-01 01:10:34 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:10:34 --> Cart Class Initialized
+INFO - 2023-01-01 01:10:34 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:10:34 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:10:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:10:34 --> Pagination Class Initialized
+INFO - 2023-01-01 01:10:34 --> Controller Class Initialized
+ERROR - 2023-01-01 01:10:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:10:34 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:10:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:10:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:10:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:10:34 --> Model Class Initialized
+INFO - 2023-01-01 01:10:34 --> Final output sent to browser
+DEBUG - 2023-01-01 01:10:34 --> Total execution time: 0.0623
+INFO - 2023-01-01 01:10:44 --> Config Class Initialized
+INFO - 2023-01-01 01:10:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:10:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:10:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:10:44 --> URI Class Initialized
+INFO - 2023-01-01 01:10:44 --> Router Class Initialized
+INFO - 2023-01-01 01:10:44 --> Output Class Initialized
+INFO - 2023-01-01 01:10:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:10:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:10:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:10:44 --> CSRF token verified
+INFO - 2023-01-01 01:10:44 --> Input Class Initialized
+INFO - 2023-01-01 01:10:44 --> Language Class Initialized
+INFO - 2023-01-01 01:10:44 --> Language Class Initialized
+INFO - 2023-01-01 01:10:44 --> Config Class Initialized
+INFO - 2023-01-01 01:10:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:10:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:10:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:10:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:10:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:10:44 --> Email Class Initialized
+INFO - 2023-01-01 01:10:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:10:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:10:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:10:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:10:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:10:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:10:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:10:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:10:44 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:10:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:10:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:10:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:10:44 --> Model Class Initialized
+INFO - 2023-01-01 01:10:44 --> Final output sent to browser
+DEBUG - 2023-01-01 01:10:44 --> Total execution time: 0.0743
+INFO - 2023-01-01 01:10:54 --> Config Class Initialized
+INFO - 2023-01-01 01:10:54 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:10:54 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:10:54 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:10:54 --> URI Class Initialized
+INFO - 2023-01-01 01:10:54 --> Router Class Initialized
+INFO - 2023-01-01 01:10:54 --> Output Class Initialized
+INFO - 2023-01-01 01:10:54 --> Security Class Initialized
+DEBUG - 2023-01-01 01:10:54 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:10:54 --> CSRF cookie sent
+INFO - 2023-01-01 01:10:54 --> CSRF token verified
+INFO - 2023-01-01 01:10:54 --> Input Class Initialized
+INFO - 2023-01-01 01:10:54 --> Language Class Initialized
+INFO - 2023-01-01 01:10:54 --> Language Class Initialized
+INFO - 2023-01-01 01:10:54 --> Config Class Initialized
+INFO - 2023-01-01 01:10:54 --> Loader Class Initialized
+INFO - 2023-01-01 01:10:54 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:10:54 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:10:54 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:10:54 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:10:54 --> Email Class Initialized
+INFO - 2023-01-01 01:10:54 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:10:54 --> Cart Class Initialized
+INFO - 2023-01-01 01:10:54 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:10:54 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:10:54 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:10:54 --> Pagination Class Initialized
+INFO - 2023-01-01 01:10:54 --> Controller Class Initialized
+ERROR - 2023-01-01 01:10:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:10:54 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:10:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:10:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:10:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:10:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:10:54 --> Model Class Initialized
+INFO - 2023-01-01 01:10:54 --> Final output sent to browser
+DEBUG - 2023-01-01 01:10:54 --> Total execution time: 0.0676
+INFO - 2023-01-01 01:11:00 --> Config Class Initialized
+INFO - 2023-01-01 01:11:00 --> Hooks Class Initialized
+INFO - 2023-01-01 01:11:00 --> Config Class Initialized
+INFO - 2023-01-01 01:11:00 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:00 --> Utf8 Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:00 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:00 --> URI Class Initialized
+INFO - 2023-01-01 01:11:00 --> URI Class Initialized
+INFO - 2023-01-01 01:11:00 --> Router Class Initialized
+INFO - 2023-01-01 01:11:00 --> Router Class Initialized
+INFO - 2023-01-01 01:11:00 --> Output Class Initialized
+INFO - 2023-01-01 01:11:00 --> Output Class Initialized
+INFO - 2023-01-01 01:11:00 --> Security Class Initialized
+INFO - 2023-01-01 01:11:00 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2023-01-01 01:11:00 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:00 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:00 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:00 --> Input Class Initialized
+INFO - 2023-01-01 01:11:00 --> Input Class Initialized
+INFO - 2023-01-01 01:11:00 --> Language Class Initialized
+INFO - 2023-01-01 01:11:00 --> Language Class Initialized
+ERROR - 2023-01-01 01:11:00 --> 404 Page Not Found: /index
+ERROR - 2023-01-01 01:11:00 --> 404 Page Not Found: /index
+INFO - 2023-01-01 01:11:00 --> Config Class Initialized
+INFO - 2023-01-01 01:11:00 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:00 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:00 --> URI Class Initialized
+INFO - 2023-01-01 01:11:00 --> Router Class Initialized
+INFO - 2023-01-01 01:11:00 --> Output Class Initialized
+INFO - 2023-01-01 01:11:00 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:00 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:00 --> Input Class Initialized
+INFO - 2023-01-01 01:11:00 --> Language Class Initialized
+ERROR - 2023-01-01 01:11:00 --> 404 Page Not Found: /index
+INFO - 2023-01-01 01:11:00 --> Config Class Initialized
+INFO - 2023-01-01 01:11:00 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:00 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:00 --> URI Class Initialized
+INFO - 2023-01-01 01:11:00 --> Router Class Initialized
+INFO - 2023-01-01 01:11:00 --> Output Class Initialized
+INFO - 2023-01-01 01:11:00 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:00 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:00 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:00 --> Input Class Initialized
+INFO - 2023-01-01 01:11:00 --> Language Class Initialized
+ERROR - 2023-01-01 01:11:00 --> 404 Page Not Found: /index
+INFO - 2023-01-01 01:11:04 --> Config Class Initialized
+INFO - 2023-01-01 01:11:04 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:04 --> URI Class Initialized
+INFO - 2023-01-01 01:11:04 --> Router Class Initialized
+INFO - 2023-01-01 01:11:04 --> Output Class Initialized
+INFO - 2023-01-01 01:11:04 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:04 --> CSRF token verified
+INFO - 2023-01-01 01:11:04 --> Input Class Initialized
+INFO - 2023-01-01 01:11:04 --> Language Class Initialized
+INFO - 2023-01-01 01:11:04 --> Language Class Initialized
+INFO - 2023-01-01 01:11:04 --> Config Class Initialized
+INFO - 2023-01-01 01:11:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:11:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:11:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:11:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:11:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:11:04 --> Email Class Initialized
+INFO - 2023-01-01 01:11:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:11:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:11:04 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:11:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:11:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:11:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:11:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:11:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:11:04 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:11:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:11:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:11:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:11:04 --> Model Class Initialized
+INFO - 2023-01-01 01:11:04 --> Final output sent to browser
+DEBUG - 2023-01-01 01:11:04 --> Total execution time: 0.1006
+INFO - 2023-01-01 01:11:14 --> Config Class Initialized
+INFO - 2023-01-01 01:11:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:14 --> URI Class Initialized
+INFO - 2023-01-01 01:11:14 --> Router Class Initialized
+INFO - 2023-01-01 01:11:14 --> Output Class Initialized
+INFO - 2023-01-01 01:11:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:14 --> CSRF token verified
+INFO - 2023-01-01 01:11:14 --> Input Class Initialized
+INFO - 2023-01-01 01:11:14 --> Language Class Initialized
+INFO - 2023-01-01 01:11:14 --> Language Class Initialized
+INFO - 2023-01-01 01:11:14 --> Config Class Initialized
+INFO - 2023-01-01 01:11:14 --> Loader Class Initialized
+INFO - 2023-01-01 01:11:14 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:11:14 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:11:14 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:11:14 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:11:14 --> Email Class Initialized
+INFO - 2023-01-01 01:11:14 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:11:14 --> Cart Class Initialized
+INFO - 2023-01-01 01:11:14 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:11:14 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:11:14 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:11:14 --> Pagination Class Initialized
+INFO - 2023-01-01 01:11:14 --> Controller Class Initialized
+ERROR - 2023-01-01 01:11:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:11:14 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:11:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:11:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:11:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:11:14 --> Model Class Initialized
+INFO - 2023-01-01 01:11:14 --> Final output sent to browser
+DEBUG - 2023-01-01 01:11:14 --> Total execution time: 0.1245
+INFO - 2023-01-01 01:11:24 --> Config Class Initialized
+INFO - 2023-01-01 01:11:24 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:24 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:24 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:24 --> URI Class Initialized
+INFO - 2023-01-01 01:11:24 --> Router Class Initialized
+INFO - 2023-01-01 01:11:24 --> Output Class Initialized
+INFO - 2023-01-01 01:11:24 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:24 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:24 --> CSRF token verified
+INFO - 2023-01-01 01:11:24 --> Input Class Initialized
+INFO - 2023-01-01 01:11:24 --> Language Class Initialized
+INFO - 2023-01-01 01:11:24 --> Language Class Initialized
+INFO - 2023-01-01 01:11:24 --> Config Class Initialized
+INFO - 2023-01-01 01:11:24 --> Loader Class Initialized
+INFO - 2023-01-01 01:11:24 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:11:24 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:11:24 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:11:24 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:11:24 --> Email Class Initialized
+INFO - 2023-01-01 01:11:24 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:11:24 --> Cart Class Initialized
+INFO - 2023-01-01 01:11:24 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:11:24 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:11:24 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:11:24 --> Pagination Class Initialized
+INFO - 2023-01-01 01:11:24 --> Controller Class Initialized
+ERROR - 2023-01-01 01:11:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:11:24 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:11:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:11:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:11:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:11:24 --> Model Class Initialized
+INFO - 2023-01-01 01:11:24 --> Final output sent to browser
+DEBUG - 2023-01-01 01:11:24 --> Total execution time: 0.0854
+INFO - 2023-01-01 01:11:34 --> Config Class Initialized
+INFO - 2023-01-01 01:11:34 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:34 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:34 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:34 --> URI Class Initialized
+INFO - 2023-01-01 01:11:34 --> Router Class Initialized
+INFO - 2023-01-01 01:11:34 --> Output Class Initialized
+INFO - 2023-01-01 01:11:34 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:34 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:34 --> CSRF token verified
+INFO - 2023-01-01 01:11:34 --> Input Class Initialized
+INFO - 2023-01-01 01:11:34 --> Language Class Initialized
+INFO - 2023-01-01 01:11:34 --> Language Class Initialized
+INFO - 2023-01-01 01:11:34 --> Config Class Initialized
+INFO - 2023-01-01 01:11:34 --> Loader Class Initialized
+INFO - 2023-01-01 01:11:34 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:11:34 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:11:34 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:11:34 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:11:34 --> Email Class Initialized
+INFO - 2023-01-01 01:11:34 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:11:34 --> Cart Class Initialized
+INFO - 2023-01-01 01:11:34 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:11:34 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:11:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:11:34 --> Pagination Class Initialized
+INFO - 2023-01-01 01:11:34 --> Controller Class Initialized
+ERROR - 2023-01-01 01:11:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:11:34 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:11:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:11:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:11:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:11:34 --> Model Class Initialized
+INFO - 2023-01-01 01:11:34 --> Final output sent to browser
+DEBUG - 2023-01-01 01:11:34 --> Total execution time: 0.0950
+INFO - 2023-01-01 01:11:44 --> Config Class Initialized
+INFO - 2023-01-01 01:11:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:44 --> URI Class Initialized
+INFO - 2023-01-01 01:11:44 --> Router Class Initialized
+INFO - 2023-01-01 01:11:44 --> Output Class Initialized
+INFO - 2023-01-01 01:11:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:44 --> CSRF token verified
+INFO - 2023-01-01 01:11:44 --> Input Class Initialized
+INFO - 2023-01-01 01:11:44 --> Language Class Initialized
+INFO - 2023-01-01 01:11:44 --> Language Class Initialized
+INFO - 2023-01-01 01:11:44 --> Config Class Initialized
+INFO - 2023-01-01 01:11:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:11:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:11:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:11:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:11:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:11:44 --> Email Class Initialized
+INFO - 2023-01-01 01:11:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:11:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:11:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:11:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:11:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:11:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:11:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:11:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:11:44 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:11:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:11:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:11:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:11:44 --> Model Class Initialized
+INFO - 2023-01-01 01:11:44 --> Final output sent to browser
+DEBUG - 2023-01-01 01:11:44 --> Total execution time: 0.0877
+INFO - 2023-01-01 01:11:54 --> Config Class Initialized
+INFO - 2023-01-01 01:11:54 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:11:54 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:11:54 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:11:54 --> URI Class Initialized
+INFO - 2023-01-01 01:11:54 --> Router Class Initialized
+INFO - 2023-01-01 01:11:54 --> Output Class Initialized
+INFO - 2023-01-01 01:11:54 --> Security Class Initialized
+DEBUG - 2023-01-01 01:11:54 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:11:54 --> CSRF cookie sent
+INFO - 2023-01-01 01:11:54 --> CSRF token verified
+INFO - 2023-01-01 01:11:54 --> Input Class Initialized
+INFO - 2023-01-01 01:11:54 --> Language Class Initialized
+INFO - 2023-01-01 01:11:54 --> Language Class Initialized
+INFO - 2023-01-01 01:11:54 --> Config Class Initialized
+INFO - 2023-01-01 01:11:54 --> Loader Class Initialized
+INFO - 2023-01-01 01:11:54 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:11:54 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:11:54 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:11:54 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:11:54 --> Email Class Initialized
+INFO - 2023-01-01 01:11:54 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:11:54 --> Cart Class Initialized
+INFO - 2023-01-01 01:11:54 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:11:54 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:11:54 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:11:54 --> Pagination Class Initialized
+INFO - 2023-01-01 01:11:54 --> Controller Class Initialized
+ERROR - 2023-01-01 01:11:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:11:54 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:11:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:11:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:11:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:11:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:11:54 --> Model Class Initialized
+INFO - 2023-01-01 01:11:54 --> Final output sent to browser
+DEBUG - 2023-01-01 01:11:54 --> Total execution time: 0.1042
+INFO - 2023-01-01 01:12:04 --> Config Class Initialized
+INFO - 2023-01-01 01:12:04 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:12:04 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:12:04 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:12:04 --> URI Class Initialized
+INFO - 2023-01-01 01:12:04 --> Router Class Initialized
+INFO - 2023-01-01 01:12:04 --> Output Class Initialized
+INFO - 2023-01-01 01:12:04 --> Security Class Initialized
+DEBUG - 2023-01-01 01:12:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:12:04 --> CSRF cookie sent
+INFO - 2023-01-01 01:12:04 --> CSRF token verified
+INFO - 2023-01-01 01:12:04 --> Input Class Initialized
+INFO - 2023-01-01 01:12:04 --> Language Class Initialized
+INFO - 2023-01-01 01:12:04 --> Language Class Initialized
+INFO - 2023-01-01 01:12:04 --> Config Class Initialized
+INFO - 2023-01-01 01:12:04 --> Loader Class Initialized
+INFO - 2023-01-01 01:12:04 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:12:04 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:12:04 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:12:04 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:12:04 --> Email Class Initialized
+INFO - 2023-01-01 01:12:04 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:12:04 --> Cart Class Initialized
+INFO - 2023-01-01 01:12:04 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:12:04 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:12:04 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:12:04 --> Pagination Class Initialized
+INFO - 2023-01-01 01:12:04 --> Controller Class Initialized
+ERROR - 2023-01-01 01:12:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:12:04 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:12:04 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:12:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:12:04 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:04 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:12:04 --> Model Class Initialized
+INFO - 2023-01-01 01:12:04 --> Final output sent to browser
+DEBUG - 2023-01-01 01:12:04 --> Total execution time: 0.0953
+INFO - 2023-01-01 01:12:14 --> Config Class Initialized
+INFO - 2023-01-01 01:12:14 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:12:14 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:12:14 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:12:14 --> URI Class Initialized
+INFO - 2023-01-01 01:12:14 --> Router Class Initialized
+INFO - 2023-01-01 01:12:14 --> Output Class Initialized
+INFO - 2023-01-01 01:12:14 --> Security Class Initialized
+DEBUG - 2023-01-01 01:12:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:12:14 --> CSRF cookie sent
+INFO - 2023-01-01 01:12:14 --> CSRF token verified
+INFO - 2023-01-01 01:12:14 --> Input Class Initialized
+INFO - 2023-01-01 01:12:14 --> Language Class Initialized
+INFO - 2023-01-01 01:12:14 --> Language Class Initialized
+INFO - 2023-01-01 01:12:14 --> Config Class Initialized
+INFO - 2023-01-01 01:12:14 --> Loader Class Initialized
+INFO - 2023-01-01 01:12:14 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:12:14 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:12:14 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:12:14 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:12:14 --> Email Class Initialized
+INFO - 2023-01-01 01:12:14 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:12:14 --> Cart Class Initialized
+INFO - 2023-01-01 01:12:14 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:12:14 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:12:14 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:12:14 --> Pagination Class Initialized
+INFO - 2023-01-01 01:12:14 --> Controller Class Initialized
+ERROR - 2023-01-01 01:12:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:12:14 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:12:14 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:12:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:12:14 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:14 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:12:14 --> Model Class Initialized
+INFO - 2023-01-01 01:12:14 --> Final output sent to browser
+DEBUG - 2023-01-01 01:12:14 --> Total execution time: 0.0681
+INFO - 2023-01-01 01:12:24 --> Config Class Initialized
+INFO - 2023-01-01 01:12:24 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:12:24 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:12:24 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:12:24 --> URI Class Initialized
+INFO - 2023-01-01 01:12:24 --> Router Class Initialized
+INFO - 2023-01-01 01:12:24 --> Output Class Initialized
+INFO - 2023-01-01 01:12:24 --> Security Class Initialized
+DEBUG - 2023-01-01 01:12:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:12:24 --> CSRF cookie sent
+INFO - 2023-01-01 01:12:24 --> CSRF token verified
+INFO - 2023-01-01 01:12:24 --> Input Class Initialized
+INFO - 2023-01-01 01:12:24 --> Language Class Initialized
+INFO - 2023-01-01 01:12:24 --> Language Class Initialized
+INFO - 2023-01-01 01:12:24 --> Config Class Initialized
+INFO - 2023-01-01 01:12:24 --> Loader Class Initialized
+INFO - 2023-01-01 01:12:24 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:12:24 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:12:24 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:12:24 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:12:24 --> Email Class Initialized
+INFO - 2023-01-01 01:12:24 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:12:24 --> Cart Class Initialized
+INFO - 2023-01-01 01:12:24 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:12:24 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:12:24 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:12:24 --> Pagination Class Initialized
+INFO - 2023-01-01 01:12:24 --> Controller Class Initialized
+ERROR - 2023-01-01 01:12:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:12:24 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:12:24 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:12:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:12:24 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:24 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:12:24 --> Model Class Initialized
+INFO - 2023-01-01 01:12:24 --> Final output sent to browser
+DEBUG - 2023-01-01 01:12:24 --> Total execution time: 0.0574
+INFO - 2023-01-01 01:12:34 --> Config Class Initialized
+INFO - 2023-01-01 01:12:34 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:12:34 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:12:34 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:12:34 --> URI Class Initialized
+INFO - 2023-01-01 01:12:34 --> Router Class Initialized
+INFO - 2023-01-01 01:12:34 --> Output Class Initialized
+INFO - 2023-01-01 01:12:34 --> Security Class Initialized
+DEBUG - 2023-01-01 01:12:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:12:34 --> CSRF cookie sent
+INFO - 2023-01-01 01:12:34 --> CSRF token verified
+INFO - 2023-01-01 01:12:34 --> Input Class Initialized
+INFO - 2023-01-01 01:12:34 --> Language Class Initialized
+INFO - 2023-01-01 01:12:34 --> Language Class Initialized
+INFO - 2023-01-01 01:12:34 --> Config Class Initialized
+INFO - 2023-01-01 01:12:34 --> Loader Class Initialized
+INFO - 2023-01-01 01:12:34 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:12:34 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:12:34 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:12:34 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:12:34 --> Email Class Initialized
+INFO - 2023-01-01 01:12:34 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:12:34 --> Cart Class Initialized
+INFO - 2023-01-01 01:12:34 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:12:34 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:12:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:12:34 --> Pagination Class Initialized
+INFO - 2023-01-01 01:12:34 --> Controller Class Initialized
+ERROR - 2023-01-01 01:12:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:12:34 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:12:34 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:12:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:12:34 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:34 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:12:34 --> Model Class Initialized
+INFO - 2023-01-01 01:12:34 --> Final output sent to browser
+DEBUG - 2023-01-01 01:12:34 --> Total execution time: 0.0569
+INFO - 2023-01-01 01:12:44 --> Config Class Initialized
+INFO - 2023-01-01 01:12:44 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:12:44 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:12:44 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:12:44 --> URI Class Initialized
+INFO - 2023-01-01 01:12:44 --> Router Class Initialized
+INFO - 2023-01-01 01:12:44 --> Output Class Initialized
+INFO - 2023-01-01 01:12:44 --> Security Class Initialized
+DEBUG - 2023-01-01 01:12:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:12:44 --> CSRF cookie sent
+INFO - 2023-01-01 01:12:44 --> CSRF token verified
+INFO - 2023-01-01 01:12:44 --> Input Class Initialized
+INFO - 2023-01-01 01:12:44 --> Language Class Initialized
+INFO - 2023-01-01 01:12:44 --> Language Class Initialized
+INFO - 2023-01-01 01:12:44 --> Config Class Initialized
+INFO - 2023-01-01 01:12:44 --> Loader Class Initialized
+INFO - 2023-01-01 01:12:44 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:12:44 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:12:44 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:12:44 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:12:44 --> Email Class Initialized
+INFO - 2023-01-01 01:12:44 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:12:44 --> Cart Class Initialized
+INFO - 2023-01-01 01:12:44 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:12:44 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:12:44 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:12:44 --> Pagination Class Initialized
+INFO - 2023-01-01 01:12:44 --> Controller Class Initialized
+ERROR - 2023-01-01 01:12:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:12:44 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:12:44 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:12:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:12:44 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:44 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:12:44 --> Model Class Initialized
+INFO - 2023-01-01 01:12:44 --> Final output sent to browser
+DEBUG - 2023-01-01 01:12:44 --> Total execution time: 0.0636
+INFO - 2023-01-01 01:12:54 --> Config Class Initialized
+INFO - 2023-01-01 01:12:54 --> Hooks Class Initialized
+DEBUG - 2023-01-01 01:12:54 --> UTF-8 Support Enabled
+INFO - 2023-01-01 01:12:54 --> Utf8 Class Initialized
+INFO - 2023-01-01 01:12:54 --> URI Class Initialized
+INFO - 2023-01-01 01:12:54 --> Router Class Initialized
+INFO - 2023-01-01 01:12:54 --> Output Class Initialized
+INFO - 2023-01-01 01:12:54 --> Security Class Initialized
+DEBUG - 2023-01-01 01:12:54 --> Global POST, GET and COOKIE data sanitized
+INFO - 2023-01-01 01:12:54 --> CSRF cookie sent
+INFO - 2023-01-01 01:12:54 --> CSRF token verified
+INFO - 2023-01-01 01:12:54 --> Input Class Initialized
+INFO - 2023-01-01 01:12:54 --> Language Class Initialized
+INFO - 2023-01-01 01:12:54 --> Language Class Initialized
+INFO - 2023-01-01 01:12:54 --> Config Class Initialized
+INFO - 2023-01-01 01:12:54 --> Loader Class Initialized
+INFO - 2023-01-01 01:12:54 --> Helper loaded: url_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: security_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: file_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: html_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: form_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: text_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: lang_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: directory_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: common_helper
+INFO - 2023-01-01 01:12:54 --> Helper loaded: dompdf_helper
+INFO - 2023-01-01 01:12:54 --> Database Driver Class Initialized
+INFO - 2023-01-01 01:12:54 --> Helper loaded: sslc_helper
+INFO - 2023-01-01 01:12:54 --> Email Class Initialized
+INFO - 2023-01-01 01:12:54 --> Session: Class initialized using 'files' driver.
+INFO - 2023-01-01 01:12:54 --> Cart Class Initialized
+INFO - 2023-01-01 01:12:54 --> Form Validation Class Initialized
+DEBUG - 2023-01-01 01:12:54 --> Config file loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/config/paypallib_config.php
+INFO - 2023-01-01 01:12:54 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2023-01-01 01:12:54 --> Pagination Class Initialized
+INFO - 2023-01-01 01:12:54 --> Controller Class Initialized
+ERROR - 2023-01-01 01:12:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+DEBUG - 2023-01-01 01:12:54 --> Reservation MX_Controller Initialized
+ERROR - 2023-01-01 01:12:54 --> Severity: Warning --> chmod(): Operation not permitted /Applications/XAMPP/xamppfiles/htdocs/bonresto/system/database/drivers/mysqli/mysqli_driver.php 587
+INFO - 2023-01-01 01:12:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Reservation_model.php
+INFO - 2023-01-01 01:12:54 --> Model Class Initialized
+DEBUG - 2023-01-01 01:12:54 --> File loaded: /Applications/XAMPP/xamppfiles/htdocs/bonresto/application/modules/reservation/models/Logs_model.php
+INFO - 2023-01-01 01:12:54 --> Model Class Initialized
+INFO - 2023-01-01 01:12:54 --> Final output sent to browser
+DEBUG - 2023-01-01 01:12:54 --> Total execution time: 0.0401
