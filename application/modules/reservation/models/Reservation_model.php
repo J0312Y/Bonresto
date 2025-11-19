@@ -9,20 +9,24 @@ class Reservation_model extends CI_Model {
 	{
 		return $this->db->insert($this->table, $data);
 	}
-	public function insertcustomer($data = array(), $mobile = ""){
-		$this->db->select('*');
-        $this->db->from('customer_info');
-		$this->db->where('customer_phone',$mobile);
-		 $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-           $customer=$query->result();
-		  return $returnid =   $customer->customer_id;
-        } 
-		else{
-		$this->db->insert('customer_info', $data);
-		return $returnid = $this->db->insert_id();
-		}
-		}
+	public function insertcustomer($data = array(), $mobile = "")
+	{
+    $this->db->select('*');
+    $this->db->from('customer_info');
+    $this->db->where('customer_phone', $mobile);
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        // row() retourne directement un objet et évite l’erreur "array"
+        $customer = $query->row();
+        return $customer->customer_id; 
+    } 
+    else {
+        $this->db->insert('customer_info', $data);
+        return $this->db->insert_id();
+    }
+	}
+
 	public function delete($id = null)
 	{
 		$this->db->where('reserveid',$id)
@@ -256,6 +260,7 @@ public function count_reservation()
 			->get()
 			->row();
 	}
+	
   public function read($select_items, $table, $where_array)
     {
 	    $this->db->select($select_items);

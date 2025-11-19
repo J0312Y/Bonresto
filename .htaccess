@@ -1,5 +1,17 @@
-RewriteEngine on 
-RewriteBase /Bonresto
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /Bonresto/index.php?/$1 [L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /Bonresto/
+
+    # Ne réécrire que si le fichier ou dossier n'existe pas
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rediriger toutes les requêtes vers index.php
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# Optionnel : empêcher l'accès aux fichiers sensibles
+<FilesMatch "\.(env|ini|log|sh|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

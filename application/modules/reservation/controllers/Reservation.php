@@ -375,6 +375,7 @@ class Reservation extends MX_Controller {
 			$data['page']   = "chart";
 			echo Modules::run('template/layout', $data); 
 		}
+
 public function notification(){
 			$notify=$this->db->select("*")->from('tblreservation')->where('notif',0)->get()->num_rows();
 			

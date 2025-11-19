@@ -100,6 +100,8 @@ $route['qrorder/submit'] = 'qrapp/qrpublic/submit_order';
 //$route['qr-menu'] = 'qrapp/qrorder/index';
 //$route['qrapp/Qrtable/update_payment_status'] = 'qrapp/Qrtable/update_payment_status';
 
+//for the sound of reservation notification
+$route['reservation/getSound'] = 'reservation/getSound';
 
 
 $route['admin/license'] = 'admin/license';

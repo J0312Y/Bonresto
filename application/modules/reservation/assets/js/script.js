@@ -74,4 +74,8 @@ function checkavail(){
 				 $('#availabletable').html(data);
 			 } 
 			});
+			// Récupération des éléments
+let reservationAudio = document.getElementById('reservationSound');
+let reservationNotif  = document.getElementById('reservationNotification');
+
 	}

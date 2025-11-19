@@ -9,7 +9,7 @@ CREATE TABLE `acc_account_name` (
   `account_name` varchar(255) NOT NULL,
   `account_type` int(11) NOT NULL,
   PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 INSERT INTO `acc_account_name` (`account_id`, `account_name`, `account_type`) VALUES ('1', 'Employee Salary', '0');
 INSERT INTO `acc_account_name` (`account_id`, `account_name`, `account_type`) VALUES ('3', 'Example', '1');
@@ -24,20 +24,20 @@ INSERT INTO `acc_account_name` (`account_id`, `account_name`, `account_type`) VA
 DROP TABLE IF EXISTS `acc_coa`;
 
 CREATE TABLE `acc_coa` (
-  `HeadCode` varchar(50) NOT NULL,
-  `HeadName` varchar(100) NOT NULL,
-  `PHeadName` varchar(50) NOT NULL,
+  `HeadCode` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `HeadName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `PHeadName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `HeadLevel` int(11) NOT NULL,
   `IsActive` tinyint(1) NOT NULL,
   `IsTransaction` tinyint(1) NOT NULL,
   `IsGL` tinyint(1) NOT NULL,
-  `HeadType` char(1) NOT NULL,
+  `HeadType` char(1) COLLATE utf8_unicode_ci NOT NULL,
   `IsBudget` tinyint(1) NOT NULL,
   `IsDepreciation` tinyint(1) NOT NULL,
   `DepreciationRate` decimal(18,2) NOT NULL,
-  `CreateBy` varchar(50) NOT NULL,
+  `CreateBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `CreateDate` datetime NOT NULL,
-  `UpdateBy` varchar(50) NOT NULL,
+  `UpdateBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `UpdateDate` datetime NOT NULL,
   PRIMARY KEY (`HeadName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -268,8 +268,8 @@ DROP TABLE IF EXISTS `acc_customer_income`;
 
 CREATE TABLE `acc_customer_income` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Customer_Id` varchar(50) NOT NULL,
-  `VNo` varchar(50) NOT NULL,
+  `Customer_Id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `VNo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Date` date NOT NULL,
   `Amount` decimal(10,2) NOT NULL,
   UNIQUE KEY `ID` (`ID`)
@@ -283,11 +283,11 @@ DROP TABLE IF EXISTS `acc_glsummarybalance`;
 
 CREATE TABLE `acc_glsummarybalance` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `COAID` varchar(50) DEFAULT NULL,
+  `COAID` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Debit` decimal(18,2) DEFAULT NULL,
   `Credit` decimal(18,2) DEFAULT NULL,
   `FYear` int(11) DEFAULT NULL,
-  `CreateBy` varchar(50) DEFAULT NULL,
+  `CreateBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
   UNIQUE KEY `ID` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -300,17 +300,17 @@ DROP TABLE IF EXISTS `acc_income_expence`;
 
 CREATE TABLE `acc_income_expence` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `VNo` varchar(50) NOT NULL,
-  `Student_Id` varchar(50) NOT NULL,
+  `VNo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Student_Id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Date` date NOT NULL,
-  `Paymode` varchar(50) NOT NULL,
-  `Perpose` varchar(50) NOT NULL,
-  `Narration` text NOT NULL,
+  `Paymode` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Perpose` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Narration` text COLLATE utf8_unicode_ci NOT NULL,
   `StoreID` int(11) NOT NULL,
-  `COAID` varchar(50) NOT NULL,
+  `COAID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Amount` decimal(10,2) NOT NULL,
   `IsApprove` tinyint(4) NOT NULL,
-  `CreateBy` varchar(50) NOT NULL,
+  `CreateBy` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `CreateDate` datetime NOT NULL,
   UNIQUE KEY `ID` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -322,8 +322,8 @@ CREATE TABLE `acc_income_expence` (
 DROP TABLE IF EXISTS `acc_temp`;
 
 CREATE TABLE `acc_temp` (
-  `COAID` varchar(50) NOT NULL,
-  `Name` varchar(50) NOT NULL,
+  `COAID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Debit` decimal(18,2) NOT NULL,
   `Credit` decimal(18,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -336,20 +336,20 @@ DROP TABLE IF EXISTS `acc_transaction`;
 
 CREATE TABLE `acc_transaction` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `VNo` varchar(50) DEFAULT NULL,
-  `Vtype` varchar(50) DEFAULT NULL,
+  `VNo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Vtype` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `VDate` date DEFAULT NULL,
-  `COAID` varchar(50) NOT NULL,
-  `Narration` text DEFAULT NULL,
+  `COAID` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Narration` text COLLATE utf8_unicode_ci,
   `Debit` decimal(18,2) DEFAULT NULL,
   `Credit` decimal(18,2) DEFAULT NULL,
   `StoreID` int(11) NOT NULL,
-  `IsPosted` char(10) DEFAULT NULL,
-  `CreateBy` varchar(50) DEFAULT NULL,
+  `IsPosted` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CreateBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CreateDate` datetime DEFAULT NULL,
-  `UpdateBy` varchar(50) DEFAULT NULL,
+  `UpdateBy` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `UpdateDate` datetime DEFAULT NULL,
-  `IsAppove` char(10) DEFAULT NULL,
+  `IsAppove` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   UNIQUE KEY `ID` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -548,13 +548,13 @@ DROP TABLE IF EXISTS `accesslog`;
 
 CREATE TABLE `accesslog` (
   `sl_no` bigint(20) NOT NULL AUTO_INCREMENT,
-  `action_page` varchar(50) DEFAULT NULL,
-  `action_done` text DEFAULT NULL,
-  `remarks` text NOT NULL,
-  `user_name` varchar(50) DEFAULT NULL,
+  `action_page` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `action_done` text COLLATE utf8_unicode_ci,
+  `remarks` text COLLATE utf8_unicode_ci NOT NULL,
+  `user_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `entry_date` datetime DEFAULT NULL,
   PRIMARY KEY (`sl_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=498 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=520 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('1', 'Add Category', 'Insert Data', 'Category is Created', 'John Doe', '2025-10-30 20:41:53');
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('2', 'Add Category', 'Insert Data', 'Category is Created', 'John Doe', '2025-10-30 20:42:36');
@@ -1053,6 +1053,28 @@ INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('495', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-16 10:22:08');
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('496', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-16 10:22:15');
 INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('497', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-16 10:22:23');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('498', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-17 22:10:34');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('499', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:07:53');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('500', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:08:20');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('501', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:09:15');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('502', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:09:38');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('503', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:09:59');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('504', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:10:35');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('505', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:11:22');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('506', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:12:06');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('507', 'Food List', 'Update Data', 'Food Updated', 'John Doe', '2025-11-18 07:12:35');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('508', 'Reservation List', 'Update Data', 'Reservation Updated', 'John Doe', '2025-11-18 11:41:32');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('509', 'Reservation List', 'Update Data', 'Reservation Updated', 'John Doe', '2025-11-18 11:41:44');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('510', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:33:42');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('511', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:35:02');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('512', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-18 12:36:50');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('513', 'Order List', 'Insert Data', 'Order is Update', 'John Doe', '2025-11-18 12:37:15');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('514', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:50:43');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('515', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:51:55');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('516', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:54:53');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('517', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:55:18');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('518', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:56:47');
+INSERT INTO `accesslog` (`sl_no`, `action_page`, `action_done`, `remarks`, `user_name`, `entry_date`) VALUES ('519', 'Add New Order', 'Insert Data', 'Item New Order Created', 'John Doe', '2025-11-18 12:57:34');
 
 
 #
@@ -1070,7 +1092,7 @@ CREATE TABLE `acn_account_transaction` (
   `payment_id` int(11) NOT NULL,
   `create_by_id` varchar(25) NOT NULL,
   PRIMARY KEY (`account_tran_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: add_ons
@@ -1080,8 +1102,8 @@ DROP TABLE IF EXISTS `add_ons`;
 
 CREATE TABLE `add_ons` (
   `add_on_id` int(11) NOT NULL AUTO_INCREMENT,
-  `add_on_name` varchar(200) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `add_on_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `is_active` tinyint(4) NOT NULL,
   PRIMARY KEY (`add_on_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1115,7 +1137,7 @@ CREATE TABLE `award` (
   `employee_id` varchar(30) NOT NULL,
   `awarded_by` varchar(30) NOT NULL,
   PRIMARY KEY (`award_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: bank_summary
@@ -1125,15 +1147,15 @@ DROP TABLE IF EXISTS `bank_summary`;
 
 CREATE TABLE `bank_summary` (
   `bank_id` varchar(250) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `description` text,
   `deposite_id` varchar(250) DEFAULT NULL,
   `date` varchar(250) DEFAULT NULL,
   `ac_type` varchar(50) DEFAULT NULL,
   `dr` float DEFAULT NULL,
   `cr` float DEFAULT NULL,
   `ammount` float DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `status` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: bill
@@ -1164,7 +1186,7 @@ CREATE TABLE `bill` (
   PRIMARY KEY (`bill_id`),
   KEY `order_id` (`order_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('1', '55', '1', '0', '0', '0', '3', NULL, '0', '0', '2025-10-31', '10:05:29', '2025-10-31 22:34:40', '1', '4', '2', '2025-10-31', '0', '0000-00-00');
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('2', '54', '2', '20', '1.275', '4', '1', NULL, '1.5', '24.225', '2025-10-31', '12:18:17', '2025-10-31 23:32:11', '1', '4', '2', '2025-10-31', '0', '0000-00-00');
@@ -1258,6 +1280,15 @@ INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `disco
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('90', '76', '90', '30', '1.8', '6', NULL, NULL, '2.25', '34.2', '2025-11-16', '09:52:59', '2025-11-16 10:21:53', '1', '4', '2', '2025-11-16', '0', '0000-00-00');
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('91', '76', '91', '300', '60.3', '51', NULL, NULL, '19.125', '290.7', '2025-11-16', '09:53:22', '2025-11-16 10:21:45', '1', '4', '2', '2025-11-16', '0', '0000-00-00');
 INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('92', '76', '92', '300', '60.3', '51', NULL, NULL, '19.125', '290.7', '2025-11-16', '09:53:57', '2025-11-16 10:20:19', '1', '4', '2', '2025-11-16', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('93', '82', '93', '20', '1.2', '4', '3', NULL, '1.5', '22.8', '2025-11-17', '22:04:18', '2025-11-17 22:10:34', '1', '4', '2', '2025-11-17', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('94', '1', '94', '320', '61.5', '55', NULL, NULL, '20.625', '313.5', '2025-11-18', '12:33:44', '2025-11-18 12:37:15', '1', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('95', '1', '95', '450', '27', '90', NULL, NULL, '33.75', '513', '2025-11-18', '12:35:03', '2025-11-18 12:36:50', '1', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('96', '63', '96', '150', '0', '30', NULL, NULL, '11.25', '180', '2025-11-18', '12:50:44', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('97', '75', '97', '300', '45', '51', NULL, NULL, '19.125', '306', '2025-11-18', '12:51:57', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('98', '75', '98', '150', '0', '30', NULL, NULL, '11.25', '180', '2025-11-18', '12:54:54', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('99', '75', '99', '20', '0', '4', NULL, NULL, '1.5', '24', '2025-11-18', '12:55:20', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('100', '63', '100', '150', '0', '30', NULL, NULL, '11.25', '180', '2025-11-18', '12:56:48', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-18', '0', '0000-00-00');
+INSERT INTO `bill` (`bill_id`, `customer_id`, `order_id`, `total_amount`, `discount`, `service_charge`, `shipping_type`, `delivarydate`, `VAT`, `bill_amount`, `bill_date`, `bill_time`, `create_at`, `bill_status`, `payment_method_id`, `create_by`, `create_date`, `update_by`, `update_date`) VALUES ('101', '64', '101', '200', '0', '40', NULL, NULL, '15', '240', '2025-11-18', '12:57:35', '1970-01-01 01:01:01', '0', '4', '2', '2025-11-18', '0', '0000-00-00');
 
 
 #
@@ -1270,7 +1301,7 @@ CREATE TABLE `bill_card_payment` (
   `row_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `bill_id` bigint(20) NOT NULL,
   `multipay_id` int(11) DEFAULT NULL,
-  `card_no` varchar(200) DEFAULT NULL,
+  `card_no` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `terminal_name` int(11) NOT NULL,
   `bank_name` int(11) DEFAULT NULL,
   PRIMARY KEY (`row_id`)
@@ -1284,20 +1315,20 @@ DROP TABLE IF EXISTS `candidate_basic_info`;
 
 CREATE TABLE `candidate_basic_info` (
   `can_id` varchar(20) NOT NULL,
-  `first_name` varchar(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `last_name` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `email` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `phone` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `alter_phone` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `present_address` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `parmanent_address` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `picture` text DEFAULT NULL,
+  `first_name` varchar(11) CHARACTER SET latin1 NOT NULL,
+  `last_name` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `phone` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `alter_phone` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `present_address` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `parmanent_address` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `picture` text,
   `ssn` varchar(50) NOT NULL,
   `state` varchar(30) NOT NULL,
   `city` varchar(30) NOT NULL,
   `zip` int(11) NOT NULL,
   PRIMARY KEY (`can_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: candidate_education_info
@@ -1308,13 +1339,13 @@ DROP TABLE IF EXISTS `candidate_education_info`;
 CREATE TABLE `candidate_education_info` (
   `can_edu_id` int(11) NOT NULL AUTO_INCREMENT,
   `can_id` varchar(30) NOT NULL,
-  `degree_name` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `university_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `cgp` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `comments` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `sequencee` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `degree_name` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `university_name` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `cgp` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `comments` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `sequencee` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`can_edu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: candidate_interview
@@ -1324,19 +1355,19 @@ DROP TABLE IF EXISTS `candidate_interview`;
 
 CREATE TABLE `candidate_interview` (
   `can_int_id` int(11) NOT NULL AUTO_INCREMENT,
-  `can_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `job_adv_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `interview_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `interviewer_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `interview_marks` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `written_total_marks` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `mcq_total_marks` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `can_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `job_adv_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `interview_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `interviewer_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `interview_marks` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `written_total_marks` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `mcq_total_marks` varchar(50) CHARACTER SET latin1 NOT NULL,
   `total_marks` varchar(30) NOT NULL,
-  `recommandation` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `selection` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `details` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `recommandation` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `selection` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `details` varchar(50) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`can_int_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: candidate_selection
@@ -1346,12 +1377,12 @@ DROP TABLE IF EXISTS `candidate_selection`;
 
 CREATE TABLE `candidate_selection` (
   `can_sel_id` int(11) NOT NULL AUTO_INCREMENT,
-  `can_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `employee_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `pos_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `selection_terms` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `can_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `employee_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `pos_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `selection_terms` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`can_sel_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: candidate_shortlist
@@ -1361,12 +1392,12 @@ DROP TABLE IF EXISTS `candidate_shortlist`;
 
 CREATE TABLE `candidate_shortlist` (
   `can_short_id` int(11) NOT NULL AUTO_INCREMENT,
-  `can_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `can_id` varchar(30) CHARACTER SET latin1 NOT NULL,
   `job_adv_id` int(11) NOT NULL,
-  `date_of_shortlist` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `interview_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `date_of_shortlist` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `interview_date` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`can_short_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: candidate_workexperience
@@ -1376,14 +1407,14 @@ DROP TABLE IF EXISTS `candidate_workexperience`;
 
 CREATE TABLE `candidate_workexperience` (
   `can_workexp_id` int(11) NOT NULL AUTO_INCREMENT,
-  `can_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `company_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `working_period` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `duties` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `supervisor` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `sequencee` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `can_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `company_name` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `working_period` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `duties` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `supervisor` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `sequencee` varchar(10) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`can_workexp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: check_addones
@@ -1407,21 +1438,21 @@ DROP TABLE IF EXISTS `common_setting`;
 
 CREATE TABLE `common_setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `address` text DEFAULT NULL,
+  `address` text,
   `email` varchar(50) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `phone_optional` varchar(30) DEFAULT NULL,
   `logo` varchar(50) DEFAULT NULL,
   `logo_footer` varchar(255) DEFAULT NULL,
-  `ismembership` int(11) NOT NULL DEFAULT 0 COMMENT '1=enable,0=disable',
-  `powerbytxt` text DEFAULT NULL,
-  `web_onoff` int(11) DEFAULT 1 COMMENT '1=enable,0=disable',
+  `ismembership` int(11) NOT NULL DEFAULT '0' COMMENT '1=enable,0=disable',
+  `powerbytxt` text,
+  `web_onoff` int(11) DEFAULT '1' COMMENT '1=enable,0=disable',
   `backgroundcolorweb` varchar(30) DEFAULT NULL,
   `webheaderfontcolor` varchar(20) DEFAULT NULL,
   `backgroundcolorqr` varchar(30) DEFAULT NULL,
   `qrheaderfontcolor` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `common_setting` (`id`, `address`, `email`, `phone`, `phone_optional`, `logo`, `logo_footer`, `ismembership`, `powerbytxt`, `web_onoff`, `backgroundcolorweb`, `webheaderfontcolor`, `backgroundcolorqr`, `qrheaderfontcolor`) VALUES ('1', '<p>123 Suspendis matti, <br> Visaosang Building VST District, <br>BZ Accums, North Brazzaville</p>\r\n<div id=\"gtx-trans\" xss=removed> </div>', 'support@lumuka.com', '050489037', '+242 064663469', 'assets/img/2021-01-02/b.png', 'assets/img/2021-01-02/b1.png', '1', '© 2025 Hungry All Right Reserved. Developed by LMK Tech.\r\n', '1', NULL, NULL, NULL, NULL);
 
@@ -1436,10 +1467,10 @@ CREATE TABLE `currency` (
   `currencyid` int(11) NOT NULL AUTO_INCREMENT,
   `currencyname` varchar(50) NOT NULL,
   `curr_icon` varchar(50) NOT NULL,
-  `position` int(11) NOT NULL DEFAULT 1 COMMENT '1=left.2=right',
-  `curr_rate` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `position` int(11) NOT NULL DEFAULT '1' COMMENT '1=left.2=right',
+  `curr_rate` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`currencyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 INSERT INTO `currency` (`currencyid`, `currencyname`, `curr_icon`, `position`, `curr_rate`) VALUES ('1', 'BDT', 'BDT', '2', '83.00');
 INSERT INTO `currency` (`currencyid`, `currencyname`, `curr_icon`, `position`, `curr_rate`) VALUES ('2', 'USD', '$', '1', '1.00');
@@ -1460,7 +1491,7 @@ CREATE TABLE `custom_table` (
   `custom_data` text NOT NULL,
   `employee_id` varchar(20) NOT NULL,
   PRIMARY KEY (`custom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 INSERT INTO `custom_table` (`custom_id`, `custom_field`, `custom_data_type`, `custom_data`, `employee_id`) VALUES ('52', 'Chinese Cuisine', '1', 'coffee roastery located on a busy corner site in Farringdon\'s Exmouth Market. With glazed frontage on two sides ', 'EU3APTYY');
 INSERT INTO `custom_table` (`custom_id`, `custom_field`, `custom_data_type`, `custom_data`, `employee_id`) VALUES ('54', 'French Suicine', '1', 'coffee roastery located on a busy corner site in Farringdon\'s Exmouth Market. With glazed frontage on two sides ', 'EXL9WSCL');
@@ -1476,22 +1507,39 @@ DROP TABLE IF EXISTS `customer_info`;
 
 CREATE TABLE `customer_info` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cuntomer_no` varchar(120) NOT NULL,
-  `facebook_id` varchar(100) DEFAULT NULL,
+  `cuntomer_no` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  `facebook_id` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `membership_type` int(11) DEFAULT NULL COMMENT '1=bronze,2=silver,3=gold,4=platinum,5vip',
-  `customer_name` varchar(150) NOT NULL,
-  `customer_email` varchar(100) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `customer_token` text DEFAULT NULL,
-  `customer_address` varchar(250) DEFAULT NULL,
-  `customer_phone` varchar(200) NOT NULL,
-  `customer_picture` varchar(255) DEFAULT NULL,
-  `favorite_delivery_address` varchar(200) DEFAULT NULL,
+  `customer_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `customer_email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_token` text COLLATE utf8_unicode_ci,
+  `customer_address` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_phone` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `customer_picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `favorite_delivery_address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `crdate` date DEFAULT NULL,
-  `is_active` tinyint(4) NOT NULL DEFAULT 1,
+  `is_active` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('1', 'cusL-0001', NULL, '2', 'Walkin', 'test@gmail.com', NULL, 'cO_Sa2fwscE:APA91bEFDD0sbV52pZPwJEl8MEUCcHBg2wIGjKfelfbiytAj4nJlPsKf8sSupfElBq-nm36DCkjYDEoUcA7qvtzKu4vDqjutF23f6Y_0uw4L_PlJIrtl61y4s-t5OKFAmdaU9OUQTtYS', 'dhaka', '8801717426371', NULL, 'ddd', NULL, '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('36', 'cusL-0004', NULL, '1', 'Kabir khan', 'kabir@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'DDD sgfsrgrg', '1732432434', 'assets/img/icons/2021-11-10/m.png', NULL, '2021-08-31', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('54', 'cusL-0005', NULL, '0', 'joeldy tsna', 'joeldytsina94@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Congo Brazzaville', '064663469', 'assets/img/icons/2025-10-31/P.png', NULL, '2025-10-31', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('55', 'cusL-0006', NULL, '0', 'simon', '064663469@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '064663469', NULL, 'Not Set', '2025-10-31', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('56', 'cusL-0007', NULL, '0', 'clavina', 'counter@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'la poudriere', '050489037', 'assets/img/user/676447881_1761963839.jpeg', NULL, '2025-11-01', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('57', 'cusL-0008', NULL, '0', 'simon', '06739988747@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'egWXc5aoQO_l4FM4EWk3uy:APA91bGdppgUgWU5nRlXmv0IigH2TMOk6y7p5DAzIk3nvOtW_Tvo4Z_Hrc6PV4hiKzoWEG-xxPHQwAg4-TUcuU4cgtfeYZeMqrCOAjcheatLJc-GZflWSWc', 'Not Set', '06739988747', NULL, 'Not Set', '2025-11-01', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('58', 'cusL-0009', NULL, NULL, 'clavina', '06739988747@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'egWXc5aoQO_l4FM4EWk3uy:APA91bGdppgUgWU5nRlXmv0IigH2TMOk6y7p5DAzIk3nvOtW_Tvo4Z_Hrc6PV4hiKzoWEG-xxPHQwAg4-TUcuU4cgtfeYZeMqrCOAjcheatLJc-GZflWSWc', 'bzv', '06739988747', 'assets/img/icons/2025-11-01/.jpeg', NULL, '2025-11-01', '0');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('59', 'cusL-0010', NULL, '0', 'hemercia', '045467893@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '045467893', NULL, 'Not Set', '2025-11-02', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('60', 'cusL-0011', NULL, '0', 'test@gmail', 'testpghone@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', 'testpghone', NULL, 'Not Set', '2025-11-03', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('61', 'cusL-0012', NULL, '0', 'etstqr', '0977376733@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '0977376733', NULL, 'Not Set', '2025-11-08', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('62', 'cusL-0013', NULL, '0', 'simonnn', '0645565372@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '0645565372', NULL, 'Not Set', '2025-11-08', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('63', 'cusL-0014', NULL, '0', 'joeldy qr', '088973824863@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '088973824863', NULL, 'Not Set', '2025-11-08', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('64', 'cusL-0015', NULL, '0', 'joeldy simon pierre', '048329756\"&@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '048329756\"&', NULL, 'Not Set', '2025-11-08', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('65', 'cusL-0016', NULL, '0', 'joeldy simon pierre', '234324524@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '234324524', NULL, 'Not Set', '2025-11-08', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('66', 'cusL-0017', NULL, '0', 'simon', '1324@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '1324', NULL, 'Not Set', '2025-11-08', '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('67', 'cusL-0018', NULL, '0', 'tes', 'tes@gmail.com', NULL, NULL, 'Avenue ngamaba', '050489037', NULL, '', NULL, '1');
+INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('68', 'cusL-0019', NULL, '0', 'tes', '0988787287392@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Not Set', '0988787287392', NULL, 'Not Set', '2025-11-12', '1');
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('75', 'cus-0002', NULL, '0', 'customer', 'customer@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'Avenue ngamaba', '050489037', NULL, 'Thyestere', NULL, '1');
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('76', 'cus-0003', NULL, '0', 'customer1', 'customer1@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'la poudriere', '050489039', NULL, 'BZV', NULL, '1');
 INSERT INTO `customer_info` (`customer_id`, `cuntomer_no`, `facebook_id`, `membership_type`, `customer_name`, `customer_email`, `password`, `customer_token`, `customer_address`, `customer_phone`, `customer_picture`, `favorite_delivery_address`, `crdate`, `is_active`) VALUES ('77', 'cus-0004', NULL, '0', 'qrcustomer', 'qrcustomer@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'la gare', '06563679178', NULL, '', NULL, '1');
@@ -1525,11 +1573,11 @@ DROP TABLE IF EXISTS `customer_order`;
 
 CREATE TABLE `customer_order` (
   `order_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `saleinvoice` varchar(100) NOT NULL,
-  `marge_order_id` varchar(30) DEFAULT NULL,
+  `saleinvoice` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `marge_order_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `customer_id` int(11) NOT NULL,
   `cutomertype` int(11) NOT NULL,
-  `isthirdparty` int(11) NOT NULL DEFAULT 0 COMMENT '0=normal,1>all Third Party',
+  `isthirdparty` int(11) NOT NULL DEFAULT '0' COMMENT '0=normal,1>all Third Party',
   `thirdpartyinvoiceid` int(11) DEFAULT NULL,
   `waiter_id` int(11) DEFAULT NULL,
   `kitchen` int(11) DEFAULT NULL,
@@ -1537,18 +1585,18 @@ CREATE TABLE `customer_order` (
   `order_time` time NOT NULL,
   `cookedtime` time NOT NULL DEFAULT '00:15:00',
   `table_no` int(11) DEFAULT NULL,
-  `tokenno` varchar(30) DEFAULT NULL,
-  `totalamount` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `customerpaid` decimal(10,2) DEFAULT 0.00,
-  `customer_note` text DEFAULT NULL,
-  `anyreason` text DEFAULT NULL,
+  `tokenno` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `totalamount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `customerpaid` decimal(10,2) DEFAULT '0.00',
+  `customer_note` text COLLATE utf8_unicode_ci,
+  `anyreason` text COLLATE utf8_unicode_ci,
   `order_status` tinyint(1) NOT NULL COMMENT '1=Pending, 2=Processing, 3=Ready, 4=Served,5=Cancel',
-  `nofification` int(11) NOT NULL DEFAULT 0 COMMENT '0=unseen,1=seen',
+  `nofification` int(11) NOT NULL DEFAULT '0' COMMENT '0=unseen,1=seen',
   `orderacceptreject` int(11) DEFAULT NULL,
-  `splitpay_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=no split,1=split',
+  `splitpay_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=no split,1=split',
   `isupdate` int(11) DEFAULT NULL,
   `shipping_date` datetime DEFAULT '1790-01-01 01:01:01',
-  `tokenprint` int(11) NOT NULL DEFAULT 0 COMMENT '1=print done,0=not done',
+  `tokenprint` int(11) NOT NULL DEFAULT '0' COMMENT '1=print done,0=not done',
   `invoiceprint` int(11) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `customer_id` (`customer_id`),
@@ -1556,7 +1604,7 @@ CREATE TABLE `customer_order` (
   KEY `waiter_id` (`waiter_id`),
   KEY `kitchen` (`kitchen`),
   KEY `thirdpartyinvoiceid` (`thirdpartyinvoiceid`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('1', '0001', NULL, '55', '99', '0', NULL, '0', NULL, '2025-10-31', '10:05:29', '00:15:00', NULL, NULL, '0.00', '0.00', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('2', '0002', NULL, '54', '2', '0', NULL, '0', NULL, '2025-10-31', '12:18:17', '00:15:00', '0', '01', '24.23', '24.23', '', '', '4', '1', '1', '0', NULL, '2025-10-31 12:17:00', '0', NULL);
@@ -1648,6 +1696,15 @@ INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `cust
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('90', '0090', NULL, '76', '1', '0', NULL, '178', NULL, '2025-11-16', '09:52:57', '00:15:00', '2', '01', '34.20', '34.20', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('91', '0091', NULL, '76', '1', '0', NULL, '178', NULL, '2025-11-16', '09:53:19', '00:15:00', '3', '02', '290.70', '290.70', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('92', '0092', NULL, '76', '1', '0', NULL, '179', NULL, '2025-11-16', '09:53:55', '00:15:00', '3', '03', '290.70', '290.70', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('93', '0093', NULL, '82', '99', '0', NULL, '0', NULL, '2025-11-17', '22:04:18', '00:15:00', NULL, NULL, '22.80', '22.80', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('94', '0094', NULL, '1', '99', '0', NULL, '178', NULL, '2025-11-18', '12:33:42', '00:15:00', '3', '01', '313.50', '313.50', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('95', '0095', NULL, '1', '99', '0', NULL, '179', NULL, '2025-11-18', '12:35:02', '00:15:00', '3', '02', '513.00', '513.00', '', '', '4', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('96', '0096', NULL, '63', '1', '0', NULL, '178', NULL, '2025-11-18', '12:50:43', '00:15:00', '2', '03', '180.00', '0.00', '', NULL, '1', '0', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('97', '0097', NULL, '75', '1', '0', NULL, '178', NULL, '2025-11-18', '12:51:55', '00:15:00', '2', '04', '306.00', '0.00', '', NULL, '1', '0', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('98', '0098', NULL, '75', '1', '0', NULL, '178', NULL, '2025-11-18', '12:54:53', '00:15:00', '3', '05', '180.00', '0.00', '', NULL, '1', '0', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('99', '0099', NULL, '75', '99', '0', NULL, '178', NULL, '2025-11-18', '12:55:18', '00:15:00', '3', '06', '24.00', '0.00', '', '', '1', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('100', '0100', NULL, '63', '99', '0', NULL, '178', NULL, '2025-11-18', '12:56:47', '00:15:00', '3', '07', '180.00', '0.00', '', '', '1', '1', '1', '0', NULL, '1790-01-01 01:01:01', '0', NULL);
+INSERT INTO `customer_order` (`order_id`, `saleinvoice`, `marge_order_id`, `customer_id`, `cutomertype`, `isthirdparty`, `thirdpartyinvoiceid`, `waiter_id`, `kitchen`, `order_date`, `order_time`, `cookedtime`, `table_no`, `tokenno`, `totalamount`, `customerpaid`, `customer_note`, `anyreason`, `order_status`, `nofification`, `orderacceptreject`, `splitpay_status`, `isupdate`, `shipping_date`, `tokenprint`, `invoiceprint`) VALUES ('101', '0101', NULL, '64', '1', '0', NULL, '178', NULL, '2025-11-18', '12:57:34', '00:15:00', '3', '08', '240.00', '0.00', '', NULL, '1', '0', NULL, '0', NULL, '1790-01-01 01:01:01', '0', NULL);
 
 
 #
@@ -1658,8 +1715,8 @@ DROP TABLE IF EXISTS `customer_type`;
 
 CREATE TABLE `customer_type` (
   `customer_type_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_type` varchar(100) NOT NULL,
-  `ordering` int(11) DEFAULT 0,
+  `customer_type` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `ordering` int(11) DEFAULT '0',
   PRIMARY KEY (`customer_type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1681,7 +1738,7 @@ CREATE TABLE `department` (
   `department_name` varchar(100) NOT NULL,
   `parent_id` int(11) NOT NULL,
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 INSERT INTO `department` (`dept_id`, `department_name`, `parent_id`) VALUES ('8', 'ACCOUNTING', '0');
 INSERT INTO `department` (`dept_id`, `department_name`, `parent_id`) VALUES ('9', 'Human Resource', '0');
@@ -1706,7 +1763,7 @@ CREATE TABLE `duty_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 INSERT INTO `duty_type` (`id`, `type_name`) VALUES ('1', 'Full Time');
 INSERT INTO `duty_type` (`id`, `type_name`) VALUES ('2', 'Part Time');
@@ -1730,9 +1787,9 @@ CREATE TABLE `email_config` (
   `mailtype` text NOT NULL,
   `sender` text NOT NULL,
   `api_key` varchar(250) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`email_config_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `email_config` (`email_config_id`, `smtp_host`, `smtp_port`, `smtp_password`, `protocol`, `mailpath`, `mailtype`, `sender`, `api_key`, `status`) VALUES ('1', 'ssl://smtp.googlemail.com', '465', '123456', 'SMTP', '/usr/sbin/sendmail', 'html', 'ainalcse@gmail.com', '22c4c92a-e5a8-4293-b64c-befc9248521e', '1');
 
@@ -1745,13 +1802,13 @@ DROP TABLE IF EXISTS `emp_attendance`;
 
 CREATE TABLE `emp_attendance` (
   `att_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `sign_in` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `sign_out` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `employee_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `sign_in` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
+  `sign_out` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
   `staytime` time DEFAULT NULL,
   PRIMARY KEY (`att_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `emp_attendance` (`att_id`, `employee_id`, `date`, `sign_in`, `sign_out`, `staytime`) VALUES ('1', 'EY2T1OWA', '2025-10-30', '08:37:05 pm', NULL, NULL);
 
@@ -1770,7 +1827,7 @@ CREATE TABLE `employee_benifit` (
   `bnf_status` tinyint(4) NOT NULL,
   `employee_id` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: employee_history
@@ -1790,7 +1847,7 @@ CREATE TABLE `employee_history` (
   `alter_phone` varchar(30) DEFAULT NULL,
   `present_address` varchar(100) DEFAULT NULL,
   `parmanent_address` varchar(100) DEFAULT NULL,
-  `picture` text DEFAULT NULL,
+  `picture` text,
   `degree_name` varchar(30) DEFAULT NULL,
   `university_name` varchar(50) DEFAULT NULL,
   `cgp` varchar(30) DEFAULT NULL,
@@ -1799,8 +1856,8 @@ CREATE TABLE `employee_history` (
   `working_period` varchar(30) DEFAULT NULL,
   `duties` varchar(30) DEFAULT NULL,
   `supervisor` varchar(30) DEFAULT NULL,
-  `signature` text DEFAULT NULL,
-  `is_admin` int(11) NOT NULL DEFAULT 0,
+  `signature` text,
+  `is_admin` int(11) NOT NULL DEFAULT '0',
   `dept_id` int(11) DEFAULT NULL,
   `division_id` int(11) NOT NULL,
   `maiden_name` varchar(50) DEFAULT NULL,
@@ -1852,7 +1909,7 @@ CREATE TABLE `employee_history` (
   `alt_emg_h_phone` varchar(30) NOT NULL,
   `alt_emg_w_phone` varchar(30) NOT NULL,
   PRIMARY KEY (`emp_his_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8;
 
 INSERT INTO `employee_history` (`emp_his_id`, `employee_id`, `pos_id`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `alter_phone`, `present_address`, `parmanent_address`, `picture`, `degree_name`, `university_name`, `cgp`, `passing_year`, `company_name`, `working_period`, `duties`, `supervisor`, `signature`, `is_admin`, `dept_id`, `division_id`, `maiden_name`, `state`, `city`, `zip`, `citizenship`, `duty_type`, `hire_date`, `original_hire_date`, `termination_date`, `termination_reason`, `voluntary_termination`, `rehire_date`, `rate_type`, `rate`, `pay_frequency`, `pay_frequency_txt`, `hourly_rate2`, `hourly_rate3`, `home_department`, `department_text`, `class_code`, `class_code_desc`, `class_acc_date`, `class_status`, `is_super_visor`, `super_visor_id`, `supervisor_report`, `dob`, `gender`, `country`, `marital_status`, `ethnic_group`, `eeo_class_gp`, `ssn`, `work_in_state`, `live_in_state`, `home_email`, `business_email`, `home_phone`, `business_phone`, `cell_phone`, `emerg_contct`, `emrg_h_phone`, `emrg_w_phone`, `emgr_contct_relation`, `alt_em_contct`, `alt_emg_h_phone`, `alt_emg_w_phone`) VALUES ('162', 'EY2T1OWA', '4', 'counter', NULL, 'Ahmad', 'counter2@example.com', '0195511016', NULL, NULL, NULL, './application/modules/employee/assets/images/2018-09-20/pra.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', '15', '3', NULL, 'New York', 'New', '234234', '0', '1', '2018-09-19', '2018-09-19', '2018-09-19', 'sdfasdf', '2', '2018-09-26', '1', '323', '2', '234', '324234', '2523', '234', '234532', '', '', '1970-01-01', '1', NULL, '0', 'dfasdfsdf', '2018-09-19', '1', 'Bangladesh', '2', 'sunni', '234324', '23423', '1', '1', 'u@gmail.com', 'b@gmail.com', 'dsfsdf', 'dsfdsf', 'sdfsdf', '42342323', '234234', '234234', '2343', '234', '324234', '324324');
 INSERT INTO `employee_history` (`emp_his_id`, `employee_id`, `pos_id`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `alter_phone`, `present_address`, `parmanent_address`, `picture`, `degree_name`, `university_name`, `cgp`, `passing_year`, `company_name`, `working_period`, `duties`, `supervisor`, `signature`, `is_admin`, `dept_id`, `division_id`, `maiden_name`, `state`, `city`, `zip`, `citizenship`, `duty_type`, `hire_date`, `original_hire_date`, `termination_date`, `termination_reason`, `voluntary_termination`, `rehire_date`, `rate_type`, `rate`, `pay_frequency`, `pay_frequency_txt`, `hourly_rate2`, `hourly_rate3`, `home_department`, `department_text`, `class_code`, `class_code_desc`, `class_acc_date`, `class_status`, `is_super_visor`, `super_visor_id`, `supervisor_report`, `dob`, `gender`, `country`, `marital_status`, `ethnic_group`, `eeo_class_gp`, `ssn`, `work_in_state`, `live_in_state`, `home_email`, `business_email`, `home_phone`, `business_phone`, `cell_phone`, `emerg_contct`, `emrg_h_phone`, `emrg_w_phone`, `emgr_contct_relation`, `alt_em_contct`, `alt_emg_h_phone`, `alt_emg_w_phone`) VALUES ('165', '145454', '1', 'kitchen', NULL, '2', 'kitchen1@example.com', '2344098234', NULL, NULL, NULL, './application/modules/hrm/assets/images/2025-10-31/P1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '17', '6', NULL, 'Alabama', 'deom', '3243', '0', '1', '2018-09-20', '2018-09-20', '2018-09-29', 'fsdf', '1', '2018-09-29', '1', '234', '3', '234', '0', '0', '', '', '', '', '1970-01-01', '1', NULL, '0', '324', '2018-09-29', '1', 'Bangladesh', '1', 'sdfsdf', '', '23423', '1', '1', '234', 'sd', '82309423', '', '234', '324234', '34242', '546456', '', '', '', '');
@@ -1871,15 +1928,15 @@ DROP TABLE IF EXISTS `employee_performance`;
 
 CREATE TABLE `employee_performance` (
   `emp_per_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `note` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `date` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `note_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `number_of_star` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `status` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `updated_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `note` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `date` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `note_by` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `number_of_star` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `status` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `updated_by` varchar(50) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`emp_per_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: employee_sal_pay_type
@@ -1889,8 +1946,8 @@ DROP TABLE IF EXISTS `employee_sal_pay_type`;
 
 CREATE TABLE `employee_sal_pay_type` (
   `emp_sal_pay_type_id` int(10) unsigned NOT NULL,
-  `payment_period` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `payment_period` varchar(50) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: employee_salary_payment
@@ -1900,15 +1957,15 @@ DROP TABLE IF EXISTS `employee_salary_payment`;
 
 CREATE TABLE `employee_salary_payment` (
   `emp_sal_pay_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `total_salary` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `total_working_minutes` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `working_period` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `payment_due` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `payment_date` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `paid_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `total_salary` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `total_working_minutes` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `working_period` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `payment_due` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `payment_date` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `paid_by` varchar(50) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`emp_sal_pay_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: employee_salary_setup
@@ -1918,16 +1975,16 @@ DROP TABLE IF EXISTS `employee_salary_setup`;
 
 CREATE TABLE `employee_salary_setup` (
   `e_s_s_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(30) CHARACTER SET latin1 NOT NULL,
   `sal_type` varchar(30) NOT NULL,
-  `salary_type_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `amount` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `salary_type_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `amount` varchar(30) CHARACTER SET latin1 NOT NULL,
   `create_date` date DEFAULT NULL,
   `update_date` datetime(6) DEFAULT NULL,
-  `update_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `update_id` varchar(30) CHARACTER SET latin1 NOT NULL,
   `gross_salary` float NOT NULL,
   PRIMARY KEY (`e_s_s_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `employee_salary_setup` (`e_s_s_id`, `employee_id`, `sal_type`, `salary_type_id`, `amount`, `create_date`, `update_date`, `update_id`, `gross_salary`) VALUES ('1', 'EZR0A9IB', '1', '1', '20', '2025-10-30', NULL, '', '400');
 INSERT INTO `employee_salary_setup` (`e_s_s_id`, `employee_id`, `sal_type`, `salary_type_id`, `amount`, `create_date`, `update_date`, `update_id`, `gross_salary`) VALUES ('2', 'EZR0A9IB', '1', '2', '80', '2025-10-30', NULL, '', '400');
@@ -1946,7 +2003,7 @@ CREATE TABLE `expense` (
   `voucher_no` varchar(50) NOT NULL,
   `amount` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: expense_item
@@ -1958,7 +2015,7 @@ CREATE TABLE `expense_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `expense_item_name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: facebook_settings
@@ -1971,7 +2028,7 @@ CREATE TABLE `facebook_settings` (
   `app_id` varchar(100) DEFAULT NULL,
   `app_secret` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `facebook_settings` (`id`, `app_id`, `app_secret`) VALUES ('1', '08650802009429', '37ab16f733c6ec926708b43f9452b8f5');
 
@@ -1989,7 +2046,7 @@ CREATE TABLE `fcm_token` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: fcm_tokens
@@ -2004,7 +2061,7 @@ CREATE TABLE `fcm_tokens` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('1', NULL, 'egWXc5aoQO_l4FM4EWk3uy:APA91bGdppgUgWU5nRlXmv0IigH2TMOk6y7p5DAzIk3nvOtW_Tvo4Z_Hrc6PV4hiKzoWEG-xxPHQwAg4-TUcuU4cgtfeYZeMqrCOAjcheatLJc-GZflWSWc', '2025-11-01 02:51:06', NULL);
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('2', NULL, 'egWXc5aoQO_l4FM4EWk3uy:APA91bGdppgUgWU5nRlXmv0IigH2TMOk6y7p5DAzIk3nvOtW_Tvo4Z_Hrc6PV4hiKzoWEG-xxPHQwAg4-TUcuU4cgtfeYZeMqrCOAjcheatLJc-GZflWSWc', '2025-11-01 03:27:47', NULL);
@@ -2104,7 +2161,14 @@ INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) 
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('96', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:20:12', NULL);
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('97', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:20:32', NULL);
 INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('98', NULL, 'fU2Xl6CFkeyzAjFTo4kFrh:APA91bHGkpD2QTQISVm7tuR9RUv7tP9xJdPkdZn-3RllwyO3tAkMGE6ZXvBdtNUStwKRhVxYg5l-Bez6gN2h3ttSXCz5Vyg_NbTEayOV8LuJVbvXeYqRDxU', '2025-11-13 19:20:42', NULL);
-INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('99', NULL, 'ehmt5BtnJPmBhFLTv8gZSM:APA91bGTkIaQrqdUjFTa2vdC0uEBpEeFHHgxsDMxNdG00syJvX6RTh5XWN0ZiP5KiVQXT5kB6B5bPt2_z0NB7NRNVmmr9noWO3Y5bWOCbUA5AtuBD6AwH4U', '2025-11-17 00:17:42', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('99', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bGgzO_RcgvbPRieCGIEAMm65DqhkUhlSZdEgWPxCPdYMEpk5dW11b-_RKzK60sHHd0l_t3tIG39A-wfz0BYK_O4g5syhvFy_v9ZM_PyEtoM7K5lJHg', '2025-11-17 22:03:30', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('100', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bGgzO_RcgvbPRieCGIEAMm65DqhkUhlSZdEgWPxCPdYMEpk5dW11b-_RKzK60sHHd0l_t3tIG39A-wfz0BYK_O4g5syhvFy_v9ZM_PyEtoM7K5lJHg', '2025-11-17 22:03:56', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('101', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bGgzO_RcgvbPRieCGIEAMm65DqhkUhlSZdEgWPxCPdYMEpk5dW11b-_RKzK60sHHd0l_t3tIG39A-wfz0BYK_O4g5syhvFy_v9ZM_PyEtoM7K5lJHg', '2025-11-17 22:04:24', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('102', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bGgzO_RcgvbPRieCGIEAMm65DqhkUhlSZdEgWPxCPdYMEpk5dW11b-_RKzK60sHHd0l_t3tIG39A-wfz0BYK_O4g5syhvFy_v9ZM_PyEtoM7K5lJHg', '2025-11-17 22:16:44', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('103', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bHTwD1qi0qZQ-Wj5jP1yLF2fiQtMVuNttN56z6UXkj9aWGxnbjtB_74s2Ak0MdnT6_McHTxiYseo2Qds7OOuoLZ2KrqVpjROR9arBwOTEsbtXdImRo', '2025-11-18 07:05:01', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('104', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bHTwD1qi0qZQ-Wj5jP1yLF2fiQtMVuNttN56z6UXkj9aWGxnbjtB_74s2Ak0MdnT6_McHTxiYseo2Qds7OOuoLZ2KrqVpjROR9arBwOTEsbtXdImRo', '2025-11-18 07:05:53', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('105', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bHXGtrys9Rjd7QhEUYHnuqeQNMsGB_z8Hvgzotp9GvNA5unWTF-LT_W0iIlx4gKTGf5njQImUISDhQkK0mC3zs6vJLInfMCUpgjoltVri_bDkxOqR4', '2025-11-18 11:40:16', NULL);
+INSERT INTO `fcm_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES ('106', NULL, 'c8F4NY0n-yzn8biIsXpWPo:APA91bHXGtrys9Rjd7QhEUYHnuqeQNMsGB_z8Hvgzotp9GvNA5unWTF-LT_W0iIlx4gKTGf5njQImUISDhQkK0mC3zs6vJLInfMCUpgjoltVri_bDkxOqR4', '2025-11-18 13:00:16', NULL);
 
 
 #
@@ -2118,9 +2182,9 @@ CREATE TABLE `foodvariable` (
   `foodid` int(11) NOT NULL,
   `availtime` varchar(50) NOT NULL,
   `availday` varchar(30) NOT NULL,
-  `is_active` int(11) NOT NULL DEFAULT 0,
+  `is_active` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`availableID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: gender
@@ -2132,7 +2196,7 @@ CREATE TABLE `gender` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gender_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `gender` (`id`, `gender_name`) VALUES ('1', 'Male');
 INSERT INTO `gender` (`id`, `gender_name`) VALUES ('2', 'Female');
@@ -2147,21 +2211,21 @@ DROP TABLE IF EXISTS `grand_loan`;
 
 CREATE TABLE `grand_loan` (
   `loan_id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `permission_by` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `loan_details` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `amount` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `interest_rate` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `installment` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `installment_period` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `repayment_amount` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `date_of_approve` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `repayment_start_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `created_by` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `updated_by` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `loan_status` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `permission_by` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `loan_details` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `amount` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `interest_rate` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `installment` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `installment_period` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `repayment_amount` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `date_of_approve` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `repayment_start_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `created_by` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `updated_by` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `loan_status` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`loan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: ingredients
@@ -2171,11 +2235,11 @@ DROP TABLE IF EXISTS `ingredients`;
 
 CREATE TABLE `ingredients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ingredient_name` varchar(250) NOT NULL,
+  `ingredient_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `uom_id` int(11) NOT NULL,
-  `stock_qty` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `min_stock` decimal(10,2) NOT NULL DEFAULT 1.00,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=kitchenitems,1=otheritems',
+  `stock_qty` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `min_stock` decimal(10,2) NOT NULL DEFAULT '1.00',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0=kitchenitems,1=otheritems',
   `is_active` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2213,16 +2277,16 @@ CREATE TABLE `item_category` (
   `CategoryIsActive` int(11) DEFAULT NULL,
   `offerstartdate` date DEFAULT '0000-00-00',
   `offerendate` date NOT NULL DEFAULT '0000-00-00',
-  `isoffer` int(11) DEFAULT 0,
-  `parentid` int(11) DEFAULT 0,
-  `UserIDInserted` int(11) NOT NULL DEFAULT 0,
-  `UserIDUpdated` int(11) NOT NULL DEFAULT 0,
-  `UserIDLocked` int(11) NOT NULL DEFAULT 0,
+  `isoffer` int(11) DEFAULT '0',
+  `parentid` int(11) DEFAULT '0',
+  `UserIDInserted` int(11) NOT NULL DEFAULT '0',
+  `UserIDUpdated` int(11) NOT NULL DEFAULT '0',
+  `UserIDLocked` int(11) NOT NULL DEFAULT '0',
   `DateInserted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `DateUpdated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `DateLocked` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`CategoryID`)
-) ENGINE=MyISAM AUTO_INCREMENT=87 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
 
 INSERT INTO `item_category` (`CategoryID`, `Name`, `CategoryImage`, `Position`, `CategoryIsActive`, `offerstartdate`, `offerendate`, `isoffer`, `parentid`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`) VALUES ('1', 'Squid Fry', './application/modules/itemmanage/assets/images/2025-10-30/S.jpg', NULL, '1', '2025-10-31', '2025-11-30', '1', '0', '2', '2', '2', '2025-10-30 20:41:53', '2025-10-30 20:41:53', '2025-10-30 20:41:53');
 INSERT INTO `item_category` (`CategoryID`, `Name`, `CategoryImage`, `Position`, `CategoryIsActive`, `offerstartdate`, `offerendate`, `isoffer`, `parentid`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`) VALUES ('2', 'Vegan Pasta Sauce', './application/modules/itemmanage/assets/images/2025-10-30/G.jpg', NULL, '1', '2025-10-31', '2026-01-30', '1', '0', '2', '2', '2', '2025-10-30 20:42:36', '2025-10-30 20:42:36', '2025-10-30 20:42:36');
@@ -2271,32 +2335,32 @@ CREATE TABLE `item_foods` (
   `bigthumb` varchar(255) NOT NULL,
   `medium_thumb` varchar(255) NOT NULL,
   `small_thumb` varchar(255) NOT NULL,
-  `component` text DEFAULT NULL,
-  `descrip` text DEFAULT NULL,
+  `component` text,
+  `descrip` text,
   `itemnotes` varchar(255) DEFAULT NULL,
   `menutype` varchar(25) DEFAULT NULL,
-  `productvat` decimal(10,3) DEFAULT 0.000,
-  `special` int(11) NOT NULL DEFAULT 0,
-  `OffersRate` int(11) NOT NULL DEFAULT 0 COMMENT '1=offer rate',
-  `offerIsavailable` int(11) NOT NULL DEFAULT 0 COMMENT '1=offer available,0=No Offer',
+  `productvat` decimal(10,3) DEFAULT '0.000',
+  `special` int(11) NOT NULL DEFAULT '0',
+  `OffersRate` int(11) NOT NULL DEFAULT '0' COMMENT '1=offer rate',
+  `offerIsavailable` int(11) NOT NULL DEFAULT '0' COMMENT '1=offer available,0=No Offer',
   `offerstartdate` date DEFAULT '0000-00-00',
   `offerendate` date DEFAULT '0000-00-00',
   `Position` int(11) DEFAULT NULL,
   `kitchenid` int(11) NOT NULL,
   `isgroup` int(11) DEFAULT NULL,
-  `is_customqty` int(11) DEFAULT 0,
+  `is_customqty` int(11) DEFAULT '0',
   `cookedtime` time NOT NULL DEFAULT '00:00:00',
   `ProductsIsActive` int(11) DEFAULT NULL,
-  `UserIDInserted` int(11) NOT NULL DEFAULT 0,
-  `UserIDUpdated` int(11) NOT NULL DEFAULT 0,
-  `UserIDLocked` int(11) NOT NULL DEFAULT 0,
+  `UserIDInserted` int(11) NOT NULL DEFAULT '0',
+  `UserIDUpdated` int(11) NOT NULL DEFAULT '0',
+  `UserIDLocked` int(11) NOT NULL DEFAULT '0',
   `DateInserted` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `DateUpdated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `DateLocked` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `tax0` text DEFAULT NULL,
-  `tax1` text DEFAULT NULL,
+  `tax0` text,
+  `tax1` text,
   PRIMARY KEY (`ProductsID`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('1', '2', 'Atlantic Salmon with Sauce', 'application/modules/itemmanage/assets/images/Fast-Food.png', 'application/modules/itemmanage/assets/images/big/Fast-Food.png', 'application/modules/itemmanage/assets/images/medium/Fast-Food.png', 'application/modules/itemmanage/assets/images/small/Fast-Food.png', 'farine,pomme,legume', 'good to eat', '', '5,3,1', '0.000', '1', '0', '1', '2025-10-29', '2025-11-30', NULL, '1', NULL, '1', '01:00:00', '1', '2', '2', '2', '2025-10-30 21:04:28', '2025-10-30 21:04:28', '2025-10-30 21:04:28', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('2', '2', 'Free-Range Chicken Supreme', 'application/modules/itemmanage/assets/images/Free-Range-Chicken-Supreme.png', 'application/modules/itemmanage/assets/images/big/Free-Range-Chicken-Supreme.png', 'application/modules/itemmanage/assets/images/medium/Free-Range-Chicken-Supreme.png', 'application/modules/itemmanage/assets/images/small/Free-Range-Chicken-Supreme.png', '', 'Our dishes are full of taste, you must love it. its a new item in our menu.', '', '', '10.000', '1', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, '1', '00:15:00', '1', '2', '2', '2', '2025-10-30 21:19:47', '2025-10-30 21:19:47', '2025-10-30 21:19:47', NULL, NULL);
@@ -2327,7 +2391,7 @@ INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductIma
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('61', '26', 'Vegetable Beef soup with Noodles', 'application/modules/itemmanage/assets/images/Vegetable-Beef-soup-with-Noodles.png', 'application/modules/itemmanage/assets/images/big/Vegetable-Beef-soup-with-Noodles.png', 'application/modules/itemmanage/assets/images/medium/Vegetable-Beef-soup-with-Noodles.png', 'application/modules/itemmanage/assets/images/small/Vegetable-Beef-soup-with-Noodles.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:43:53', '2025-10-31 12:43:53', '2025-10-31 12:43:53', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('62', '2', 'Fish Fry', 'application/modules/itemmanage/assets/images/Fish-Fry1.png', 'application/modules/itemmanage/assets/images/big/Fish-Fry1.png', 'application/modules/itemmanage/assets/images/medium/Fish-Fry1.png', 'application/modules/itemmanage/assets/images/small/Fish-Fry1.png', '', '', '', '3,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:44:27', '2025-10-31 12:44:27', '2025-10-31 12:44:27', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('63', '2', 'Squid Fry', 'application/modules/itemmanage/assets/images/Squid-Fry.png', 'application/modules/itemmanage/assets/images/big/Squid-Fry.png', 'application/modules/itemmanage/assets/images/medium/Squid-Fry.png', 'application/modules/itemmanage/assets/images/small/Squid-Fry.png', '', '', '', '2,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:44:59', '2025-10-31 12:44:59', '2025-10-31 12:44:59', NULL, NULL);
-INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('64', '2', 'Masala Tea', 'application/modules/itemmanage/assets/images/Masala-Tea.png', 'application/modules/itemmanage/assets/images/big/Masala-Tea.png', 'application/modules/itemmanage/assets/images/medium/Masala-Tea.png', 'application/modules/itemmanage/assets/images/small/Masala-Tea.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:45:30', '2025-10-31 12:45:30', '2025-10-31 12:45:30', NULL, NULL);
+INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('64', '2', 'Masala Tea', 'application/modules/itemmanage/assets/images/Masala-Tea.png', 'application/modules/itemmanage/assets/images/big/Masala-Tea.png', 'application/modules/itemmanage/assets/images/medium/Masala-Tea.png', 'application/modules/itemmanage/assets/images/small/Masala-Tea.png', '', '', '', '5,1', '0.000', '1', '30', '1', '2025-11-18', '2026-01-31', NULL, '28', NULL, '1', '00:40:00', '1', '2', '2', '2', '2025-10-31 12:45:30', '2025-11-18 07:12:35', '2025-10-31 12:45:30', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('65', '2', 'Green Tea Special', 'application/modules/itemmanage/assets/images/Green-Tea-Special.png', 'application/modules/itemmanage/assets/images/big/Green-Tea-Special.png', 'application/modules/itemmanage/assets/images/medium/Green-Tea-Special.png', 'application/modules/itemmanage/assets/images/small/Green-Tea-Special.png', '', '', '', '2,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:46:03', '2025-10-31 12:46:03', '2025-10-31 12:46:03', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('66', '2', 'Lemon And Honey Tea', 'application/modules/itemmanage/assets/images/Lemon-And-Honey-Tea.png', 'application/modules/itemmanage/assets/images/big/Lemon-And-Honey-Tea.png', 'application/modules/itemmanage/assets/images/medium/Lemon-And-Honey-Tea.png', 'application/modules/itemmanage/assets/images/small/Lemon-And-Honey-Tea.png', '', '', '', '2,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:46:37', '2025-10-31 12:46:37', '2025-10-31 12:46:37', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('67', '2', 'Chicken Patty Burger with double cheese', 'application/modules/itemmanage/assets/images/Chicken-Patty-Burger.png', 'application/modules/itemmanage/assets/images/big/Chicken-Patty-Burger.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Patty-Burger.png', 'application/modules/itemmanage/assets/images/small/Chicken-Patty-Burger.png', '', '', '', '4,3,2,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:47:50', '2025-10-31 12:47:50', '2025-10-31 12:47:50', NULL, NULL);
@@ -2335,15 +2399,15 @@ INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductIma
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('69', '2', 'Chicken BBQ Burger', 'application/modules/itemmanage/assets/images/Chicken-BBQ-Burger.png', 'application/modules/itemmanage/assets/images/big/Chicken-BBQ-Burger.png', 'application/modules/itemmanage/assets/images/medium/Chicken-BBQ-Burger.png', 'application/modules/itemmanage/assets/images/small/Chicken-BBQ-Burger.png', '', '', '', '4,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:49:00', '2025-10-31 12:49:00', '2025-10-31 12:49:00', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('70', '2', 'Chicken Naga Sauce Burger', 'application/modules/itemmanage/assets/images/Chicken-Naga-Sauce-Burger.png', 'application/modules/itemmanage/assets/images/big/Chicken-Naga-Sauce-Burger.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Naga-Sauce-Burger.png', 'application/modules/itemmanage/assets/images/small/Chicken-Naga-Sauce-Burger.png', '', '', '', '4,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '11', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:49:32', '2025-10-31 12:49:32', '2025-10-31 12:49:32', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('71', '19', 'Chicken Sub Sandwich', 'application/modules/itemmanage/assets/images/Chicken-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/big/Chicken-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/small/Chicken-Sub-Sandwich.png', '', '', '', '4,3,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:50:29', '2025-10-31 12:50:29', '2025-10-31 12:50:29', NULL, NULL);
-INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('72', '19', 'Special Sub Sandwich', 'application/modules/itemmanage/assets/images/Special-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/big/Special-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/medium/Special-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/small/Special-Sub-Sandwich.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '12', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:51:02', '2025-10-31 12:51:02', '2025-10-31 12:51:02', NULL, NULL);
+INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('72', '19', 'Special Sub Sandwich', 'application/modules/itemmanage/assets/images/Special-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/big/Special-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/medium/Special-Sub-Sandwich.png', 'application/modules/itemmanage/assets/images/small/Special-Sub-Sandwich.png', '', '', '', '5,1', '0.000', '1', '50', '1', '2025-11-18', '2025-12-31', NULL, '28', NULL, '1', '00:10:00', '1', '2', '2', '2', '2025-10-31 12:51:02', '2025-11-18 07:12:06', '2025-10-31 12:51:02', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('73', '19', 'Egg Sandwich and cold drinks', 'application/modules/itemmanage/assets/images/Egg-Sandwich.png', 'application/modules/itemmanage/assets/images/big/Egg-Sandwich.png', 'application/modules/itemmanage/assets/images/medium/Egg-Sandwich.png', 'application/modules/itemmanage/assets/images/small/Egg-Sandwich.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '14', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:51:50', '2025-10-31 12:51:50', '2025-10-31 12:51:50', NULL, NULL);
-INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('74', '16', 'Special Wonthon', 'application/modules/itemmanage/assets/images/Special-Wonthon.png', 'application/modules/itemmanage/assets/images/big/Special-Wonthon.png', 'application/modules/itemmanage/assets/images/medium/Special-Wonthon.png', 'application/modules/itemmanage/assets/images/small/Special-Wonthon.png', '', '', '', '2,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '12', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:52:30', '2025-10-31 12:52:30', '2025-10-31 12:52:30', NULL, NULL);
+INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('74', '16', 'Special Wonthon', 'application/modules/itemmanage/assets/images/Special-Wonthon.png', 'application/modules/itemmanage/assets/images/big/Special-Wonthon.png', 'application/modules/itemmanage/assets/images/medium/Special-Wonthon.png', 'application/modules/itemmanage/assets/images/small/Special-Wonthon.png', '', '', '', '2,1', '0.000', '1', '5', '1', '2025-11-18', '2025-11-30', NULL, '28', NULL, NULL, '00:30:00', '1', '2', '2', '2', '2025-10-31 12:52:30', '2025-11-18 07:10:35', '2025-10-31 12:52:30', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('75', '2', 'Spring Rolls', 'application/modules/itemmanage/assets/images/spring-rolls-2097978_960_7201.jpg', 'application/modules/itemmanage/assets/images/big/spring-rolls-2097978_960_7201.jpg', 'application/modules/itemmanage/assets/images/medium/spring-rolls-2097978_960_7201.jpg', 'application/modules/itemmanage/assets/images/small/spring-rolls-2097978_960_7201.jpg', '', '', '', '1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '11', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:53:00', '2025-10-31 12:53:00', '2025-10-31 12:53:00', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('76', '2', 'Chicken Fry and French Fries', 'application/modules/itemmanage/assets/images/Chicken-Fry.png', 'application/modules/itemmanage/assets/images/big/Chicken-Fry.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Fry.png', 'application/modules/itemmanage/assets/images/small/Chicken-Fry.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:53:38', '2025-10-31 12:53:38', '2025-10-31 12:53:38', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('77', '12', 'Chicken Chowmein', 'application/modules/itemmanage/assets/images/Chicken-Chowmein.png', 'application/modules/itemmanage/assets/images/big/Chicken-Chowmein.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Chowmein.png', 'application/modules/itemmanage/assets/images/small/Chicken-Chowmein.png', '', '', '', '3,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '11', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:54:11', '2025-10-31 12:54:11', '2025-10-31 12:54:11', NULL, NULL);
-INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('78', '2', 'Mixed Chowmein and Cold Drinks', 'application/modules/itemmanage/assets/images/Mixed-Chowmein.png', 'application/modules/itemmanage/assets/images/big/Mixed-Chowmein.png', 'application/modules/itemmanage/assets/images/medium/Mixed-Chowmein.png', 'application/modules/itemmanage/assets/images/small/Mixed-Chowmein.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '14', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:55:23', '2025-10-31 12:55:23', '2025-10-31 12:55:23', NULL, NULL);
-INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('79', '9', 'Beef Swarma', 'application/modules/itemmanage/assets/images/Beef-Swarma.png', 'application/modules/itemmanage/assets/images/big/Beef-Swarma.png', 'application/modules/itemmanage/assets/images/medium/Beef-Swarma.png', 'application/modules/itemmanage/assets/images/small/Beef-Swarma.png', '', '', '', '1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '11', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:55:54', '2025-10-31 12:55:54', '2025-10-31 12:55:54', NULL, NULL);
-INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('80', '2', 'Chicken Swarma Roll', 'application/modules/itemmanage/assets/images/Chicken-Swarma-Roll.png', 'application/modules/itemmanage/assets/images/big/Chicken-Swarma-Roll.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Swarma-Roll.png', 'application/modules/itemmanage/assets/images/small/Chicken-Swarma-Roll.png', '', '', '', '5,1', '0.000', '0', '0', '0', '0000-00-00', '0000-00-00', NULL, '1', NULL, NULL, '00:00:00', '1', '2', '2', '2', '2025-10-31 12:56:57', '2025-10-31 12:56:57', '2025-10-31 12:56:57', NULL, NULL);
+INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('78', '2', 'Mixed Chowmein and Cold Drinks', 'application/modules/itemmanage/assets/images/Mixed-Chowmein.png', 'application/modules/itemmanage/assets/images/big/Mixed-Chowmein.png', 'application/modules/itemmanage/assets/images/medium/Mixed-Chowmein.png', 'application/modules/itemmanage/assets/images/small/Mixed-Chowmein.png', '', '', '', '5,1', '0.000', '0', '10', '1', '2025-11-18', '2025-11-30', NULL, '28', NULL, NULL, '00:10:00', '1', '2', '2', '2', '2025-10-31 12:55:23', '2025-11-18 07:09:15', '2025-10-31 12:55:23', NULL, NULL);
+INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('79', '9', 'Beef Swarma', 'application/modules/itemmanage/assets/images/Beef-Swarma.png', 'application/modules/itemmanage/assets/images/big/Beef-Swarma.png', 'application/modules/itemmanage/assets/images/medium/Beef-Swarma.png', 'application/modules/itemmanage/assets/images/small/Beef-Swarma.png', '', '', '', '1', '0.000', '1', '5', '1', '2025-11-18', '2026-01-31', NULL, '28', NULL, '1', '01:00:00', '1', '2', '2', '2', '2025-10-31 12:55:54', '2025-11-18 07:09:59', '2025-10-31 12:55:54', NULL, NULL);
+INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('80', '2', 'Chicken Swarma Roll', 'application/modules/itemmanage/assets/images/Chicken-Swarma-Roll.png', 'application/modules/itemmanage/assets/images/big/Chicken-Swarma-Roll.png', 'application/modules/itemmanage/assets/images/medium/Chicken-Swarma-Roll.png', 'application/modules/itemmanage/assets/images/small/Chicken-Swarma-Roll.png', '', '', '', '5,1', '0.000', '1', '10', '1', '2025-11-18', '2026-01-31', NULL, '28', NULL, '1', '03:00:00', '1', '2', '2', '2', '2025-10-31 12:56:57', '2025-11-18 07:09:38', '2025-10-31 12:56:57', NULL, NULL);
 INSERT INTO `item_foods` (`ProductsID`, `CategoryID`, `ProductName`, `ProductImage`, `bigthumb`, `medium_thumb`, `small_thumb`, `component`, `descrip`, `itemnotes`, `menutype`, `productvat`, `special`, `OffersRate`, `offerIsavailable`, `offerstartdate`, `offerendate`, `Position`, `kitchenid`, `isgroup`, `is_customqty`, `cookedtime`, `ProductsIsActive`, `UserIDInserted`, `UserIDUpdated`, `UserIDLocked`, `DateInserted`, `DateUpdated`, `DateLocked`, `tax0`, `tax1`) VALUES ('81', '3', 'menu1', 'application/modules/itemmanage/assets/images/O.png', 'application/modules/itemmanage/assets/images/big/O.png', 'application/modules/itemmanage/assets/images/medium/O.png', 'application/modules/itemmanage/assets/images/small/O.png', '', '', '', '5,1', '0.000', '0', '20', '1', '2025-10-31', '2025-11-26', NULL, '0', '1', '0', '00:00:00', '1', '2', '2', '2', '2025-10-31 21:43:08', '2025-10-31 21:43:08', '2025-10-31 21:43:08', NULL, NULL);
 
 
@@ -2355,12 +2419,12 @@ DROP TABLE IF EXISTS `job_advertisement`;
 
 CREATE TABLE `job_advertisement` (
   `job_adv_id` int(10) unsigned NOT NULL,
-  `pos_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `adv_circular_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `circular_dadeline` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `adv_file` tinytext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `adv_details` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `pos_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `adv_circular_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `circular_dadeline` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `adv_file` tinytext CHARACTER SET latin1 NOT NULL,
+  `adv_details` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: language
@@ -2372,10 +2436,10 @@ CREATE TABLE `language` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `phrase` varchar(100) NOT NULL,
   `english` varchar(255) NOT NULL,
-  `french` text DEFAULT NULL,
+  `french` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `phrase` (`phrase`)
-) ENGINE=InnoDB AUTO_INCREMENT=2481 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2481 DEFAULT CHARSET=utf8;
 
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('2', 'login', 'Login', NULL);
 INSERT INTO `language` (`id`, `phrase`, `english`, `french`) VALUES ('3', 'email', 'Email Address', NULL);
@@ -3973,13 +4037,13 @@ CREATE TABLE `leave_apply` (
   `leave_aprv_end_date` varchar(20) NOT NULL,
   `num_aprv_day` varchar(15) NOT NULL,
   `reason` varchar(100) NOT NULL,
-  `apply_hard_copy` text DEFAULT NULL,
+  `apply_hard_copy` text,
   `apply_date` varchar(20) NOT NULL,
   `approve_date` varchar(20) NOT NULL,
   `approved_by` varchar(30) NOT NULL,
   `leave_type` varchar(50) NOT NULL,
   PRIMARY KEY (`leave_appl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: leave_type
@@ -3992,7 +4056,7 @@ CREATE TABLE `leave_type` (
   `leave_type` varchar(50) NOT NULL,
   `leave_days` int(11) NOT NULL,
   PRIMARY KEY (`leave_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: license_logs
@@ -4005,9 +4069,9 @@ CREATE TABLE `license_logs` (
   `admin_id` int(11) NOT NULL,
   `old_expire_date` date NOT NULL,
   `new_expire_date` date NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: licenses
@@ -4018,10 +4082,10 @@ DROP TABLE IF EXISTS `licenses`;
 CREATE TABLE `licenses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `expire_date` date NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: loan_installment
@@ -4031,16 +4095,16 @@ DROP TABLE IF EXISTS `loan_installment`;
 
 CREATE TABLE `loan_installment` (
   `loan_inst_id` int(11) NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(21) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `loan_id` varchar(21) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `installment_amount` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `payment` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `date` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `received_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `installment_no` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '1',
-  `notes` varchar(80) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(21) CHARACTER SET latin1 NOT NULL,
+  `loan_id` varchar(21) CHARACTER SET latin1 NOT NULL,
+  `installment_amount` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `payment` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `date` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `received_by` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `installment_no` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '1',
+  `notes` varchar(80) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`loan_inst_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: marital_info
@@ -4052,7 +4116,7 @@ CREATE TABLE `marital_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `marital_sta` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 INSERT INTO `marital_info` (`id`, `marital_sta`) VALUES ('1', 'Single');
 INSERT INTO `marital_info` (`id`, `marital_sta`) VALUES ('2', 'Married');
@@ -4069,9 +4133,9 @@ DROP TABLE IF EXISTS `membership`;
 
 CREATE TABLE `membership` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `membership_name` varchar(250) NOT NULL,
+  `membership_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `discount` float NOT NULL,
-  `other_facilities` varchar(255) NOT NULL,
+  `other_facilities` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `create_by` int(11) NOT NULL,
   `create_date` date NOT NULL,
   `update_by` int(11) NOT NULL,
@@ -4118,10 +4182,10 @@ CREATE TABLE `message` (
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `datetime` datetime NOT NULL,
-  `sender_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unseen, 1=seen, 2=delete',
-  `receiver_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unseen, 1=seen, 2=delete',
+  `sender_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=unseen, 1=seen, 2=delete',
+  `receiver_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=unseen, 1=seen, 2=delete',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `subject`, `message`, `datetime`, `sender_status`, `receiver_status`) VALUES ('1', '2', '166', 'test', '<p>test</p>', '2025-11-01 03:11:32', '1', '0');
 
@@ -4135,12 +4199,12 @@ DROP TABLE IF EXISTS `module`;
 CREATE TABLE `module` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `description` text DEFAULT NULL,
+  `description` text,
   `image` varchar(255) NOT NULL,
   `directory` varchar(100) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO `module` (`id`, `name`, `description`, `image`, `directory`, `status`) VALUES ('1', 'WhatsApp Chat & Ordering', 'WhatsApp Chat & Ordering', 'application/modules/whatsapp/assets/images/thumbnail.jpg', 'whatsapp', '1');
 INSERT INTO `module` (`id`, `name`, `description`, `image`, `directory`, `status`) VALUES ('2', 'Facebook login customer', 'Facebook login customer', 'application/modules/facebooklogin/assets/images/thumbnail.jpg', 'facebooklogin', '1');
@@ -4164,7 +4228,7 @@ CREATE TABLE `module_permission` (
   PRIMARY KEY (`id`),
   KEY `fk_module_id` (`fk_module_id`),
   KEY `fk_user_id` (`fk_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `module_permission` (`id`, `fk_module_id`, `fk_user_id`, `create`, `read`, `update`, `delete`) VALUES ('1', '3', '1', '1', '1', '1', '1');
 
@@ -4177,9 +4241,9 @@ DROP TABLE IF EXISTS `module_purchase_key`;
 
 CREATE TABLE `module_purchase_key` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `identity` varchar(250) DEFAULT NULL,
-  `purchase_key` varchar(255) DEFAULT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `identity` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `purchase_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -4192,11 +4256,11 @@ DROP TABLE IF EXISTS `multipay_bill`;
 CREATE TABLE `multipay_bill` (
   `multipay_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
-  `multipayid` varchar(30) DEFAULT NULL,
+  `multipayid` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_type_id` int(11) NOT NULL,
   `amount` float NOT NULL,
   PRIMARY KEY (`multipay_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('1', '1', NULL, '4', '0');
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('2', '1', NULL, '4', '0');
@@ -4292,6 +4356,9 @@ INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_t
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('92', '87', NULL, '4', '22.8');
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('93', '86', NULL, '4', '125.4');
 INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('94', '89', NULL, '4', '28.5');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('95', '93', NULL, '4', '22.8');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('96', '95', NULL, '4', '513');
+INSERT INTO `multipay_bill` (`multipay_id`, `order_id`, `multipayid`, `payment_type_id`, `amount`) VALUES ('97', '94', NULL, '4', '313.5');
 
 
 #
@@ -4304,22 +4371,22 @@ CREATE TABLE `order_menu` (
   `row_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) NOT NULL,
   `menu_id` int(11) NOT NULL,
-  `price` decimal(19,3) DEFAULT 0.000,
-  `groupmid` int(11) DEFAULT 0,
-  `notes` varchar(255) DEFAULT NULL,
+  `price` decimal(19,3) DEFAULT '0.000',
+  `groupmid` int(11) DEFAULT '0',
+  `notes` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `menuqty` float NOT NULL,
-  `add_on_id` varchar(100) NOT NULL,
-  `addonsqty` varchar(100) NOT NULL,
+  `add_on_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `addonsqty` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `varientid` int(11) NOT NULL,
   `groupvarient` int(11) DEFAULT NULL,
   `addonsuid` int(11) DEFAULT NULL,
   `qroupqty` int(11) DEFAULT NULL,
-  `isgroup` int(11) DEFAULT 0,
-  `food_status` int(11) DEFAULT 0,
+  `isgroup` int(11) DEFAULT '0',
+  `food_status` int(11) DEFAULT '0',
   `allfoodready` int(11) DEFAULT NULL,
   `isupdate` int(11) DEFAULT NULL,
   PRIMARY KEY (`row_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('1', '1', '1', '0.000', '0', '', '1', '', '', '0', NULL, '1', NULL, '0', '1', '1', NULL);
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('2', '2', '1', '0.000', '0', '', '1', '', '', '0', NULL, '1', NULL, '0', '1', '1', NULL);
@@ -4488,6 +4555,16 @@ INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, 
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('166', '90', '6', '20.000', '0', '', '1', '', '', '55', NULL, '655', NULL, '0', '1', '1', NULL);
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('167', '91', '7', '300.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '1', '1', NULL);
 INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('168', '92', '7', '300.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('169', '93', '1', '0.000', '0', '', '1', '', '', '1', NULL, '11', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('170', '94', '6', '20.000', '0', '', '1', '', '', '55', NULL, '655', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('171', '94', '7', '300.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('172', '95', '8', '150.000', '0', '', '3', '', '', '54', NULL, '854', NULL, '0', '1', '1', NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('173', '96', '8', '150.000', '0', '', '1', '', '', '54', NULL, '854', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('174', '97', '7', '300.000', '0', '', '1', '', '', '56', NULL, '756', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('175', '98', '10', '150.000', '0', '', '1', '', '', '60', NULL, '1060', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('176', '99', '14', '20.000', '0', '', '1', '', '', '94', NULL, '1494', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('177', '100', '10', '150.000', '0', '', '1', '', '', '60', NULL, '1060', NULL, '0', '0', NULL, NULL);
+INSERT INTO `order_menu` (`row_id`, `order_id`, `menu_id`, `price`, `groupmid`, `notes`, `menuqty`, `add_on_id`, `addonsqty`, `varientid`, `groupvarient`, `addonsuid`, `qroupqty`, `isgroup`, `food_status`, `allfoodready`, `isupdate`) VALUES ('178', '101', '49', '200.000', '0', '', '1', '', '', '53', NULL, '4953', NULL, '0', '0', NULL, NULL);
 
 
 #
@@ -4500,7 +4577,7 @@ CREATE TABLE `pay_frequency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `frequency_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 INSERT INTO `pay_frequency` (`id`, `frequency_name`) VALUES ('1', 'Weekly');
 INSERT INTO `pay_frequency` (`id`, `frequency_name`) VALUES ('2', 'Biweekly');
@@ -4516,11 +4593,11 @@ DROP TABLE IF EXISTS `payment_method`;
 
 CREATE TABLE `payment_method` (
   `payment_method_id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `payment_method` varchar(100) NOT NULL,
+  `payment_method` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `modulename` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`payment_method_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `payment_method` (`payment_method_id`, `payment_method`, `is_active`, `modulename`) VALUES ('1', 'Card Payment', '1', '');
 INSERT INTO `payment_method` (`payment_method_id`, `payment_method`, `is_active`, `modulename`) VALUES ('2', 'Two Checkout', '1', '');
@@ -4553,7 +4630,7 @@ CREATE TABLE `payment_transactions` (
   `phone_number` varchar(15) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
   `status` enum('PENDING','SUCCESS','FAILED','EXPIRED') NOT NULL DEFAULT 'PENDING',
-  `provider_data` text DEFAULT NULL,
+  `provider_data` text,
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   `expires_at` datetime NOT NULL,
@@ -4561,7 +4638,7 @@ CREATE TABLE `payment_transactions` (
   UNIQUE KEY `reference` (`reference`),
   KEY `order_id` (`order_id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: paymentmethod
@@ -4572,10 +4649,10 @@ DROP TABLE IF EXISTS `paymentmethod`;
 CREATE TABLE `paymentmethod` (
   `payment_method_id` int(11) NOT NULL AUTO_INCREMENT,
   `payment_method` varchar(50) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `is_qr` tinyint(1) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `is_qr` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`payment_method_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `paymentmethod` (`payment_method_id`, `payment_method`, `is_active`, `is_qr`) VALUES ('1', 'Cash', '1', '0');
 INSERT INTO `paymentmethod` (`payment_method_id`, `payment_method`, `is_active`, `is_qr`) VALUES ('2', 'Credit Card', '1', '0');
@@ -4600,7 +4677,7 @@ CREATE TABLE `paymentsetup` (
   `status` int(11) NOT NULL,
   `edit_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`setupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 INSERT INTO `paymentsetup` (`setupid`, `paymentid`, `marchantid`, `password`, `email`, `currency`, `Islive`, `status`, `edit_url`) VALUES ('1', '5', 'bdtas5e772deb8ff87', 'bdtas5e772deb8ff87@ssl', 'ainalcse@gmail.com', 'BDT', '0', '1', NULL);
 INSERT INTO `paymentsetup` (`setupid`, `paymentid`, `marchantid`, `password`, `email`, `currency`, `Islive`, `status`, `edit_url`) VALUES ('2', '3', '', '', 'tareq7500personal2@gmail.com', 'USD', '0', '1', NULL);
@@ -4640,14 +4717,14 @@ DROP TABLE IF EXISTS `payroll_holiday`;
 
 CREATE TABLE `payroll_holiday` (
   `payrl_holi_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `holiday_name` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `start_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `end_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `no_of_days` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `created_by` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `updated_by` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `holiday_name` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `start_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `end_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `no_of_days` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `created_by` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `updated_by` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`payrl_holi_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: payroll_tax_setup
@@ -4657,12 +4734,12 @@ DROP TABLE IF EXISTS `payroll_tax_setup`;
 
 CREATE TABLE `payroll_tax_setup` (
   `tax_setup_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `start_amount` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `end_amount` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `rate` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `status` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `start_amount` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `end_amount` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `rate` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `status` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`tax_setup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: position
@@ -4672,10 +4749,10 @@ DROP TABLE IF EXISTS `position`;
 
 CREATE TABLE `position` (
   `pos_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `position_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `position_details` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `position_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `position_details` text CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`pos_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 INSERT INTO `position` (`pos_id`, `position_name`, `position_details`) VALUES ('1', 'chef', 'Responsible for the pastry shop in a foodservice establishment. Ensures that the products produced in the pastry shop meet the quality standards in conjunction with the executive chef.');
 INSERT INTO `position` (`pos_id`, `position_name`, `position_details`) VALUES ('2', 'HRM', 'Recruits and hires qualified employees, creates in-house job-training programs, and assists employees with their career needs.');
@@ -4701,7 +4778,7 @@ CREATE TABLE `production` (
   `saveddate` date NOT NULL,
   `productionexpiredate` date NOT NULL,
   PRIMARY KEY (`productionid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `production` (`productionid`, `itemid`, `itemvid`, `itemquantity`, `savedby`, `saveddate`, `productionexpiredate`) VALUES ('1', '3', '4', '1', '2', '2025-11-03', '2025-11-03');
 
@@ -4717,12 +4794,12 @@ CREATE TABLE `production_details` (
   `foodid` int(11) NOT NULL,
   `pvarientid` int(11) DEFAULT NULL,
   `ingredientid` int(11) NOT NULL,
-  `qty` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `qty` decimal(10,2) NOT NULL DEFAULT '0.00',
   `unitname` varchar(100) NOT NULL,
   `createdby` int(11) NOT NULL,
   `created_date` date NOT NULL,
   PRIMARY KEY (`pro_detailsid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `production_details` (`pro_detailsid`, `foodid`, `pvarientid`, `ingredientid`, `qty`, `unitname`, `createdby`, `created_date`) VALUES ('1', '3', '4', '17', '1.00', '', '2', '2025-11-03');
 
@@ -4737,15 +4814,15 @@ CREATE TABLE `purchase_details` (
   `detailsid` int(11) NOT NULL AUTO_INCREMENT,
   `purchaseid` int(11) NOT NULL,
   `indredientid` int(11) NOT NULL,
-  `quantity` decimal(19,3) NOT NULL DEFAULT 0.000,
+  `quantity` decimal(19,3) NOT NULL DEFAULT '0.000',
   `unitname` varchar(80) NOT NULL,
-  `price` decimal(19,3) NOT NULL DEFAULT 0.000,
-  `totalprice` decimal(19,3) NOT NULL DEFAULT 0.000,
+  `price` decimal(19,3) NOT NULL DEFAULT '0.000',
+  `totalprice` decimal(19,3) NOT NULL DEFAULT '0.000',
   `purchaseby` int(11) NOT NULL,
   `purchasedate` date NOT NULL,
   `purchaseexpiredate` date NOT NULL,
   PRIMARY KEY (`detailsid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `purchase_details` (`detailsid`, `purchaseid`, `indredientid`, `quantity`, `unitname`, `price`, `totalprice`, `purchaseby`, `purchasedate`, `purchaseexpiredate`) VALUES ('1', '1', '17', '12.000', '', '12.000', '144.000', '2', '2025-11-03', '2025-11-03');
 
@@ -4759,11 +4836,11 @@ DROP TABLE IF EXISTS `purchase_return`;
 CREATE TABLE `purchase_return` (
   `preturn_id` int(11) NOT NULL AUTO_INCREMENT,
   `supplier_id` int(11) NOT NULL,
-  `po_no` varchar(120) NOT NULL,
+  `po_no` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `return_date` date NOT NULL,
   `totalamount` float NOT NULL,
   `totaldiscount` float NOT NULL,
-  `return_reason` varchar(250) NOT NULL,
+  `return_reason` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `createby` int(11) NOT NULL,
   `createdate` datetime NOT NULL,
   `updateby` int(11) NOT NULL,
@@ -4803,14 +4880,14 @@ CREATE TABLE `purchaseitem` (
   `suplierID` int(11) NOT NULL,
   `paymenttype` int(11) DEFAULT NULL,
   `bankid` int(11) DEFAULT NULL,
-  `total_price` decimal(19,3) NOT NULL DEFAULT 0.000,
-  `paid_amount` decimal(19,3) DEFAULT 0.000,
-  `details` text DEFAULT NULL,
+  `total_price` decimal(19,3) NOT NULL DEFAULT '0.000',
+  `paid_amount` decimal(19,3) DEFAULT '0.000',
+  `details` text,
   `purchasedate` date NOT NULL,
   `purchaseexpiredate` date NOT NULL,
   `savedby` int(11) NOT NULL,
   PRIMARY KEY (`purID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `purchaseitem` (`purID`, `invoiceid`, `suplierID`, `paymenttype`, `bankid`, `total_price`, `paid_amount`, `details`, `purchasedate`, `purchaseexpiredate`, `savedby`) VALUES ('1', '2', '1', '1', '0', '144.000', '4000.000', '', '2025-11-03', '2025-11-03', '2');
 
@@ -4826,13 +4903,13 @@ CREATE TABLE `qr_orders` (
   `order_code` varchar(50) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `table_id` int(11) DEFAULT NULL,
-  `total_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `total_amount` decimal(10,2) NOT NULL DEFAULT '0.00',
   `payment_status` enum('pending','paid','cancelled') DEFAULT 'pending',
   `order_status` enum('new','processing','served','completed','cancelled') DEFAULT 'new',
-  `order_time` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `order_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: qr_payments
@@ -4846,9 +4923,9 @@ CREATE TABLE `qr_payments` (
   `amount` decimal(10,2) NOT NULL,
   `method` varchar(50) DEFAULT 'cash',
   `transaction_id` varchar(100) DEFAULT NULL,
-  `payment_date` datetime DEFAULT current_timestamp(),
+  `payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`payment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: qr_tables
@@ -4862,7 +4939,7 @@ CREATE TABLE `qr_tables` (
   `qr_code` varchar(255) DEFAULT NULL,
   `status` enum('active','inactive') DEFAULT 'active',
   PRIMARY KEY (`table_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: rate_type
@@ -4874,7 +4951,7 @@ CREATE TABLE `rate_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `r_type_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 INSERT INTO `rate_type` (`id`, `r_type_name`) VALUES ('1', 'Hourly');
 INSERT INTO `rate_type` (`id`, `r_type_name`) VALUES ('2', 'Salary');
@@ -4890,9 +4967,9 @@ CREATE TABLE `reservationofday` (
   `offdayid` int(11) NOT NULL AUTO_INCREMENT,
   `offdaydate` date NOT NULL,
   `availtime` varchar(50) NOT NULL,
-  `is_active` int(11) NOT NULL DEFAULT 0,
+  `is_active` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`offdayid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `reservationofday` (`offdayid`, `offdaydate`, `availtime`, `is_active`) VALUES ('1', '2025-11-30', '12:40:15-05:00:00', '1');
 
@@ -4909,10 +4986,10 @@ CREATE TABLE `rest_table` (
   `person_capicity` int(11) NOT NULL,
   `qr_code` varchar(255) DEFAULT NULL,
   `table_icon` varchar(255) NOT NULL,
-  `floor` int(11) DEFAULT 0,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1=booked,0=free',
+  `floor` int(11) DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '1=booked,0=free',
   PRIMARY KEY (`tableid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('1', '1', '2', 'table_1.png', 'assets/img/icons/resttable/1.png', '3', '1');
 INSERT INTO `rest_table` (`tableid`, `tablename`, `person_capicity`, `qr_code`, `table_icon`, `floor`, `status`) VALUES ('2', '2', '4', 'table_2.png', 'assets/img/icons/resttable/4.png', '1', '1');
@@ -4943,7 +5020,7 @@ CREATE TABLE `role_permission` (
   PRIMARY KEY (`id`),
   KEY `fk_module_id` (`fk_module_id`),
   KEY `fk_user_id` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: salary_setup_header
@@ -4953,13 +5030,13 @@ DROP TABLE IF EXISTS `salary_setup_header`;
 
 CREATE TABLE `salary_setup_header` (
   `s_s_h_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `employee_id` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `salary_payable` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `absent_deduct` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `tax_manager` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `status` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `employee_id` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `salary_payable` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `absent_deduct` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `tax_manager` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `status` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`s_s_h_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `salary_setup_header` (`s_s_h_id`, `employee_id`, `salary_payable`, `absent_deduct`, `tax_manager`, `status`) VALUES ('1', 'EZR0A9IB', '400', '0', '0', '');
 
@@ -4973,13 +5050,13 @@ DROP TABLE IF EXISTS `salary_sheet_generate`;
 CREATE TABLE `salary_sheet_generate` (
   `ssg_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `employee_id` varchar(20) NOT NULL,
-  `name` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `name` varchar(30) CHARACTER SET latin1 NOT NULL,
   `gdate` varchar(20) DEFAULT NULL,
-  `start_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `end_date` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `generate_by` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `start_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `end_date` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `generate_by` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`ssg_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: salary_type
@@ -4989,12 +5066,12 @@ DROP TABLE IF EXISTS `salary_type`;
 
 CREATE TABLE `salary_type` (
   `salary_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `sal_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `emp_sal_type` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `sal_name` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `emp_sal_type` varchar(50) CHARACTER SET latin1 NOT NULL,
   `default_amount` varchar(30) NOT NULL,
   `status` varchar(50) NOT NULL,
   PRIMARY KEY (`salary_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `salary_type` (`salary_type_id`, `sal_name`, `emp_sal_type`, `default_amount`, `status`) VALUES ('1', 'House Rent', '1', '', '');
 INSERT INTO `salary_type` (`salary_type_id`, `sal_name`, `emp_sal_type`, `default_amount`, `status`) VALUES ('2', 'Medical', '1', '', '');
@@ -5008,9 +5085,9 @@ DROP TABLE IF EXISTS `sec_menu_item`;
 
 CREATE TABLE `sec_menu_item` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_title` varchar(200) DEFAULT NULL,
-  `page_url` varchar(250) DEFAULT NULL,
-  `module` varchar(200) DEFAULT NULL,
+  `menu_title` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `page_url` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `module` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `parent_menu` int(11) DEFAULT NULL,
   `is_report` tinyint(1) DEFAULT NULL,
   `createby` int(11) NOT NULL,
@@ -5893,9 +5970,9 @@ CREATE TABLE `sec_role_tbl` (
   `role_description` text NOT NULL,
   `create_by` int(11) DEFAULT NULL,
   `date_time` datetime DEFAULT NULL,
-  `role_status` int(11) NOT NULL DEFAULT 1,
+  `role_status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 INSERT INTO `sec_role_tbl` (`role_id`, `role_name`, `role_description`, `create_by`, `date_time`, `role_status`) VALUES ('1', 'kitchen', 'manage kitchen', '2', '2020-10-12 10:27:03', '1');
 INSERT INTO `sec_role_tbl` (`role_id`, `role_name`, `role_description`, `create_by`, `date_time`, `role_status`) VALUES ('2', 'Counter', 'Display Order timing', '2', '2020-10-12 10:27:45', '1');
@@ -5914,7 +5991,7 @@ CREATE TABLE `sec_user_access_tbl` (
   `fk_role_id` int(11) NOT NULL,
   `fk_user_id` int(11) NOT NULL,
   PRIMARY KEY (`role_acc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 INSERT INTO `sec_user_access_tbl` (`role_acc_id`, `fk_role_id`, `fk_user_id`) VALUES ('1', '3', '172');
 INSERT INTO `sec_user_access_tbl` (`role_acc_id`, `fk_role_id`, `fk_user_id`) VALUES ('2', '4', '178');
@@ -5935,7 +6012,7 @@ CREATE TABLE `setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `storename` varchar(100) DEFAULT NULL,
-  `address` text DEFAULT NULL,
+  `address` text,
   `email` varchar(50) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `logo` varchar(50) DEFAULT NULL,
@@ -5943,30 +6020,30 @@ CREATE TABLE `setting` (
   `favicon` varchar(100) DEFAULT NULL,
   `opentime` varchar(255) DEFAULT NULL,
   `closetime` varchar(255) DEFAULT NULL,
-  `vat` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `isvatnumshow` int(11) DEFAULT 0,
+  `vat` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `isvatnumshow` int(11) DEFAULT '0',
   `vattinno` varchar(30) DEFAULT NULL,
-  `isvatinclusive` int(11) NOT NULL DEFAULT 0,
-  `discount_type` int(11) NOT NULL DEFAULT 0 COMMENT '0=amount,1=percent',
-  `discountrate` decimal(19,3) DEFAULT 0.000,
-  `servicecharge` decimal(10,0) NOT NULL DEFAULT 0,
-  `service_chargeType` int(11) NOT NULL DEFAULT 0 COMMENT '0=amount,1=percent',
-  `currency` int(11) DEFAULT 0,
+  `isvatinclusive` int(11) NOT NULL DEFAULT '0',
+  `discount_type` int(11) NOT NULL DEFAULT '0' COMMENT '0=amount,1=percent',
+  `discountrate` decimal(19,3) DEFAULT '0.000',
+  `servicecharge` decimal(10,0) NOT NULL DEFAULT '0',
+  `service_chargeType` int(11) NOT NULL DEFAULT '0' COMMENT '0=amount,1=percent',
+  `currency` int(11) DEFAULT '0',
   `min_prepare_time` varchar(50) DEFAULT NULL,
   `language` varchar(100) DEFAULT NULL,
   `timezone` varchar(150) NOT NULL,
   `dateformat` text NOT NULL,
   `site_align` varchar(50) DEFAULT NULL,
-  `kitchenrefreshtime` int(11) DEFAULT 5,
-  `powerbytxt` text DEFAULT NULL,
+  `kitchenrefreshtime` int(11) DEFAULT '5',
+  `powerbytxt` text,
   `footer_text` varchar(255) DEFAULT NULL,
   `whatsapp_number` varchar(50) DEFAULT NULL,
   `reservation_open` varchar(30) DEFAULT NULL,
   `reservation_close` varchar(30) DEFAULT NULL,
   `maxreserveperson` int(11) DEFAULT NULL,
-  `printtype` int(11) DEFAULT 0,
+  `printtype` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `setting` (`id`, `title`, `storename`, `address`, `email`, `phone`, `logo`, `logoweb`, `favicon`, `opentime`, `closetime`, `vat`, `isvatnumshow`, `vattinno`, `isvatinclusive`, `discount_type`, `discountrate`, `servicecharge`, `service_chargeType`, `currency`, `min_prepare_time`, `language`, `timezone`, `dateformat`, `site_align`, `kitchenrefreshtime`, `powerbytxt`, `footer_text`, `whatsapp_number`, `reservation_open`, `reservation_close`, `maxreserveperson`, `printtype`) VALUES ('2', 'Bonresto Restaurant', 'Jaipure Restaurant', '98 Green Road, brazzaville, Dhaka-1215.', 'lmk@gmail.com', '050489037', 'assets/img/icons/2019-10-29/h.png', NULL, 'assets/img/icons/m.png', '08:00AM', '11:59PM', '7.50', NULL, '23457586', '1', '1', '5.000', '20', '1', '4', '1:00 Hour', 'english', 'Africa/Brazzaville', 'd/m/Y', 'LTR', '15', 'Powered By: BDTASK, www.bdtask.com\r\n', '2025', '242064663469', '09:00:00', '22:00:00', '20', '2');
 
@@ -5982,10 +6059,10 @@ CREATE TABLE `shift_management` (
   `shift_name` varchar(100) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` datetime DEFAULT current_timestamp(),
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: shipping_method
@@ -5996,12 +6073,12 @@ DROP TABLE IF EXISTS `shipping_method`;
 CREATE TABLE `shipping_method` (
   `ship_id` int(11) NOT NULL AUTO_INCREMENT,
   `shipping_method` varchar(150) NOT NULL,
-  `shippingrate` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `shippingrate` decimal(10,2) NOT NULL DEFAULT '0.00',
   `payment_method` varchar(255) DEFAULT NULL,
-  `is_active` int(11) NOT NULL DEFAULT 0,
+  `is_active` int(11) NOT NULL DEFAULT '0',
   `shiptype` int(11) DEFAULT NULL COMMENT '1=dinein,2=pickup,3=home',
   PRIMARY KEY (`ship_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO `shipping_method` (`ship_id`, `shipping_method`, `shippingrate`, `payment_method`, `is_active`, `shiptype`) VALUES ('1', 'Home Delivary', '60.00', '9, 8, 5, 4, 3, 1', '1', '3');
 INSERT INTO `shipping_method` (`ship_id`, `shipping_method`, `shippingrate`, `payment_method`, `is_active`, `shiptype`) VALUES ('2', 'Pickup', '0.00', '4, 3, 1', '1', '2');
@@ -6022,9 +6099,9 @@ CREATE TABLE `sms_configuration` (
   `password` varchar(255) NOT NULL,
   `sms_from` varchar(200) NOT NULL,
   `userid` varchar(100) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO `sms_configuration` (`id`, `link`, `gateway`, `user_name`, `password`, `sms_from`, `userid`, `status`) VALUES ('1', 'http://smsrank.com/', 'SMS Rank', 'joeldy tsna', '1234', 'smsrank', '', '0');
 INSERT INTO `sms_configuration` (`id`, `link`, `gateway`, `user_name`, `password`, `sms_from`, `userid`, `status`) VALUES ('2', 'https://www.nexmo.com/', 'nexmo', '50489b88', 'z1cBmtrDeQrOaqhg', 'restaurant', '', '0');
@@ -6042,12 +6119,12 @@ CREATE TABLE `sms_template` (
   `template_name` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
   `default_status` tinyint(4) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 INSERT INTO `sms_template` (`id`, `template_name`, `message`, `type`, `status`, `default_status`, `created_at`, `updated_at`) VALUES ('1', 'one', 'your Order {id} is cancel for some reason.', 'Cancel', '0', '0', '2018-12-30 18:08:07', '0000-00-00 00:00:00');
 INSERT INTO `sms_template` (`id`, `template_name`, `message`, `type`, `status`, `default_status`, `created_at`, `updated_at`) VALUES ('2', 'two', 'your order {id} is completed', 'CompleteOrder', '0', '1', '2018-12-30 19:58:19', '0000-00-00 00:00:00');
@@ -6066,13 +6143,13 @@ CREATE TABLE `sub_order` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `vat` float DEFAULT NULL,
-  `discount` decimal(10,2) DEFAULT 0.00,
+  `discount` decimal(10,2) DEFAULT '0.00',
   `s_charge` float DEFAULT NULL,
   `total_price` float DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0=unpaid,1=paid',
-  `order_menu_id` text DEFAULT NULL,
-  `adons_id` varchar(20) DEFAULT NULL,
-  `adons_qty` varchar(20) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0=unpaid,1=paid',
+  `order_menu_id` text COLLATE utf8_unicode_ci,
+  `adons_id` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `adons_qty` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `invoiceprint` int(11) DEFAULT NULL,
   PRIMARY KEY (`sub_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -6099,7 +6176,7 @@ CREATE TABLE `subscribe_emaillist` (
   `email` varchar(255) DEFAULT NULL,
   `dateinsert` datetime NOT NULL,
   PRIMARY KEY (`emailid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `subscribe_emaillist` (`emailid`, `email`, `dateinsert`) VALUES ('1', 'joeldytsina94@gmail.com', '2025-11-01 04:35:28');
 INSERT INTO `subscribe_emaillist` (`emailid`, `email`, `dateinsert`) VALUES ('2', 'joeldytsina@gmail.com', '2025-11-15 12:31:58');
@@ -6119,7 +6196,7 @@ CREATE TABLE `supplier` (
   `supMobile` varchar(50) NOT NULL,
   `supAddress` text NOT NULL,
   PRIMARY KEY (`supid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `supplier` (`supid`, `suplier_code`, `supName`, `supEmail`, `supMobile`, `supAddress`) VALUES ('1', 'sup_002', 'Kabalan', 'Kabalan@gmail.com', '065678909', 'Congo Brazzaville, centre ville');
 INSERT INTO `supplier` (`supid`, `suplier_code`, `supName`, `supEmail`, `supMobile`, `supAddress`) VALUES ('2', 'sup_003', 'Super market', 'supermarket@gmail.com', '064663463', 'centre ville, bzv');
@@ -6145,7 +6222,7 @@ CREATE TABLE `supplier_ledger` (
   `status` int(11) DEFAULT NULL,
   `d_c` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 INSERT INTO `supplier_ledger` (`id`, `transaction_id`, `supplier_id`, `chalan_no`, `deposit_no`, `amount`, `description`, `payment_type`, `cheque_no`, `date`, `status`, `d_c`) VALUES ('1', 'sup_002', '1', 'Adjustment ', NULL, '1000000.000', 'Previous adjustment with software', 'NA', 'NA', '2025-11-03', '1', 'c');
 INSERT INTO `supplier_ledger` (`id`, `transaction_id`, `supplier_id`, `chalan_no`, `deposit_no`, `amount`, `description`, `payment_type`, `cheque_no`, `date`, `status`, `d_c`) VALUES ('2', 'PM-1', '1', NULL, 'PM-1', '2333.000', 'Paid to Kabalan', '1', '', '2025-11-03', '1', 'd');
@@ -6169,7 +6246,7 @@ CREATE TABLE `synchronizer_setting` (
   `debug` varchar(10) NOT NULL,
   `project_root` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 INSERT INTO `synchronizer_setting` (`id`, `hostname`, `username`, `password`, `port`, `debug`, `project_root`) VALUES ('8', '70.35.198.244', 'softest3bdtask', 'Ux5O~MBJ#odK', '21', 'true', './public_html/');
 
@@ -6187,10 +6264,10 @@ CREATE TABLE `table_details` (
   `order_id` int(11) NOT NULL,
   `time_enter` time NOT NULL,
   `total_people` int(11) NOT NULL,
-  `delete_at` int(11) NOT NULL DEFAULT 0,
+  `delete_at` int(11) NOT NULL DEFAULT '0',
   `created_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('3', '3', '1', '16', '18:04:42', '2', '0', '2025-11-01');
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('4', '2', '1', '17', '18:05:25', '4', '0', '2025-11-01');
@@ -6198,6 +6275,10 @@ INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('6', '9', '1', '19', '18:07:03', '3', '0', '2025-11-01');
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('8', '10', '1', '23', '18:11:10', '8', '0', '2025-11-01');
 INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('9', '1', '1', '24', '18:11:37', '2', '0', '2025-11-01');
+INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('10', '2', '63', '96', '12:50:43', '3', '0', '2025-11-18');
+INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('11', '2', '75', '97', '12:51:55', '1', '0', '2025-11-18');
+INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('12', '3', '75', '98', '12:54:53', '1', '0', '2025-11-18');
+INSERT INTO `table_details` (`id`, `table_id`, `customer_id`, `order_id`, `time_enter`, `total_people`, `delete_at`, `created_at`) VALUES ('13', '3', '64', '101', '12:57:34', '1', '0', '2025-11-18');
 
 
 #
@@ -6211,18 +6292,8 @@ CREATE TABLE `table_setting` (
   `tableid` int(11) NOT NULL,
   `iconpos` text NOT NULL,
   PRIMARY KEY (`settingid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('1', '2', 'position: relative; left: 186px; top: 231px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('2', '4', 'position: relative; left: 87px; top: 17px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('3', '3', 'position: relative; left: -126px; top: 129px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('4', '1', 'position: relative; left: 15px; top: 28px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('5', '8', 'position: relative; left: -336px; top: 224px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('6', '6', 'position: relative; left: -184px; top: 113px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('7', '5', 'position: relative; left: -153px; top: 85px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('8', '7', 'position: relative; left: -372px; top: 223px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('9', '9', 'position: relative; left: -744px; top: 14px;');
-INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('10', '10', 'position: relative; left: -448px; top: 226px;');
 INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('11', '11', '');
 INSERT INTO `table_setting` (`settingid`, `tableid`, `iconpos`) VALUES ('12', '12', '');
 
@@ -6236,10 +6307,10 @@ DROP TABLE IF EXISTS `tablelist`;
 CREATE TABLE `tablelist` (
   `tableid` int(11) NOT NULL AUTO_INCREMENT,
   `tablename` varchar(50) NOT NULL,
-  `capacity` int(11) DEFAULT 0,
+  `capacity` int(11) DEFAULT '0',
   `qr_code` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`tableid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: tax_settings
@@ -6250,10 +6321,10 @@ DROP TABLE IF EXISTS `tax_settings`;
 CREATE TABLE `tax_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `taxname` varchar(100) NOT NULL,
-  `rate` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `rate` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: tbl_assign_kitchen
@@ -6266,7 +6337,7 @@ CREATE TABLE `tbl_assign_kitchen` (
   `kitchen_id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   PRIMARY KEY (`assignid`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_assign_kitchen` (`assignid`, `kitchen_id`, `userid`) VALUES ('3', '1', '166');
 INSERT INTO `tbl_assign_kitchen` (`assignid`, `kitchen_id`, `userid`) VALUES ('4', '11', '166');
@@ -6293,7 +6364,7 @@ CREATE TABLE `tbl_bank` (
   `branch` varchar(200) DEFAULT NULL,
   `signature_pic` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`bankid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_bank` (`bankid`, `bank_name`, `ac_name`, `ac_number`, `branch`, `signature_pic`) VALUES ('1', 'Dutch-Bangla Bank', 'Ainal Haque', '110535764655', 'Mirpur 10', './application/modules/hrm/assets/images/2020-01-18/c.jpg');
 INSERT INTO `tbl_bank` (`bankid`, `bank_name`, `ac_name`, `ac_number`, `branch`, `signature_pic`) VALUES ('2', 'City Bank', 'Kamal Hassan', '3869583', 'Uttara', './application/modules/hrm/assets/images/2020-01-18/e.jpg');
@@ -6318,11 +6389,11 @@ CREATE TABLE `tbl_billingaddress` (
   `district` varchar(255) DEFAULT NULL,
   `country` varchar(150) DEFAULT NULL,
   `zip` varchar(50) DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `address2` text DEFAULT NULL,
+  `address` text,
+  `address2` text,
   `DateInserted` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`billaddressid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('1', '1', 'simon', 'simon', 'Not Set', '', '064663469', '', '', '', '', 'Not Set', NULL, '2025-10-31 10:05:29');
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('2', '2', 'Simon Joeldy', 'TSINA', NULL, 'joeldytsina94@gmail.com', '064663469', '', 'Nagaland', 'India', '', 'Congo Brazzaville', NULL, '2025-10-31 12:18:17');
@@ -6353,6 +6424,7 @@ INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `last
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('27', '79', 'dsdfgf', 'dsdfgf', 'Not Set', '', '23224<', '', '', '', '', 'Not Set', NULL, '2025-11-13 19:20:29');
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('28', '80', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', 'Pointe-Noire', 'Pointe-Noire', 'Congo Brazzaville', '', 'Avenue ngamaba', NULL, '2025-11-13 19:39:26');
 INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('29', '81', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', '', '', '', '', 'Avenue ngamaba', NULL, '2025-11-13 20:07:48');
+INSERT INTO `tbl_billingaddress` (`billaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('30', '93', 'customer1', 'customer1', 'Not Set', '', '06739988747', '', '', '', '', 'Not Set', NULL, '2025-11-17 22:04:18');
 
 
 #
@@ -6366,9 +6438,9 @@ CREATE TABLE `tbl_cancelitem` (
   `orderid` int(11) NOT NULL,
   `foodid` int(11) NOT NULL,
   `varientid` int(11) NOT NULL,
-  `quantity` decimal(19,3) NOT NULL DEFAULT 0.000,
+  `quantity` decimal(19,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`cancelid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_cancelitem` (`cancelid`, `orderid`, `foodid`, `varientid`, `quantity`) VALUES ('1', '28', '56', '86', '1.000');
 INSERT INTO `tbl_cancelitem` (`cancelid`, `orderid`, `foodid`, `varientid`, `quantity`) VALUES ('2', '25', '12', '96', '1.000');
@@ -6384,7 +6456,7 @@ CREATE TABLE `tbl_card_terminal` (
   `card_terminalid` int(11) NOT NULL AUTO_INCREMENT,
   `terminal_name` varchar(255) NOT NULL,
   PRIMARY KEY (`card_terminalid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_card_terminal` (`card_terminalid`, `terminal_name`) VALUES ('1', 'Nexus Terminal');
 INSERT INTO `tbl_card_terminal` (`card_terminalid`, `terminal_name`) VALUES ('2', 'Brac Bank Terminal');
@@ -6401,7 +6473,7 @@ CREATE TABLE `tbl_cashcounter` (
   `ccid` int(11) NOT NULL AUTO_INCREMENT,
   `counterno` int(11) NOT NULL,
   PRIMARY KEY (`ccid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_cashcounter` (`ccid`, `counterno`) VALUES ('1', '1');
 INSERT INTO `tbl_cashcounter` (`ccid`, `counterno`) VALUES ('2', '2');
@@ -6418,17 +6490,17 @@ CREATE TABLE `tbl_cashregister` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL,
   `counter_no` int(11) NOT NULL,
-  `opening_balance` decimal(19,3) NOT NULL DEFAULT 0.000,
-  `closing_balance` decimal(19,3) NOT NULL DEFAULT 0.000,
+  `opening_balance` decimal(19,3) NOT NULL DEFAULT '0.000',
+  `closing_balance` decimal(19,3) NOT NULL DEFAULT '0.000',
   `openclosedate` date NOT NULL,
   `opendate` datetime DEFAULT '1970-01-01 01:01:01',
   `closedate` datetime DEFAULT '1970-01-01 01:01:01',
-  `status` int(11) NOT NULL DEFAULT 0,
-  `openingnote` text DEFAULT NULL,
-  `closing_note` text DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `openingnote` text,
+  `closing_note` text,
   PRIMARY KEY (`id`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_cashregister` (`id`, `userid`, `counter_no`, `opening_balance`, `closing_balance`, `openclosedate`, `opendate`, `closedate`, `status`, `openingnote`, `closing_note`) VALUES ('1', '2', '2', '12000.000', '22562.575', '2025-10-30', '2025-10-30 22:14:54', '2025-11-01 22:57:13', '1', '', '');
 INSERT INTO `tbl_cashregister` (`id`, `userid`, `counter_no`, `opening_balance`, `closing_balance`, `openclosedate`, `opendate`, `closedate`, `status`, `openingnote`, `closing_note`) VALUES ('2', '2', '2', '22562.575', '30058.455', '2025-11-01', '2025-11-01 23:10:32', '2025-11-12 00:20:12', '1', '', '');
@@ -6446,9 +6518,9 @@ CREATE TABLE `tbl_city` (
   `countryid` int(11) NOT NULL,
   `stateid` int(11) NOT NULL,
   `cityname` varchar(100) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`cityid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_city` (`cityid`, `countryid`, `stateid`, `cityname`, `status`) VALUES ('3', '1', '12', 'Savar', '1');
 INSERT INTO `tbl_city` (`cityid`, `countryid`, `stateid`, `cityname`, `status`) VALUES ('4', '1', '12', 'Gajipur', '1');
@@ -6471,9 +6543,9 @@ DROP TABLE IF EXISTS `tbl_country`;
 CREATE TABLE `tbl_country` (
   `countryid` int(11) NOT NULL AUTO_INCREMENT,
   `countryname` varchar(70) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`countryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_country` (`countryid`, `countryname`, `status`) VALUES ('1', 'Bangladesh', '1');
 INSERT INTO `tbl_country` (`countryid`, `countryname`, `status`) VALUES ('2', 'United State', '1');
@@ -6492,12 +6564,12 @@ DROP TABLE IF EXISTS `tbl_customerpoint`;
 CREATE TABLE `tbl_customerpoint` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customerid` int(11) NOT NULL,
-  `amount` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `points` int(11) NOT NULL DEFAULT 0,
-  `created_at` datetime DEFAULT current_timestamp(),
+  `amount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `points` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `customerid` (`customerid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `tbl_customerpoint` (`id`, `customerid`, `amount`, `points`, `created_at`) VALUES ('1', '71', '0.00', '10', '2025-11-11 22:42:40');
 INSERT INTO `tbl_customerpoint` (`id`, `customerid`, `amount`, `points`, `created_at`) VALUES ('2', '36', '0.00', '10', '2025-11-11 22:45:15');
@@ -6515,7 +6587,7 @@ CREATE TABLE `tbl_delivaritime` (
   `dtimeid` int(11) NOT NULL AUTO_INCREMENT,
   `deltime` varchar(255) NOT NULL,
   PRIMARY KEY (`dtimeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_delivaritime` (`dtimeid`, `deltime`) VALUES ('1', '10:00-10:30');
 INSERT INTO `tbl_delivaritime` (`dtimeid`, `deltime`) VALUES ('2', '10:30-11:00');
@@ -6551,7 +6623,7 @@ CREATE TABLE `tbl_delivaryaddress` (
   `delivaryid` int(11) NOT NULL AUTO_INCREMENT,
   `deladdress` text NOT NULL,
   PRIMARY KEY (`delivaryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_delivaryaddress` (`delivaryid`, `deladdress`) VALUES ('1', 'Uttara,Road#7,Dhaka-Bangladesh.');
 INSERT INTO `tbl_delivaryaddress` (`delivaryid`, `deladdress`) VALUES ('2', 'Uttara,Road#5,Dhaka');
@@ -6588,23 +6660,23 @@ CREATE TABLE `tbl_generatedreport` (
   `saleinvoice` varchar(100) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `cutomertype` int(11) NOT NULL,
-  `isthirdparty` int(11) NOT NULL DEFAULT 0,
+  `isthirdparty` int(11) NOT NULL DEFAULT '0',
   `waiter_id` int(11) DEFAULT NULL,
   `kitchen` int(11) DEFAULT NULL,
   `order_date` date NOT NULL,
   `order_time` time NOT NULL,
   `table_no` int(11) DEFAULT NULL,
   `tokenno` varchar(30) DEFAULT NULL,
-  `totalamount` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `customerpaid` decimal(10,2) DEFAULT 0.00,
-  `customer_note` text DEFAULT NULL,
-  `anyreason` text DEFAULT NULL,
+  `totalamount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `customerpaid` decimal(10,2) DEFAULT '0.00',
+  `customer_note` text,
+  `anyreason` text,
   `order_status` tinyint(4) NOT NULL,
   `nofification` int(11) NOT NULL,
   `orderacceptreject` int(11) DEFAULT NULL,
   `reportDate` date NOT NULL,
   PRIMARY KEY (`generateid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: tbl_groupitems
@@ -6616,11 +6688,11 @@ CREATE TABLE `tbl_groupitems` (
   `groupid` int(11) NOT NULL AUTO_INCREMENT,
   `gitemid` int(11) NOT NULL,
   `items` int(11) NOT NULL,
-  `item_qty` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `item_qty` decimal(10,2) NOT NULL DEFAULT '0.00',
   `varientid` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`groupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_groupitems` (`groupid`, `gitemid`, `items`, `item_qty`, `varientid`, `status`) VALUES ('1', '81', '57', '1.00', '85', '1');
 INSERT INTO `tbl_groupitems` (`groupid`, `gitemid`, `items`, `item_qty`, `varientid`, `status`) VALUES ('2', '81', '3', '1.00', '4', '1');
@@ -6639,7 +6711,7 @@ CREATE TABLE `tbl_itemaccepted` (
   `varient` int(11) NOT NULL,
   `accepttime` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`acid`)
-) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('1', '1', '1', '0', '2025-10-31 10:10:48');
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('2', '1', '0', '0', '2025-10-31 10:11:20');
@@ -6869,6 +6941,12 @@ INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `acceptt
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('226', '91', '0', '0', '2025-11-16 10:17:25');
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('227', '92', '7', '56', '2025-11-16 10:17:26');
 INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('228', '92', '0', '0', '2025-11-16 10:17:26');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('229', '93', '1', '1', '2025-11-17 22:06:31');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('230', '93', '0', '0', '2025-11-17 22:06:31');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('231', '94', '7', '56', '2025-11-18 12:35:49');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('232', '94', '0', '0', '2025-11-18 12:35:49');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('233', '94', '6', '55', '2025-11-18 12:35:52');
+INSERT INTO `tbl_itemaccepted` (`acid`, `orderid`, `menuid`, `varient`, `accepttime`) VALUES ('234', '94', '0', '0', '2025-11-18 12:35:52');
 
 
 #
@@ -6882,9 +6960,9 @@ CREATE TABLE `tbl_kitchen` (
   `kitchen_name` varchar(100) NOT NULL,
   `ip` varchar(255) DEFAULT NULL,
   `port` varchar(10) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`kitchenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_kitchen` (`kitchenid`, `kitchen_name`, `ip`, `port`, `status`) VALUES ('1', 'Common Kitchen', '192.168.1.87', '9100', '1');
 INSERT INTO `tbl_kitchen` (`kitchenid`, `kitchen_name`, `ip`, `port`, `status`) VALUES ('11', 'Italian', NULL, NULL, '1');
@@ -6911,7 +6989,7 @@ CREATE TABLE `tbl_kitchen_order` (
   `varient` int(11) DEFAULT NULL,
   `addonsuid` int(11) DEFAULT NULL,
   PRIMARY KEY (`ktid`)
-) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('1', '1', '1', '1', '0', NULL);
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('2', '1', '1', '0', '0', NULL);
@@ -7169,6 +7247,13 @@ INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `vari
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('254', '11', '87', '6', '55', NULL);
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('255', '1', '86', '2', '3', NULL);
 INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('256', '11', '89', '12', '96', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('257', '1', '93', '1', '1', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('258', '1', '93', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('259', '14', '94', '7', '56', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('260', '14', '94', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('261', '11', '94', '6', '55', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('262', '11', '94', '0', '0', NULL);
+INSERT INTO `tbl_kitchen_order` (`ktid`, `kitchenid`, `orderid`, `itemid`, `varient`, `addonsuid`) VALUES ('263', '16', '95', '8', '54', NULL);
 
 
 #
@@ -7181,9 +7266,9 @@ CREATE TABLE `tbl_menutype` (
   `menutypeid` int(11) NOT NULL AUTO_INCREMENT,
   `menutype` varchar(120) NOT NULL,
   `menu_icon` varchar(150) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`menutypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_menutype` (`menutypeid`, `menutype`, `menu_icon`, `status`) VALUES ('1', 'Breakfast', './application/modules/itemmanage/assets/images/2020-11-21/b.png', '1');
 INSERT INTO `tbl_menutype` (`menutypeid`, `menutype`, `menu_icon`, `status`) VALUES ('2', 'Launch', './application/modules/itemmanage/assets/images/2020-11-21/l1.png', '1');
@@ -7205,7 +7290,7 @@ CREATE TABLE `tbl_module_purchasekey` (
   `downloaddate` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   `updatedate` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`mpid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: tbl_notificationsetting
@@ -7215,12 +7300,12 @@ DROP TABLE IF EXISTS `tbl_notificationsetting`;
 
 CREATE TABLE `tbl_notificationsetting` (
   `notifid` int(11) NOT NULL AUTO_INCREMENT,
-  `firebasewaiterkitchen` text DEFAULT NULL,
+  `firebasewaiterkitchen` text,
   `onesignalcustomer` text NOT NULL,
   `onesignal_ioswaiter` text NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`notifid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: tbl_openclose
@@ -7234,7 +7319,7 @@ CREATE TABLE `tbl_openclose` (
   `opentime` varchar(15) NOT NULL,
   `closetime` varchar(15) NOT NULL,
   PRIMARY KEY (`stid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_openclose` (`stid`, `dayname`, `opentime`, `closetime`) VALUES ('1', 'Saturday', '08:00', '23:59');
 INSERT INTO `tbl_openclose` (`stid`, `dayname`, `opentime`, `closetime`) VALUES ('2', 'Sunday', '08:00', '20:00');
@@ -7258,7 +7343,7 @@ CREATE TABLE `tbl_orderprepare` (
   `varient` int(11) NOT NULL,
   `preparetime` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`opid`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('1', '6', '1', '1', '2025-11-01 03:42:46');
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('2', '6', '0', '1', '2025-11-01 03:42:46');
@@ -7382,6 +7467,12 @@ INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `prepare
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('120', '91', '0', '56', '2025-11-16 10:19:42');
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('121', '92', '7', '56', '2025-11-16 10:19:44');
 INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('122', '92', '0', '56', '2025-11-16 10:19:44');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('123', '93', '1', '1', '2025-11-17 22:08:15');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('124', '93', '0', '1', '2025-11-17 22:08:15');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('125', '94', '7', '56', '2025-11-18 12:36:22');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('126', '94', '0', '56', '2025-11-18 12:36:22');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('127', '94', '6', '55', '2025-11-18 12:36:25');
+INSERT INTO `tbl_orderprepare` (`opid`, `orderid`, `menuid`, `varient`, `preparetime`) VALUES ('128', '94', '0', '55', '2025-11-18 12:36:26');
 
 
 #
@@ -7392,14 +7483,14 @@ DROP TABLE IF EXISTS `tbl_posetting`;
 
 CREATE TABLE `tbl_posetting` (
   `possettingid` int(11) NOT NULL AUTO_INCREMENT,
-  `waiter` int(11) NOT NULL DEFAULT 0 COMMENT '1=show,0=hide',
-  `tableid` int(11) NOT NULL DEFAULT 0 COMMENT '1=show,0=hide',
-  `cooktime` int(11) NOT NULL DEFAULT 0 COMMENT '1=enable,0=disable',
-  `productionsetting` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=manual,1=auto',
-  `tablemaping` int(11) NOT NULL DEFAULT 0 COMMENT '1=enable,0=disable',
+  `waiter` int(11) NOT NULL DEFAULT '0' COMMENT '1=show,0=hide',
+  `tableid` int(11) NOT NULL DEFAULT '0' COMMENT '1=show,0=hide',
+  `cooktime` int(11) NOT NULL DEFAULT '0' COMMENT '1=enable,0=disable',
+  `productionsetting` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=manual,1=auto',
+  `tablemaping` int(11) NOT NULL DEFAULT '0' COMMENT '1=enable,0=disable',
   `soundenable` int(11) DEFAULT NULL COMMENT '1=enable,0=disable',
   PRIMARY KEY (`possettingid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_posetting` (`possettingid`, `waiter`, `tableid`, `cooktime`, `productionsetting`, `tablemaping`, `soundenable`) VALUES ('1', '1', '1', '1', '0', '1', '1');
 
@@ -7412,13 +7503,13 @@ DROP TABLE IF EXISTS `tbl_quickordersetting`;
 
 CREATE TABLE `tbl_quickordersetting` (
   `quickordid` int(11) NOT NULL AUTO_INCREMENT,
-  `waiter` int(11) NOT NULL DEFAULT 1 COMMENT '1=show,0=hide',
-  `tableid` int(11) NOT NULL DEFAULT 1 COMMENT '1=show,0=hide',
-  `cooktime` int(11) NOT NULL DEFAULT 1 COMMENT '1=show,0=hide',
-  `soundenable` int(11) NOT NULL DEFAULT 1 COMMENT '1=enable,0=disable	',
-  `tablemaping` int(11) NOT NULL DEFAULT 1 COMMENT '1=enable,0=disable',
+  `waiter` int(11) NOT NULL DEFAULT '1' COMMENT '1=show,0=hide',
+  `tableid` int(11) NOT NULL DEFAULT '1' COMMENT '1=show,0=hide',
+  `cooktime` int(11) NOT NULL DEFAULT '1' COMMENT '1=show,0=hide',
+  `soundenable` int(11) NOT NULL DEFAULT '1' COMMENT '1=enable,0=disable	',
+  `tablemaping` int(11) NOT NULL DEFAULT '1' COMMENT '1=enable,0=disable',
   PRIMARY KEY (`quickordid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_quickordersetting` (`quickordid`, `waiter`, `tableid`, `cooktime`, `soundenable`, `tablemaping`) VALUES ('1', '1', '1', '1', '1', '1');
 
@@ -7433,17 +7524,14 @@ CREATE TABLE `tbl_rating` (
   `ratingid` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) DEFAULT NULL,
   `name` varchar(200) NOT NULL,
-  `reviewtxt` text DEFAULT NULL,
+  `reviewtxt` text,
   `proid` int(11) NOT NULL,
-  `rating` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `status` int(11) NOT NULL DEFAULT 0,
+  `rating` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `status` int(11) NOT NULL DEFAULT '0',
   `email` varchar(255) NOT NULL,
   `ratetime` datetime NOT NULL,
   PRIMARY KEY (`ratingid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-INSERT INTO `tbl_rating` (`ratingid`, `title`, `name`, `reviewtxt`, `proid`, `rating`, `status`, `email`, `ratetime`) VALUES ('1', 'good', 'joeldy tsna', 'good meat; I enjoyed it', '1', '0.00', '1', 'joeldytsina94@gmail.com', '2025-10-31 13:48:57');
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: tbl_room
@@ -7457,7 +7545,7 @@ CREATE TABLE `tbl_room` (
   `floorno` int(11) NOT NULL,
   `status` int(11) NOT NULL COMMENT '1=active,0=inactive',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: tbl_seoption
@@ -7469,10 +7557,10 @@ CREATE TABLE `tbl_seoption` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `title_slug` varchar(255) NOT NULL,
-  `keywords` text DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `keywords` text,
+  `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_seoption` (`id`, `title`, `title_slug`, `keywords`, `description`) VALUES ('1', 'Bhojon Home page', 'home', 'restaurant,food,reservation', 'Best Restautant Management Software');
 INSERT INTO `tbl_seoption` (`id`, `title`, `title_slug`, `keywords`, `description`) VALUES ('3', 'Menu', 'menu', 'Desert,Meet,fish,meet,bevarage', 'Menu Page');
@@ -7512,11 +7600,11 @@ CREATE TABLE `tbl_shippingaddress` (
   `district` varchar(255) DEFAULT NULL,
   `country` varchar(150) DEFAULT NULL,
   `zip` varchar(50) DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `address2` text DEFAULT NULL,
+  `address` text,
+  `address2` text,
   `DateInserted` datetime NOT NULL DEFAULT '1970-01-01 01:01:01',
   PRIMARY KEY (`shipaddressid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('1', '1', 'simon', 'simon', 'Not Set', '', '064663469', '', '', '', '', 'Not Set', NULL, '2025-10-31 10:05:29');
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('2', '2', 'Simon Joeldy', 'TSINA', NULL, 'joeldytsina94@gmail.com', '064663469', '', 'Nagaland', 'India', '', 'Congo Brazzaville', NULL, '2025-10-31 12:18:17');
@@ -7547,6 +7635,7 @@ INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `las
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('27', '79', 'dsdfgf', 'dsdfgf', 'Not Set', '', '23224<', '', '', '', '', 'Not Set', NULL, '2025-11-13 19:20:29');
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('28', '80', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', 'Pointe-Noire', 'Pointe-Noire', 'Congo Brazzaville', '', 'Avenue ngamaba', NULL, '2025-11-13 19:39:26');
 INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('29', '81', 'clavina', 'Tsina', NULL, 'joeldytsina94@gmail.com', '050489037', '', '', '', '', 'Avenue ngamaba', NULL, '2025-11-13 20:07:48');
+INSERT INTO `tbl_shippingaddress` (`shipaddressid`, `orderid`, `firstname`, `lastname`, `companyname`, `email`, `phone`, `city`, `district`, `country`, `zip`, `address`, `address2`, `DateInserted`) VALUES ('30', '93', 'customer1', 'customer1', 'Not Set', '', '06739988747', '', '', '', '', 'Not Set', NULL, '2025-11-17 22:04:18');
 
 
 #
@@ -7561,13 +7650,13 @@ CREATE TABLE `tbl_slider` (
   `title` varchar(255) DEFAULT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `image` varchar(255) NOT NULL,
-  `slink` text DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `delation_status` int(11) NOT NULL DEFAULT 0,
-  `width` int(11) NOT NULL DEFAULT 0,
-  `height` int(11) NOT NULL DEFAULT 0,
+  `slink` text,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `delation_status` int(11) NOT NULL DEFAULT '0',
+  `width` int(11) NOT NULL DEFAULT '0',
+  `height` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`slid`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_slider` (`slid`, `Sltypeid`, `title`, `subtitle`, `image`, `slink`, `status`, `delation_status`, `width`, `height`) VALUES ('1', '1', 'Welcome To', 'Book <span>Your</span> Table', 'assets/img/banner/2025-11-11/1.jpg', '#', '1', '0', '1920', '902');
 INSERT INTO `tbl_slider` (`slid`, `Sltypeid`, `title`, `subtitle`, `image`, `slink`, `status`, `delation_status`, `width`, `height`) VALUES ('2', '1', 'Find Your', 'Best <span>Cafe</span> Deals', 'assets/img/banner/2025-11-11/2.jpg', '#', '1', '0', '1920', '902');
@@ -7616,9 +7705,9 @@ DROP TABLE IF EXISTS `tbl_slider_type`;
 CREATE TABLE `tbl_slider_type` (
   `stype_id` int(11) NOT NULL AUTO_INCREMENT,
   `STypeName` varchar(255) DEFAULT NULL,
-  `delation_status` int(11) NOT NULL DEFAULT 0,
+  `delation_status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`stype_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_slider_type` (`stype_id`, `STypeName`, `delation_status`) VALUES ('1', 'Home Top Slider', '0');
 INSERT INTO `tbl_slider_type` (`stype_id`, `STypeName`, `delation_status`) VALUES ('2', 'Home our story', '0');
@@ -7647,11 +7736,11 @@ DROP TABLE IF EXISTS `tbl_sociallink`;
 CREATE TABLE `tbl_sociallink` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `socialurl` text DEFAULT NULL,
+  `socialurl` text,
   `icon` varchar(100) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`sid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_sociallink` (`sid`, `title`, `socialurl`, `icon`, `status`) VALUES ('1', 'Facebook', 'https://www.facebook.com', 'fab fa-facebook', '1');
 INSERT INTO `tbl_sociallink` (`sid`, `title`, `socialurl`, `icon`, `status`) VALUES ('2', 'Twitter', 'https://www.twitter.com', 'fab fa-twitter', '1');
@@ -7668,10 +7757,10 @@ DROP TABLE IF EXISTS `tbl_soundsetting`;
 
 CREATE TABLE `tbl_soundsetting` (
   `soundid` int(11) NOT NULL AUTO_INCREMENT,
-  `nofitysound` text DEFAULT NULL,
-  `addtocartsound` text DEFAULT NULL,
+  `nofitysound` text,
+  `addtocartsound` text,
   PRIMARY KEY (`soundid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_soundsetting` (`soundid`, `nofitysound`, `addtocartsound`) VALUES ('1', 'assets/2021-03-21/b1.mp3', 'h');
 
@@ -7686,9 +7775,9 @@ CREATE TABLE `tbl_state` (
   `stateid` int(11) NOT NULL AUTO_INCREMENT,
   `countryid` int(11) NOT NULL,
   `statename` varchar(100) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`stateid`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_state` (`stateid`, `countryid`, `statename`, `status`) VALUES ('1', '2', 'Alabama', '1');
 INSERT INTO `tbl_state` (`stateid`, `countryid`, `statename`, `status`) VALUES ('2', '2', 'Alaska', '1');
@@ -7735,7 +7824,7 @@ CREATE TABLE `tbl_tablefloor` (
   `tbfloorid` int(11) NOT NULL AUTO_INCREMENT,
   `floorName` varchar(100) NOT NULL,
   PRIMARY KEY (`tbfloorid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_tablefloor` (`tbfloorid`, `floorName`) VALUES ('1', 'First Floor');
 INSERT INTO `tbl_tablefloor` (`tbfloorid`, `floorName`) VALUES ('2', 'VIP Floor');
@@ -7752,10 +7841,10 @@ DROP TABLE IF EXISTS `tbl_thirdparty_customer`;
 CREATE TABLE `tbl_thirdparty_customer` (
   `companyId` int(11) NOT NULL AUTO_INCREMENT,
   `company_name` varchar(150) NOT NULL,
-  `address` text DEFAULT NULL,
-  `commision` decimal(10,2) DEFAULT 0.00,
+  `address` text,
+  `commision` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`companyId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_thirdparty_customer` (`companyId`, `company_name`, `address`, `commision`) VALUES ('1', 'Uber eat', 'BZV', '5.00');
 INSERT INTO `tbl_thirdparty_customer` (`companyId`, `company_name`, `address`, `commision`) VALUES ('2', 'Noki Noki', 'BZV', '8.00');
@@ -7772,12 +7861,12 @@ DROP TABLE IF EXISTS `tbl_token`;
 CREATE TABLE `tbl_token` (
   `tokenid` int(11) NOT NULL AUTO_INCREMENT,
   `tokencode` varchar(50) NOT NULL,
-  `tokenrate` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `tokenrate` decimal(10,2) NOT NULL DEFAULT '0.00',
   `tokenstartdate` date NOT NULL,
   `tokenendate` date NOT NULL,
-  `tokenstatus` int(11) NOT NULL DEFAULT 0,
+  `tokenstatus` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tokenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_token` (`tokenid`, `tokencode`, `tokenrate`, `tokenstartdate`, `tokenendate`, `tokenstatus`) VALUES ('1', 'ABCD', '10.00', '2021-08-28', '2021-12-30', '1');
 
@@ -7792,7 +7881,7 @@ CREATE TABLE `tbl_updateitems` (
   `updateid` int(11) NOT NULL AUTO_INCREMENT,
   `ordid` int(11) NOT NULL,
   `menuid` int(11) NOT NULL,
-  `qty` decimal(10,3) NOT NULL DEFAULT 0.000,
+  `qty` decimal(10,3) NOT NULL DEFAULT '0.000',
   `adonsqty` varchar(50) DEFAULT NULL,
   `addonsid` varchar(50) DEFAULT NULL,
   `varientid` int(11) NOT NULL,
@@ -7800,7 +7889,7 @@ CREATE TABLE `tbl_updateitems` (
   `isupdate` varchar(5) DEFAULT NULL,
   `insertdate` date DEFAULT '0000-00-00',
   PRIMARY KEY (`updateid`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 #
 # TABLE STRUCTURE FOR: tbl_version_checker
@@ -7811,9 +7900,9 @@ DROP TABLE IF EXISTS `tbl_version_checker`;
 CREATE TABLE `tbl_version_checker` (
   `vid` int(11) NOT NULL AUTO_INCREMENT,
   `version` varchar(10) DEFAULT NULL,
-  `disable` int(11) NOT NULL DEFAULT 0,
+  `disable` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`vid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tbl_version_checker` (`vid`, `version`, `disable`) VALUES ('1', '2.8', '0');
 
@@ -7828,20 +7917,20 @@ CREATE TABLE `tbl_waiterappcart` (
   `weaterappid` int(11) NOT NULL AUTO_INCREMENT,
   `waiterid` int(11) NOT NULL,
   `alladdOnsName` varchar(255) DEFAULT NULL,
-  `total_addonsprice` decimal(10,2) DEFAULT 0.00,
+  `total_addonsprice` decimal(10,2) DEFAULT '0.00',
   `totaladdons` int(11) DEFAULT NULL,
   `addons_name` varchar(255) DEFAULT NULL,
   `addons_id` int(11) DEFAULT NULL,
-  `addons_price` double(10,2) DEFAULT 0.00,
+  `addons_price` double(10,2) DEFAULT '0.00',
   `addonsQty` int(11) DEFAULT NULL,
   `component` varchar(255) DEFAULT NULL,
-  `destcription` text DEFAULT NULL,
+  `destcription` text,
   `itemnotes` varchar(255) DEFAULT NULL,
-  `offerIsavailable` int(11) DEFAULT 0,
+  `offerIsavailable` int(11) DEFAULT '0',
   `offerstartdate` date DEFAULT '0000-00-00',
   `OffersRate` int(11) DEFAULT NULL,
   `offerendate` date DEFAULT '0000-00-00',
-  `price` decimal(10,2) DEFAULT 0.00,
+  `price` decimal(10,2) DEFAULT '0.00',
   `ProductsID` int(11) NOT NULL,
   `ProductImage` varchar(255) NOT NULL,
   `ProductName` varchar(255) NOT NULL,
@@ -7851,7 +7940,7 @@ CREATE TABLE `tbl_waiterappcart` (
   `variantid` int(11) NOT NULL,
   `orderid` int(11) DEFAULT NULL,
   PRIMARY KEY (`weaterappid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: tbl_widget
@@ -7863,10 +7952,10 @@ CREATE TABLE `tbl_widget` (
   `widgetid` int(11) NOT NULL AUTO_INCREMENT,
   `widget_name` varchar(100) NOT NULL,
   `widget_title` varchar(150) DEFAULT NULL,
-  `widget_desc` text DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `widget_desc` text,
+  `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`widgetid`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('1', 'Footer left', '', '<p class=\"text-justify\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard.</p>', '1');
 INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('2', 'footermiddle', 'Available On', '<p><strong>Monday - Wednesday</strong>Â 10:00 AM - 7:00 PM</p>\r\n<p><strong>Thursday - Friday</strong>Â 10:00 AM - 11:00 PM</p>\r\n<p><strong>Saturday</strong>Â 12:00 PM - 6:00 PM</p>\r\n<p><strong>Sunday</strong>Â Off</p>', '1');
@@ -7893,10 +7982,6 @@ INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_des
 INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('29', 'Hero Sub Title', 'Hero Sub Title(Exclusive Theme)', 'Discover bold flavors and unforgettable dishes in a place where every craving is satisfied with the perfect bite, crafted just for you.', '1');
 INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('30', 'Hero Video Link', 'Hero Video Link(Youtube, Vimeo etc)', 'https://www.youtube.com/watch?app=desktop&v=4IXGFfMgR2U', '1');
 INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('31', 'Serve Quality Food & Thing', 'Welcome To Our Luxury Restaurant', 'Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum. Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami readymade swag. Selfies iPhone Kickstarter, drinking vinegar jean vinegar stumptown yr pop-up artisan sunt.', '1');
-INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('36', 'Why choose us?', 'Enjoying the beautiful things', '<p>Discover bold flavors and unforgettable dishes in a place where every craving is satisfied with the perfect bite, crafted just for you.</p>\r\n<ul>\r\n<li>The sushi here is always fresh & beautifully</li>\r\n<li>We invite everyone to see how our products</li>\r\n<li>We invite everyone to see how our products</li>\r\n</ul>', '1');
-INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('37', 'Testimonials', 'What Our Customers Say', NULL, '1');
-INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('38', 'Visit Our Restaurant', 'Visit Our Restaurant', 'Experience the perfect blend of delicious cuisine and warm hospitality at our restaurant. Whether you\'re planning a family dinner, a casual lunch, or a special celebration, we are here to make every visit memorable. Call us anytime for reservations or simply walk in during our opening hours to enjoy a delightful dining experience.', '1');
-INSERT INTO `tbl_widget` (`widgetid`, `widget_name`, `widget_title`, `widget_desc`, `status`) VALUES ('39', 'Short Opening Hours', 'Opening Hours', '<p>Mon – Thu (10:00 AM – 01:00 AM)</p>\n<p>Fri – Sun (11:00 AM – 10:00 PM)</p>', '1');
 
 
 #
@@ -7913,11 +7998,11 @@ CREATE TABLE `tblreservation` (
   `formtime` time NOT NULL,
   `totime` time NOT NULL,
   `reserveday` date NOT NULL,
-  `customer_notes` text DEFAULT NULL,
+  `customer_notes` text,
   `status` int(11) NOT NULL COMMENT '1=free,2=booked',
-  `notif` int(11) NOT NULL DEFAULT 0 COMMENT '0=unseen,1=seen',
+  `notif` int(11) NOT NULL DEFAULT '0' COMMENT '0=unseen,1=seen',
   PRIMARY KEY (`reserveid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('1', '54', '3', '2', '21:10:00', '21:40:00', '2025-11-01', '', '2', '1');
 INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('3', '69', '9', '3', '12:00:00', '12:30:00', '2025-11-13', NULL, '2', '1');
@@ -7925,6 +8010,8 @@ INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, 
 INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('5', '73', '3', '2', '04:00:00', '04:30:00', '2025-11-15', NULL, '2', '1');
 INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('9', '81', '0', '1', '01:25:30', '01:55:30', '2025-11-15', NULL, '2', '1');
 INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('10', '82', '9', '3', '01:25:30', '01:55:30', '2025-11-15', NULL, '2', '1');
+INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('11', '82', '7', '4', '10:10:00', '10:40:00', '2025-11-20', '', '2', '1');
+INSERT INTO `tblreservation` (`reserveid`, `cid`, `tableid`, `person_capicity`, `formtime`, `totime`, `reserveday`, `customer_notes`, `status`, `notif`) VALUES ('12', '82', '0', '6', '10:00:00', '10:30:00', '2025-11-19', '', '2', '1');
 
 
 #
@@ -7938,7 +8025,7 @@ CREATE TABLE `tblserver` (
   `localhost_url` varchar(255) NOT NULL,
   `online_url` varchar(255) NOT NULL,
   PRIMARY KEY (`serverid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 INSERT INTO `tblserver` (`serverid`, `localhost_url`, `online_url`) VALUES ('1', 'http://localhost/restaurant_v2', 'http://soft14.bdtask.com/restaurant_v2');
 
@@ -7973,7 +8060,7 @@ CREATE TABLE `themes` (
   `status` int(11) NOT NULL COMMENT '0=inactive,1=active',
   `activedate` date DEFAULT NULL,
   PRIMARY KEY (`themeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 INSERT INTO `themes` (`themeid`, `themename`, `theme_thumb`, `primary_color`, `top_header_bg`, `header_bg`, `header_color`, `footer_bg`, `footer_color`, `status`, `activedate`) VALUES ('1', 'defaults', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2020-11-19');
 INSERT INTO `themes` (`themeid`, `themename`, `theme_thumb`, `primary_color`, `top_header_bg`, `header_bg`, `header_color`, `footer_bg`, `footer_color`, `status`, `activedate`) VALUES ('3', 'classic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '2020-11-19');
@@ -7991,11 +8078,11 @@ CREATE TABLE `top_menu` (
   `menu_name` varchar(50) NOT NULL,
   `menu_slug` varchar(70) NOT NULL,
   `parentid` int(11) NOT NULL,
-  `is_footer` tinyint(1) NOT NULL DEFAULT 0,
+  `is_footer` tinyint(1) NOT NULL DEFAULT '0',
   `entrydate` date NOT NULL,
-  `isactive` int(11) NOT NULL DEFAULT 0,
+  `isactive` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`menuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 INSERT INTO `top_menu` (`menuid`, `menu_name`, `menu_slug`, `parentid`, `is_footer`, `entrydate`, `isactive`) VALUES ('1', 'Home', 'home', '0', '0', '2025-09-01', '1');
 INSERT INTO `top_menu` (`menuid`, `menu_name`, `menu_slug`, `parentid`, `is_footer`, `entrydate`, `isactive`) VALUES ('2', 'Reservation', 'reservation', '0', '0', '2025-09-01', '1');
@@ -8025,8 +8112,8 @@ DROP TABLE IF EXISTS `unit_of_measurement`;
 
 CREATE TABLE `unit_of_measurement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uom_name` varchar(200) NOT NULL,
-  `uom_short_code` varchar(10) NOT NULL,
+  `uom_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `uom_short_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -8054,9 +8141,9 @@ CREATE TABLE `usedcoupon` (
   `cusedid` int(11) NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NOT NULL,
   `couponcode` varchar(100) NOT NULL,
-  `couponrate` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `couponrate` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`cusedid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # TABLE STRUCTURE FOR: user
@@ -8068,8 +8155,8 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) DEFAULT NULL,
   `lastname` varchar(50) DEFAULT NULL,
-  `about` text DEFAULT NULL,
-  `waiter_kitchenToken` text DEFAULT NULL,
+  `about` text,
+  `waiter_kitchenToken` text,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
   `password_reset_token` varchar(20) DEFAULT NULL,
@@ -8078,12 +8165,12 @@ CREATE TABLE `user` (
   `last_logout` datetime DEFAULT NULL,
   `ip_address` varchar(14) DEFAULT NULL,
   `counter` int(11) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `is_admin` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('2', 'John', 'Doe', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '', 'admin@example.com', '827ccb0eea8a706c4c34a16891f84e7b', '', './assets/img/user/m2.png', '2025-11-17 21:41:56', '2023-01-01 01:07:30', '::1', NULL, '1', '1');
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('2', 'John', 'Doe', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum', '', 'admin@example.com', '827ccb0eea8a706c4c34a16891f84e7b', '', './assets/img/user/m2.png', '2025-11-18 11:40:34', '2025-11-17 21:51:24', '::1', NULL, '1', '1');
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('162', 'counter', 'Ahmad', NULL, NULL, 'counter2@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, '2025-11-15 12:34:01', '2025-11-15 12:34:38', '::1', NULL, '1', '0');
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('165', 'kitchen', '2', NULL, NULL, 'kitchen1@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, '2023-01-01 01:07:36', '2023-01-01 01:07:50', '::1', NULL, '1', '0');
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `about`, `waiter_kitchenToken`, `email`, `password`, `password_reset_token`, `image`, `last_login`, `last_logout`, `ip_address`, `counter`, `status`, `is_admin`) VALUES ('166', 'kitchen', '1', '', NULL, 'kitchen@example.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, '2025-11-15 12:34:49', '2025-11-15 12:35:04', '::1', NULL, '1', '0');
@@ -8104,9 +8191,9 @@ CREATE TABLE `variant` (
   `variantid` int(11) NOT NULL AUTO_INCREMENT,
   `menuid` int(11) NOT NULL,
   `variantName` varchar(120) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`variantid`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 
 INSERT INTO `variant` (`variantid`, `menuid`, `variantName`, `price`) VALUES ('1', '1', '100 og', '20.00');
 INSERT INTO `variant` (`variantid`, `menuid`, `variantName`, `price`) VALUES ('2', '5', 'Mineral Water ', '10.00');
@@ -8170,13 +8257,13 @@ DROP TABLE IF EXISTS `waste_tracking`;
 CREATE TABLE `waste_tracking` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_name` varchar(100) NOT NULL,
-  `quantity` int(11) DEFAULT 0,
+  `quantity` int(11) DEFAULT '0',
   `unit` varchar(50) DEFAULT NULL,
   `reason` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #
 # TABLE STRUCTURE FOR: weekly_holiday
@@ -8186,9 +8273,9 @@ DROP TABLE IF EXISTS `weekly_holiday`;
 
 CREATE TABLE `weekly_holiday` (
   `wk_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dayname` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `dayname` varchar(30) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`wk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `weekly_holiday` (`wk_id`, `dayname`) VALUES ('1', 'Friday,Satarday,Sunday');
 
@@ -8202,11 +8289,11 @@ DROP TABLE IF EXISTS `whatsapp_settings`;
 CREATE TABLE `whatsapp_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `whatsapp_number` varchar(100) DEFAULT NULL,
-  `chatenable` int(11) DEFAULT 0,
-  `orderenable` int(11) DEFAULT 0,
+  `chatenable` int(11) DEFAULT '0',
+  `orderenable` int(11) DEFAULT '0',
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `whatsapp_settings` (`id`, `whatsapp_number`, `chatenable`, `orderenable`, `status`) VALUES ('1', '242064663469', '1', '1', '1');
 
