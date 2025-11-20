@@ -4655,6 +4655,7 @@ DEBUG - 2025-11-17 22:50:28 --> File loaded: /Applications/XAMPP/xamppfiles/htdo
 INFO - 2025-11-17 22:50:28 --> Model Class Initialized
 INFO - 2025-11-17 22:50:28 --> Final output sent to browser
 DEBUG - 2025-11-17 22:50:28 --> Total execution time: 0.3616
+<<<<<<< HEAD
 INFO - 2025-11-17 20:51:03 --> Config Class Initialized
 INFO - 2025-11-17 20:51:03 --> Hooks Class Initialized
 DEBUG - 2025-11-17 20:51:03 --> UTF-8 Support Enabled
@@ -24899,3 +24900,5 @@ DEBUG - 2025-11-17 22:20:53 --> File loaded: C:\MAMP\htdocs\Bonresto\application
 INFO - 2025-11-17 22:20:53 --> Model Class Initialized
 INFO - 2025-11-17 22:20:54 --> Final output sent to browser
 DEBUG - 2025-11-17 22:20:54 --> Total execution time: 0.1624
+=======
+>>>>>>> dc314dfad6bbdfcf2a1bcc520a5246d0538ddb6b
