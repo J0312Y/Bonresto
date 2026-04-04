@@ -97,8 +97,7 @@ echo form_open_multipart('setting/serversetting/create', 'class="form-inner"') ?
                     </div>
                 <?php echo form_close() ?>
                 <p>*** <?php echo display('if_you_need_the_above_all_apps') ?><br />
-               Email:business@bdtask.com <br />
-               Skype:bdtask
+               Email:business@lmk.com <br />
                 </p>
             </div>
         </div>

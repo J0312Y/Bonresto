@@ -1,4 +1,4 @@
-<li><a href="<?php echo base_url('dashboard/backup_restore'); ?>">Backup & Restore</a></li>
+<!--<li><a href="<?php echo base_url('dashboard/backup_restore'); ?>">Backup & Restore</a></li>-->
 <link href="<?php echo base_url('application/modules/dashboard/assest/css/home_dashboard.css?v=1.1'); ?>"
     rel="stylesheet" type="text/css" />
 <link

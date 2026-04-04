@@ -1,17 +1,11 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /Bonresto/
+    # On indique au serveur que le projet est dans le dossier bonresto
+    RewriteBase /bonresto/
 
-    # Ne réécrire que si le fichier ou dossier n'existe pas
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-
-    # Rediriger toutes les requêtes vers index.php
-    RewriteRule ^(.*)$ index.php/$1 [L]
+    
+    # Suppression du slash après index.php pour une meilleure compatibilité
+    RewriteRule ^(.*)$ index.php?$1 [L]
 </IfModule>
-
-# Optionnel : empêcher l'accès aux fichiers sensibles
-<FilesMatch "\.(env|ini|log|sh|sql)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>

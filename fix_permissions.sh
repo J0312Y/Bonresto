@@ -1,12 +1,11 @@
 #!/bin/bash
 # ==============================================
-# 🚀 Script de réparation des permissions Bhojon
-# Pour macOS (XAMPP) ou Linux (Apache)
-# Auteur : ChatGPT
+# 🚀 Script de réparation des permissions Bonresto
+
 # ==============================================
 
 # 📂 Chemin vers ton projet
-PROJECT_PATH="/Applications/XAMPP/xamppfiles/htdocs/Bhojon_Main_File"
+PROJECT_PATH="C:\MAMP\htdocs\Bonresto"
 
 echo "🔧 Réparation des permissions dans : $PROJECT_PATH"
 
@@ -35,9 +34,8 @@ else
 "$PROJECT_PATH/application/logs" "$PROJECT_PATH/assets/uploads"
   echo "♻️ Redémarrage d’Apache..."
   sudo service apache2 restart
-fi
+
 
 echo "✅ Permissions réparées avec succès !"
 echo "📁 Vérifie que ton application fonctionne sur : 
-http://localhost/Bhojon_Main_File"
-
+http://localhost/Bonresto/"

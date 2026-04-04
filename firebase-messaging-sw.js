@@ -1,49 +1,67 @@
-// firebase-messaging-sw.js
-
-// Import Firebase scripts
 importScripts('https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/7.17.1/firebase-messaging.js');
 
-// 🔹 Configure Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyCm2qFBF085Y9hPLr7BmKJBxQx_wWqwIAE",
-    authDomain: "restaurantqrapp-ea222.firebaseapp.com",
-    databaseURL: "https://restaurantqrapp-ea222-default-rtdb.firebaseio.com",
-    projectId: "restaurantqrapp-ea222",
-    storageBucket: "restaurantqrapp-ea222.firebasestorage.app",
-    messagingSenderId: "772898595253",
-    appId: "1:772898595253:web:7c182c663e7327938579fc",
-    measurementId: "G-M6WZJTBZWC"
+// Configuration Firebase
+var config = {
+    apiKey: "AIzaSyAmQ43V5XgOtd9Yd_wo-FROpkQ3tWLqcX0",
+    authDomain: "my-apps-project-9ba31.firebaseapp.com",
+    databaseURL: "https://my-apps-project-9ba31.firebaseio.com",
+    projectId: "my-apps-project-9ba31",
+    storageBucket: "my-apps-project-9ba31.appspot.com",
+    messagingSenderId: "562824560989",
+    appId: "1:562824560989:web:7f068c5adbf5436210e8b4"
 };
+firebase.initializeApp(config);
 
-// ✅ Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-// Retrieve Firebase Messaging
 const messaging = firebase.messaging();
 
-// Handle background messages
-messaging.setBackgroundMessageHandler(function(payload) {
-    console.log('[firebase-messaging-sw.js] Received background message:', payload);
+// Détection automatique de l'environnement
+const isLocalhost = self.location.hostname === "localhost" || self.location.hostname === "127.0.0.1";
+const BASE_URL = isLocalhost ? "http://localhost" : self.location.origin;
 
-    // Customize notification
-    const notificationTitle = payload.data.title || 'New Notification';
+// Définition des icônes par défaut
+const defaultIcon = `${BASE_URL}/img/icon.png`;
+const defaultImage = `${BASE_URL}/img/d.png`;
+
+// Gestion des messages en arrière-plan
+messaging.setBackgroundMessageHandler(function(payload) {
+    console.log('[firebase-messaging-sw.js] Received background message', payload);
+
+    const notificationTitle = payload.data?.title || 'Nouvelle notification';
     const notificationOptions = {
-        body: payload.data.body || 'You have a new message.',
-        icon: payload.data.icon || '/Bonresto/assets/images/icon.png',
-        image: payload.data.image || '/Bonresto/assets/images/notification.png'
+        body: payload.data?.body || '',
+        icon: payload.data?.icon || defaultIcon,
+        image: payload.data?.image || defaultImage,
+        data: {
+            url: payload.data?.click_action || '/'
+        }
     };
 
-    return self.registration.showNotification(notificationTitle, notificationOptions);
+    // Retour de la promesse pour éviter l'erreur de canal fermé
+    return self.registration.showNotification(notificationTitle, notificationOptions)
+        .then(() => {
+            console.log('Notification affichée avec succès.');
+        })
+        .catch(err => {
+            console.error('Erreur lors de l’affichage de la notification:', err);
+        });
 });
 
-// Optional: handle notification click
+// Gestion du clic sur la notification
 self.addEventListener('notificationclick', function(event) {
     event.notification.close();
+
+    const clickUrl = event.notification.data?.url || '/';
     event.waitUntil(
-        clients.openWindow('/') // Open homepage or specific page
+        clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function(clientList) {
+            for (const client of clientList) {
+                if (client.url === clickUrl && 'focus' in client) {
+                    return client.focus();
+                }
+            }
+            if (clients.openWindow) {
+                return clients.openWindow(clickUrl);
+            }
+        })
     );
 });
-/* ===============================
-   🔹 Firebase Cloud Messaging
-================================ */

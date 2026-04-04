@@ -1,3 +1,4 @@
+<div id="message" style="display:none; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;"></div>
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="panel panel-bd lobidrag">

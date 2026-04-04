@@ -36,6 +36,10 @@ if (!empty($seoterm)) {
     <link href="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/css/new.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/css/responsive.css" rel="stylesheet">
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/jquery-3.3.1.min.js"></script>
+        <!-- Ajout plugins via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/theia-sticky-sidebar@1.7.0/dist/theia-sticky-sidebar.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/floating-whatsapp@1.0.1/dist/floating-wpp.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/floating-whatsapp@1.0.1/dist/floating-wpp.min.js"></script>
      <link href="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/css/appcart.css" rel="stylesheet">
   
  

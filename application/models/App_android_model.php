@@ -509,6 +509,97 @@ class App_android_model extends CI_Model
 		 $data = $this->db->select("*")->from('tbl_bank')->get()->result();
 		 return $data;
 	}
+
+	/**
+	 * Process mobile payment for an order using Airtel Money
+	 * @param int $order_id
+	 * @param array $data (expects 'phone_number' and optionally 'amount')
+	 * @return array result status
+	 */
+	public function process_mobile_payment($order_id, $data)
+	{
+		try {
+			// Load order to determine amount if not provided
+			$order = $this->db->select('*')->from('customer_order')->where('order_id', $order_id)->get()->row();
+
+			$phone = isset($data['phone_number']) ? $data['phone_number'] : (isset($data['phone']) ? $data['phone'] : null);
+			$amount = isset($data['amount']) ? $data['amount'] : 0;
+
+			if (empty($phone)) {
+				return [
+					'status' => 'error',
+					'message' => 'Numéro de téléphone manquant pour le paiement mobile',
+					'bgColor' => '2'
+				];
+			}
+
+			if (empty($amount) && !empty($order)) {
+				// Try to compute total from order amounts if available
+				$amount = isset($order->total) ? $order->total : (isset($order->grand_total) ? $order->grand_total : 0);
+			}
+
+			if ($amount <= 0) {
+				return [
+					'status' => 'error',
+					'message' => 'Montant de paiement invalide',
+					'bgColor' => '2'
+				];
+			}
+
+			// Load Airtel Money library
+			$this->load->library('AirtelMoneyAPI');
+
+			// Create a reference for this transaction
+			$reference = 'order_' . $order_id . '_' . time();
+
+			// Initiate payment via Airtel Money
+			$response = $this->airtelmoneyapi->initiatePayment($phone, $amount, $reference);
+
+			// Normalize response with friendly messages and bgColor
+			if ($response && isset($response['status'])) {
+				if ($response['status'] === 'success') {
+					$response['message'] = 'Paiement initié avec succès. Veuillez vérifier votre téléphone.';
+					$response['bgColor'] = '1'; // Green for success
+					
+					// Optionally record the transaction
+					if (isset($response['transaction_id'])) {
+						$tx = [
+							'order_id' => $order_id,
+							'transaction_id' => $response['transaction_id'],
+							'provider' => 'airtel',
+							'amount' => $amount,
+							'status' => 'pending',
+							'created_at' => date('Y-m-d H:i:s')
+						];
+						// Attempt to insert into `mobile_transactions` if table exists
+						if ($this->db->table_exists('mobile_transactions')) {
+							$this->db->insert('mobile_transactions', $tx);
+						}
+					}
+				} else {
+					// Error case
+					$response['message'] = 'Échec de l\'initiation du paiement Airtel Money. Veuillez réessayer.';
+					$response['bgColor'] = '2'; // Red for error
+				}
+			} else {
+				// No response from API
+				return [
+					'status' => 'error',
+					'message' => 'Erreur de connexion au service Airtel Money',
+					'bgColor' => '2'
+				];
+			}
+
+			return $response;
+
+		} catch (Exception $e) {
+			return [
+				'status' => 'error',
+				'message' => 'Erreur de traitement du paiement: ' . $e->getMessage(),
+				'bgColor' => '2'
+			];
+		}
+	}
 	public function terminallist()
 	{
 		$data = $this->db->select("*")->from('tbl_card_terminal')->get()->result();
@@ -520,39 +611,6 @@ class App_android_model extends CI_Model
 		return $data;
 	}
 
-	public function process_mobile_payment($order_id, $payment_data)
-	{
-		// Vérifier le type de paiement mobile
-		switch ($payment_data['payment_method_id']) {
-			case 8: // Airtel Money
-				$result = $this->mobileMoney->processAirtelMoney($payment_data);
-				break;
-			case 9: // MTN Money
-				$result = $this->mobileMoney->processMTNMoney($payment_data);
-				break;
-			default:
-				return array(
-					'status' => 'error',
-					'message' => 'Méthode de paiement mobile non supportée'
-				);
-		}
-
-		if ($result['status'] === 'success') {
-			// Mettre à jour le statut de la commande
-			$this->db->where('order_id', $order_id)
-					->update('customer_order', array(
-						'order_status' => 1,
-						'payment_method_id' => $result['payment_method_id'],
-						'payment_details' => json_encode(array(
-							'transaction_id' => $result['transaction_id'],
-							'phone_number' => $payment_data['phone_number'],
-							'payment_time' => date('Y-m-d H:i:s')
-						))
-					));
-		}
-
-		return $result;
-	}
 	public function customerorder($id,$nststus=null){
 		if(!empty($nststus)){
 		$where="order_menu.order_id = '".$id."' AND order_menu.isupdate='".$nststus."' ";

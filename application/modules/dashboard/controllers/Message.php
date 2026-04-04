@@ -151,7 +151,7 @@ class Message extends MX_Controller {
         if ($this->form_validation->run() === true) { 
             if ($this->message_model->create($postData)) {
                 #set success message
-                $this->session->set_flashdata('message', display('message_sent!'));
+                $this->session->set_flashdata('message', display('message_sent'));
             } else {
                 #set exception message
                 $this->session->set_flashdata('exception', display('please_try_again'));

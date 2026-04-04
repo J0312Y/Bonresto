@@ -15,36 +15,31 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <?php echo form_open('purchase/supplierlist/supplier_ledger_report', ['class' => '', 'id' => 'validate']) ?>
-                        <?php $today = date('Y-m-d');?>
+                    <div class="panel-body"> 
+                        <?php echo form_open('purchase/supplierlist/supplier_ledger_report', array('class' => '', 'id' => 'validate')) ?>
+                        <?php $today = date('Y-m-d'); ?>
 
                         <div class="form-group row">
                             <label for="supplier_name" class="col-sm-3 col-form-label"><?php echo display('select_supplier') ?> <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                                 <select name="supplier_id"  class="form-control" required="">
                                     <option value=""></option>
-                                    <?php
-if ($supplierlist) {
-
-    foreach ($supplierlist as $supplier) {?>
-                                        <option value="<?php echo $supplier->supid; ?>"><?php echo $supplier->supName; ?></option>
-                                    <?php }
-
-}
-?>
+                                    <?php if($supplierlist) { 
+									foreach($supplierlist as $supplier){?>
+                                        <option value="<?php echo $supplier->supid;?>"><?php echo $supplier->supName;?></option>
+                                    <?php } } ?>
                                 </select>
                             </div>
                         </div>
 
-
+                    
                         <div class="" id="datebetween">
                             <div class="form-group row">
                                 <label for="from_date " class="col-sm-3 col-form-label"> <?php echo display('from') ?></label>
                                 <div class="col-sm-6">
                                     <input type="text" name="from_date"  value="<?php echo $today; ?>" class="datepicker form-control" id="from_date"/>
                                 </div>
-                            </div>
+                            </div>      
 
                             <div class="form-group row">
                                 <label for="to_date" class="col-sm-3 col-form-label"> <?php echo display('end_date') ?></label>
@@ -52,7 +47,7 @@ if ($supplierlist) {
                                     <input type="text" name="to_date" value="<?php echo $today; ?>" class="datepicker form-control" id="to_date"/>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 
                         <div class="form-group row">
                             <label for="details" class="col-sm-3 col-form-label"></label>
@@ -79,15 +74,13 @@ if ($supplierlist) {
                     <div class="panel-body">
                         <div id="printableArea" class="supplier_ledger_mr_left">
 
-                            <?php
-if ($Supplierinfo) {?>
+                            <?php if ($Supplierinfo) { ?>
                                 <div class="text-center">
                                     <h3> <?php echo $Supplierinfo->supName; ?> </h3>
                                     <h4><?php echo display('address') ?> : <?php echo $Supplierinfo->supAddress; ?> </h4>
                                     <h4> <?php echo display('print_date') ?>: <?php echo date("d/m/Y h:i:s"); ?> </h4>
                                 </div>
-                            <?php }
-?>
+                            <?php } ?>
 
                             <div class="table-responsive">
 
@@ -105,82 +98,72 @@ if ($Supplierinfo) {?>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        if ($supplierledger) {
 
-if ($supplierledger) {
-
-    $sl    = 0;
-    $debit = $credit = $balance = 0;
-
-    foreach ($supplierledger as $ledger) {
-        $sl++;
-        $purchaseinfo = $this->db->select("*")->from('purchaseitem')->where('invoiceid', $ledger->transaction_id)->get()->row();
-        ?>
+                                            $sl = 0;
+                                            $debit = $credit = $balance = 0;
+                                            foreach ($supplierledger as $ledger) {
+                                                $sl++;
+												$purchaseinfo=$this->db->select("*")->from('purchaseitem')->where('invoiceid',$ledger->transaction_id)->get()->row();
+                                                ?>
                                                 <tr>
                                                     <td class="text-center"><?php echo $ledger->date; ?></td>
                                                     <td><?php echo $ledger->description; ?></td>
-                                                    <td><?php
-if ($ledger->chalan_no != 'Adjustment ') {?><a href="<?php echo base_url(); ?>purchase/purchase/purchaseinvoice/<?php echo (!empty($purchaseinfo->purID) ? $purchaseinfo->purID : null); ?>"><?php echo $ledger->chalan_no; ?></a><?php } else {echo $ledger->chalan_no;}
-        ?></td>
+                                                    <td><?php if($ledger->chalan_no!='Adjustment '){?><a href="<?php echo base_url(); ?>purchase/purchase/purchaseinvoice/<?php echo (!empty($purchaseinfo->purID)?$purchaseinfo->purID:null); ?>"><?php echo $ledger->chalan_no; ?></a><?php } else{ echo $ledger->chalan_no;}?></td>
                                                     <td><?php echo @$ledger->deposit_no; ?></td>
                                                     <td align="right">
                                                         <?php
+                                                        if ($ledger->d_c == 'd') {
+                                                            echo (($position == 0) ? "$currency " : " $currency");
+                                                            echo number_format($ledger->amount, 2, '.', ',');
+                                                            $debit += $ledger->amount;
 
-        if ($ledger->d_c == 'd') {
-            echo (($position == 0) ? "$currency " : " $currency");
-            echo number_format($ledger->amount, 2, '.', ',');
-            $debit += $ledger->amount;
-
-        } else {
-            $debit += '0.00';
-        }
-
-        ?>
+                                                        } else {
+                                                            $debit += '0.00';
+                                                        }
+                                                        ?>
                                                     </td>
                                                     <td align="right">
                                                         <?php
-
-        if ($ledger->d_c == 'c') {
-            echo (($position == 0) ? "$currency " : " $currency");
-            echo number_format($ledger->amount, 2, '.', ',');
-            $credit += $ledger->amount;
-        } else {
-            $credit += '0.00';
-        }
-
-        ?>
+                                                        if ($ledger->d_c == 'c') {
+                                                            echo (($position == 0) ? "$currency " : " $currency");
+                                                            echo number_format($ledger->amount, 2, '.', ',');
+                                                            $credit += $ledger->amount;
+                                                        } else {
+                                                            $credit += '0.00';
+                                                        }
+                                                        ?>
                                                     </td>
                                                     <td align='right'>
                                                         <?php
-$balance = $debit - $credit;
-        echo (($position == 0) ? "$currency " : " $currency");
-        echo number_format($balance, 2, '.', ',');
-        ?>
+                                                        $balance = $debit - $credit;
+                                                        echo (($position == 0) ? "$currency " : " $currency");
+                                                        echo number_format($balance, 2, '.', ',');
+                                                        ?>
                                                     </td>
                                                 </tr>
                                                 <?php
-}
-
-}
-
-?>
+                                            }
+                                        }
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="4" align="right"><b><?php echo display('grand_total') ?>:</b></td>
                                             <td align="right"><b><?php
-echo (($position == 0) ? "$currency " : "$currency");
-echo number_format(($debit ?? 0), 2, '.', ',');
-?></b>
+                                                    echo (($position == 0) ? "$currency " : "$currency");
+                                                    echo number_format((@$debit), 2, '.', ',');
+                                                    ?></b>
                                             </td>
                                             <td align="right"><b><?php
-echo (($position == 0) ? "$currency " : "$currency");
-echo number_format(($credit ?? 0), 2, '.', ',');
-?></b>
+                                                    echo (($position == 0) ? "$currency " : "$currency");
+                                                    echo number_format((@$credit), 2, '.', ',');
+                                                    ?></b>
                                             </td>
                                             <td align="right"><b><?php
-echo (($position == 0) ? "$currency " : "$currency");
-echo number_format(($balance ?? 0), 2, '.', ',');
-?></b></td>
+                                                    echo (($position == 0) ? "$currency " : "$currency");
+                                                    echo number_format((@$balance), 2, '.', ',');
+                                                    ?></b></td>
                                         </tr>
                                     </tfoot>
                                 </table>

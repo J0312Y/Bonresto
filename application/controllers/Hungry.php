@@ -3614,9 +3614,10 @@ document.getElementById("paytrack").click();
         $text       = $this->input->post('comments', true);
         $phone      = $this->input->post('phone', true);
         $subject    = "Demande de contact";
-        $emailtext  = '<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ' . $fullname . ',</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Phone:' . $phone . '</p>
-						<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">' . $text . '</p>';
+	$emailtext  = '<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi I am ' . $fullname . ',</p>
+                  <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Email:' . $email . '</p>
+                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Phone:' . $phone . '</p>
+		<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">' . $text . '</p>';
         $config = [
             'protocol'  => $send_email->protocol,
             'smtp_host' => $send_email->smtp_host,
@@ -3624,21 +3625,22 @@ document.getElementById("paytrack").click();
             'smtp_user' => $send_email->sender,
             'smtp_pass' => $send_email->smtp_password,
             'mailtype'  => $send_email->mailtype,
-            'smtp_crypto'  => 'tls',
-            'charset'   => 'utf-8',
+            'smtp_crypto'  => $send_email->smtp_crypto,
+	    'charset'   => 'utf-8',
+	    'newline'   => "\r\n",
         ];
 
         $this->load->library('email');
         $this->email->initialize($config);
         $this->email->set_newline("\r\n");
         $this->email->set_mailtype("html");
-        $this->email->from($email, 'Contact Info');
+        $this->email->from($send_email->sender, 'Demande de Contact Client');
         $this->email->to($send_email->sender);
         $this->email->subject($subject);
         $this->email->message($emailtext);
         $this->email->send();
         $this->session->set_flashdata('message', display('contact_send'));
-        redirect('contact/');
+	redirect('contact/');
     }
 
     public function subscribe()

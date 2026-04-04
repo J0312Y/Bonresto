@@ -76,6 +76,7 @@ $route['app-terms'] = "hungry/termsqr";
 $route['app-refund-policty'] = "hungry/refundpolicyqr";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['accounts/get_supplier_code'] = 'accounts/get_supplier_code';
 
 // New Design
 $route['online-order'] = "hungry/onlineorder";
@@ -103,7 +104,23 @@ $route['qrorder/submit'] = 'qrapp/qrpublic/submit_order';
 //for the sound of reservation notification
 $route['reservation/getSound'] = 'reservation/getSound';
 
+// Optional: AJAX endpoint to load employees
+$route['employee/get_all'] = 'employee/employeeback/get_all';
 
+$route['android'] = 'android/index';
+$route['android/categorylist'] = 'android/categorylist';
+$route['android/itemlist/(:num)'] = 'android/itemlist/$1';
+$route['android/itemdetails/(:num)'] = 'android/itemdetails/$1';
+$route['android/addtoCart'] = 'android/addtoCart';
+$route['android/viewCart/(:num)'] = 'android/viewCart/$1';
+$route['android/updateCart'] = 'android/updateCart';
+$route['android/checkout'] = 'android/checkout';
+$route['android/placeOrder'] = 'android/placeOrder';
+$route['android/myorderlist'] = 'android/myorderlist';
+$route['android/vieworder/(:num)'] = 'android/vieworder/$1';
+$route['android/myurl'] = 'android/myurl';
+
+// Admin License Route
 $route['admin/license'] = 'admin/license';
 //set modules/config/routes.php
 $modules_path = APPPATH.'modules/';     

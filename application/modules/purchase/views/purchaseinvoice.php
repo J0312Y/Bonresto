@@ -7,13 +7,13 @@
                
                 <div class="panel-body">
                     <fieldset class="border p-2">
-                       <legend  class="w-auto"><?php echo display('inv_information') ?></legend>
+                       <legend  class="w-auto"><?php echo "Invoice Information"; ?></legend>
                     </fieldset>
                     <div class="row">
 			<div class="col-sm-12">
 		        <div class="panel panel-default">
 		            <div class="panel-body"> 
-						<a  class="btn btn-warning" href="#" onclick="printDiv('printableArea')"><?php echo display('print') ?></a>
+						<a  class="btn btn-warning" href="#" onclick="printDiv('printableArea')"><?php echo "Print"; ?></a>
 		            </div>
 		        </div>
 
@@ -24,7 +24,7 @@
 		        <div class="panel panel-bd lobidrag">
 		            <div class="panel-heading">
 		                <div class="panel-title">
-		                    <h4><?php echo display('inv_information') ?></h4>
+		                    <h4><?php echo "Invoice Information"; ?></h4>
 		                </div>
 		            </div>
 		            <div class="panel-body">
@@ -41,15 +41,14 @@
 			                        <thead>
 										<tr>
 											<th class="text-center"><?php echo display('ingredient_name') ?></th>
-											<th class="text-center"><?php echo display('quantity') ?></th>
-											<th class="text-center"><?php echo display('unit_price') ?></th>
-											<th class="text-center"><?php echo display('total_price') ?></th>
+											<th class="text-center"><?php echo "Quantity"; ?></th>
+											<th class="text-center"><?php echo "Unit Price"; ?></th>
+											<th class="text-center"><?php echo "Total Price"; ?></th>
 										</tr>
 									</thead>
 									<tbody>
                                      <?php 
 									 //print_r($iteminfo);
-									 if(!empty($iteminfo)) {
 									 foreach($iteminfo as $item){?>
 									<tr>
 											<td><?php echo $item->ingredient_name;?></td>
@@ -57,12 +56,12 @@
                                             <td class="text-right"><?php echo $item->price;?></td>
                                             <td class="text-right"><?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $item->totalprice;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></td>
                                     </tr>
-                                    <?php } } ?>
+                                    <?php } ?>
                                     <tr>
-                                         <td class="text-right" colspan="4"><?php echo display('grand_total') ?>:  <?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $purchaseinfo->total_price;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></td>
+                                         <td class="text-right" colspan="4">Grand Total:  <?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $purchaseinfo->total_price;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></td>
                                     </tr>
                                     <tr>
-                                         <td class="text-right" colspan="4"><?php echo display('paid_amnt') ?>:  <?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $purchaseinfo->paid_amount;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></td>
+                                         <td class="text-right" colspan="4">Paid Amount:  <?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $purchaseinfo->paid_amount;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></td>
                                     </tr>
 									</tbody>
 									

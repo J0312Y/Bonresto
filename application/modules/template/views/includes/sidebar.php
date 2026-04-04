@@ -845,7 +845,7 @@
         }
 
         ?>
-    <?php
+       <?php
     if(!empty($HmvcMenu["qrapp"])) {
         $qrAppMenu = $HmvcMenu["qrapp"];
         ?>
@@ -1138,8 +1138,13 @@
         <?php
         }
         ?>
+        <li class="<?php echo ($this->uri->segment(2) == 'backup_restore' ? 'active' : ''); ?>">
+            <a href="<?php echo base_url('dashboard/backup_restore'); ?>">
+                <i class="fa fa-database"></i>
+                <span>Backup & Restore</span>
+            </a>
+        </li>
         <!-- ends of admin area -->
-
         <li class="treeview <?php echo $this->uri->segment(2) == "message"
                                 ? "active"
                                 : null; ?>">

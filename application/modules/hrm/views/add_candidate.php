@@ -48,7 +48,7 @@
                                <label for="picture" class="col-sm-2 col-form-label"><?php echo display('picture') ?>
                                    *</label>
                                <div class="col-sm-4">
-                                   <input type="file" name=" picture" class="form-control"
+                                   <input type="file" name="picture" class="form-control"
                                        placeholder="<?php echo display('picture') ?>" id="picture">
                                </div>
                            </div>

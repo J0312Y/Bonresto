@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="<?php echo $installerurl;?>assets/img/favicon.png" sizes="32x32">
 <base href="<?php echo $installerurl; ?>">
-<title>CodeIgniter Application Installer</title>
+<title>Bonresto Application Installer</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=EB+Garamond&display=swap" rel="stylesheet">
 <link href="<?php echo $installerurl;?>assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo $installerurl;?>assets/css/style.min.css" rel="stylesheet">

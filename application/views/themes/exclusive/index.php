@@ -469,6 +469,10 @@ $whatsapp_count = $WhatsApp->num_rows();
 	<!-- <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/customescript.js"></script> -->
 	<script src="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/exclusive_theme.js"></script>
+	<!-- Ajout plugins via CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/theia-sticky-sidebar@1.7.0/dist/theia-sticky-sidebar.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/floating-whatsapp@1.0.1/dist/floating-wpp.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/floating-whatsapp@1.0.1/dist/floating-wpp.min.js"></script>
     
 	<script>
 		$(document).ready(function () {

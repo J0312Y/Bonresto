@@ -4,16 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Backup_restore extends MX_Controller {
 
     private $savePath = "assets/data/backup/";
-    private $fileName = "backup.sql";
 
     public function __construct()
     {
         parent::__construct(); 
         $this->db->query('SET SESSION sql_mode = ""');
 
-        // Vérifie si l'utilisateur est admin
         if (!$this->session->userdata('isAdmin')) {
             redirect('login');
+        }
+
+        // Assure que le dossier existe
+        if (!is_dir($this->savePath)) {
+            mkdir($this->savePath, 0777, true);
         }
     }
 
@@ -22,8 +25,9 @@ class Backup_restore extends MX_Controller {
         $data['title']  = display('backup_and_restore');
         $data['module'] = "dashboard";  
         $data['page']   = "home/backup_and_restore"; 
-        $data['backup'] = $this->checkBackup();  
+        $data['backup'] = $this->latestBackup();  
         $data['file']   = $this->checkFileInfo();  
+
         echo Modules::run('template/layout', $data); 
     }
 
@@ -33,7 +37,7 @@ class Backup_restore extends MX_Controller {
         $data   = [];
 
         if ($input == 1) {
-            if ($this->backup()) {
+            if ($this->manualBackup()) {
                 $data['success'] = display('backup_successfully');
             } else {
                 $data['error'] = display('please_try_again');
@@ -49,25 +53,31 @@ class Backup_restore extends MX_Controller {
         echo json_encode($data);
     }
 
-    public function checkBackup()
+    // Récupère le dernier backup
+    public function latestBackup()
     {
-        return file_exists($this->savePath . $this->fileName);
+        $files = glob($this->savePath . "backup_*.sql");
+        return !empty($files);
     }
 
+    // Info du dernier fichier
     public function checkFileInfo()
     {
-        if (file_exists($this->savePath . $this->fileName)){
-            $info = get_file_info($this->savePath . $this->fileName);
-            return [
-                'name' => $info['name'],
-                'size' => number_format($info['size'] / 1024, 2)." KB (".$info['size']." bytes)",
-                'date' => date('d-m-Y H:i', $info['date']) . ' ('.$this->timeAgo($info['date']).')'
-            ];
-        }
-        return false;
+        $files = glob($this->savePath . "backup_*.sql");
+        if (empty($files)) return false;
+
+        $lastFile = end($files);
+        $info = get_file_info($lastFile);
+
+        return [
+            'name' => basename($lastFile),
+            'size' => number_format($info['size'] / 1024, 2)." KB",
+            'date' => date('d-m-Y H:i', $info['date']) .' ('.$this->timeAgo($info['date']).')'
+        ];
     }
 
-    public function backup()
+    // Génère un backup manuel
+    public function manualBackup()
     { 
         $this->load->helper('file');
         $this->load->dbutil();  
@@ -76,26 +86,31 @@ class Backup_restore extends MX_Controller {
             'format'     => 'txt',
             'add_drop'   => TRUE,
             'add_insert' => TRUE,
-            'add_update' => TRUE,
             'newline'    => "\n"
         ]; 
 
         $backup = $this->dbutil->backup($prefs);
 
-        if (write_file($this->savePath . $this->fileName, $backup)) {
-            return true;
-        }
-        return false;
+        $date = date('Y_m_d_H_i_s');
+        $filePath = $this->savePath . "backup_{$date}.sql";
+
+        return write_file($filePath, $backup);
     }
 
     public function restore()
     {
-        $isi_file     = file_get_contents($this->savePath . $this->fileName);
-        $string_query = rtrim($isi_file, "\n;");
-        $array_query  = explode(";", $string_query);
+        $files = glob($this->savePath . "backup_*.sql");
+        if (empty($files)) return false;
+
+        $file = end($files);
+        $content = file_get_contents($file);
+
+        $queries = explode(";", $content);
 
         $this->db->query("SET FOREIGN_KEY_CHECKS = 0");
-        foreach ($array_query as $query) {
+
+        foreach ($queries as $query)
+        {
             $query = trim($query);
             if (!empty($query)) {
                 try {
@@ -105,45 +120,41 @@ class Backup_restore extends MX_Controller {
                 }
             }
         }
-        $this->db->query("SET FOREIGN_KEY_CHECKS = 1");
 
-        return @unlink($this->savePath . $this->fileName);
+        $this->db->query("SET FOREIGN_KEY_CHECKS = 1");
+        return true;
     }
 
     public function download()
     {
-        if (file_exists($this->savePath . $this->fileName)) {
-            $this->load->helper('download');
-            if (force_download($this->savePath . $this->fileName, null)) {
-                $this->session->set_flashdata('message', display('download_successfully'));
-            } else {
-                $this->session->set_flashdata('exception', display('please_try_again'));
-            }
-        } else {
+        $files = glob($this->savePath . "backup_*.sql");
+        if (empty($files)) {
             $this->session->set_flashdata('exception', display('please_try_again'));
+            redirect($_SERVER['HTTP_REFERER']);
         }
-        redirect($_SERVER['HTTP_REFERER']);
+
+        $file = end($files);
+
+        $this->load->helper('download');
+        force_download($file, null);
     }
 
     public function delete()
     {
-        if (file_exists($this->savePath . $this->fileName)) {
-            if (@unlink($this->savePath . $this->fileName)) {
-                $this->session->set_flashdata('message', display('delete_successfully'));
-            } else {
-                $this->session->set_flashdata('exception', display('please_try_again'));
-            }
-        } else {
-            $this->session->set_flashdata('exception', display('please_try_again'));
+        foreach (glob($this->savePath . "backup_*.sql") as $file) {
+            unlink($file);
         }
+
+        $this->session->set_flashdata('message', display('delete_successfully'));
         redirect($_SERVER['HTTP_REFERER']);
     }
 
+    // 🔄 Backup automatique (CRON)
     public function auto_backup()
     {
         $this->load->helper('file');
         $this->load->dbutil();
-
+        
         $prefs = [
             'format'     => 'txt',
             'add_drop'   => TRUE,
@@ -152,48 +163,31 @@ class Backup_restore extends MX_Controller {
         ];
 
         $backup = $this->dbutil->backup($prefs);
-        $logFile = $this->savePath . 'backup_log.txt';
 
-        if ($backup) {
-            $date = date('Y_m_d_H_i_s');
-            $filePath = $this->savePath . "backup_{$date}.sql";
+        $date = date('Y_m_d_H_i_s');
+        $filePath = $this->savePath . "backup_{$date}.sql";
 
-            if (write_file($filePath, $backup)) {
-                // Supprimer les backups plus vieux que 7 jours
-                foreach (glob($this->savePath . "backup_*.sql") as $file) {
-                    if (filemtime($file) < time() - (7 * 24 * 60 * 60)) {
-                        unlink($file);
-                    }
-                }
+        // Enregistrer le backup
+        write_file($filePath, $backup);
 
-                $logMsg = "[" . date('Y-m-d H:i:s') . "] ✅ Backup done: {$filePath}\n";
-                file_put_contents($logFile, $logMsg, FILE_APPEND);
-                echo $logMsg;
-
-            } else {
-                $logMsg = "[" . date('Y-m-d H:i:s') . "] ❌ Backup failed: cannot write backup file\n";
-                file_put_contents($logFile, $logMsg, FILE_APPEND);
-                echo $logMsg;
+        // Supprimer les backups de plus de 7 jours
+        foreach (glob($this->savePath . "backup_*.sql") as $file) {
+            if (filemtime($file) < time() - (7 * 24 * 60 * 60)) {
+                unlink($file);
             }
-
-        } else {
-            $logMsg = "[" . date('Y-m-d H:i:s') . "] ❌ Backup failed: dbutil->backup returned false\n";
-            file_put_contents($logFile, $logMsg, FILE_APPEND);
-            echo $logMsg;
         }
     }
 
-    public function timeAgo($time_ago)
+    // Fonction timeAgo
+    public function timeAgo($time)
     {
-        $time_ago = strtotime($time_ago) ? strtotime($time_ago) : $time_ago;
-        $time = time() - $time_ago;
+        $time = time() - $time;
 
-        if ($time <= 60) return 'less than a minute ago';
-        elseif ($time < 3600) return (round($time/60) == 1) ? 'a minute ago' : round($time/60).' minutes ago';
-        elseif ($time < 86400) return (round($time/3600) == 1) ? 'an hour ago' : round($time/3600).' hours ago';
-        elseif ($time < 604800) return (round($time/86400) == 1) ? 'a day ago' : round($time/86400).' days ago';
-        elseif ($time < 2600640) return (round($time/604800) == 1) ? 'a week ago' : round($time/604800).' weeks ago';
-        elseif ($time < 31207680) return (round($time/2600640) == 1) ? 'a month ago' : round($time/2600640).' months ago';
-        else return (round($time/31207680) == 1) ? 'a year ago' : round($time/31207680).' years ago';
+        if ($time < 60) return 'less than a minute ago';
+        elseif ($time < 3600) return round($time/60).' minutes ago';
+        elseif ($time < 86400) return round($time/3600).' hours ago';
+        elseif ($time < 604800) return round($time/86400).' days ago';
+        else return date('d-m-Y', $time);
     }
+
 }

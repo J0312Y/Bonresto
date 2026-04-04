@@ -75,7 +75,7 @@ class V3 extends MY_Controller
 			return $this->respondWithValidationError($errors);
 		} else {
 			$kitchenuserid = $this->input->post('id', TRUE);
-			$output = array();
+ 			$output = array();
 			$kitcheninfo = $this->Api_kitchen_model->readallkitchen('tbl_kitchen.kitchenid,tbl_kitchen.kitchen_name,tbl_assign_kitchen.kitchen_id', 'tbl_assign_kitchen', 'tbl_assign_kitchen.kitchen_id', array('tbl_assign_kitchen.userid' => $kitchenuserid));
 			$i = 0;
 			foreach ($kitcheninfo as $kitchenid) {

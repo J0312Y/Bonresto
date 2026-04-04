@@ -52,8 +52,8 @@ class Lic
     private $product_version = '3.0';
     private $log_path    = null;
     private $check_days  = array(9, 10, 11);
-    private $api_domain  = 'secure.bdtask.com';
-    private $api_url     = 'https://secure.bdtask.com/alpha/class.licence.php';
+    //private $api_domain  = 'secure.bdtask.com';
+    //private $api_url     = 'https://secure.bdtask.com/alpha/class.licence.php';
     private $whitelist   = '12ca17b49a-6d16ab695d-49960de588-6f32aa4e40-6f32aa4e40';
 
     public function __construct()
@@ -66,7 +66,7 @@ class Lic
         }
 
         // set log_path
-        $this->log_path = SYSDIR.'/core/compat/index.html'; 
+       /* $this->log_path = SYSDIR.'/core/compat/index.html'; 
 
         //set initial values
         $this->domain = $this->domain(); 
@@ -77,7 +77,7 @@ class Lic
         $this->update_day  = @date('d');
         
         // call main method verify();
-        $this->verify();
+        $this->verify();*/
     }
 
 
@@ -126,23 +126,23 @@ class Lic
     }
 
     //filter all input data
-    public function filterPurchaseKey($purchase_key)
+   /* public function filterPurchaseKey($purchase_key)
     { 
         $length = strlen($purchase_key);
         if($length>=20 && $length<=40){
             return TRUE;
         }
         return false;
-    }
-
+    }*/
+/*
     private function getprelicense(){
         return substr(hash('ripemd256', $this->domain), 0, 15);
     }
     private function domain_encription(){
         $en_val = hash('sha256', $this->domain);
         return substr($en_val, 0, 10);
-    }
-
+    }*/
+/*
     private function verify()
     { 
         // app in localhost
@@ -193,8 +193,8 @@ class Lic
                 $this->html($this->product_key);
             }
         }
-    }
-
+    }*/
+/*
     private function envato($LicSysLog = array())
     {
         if (strtotime($LicSysLog->expire_date) <= @strtotime(date('Y-m-d'))) {
@@ -220,9 +220,9 @@ class Lic
             }
             $_SESSION['response'] = true;
         }
-    }
+    }/*
 
-
+/*
     private function html($product_key = null)
     {
         if (isset($_POST['purchase_key']) && ($_POST['purchase_key'] != null) && $this->filterPurchaseKey($_POST['purchase_key'])) { 
@@ -255,7 +255,7 @@ class Lic
         </div>
         </form>"; 
     }
-
+/*
 
     private function response($purchase_key = null) {
 
@@ -274,7 +274,8 @@ class Lic
  
         return json_decode( curl_exec($ch) , true );
     }
-
+    */
+/*
     public function updateFile($whitelist, $product_key=false)
     {
 
@@ -317,8 +318,8 @@ class Lic
             return false;
         }
         
-    }
-
+    }*/
+    /*
     private function fileWrite($purchase_key = null)
     {
         $data = (object)array(
@@ -334,9 +335,9 @@ class Lic
         $data = json_decode($data);
         $_SESSION['LicSysLog'] = $data;
 
-    }
+    }*/
 
-    private function fileRead()
+    /*private function fileRead()
     {
         if (file_exists($this->log_path)) {
             $data = file_get_contents($this->log_path);
@@ -355,7 +356,7 @@ class Lic
         } else {
             return false;
         }
-    }
+    }*/
 
     private function serverAliveOrNot()
     {

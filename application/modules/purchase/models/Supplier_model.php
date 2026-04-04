@@ -20,10 +20,17 @@ class Supplier_model extends CI_Model {
 		} else {
 			return false;
 		}
-	}
+	} 
+
+	 public function headcode(){
+        $query=$this->db->query("SELECT MAX(HeadCode) as HeadCode FROM acc_coa WHERE HeadLevel='4' And HeadCode LIKE '5020205%'");
+        return $query->row();
+    }
 	
 	 //Supplier Previous balance adjustment
-      public function previous_balance_add($balance, $supplier_id, $sino) {
+      public function previous_balance_add($balance, $supplier_id,$c_acc,$supplier_name,$sino) {
+    $coainfo = $this->db->select('*')->from('acc_coa')->where('HeadName',$c_acc)->get()->row();
+    $supplier_headcode = $coainfo->HeadCode;
         $data = array(
             'transaction_id' => $sino,
             'supplier_id'    => $supplier_id,
@@ -37,8 +44,45 @@ class Supplier_model extends CI_Model {
             'status'         => 1,
             'd_c'            => 'c'
         );
-     
+     $cosdr = array(
+      'VNo'            =>  $sino,
+      'Vtype'          =>  'PR Balance',
+      'VDate'          =>  date("Y-m-d"),
+      'COAID'          =>  $supplier_headcode,
+      'Narration'      =>  'supplier debit For '.$supplier_name,
+      'Debit'          =>  0,
+      'Credit'         =>  $balance,
+      'IsPosted'       => 1,
+      'CreateBy'       => $this->session->userdata('user_id'),
+      'CreateDate'     => date('Y-m-d H:i:s'),
+      'IsAppove'       => 1
+    );
+       $inventory = array(
+      'VNo'            =>  $sino,
+      'Vtype'          =>  'PR Balance',
+      'VDate'          =>  date("Y-m-d"),
+      'COAID'          =>  10107,
+      'Narration'      =>  'Inventory credit For  '.$supplier_name,
+      'Debit'          =>  $balance,
+      'Credit'         =>  0,//purchase price asbe
+      'IsPosted'       => 1,
+      'CreateBy'       => $this->session->userdata('user_id'),
+      'CreateDate'     => date('Y-m-d H:i:s'),
+      'IsAppove'       => 1
+    ); 
+
         $this->db->insert('supplier_ledger', $data);
+        if(!empty($balance)){
+           $this->db->insert('acc_transaction', $cosdr); 
+           $this->db->insert('acc_transaction', $inventory); 
+        }
+    }
+	
+	
+ 	public function create_coa($data = array())
+    {
+        $this->db->insert('acc_coa',$data);
+        return true;
     }
 
 	public function update($data = array())

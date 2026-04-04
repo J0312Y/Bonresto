@@ -124,6 +124,7 @@ $.ajax({
 		}
 	});
 }
+
 function autoupdateoff(latestv){
 	var r = confirm("are you sure want to Off Auto Update Notification?");
 	if (r == true) {
@@ -146,6 +147,5 @@ function autoupdateoff(latestv){
 	} else {
 	  return false;
 	}
-	
 	
 	}

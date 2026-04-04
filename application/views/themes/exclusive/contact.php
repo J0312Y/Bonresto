@@ -55,7 +55,6 @@
                     <div>
                         <h3 class="font_prata fs-22 text-black mb-2"><?php echo display('sent_message') ?></h3>
                         <p class="font_prata fs-15">
-                            <?php echo $webinfo->email; ?><br>
                             <?php echo $webinfo->email; ?>
                         </p>
                     </div>

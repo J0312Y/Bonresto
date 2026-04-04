@@ -217,7 +217,7 @@ class Api_v2_model extends CI_Model
         }
         return false;
 		} 
-	public function insertcustomer($data = array(),$mobile){
+	public function insertcustomer($mobile,$data = array()){
 		$this->db->select('*');
         $this->db->from('customer_info');
 		$this->db->where('customer_phone',$mobile);

@@ -21,7 +21,7 @@
     <!--  table area -->
     <div class="col-sm-12">
 
-        <div class="panel panel-default thumbnail"> 
+        <div class="panel panel-defailt thumbnail"> 
 
             <div class="panel-body">
             <div class="table_content table_contentpost" >

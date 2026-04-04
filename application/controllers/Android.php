@@ -1,5 +1,7 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -714,7 +716,7 @@ class Android extends MY_Controller
 
     }
 
-    public function categorylist()
+    public function categorylist($catid = null)
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('android', 'android', 'required|xss_clean|trim');
