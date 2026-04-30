@@ -1,0 +1,24 @@
+name: CD Bonresto Production
+
+on:
+  push:
+    branches: [ main ] # Se déclenche uniquement quand on push sur main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Deploiement SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/bonresto
+            git pull origin main
+            # Optionnel : Droits sur les dossiers de logs CodeIgniter
+            chmod -R 777 application/logs application/cache
