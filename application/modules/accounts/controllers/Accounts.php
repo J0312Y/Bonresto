@@ -51,7 +51,6 @@ class Accounts extends MX_Controller {
 		
 	 }
   function allphead($data){
-	  echo '<option value="" class="bolden" data-id="0"><strong>'.$menu->HeadName.'</strong></option>';
 	foreach($data as $menu){
 		echo '<option value="'.$menu->HeadCode.'" class="bolden" data-id="'.$menu->HeadLevel.'" data-phead="'.$menu->HeadName.'"><strong>'.$menu->HeadName.'</strong></option>';
 		if(!empty($menu->sub)){
@@ -375,7 +374,7 @@ echo json_encode($code);
 
 // Update Debit voucher 
 public function update_debit_voucher(){
-   $this->permission->method('accounts','create')->redirect();
+   $this->permission->method('accounts','update')->redirect();
     $this->form_validation->set_rules('cmbDebit', display('cmbDebit')  ,'max_length[100]');
          if ($this->form_validation->run()) { 
         if ($this->accounts_model->update_debitvoucher()) { 
@@ -511,7 +510,7 @@ public function update_debit_voucher(){
 
   //Update voucher 
   public function voucher_update($id= null){
-    $this->permission->method('accounts','Update')->redirect();
+    $this->permission->method('accounts','update')->redirect();
     $vtype =$this->db->select('*')
                     ->from('acc_transaction')
                     ->where('VNo',$id)
@@ -551,9 +550,9 @@ public function update_debit_voucher(){
    
     echo Modules::run('template/layout', $data); 
   }
-  // update credit voucher 
+  // update credit voucher
   public function update_credit_voucher(){
-   $this->permission->method('accounts','create')->redirect();
+   $this->permission->method('accounts','update')->redirect();
     $this->form_validation->set_rules('cmbDebit', display('cmbDebit')  ,'max_length[100]');
          if ($this->form_validation->run()) { 
         if ($this->accounts_model->update_creditvoucher()) { 
@@ -731,7 +730,6 @@ public function update_debit_voucher(){
         $date = date('Y-m-d'); // Set to today's date
         }
         $vouchar_view = $this->accounts_model->get_vouchar_view($date);
-        $vouchar_view = $this->accounts_model->get_vouchar_view($date);
         $data = array(
             'vouchar_view' => $vouchar_view,
         );
@@ -908,7 +906,7 @@ public function update_debit_voucher(){
 
         // PDF Generator 
         $this->load->library('pdfgenerator');
-        $dompdf = new DOMPDF();
+        $dompdf = new Dompdf();
         $page = $this->load->view('accounts/cash_flow_report_search_pdf',$data,true);
         $dompdf->load_html($page);
         $dompdf->render();
@@ -954,15 +952,15 @@ public function banklist(){
 
     $this->form_validation->set_rules('txtCode', display('txtCode')  ,'max_length[100]');
          if ($this->form_validation->run()) { 
-        if ($this->accounts_model->supplier_payment_insert()) { 
+        if ($this->accounts_model->supplier_payment_insert()) {
           $this->session->set_flashdata('message', display('save_successfully'));
           redirect('accounts/accounts/supplier_payment/');
         }else{
-          $this->session->set_flashdata('error_message',  display('please_try_again'));
+          $this->session->set_flashdata('exception',  display('please_try_again'));
         }
         redirect("accounts/accounts/supplier_payment");
     }else{
-      $this->session->set_flashdata('error_message',  display('please_try_again'));
+      $this->session->set_flashdata('exception',  display('please_try_again'));
       redirect("accounts/accounts/supplier_payment");
      }
 }
@@ -973,11 +971,9 @@ public function banklist(){
 		$data['currency']=$currencyinfo->curr_icon;
 		$data['position']=$currencyinfo->position;
 		$data['supplier_info'] = $this->accounts_model->supplierinfo($supplier_id);
-	
+
 		$data['payment_info']  = $this->accounts_model->supplierpaymentinfo($voucher_no,$coaid);
 		$data['company_info']  = $seting;
-		$data['currency']      = $currency_details[0]['currency'];
-		$data['position']      = $currency_details[0]['currency_position'];
 		$data['title']         = display('supplier_payment');
 		$data['module'] = "accounts";
 		 $data['page']   = "supplier_payment_receipt";
@@ -996,18 +992,18 @@ public function banklist(){
 
     //Create Cash Adjustment
  public function create_cash_adjustment(){
-    $this->permission->method('accounts','read')->redirect();
+    $this->permission->method('accounts','create')->redirect();
     $this->form_validation->set_rules('txtAmount', display('amount')  ,'max_length[100]');
          if ($this->form_validation->run()) { 
-        if ($this->accounts_model->insert_cashadjustment()) { 
+        if ($this->accounts_model->insert_cashadjustment()) {
           $this->session->set_flashdata('message', display('save_successfully'));
           redirect('accounts/accounts/cash_adjustment/');
         }else{
-          $this->session->set_flashdata('error_message',  display('please_try_again'));
+          $this->session->set_flashdata('exception',  display('please_try_again'));
         }
         redirect("accounts/accounts/cash_adjustment");
     }else{
-      $this->session->set_flashdata('error_message',  display('please_try_again'));
+      $this->session->set_flashdata('exception',  display('please_try_again'));
       redirect("accounts/accounts/cash_adjustment");
      }
    }

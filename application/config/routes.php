@@ -107,21 +107,104 @@ $route['reservation/getSound'] = 'reservation/getSound';
 // Optional: AJAX endpoint to load employees
 $route['employee/get_all'] = 'employee/employeeback/get_all';
 
-$route['android'] = 'android/index';
-$route['android/categorylist'] = 'android/categorylist';
-$route['android/itemlist/(:num)'] = 'android/itemlist/$1';
-$route['android/itemdetails/(:num)'] = 'android/itemdetails/$1';
-$route['android/addtoCart'] = 'android/addtoCart';
-$route['android/viewCart/(:num)'] = 'android/viewCart/$1';
-$route['android/updateCart'] = 'android/updateCart';
-$route['android/checkout'] = 'android/checkout';
-$route['android/placeOrder'] = 'android/placeOrder';
-$route['android/myorderlist'] = 'android/myorderlist';
-$route['android/vieworder/(:num)'] = 'android/vieworder/$1';
-$route['android/myurl'] = 'android/myurl';
 
-// Admin License Route
-$route['admin/license'] = 'admin/license';
+// License management routes
+$route['dashboard/license']                   = 'dashboard/license/index';
+$route['dashboard/license/activate']['POST']  = 'dashboard/license/activate';
+$route['dashboard/license/refresh']           = 'dashboard/license/refresh';
+$route['dashboard/license/expired']           = 'dashboard/license/expired';
+
+// ── SaaS API Routes ───────────────────────────────────────────────────────────
+// Auth
+$route['saas/auth/login']['POST']           = 'saas/auth/login';
+$route['saas/auth/me']['GET']               = 'saas/auth/me';
+$route['saas/auth/change-password']['POST'] = 'saas/auth/change_password';
+$route['saas/auth/profile']['PUT']          = 'saas/auth/update_profile';
+
+// Dashboard
+$route['saas/dashboard/stats']['GET']           = 'saas/dashboard/stats';
+$route['saas/dashboard/recent-orders']['GET']   = 'saas/dashboard/recent_orders';
+$route['saas/dashboard/clients-stats']['GET']   = 'saas/dashboard/clients_stats';
+$route['saas/dashboard/clients-revenue']['GET'] = 'saas/dashboard/clients_revenue';
+
+// Clients
+$route['saas/clients']['GET']                          = 'saas/clients/index';
+$route['saas/clients']['POST']                         = 'saas/clients/create';
+$route['saas/clients/(:num)']['GET']                   = 'saas/clients/show/$1';
+$route['saas/clients/(:num)']['PUT']                   = 'saas/clients/update/$1';
+$route['saas/clients/(:num)/live']['GET']              = 'saas/clients/live/$1';
+$route['saas/clients/(:num)/subscription']['PUT']      = 'saas/clients/subscription/$1';
+$route['saas/clients/export']['GET']                   = 'saas/clients/export';
+$route['saas/clients/(:num)/suspend']['POST']          = 'saas/clients/suspend/$1';
+$route['saas/clients/(:num)/reactivate']['POST']       = 'saas/clients/reactivate/$1';
+$route['saas/clients/(:num)/logo']['POST']             = 'saas/clients/upload_logo/$1';
+$route['saas/clients/(:num)/logo']['DELETE']           = 'saas/clients/delete_logo/$1';
+
+// Plans
+$route['saas/plans']['GET']              = 'saas/plans/index';
+$route['saas/plans']['POST']             = 'saas/plans/create';
+$route['saas/plans/(:num)']['PUT']       = 'saas/plans/update/$1';
+$route['saas/plans/(:num)']['DELETE']    = 'saas/plans/delete/$1';
+
+// Licenses
+$route['saas/licenses']['GET']                    = 'saas/licenses/index';
+$route['saas/licenses/generate']['POST']          = 'saas/licenses/generate';
+$route['saas/licenses/activate']['POST']          = 'saas/licenses/activate';
+$route['saas/licenses/check']['GET']              = 'saas/licenses/check';
+$route['saas/licenses/updates-info']['GET']       = 'saas/licenses/updates_info';
+$route['saas/licenses/refresh']['GET']            = 'saas/licenses/refresh';
+$route['saas/licenses/(:num)/revoke']['POST']     = 'saas/licenses/revoke/$1';
+
+// Updates
+$route['saas/updates']['GET']                        = 'saas/updates/index';
+$route['saas/updates']['POST']                       = 'saas/updates/create';
+$route['saas/updates/applied']['POST']               = 'saas/updates/applied';
+$route['saas/updates/(:num)']['GET']                 = 'saas/updates/show/$1';
+$route['saas/updates/(:num)/publish']['POST']        = 'saas/updates/publish/$1';
+$route['saas/updates/(:num)/archive']['POST']        = 'saas/updates/archive_update/$1';
+
+// Payments
+$route['saas/payments']['GET']   = 'saas/payments/index';
+$route['saas/payments']['POST']  = 'saas/payments/create';
+
+// Activity
+$route['saas/activity']['GET']                  = 'saas/activity/index';
+$route['saas/activity/export']['GET']           = 'saas/activity/export';
+$route['saas/activity/tenant/(:num)']['GET']    = 'saas/activity/tenant/$1';
+$route['saas/activity/report']['POST']          = 'saas/activity/report';
+
+// Notifications
+$route['saas/notifications']['GET'] = 'saas/notifications/index';
+
+// Invoices
+$route['saas/invoices/export']['GET']                = 'saas/invoices/export';
+$route['saas/invoices']['GET']                       = 'saas/invoices/index';
+$route['saas/invoices']['POST']                      = 'saas/invoices/create';
+$route['saas/invoices/(:num)']['GET']                = 'saas/invoices/show/$1';
+$route['saas/invoices/(:num)/pdf']['GET']            = 'saas/invoices/pdf/$1';
+$route['saas/invoices/(:num)/send']['POST']          = 'saas/invoices/send/$1';
+$route['saas/invoices/(:num)/confirm']['POST']       = 'saas/invoices/confirm/$1';
+$route['saas/invoices/(:num)/cancel']['POST']        = 'saas/invoices/cancel/$1';
+
+// Team
+$route['saas/team']['GET']              = 'saas/team/index';
+$route['saas/team']['POST']             = 'saas/team/create';
+$route['saas/team/(:num)']['PUT']       = 'saas/team/update/$1';
+$route['saas/team/(:num)']['DELETE']    = 'saas/team/remove/$1';
+
+// Roles
+$route['saas/roles']['GET']             = 'saas/roles/index';
+$route['saas/roles']['POST']            = 'saas/roles/create';
+$route['saas/roles/(:num)']['PUT']      = 'saas/roles/update/$1';
+$route['saas/roles/(:num)']['DELETE']   = 'saas/roles/remove/$1';
+
+// Settings
+$route['saas/settings']['GET']              = 'saas/settings/index';
+$route['saas/settings']['POST']             = 'saas/settings/save';
+$route['saas/settings/test-smtp']['POST']   = 'saas/settings/test_smtp';
+
+// Cron (protected by secret key)
+$route['saas/cron/run']['GET'] = 'saas/cron/run';
 //set modules/config/routes.php
 $modules_path = APPPATH.'modules/';     
 $modules = scandir($modules_path);

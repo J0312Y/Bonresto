@@ -184,6 +184,13 @@ function getslcategory(carid) {
     },
   });
 }
+
+// Highlight the active category pill in the horizontal bar
+$(document).on("click", ".product-category-bar .pos-category", function () {
+  $(".product-category-bar .pos-category").removeClass("cat-active");
+  $(this).addClass("cat-active");
+});
+
 //Product search button js
 $("body").on("click", "#search_button", function () {
   var product_name = $("#product_name").val();

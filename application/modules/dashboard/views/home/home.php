@@ -5,6 +5,22 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
 
+<?php if (!empty($saas_pending_updates) && $saas_pending_updates > 0): ?>
+<div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:12px 20px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+        <i class="fa fa-cloud-download" style="color:#d97706;font-size:18px;"></i>
+        <span style="font-size:14px;color:#92400e;font-weight:500;">
+            <strong><?php echo $saas_pending_updates; ?> mise<?php echo $saas_pending_updates > 1 ? 's' : ''; ?> à jour</strong>
+            de la plateforme Bonresto disponible<?php echo $saas_pending_updates > 1 ? 's' : ''; ?>.
+        </span>
+    </div>
+    <a href="<?php echo base_url('dashboard/autoupdate'); ?>"
+       style="background:#37a000;color:#fff;border-radius:7px;padding:7px 16px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">
+        Voir &amp; Appliquer
+    </a>
+</div>
+<?php endif; ?>
+
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 mt-10">
         <div class="panel home-panel-bd bg-alice-blue rounded-15 d-flex align-items-center justify-content-center">

@@ -81,7 +81,7 @@
             <div class="panel panel-default">
                 <div class="panel-body"> 
                     <?php echo form_open('',array('class' => 'form-inline'))?>
-                    <?php date_default_timezone_set("Asia/Dhaka"); $today = date('d-m-Y'); 
+                    <?php $today = date('d-m-Y');
                      $statdate = date('d-m-Y', strtotime('first day of this month')); ?>
                         <div class="form-group">
                             <label class="" for="from_date"><?php echo display('start_date') ?></label>

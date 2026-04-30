@@ -409,6 +409,8 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		$orderinfo = $query->row();
 
+		$settinginfo = $this->db->select('*')->from('setting')->get()->row();
+
 		$this->db->select('*');
 		$this->db->from('bill');
 		$this->db->where('order_id', $id);
@@ -1085,7 +1087,7 @@ class Order_model extends CI_Model
 		$this->db->join('customer_type', 'customer_order.cutomertype=customer_type.customer_type_id', 'left');
 		$this->db->join('employee_history', 'customer_order.waiter_id=employee_history.emp_his_id', 'left');
 		$this->db->join('rest_table', 'customer_order.table_no=rest_table.tableid', 'left');
-		$this->db->where('customer_order.order_id', $orderid);
+		$this->db->where('customer_order.order_id', $id);
 		$this->db->group_by('customer_order.order_id');
 		$query = $this->db->get();
 

@@ -95,7 +95,7 @@ export default function ClientRevenueChart({ data }: Props) {
         </div>
       ) : (
         <div className="max-w-full overflow-x-auto custom-scrollbar">
-          <div className="-ml-5 min-w-[650px] xl:min-w-full pl-2">
+          <div className="-ml-5 min-w-[650px] lg:min-w-full pl-2">
             <Chart options={options} series={series} type="bar" height={220} />
           </div>
         </div>

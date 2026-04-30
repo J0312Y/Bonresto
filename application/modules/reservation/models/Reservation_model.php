@@ -164,24 +164,26 @@ public function count_reservation()
         $this->db->from('tblreservation');
 		$this->db->where($dateRange, NULL, FALSE); 
 		$query = $this->db->get();
-		$totalid='';
+		$totalid = [];
 		 if ($query->num_rows() > 0) {
-           $gettable=$query->result(); 
+           $gettable=$query->result();
 		   foreach($gettable as $selectedtable){
-			   $totalid.=$selectedtable->tableid.",";
-			   } 
-			return $totalid=trim($totalid,',');    
+			   $totalid[] = $selectedtable->tableid;
+			   }
+			return $totalid;
         }
-        return false;
+        return [];
 		}
 	public function checkfree($invalue,$person){
 		$this->db->select('*');
         $this->db->from('rest_table');
-		$this->db->where_not_in('tableid', $invalue);
-		$this->db->where('person_capicity', $person); 
+		if (!empty($invalue)) {
+			$this->db->where_not_in('tableid', $invalue);
+		}
+		$this->db->where('person_capicity', $person);
 		$query = $this->db->get();
 		 if ($query->num_rows() > 0) {
-            return $query->result();    
+            return $query->result();
         }
         return false;
 		}  

@@ -67,7 +67,6 @@ class Home extends MX_Controller
                         'sign_out'    => $out_time,
                         'staytime'    => $staytime,
                     ];
-                    print_r($insert_data);
                     $this->Csv_model->insert_csv($insert_data);
 
                 }
@@ -236,8 +235,8 @@ class Home extends MX_Controller
         $this->permission->module('hrm', 'read')->redirect();
         $format_start_date = $this->input->post('start_date');
         $format_end_date   = $this->input->post('end_date');
-        $data['date']      = $format_start_date;
-        $data['date']      = $format_end_date;
+        $data['start_date'] = $format_start_date;
+        $data['end_date']   = $format_end_date;
         $data['query']     = $this->Csv_model->userReport($format_start_date, $format_end_date);
         $data['module']    = "hrm";
         $data['page']      = "user_views_report";
@@ -283,8 +282,8 @@ class Home extends MX_Controller
         $start_time      = $this->input->post('s_time');
         $end_time        = $this->input->post('e_time');
         $data['date']    = $date;
-        $data['sign_in'] = $start_time;
-        $data['sign_in'] = $end_time;
+        $data['start_time'] = $start_time;
+        $data['end_time']   = $end_time;
         $data['query']   = $this->Csv_model->search_intime($date, $start_time, $end_time);
         $data['module']  = "hrm";
         $data['page']    = "Date_time_report";

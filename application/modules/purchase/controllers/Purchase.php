@@ -135,10 +135,12 @@ class Purchase extends MX_Controller
         $product_name = $this->input->post('product_name', true);
         $product_info = $this->purchase_model->finditem($product_name);
 
-        $list[''] = '';
+        $json_product = [];
 
-        foreach ($product_info as $value) {
-            $json_product[] = ['label' => $value['ingredient_name'], 'value' => $value['id']];
+        if (!empty($product_info)) {
+            foreach ($product_info as $value) {
+                $json_product[] = ['label' => $value['ingredient_name'], 'value' => $value['id']];
+            }
         }
 
         echo json_encode($json_product);

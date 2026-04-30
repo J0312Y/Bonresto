@@ -51,6 +51,15 @@ class Home extends MX_Controller
         $data['title2'] = "dashboard";
         #page path
         $data['module']     = "dashboard";
+
+        // SaaS update notification banner
+        $this->load->library('License_manager');
+        $raw = $this->license_manager->raw();
+        $data['saas_pending_updates'] = 0;
+        if (!empty($raw['client_key'])) {
+            $updates = $this->license_manager->get_updates_info();
+            $data['saas_pending_updates'] = count(array_filter($updates, fn($u) => ($u['delivery_status'] ?? '') === 'pending'));
+        }
         $data['page']       = "home/home";
         $settinginfo        = $this->db->select('currency')->from('setting')->get()->row();
         $currencyinfo       = $this->db->select('currencyname,curr_icon')->from('currency')->where('currencyid', $settinginfo->currency)->get()->row();

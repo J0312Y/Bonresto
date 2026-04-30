@@ -80,8 +80,8 @@
             <div class="panel panel-default">
                 <div class="panel-body"> 
                     <?php echo form_open('',array('class' => 'form-inline'))?>
-                    <?php date_default_timezone_set("Asia/Dhaka"); $today = date('d-m-Y'); 
-                    $statdate = date('d-m-Y', strtotime('first day of this month'));?>
+                    <?php $today = date('d-m-Y');
+                    $statdate = date('d-m-Y', strtotime('first day of this month')); ?>
                         <div class="form-group">
                             <label class="" for="from_date"><?php echo display('start_date') ?></label>
                             <input type="text" name="from_date" class="form-control datepicker" id="from_date" placeholder="<?php echo display('start_date') ?>" readonly="readonly" value="<?php  echo $statdate; ?>" >
@@ -126,7 +126,7 @@ function product_list(sl) {
 	 var csrf = $('#csrfhashresarvation').val();  
 	//alert(csrfname);
     if (foodid == 0 || foodid=='') {
-        alert('pleas select user');
+        alert('Please enter an Order ID first');
         return false;
     }
 

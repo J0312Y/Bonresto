@@ -107,18 +107,7 @@ $route['reservation/getSound'] = 'reservation/getSound';
 // Optional: AJAX endpoint to load employees
 $route['employee/get_all'] = 'employee/employeeback/get_all';
 
-$route['android'] = 'android/index';
-$route['android/categorylist'] = 'android/categorylist';
-$route['android/itemlist/(:num)'] = 'android/itemlist/$1';
-$route['android/itemdetails/(:num)'] = 'android/itemdetails/$1';
-$route['android/addtoCart'] = 'android/addtoCart';
-$route['android/viewCart/(:num)'] = 'android/viewCart/$1';
-$route['android/updateCart'] = 'android/updateCart';
-$route['android/checkout'] = 'android/checkout';
-$route['android/placeOrder'] = 'android/placeOrder';
-$route['android/myorderlist'] = 'android/myorderlist';
-$route['android/vieworder/(:num)'] = 'android/vieworder/$1';
-$route['android/myurl'] = 'android/myurl';
+
 
 // Admin License Route
 $route['admin/license'] = 'admin/license';

@@ -1,0 +1,39 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+$route['saas/auth/login']['POST']  = 'saas/auth/login';
+$route['saas/auth/me']['GET']      = 'saas/auth/me';
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
+$route['saas/dashboard/stats']['GET'] = 'saas/dashboard/stats';
+
+// ── Clients ───────────────────────────────────────────────────────────────────
+$route['saas/clients']['GET']                          = 'saas/clients/index';
+$route['saas/clients']['POST']                         = 'saas/clients/create';
+$route['saas/clients/(:num)']['GET']                   = 'saas/clients/show/$1';
+$route['saas/clients/(:num)/live']['GET']              = 'saas/clients/live/$1';
+$route['saas/clients/(:num)/subscription']['PUT']      = 'saas/clients/subscription/$1';
+$route['saas/clients/(:num)/suspend']['POST']          = 'saas/clients/suspend/$1';
+
+// ── Plans ─────────────────────────────────────────────────────────────────────
+$route['saas/plans']['GET']              = 'saas/plans/index';
+$route['saas/plans']['POST']             = 'saas/plans/create';
+$route['saas/plans/(:num)']['PUT']       = 'saas/plans/update/$1';
+$route['saas/plans/(:num)']['DELETE']    = 'saas/plans/delete/$1';
+
+// ── Licenses ──────────────────────────────────────────────────────────────────
+$route['saas/licenses']['GET']                    = 'saas/licenses/index';
+$route['saas/licenses/generate']['POST']          = 'saas/licenses/generate';
+$route['saas/licenses/activate']['POST']          = 'saas/licenses/activate';
+$route['saas/licenses/refresh']['GET']            = 'saas/licenses/refresh';
+$route['saas/licenses/(:num)/revoke']['POST']     = 'saas/licenses/revoke/$1';
+
+// ── Payments ──────────────────────────────────────────────────────────────────
+$route['saas/payments']['GET']   = 'saas/payments/index';
+$route['saas/payments']['POST']  = 'saas/payments/create';
+
+// ── Activity ──────────────────────────────────────────────────────────────────
+$route['saas/activity']['GET']                  = 'saas/activity/index';
+$route['saas/activity/tenant/(:num)']['GET']    = 'saas/activity/tenant/$1';
+$route['saas/activity/report']['POST']          = 'saas/activity/report';

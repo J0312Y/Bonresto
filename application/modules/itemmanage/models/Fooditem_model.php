@@ -116,6 +116,7 @@ class Fooditem_model extends CI_Model {
             			$this->db->insert('tbl_groupitems', $data1);
         			}
 			}
+		return true;
 	}
 
     public function read_fooditem($limit = null, $start = null)
@@ -124,7 +125,9 @@ class Fooditem_model extends CI_Model {
         $this->db->from($this->table);
 		$this->db->join('item_category','item_foods.CategoryID = item_category.CategoryID','left');
         $this->db->order_by('ProductsID', 'desc');
-   
+        if ($limit !== null) {
+            $this->db->limit($limit, $start);
+        }
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->result();    

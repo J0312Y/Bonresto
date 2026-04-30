@@ -15,7 +15,7 @@ class Leave_model extends CI_Model
 
     public function weekleave_create($data = [])
     {
-        $this->db->insert('weekly_holiday', $data);
+        return $this->db->insert('weekly_holiday', $data);
     }
 
     public function weekleave_delete($id = null)

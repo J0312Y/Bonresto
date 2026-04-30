@@ -38,11 +38,9 @@ class Leave extends MX_Controller
             ];
 
             if ($this->Leave_model->weekleave_create($data)) {
-                $this->session->set_flashdata('exception', display('please_try_again'));
-
-            } else {
-
                 $this->session->set_flashdata('message', display('save_successfully'));
+            } else {
+                $this->session->set_flashdata('exception', display('please_try_again'));
             }
 
             redirect("hrm/Leave/create_weekleave");
@@ -375,7 +373,7 @@ class Leave extends MX_Controller
     }
 
     // update leave type
-    public function update_leave_type($id = nul)
+    public function update_leave_type($id = null)
     {
         $this->permission->module('hrm', 'update')->redirect();
         $data['title'] = display('update');

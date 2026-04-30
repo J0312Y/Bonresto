@@ -338,8 +338,8 @@ public function create($id = null)
         if(!empty($id)) {
             $data['title'] = display('update');
             $data['intinfo'] = $this->reservation_model->findById($id);
-            $data['customerinfo'] = $this->reservation_model->findByCusId($data['reserveinfo']->cid);
-            $data['tableinfo'] = $this->reservation_model->findBytableId($data['reserveinfo']->tableid);
+            $data['customerinfo'] = $this->reservation_model->findByCusId($data['intinfo']->cid);
+            $data['tableinfo'] = $this->reservation_model->findBytableId($data['intinfo']->tableid);
         }
 
         $data['module'] = "reservation";
@@ -504,7 +504,7 @@ public function notification(){
  
     public function deleteunavailable($category = null)
     {
-        $this->permission->module('itemmanage','delete')->redirect();
+        $this->permission->module('reservation','delete')->redirect();
 			$logData = array(
 			   'action_page'         => "Reservation unavailablity",
 			   'action_done'     	 => "Delete Data", 
@@ -532,7 +532,7 @@ public function notification(){
         echo Modules::run('template/layout', $data); 
 	  }
   public function settingsave(){
-	  	$this->permission->method('reservation','read')->redirect();
+	  	$this->permission->method('reservation','update')->redirect();
 	    $data['title'] = display('reservasetting');
 		#-------------------------------#
 		$this->form_validation->set_rules('opentime',display('opening_time'),'required|max_length[50]');

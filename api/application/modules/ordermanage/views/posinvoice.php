@@ -498,7 +498,7 @@ foreach ($iteminfo as $item) {
 
         foreach ($addons as $addonsid) {
             $adonsinfo  = $this->order_model->read('*', 'add_ons', ['add_on_id' => $addonsid]);
-            $adonsprice = $adonsprice + $adonsinfo->price * $addonsqty[$y];?>
+            ?>
                         <div class="row-data">
                             <div class="item-info">
                                 <h5 class="item-title">-<?php echo $adonsinfo->add_on_name; ?></h5>
@@ -523,8 +523,6 @@ foreach ($iteminfo as $item) {
 }
 
 $itemtotal = $totalamount + $subtotal;
-$calvat    = $itemtotal * 15 / 100;
-
 $servicecharge = 0;
 
 if (empty($billinfo)) {$servicecharge;} else { $servicecharge = $billinfo->service_charge;}
@@ -691,7 +689,7 @@ if ($currency->position == 2) {echo $currency->curr_icon;}
 
 if ($orderinfo->customerpaid > 0) {
     $customepaid = $orderinfo->customerpaid;
-    $changes     = $customepaid - $orderinfo->totalamount;
+    $changes     = $customepaid - $billinfo->bill_amount;
 } else {
     $customepaid = $orderinfo->totalamount;
     $changes     = 0;
@@ -745,32 +743,6 @@ if ($currency->position == 1) {echo $currency->curr_icon;}
 ?> <?php echo $changes; ?> <?php
 
 if ($currency->position == 2) {echo $currency->curr_icon;}
-
-?></h5>
-                </div>
-                <div class="row-data">
-                    <div class="item-info">
-                        <h5 class="item-title"><?php echo display('totalpayment') ?></h5>
-                    </div>
-                    <h5 class="my-5"> <?php
-
-if ($billinfo->bill_status == 1) {
-
-    if ($currency->position == 1) {echo $currency->curr_icon;}
-
-    echo $customepaid;
-
-    if ($currency->position == 2) {echo $currency->curr_icon;}
-
-} else {
-
-    if ($currency->position == 1) {echo $currency->curr_icon;}
-
-    echo $customepaid;
-
-    if ($currency->position == 2) {echo $currency->curr_icon;}
-
-}
 
 ?></h5>
                 </div>

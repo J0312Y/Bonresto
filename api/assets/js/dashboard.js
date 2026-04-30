@@ -414,6 +414,8 @@ $(document).ready(function () {
         ],
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {
           display: true,
           align: "right",

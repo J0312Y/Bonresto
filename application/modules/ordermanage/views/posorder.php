@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css"
-    href="<?php echo base_url('application/modules/ordermanage/assets/css/posordernew.css?v=1.2'); ?>">
+    href="<?php echo base_url('application/modules/ordermanage/assets/css/posordernew.css?v=2.6'); ?>">
 <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url('application/modules/ordermanage/assets/js/postop.js?v=1.2'); ?>"
     type="text/javascript">
@@ -876,13 +876,23 @@ foreach ($scan as $file) {
                                 <input name="url" type="hidden" id="removeurl"
                                     value="<?php echo base_url("ordermanage/order/removetocart") ?>" />
                                 <input name="updateid" type="hidden" id="updateid" value="" />
-                                <div class="row">
+                                <div class="row pos-columns-row">
                                     <form action="<?php echo base_url("ordermanage/order/pos_order") ?>"
                                         class="form-vertical" id="onlineordersubmit" enctype="multipart/form-data"
                                         method="post" accept-charset="utf-8">
 
                                         <div class="col-md-4">
                                             <div class="leftSidebarPosMain">
+                                                <!-- ORDER PANEL HEADER -->
+                                                <div class="order-panel-header">
+                                                    <div class="order-panel-title">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span id="order-panel-label"><?php echo empty($this->cart->contents()) ? 'New Order' : 'Order in Progress'; ?></span>
+                                                    </div>
+                                                    <div class="order-panel-date">
+                                                        <?php echo date('d M Y, H:i'); ?>
+                                                    </div>
+                                                </div>
                                                 <!-- <div class="slimScrollDiv"> -->
                                                 <div class="row">
                                                     <div class="col-md-6 form-group">
@@ -1001,6 +1011,13 @@ foreach ($scan as $file) {
                                                     </div>
                                                 </div>
                                                 <div class="productlist product-table">
+                                                    <!-- ORDERED MENUS HEADER -->
+                                                    <div class="ordered-menus-header">
+                                                        <span class="ordered-menus-title">Ordered Items</span>
+                                                        <?php if (!empty($this->cart->contents())) : ?>
+                                                        <span class="ordered-menus-count"><?php echo count($this->cart->contents()); ?> article<?php echo count($this->cart->contents()) > 1 ? 's' : ''; ?></span>
+                                                        <?php endif; ?>
+                                                    </div>
                                                     <div class="product-list pdlist product-table-height">
                                                         <div class="table-responsive" id="addfoodlist">
                                                             <?php $grtotal = 0;
@@ -1270,6 +1287,20 @@ foreach ($scan as $file) {
                                                             <div class="summary-bg p-10 mb-13">
                                                                 <table
                                                                     class="table table-bordered footersumtotal summary-table">
+                                                                    <tr class="subtotal-row">
+                                                                        <td>
+                                                                            <label class="mb-0">Sub Total :</label>
+                                                                        </td>
+                                                                        <td class="text-end fs-17">
+                                                                            <label class="mb-0">
+                                                                                <strong>
+                                                                                    <?php if ($currency->position == 1) { echo $currency->curr_icon; } ?>
+                                                                                    <span id="pos-subtotal"><?php echo number_format((float)$subtotal, 0); ?></span>
+                                                                                    <?php if ($currency->position == 2) { echo ' ' . $currency->curr_icon; } ?>
+                                                                                </strong>
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>
                                                                             <label for="date"
@@ -1385,72 +1416,121 @@ foreach ($scan as $file) {
                                         </div>
                                     </form>
                                     <div class="col-md-8 height-cal">
+                                        <?php if (!empty($ongoingorder)) : ?>
+                                        <div class="recent-orders-bar-wrap">
+                                            <div class="recent-orders-header">
+                                                <span class="recent-orders-title">Recent Orders</span>
+                                                <div class="recent-order-filters">
+                                                    <button class="ro-filter ro-filter-active" data-filter="all">All</button>
+                                                    <button class="ro-filter" data-filter="dine">Dine In</button>
+                                                    <button class="ro-filter" data-filter="take">Take Away</button>
+                                                    <button class="ro-filter" data-filter="delivery">Delivery</button>
+                                                    <button class="ro-filter" data-filter="table">Table</button>
+                                                </div>
+                                            </div>
+                                            <div class="recent-orders-scroll">
+                                                <?php foreach ($ongoingorder as $ong) :
+                                                    $tl = strtolower($ong->customer_type);
+                                                    if (strpos($tl, 'dine') !== false)                               { $tk = 'dine'; }
+                                                    elseif (strpos($tl, 'take') !== false || strpos($tl, 'away') !== false) { $tk = 'take'; }
+                                                    elseif (strpos($tl, 'delivery') !== false)                       { $tk = 'delivery'; }
+                                                    elseif (!empty($ong->tablename))                                 { $tk = 'table'; }
+                                                    else                                                              { $tk = 'other'; }
+                                                    // Elapsed time
+                                                    $elapsed = '';
+                                                    if (!empty($ong->order_time)) {
+                                                        try {
+                                                            $orderT = new DateTime($ong->order_time);
+                                                            $nowT   = new DateTime();
+                                                            $diff   = $nowT->diff($orderT);
+                                                            if ($diff->h > 0) {
+                                                                $elapsed = $diff->h . 'h ' . $diff->i . 'min';
+                                                            } else {
+                                                                $elapsed = $diff->i . ' min';
+                                                            }
+                                                        } catch (Exception $e) { $elapsed = ''; }
+                                                    }
+                                                ?>
+                                                <div class="recent-order-card ro-type-<?php echo $tk; ?>"
+                                                    onclick="openRecentOrder(<?php echo $ong->order_id; ?>)" style="cursor:pointer;">
+                                                    <div class="ro-top">
+                                                        <span class="ro-id">#<?php echo $ong->order_id; ?></span>
+                                                        <span class="ro-badge ro-badge-<?php echo $tk; ?>"><?php echo $ong->customer_type; ?></span>
+                                                    </div>
+                                                    <div class="ro-customer"><?php echo $ong->customer_name; ?></div>
+                                                    <div class="ro-meta">
+                                                        <?php if (!empty($ong->tablename)) : ?>
+                                                        <span><i class="fa fa-cutlery"></i> <?php echo $ong->tablename; ?></span>
+                                                        <?php endif; ?>
+                                                        <?php if ($elapsed) : ?>
+                                                        <span class="ro-elapsed"><i class="fa fa-clock-o"></i> <?php echo $elapsed; ?></span>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="ro-amount"><?php echo ($currency->position == 1 ? $currency->curr_icon . ' ' : '') . number_format((float)$ong->totalamount, 0) . ($currency->position == 2 ? ' ' . $currency->curr_icon : ''); ?></div>
+                                                </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <div class="pos-search-catbar-wrap">
+                                            <form class="pos-search-form" method="get"
+                                                action="<?php echo base_url("ordermanage/order/pos_invoice") ?>">
+                                                <div class="pos-search-inner">
+                                                    <i class="fa fa-search pos-search-icon"></i>
+                                                    <select id="product_name"
+                                                        class="form-control dont-select-me search-field" dir="ltr"
+                                                        name="s">
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <form class="navbar-search" method="get"
-                                                    action="<?php echo base_url("ordermanage/order/pos_invoice") ?>">
-                                                    <label class="sr-only screen-reader-text"
-                                                        for="search"><?php echo display('search') ?>:</label>
-                                                    <div class="input-group search-custom">
-                                                        <select id="product_name"
-                                                            class="form-control dont-select-me  search-field" dir="ltr"
-                                                            name="s">
-                                                        </select>
+                                                <div class="product-category-bar">
+                                                    <!-- Refresh button -->
+                                                    <div class="cat-refresh-btn" onclick="posRefresh()" title="Refresh">
+                                                        <i class="fa fa-refresh"></i>
                                                     </div>
-                                                </form>
+                                                    <!-- All -->
+                                                    <div class="listcatnew pos-category cat-pill cat-active"
+                                                        onclick="getslcategory('')" data-catid="">
+                                                        <div class="cat-pill-img">
+                                                            <i class="fa fa-th"></i>
+                                                        </div>
+                                                        <span class="cat-pill-name"><?php echo display('all') ?></span>
+                                                    </div>
+                                                    <?php foreach ($allcategorylist as $category) {
+                                                        $catImg = !empty($category->CategoryImage) ? base_url($category->CategoryImage) : base_url('assets/img/icons/default.jpg');
+                                                        if (!empty($category->sub)) { ?>
+                                                    <div class="listcatnew pos-category cat-pill cat-nav2">
+                                                        <div class="cat-pill-img">
+                                                            <img src="<?php echo $catImg; ?>" alt="<?php echo $category->Name; ?>">
+                                                        </div>
+                                                        <span class="cat-pill-name"><?php echo $category->Name; ?> <i class="fa fa-caret-down"></i></span>
+                                                        <ul class="dropdown-menucat dropcat display-none"
+                                                            id="newtcat<?php echo $category->CategoryID; ?>">
+                                                            <?php foreach ($category->sub as $subcat) { ?>
+                                                            <li class="lip-2 border-bottom-white"><a
+                                                                    onclick="getslcategory(<?php echo $subcat->CategoryID; ?>)"><?php echo $subcat->Name; ?></a>
+                                                            </li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </div>
+                                                    <?php } else { ?>
+                                                    <div class="listcatnew pos-category cat-pill cat-nav"
+                                                        onclick="getslcategory(<?php echo $category->CategoryID; ?>)" data-catid="<?php echo $category->CategoryID; ?>">
+                                                        <div class="cat-pill-img">
+                                                            <img src="<?php echo $catImg; ?>" alt="<?php echo $category->Name; ?>">
+                                                        </div>
+                                                        <span class="cat-pill-name"><?php echo $category->Name; ?></span>
+                                                    </div>
+                                                    <?php } } ?>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3 col-lg-2 pr-0">
-                                                <div class="leftSidebarPosMain bg-alice-blue p-10 pb-60 pb-sm-0">
-                                                    <div class="slimScrollDiv">
-                                                        <div class="product-category">
-                                                            <div class="listcatnew pos-category"
-                                                                onclick="getslcategory('')"><?php echo display('all') ?>
-                                                            </div>
-                                                            <?php //$result = array_diff($categorylist, array("Select Food Category"));
-
-                                                            foreach ($allcategorylist as $category) {
-
-                                                                if (!empty($category->sub)) {
-                                                            ?>
-                                                            <div class="listcatnew pos-category cat-nav2">
-                                                                <a class="btn listcatnew listcat2 pos-category-sub">
-                                                                    <?php echo $category->Name; ?>
-                                                                    <span class="caret"></span>
-                                                                </a>
-                                                                <ul class="dropdown-menucat dropcat display-none"
-                                                                    id="newtcat<?php echo $subcat->CategoryID ?? ''; ?>">
-                                                                    <?php
-
-                                                                            foreach ($category->sub as $subcat) { ?>
-                                                                    <li class="lip-2 border-bottom-white"><a
-                                                                            onclick="getslcategory(<?php echo $subcat->CategoryID; ?>)"><?php echo $subcat->Name; ?></a>
-                                                                    </li>
-                                                                    <?php }
-
-                                                                            ?>
-                                                                </ul>
-
-
-                                                            </div>
-                                                            <?php
-                                                                } else { ?>
-
-                                                            <div class="listcatnew pos-category cat-nav"
-                                                                onclick="getslcategory(<?php echo $category->CategoryID; ?>)">
-                                                                <?php echo $category->Name; ?></div>
-                                                            <?php }
-                                                            }
-
-                                                            ?>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-9 col-lg-10">
-                                                <div class="leftSidebarPosMain bg-alice-blue pb-60">
+                                            <div class="col-md-12">
+                                                <div class="leftSidebarPosMain bg-alice-blue">
                                                     <div class="slimScrollDiv">
                                                         <div class="row m-3" id="product_search">
                                                             <?php $i = 0;
@@ -1471,9 +1551,9 @@ foreach ($scan as $file) {
                                                                 }
 
                                                             ?>
-                                                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 p-6">
+                                                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 p-4">
                                                                 <div
-                                                                    class="panel panel-bd product-panel select_product rounded-lg border-none p-10 product-h m-0 bg-white">
+                                                                    class="panel panel-bd product-panel select_product rounded-lg border-none p-0 product-h m-0 bg-white">
                                                                     <div class="panel-body p-0">
                                                                         <div class="pos-img-wrap">
                                                                             <img src="<?php echo base_url(!empty($item->small_thumb) ? $item->small_thumb : 'assets/img/icons/default_pos_pro.jpg'); ?>"
@@ -1518,18 +1598,21 @@ foreach ($scan as $file) {
                                                                             class="select_addons"
                                                                             value="<?php echo $getadons; ?>">
                                                                     </div>
-                                                                    <div class="text-center">
-                                                                        <h4 class="m-0 pt-12">
+                                                                    <div class="product-card-footer">
+                                                                        <?php if (!empty($item->variantName)) : ?>
+                                                                        <span class="product-card-variant"><?php echo $item->variantName; ?></span>
+                                                                        <?php endif; ?>
+                                                                        <div class="product-card-name">
                                                                             <?php echo $item->ProductName; ?>
-
+                                                                            <?php if (!empty($item->itemnotes)) { echo ' · ' . $item->itemnotes; } ?>
+                                                                        </div>
+                                                                        <div class="product-card-price">
                                                                             <?php
-
-                                                                                if (!empty($item->itemnotes)) {
-                                                                                    echo " -" . $item->itemnotes;
-                                                                                }
-
-                                                                                ?>
-                                                                        </h4>
+                                                                            if ($currency->position == 1) { echo $currency->curr_icon . ' '; }
+                                                                            echo number_format((float)$item->price, 0);
+                                                                            if ($currency->position == 2) { echo ' ' . $currency->curr_icon; }
+                                                                            ?>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1608,5 +1691,5 @@ foreach ($scan1 as $file) {
 
 <script src="<?php echo base_url('ordermanage/order/possettingjs') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('ordermanage/order/quickorderjs') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js'); ?>" type="text/javascript">
+<script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js?v=1.8'); ?>" type="text/javascript">
 </script>

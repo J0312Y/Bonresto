@@ -545,7 +545,8 @@ public function workexperience_view()
 
 
 public function view_details(){
-     $data=array();    
+     $id = $this->uri->segment(4);
+     $data=array();
      $data['ab']=$this->Candidate_model->employee_details($id);
    
      $this->load->view('cv',$data);

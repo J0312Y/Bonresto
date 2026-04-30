@@ -3,17 +3,24 @@ import PageMeta from "../../components/common/PageMeta";
 import ClientRevenueChart from "../../components/saas/ClientRevenueChart";
 import ClientStatsComparison from "../../components/saas/ClientStatsComparison";
 import RecentOrdersAll from "../../components/saas/RecentOrdersAll";
+import PlansBreakdown from "../../components/saas/PlansBreakdown";
+import RecentClients from "../../components/saas/RecentClients";
+import RevenueChart from "../../components/saas/RevenueChart";
+import SaasTarget from "../../components/saas/SaasTarget";
+import ClientDemographics from "../../components/saas/ClientDemographics";
 import {
   getDashboardStats,
   getRecentOrders,
   getClientsStats,
   getClientsRevenue,
+  getClients,
 } from "../../services/api";
 import type {
   DashboardStats,
   RecentOrder,
   ClientStats,
   ClientRevenueMonth,
+  Client,
 } from "../../types/saas";
 import {
   GroupIcon,
@@ -25,8 +32,6 @@ import {
   ArrowUpIcon,
   ArrowDownIcon,
 } from "../../icons";
-import Chart from "react-apexcharts";
-import type { ApexOptions } from "apexcharts";
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -85,93 +90,43 @@ function KpiCard({ label, value, sub, badge, icon, iconBg }: KpiProps) {
   );
 }
 
-// ── Activation gauge (inline, lighter) ────────────────────────────────────────
-
-function ActivationGauge({ stats }: { stats: DashboardStats }) {
-  const rate = stats.total_clients > 0
-    ? Math.round((stats.active_subscriptions / stats.total_clients) * 100)
-    : 0;
-
-  const options: ApexOptions = {
-    colors: ["#37a000"],
-    chart: { fontFamily: "Outfit, sans-serif", type: "radialBar", sparkline: { enabled: true } },
-    plotOptions: {
-      radialBar: {
-        startAngle: -90,
-        endAngle: 90,
-        hollow: { size: "72%" },
-        track: { background: "#f3f4f6", strokeWidth: "100%" },
-        dataLabels: {
-          name: { show: false },
-          value: {
-            fontSize: "28px",
-            fontWeight: "700",
-            offsetY: -18,
-            color: "#1a1a2e",
-            formatter: (val: number) => val + "%",
-          },
-        },
-      },
-    },
-    stroke: { lineCap: "round" },
-    fill: { type: "solid", colors: ["#37a000"] },
-    labels: ["Activation"],
-  };
-
-  return (
-    <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] p-5 flex flex-col h-full">
-      <div className="flex items-center justify-between mb-1">
-        <div>
-          <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">Taux d'activation</p>
-          <p className="text-xs text-gray-400 mt-0.5">Clients avec abonnement actif</p>
-        </div>
-        <span className="text-xs font-medium text-[#37a000] bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
-          {stats.active_subscriptions}/{stats.total_clients}
-        </span>
-      </div>
-
-      <div className="-mb-4">
-        <Chart options={options} series={[rate]} type="radialBar" height={200} />
-      </div>
-
-      <div className="mt-auto grid grid-cols-3 gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
-        <div className="text-center">
-          <p className="text-[10px] text-gray-400 uppercase tracking-wide">MRR</p>
-          <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 truncate">{fcfa(stats.mrr)}</p>
-        </div>
-        <div className="text-center border-x border-gray-100 dark:border-gray-800">
-          <p className="text-[10px] text-gray-400 uppercase tracking-wide">Ce mois</p>
-          <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 truncate">{fcfa(stats.revenue_this_month)}</p>
-        </div>
-        <div className="text-center">
-          <p className="text-[10px] text-gray-400 uppercase tracking-wide">Expirent</p>
-          <p className={`text-xs font-semibold ${stats.expiring_soon > 0 ? "text-amber-600" : "text-gray-700 dark:text-gray-300"}`}>
-            {stats.expiring_soon}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [stats, setStats]     = useState<DashboardStats>(EMPTY_STATS);
-  const [orders, setOrders]   = useState<RecentOrder[]>([]);
-  const [clients, setClients] = useState<ClientStats[]>([]);
-  const [revenue, setRevenue] = useState<ClientRevenueMonth[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState<string | null>(null);
+  const [stats, setStats]                   = useState<DashboardStats>(EMPTY_STATS);
+  const [orders, setOrders]                 = useState<RecentOrder[]>([]);
+  const [clientStats, setClientStats]       = useState<ClientStats[]>([]);
+  const [revenue, setRevenue]               = useState<ClientRevenueMonth[]>([]);
+  const [recentClients, setRecentClients]   = useState<Client[]>([]);
+  const [loading, setLoading]               = useState(true);
+  const [error, setError]                   = useState<string | null>(null);
 
   useEffect(() => {
-    Promise.all([getDashboardStats(), getRecentOrders(), getClientsStats(), getClientsRevenue()])
-      .then(([s, o, c, r]) => { setStats(s); setOrders(o); setClients(c); setRevenue(r); setError(null); })
+    Promise.all([
+      getDashboardStats(),
+      getRecentOrders(),
+      getClientsStats(),
+      getClientsRevenue(),
+      getClients(),
+    ])
+      .then(([s, o, cs, r, cl]) => {
+        setStats(s);
+        setOrders(o);
+        setClientStats(cs);
+        setRevenue(r);
+        setRecentClients(cl);
+        setError(null);
+      })
       .catch((e) => setError(e?.message ?? "Erreur API"))
       .finally(() => setLoading(false));
   }, []);
 
-  const today = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const today = new Date().toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   if (loading) {
     return (
@@ -202,12 +157,14 @@ export default function Home() {
       <div className="space-y-6">
 
         {/* ── Section 1 : KPI principaux (4 cards) ────────────────── */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <KpiCard
             label="Total clients"
             value={stats.total_clients}
             sub={`+${stats.new_clients_this_month} ce mois`}
-            badge={stats.new_clients_this_month > 0 ? { text: `${stats.new_clients_this_month} nouveaux`, up: true } : undefined}
+            badge={stats.new_clients_this_month > 0
+              ? { text: `${stats.new_clients_this_month} nouveaux`, up: true }
+              : undefined}
             icon={<GroupIcon className="text-blue-600 size-5 dark:text-blue-400" />}
             iconBg="bg-blue-50 dark:bg-blue-500/10"
           />
@@ -237,22 +194,25 @@ export default function Home() {
           />
         </div>
 
-        {/* ── Section 2 : Graphique revenus + jauge activation ────── */}
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-          <div className="xl:col-span-2">
+        {/* ── Section 2 : Revenus 12 mois (full width) ────────────── */}
+        <RevenueChart stats={stats} />
+
+        {/* ── Section 3 : Revenus par client + Taux d'activation ──── */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <div className="lg:col-span-2">
             <ClientRevenueChart data={revenue} />
           </div>
-          <div className="xl:col-span-1">
-            <ActivationGauge stats={stats} />
+          <div className="lg:col-span-1">
+            <SaasTarget stats={stats} />
           </div>
         </div>
 
-        {/* ── Section 3 : KPI secondaires (4 cards) ───────────────── */}
+        {/* ── Section 4 : KPI secondaires ─────────────────────────── */}
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3 px-0.5">
             Performance & Santé
           </p>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <KpiCard
               label="Expirent bientôt"
               value={stats.expiring_soon}
@@ -263,7 +223,9 @@ export default function Home() {
             />
             <KpiCard
               label="Taux d'activation"
-              value={`${stats.total_clients > 0 ? Math.round((stats.active_subscriptions / stats.total_clients) * 100) : 0}%`}
+              value={`${stats.total_clients > 0
+                ? Math.round((stats.active_subscriptions / stats.total_clients) * 100)
+                : 0}%`}
               sub="clients avec abonnement actif"
               icon={<PieChartIcon className="text-pink-600 size-5 dark:text-pink-400" />}
               iconBg="bg-pink-50 dark:bg-pink-500/10"
@@ -287,11 +249,24 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Section 4 : Comparaison + Commandes récentes ─────────── */}
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-          <ClientStatsComparison clients={clients} />
-          <RecentOrdersAll orders={orders} />
+        {/* ── Section 5 : Répartition plans + Démographie clients ─── */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <div className="lg:col-span-1">
+            <PlansBreakdown stats={stats} />
+          </div>
+          <div className="lg:col-span-2">
+            <ClientDemographics clients={clientStats} />
+          </div>
         </div>
+
+        {/* ── Section 6 : Comparaison + Clients récents ────────────── */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <ClientStatsComparison clients={clientStats} />
+          <RecentClients clients={recentClients} />
+        </div>
+
+        {/* ── Section 7 : Toutes les commandes récentes ────────────── */}
+        <RecentOrdersAll orders={orders} />
 
       </div>
     </>
