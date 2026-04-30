@@ -2,8 +2,17 @@
     RewriteEngine On
     RewriteBase /
 
+    # Admin SaaS — fichiers statiques servis depuis admin/dist/
+    RewriteCond %{REQUEST_URI} ^/admin/(.+)
+    RewriteCond %{DOCUMENT_ROOT}/admin/dist/%1 -f
+    RewriteRule ^admin/(.+)$ admin/dist/$1 [L]
+
+    # Admin SaaS — SPA fallback (toutes les routes → index.html)
+    RewriteCond %{REQUEST_URI} ^/admin
+    RewriteRule ^ admin/dist/index.html [L]
+
+    # CodeIgniter
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-
     RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>
