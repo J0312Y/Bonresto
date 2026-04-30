@@ -111,12 +111,9 @@ class Menu_addons extends MX_Controller {
 	
 	   } else {
 		$this->permission->method('itemmanage','update')->redirect();
-		if(empty($img)){
-			$img=$this->input->post('old_image');
-			}
 	   $logData = [
 	   'action_page'         => "Add-ons List",
-	   'action_done'     	 => "Update Data", 
+	   'action_done'     	 => "Update Data",
 	   'remarks'             => "Add-ons Updated",
 	   'user_name'           => $this->session->userdata('fullname',true),
 	   'entry_date'          => date('Y-m-d H:i:s'),
@@ -270,12 +267,9 @@ class Menu_addons extends MX_Controller {
 	
 	   } else {
 		$this->permission->method('itemmanage','update')->redirect();
-		if(empty($img)){
-			$img=$this->input->post('old_image');
-			}
 	   $logData = [
 	   'action_page'         => "Add-ons Assign List",
-	   'action_done'     	 => "Update Data", 
+	   'action_done'     	 => "Update Data",
 	   'remarks'             => "Add-ons Assign List Updated",
 	   'user_name'           => $this->session->userdata('fullname'),
 	   'entry_date'          => date('Y-m-d H:i:s'),

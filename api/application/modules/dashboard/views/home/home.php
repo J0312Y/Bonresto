@@ -1,4 +1,3 @@
-<!--<li><a href="<?php echo base_url('dashboard/backup_restore'); ?>">Backup & Restore</a></li>-->
 <link href="<?php echo base_url('application/modules/dashboard/assest/css/home_dashboard.css?v=1.1'); ?>"
     rel="stylesheet" type="text/css" />
 <link
@@ -314,6 +313,8 @@
 
     <!-- Purchase -->
    <!-- Sales Report -->
+   <!-- Purchase -->
+   <!-- Sales Report -->
 <!-- Purchase -->
     <div class="col-sm-12 col-md-6">
         <div class="panel panel-bd shadow-1 border-none rounded-10 p-15">
@@ -326,7 +327,9 @@
                 </ul>
             </div>
             <div class="panel-body">
-                <canvas id="purchaseChart" height="324"></canvas>
+                <div style="position:relative; height:220px;">
+                    <canvas id="purchaseChart"></canvas>
+                </div>
             </div>
         </div>
     </div>

@@ -593,9 +593,9 @@ class Reports extends MX_Controller
                     $itemprice = $value->menuqty * $newprice;
                 }
 
-                if (@$countprice->add_on_id != null) {
-                    $add_on_ids  = explode(',', @$countprice->add_on_id);
-                    $add_on_qtys = explode(',', @$countprice->addonsqty);
+                if (!empty($value->add_on_id)) {
+                    $add_on_ids  = explode(',', $value->add_on_id);
+                    $add_on_qtys = explode(',', $value->addonsqty);
                     $i           = 0;
 
                     foreach ($add_on_ids as $add_on_id) {

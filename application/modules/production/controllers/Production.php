@@ -214,7 +214,7 @@ class Production extends MX_Controller
 				$this->session->set_flashdata('message', display('update_successfully'));
 				redirect('production/production/index');
 			} else {
-				$this->session->set_flashdata('message',  display('update_successfully'));
+				$this->session->set_flashdata('exception', display('please_try_again'));
 			}
 			redirect("production/production/index");
 		} else {

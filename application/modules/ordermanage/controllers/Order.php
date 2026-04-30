@@ -63,7 +63,7 @@ class Order extends MX_Controller
             ->order_by('cuntomer_no', 'desc')
             ->get()
             ->row();
-        $sl = $lastid->cuntomer_no;
+        $sl = $lastid->cuntomer_no ?? '';
 
         if (empty($sl)) {
             $sl = "cus-0001";
@@ -149,7 +149,7 @@ class Order extends MX_Controller
             ->order_by('cuntomer_no', 'desc')
             ->get()
             ->row();
-        $sl = $lastid->cuntomer_no;
+        $sl = $lastid->cuntomer_no ?? '';
 
         if (empty($sl)) {
             $sl = "cus-0001";
@@ -202,7 +202,7 @@ class Order extends MX_Controller
     public function getcustomerdiscount($cid)
     {
         $settinginfo  = $this->order_model->settinginfo();
-        $customerinfo = $this->order_model->read('*', 'customer_info', ['customer_id' => 1]);
+        $customerinfo = $this->order_model->read('*', 'customer_info', ['customer_id' => $cid]);
         $mtype        = $this->order_model->read('*', 'membership', ['id' => $customerinfo->membership_type]);
 
         if ($settinginfo->discount_type == 0) {
@@ -279,6 +279,25 @@ class Order extends MX_Controller
         }
 
         $this->load->view('ongoingorder_ajax', $data);
+    }
+
+    public function getongoingorder_pos_json()
+    {
+        $orders = $this->order_model->get_ongoingorder();
+        $result = [];
+        foreach ($orders as $o) {
+            $result[] = [
+                'order_id'      => $o->order_id,
+                'customer_name' => $o->customer_name,
+                'customer_type' => $o->customer_type,
+                'tablename'     => $o->tablename,
+                'totalamount'   => $o->totalamount,
+                'cutomertype'   => $o->cutomertype,
+                'order_time'    => $o->order_time,
+            ];
+        }
+        header('Content-Type: application/json');
+        echo json_encode($result);
     }
 
     public function kitchenstatus()
@@ -367,7 +386,7 @@ class Order extends MX_Controller
         $data['title'] = display('supplier_edit');
         $prod          = $this->input->post('product_id');
         $getproduct    = $this->order_model->productinfo($prod);
-        return json_encode($getproduct);
+        echo json_encode($getproduct);
     }
 
     public function itemlistselect()
@@ -985,7 +1004,7 @@ class Order extends MX_Controller
                     ->order_by('order_id', 'desc')
                     ->get()
                     ->row();
-                $sl = $lastid->order_id;
+                $sl = $lastid->order_id ?? '';
 
                 if (empty($sl)) {
                     $sl = 1;
@@ -1274,7 +1293,7 @@ class Order extends MX_Controller
                         $senderid5[] = $mytoken->waiter_kitchenToken;
                     }
 
-                    define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
+                    defined('API_ACCESS_KEY') || define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
                     $registrationIds5 = $senderid5;
                     $msg5             =
                         [
@@ -1772,7 +1791,7 @@ class Order extends MX_Controller
         if ($acceptreject == 1) {
             $onlinebill = $this->db->select('*')->from('bill')->where('order_id', $orderid)->get()->row();
 
-            if ($onlinebill->payment_method_id == 1 && $onlinebill->payment_method_id == 4) {
+            if ($onlinebill->payment_method_id == 1 || $onlinebill->payment_method_id == 4) {
                 $updatetData = ['anyreason' => $reason, 'nofification' => $status, 'orderacceptreject' => $acceptreject, 'order_status' => 2];
             } else {
                 $updatetData = ['anyreason' => $reason, 'nofification' => $status, 'orderacceptreject' => $acceptreject];
@@ -1952,8 +1971,8 @@ class Order extends MX_Controller
 
             if (empty($taxinfos)) {
 
-                if ($settinginfo->vat > 0) {
-                    $calvat = $itemtotal * $settinginfo->vat / 100;
+                if ($setting->vat > 0) {
+                    $calvat = $itemtotal * $setting->vat / 100;
                 } else {
                     $calvat = $pvat;
                 }

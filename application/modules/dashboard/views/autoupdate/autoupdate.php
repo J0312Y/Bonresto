@@ -1,89 +1,111 @@
-<link href="<?php echo base_url('application/modules/dashboard/assest/css/autoupdate.css'); ?>" rel="stylesheet" type="text/css"/>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+<style>
+.upd-card       { background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,.07); padding:28px 32px; margin-bottom:20px; }
+.upd-header     { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+.upd-title      { font-size:20px; font-weight:700; color:#1a202c; margin:0; }
+.upd-plan       { font-size:13px; color:#6b7280; margin-top:4px; }
+.upd-badge      { display:inline-flex; align-items:center; gap:5px; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+.upd-pending    { background:#fef3c7; color:#92400e; }
+.upd-applied    { background:#d1fae5; color:#065f46; }
+.upd-failed     { background:#fee2e2; color:#991b1b; }
+.upd-row        { display:flex; align-items:flex-start; gap:16px; padding:16px 0; border-bottom:1px solid #f3f4f6; }
+.upd-row:last-child { border-bottom:none; }
+.upd-icon       { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.upd-icon-cfg   { background:#eff6ff; color:#3b82f6; }
+.upd-icon-code  { background:#f0fdf4; color:#22c55e; }
+.upd-name       { font-size:14px; font-weight:600; color:#1a202c; }
+.upd-meta       { font-size:12px; color:#9ca3af; margin-top:2px; }
+.upd-changelog  { font-size:13px; color:#4b5563; margin-top:6px; line-height:1.5; }
+.upd-empty      { text-align:center; padding:48px 0; color:#9ca3af; }
+.upd-empty i    { font-size:40px; display:block; margin-bottom:12px; }
+.btn-apply      { background:#37a000; color:#fff; border:none; border-radius:8px; padding:10px 22px; font-size:14px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; }
+.btn-apply:hover { background:#2d8600; }
+.alert-ok  { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:14px; }
+.alert-err { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:14px; }
+</style>
 
 <div class="row">
-    <div class="col-sm-12 col-md-12">
-        <div class="panel panel-bd lobidrag">
-            <div class="panel-body">
-            <?php if ((float)$latest_version>$current_version) { ?>
-                <?php echo form_open_multipart("dashboard/autoupdate/update") ?>
-                    <div class="row">
-                        <div class="form-group col-lg-8 col-sm-offset-2 autoupdate-blink">
-                            <blink class="text-success text-center"><?php echo @$message_txt ?></blink>
-                            <blink class="text-waring text-center"><?php echo @$exception_txt ?></blink>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="alert alert-success text-center autoupdate_line_height_font"><?php echo display('latestv')?> <br>V-<?php echo $latest_version ?></div>
-                                </div> 
-                                <div class="col-lg-6">
-                                	<span class="autoupdate_pos_bg_color"><?php echo display('after19')?></span>
-                                    <div class="alert alert-danger text-center autoupdate_line_font_18"><?php echo display('crver')?> <br>V-<?php echo $current_version ?></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="checkserver">
-                    <div class="row">
-                        <div class="form-group col-lg-6 col-sm-offset-3">
-                            <p id="errormsg" class="alert autoupdate_line_font_doted"><?php echo "Before Update Check Your Server requirement for Update script.Check Your server php allow_url_fopen is enable,memory Limit More than 100M and max execution time is 300 or more";?></p>
-                        </div>
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-success col-sm-offset-5" onclick="checkserver()"><i class="fa fa-wrench" aria-hidden="true"></i> <?php echo "Check server";?></button>
-                        <button type="button" class="btn btn-success" onclick="autoupdateoff(<?php echo $latest_version;?>)"><i class="fa fa-close" aria-hidden="true"></i> Notification Off</button>
-                    </div>
-                    </div>
-                    <div id="serverok" class="autoupdate_d_none">
-                    <div class="row">
-                        <div class="form-group col-lg-6 col-sm-offset-3">
-                        	 <p class="alert autoupdate_line_font_doted">Note: If you want to update software,you Must have immediate previous version.</p>
-                            <p class="alert autoupdate_line_font_doted"><?php echo display('notesupdate')?><a href="<?php echo base_url()?>dashboard/autoupdate/download_backup"  class="btn btn-success col-sm-offset-5"><i class="fa fa-database" aria-hidden="true"></i> Download Database</a></p>
-                            <label><?php echo display('lic_pur_key')?><span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="purchase_key">
-                        </div>
-                        <div class="form-group col-lg-6 col-sm-offset-3">                           
-                            <label><?php echo "Select Version";?><span class="text-danger">*</span></label>
-                            <select name="version"  class="form-control">
-                            <option value=""  selected="selected"><?php echo display('select_option') ?></option>
-                           		<?php $start=$latest_version-0.4;
-								$cversion=(float)$current_version+0.1;
-								$newversion=(float)$latest_version+0.1;
-								for($m=$cversion;$m<=$newversion;$m+=0.1){
-									
-								?>
-                                <option value="<?php echo $m;?>"><?php echo "Bhojon-v".$m;?></option>
-                                <?php } ?>
-                               
-                              </select>
-                              <p><a href="https://forum.bdtask.com" target="_blank">Do you Need support?</a> </p>
-                        </div>
-                    </div> 
-                    <div>
-                        <button type="submit" class="btn btn-success col-sm-offset-5" onclick="return confirm('are you sure want to update?')"><i class="fa fa-wrench" aria-hidden="true"></i> <?php echo display('update')?></button>
-                        
-                    </div>
-                    </div>
-                <?php echo form_close(); 
-				
-				?>
+    <div class="col-md-10 col-md-offset-1">
 
-                <?php } else{  ?>
-                    <div class="row">
-                        <div class="form-group col-lg-4 col-sm-offset-4">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="alert alert-success text-center autoupdate_line_height_font" ><?php echo display('crver')?> <br>V-<?php echo $current_version ?></div>
-                                    <h2 class="text-center"><?php echo display('noupdates')?></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+        <?php if ($success): ?>
+            <div class="alert-ok"><i class="fa fa-check-circle"></i> <?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="alert-err"><i class="fa fa-exclamation-circle"></i> <?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
 
+        <!-- ── Header ──────────────────────────────────────────────── -->
+        <div class="upd-card">
+            <div class="upd-header">
+                <div>
+                    <h2 class="upd-title"><i class="fa fa-cloud-download" style="color:#37a000;margin-right:8px;"></i>Mises à jour Bonresto</h2>
+                    <p class="upd-plan">
+                        Version installée : <strong>v<?php echo htmlspecialchars($current_version); ?></strong>
+                        &nbsp;·&nbsp;
+                        Plan : <strong><?php echo htmlspecialchars($plan); ?></strong>
+                        <?php if ($pending_count > 0): ?>
+                            &nbsp;·&nbsp; <span style="color:#d97706;font-weight:600;"><?php echo $pending_count; ?> mise<?php echo $pending_count > 1 ? 's' : ''; ?> à jour en attente</span>
+                        <?php else: ?>
+                            &nbsp;·&nbsp; <span style="color:#059669;">À jour</span>
+                        <?php endif; ?>
+                    </p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <form method="post" action="<?php echo base_url('dashboard/autoupdate/apply'); ?>" style="margin:0;">
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                        <button type="submit" class="btn-apply" onclick="return confirm('Vérifier et appliquer les mises à jour disponibles ?')">
+                            <i class="fa fa-refresh"></i> Vérifier & Appliquer
+                        </button>
+                    </form>
+                </div>
             </div>
+
+            <!-- ── Updates list ──────────────────────────────────── -->
+            <?php if (empty($updates)): ?>
+                <div class="upd-empty">
+                    <i class="fa fa-check-circle" style="color:#37a000;"></i>
+                    Aucune mise à jour disponible pour le moment.
+                </div>
+            <?php else: ?>
+                <?php foreach ($updates as $u): ?>
+                    <?php
+                        $is_code = $u['type'] === 'code';
+                        $status  = $u['delivery_status'];
+                        $badge   = match($status) {
+                            'applied' => ['class' => 'upd-applied', 'icon' => 'fa-check',           'label' => 'Appliqué'],
+                            'failed'  => ['class' => 'upd-failed',  'icon' => 'fa-exclamation',     'label' => 'Échoué'],
+                            default   => ['class' => 'upd-pending', 'icon' => 'fa-clock-o',         'label' => 'En attente'],
+                        };
+                    ?>
+                    <div class="upd-row">
+                        <div class="upd-icon <?php echo $is_code ? 'upd-icon-code' : 'upd-icon-cfg'; ?>">
+                            <i class="fa <?php echo $is_code ? 'fa-code' : 'fa-cog'; ?> fa-lg"></i>
+                        </div>
+                        <div style="flex:1;">
+                            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                                <span class="upd-name"><?php echo htmlspecialchars($u['title']); ?></span>
+                                <span class="upd-badge <?php echo $badge['class']; ?>">
+                                    <i class="fa <?php echo $badge['icon']; ?>"></i> <?php echo $badge['label']; ?>
+                                </span>
+                            </div>
+                            <div class="upd-meta">
+                                v<?php echo htmlspecialchars($u['version']); ?>
+                                &nbsp;·&nbsp; Module : <strong><?php echo htmlspecialchars($u['module']); ?></strong>
+                                &nbsp;·&nbsp; <?php echo $is_code ? 'Mise à jour code' : 'Mise à jour config'; ?>
+                                &nbsp;·&nbsp; Publié le <?php echo date('d/m/Y', strtotime($u['published_at'])); ?>
+                                <?php if ($status === 'applied' && !empty($u['applied_at'])): ?>
+                                    &nbsp;·&nbsp; Appliqué le <?php echo date('d/m/Y à H\hi', strtotime($u['applied_at'])); ?>
+                                <?php endif; ?>
+                            </div>
+                            <?php if (!empty($u['changelog'])): ?>
+                                <div class="upd-changelog"><?php echo nl2br(htmlspecialchars($u['changelog'])); ?></div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
+
     </div>
 </div>
-
-<script src="<?php echo base_url('application/modules/dashboard/assest/js/form.js'); ?>" type="text/javascript"></script>
- 

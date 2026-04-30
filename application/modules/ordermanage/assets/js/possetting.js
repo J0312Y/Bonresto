@@ -184,6 +184,27 @@ function getslcategory(carid) {
     },
   });
 }
+
+// Highlight the active category pill in the horizontal bar
+$(document).on("click", ".product-category-bar .pos-category", function () {
+  $(".product-category-bar .pos-category").removeClass("cat-active");
+  $(this).addClass("cat-active");
+});
+
+// Recent Orders filter tabs
+$(document).on("click", ".ro-filter", function () {
+  $(".ro-filter").removeClass("ro-filter-active");
+  $(this).addClass("ro-filter-active");
+  var f = $(this).data("filter");
+  $(".recent-order-card").each(function () {
+    if (f === "all" || $(this).hasClass("ro-type-" + f)) {
+      $(this).removeClass("ro-hidden");
+    } else {
+      $(this).addClass("ro-hidden");
+    }
+  });
+});
+
 //Product search button js
 $("body").on("click", "#search_button", function () {
   var product_name = $("#product_name").val();
@@ -1538,7 +1559,9 @@ function load_unseen_notificationqr(view = "") {
   });
 }
 setInterval(function () {
-  $("li.active").trigger("click");
+  if (!document.fullscreenElement) {
+    $("li.active").trigger("click");
+  }
   load_unseen_notificationqr();
 }, 30000);
 
@@ -2585,3 +2608,127 @@ $(".lang_box").on("click", function (event) {
   var submenu = $(this).next(".lang_options");
   submenu.slideToggle(400, function () {});
 });
+
+/* ── Refresh POS data without exiting fullscreen ────────────────────────── */
+function posRefresh() {
+  // Spin the refresh icon
+  var $icon = $(".cat-refresh-btn i");
+  $icon.addClass("fa-spin");
+  // Reload product grid (keeps current category active)
+  var activecat = $(".product-category-bar .cat-active").data("catid") || "";
+  getslcategory(activecat);
+  // Reload recent orders strip
+  refreshRecentOrders();
+  // Stop spin after 1s
+  setTimeout(function () { $icon.removeClass("fa-spin"); }, 1000);
+}
+
+/* ── Open a recent order card → show detail popup without leaving POS ──── */
+function openRecentOrder(id) {
+  detailspop(id);
+}
+
+/* ── Order panel label update ───────────────────────────────────────────── */
+function updateOrderPanelLabel() {
+  var $label = $("#order-panel-label");
+  if (!$label.length) return;
+  var itemCount = $("#addinvoice tbody tr").length;
+  if (itemCount > 0) {
+    $label.text("Order in Progress");
+  } else {
+    $label.text("New Order");
+  }
+}
+
+// Update label whenever the cart table changes
+var _panelLabelObserver = null;
+$(document).ready(function () {
+  var target = document.getElementById("addfoodlist");
+  if (target && window.MutationObserver) {
+    _panelLabelObserver = new MutationObserver(updateOrderPanelLabel);
+    _panelLabelObserver.observe(target, { childList: true, subtree: true });
+  }
+  updateOrderPanelLabel();
+});
+
+/* ── Live clock for order panel header ─────────────────────────────────── */
+function updatePanelClock() {
+  var now = new Date();
+  var day   = String(now.getDate()).padStart(2, "0");
+  var month = now.toLocaleString("fr-FR", { month: "short" });
+  var year  = now.getFullYear();
+  var hh    = String(now.getHours()).padStart(2, "0");
+  var mm    = String(now.getMinutes()).padStart(2, "0");
+  $(".order-panel-date").text(day + " " + month + " " + year + ", " + hh + ":" + mm);
+}
+if ($(".order-panel-date").length) {
+  updatePanelClock();
+  setInterval(updatePanelClock, 30000);
+}
+
+/* ── Auto-refresh Recent Orders strip every 30 seconds ─────────────────── */
+function getElapsedTime(orderTime) {
+  if (!orderTime) return "";
+  var parts = orderTime.split(":");
+  if (parts.length < 2) return "";
+  var now = new Date();
+  var orderDate = new Date();
+  orderDate.setHours(parseInt(parts[0], 10), parseInt(parts[1], 10), parseInt(parts[2] || 0, 10), 0);
+  var diffMs = now - orderDate;
+  if (diffMs < 0) diffMs = 0;
+  var diffMin = Math.floor(diffMs / 60000);
+  if (diffMin >= 60) {
+    var h = Math.floor(diffMin / 60);
+    var m = diffMin % 60;
+    return h + "h " + m + "min";
+  }
+  return diffMin + " min";
+}
+
+function buildTypeKey(customerType, tablename) {
+  var tl = (customerType || "").toLowerCase();
+  if (tl.indexOf("dine") !== -1)                          return "dine";
+  if (tl.indexOf("take") !== -1 || tl.indexOf("away") !== -1) return "take";
+  if (tl.indexOf("delivery") !== -1)                      return "delivery";
+  if (tablename && tablename.trim() !== "")               return "table";
+  return "other";
+}
+
+function refreshRecentOrders() {
+  if (!$(".recent-orders-scroll").length) return;
+  $.ajax({
+    url: basicinfo.baseurl + "ordermanage/order/getongoingorder_pos_json",
+    type: "GET",
+    dataType: "json",
+    success: function (orders) {
+      var activeFilter = $(".ro-filter-active").data("filter") || "all";
+      var $scroll = $(".recent-orders-scroll");
+      $scroll.empty();
+      if (!orders || orders.length === 0) {
+        $scroll.append('<p class="ro-empty">No active orders</p>');
+        return;
+      }
+      $.each(orders, function (i, o) {
+        var tk = buildTypeKey(o.customer_type, o.tablename);
+        var hiddenClass = (activeFilter === "all" || activeFilter === tk) ? "" : " ro-hidden";
+        var name = o.customer_name || "—";
+        var table = o.tablename ? ('<span>' + o.tablename + '</span>') : "";
+        var amount = parseFloat(o.totalamount || 0).toLocaleString("fr-FR");
+        var elapsed = getElapsedTime(o.order_time);
+        var elapsedHtml = elapsed ? '<span class="ro-elapsed"><i class="fa fa-clock-o"></i> ' + elapsed + '</span>' : '';
+        var card = '<div class="recent-order-card ro-type-' + tk + hiddenClass + '" onclick="openRecentOrder(' + o.order_id + ')" style="cursor:pointer;">'
+          + '<div class="ro-top"><span class="ro-id">#' + o.order_id + '</span>'
+          + '<span class="ro-badge ro-badge-' + tk + '">' + (o.customer_type || tk) + '</span></div>'
+          + '<div class="ro-customer">' + name + '</div>'
+          + '<div class="ro-meta">' + table + elapsedHtml + '</div>'
+          + '<div class="ro-amount">' + amount + '</div>'
+          + '</div>';
+        $scroll.append(card);
+      });
+    }
+  });
+}
+
+if ($(".recent-orders-scroll").length) {
+  setInterval(refreshRecentOrders, 30000);
+}

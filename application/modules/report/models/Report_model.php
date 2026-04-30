@@ -47,7 +47,7 @@ class Report_model extends CI_Model
             $myArray[$i]['ProductName'] = $result->ProductName;
             $myArray[$i]['In_Qnty']     = $result->totalqty;
             $myArray[$i]['Out_Qnty']    = $tout;
-            $myArray[$i]['Stock']       = $result->totalqty - $salereport->totalsaleqty;
+            $myArray[$i]['Stock']       = $result->totalqty - $tout;
         }
 
         return $myArray;
@@ -444,9 +444,7 @@ $this->db->like('bill.bill_status', $this->input->post('status'));
     {
         $this->get_allsalespayment_query($payid);
 
-        if ($_POST['length'] != -1) {
-            $query = $this->db->get();
-        }
+        $query = $this->db->get();
 
         //echo $this->db->last_query();
         $totalamount = $query->row();
@@ -653,9 +651,7 @@ $this->db->like('bill.bill_status', $this->input->post('status'));
     {
         $this->get_allsalespaymentgt_query($payid);
 
-        if ($_POST['length'] != -1) {
-            $query = $this->db->get();
-        }
+        $query = $this->db->get();
 
         $totalamount = $query->row();
 
@@ -850,9 +846,9 @@ $this->db->like('bill.bill_status', $this->input->post('status'));
     {
 
         if (!empty($id)) {
-            $where = "order_status = 1 OR order_status = 2 OR order_status = 3 AND order_id='" . $id . "'";
+            $where = "(order_status = 1 OR order_status = 2 OR order_status = 3) AND order_id='" . $id . "'";
         } else {
-            $where = " order_status = 1 OR order_status = 2 OR order_status = 3";
+            $where = "order_status = 1 OR order_status = 2 OR order_status = 3";
         }
 
         $marge        = $this->db->select("customer_id,order_id,SUM(totalamount) as totalamount")->from('customer_order')->where($where)->group_by('order_id')->get();

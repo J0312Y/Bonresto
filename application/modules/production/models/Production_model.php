@@ -95,19 +95,19 @@ class Production_model extends CI_Model {
 		$this->db->from('order_menu');
 		$this->db->where('menu_id',$id);
 		$query = $this->db->get();
-		
+
 		if ($query->num_rows() > 0) {
-			return true;
+			// Item is used in orders — cannot delete
+			return false;
 		}
 		else{
-			
-			    $this->db->where('pro_detailsid',$qid)->delete($this->table);
-				if ($this->db->affected_rows()) {
-					return true;
-				} else {
-					return false;
-				}
+			$this->db->where('pro_detailsid',$qid)->delete($this->table);
+			if ($this->db->affected_rows()) {
+				return true;
+			} else {
+				return false;
 			}
+		}
 	} 
 
 
@@ -124,7 +124,7 @@ class Production_model extends CI_Model {
      
 		
 		$this->db->where('foodid',$itemid)->where('pvarientid',$itemvarient)->delete('production_details');
-		
+
 		for ($i=0, $n=count($p_id); $i < $n; $i++) {
 			$product_quantity = $quantity[$i];
 			$product_id = $p_id[$i];
@@ -136,13 +136,14 @@ class Production_model extends CI_Model {
 				'createdby'			=>	$saveid,
 				'created_date'		=>	$newdate
 			);
-			
+
 				if(!empty($quantity))
 				{
 					$this->db->insert('production_details',$data1);
 				}
-			
+
 		}
+		return true;
 	}
 	
 	
@@ -197,11 +198,14 @@ class Production_model extends CI_Model {
 		$this->db->join('item_foods','item_foods.ProductsID = production_details.foodid','left');
 		$this->db->join('variant','variant.variantid = production_details.pvarientid','left');
 		$this->db->group_by('production_details.pvarientid');
+        if ($limit !== null) {
+			$this->db->limit($limit, $start);
+		}
         $query = $this->db->get();
-		
+
         if ($query->num_rows() > 0) {
         	$data = $this->totalcal($query->result());
-            return $data;    
+            return $data;
         }
         return false;
 	}

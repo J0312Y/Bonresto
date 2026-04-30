@@ -39,14 +39,36 @@
 										 if(($onprocess->orderacceptreject==0 || empty($onprocess->orderacceptreject)) && ($onprocess->cutomertype==2)){}
 										 else{
 										 ?>
-                                  		<div class="col-sm-2">
-                                            <div class="hero-widget well well-sm height-auto">
-                                                    <p class="m-0"><label class="text-muted"><strong><?php echo display('table');?>:<?php echo $onprocess->tablename;?></strong></label></p>
-                                                    <p class="m-0"><label class="text-muted"><strong><?php echo display('tok');?>:<?php echo $onprocess->tokenno;?></strong></label></p>
-                                                    <p class="m-0"><label class="text-muted"><strong><?php echo display('cookedtime');?>:<?php echo $onprocess->cookedtime;?></strong></label></p>
-                                                    <p class="m-0"><label class="text-muted"><?php echo display('ord');?>:<?php echo $onprocess->saleinvoice;?></label></p>
-                                                    <p class="m-0"><label class="text-muted"><?php echo display('waiter');?>:<?php echo $onprocess->first_name.' '.$onprocess->last_name;?></label></p>
-                                                    <a href="javascript:;" onclick="oredrready('<?php echo $onprocess->order_id;?>')" class="btn btn-xs btn-success btn-sm mr-1 display-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo display('view_ord')?>"><?php echo display('view_ord');?></a>
+                                  		<div class="col-sm-3 col-md-2 col-lg-2 kcard-col">
+                                            <div class="kcard">
+                                                <div class="kcard-header">
+                                                    <span class="kcard-order">#<?php echo $onprocess->saleinvoice; ?></span>
+                                                    <span class="kcard-status <?php echo ($onprocess->order_status == 1) ? 'kcard-pending' : 'kcard-accepted'; ?>">
+                                                        <?php echo ($onprocess->order_status == 1) ? 'Pending' : 'Accepted'; ?>
+                                                    </span>
+                                                </div>
+                                                <div class="kcard-body">
+                                                    <?php if (!empty($onprocess->tablename)) : ?>
+                                                    <div class="kcard-row"><i class="fa fa-cutlery"></i> <strong><?php echo display('table'); ?>:</strong> <?php echo $onprocess->tablename; ?></div>
+                                                    <?php endif; ?>
+                                                    <div class="kcard-row"><i class="fa fa-ticket"></i> <strong><?php echo display('tok'); ?>:</strong> <?php echo $onprocess->tokenno; ?></div>
+                                                    <div class="kcard-row"><i class="fa fa-user"></i> <strong><?php echo display('waiter'); ?>:</strong> <?php echo $onprocess->first_name . ' ' . $onprocess->last_name; ?></div>
+                                                    <?php if (!empty($onprocess->cookedtime)) : ?>
+                                                    <div class="kcard-row"><i class="fa fa-clock-o"></i> <strong><?php echo display('cookedtime'); ?>:</strong> <?php echo $onprocess->cookedtime; ?></div>
+                                                    <?php endif; ?>
+                                                    <?php
+                                                    if (!empty($onprocess->order_time)) {
+                                                        try {
+                                                            $ot = new DateTime($onprocess->order_time);
+                                                            $nw = new DateTime();
+                                                            $df = $nw->diff($ot);
+                                                            $elapsed = ($df->h > 0) ? $df->h . 'h ' . $df->i . 'min' : $df->i . ' min';
+                                                        } catch (Exception $e) { $elapsed = ''; }
+                                                        if ($elapsed) echo '<div class="kcard-elapsed"><i class="fa fa-hourglass-half"></i> ' . $elapsed . ' ago</div>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <a href="javascript:;" onclick="oredrready('<?php echo $onprocess->order_id; ?>')" class="kcard-btn"><?php echo display('view_ord'); ?></a>
                                             </div>
                                         </div>
                                      <?php } } }

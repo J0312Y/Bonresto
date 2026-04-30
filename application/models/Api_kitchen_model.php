@@ -136,18 +136,19 @@ class Api_kitchen_model extends CI_Model
 
     public function authenticate_user($table, $data)
     {
-        $Type = $data['email'];
         $Password = $data['password'];
         $this->db->select("user.id,user.firstname, user.lastname, user.email, employee_history.picture");
 		$this->db->join("employee_history",'employee_history.emp_his_id=user.id','left');
 		$this->db->where('employee_history.pos_id', 1);
 		$this->db->where('user.email', $data['email']);
-        $this->db->where("(user.password = '" . $Password . "' OR user.password =  '" . md5($Password) . "')", NULL, TRUE);
-        $query = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
-        if ($num_rows > 0)
+        $this->db->group_start();
+            $this->db->where('user.password', $Password);
+            $this->db->or_where('user.password', md5($Password));
+        $this->db->group_end();
+        $result = $this->db->get($table);
+        if ($result->num_rows() > 0)
         {
-			return $query;
+			return $result->row();
         }
         else
         {
@@ -159,11 +160,10 @@ class Api_kitchen_model extends CI_Model
     {
         $this->db->select('email, password');
 		$this->db->where('email', $data['email']);
-        $query = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
-        if ($num_rows > 0)
+        $result = $this->db->get($table);
+        if ($result->num_rows() > 0)
         {
-            return $query;
+            return $result->row();
         }
         else
         {

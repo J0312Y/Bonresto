@@ -63,7 +63,7 @@ public function create_dept()
     }
 
  public function delete_dept($id=null){
-        $this->permission->module('department','delete')->redirect();
+        $this->permission->module('hrm','delete')->redirect();
         if($this->Department_model->dept_delete($id)) {
             #set success message
             $this->session->set_flashdata('message',display('delete_successfully'));

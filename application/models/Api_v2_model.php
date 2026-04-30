@@ -5,16 +5,17 @@ class Api_v2_model extends CI_Model
 
    public function authenticate_user($table, $data)
     {
-        $Type = $data['customer_email'];
         $Password = $data['password'];
         $this->db->select("*");
 		$this->db->where('customer_email', $data['customer_email']);
-        $this->db->where("(password = '" . $Password . "' OR customer_info.password =  '" . md5($Password) . "')", NULL, TRUE);
-        $query = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
-        if ($num_rows > 0)
+        $this->db->group_start();
+            $this->db->where('password', $Password);
+            $this->db->or_where('password', md5($Password));
+        $this->db->group_end();
+        $result = $this->db->get($table);
+        if ($result->num_rows() > 0)
         {
-			return $query;
+			return $result->row();
         }
         else
         {
@@ -25,12 +26,11 @@ class Api_v2_model extends CI_Model
     {
         $this->db->select('*');
 		$this->db->where('customer_email', $data['customer_email']);
-        $query = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
+        $result = $this->db->get($table);
 
-        if ($num_rows > 0)
+        if ($result->num_rows() > 0)
         {
-            return $query;
+            return $result->row();
         }
         else
         {

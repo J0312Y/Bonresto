@@ -2464,7 +2464,7 @@ document.getElementById("paytrack").click();
 
                 $user['cuntomer_no']               = $sino;
                 $user['membership_type']           = $pointsys;
-                $user['password']                  = md5(12345);
+                $user['password']                  = md5(bin2hex(random_bytes(16)));
                 $user['customer_name']             = $this->input->post('customerName', true);
                 $user['customer_email']            = $phone . "@gmail.com";
                 $user['customer_phone']            = $this->input->post('phone', true);

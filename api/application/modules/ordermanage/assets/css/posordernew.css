@@ -439,6 +439,48 @@ listcat.listcat {
 .pt-12 {
   padding-top: 12px;
 }
+/* ── Horizontal category bar ─────────────────────────────────────────────── */
+.product-category-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 6px;
+  padding: 6px 4px 8px;
+  background: #f4f6f8;
+  border-bottom: 1px solid #e3e6ea;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #b0b8c1 transparent;
+}
+.product-category-bar::-webkit-scrollbar {
+  height: 4px;
+}
+.product-category-bar::-webkit-scrollbar-thumb {
+  background: #c5cdd5;
+  border-radius: 4px;
+}
+.product-category-bar .pos-category {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-bottom: 0 !important;
+  cursor: pointer;
+}
+.product-category-bar .pos-category.cat-active {
+  background: #019049 !important;
+  color: #ffffff !important;
+  border-color: #019049 !important;
+}
+.product-category-bar .cat-nav2 {
+  position: relative;
+}
+.product-category-bar .cat-nav2 .dropcat {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  min-width: 140px;
+}
+
 .pos-category {
   color: #1e1e1e !important;
   background: #ffffff !important;

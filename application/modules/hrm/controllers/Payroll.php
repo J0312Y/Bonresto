@@ -295,7 +295,7 @@ class Payroll extends MX_Controller
                         $netAmount = $Amount;
                     }
 
-                    $workingper  = $this->db->select('COUNT(date) AS date')->from('emp_attendance')->where('date BETWEEN "' . date('d-m-Y', strtotime($startd)) . '" and "' . date('d-m-Y', strtotime($end)) . '"')->where("employee_id", $value->employee_id)->get()->row()->date;
+                    $workingper  = $this->db->select('COUNT(date) AS date')->from('emp_attendance')->where('date BETWEEN "' . date('Y-m-d', strtotime($startd)) . '" and "' . date('Y-m-d', strtotime($end)) . '"')->where("employee_id", $value->employee_id)->get()->row()->date;
                     $paymentData = [
                         'employee_id'           => $value->employee_id,
                         'total_salary'          => $netAmount ?? 0,

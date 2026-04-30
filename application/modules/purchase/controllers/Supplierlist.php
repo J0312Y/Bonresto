@@ -77,9 +77,9 @@ class Supplierlist extends MX_Controller {
 			->order_by('suplier_code','desc')
 			->get()
 			->row();
-		$sl=$lastid->suplier_code;
+		$sl = !empty($lastid) ? $lastid->suplier_code : null;
 		if(empty($sl)){
-		$sl = "sup_001"; 
+		$sl = "sup_001";
 		}
 		else{
 		$sl = $sl;  

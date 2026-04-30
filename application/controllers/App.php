@@ -862,7 +862,7 @@ class App extends MY_Controller
                     $output['userinfo'][$k]['firstname'] = $user->first_name;
                     $output['userinfo'][$k]['lastname']  = $user->last_name;
                     $output['userinfo'][$k]['email']     = $user->email;
-                    $output['userinfo'][$k]['password']  = md5(123456);
+                    $output['userinfo'][$k]['password']  = '';
                     $k++;
                 }
 

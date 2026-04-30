@@ -21,6 +21,7 @@ class Wastemangment_model extends CI_Model
         $this->db->join('purchase_details', 'purchase_details.indredientid = ingredients.id', 'inner');
         $this->db->where('ingredients.is_active', 1);
         $this->db->like('ingredients.ingredient_name', $product_name);
+        $this->db->group_by('ingredients.id');
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
@@ -51,20 +52,18 @@ class Wastemangment_model extends CI_Model
         return false;
     }
 
-    #new metho for cal total
     public function totalcal($values)
     {
-        $i    = 0;
-        $data = [];
+        $i = 0;
 
         foreach ($values as $value) {
-            # code...
             $toalvalue     = 0;
             $totalvalucals = $this->iteminfo($value->foodid, $value->variantid);
 
-            foreach ($totalvalucals as $totalvalucal) {
-                # code...
-                $toalvalue = $totalvalucal->uprice * $totalvalucal->qty + $toalvalue;
+            if ($totalvalucals) {
+                foreach ($totalvalucals as $totalvalucal) {
+                    $toalvalue = $totalvalucal->uprice * $totalvalucal->qty + $toalvalue;
+                }
             }
 
             $values[$i]->totalcost = $toalvalue;
@@ -72,7 +71,6 @@ class Wastemangment_model extends CI_Model
         }
 
         return $values;
-
     }
 
     public function iteminfo($id, $vid)
@@ -116,61 +114,68 @@ class Wastemangment_model extends CI_Model
         $price    = $this->input->post('price');
         $note     = $this->input->post('note');
         $newdate  = date('Y-m-d');
-        $this->db->select('*');
+
+        // Check if this order already has a waste entry
+        $this->db->select('order_id');
         $this->db->from('packaging_food_waste');
         $this->db->where('order_id', $itemid);
-        $query = $this->db->get();
+        $already = $this->db->get()->num_rows();
+        if ($already > 0) {
+            return false;
+        }
+
+        // Check the order exists (any date, not just today)
         $this->db->select('order_id');
         $this->db->from('customer_order');
         $this->db->where('order_id', $itemid);
-        $this->db->where('order_date', $newdate);
         $ordercount = $this->db->get()->num_rows();
-
         if ($ordercount != 1) {
-
             return false;
-        } else if ($query->num_rows() > 0) {
-            return false;
-        } else {
-            for ($i = 0, $n = count($p_id); $i < $n; $i++) {
-                $product_quantity = $quantity[$i];
-                $product_id       = $p_id[$i];
-                $pr_lost          = $price[$i];
-                $not_e            = $note[$i];
-
-                $data1 = [
-                    'order_id'      => $itemid,
-                    'ingradient_id' => $product_id,
-                    'qnty'          => $product_quantity,
-                    'l_price'       => $pr_lost,
-                    'note'          => $not_e,
-                    'createdby'     => $saveid,
-                    'created_at'    => $newdate,
-                ];
-
-                if (!empty($quantity)) {
-                    /*add stock in ingredients*/
-                    $this->db->set('stock_qty', 'stock_qty-' . $product_quantity, false);
-                    $this->db->where('id', $product_id);
-                    $this->db->update('ingredients');
-                    /*end add ingredients*/
-                    $this->db->insert('packaging_food_waste', $data1);
-                }
-
-            }
-
-            return true;
         }
 
+        if (empty($p_id)) {
+            return false;
+        }
+
+        $this->db->trans_start();
+        for ($i = 0, $n = count($p_id); $i < $n; $i++) {
+            $product_quantity = (float) $quantity[$i];
+            $product_id       = $p_id[$i];
+            $pr_lost          = $price[$i];
+            $not_e            = $note[$i];
+
+            if ($product_quantity <= 0) {
+                continue;
+            }
+
+            $data1 = [
+                'order_id'      => $itemid,
+                'ingradient_id' => $product_id,
+                'qnty'          => $product_quantity,
+                'l_price'       => $pr_lost,
+                'note'          => $not_e,
+                'createdby'     => $saveid,
+                'created_at'    => $newdate,
+            ];
+
+            $this->db->insert('packaging_food_waste', $data1);
+
+            $this->db->set('stock_qty', 'stock_qty-' . $product_quantity, false);
+            $this->db->where('id', $product_id);
+            $this->db->update('ingredients');
+        }
+        $this->db->trans_complete();
+
+        return $this->db->trans_status();
     }
 
     public function showpackagingfoodwaste($start_date, $end_date)
     {
-        $dateRange = "date(packaging_food_waste.created_at) BETWEEN '$start_date' AND '$end_date'";
         $this->db->select('*,ingredients.ingredient_name');
         $this->db->from('packaging_food_waste');
-        $this->db->where($dateRange, null, false);
         $this->db->join('ingredients', 'packaging_food_waste.ingradient_id = ingredients.id');
+        $this->db->where('date(packaging_food_waste.created_at) >=', $start_date);
+        $this->db->where('date(packaging_food_waste.created_at) <=', $end_date);
         $query = $this->db->get()->result();
         return $query;
     }
@@ -276,13 +281,13 @@ class Wastemangment_model extends CI_Model
 
     public function showingrdinfoodwaste($start_date, $end_date)
     {
-        $dateRange = "date(ingradient_food_waste.created_at) BETWEEN '$start_date' AND '$end_date'";
         $this->db->select('*,ingredients.ingredient_name,
 				CONCAT_WS(" ", user.firstname, user.lastname) AS fullname');
         $this->db->from('ingradient_food_waste');
         $this->db->join('ingredients', 'ingradient_food_waste.ingradient_id = ingredients.id');
         $this->db->join('user', 'ingradient_food_waste.check_by = user.id');
-        $this->db->where($dateRange, null, false);
+        $this->db->where('date(ingradient_food_waste.created_at) >=', $start_date);
+        $this->db->where('date(ingradient_food_waste.created_at) <=', $end_date);
         $this->db->order_by('ingradient_food_waste.id', 'DESC');
         $query = $this->db->get()->result();
         return $query;
@@ -290,14 +295,14 @@ class Wastemangment_model extends CI_Model
 
     public function showitemsfoodwaste($start_date, $end_date)
     {
-        $dateRange = "date(items_food_waste.created_at) BETWEEN '$start_date' AND '$end_date'";
         $this->db->select('*,item_foods.ProductName,variant.variantName,
 				CONCAT_WS(" ", user.firstname, user.lastname) AS fullname');
         $this->db->from('items_food_waste');
         $this->db->join('item_foods', 'items_food_waste.itms_id = item_foods.ProductsID');
         $this->db->join('variant', 'variant.variantid = items_food_waste.wvarientid');
         $this->db->join('user', 'items_food_waste.check_by = user.id');
-        $this->db->where($dateRange, null, false);
+        $this->db->where('date(items_food_waste.created_at) >=', $start_date);
+        $this->db->where('date(items_food_waste.created_at) <=', $end_date);
         $this->db->order_by('items_food_waste.id', 'DESC');
         $query = $this->db->get()->result();
 

@@ -1,11 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    # On indique au serveur que le projet est dans le dossier bonresto
-    RewriteBase /bonresto/
+    RewriteBase /
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    
-    # Suppression du slash après index.php pour une meilleure compatibilité
-    RewriteRule ^(.*)$ index.php?$1 [L]
+
+    RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>

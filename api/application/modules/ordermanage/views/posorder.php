@@ -1,11 +1,16 @@
 <link rel="stylesheet" type="text/css"
-    href="<?php echo base_url('application/modules/ordermanage/assets/css/posordernew.css?v=1.2'); ?>">
+    href="<?php echo base_url('application/modules/ordermanage/assets/css/posordernew.css?v=1.3'); ?>">
 <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url('application/modules/ordermanage/assets/js/postop.js?v=1.2'); ?>"
     type="text/javascript">
 </script>
 <?php
-(int) $new_version = @file_get_contents('https://update.bdtask.com/bhojon/autoupdate/update_info');
+if (!$this->session->has_userdata('cached_new_version') || (time() - (int)$this->session->userdata('cached_version_time')) > 3600) {
+    $fetched = @file_get_contents('https://update.bdtask.com/bhojon/autoupdate/update_info');
+    $this->session->set_userdata('cached_new_version', (int)$fetched);
+    $this->session->set_userdata('cached_version_time', time());
+}
+$new_version = (int)$this->session->userdata('cached_new_version');
 $myversion         = current_version();
 function current_version()
 {
@@ -162,7 +167,7 @@ $ptdiscount     = 0; ?>
                                             echo form_dropdown('card_typesl', $paymentmethod, (!empty($card_type) ? $card_type : null), 'class="postform resizeselect form-control" id="card_typesl"') ?>
                                         </div>
                                     </div>
-                                    <div id="cardarea wpr_100 display-none">
+                                    <div id="cardarea" class="wpr_100 display-none">
                                         <div class="form-group row">
                                             <label for="card_terminal"
                                                 class="col-sm-4 col-form-label"><?php echo display('crd_terminal'); ?></label>
@@ -205,7 +210,7 @@ $ptdiscount     = 0; ?>
                                     </div>
                                     <div class="form-group row">
                                         <label for="4digit"
-                                            class="col-sm-4 col-form-label"><?php echo display('cuspayment'); ?></label>
+                                            class="col-sm-4 col-form-label"><?php echo display('change_due'); ?></label>
                                         <div class="col-sm-7 customesl">
                                             <input type="text" class="form-control" id="change" name="change"
                                                 readonly="readonly" value="" />
@@ -288,7 +293,7 @@ $ptdiscount     = 0; ?>
                                         echo form_dropdown('card_typesl', $paymentmethod, (!empty($card_type) ? $card_type : null), 'class="postform resizeselect form-control" id="card_typesl"') ?>
                                     </div>
                                 </div>
-                                <div id="cardarea display-none wpr_100">
+                                <div id="cardarea" class="display-none wpr_100">
                                     <div class="form-group row">
                                         <label for="card_terminal"
                                             class="col-sm-4 col-form-label"><?php echo display('crd_terminal'); ?></label>
@@ -578,7 +583,7 @@ foreach ($scan as $file) {
                             class="comorder newtab online-order-tab" id="todayonlieorder"
                             onclick="giveselecttab(this)"><i class="fa fa-shopping-bag smallview"></i> <span
                                 class="responsiveview"><?php echo display('onlineord'); ?></span> </a> <a href=""
-                            class="notif order-notify"><span class="label label-danger count order-label">02</span></a>
+                            class="notif order-notify"><span class="label label-danger count order-label">0</span></a>
                     </li>
                     <li> <a href="#messages" role="tab" data-toggle="tab" class="torder newtab today-order-tab"
                             id="todayorder" onclick="giveselecttab(this)"><i class="fa fa-first-order smallview"></i>
@@ -586,94 +591,10 @@ foreach ($scan as $file) {
 
                     <li class="mobiletag"><a href="javascript:;" class="btn bg-soft-blue" onclick="closeopenresister()"
                             role="button"><i class="fa fa-window-close"></i></a></li>
+                    <?php $shortcut_html = "<?php echo $shortcut_html; ?>"; ?>
                     <li class="mobiletag"><a href="#" class="bg-soft-red"><i
                                 class="fa fa-keyboard bg-soft-red hover-q text-muted" aria-hidden="true"
-                                data-container="body" data-toggle="popover" data-placement="bottom" data-content="<table class='table table-condensed table-striped' >
-        <tr>
-            <th>Operations</th>
-            <th>Keyboard Shortcut</th>
-            <th>Operations</th>
-            <th>Keyboard Shortcut</th>
-        </tr>
-        <tr>
-        <td>New Order Tab</td>
-        <td>Shift+N</td>
-        <td>On Going Tab</td>
-        <td>Shift+G</td>
-        </tr>
-        <tr>
-        <td>Today Order Tab</td>
-        <td>Shift+T</td>
-        <td>Online Order Tab</td>
-        <td>Shift+O</td>
-        </tr>
-        <tr>
-        <td>Place Order</td>
-        <td>Shift+P</td>
-        <td>Quick Order</td>
-        <td>Shift+Q</td>
-        </tr>
-        <tr>
-        <td>Search Product</td>
-        <td>Shift+S</td>
-        <td>Select Customer</td>
-        <td>Shift+C</td>
-        </tr>
-        <tr>
-        <td>Select Customer Type</td>
-        <td>Shift+Y</td>
-        <td>Edit Discount:</td>
-        <td>Shift+D</td></tr>
-        <tr>
-        <td>Edit Service Charge</td>
-        <td>Shift+R</td>
-        <td>Select Waiter</td>
-        <td>Shift+W</td>
-        </tr>
-        <tr>
-        <td>Select Table</td>
-        <td>Shift+B</td>
-        <td>Cooking Time</td>
-        <td>Alt+K</td></tr>
-        <tr>
-        <td>Search Table</td>
-        <td>Alt+T</td>
-        <td>Go Edit</td>
-        <td>Shift+E</td></tr>
-        <tr>
-        <td>Search Today Order</td>
-        <td>Shift+X</td>
-        <td>Search Online Order</td>
-        <td>Shift+V</td>
-        </tr>
-        <tr>
-        <td>Update Search Product</td>
-        <td>Alt+S</td>
-        <td>Update Select Customer</td>
-        <td>Alt+C</td>
-        </tr>
-        <tr>
-        <td>Update Select Customer Type</td>
-        <td>Alt+Y</td>
-        <td>Update Discount:</td>
-        <td>Alt+D</td></tr>
-        <tr>
-        <td>Update Service Charge:</td>
-        <td>Alt+R</td>
-        <td>Update Select Table</td>
-        <td>Alt+B</td>
-        </tr>
-
-        <td>Update Submit From</td>
-        <td>Alt+U</td>
-        <td>Select Payment Type</td>
-        <td>Alt+M</td></tr>
-        <tr>
-        <td>Pay & Print Bill</td>
-        <td>Alt+P</td>
-        <td>Paid Amount Typing</td>
-        <td>Alt+A</td></tr>
-    </table>" data-html="true" data-trigger="hover" data-original-title="" title=""></i></a></li>
+                                data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?php echo $shortcut_html; ?>" data-html="true" data-trigger="hover" data-original-title="" title=""></i></a></li>
                     <li class="mobiletag">
                         <?php $languagenames = $this->db->field_data('language'); ?>
                         <!-- for language -->
@@ -732,93 +653,7 @@ foreach ($scan as $file) {
                     ?>
                     <a id="fullscreen" href="#" class="bg-soft-green"><i class="pe-7s-expand1"></i></a> <a href="#"
                         class="bg-soft-red"><i class="fa fa-keyboard hover-q text-muted" aria-hidden="true"
-                            data-container="body" data-toggle="popover" data-placement="bottom" data-content="<table class='table table-condensed table-striped' >
-        <tr>
-            <th>Operations</th>
-            <th>Keyboard Shortcut</th>
-            <th>Operations</th>
-            <th>Keyboard Shortcut</th>
-        </tr>
-        <tr>
-        <td>New Order Tab</td>
-        <td>Shift+N</td>
-        <td>On Going Tab</td>
-        <td>Shift+G</td>
-        </tr>
-        <tr>
-        <td>Today Order Tab</td>
-        <td>Shift+T</td>
-        <td>Online Order Tab</td>
-        <td>Shift+O</td>
-        </tr>
-        <tr>
-        <td>Place Order</td>
-        <td>Shift+P</td>
-        <td>Quick Order</td>
-        <td>Shift+Q</td>
-        </tr>
-        <tr>
-        <td>Search Product</td>
-        <td>Shift+S</td>
-        <td>Select Customer</td>
-        <td>Shift+C</td>
-        </tr>
-        <tr>
-        <td>Select Customer Type</td>
-        <td>Shift+Y</td>
-        <td>Edit Discount:</td>
-        <td>Shift+D</td></tr>
-        <tr>
-        <td>Edit Service Charge</td>
-        <td>Shift+R</td>
-        <td>Select Waiter</td>
-        <td>Shift+W</td>
-        </tr>
-        <tr>
-        <td>Select Table</td>
-        <td>Shift+B</td>
-        <td>Cooking Time</td>
-        <td>Alt+K</td></tr>
-        <tr>
-        <td>Search Table</td>
-        <td>Alt+T</td>
-        <td>Go Edit</td>
-        <td>Shift+E</td></tr>
-        <tr>
-        <td>Search Today Order</td>
-        <td>Shift+X</td>
-        <td>Search Online Order</td>
-        <td>Shift+V</td>
-        </tr>
-        <tr>
-        <td>Update Search Product</td>
-        <td>Alt+S</td>
-        <td>Update Select Customer</td>
-        <td>Alt+C</td>
-        </tr>
-        <tr>
-        <td>Update Select Customer Type</td>
-        <td>Alt+Y</td>
-        <td>Update Discount:</td>
-        <td>Alt+D</td></tr>
-        <tr>
-        <td>Update Service Charge:</td>
-        <td>Alt+R</td>
-        <td>Update Select Table</td>
-        <td>Alt+B</td>
-        </tr>
-
-        <td>Update Submit From</td>
-        <td>Alt+U</td>
-        <td>Select Payment Type</td>
-        <td>Alt+M</td></tr>
-        <tr>
-        <td>Pay & Print Bill</td>
-        <td>Alt+P</td>
-        <td>Paid Amount Typing</td>
-        <td>Alt+A</td></tr>
-    </table>" data-html="true" data-trigger="hover" data-original-title="" title=""></i></a>
-                    <?php $languagenames = $this->db->field_data('language'); ?>
+                            data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?php echo $shortcut_html; ?>" data-html="true" data-trigger="hover" data-original-title="" title=""></i></a>
                     <div class="dropdown">
                         <a class="dropdown-toggle lang_box" type="button" data-toggle="dropdown">
                             <?php
@@ -1401,55 +1236,50 @@ foreach ($scan as $file) {
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3 col-lg-2 pr-0">
-                                                <div class="leftSidebarPosMain bg-alice-blue p-10 pb-60 pb-sm-0">
-                                                    <div class="slimScrollDiv">
-                                                        <div class="product-category">
-                                                            <div class="listcatnew pos-category"
-                                                                onclick="getslcategory('')"><?php echo display('all') ?>
-                                                            </div>
-                                                            <?php //$result = array_diff($categorylist, array("Select Food Category"));
-
-                                                            foreach ($allcategorylist as $category) {
-
-                                                                if (!empty($category->sub)) {
-                                                            ?>
-                                                            <div class="listcatnew pos-category cat-nav2">
-                                                                <a class="btn listcatnew listcat2 pos-category-sub">
-                                                                    <?php echo $category->Name; ?>
-                                                                    <span class="caret"></span>
-                                                                </a>
-                                                                <ul class="dropdown-menucat dropcat display-none"
-                                                                    id="newtcat<?php echo $subcat->CategoryID ?? ''; ?>">
-                                                                    <?php
-
-                                                                            foreach ($category->sub as $subcat) { ?>
-                                                                    <li class="lip-2 border-bottom-white"><a
-                                                                            onclick="getslcategory(<?php echo $subcat->CategoryID; ?>)"><?php echo $subcat->Name; ?></a>
-                                                                    </li>
-                                                                    <?php }
-
-                                                                            ?>
-                                                                </ul>
-
-
-                                                            </div>
-                                                            <?php
-                                                                } else { ?>
-
-                                                            <div class="listcatnew pos-category cat-nav"
-                                                                onclick="getslcategory(<?php echo $category->CategoryID; ?>)">
-                                                                <?php echo $category->Name; ?></div>
-                                                            <?php }
-                                                            }
-
-                                                            ?>
-
-                                                        </div>
+                                            <div class="col-md-12">
+                                                <div class="product-category-bar">
+                                                    <div class="listcatnew pos-category cat-active"
+                                                        onclick="getslcategory('')"><?php echo display('all') ?>
                                                     </div>
+                                                    <?php //$result = array_diff($categorylist, array("Select Food Category"));
+
+                                                    foreach ($allcategorylist as $category) {
+
+                                                        if (!empty($category->sub)) {
+                                                    ?>
+                                                    <div class="listcatnew pos-category cat-nav2">
+                                                        <a class="btn listcatnew listcat2 pos-category-sub">
+                                                            <?php echo $category->Name; ?>
+                                                            <span class="caret"></span>
+                                                        </a>
+                                                        <ul class="dropdown-menucat dropcat display-none"
+                                                            id="newtcat<?php echo $subcat->CategoryID ?? ''; ?>">
+                                                            <?php
+
+                                                                    foreach ($category->sub as $subcat) { ?>
+                                                            <li class="lip-2 border-bottom-white"><a
+                                                                    onclick="getslcategory(<?php echo $subcat->CategoryID; ?>)"><?php echo $subcat->Name; ?></a>
+                                                            </li>
+                                                            <?php }
+
+                                                                    ?>
+                                                        </ul>
+                                                    </div>
+                                                    <?php
+                                                        } else { ?>
+
+                                                    <div class="listcatnew pos-category cat-nav"
+                                                        onclick="getslcategory(<?php echo $category->CategoryID; ?>)">
+                                                        <?php echo $category->Name; ?></div>
+                                                    <?php }
+                                                    }
+
+                                                    ?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-9 col-lg-10">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="leftSidebarPosMain bg-alice-blue pb-60">
                                                     <div class="slimScrollDiv">
                                                         <div class="row m-3" id="product_search">
@@ -1608,5 +1438,5 @@ foreach ($scan1 as $file) {
 
 <script src="<?php echo base_url('ordermanage/order/possettingjs') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('ordermanage/order/quickorderjs') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js'); ?>" type="text/javascript">
+<script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js?v=1.1'); ?>" type="text/javascript">
 </script>

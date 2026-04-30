@@ -790,7 +790,6 @@ class Employees extends MX_Controller
                 'first_name'            => $this->input->post('first_name', true),
                 'maiden_name'           => $this->input->post('maiden_name'),
                 'last_name'             => $this->input->post('last_name', true),
-                'maiden_name'           => $this->input->post('maiden_name'),
                 'email'                 => $this->input->post('email', true),
                 'phone'                 => $this->input->post('phone', true),
                 'alter_phone'           => $this->input->post('alter_phone', true),

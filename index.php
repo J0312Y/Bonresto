@@ -148,7 +148,7 @@ $view_folder = '';
  * to call functions dynamically via the URI.
  *
  * Un-comment the $routing array below to use this feature
- */
+ 
 
 // The directory name, relative to the "controllers" directory.  Leave blank
 
@@ -193,6 +193,9 @@ $view_folder = '';
  * ---------------------------------------------------------------
  */
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Set the current directory correctly for CLI requests
 if (defined('STDIN')) {
     chdir(dirname(__FILE__));

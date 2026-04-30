@@ -15,7 +15,7 @@ import type {
 } from "../types/saas";
 
 const BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost/bonresto/index.php/saas";
+  import.meta.env.VITE_API_URL || "https://bonresto.lamuka-tech.com/index.php/saas";
 
 // ── Auth token ────────────────────────────────────────────────────────────────
 
@@ -112,7 +112,7 @@ export async function uploadClientLogo(
   const form = new FormData();
   form.append("logo", file);
   const res = await fetch(
-    `${(import.meta.env.VITE_API_URL || "http://localhost/bonresto/index.php/saas")}/clients/${clientId}/logo`,
+    `${(import.meta.env.VITE_API_URL || "https://bonresto.lamuka-tech.com/index.php/saas")}/clients/${clientId}/logo`,
     {
       method: "POST",
       headers: token ? { Authorization: `Bearer ${token}` } : {},

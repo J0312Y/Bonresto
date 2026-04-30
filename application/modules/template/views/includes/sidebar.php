@@ -696,10 +696,18 @@
             ],
             
         ];
-  
+
+        // Load License_manager once for module gate checks
+        $CI_ref =& get_instance();
+        if (!isset($CI_ref->license_manager)) {
+            $CI_ref->load->library('License_manager');
+        }
+
         if (isset($HmvcMenu2) && $HmvcMenu2 != null && sizeof($HmvcMenu2) > 0) {
 
             foreach ($HmvcMenu2 as $moduleName => $moduleData) {
+
+                $module_licensed = $CI_ref->license_manager->has_module($moduleName);
 
                 // check module permission
                 if (
@@ -708,7 +716,21 @@
                     )
                 ) {
                     if ($this->permission->module($moduleName)->access()) {
-                        $this->permission->module($moduleName)->access(); ?>
+                        $this->permission->module($moduleName)->access();
+
+                        if (!$module_licensed) { ?>
+                        <!-- Locked module: visible but not accessible -->
+                        <li class="treeview" style="opacity:0.6; pointer-events:none;" title="Module non inclus dans votre plan">
+                            <a href="javascript:void(0)" style="cursor:not-allowed;">
+                                <?php echo $moduleData["icon"] != null ? $moduleData["icon"] : null; ?>
+                                <span><?php echo display($moduleName); ?></span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-lock pull-right" style="color:#e74c3c;" title="Non disponible dans votre plan"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <?php continue; // skip rendering the full submenu
+                        } ?>
                         <li class="treeview ">
 
                             <a href="javascript:void(0)">
@@ -848,7 +870,17 @@
        <?php
     if(!empty($HmvcMenu["qrapp"])) {
         $qrAppMenu = $HmvcMenu["qrapp"];
-        ?>
+        $qr_licensed = $CI_ref->license_manager->has_module('qrapp');
+        if (!$qr_licensed) { ?>
+        <li class="treeview" style="opacity:0.6; pointer-events:none;" title="Module non inclus dans votre plan">
+            <a href="javascript:void(0)" style="cursor:not-allowed;">
+                <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-lock pull-right" style="color:#e74c3c;"></i>
+                </span>
+            </a>
+        </li>
+        <?php } else { ?>
         <li class="treeview <?php echo in_array($this->uri->segment(2), ['qrorder','qrtable','qrpayment']) ? 'active' : ''; ?>">
             <a href="#">
                 <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
@@ -866,6 +898,7 @@
                 </li>
             </ul>
         </li>
+        <?php } // end else (qr licensed) ?>
     <?php } ?>
         <!-- *************************************
         **********CUSTOM MODULES****************

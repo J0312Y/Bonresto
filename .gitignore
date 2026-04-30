@@ -14,3 +14,8 @@ assets/data/pdf
 # *.png
 # *.xlsx
 node_modules
+application/config/database.php
+application/config/config.php
+application/logs/*
+application/cache/*
+.env

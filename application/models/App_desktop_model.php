@@ -5,16 +5,17 @@ class App_desktop_model extends CI_Model
 
     public function authenticate_user($table, $data)
     {
-        $Type     = $data['email'];
         $Password = $data['password'];
         $this->db->select("*");
         $this->db->where('email', $data['email']);
-        $this->db->where("(password = '" . $Password . "' OR password =  '" . md5($Password) . "')", null, true);
-        $query    = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
+        $this->db->group_start();
+            $this->db->where('password', $Password);
+            $this->db->or_where('password', md5($Password));
+        $this->db->group_end();
+        $result = $this->db->get($table);
 
-        if ($num_rows > 0) {
-            return $query;
+        if ($result->num_rows() > 0) {
+            return $result->row();
         } else {
             return false;
         }
@@ -25,11 +26,10 @@ class App_desktop_model extends CI_Model
     {
         $this->db->select('email, password');
         $this->db->where('email', $data['email']);
-        $query    = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
+        $result = $this->db->get($table);
 
-        if ($num_rows > 0) {
-            return $query;
+        if ($result->num_rows() > 0) {
+            return $result->row();
         } else {
             return false;
         }
