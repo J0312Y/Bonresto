@@ -5,11 +5,12 @@
     # Admin SaaS — fichiers statiques servis depuis admin/dist/
     RewriteCond %{REQUEST_URI} ^/admin/(.+)
     RewriteCond %{DOCUMENT_ROOT}/admin/dist/%1 -f
-    RewriteRule ^admin/(.+)$ admin/dist/$1 [L]
+    RewriteRule ^admin/(.+)$ /admin/dist/$1 [END]
 
     # Admin SaaS — SPA fallback (toutes les routes → index.html)
+    RewriteCond %{REQUEST_URI} !^/admin/dist/
     RewriteCond %{REQUEST_URI} ^/admin
-    RewriteRule ^ admin/dist/index.html [L]
+    RewriteRule ^ /admin/dist/index.html [END]
 
     # CodeIgniter
     RewriteCond %{REQUEST_FILENAME} !-f
