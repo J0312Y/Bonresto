@@ -3,6 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Saas_model extends CI_Model {
 
+    /** @var \CI_DB_driver Connexion dédiée SaaS */
+    protected $db;
+
+    public function __construct() {
+        parent::__construct();
+        // Toujours utiliser la DB SaaS dédiée, peu importe le tenant courant
+        $this->db = $this->load->database('saas', TRUE);
+    }
+
     // ── Admin Auth ─────────────────────────────────────────────────────────
 
     public function get_admin_by_email(string $email) {
@@ -223,18 +232,17 @@ class Saas_model extends CI_Model {
 
     public function create_plan(array $data): int {
         $this->db->insert('saas_plans', [
-            'plan_name'     => $data['plan_name'],
-            'price'         => $data['price'],
-            'billing_cycle' => $data['billing_cycle'] ?? 'monthly',
-            'max_tables'    => $data['max_tables'] ?? 0,
-            'max_users'     => $data['max_users'] ?? 0,
-            'features'      => json_encode($data['features'] ?? []),
+            'plan_name'  => $data['plan_name'],
+            'price'      => $data['price'],
+            'max_tables' => $data['max_tables'] ?? 0,
+            'max_users'  => $data['max_users']  ?? 0,
+            'features'   => json_encode($data['features'] ?? []),
         ]);
         return $this->db->insert_id();
     }
 
     public function update_plan(int $id, array $data): void {
-        $allowed = ['plan_name', 'price', 'billing_cycle', 'max_tables', 'max_users', 'features'];
+        $allowed = ['plan_name', 'price', 'max_tables', 'max_users', 'features'];
         $update  = array_intersect_key($data, array_flip($allowed));
         if (isset($update['features']) && is_array($update['features'])) {
             $update['features'] = json_encode($update['features']);
@@ -251,7 +259,7 @@ class Saas_model extends CI_Model {
     }
 
     public function get_role_by_name(string $name) {
-        return $this->db->where('name', $name)->get('saas_roles')->row();
+        return $this->db->where('role_name', $name)->get('saas_roles')->row();
     }
 
     public function get_role_by_id(int $id) {
@@ -342,8 +350,7 @@ class Saas_model extends CI_Model {
                 s.status      AS sub_status,
                 s.end_date    AS sub_end_date,
                 p.plan_name,
-                p.price,
-                p.billing_cycle
+                p.price
             FROM saas_license_keys k
             LEFT JOIN saas_tenants t ON t.tenant_id = k.tenant_id
             LEFT JOIN saas_subscriptions s ON s.sub_id = (
@@ -393,13 +400,18 @@ class Saas_model extends CI_Model {
     // ── Payments ─────────────────────────────────────────────────────────
 
     public function get_all_payments(): array {
-        return $this->db
+        $rows = $this->db
             ->select('pay.*, t.business_name as client_name, t.email as client_email, p.plan_name')
             ->from('saas_payments pay')
             ->join('saas_tenants t', 't.tenant_id = pay.tenant_id', 'left')
             ->join('saas_plans p', 'p.plan_id = pay.plan_id', 'left')
             ->order_by('pay.created_at', 'DESC')
             ->get()->result_array();
+        foreach ($rows as &$r) {
+            $r['payment_id'] = (int)$r['payment_id'];
+            $r['amount']     = (float)$r['amount'];
+        }
+        return $rows;
     }
 
     public function record_payment(array $data): int {
@@ -436,36 +448,47 @@ class Saas_model extends CI_Model {
         ]);
     }
 
-    // ── Live Stats per tenant (reads from main restaurant tables) ─────────
+    // ── Live Stats per tenant (saas DB only — no client DB connection) ──────
 
     public function tenant_live_stats(int $tenant_id): array {
-        $today = date('Y-m-d');
+        // Subscription info
+        $sub = $this->db
+            ->select('s.status, s.end_date, s.grace_end_date, p.plan_name, p.max_tables, p.max_users')
+            ->from('saas_subscriptions s')
+            ->join('saas_plans p', 'p.plan_id = s.plan_id')
+            ->where('s.tenant_id', $tenant_id)
+            ->order_by('s.sub_id', 'DESC')
+            ->limit(1)
+            ->get()->row_array();
 
-        $orders_today = $this->db
+        // Total paid by this tenant
+        $total_paid = (float)($this->db
+            ->select('SUM(amount) as total')
+            ->from('saas_payments')
             ->where('tenant_id', $tenant_id)
-            ->where('DATE(order_date)', $today)
-            ->count_all_results('customer_order');
+            ->where('status', 'paid')
+            ->get()->row()->total ?? 0);
 
-        $revenue_today = (float)($this->db
-            ->select('SUM(totalamount) as rev')
-            ->from('customer_order')
+        // Payment count
+        $payment_count = (int)$this->db
             ->where('tenant_id', $tenant_id)
-            ->where('DATE(order_date)', $today)
-            ->get()->row()->rev ?? 0);
+            ->where('status', 'paid')
+            ->count_all_results('saas_payments');
 
-        $total_customers = $this->db
-            ->where('tenant_id', $tenant_id)
-            ->count_all_results('customer_info');
-
-        $active_tables = $this->db
-            ->where('tenant_id', $tenant_id)
-            ->count_all_results('rest_table');
+        // Days remaining on subscription
+        $days_remaining = 0;
+        if (!empty($sub['end_date'])) {
+            $days_remaining = max(0, (int)ceil((strtotime($sub['end_date']) - time()) / 86400));
+        }
 
         return [
-            'orders_today'    => (int)$orders_today,
-            'revenue_today'   => $revenue_today,
-            'total_customers' => (int)$total_customers,
-            'active_tables'   => (int)$active_tables,
+            'subscription_status' => $sub['status']     ?? 'none',
+            'plan_name'           => $sub['plan_name']   ?? '—',
+            'days_remaining'      => $days_remaining,
+            'total_paid'          => $total_paid,
+            'payment_count'       => $payment_count,
+            'max_tables'          => (int)($sub['max_tables'] ?? 0),
+            'max_users'           => (int)($sub['max_users']  ?? 0),
         ];
     }
 
@@ -613,7 +636,12 @@ class Saas_model extends CI_Model {
             $this->db->where('i.tenant_id', $tenant_id);
         }
 
-        return $this->db->get()->result_array();
+        $rows = $this->db->get()->result_array();
+        foreach ($rows as &$r) {
+            $r['invoice_id'] = (int)$r['invoice_id'];
+            $r['amount']     = (float)$r['amount'];
+        }
+        return $rows;
     }
 
     public function get_invoice(int $id): ?array {
@@ -683,18 +711,23 @@ class Saas_model extends CI_Model {
         $this->db->where('invoice_id', $invoice_id)->update('saas_invoices', ['status' => $status]);
     }
 
-    // ── Cross-tenant restaurant data ──────────────────────────────────────
+    // ── Recent payments (replaces cross-tenant restaurant orders) ────────────
 
     public function get_recent_orders(int $limit = 15): array {
-        return $this->db
-            ->select('co.order_id, co.tenant_id, co.order_date, co.order_time, co.totalamount, co.order_status, t.business_name, ci.customer_name')
-            ->from('customer_order co')
-            ->join('saas_tenants t', 't.tenant_id = co.tenant_id', 'left')
-            ->join('customer_info ci', 'ci.customer_id = co.customer_id', 'left')
-            ->order_by('co.order_date', 'DESC')
-            ->order_by('co.order_time', 'DESC')
+        $rows = $this->db
+            ->select('p.payment_id, p.tenant_id, p.amount, p.currency, p.status, p.reference, p.created_at, t.business_name, pl.plan_name')
+            ->from('saas_payments p')
+            ->join('saas_tenants t',  't.tenant_id = p.tenant_id', 'left')
+            ->join('saas_plans pl',   'pl.plan_id  = p.plan_id',   'left')
+            ->order_by('p.created_at', 'DESC')
             ->limit($limit)
             ->get()->result_array();
+
+        foreach ($rows as &$r) {
+            $r['payment_id'] = (int)$r['payment_id'];
+            $r['amount']     = (float)$r['amount'];
+        }
+        return $rows;
     }
 
     public function get_all_clients_stats(): array {
@@ -703,48 +736,55 @@ class Saas_model extends CI_Model {
         foreach ($tenants as $tenant) {
             $tid = (int)$tenant['tenant_id'];
 
-            $total_orders = $this->db
-                ->where('tenant_id', $tid)
-                ->count_all_results('customer_order');
+            // Subscription
+            $sub = $this->db
+                ->select('s.status, s.end_date, p.plan_name')
+                ->from('saas_subscriptions s')
+                ->join('saas_plans p', 'p.plan_id = s.plan_id')
+                ->where('s.tenant_id', $tid)
+                ->order_by('s.sub_id', 'DESC')
+                ->limit(1)
+                ->get()->row_array();
 
-            $total_revenue = (float)($this->db
-                ->select('SUM(totalamount) as rev')
-                ->from('customer_order')
+            // Payments
+            $pay = $this->db
+                ->select('SUM(amount) as total_revenue, COUNT(*) as payment_count')
+                ->from('saas_payments')
                 ->where('tenant_id', $tid)
-                ->get()->row()->rev ?? 0);
-
-            $total_customers = $this->db
-                ->where('tenant_id', $tid)
-                ->count_all_results('customer_info');
-
-            $total_tables = $this->db
-                ->where('tenant_id', $tid)
-                ->count_all_results('rest_table');
-
-            $avg_order = $total_orders > 0 ? round($total_revenue / $total_orders, 0) : 0;
+                ->where('status', 'paid')
+                ->get()->row_array();
 
             $result[] = [
-                'tenant_id'       => $tid,
-                'business_name'   => $tenant['business_name'],
-                'total_orders'    => (int)$total_orders,
-                'total_revenue'   => $total_revenue,
-                'total_customers' => (int)$total_customers,
-                'total_tables'    => (int)$total_tables,
-                'avg_order'       => (float)$avg_order,
+                'tenant_id'          => $tid,
+                'business_name'      => $tenant['business_name'],
+                'subscription_status'=> $sub['status']    ?? 'none',
+                'plan_name'          => $sub['plan_name']  ?? '—',
+                'end_date'           => $sub['end_date']   ?? null,
+                'total_revenue'      => (float)($pay['total_revenue'] ?? 0),
+                'payment_count'      => (int)($pay['payment_count']   ?? 0),
             ];
         }
         return $result;
     }
 
     public function get_revenue_by_month_per_client(): array {
-        return $this->db
-            ->select("co.tenant_id, t.business_name, DATE_FORMAT(co.order_date, '%b %Y') as month, DATE_FORMAT(co.order_date, '%Y-%m') as month_key, SUM(co.totalamount) as revenue, COUNT(*) as orders_count")
-            ->from('customer_order co')
-            ->join('saas_tenants t', 't.tenant_id = co.tenant_id', 'left')
-            ->where('co.order_date >=', date('Y-m-01', strtotime('-5 months')))
-            ->group_by('co.tenant_id, month_key')
-            ->order_by('month_key', 'ASC')
-            ->get()->result_array();
+        $since = date('Y-m-01', strtotime('-5 months'));
+        $sql = "
+            SELECT
+                p.tenant_id,
+                t.business_name,
+                DATE_FORMAT(p.created_at, '%b %Y')  AS month,
+                DATE_FORMAT(p.created_at, '%Y-%m')  AS month_key,
+                SUM(p.amount)                        AS revenue,
+                COUNT(*)                             AS payment_count
+            FROM saas_payments p
+            LEFT JOIN saas_tenants t ON t.tenant_id = p.tenant_id
+            WHERE p.status = 'paid'
+              AND p.created_at >= ?
+            GROUP BY p.tenant_id, t.business_name, DATE_FORMAT(p.created_at, '%Y-%m'), DATE_FORMAT(p.created_at, '%b %Y')
+            ORDER BY month_key ASC
+        ";
+        return $this->db->query($sql, [$since])->result_array();
     }
 
     // ── Settings ──────────────────────────────────────────────────────────

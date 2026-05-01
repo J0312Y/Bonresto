@@ -3,11 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Saas_base extends MX_Controller {
 
+    /** @var \CI_DB_driver Connexion dédiée SaaS (surcharge le $db CI par défaut) */
+    protected $db;
+
     protected ?array $saas_admin       = null;
     protected array  $saas_permissions = [];
 
     public function __construct() {
         parent::__construct();
+        // Connexion dédiée SaaS — indépendante de la DB restaurant
+        $this->db = $this->load->database('saas', TRUE);
         $this->load->library('Saas_jwt');
         $this->load->model('saas/Saas_model');
     }

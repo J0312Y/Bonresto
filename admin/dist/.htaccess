@@ -1,7 +1,13 @@
-<IfModule mod_rewrite.c>
+Alias /admin/dist /var/www/bonresto/admin/dist
+
+<Directory /var/www/bonresto/admin/dist>
+    Options -MultiViews
+    AllowOverride All
+    Require all granted
+
     RewriteEngine On
-    RewriteBase /admin/
+    RewriteBase /admin/dist/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ index.html [L]
-</IfModule>
+    RewriteRule . /admin/dist/index.html [L]
+</Directory>
