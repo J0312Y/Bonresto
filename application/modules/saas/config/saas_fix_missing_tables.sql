@@ -46,25 +46,26 @@ CALL _saas_add_col('saas_license_keys', 'status',     "ENUM('active','revoked') 
 CALL _saas_add_col('saas_license_keys', 'revoked_at', 'DATETIME NULL');
 CALL _saas_add_col('saas_license_keys', 'price',      'DECIMAL(10,2) NULL');
 
--- ── 4. saas_invoices (nouvelle table) ────────────────────────────────────────
+-- ── 4. saas_invoices ─────────────────────────────────────────────────────────
+-- Create if not exists (minimal schema — columns added below via procedure)
 CREATE TABLE IF NOT EXISTS saas_invoices (
-    invoice_id      INT AUTO_INCREMENT PRIMARY KEY,
-    invoice_number  VARCHAR(30)    NOT NULL UNIQUE,
-    tenant_id       INT            NOT NULL,
-    plan_id         INT            NULL,
-    amount          DECIMAL(10,2)  NOT NULL,
-    currency        VARCHAR(10)    DEFAULT 'FCFA',
-    period_start    DATE           NULL,
-    period_end      DATE           NULL,
-    status          ENUM('draft','sent','paid','cancelled') DEFAULT 'draft',
-    payment_method  VARCHAR(50)    NULL,
-    notes           TEXT           NULL,
-    paid_at         DATETIME       NULL,
-    created_at      DATETIME       DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_tenant (tenant_id),
-    INDEX idx_status (status),
+    invoice_id  INT AUTO_INCREMENT PRIMARY KEY,
+    tenant_id   INT           NOT NULL,
+    amount      DECIMAL(10,2) NOT NULL,
+    created_at  DATETIME      DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (tenant_id) REFERENCES saas_tenants(tenant_id)
 );
+
+-- Add every column that may be missing (safe on both new and existing tables)
+CALL _saas_add_col('saas_invoices', 'invoice_number', 'VARCHAR(30) NULL');
+CALL _saas_add_col('saas_invoices', 'plan_id',        'INT NULL');
+CALL _saas_add_col('saas_invoices', 'currency',       "VARCHAR(10) DEFAULT 'FCFA'");
+CALL _saas_add_col('saas_invoices', 'period_start',   'DATE NULL');
+CALL _saas_add_col('saas_invoices', 'period_end',     'DATE NULL');
+CALL _saas_add_col('saas_invoices', 'status',         "ENUM('draft','sent','paid','cancelled') DEFAULT 'draft'");
+CALL _saas_add_col('saas_invoices', 'payment_method', 'VARCHAR(50) NULL');
+CALL _saas_add_col('saas_invoices', 'notes',          'TEXT NULL');
+CALL _saas_add_col('saas_invoices', 'paid_at',        'DATETIME NULL');
 
 -- ── 5. saas_settings ─────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS saas_settings (
