@@ -68,15 +68,10 @@ export default function ClientDetail() {
   const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
-    Promise.all([
-      getClient(clientId),
-      getTenantActivity(clientId),
-      getPlans(),
-      getInvoices(clientId),
-    ])
-      .then(([c, act, pl, inv]) => {
+    // Load client first — if it fails, show "introuvable"
+    getClient(clientId)
+      .then((c) => {
         setClient(c);
-        setInvoices(inv);
         setInfoForm({
           business_name: c.business_name,
           email: c.email,
@@ -87,10 +82,13 @@ export default function ClientDetail() {
           website: c.website ?? "",
           notes: c.notes ?? "",
         });
-        setActivity(act);
-        setPlans(pl);
         setPlanId(c.subscription?.plan_id ?? 0);
         setEndDate(c.subscription?.end_date ?? "");
+
+        // Load secondary data independently — failures don't affect client display
+        getTenantActivity(clientId).then(setActivity).catch(() => {});
+        getPlans().then(setPlans).catch(() => {});
+        getInvoices(clientId).then(setInvoices).catch(() => {});
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -272,17 +270,17 @@ export default function ClientDetail() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {/* Live Stats */}
+        {/* Live Stats (subscription-based) */}
         {live && (
           <div className="lg:col-span-3 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { label: "Commandes aujourd'hui", value: live.orders_today ?? 0 },
+              { label: "Plan actif",        value: live.plan_name ?? "—" },
+              { label: "Statut abonnement", value: live.subscription_status ?? "—" },
+              { label: "Jours restants",    value: live.days_remaining ?? 0 },
               {
-                label: "CA aujourd'hui",
-                value: `${Math.round(live.revenue_today ?? 0).toLocaleString("fr-FR")} FCFA`,
+                label: "Total encaissé",
+                value: `${Math.round(live.total_paid ?? 0).toLocaleString("fr-FR")} FCFA`,
               },
-              { label: "Clients enregistrés", value: live.customers_total ?? 0 },
-              { label: "Tables configurées", value: live.tables_total ?? 0 },
             ].map((stat) => (
               <div
                 key={stat.label}

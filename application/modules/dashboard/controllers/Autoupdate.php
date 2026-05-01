@@ -21,10 +21,18 @@ class Autoupdate extends MX_Controller {
 
     /** GET dashboard/autoupdate */
     public function index() {
-        $updates  = $this->license_manager->get_updates_info();
-        $payload  = $this->license_manager->load();
+        $raw_updates = $this->license_manager->get_updates_info();
+        $payload     = $this->license_manager->load();
 
-        $pending_count = count(array_filter($updates, fn($u) => $u['delivery_status'] === 'pending'));
+        // get_updates_info() may return an error dict instead of an array of update rows
+        $updates = (is_array($raw_updates) && !empty($raw_updates) && isset(array_values($raw_updates)[0]['update_id']))
+            ? $raw_updates
+            : [];
+
+        $pending_count = count(array_filter($updates, fn($u) => ($u['delivery_status'] ?? '') === 'pending'));
+
+        $raw = $this->license_manager->raw();
+        $has_license = !empty($raw['client_key']);
 
         $data = [
             'title'           => 'Mises à jour',
@@ -34,6 +42,7 @@ class Autoupdate extends MX_Controller {
             'pending_count'   => $pending_count,
             'plan'            => $payload['plan'] ?? '—',
             'current_version' => $this->_read_version(),
+            'has_license'     => $has_license,
             'success'         => $this->session->flashdata('update_success'),
             'error'           => $this->session->flashdata('update_error'),
         ];
@@ -58,14 +67,45 @@ class Autoupdate extends MX_Controller {
             redirect('dashboard/autoupdate');
         }
 
+        // No license configured — nothing to refresh
+        $raw = $this->license_manager->raw();
+        if (empty($raw['client_key'])) {
+            $this->session->set_flashdata('update_error',
+                'Aucune licence activée. Activez votre licence dans Paramètres avant de vérifier les mises à jour.');
+            redirect('dashboard/autoupdate');
+            return;
+        }
+
+        // Count pending updates BEFORE refresh so we can give an accurate message
+        $before     = $this->license_manager->get_updates_info();
+        $before     = (is_array($before) && isset(array_values($before)[0]['update_id'])) ? $before : [];
+        $pending_before = count(array_filter($before, fn($u) => ($u['delivery_status'] ?? '') === 'pending'));
+
         $result = $this->license_manager->refresh();
 
+        $this->session->unset_userdata('update_success');
+        $this->session->unset_userdata('update_error');
+
         if ($result) {
-            $this->session->set_flashdata('update_success',
-                'Vérification effectuée. Les mises à jour disponibles ont été appliquées.');
+            if ($pending_before > 0) {
+                $n = $pending_before;
+                $msg = $n === 1
+                    ? '1 mise à jour a été appliquée avec succès.'
+                    : "{$n} mises à jour ont été appliquées avec succès.";
+            } else {
+                $msg = 'Vérification effectuée — aucune nouvelle mise à jour disponible.';
+            }
+            $this->session->set_flashdata('update_success', $msg);
         } else {
-            $this->session->set_flashdata('update_error',
-                'Impossible de contacter le serveur SaaS. Réessayez dans quelques instants.');
+            $payload = $this->license_manager->load();
+            $status  = $this->license_manager->status($payload);
+            if (in_array($status, ['active', 'grace'])) {
+                $this->session->set_flashdata('update_success',
+                    'Licence active. Le serveur SaaS est temporairement inaccessible — réessayez plus tard.');
+            } else {
+                $this->session->set_flashdata('update_error',
+                    'Impossible de contacter le serveur SaaS. Vérifiez votre connexion.');
+            }
         }
 
         redirect('dashboard/autoupdate');

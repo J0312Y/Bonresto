@@ -21,18 +21,20 @@
 .upd-empty i    { font-size:40px; display:block; margin-bottom:12px; }
 .btn-apply      { background:#37a000; color:#fff; border:none; border-radius:8px; padding:10px 22px; font-size:14px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; }
 .btn-apply:hover { background:#2d8600; }
-.alert-ok  { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:14px; }
-.alert-err { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:14px; }
+.alert-ok  { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:14px; display:flex; align-items:center; justify-content:space-between; }
+.alert-err { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; border-radius:8px; padding:12px 16px; margin-bottom:16px; font-size:14px; display:flex; align-items:center; justify-content:space-between; }
+.alert-close { background:none; border:none; cursor:pointer; font-size:16px; line-height:1; opacity:.6; padding:0 0 0 12px; color:inherit; }
+.alert-close:hover { opacity:1; }
 </style>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
 
         <?php if ($success): ?>
-            <div class="alert-ok"><i class="fa fa-check-circle"></i> <?php echo htmlspecialchars($success); ?></div>
+            <div class="alert-ok" id="upd-alert"><i class="fa fa-check-circle"></i>&nbsp; <?php echo htmlspecialchars($success); ?><button class="alert-close" onclick="document.getElementById('upd-alert').remove()">&times;</button></div>
         <?php endif; ?>
         <?php if ($error): ?>
-            <div class="alert-err"><i class="fa fa-exclamation-circle"></i> <?php echo htmlspecialchars($error); ?></div>
+            <div class="alert-err" id="upd-alert"><i class="fa fa-exclamation-circle"></i>&nbsp; <?php echo htmlspecialchars($error); ?><button class="alert-close" onclick="document.getElementById('upd-alert').remove()">&times;</button></div>
         <?php endif; ?>
 
         <!-- ── Header ──────────────────────────────────────────────── -->
@@ -52,17 +54,26 @@
                     </p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:center;">
+                    <?php if ($has_license): ?>
                     <form method="post" action="<?php echo base_url('dashboard/autoupdate/apply'); ?>" style="margin:0;">
                         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                         <button type="submit" class="btn-apply" onclick="return confirm('Vérifier et appliquer les mises à jour disponibles ?')">
                             <i class="fa fa-refresh"></i> Vérifier & Appliquer
                         </button>
                     </form>
+                    <?php else: ?>
+                    <span style="font-size:13px;color:#9ca3af;"><i class="fa fa-lock"></i> Licence non activée</span>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <!-- ── Updates list ──────────────────────────────────── -->
-            <?php if (empty($updates)): ?>
+            <?php if (!$has_license): ?>
+                <div class="upd-empty">
+                    <i class="fa fa-key" style="color:#d97706;"></i>
+                    Aucune licence activée. Activez votre licence dans <a href="<?php echo base_url('settings'); ?>">Paramètres</a> pour recevoir les mises à jour.
+                </div>
+            <?php elseif (empty($updates)): ?>
                 <div class="upd-empty">
                     <i class="fa fa-check-circle" style="color:#37a000;"></i>
                     Aucune mise à jour disponible pour le moment.
