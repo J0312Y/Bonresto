@@ -209,7 +209,10 @@ class Saas_model extends CI_Model {
                  ->where('status', 'active')
                  ->update('saas_subscriptions', ['status' => 'suspended']);
         $this->db->where('tenant_id', $tenant_id)
-                 ->update('saas_tenants', ['is_active' => 0]);
+                 ->update('saas_tenants', [
+                     'is_active'              => 0,
+                     'license_invalidated_at' => date('Y-m-d H:i:s'),
+                 ]);
     }
 
     public function reactivate_tenant(int $tenant_id): void {
@@ -217,7 +220,10 @@ class Saas_model extends CI_Model {
                  ->where('status', 'suspended')
                  ->update('saas_subscriptions', ['status' => 'active']);
         $this->db->where('tenant_id', $tenant_id)
-                 ->update('saas_tenants', ['is_active' => 1]);
+                 ->update('saas_tenants', [
+                     'is_active'              => 1,
+                     'license_invalidated_at' => date('Y-m-d H:i:s'),
+                 ]);
     }
 
     public function update_admin_password(int $admin_id, string $hashed): void {
