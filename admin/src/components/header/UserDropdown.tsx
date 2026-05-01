@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { useAuth } from "../../context/AuthContext";
 
@@ -17,25 +17,35 @@ export default function UserDropdown() {
     ? admin.name.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2)
     : "AD";
 
+  const roleLabel: Record<string, { label: string; color: string }> = {
+    super_admin: { label: "Super Admin", color: "bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300" },
+    admin:       { label: "Admin",       color: "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300" },
+    viewer:      { label: "Lecteur",     color: "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300" },
+  };
+  const role = roleLabel[admin?.role ?? ""] ?? { label: admin?.role ?? "Admin", color: "bg-gray-100 text-gray-600" };
+
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center text-gray-700 dropdown-toggle dark:text-gray-400"
+        className="flex items-center gap-2.5 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-100 dark:hover:bg-white/5"
       >
-        <span className="mr-3 flex items-center justify-center overflow-hidden rounded-full h-11 w-11 bg-brand-500 text-white font-bold text-sm">
+        <span className="flex items-center justify-center h-9 w-9 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-white font-bold text-sm shadow-sm">
           {initials}
         </span>
-        <span className="block mr-1 font-medium text-theme-sm">
-          {admin?.name ?? "Admin"}
+        <span className="hidden sm:flex flex-col items-start">
+          <span className="text-sm font-semibold text-gray-800 dark:text-white leading-tight">
+            {admin?.name ?? "Admin"}
+          </span>
+          <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full mt-0.5 ${role.color}`}>
+            {role.label}
+          </span>
         </span>
         <svg
-          className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-          width="18" height="20" viewBox="0 0 18 20" fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          className={`text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          width="16" height="16" viewBox="0 0 16 16" fill="none"
         >
-          <path d="M4.3125 8.65625L9 13.3437L13.6875 8.65625"
-            stroke="currentColor" strokeWidth="1.5"
+          <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5"
             strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
@@ -43,30 +53,58 @@ export default function UserDropdown() {
       <Dropdown
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        className="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark"
+        className="absolute right-0 mt-2 w-[270px] rounded-2xl border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-900 overflow-hidden"
       >
-        <div className="pb-3 border-b border-gray-200 dark:border-gray-800">
-          <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-300">
-            {admin?.name ?? "Administrateur"}
-          </span>
-          <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            {admin?.email ?? ""}
-          </span>
+        {/* User info header */}
+        <div className="bg-gradient-to-br from-brand-500 to-brand-700 px-4 py-4">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center justify-center h-12 w-12 rounded-full bg-white/20 text-white font-bold text-base backdrop-blur-sm">
+              {initials}
+            </span>
+            <div className="min-w-0">
+              <p className="font-semibold text-white truncate">
+                {admin?.name ?? "Administrateur"}
+              </p>
+              <p className="text-xs text-white/70 truncate mt-0.5">
+                {admin?.email ?? ""}
+              </p>
+              <span className="inline-block mt-1.5 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/20 text-white">
+                {role.label}
+              </span>
+            </div>
+          </div>
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300 w-full text-left"
-        >
-          <svg className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
-            width="24" height="24" viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd"
-              d="M15.1007 19.247C14.6865 19.247 14.3507 18.9112 14.3507 18.497L14.3507 14.245H12.8507V18.497C12.8507 19.7396 13.8581 20.747 15.1007 20.747H18.5007C19.7434 20.747 20.7507 19.7396 20.7507 18.497L20.7507 5.49609C20.7507 4.25345 19.7433 3.24609 18.5007 3.24609H15.1007C13.8581 3.24609 12.8507 4.25345 12.8507 5.49609V9.74501L14.3507 9.74501V5.49609C14.3507 5.08188 14.6865 4.74609 15.1007 4.74609L18.5007 4.74609C18.9149 4.74609 19.2507 5.08188 19.2507 5.49609L19.2507 18.497C19.2507 18.9112 18.9149 19.247 18.5007 19.247H15.1007ZM3.25073 11.9984C3.25073 12.2144 3.34204 12.4091 3.48817 12.546L8.09483 17.1556C8.38763 17.4485 8.86251 17.4487 9.15549 17.1559C9.44848 16.8631 9.44863 16.3882 9.15583 16.0952L5.81116 12.7484L16.0007 12.7484C16.4149 12.7484 16.7507 12.4127 16.7507 11.9984C16.7507 11.5842 16.4149 11.2484 16.0007 11.2484L5.81528 11.2484L9.15585 7.90554C9.44864 7.61255 9.44847 7.13767 9.15547 6.84488C8.86248 6.55209 8.3876 6.55226 8.09481 6.84525L3.52309 11.4202C3.35673 11.5577 3.25073 11.7657 3.25073 11.9984Z"
-              fill="" />
-          </svg>
-          Se déconnecter
-        </button>
+        {/* Menu items */}
+        <div className="p-2">
+          <Link
+            to="/settings"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5 transition-colors group"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-100 text-gray-500 group-hover:bg-brand-50 group-hover:text-brand-600 dark:bg-gray-800 dark:text-gray-400 transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" strokeWidth="1.5"/>
+                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" strokeWidth="1.5"/>
+              </svg>
+            </span>
+            Paramètres
+          </Link>
+
+          <div className="my-1.5 h-px bg-gray-100 dark:bg-gray-800" />
+
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10 transition-colors group"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 text-red-500 group-hover:bg-red-100 dark:bg-red-500/10 transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            Se déconnecter
+          </button>
+        </div>
       </Dropdown>
     </div>
   );

@@ -158,90 +158,100 @@ export default function NotificationDropdown() {
       <Dropdown
         isOpen={isOpen}
         onClose={closeDropdown}
-        className="absolute -right-[240px] mt-[17px] flex h-[480px] w-[350px] flex-col rounded-2xl border border-gray-200 bg-white p-3 shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark sm:w-[361px] lg:right-0"
+        className="absolute -right-[240px] mt-2 flex w-[360px] flex-col rounded-2xl border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-900 overflow-hidden sm:w-[370px] lg:right-0"
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-gray-700">
-          <h5 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            Notifications
-            {unread === 0 && notifications.length > 0 && (
-              <span className="ml-2 text-xs font-normal text-gray-400">
-                ({notifications.length})
+        <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 dark:border-gray-800">
+          <div className="flex items-center gap-2">
+            <h5 className="text-base font-semibold text-gray-800 dark:text-white">
+              Notifications
+            </h5>
+            {unread > 0 && (
+              <span className="inline-flex items-center justify-center h-5 min-w-5 px-1.5 rounded-full bg-orange-500 text-white text-[10px] font-bold">
+                {unread}
               </span>
             )}
-          </h5>
+            {unread === 0 && notifications.length > 0 && (
+              <span className="text-xs text-gray-400">({notifications.length})</span>
+            )}
+          </div>
           <button
             onClick={closeDropdown}
-            className="text-gray-500 transition dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            className="flex items-center justify-center h-7 w-7 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300 transition-colors"
           >
-            <svg className="fill-current" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M6.21967 7.28131C5.92678 6.98841 5.92678 6.51354 6.21967 6.22065C6.51256 5.92775 6.98744 5.92775 7.28033 6.22065L11.999 10.9393L16.7176 6.22078C17.0105 5.92789 17.4854 5.92788 17.7782 6.22078C18.0711 6.51367 18.0711 6.98855 17.7782 7.28144L13.0597 12L17.7782 16.7186C18.0711 17.0115 18.0711 17.4863 17.7782 17.7792C17.4854 18.0721 17.0105 18.0721 16.7176 17.7792L11.999 13.0607L7.28033 17.7794C6.98744 18.0722 6.51256 18.0722 6.21967 17.7794C5.92678 17.4865 5.92678 17.0116 6.21967 16.7187L10.9384 12L6.21967 7.28131Z" fill="currentColor" />
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </button>
         </div>
 
         {/* List */}
-        <ul className="flex flex-col flex-1 overflow-y-auto custom-scrollbar gap-0.5">
+        <ul className="flex flex-col flex-1 overflow-y-auto custom-scrollbar max-h-[400px]">
           {loading && (
-            <li className="flex items-center justify-center py-12 text-gray-400 text-sm">
-              Chargement…
+            <li className="flex flex-col items-center justify-center py-14 gap-2">
+              <div className="h-5 w-5 rounded-full border-2 border-brand-500 border-t-transparent animate-spin" />
+              <span className="text-sm text-gray-400">Chargement…</span>
             </li>
           )}
 
           {!loading && notifications.length === 0 && (
-            <li className="flex flex-col items-center justify-center py-12 text-gray-400 text-sm gap-2">
-              <i className="fa fa-bell-slash-o text-3xl" />
-              Aucune notification récente
+            <li className="flex flex-col items-center justify-center py-14 text-gray-400 text-sm gap-3">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-2xl">
+                🔔
+              </span>
+              <span>Aucune notification récente</span>
             </li>
           )}
 
           {!loading && notifications.map((n) => {
             const isRead = getReadIds().has(n.id);
             return (
-            <li key={n.id}>
-              <Link
-                to={`/clients/${n.link.split("/").pop()}`}
-                onClick={closeDropdown}
-                className="flex gap-3 rounded-lg border-b border-gray-100 px-3 py-3 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-white/5 transition-colors"
-              >
-                {/* Logo or icon */}
-                <NotifAvatar icon={n.icon} color={n.color} logoUrl={n.logo_url} />
+              <li key={n.id}>
+                <Link
+                  to={`/clients/${n.link.split("/").pop()}`}
+                  onClick={closeDropdown}
+                  className={`flex gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b border-gray-50 dark:border-gray-800/60 ${!isRead ? "bg-brand-50/40 dark:bg-brand-500/5" : ""}`}
+                >
+                  <NotifAvatar icon={n.icon} color={n.color} logoUrl={n.logo_url} />
 
-                {/* Text */}
-                <span className="flex flex-col min-w-0">
-                  <span className="flex items-center gap-2 mb-0.5">
-                    <span className="font-semibold text-sm text-gray-800 dark:text-white truncate">
-                      {n.title}
+                  <span className="flex flex-col min-w-0 flex-1">
+                    <span className="flex items-center justify-between gap-2 mb-0.5">
+                      <span className="font-semibold text-sm text-gray-800 dark:text-white truncate">
+                        {n.title}
+                      </span>
+                      {!isRead && (
+                        <span className={`shrink-0 h-2 w-2 rounded-full ${DOT_MAP[n.color] ?? "bg-brand-500"}`} />
+                      )}
                     </span>
-                    {!isRead && (
-                      <span
-                        className={`shrink-0 inline-block h-2 w-2 rounded-full ${DOT_MAP[n.color] ?? "bg-gray-400"}`}
-                      />
-                    )}
+                    <span className="text-xs text-gray-500 dark:text-gray-400 leading-snug line-clamp-2">
+                      {n.message}
+                    </span>
+                    <span className="flex items-center gap-1.5 mt-1.5">
+                      <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${COLOR_MAP[n.color] ?? "bg-gray-100 text-gray-500"}`}>
+                        {TYPE_LABEL[n.type] ?? n.type}
+                      </span>
+                      <span className="text-[10px] text-gray-400">{timeAgo(n.time)}</span>
+                    </span>
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 leading-snug line-clamp-2">
-                    {n.message}
-                  </span>
-                  <span className="flex items-center gap-1.5 mt-1 text-[11px] text-gray-400 dark:text-gray-500">
-                    <span className="capitalize">{TYPE_LABEL[n.type] ?? n.type}</span>
-                    <span className="h-1 w-1 rounded-full bg-gray-300" />
-                    <span>{timeAgo(n.time)}</span>
-                  </span>
-                </span>
-              </Link>
-            </li>
+                </Link>
+              </li>
             );
           })}
         </ul>
 
         {/* Footer */}
-        <Link
-          to="/notifications"
-          onClick={closeDropdown}
-          className="block px-4 py-2 mt-3 text-sm font-medium text-center text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors"
-        >
-          Voir toutes les notifications
-        </Link>
+        <div className="px-3 py-2.5 border-t border-gray-100 dark:border-gray-800">
+          <Link
+            to="/notifications"
+            onClick={closeDropdown}
+            className="flex items-center justify-center gap-2 w-full rounded-xl py-2 text-sm font-medium text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10 transition-colors"
+          >
+            Voir toutes les notifications
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </Link>
+        </div>
       </Dropdown>
     </div>
   );
