@@ -147,12 +147,12 @@ export default function ClientList() {
           placeholder="Rechercher un client..."
           value={search}
           onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          className="saas-select"
         />
         <select
           value={filter}
           onChange={(e) => { setFilter(e.target.value); setPage(1); }}
-          className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          className="saas-select"
         >
           <option value="all">Tous les statuts</option>
           <option value="active">Actif</option>

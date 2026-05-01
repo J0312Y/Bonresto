@@ -11,53 +11,85 @@ interface SelectProps {
   onChange: (value: string) => void;
   className?: string;
   defaultValue?: string;
+  value?: string;
+  label?: string;
+  disabled?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
   options,
-  placeholder = "Select an option",
+  placeholder = "Sélectionner…",
   onChange,
   className = "",
   defaultValue = "",
+  value,
+  label,
+  disabled = false,
 }) => {
-  // Manage the selected value
   const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
 
+  const current = value !== undefined ? value : selectedValue;
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setSelectedValue(value);
-    onChange(value); // Trigger parent handler
+    const v = e.target.value;
+    setSelectedValue(v);
+    onChange(v);
   };
 
   return (
-    <select
-      className={`h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 ${
-        selectedValue
-          ? "text-gray-800 dark:text-white/90"
-          : "text-gray-400 dark:text-gray-400"
-      } ${className}`}
-      value={selectedValue}
-      onChange={handleChange}
-    >
-      {/* Placeholder option */}
-      <option
-        value=""
-        disabled
-        className="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
-      >
-        {placeholder}
-      </option>
-      {/* Map over options */}
-      {options.map((option) => (
-        <option
-          key={option.value}
-          value={option.value}
-          className="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+    <div className={`flex flex-col gap-1.5 ${className}`}>
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          {label}
+        </label>
+      )}
+      <div className="relative">
+        <select
+          value={current}
+          onChange={handleChange}
+          disabled={disabled}
+          className={`
+            w-full appearance-none rounded-xl border px-4 py-2.5 pr-10 text-sm
+            shadow-sm transition-all duration-150 outline-none cursor-pointer
+            ${current
+              ? "text-gray-800 dark:text-white"
+              : "text-gray-400 dark:text-gray-500"
+            }
+            ${disabled
+              ? "border-gray-200 bg-gray-50 cursor-not-allowed opacity-60 dark:border-gray-700 dark:bg-gray-800"
+              : "border-gray-300 bg-white hover:border-brand-400 focus:border-brand-500 focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-brand-600 dark:focus:border-brand-500"
+            }
+            dark:text-white/90
+          `}
         >
-          {option.label}
-        </option>
-      ))}
-    </select>
+          <option value="" disabled className="text-gray-400 dark:bg-gray-900">
+            {placeholder}
+          </option>
+          {options.map((opt) => (
+            <option
+              key={opt.value}
+              value={opt.value}
+              className="text-gray-800 dark:bg-gray-900 dark:text-white"
+            >
+              {opt.label}
+            </option>
+          ))}
+        </select>
+
+        {/* Custom chevron */}
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
   );
 };
 

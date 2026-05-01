@@ -126,7 +126,7 @@ export default function ActivityList() {
         <select
           value={action}
           onChange={(e) => handleActionChange(e.target.value)}
-          className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          className="saas-select"
         >
           {actionTypes.map((a) => (
             <option key={a} value={a}>
