@@ -35,10 +35,10 @@ export default function PaymentList() {
 
   const total = payments
     .filter((p) => p.status === "paid")
-    .reduce((sum, p) => sum + p.amount, 0);
+    .reduce((sum, p) => sum + Number(p.amount), 0);
 
-  const fmt = (n: number) =>
-    `${Math.round(n).toLocaleString("fr-FR")} FCFA`;
+  const fmt = (n: number | string) =>
+    `${Math.round(Number(n)).toLocaleString("fr-FR")} FCFA`;
 
   return (
     <>

@@ -1,7 +1,23 @@
-import { GroupIcon, BoxIconLine, DollarLineIcon, TableIcon } from "../../icons";
+import { DollarLineIcon, CheckCircleIcon } from "../../icons";
+import Badge from "../ui/badge/Badge";
 import type { ClientStats } from "../../types/saas";
 
 const fcfa = (n: number) => `${Math.round(n).toLocaleString("fr-FR")} FCFA`;
+
+function subColor(s: string): "success" | "warning" | "error" | "info" {
+  if (s === "active")   return "success";
+  if (s === "grace")    return "warning";
+  if (s === "expired" || s === "suspended") return "error";
+  return "info";
+}
+
+function subLabel(s: string) {
+  if (s === "active")    return "Actif";
+  if (s === "grace")     return "Grâce";
+  if (s === "expired")   return "Expiré";
+  if (s === "suspended") return "Suspendu";
+  return "—";
+}
 
 interface Props {
   clients: ClientStats[];
@@ -19,10 +35,10 @@ export default function ClientDemographics({ clients }: Props) {
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
       <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90 mb-1">
-        Démographie clients
+        Aperçu des abonnements
       </h3>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
-        Statistiques par restaurant
+        Statut par restaurant
       </p>
 
       <div className="space-y-5">
@@ -31,26 +47,22 @@ export default function ClientDemographics({ clients }: Props) {
             key={c.tenant_id}
             className="rounded-xl border border-gray-100 dark:border-gray-800 p-4"
           >
-            <p className="font-semibold text-gray-800 dark:text-white/90 text-sm mb-3 truncate">
-              {c.business_name}
-            </p>
+            <div className="flex items-center justify-between mb-3">
+              <p className="font-semibold text-gray-800 dark:text-white/90 text-sm truncate">
+                {c.business_name}
+              </p>
+              <Badge size="sm" color={subColor(c.subscription_status)}>
+                {subLabel(c.subscription_status)}
+              </Badge>
+            </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2">
                 <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-500/10">
-                  <GroupIcon className="text-blue-500 size-4" />
+                  <CheckCircleIcon className="text-blue-500 size-4" />
                 </span>
                 <div>
-                  <p className="text-xs text-gray-400">Clients</p>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{c.total_customers}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-500/10">
-                  <BoxIconLine className="text-purple-500 size-4" />
-                </span>
-                <div>
-                  <p className="text-xs text-gray-400">Commandes</p>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{c.total_orders}</p>
+                  <p className="text-xs text-gray-400">Plan</p>
+                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{c.plan_name}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -58,20 +70,16 @@ export default function ClientDemographics({ clients }: Props) {
                   <DollarLineIcon className="text-green-500 size-4" />
                 </span>
                 <div>
-                  <p className="text-xs text-gray-400">Panier moyen</p>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{fcfa(c.avg_order)}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-orange-50 dark:bg-orange-500/10">
-                  <TableIcon className="text-orange-500 size-4" />
-                </span>
-                <div>
-                  <p className="text-xs text-gray-400">Tables</p>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{c.total_tables}</p>
+                  <p className="text-xs text-gray-400">Total payé</p>
+                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{fcfa(c.total_revenue)}</p>
                 </div>
               </div>
             </div>
+            {c.end_date && (
+              <p className="mt-2 text-xs text-gray-400">
+                Expire le {new Date(c.end_date).toLocaleDateString("fr-FR")}
+              </p>
+            )}
           </div>
         ))}
       </div>

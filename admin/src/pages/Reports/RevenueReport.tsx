@@ -17,8 +17,8 @@ export default function RevenueReport() {
       .finally(() => setLoading(false));
   }, []);
 
-  const totalRevenue = clients.reduce((s, c) => s + c.total_revenue, 0);
-  const totalOrders  = clients.reduce((s, c) => s + c.total_orders, 0);
+  const totalRevenue  = clients.reduce((s, c) => s + c.total_revenue, 0);
+  const totalPayments = clients.reduce((s, c) => s + c.payment_count, 0);
 
   if (loading) {
     return <div className="flex items-center justify-center h-64 text-gray-400">Chargement...</div>;
@@ -40,13 +40,13 @@ export default function RevenueReport() {
             <p className="text-2xl font-bold text-gray-800 dark:text-white/90">{fcfa(totalRevenue)}</p>
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
-            <p className="text-xs text-gray-500 mb-1">Commandes totales</p>
-            <p className="text-2xl font-bold text-gray-800 dark:text-white/90">{totalOrders.toLocaleString("fr-FR")}</p>
+            <p className="text-xs text-gray-500 mb-1">Paiements totaux</p>
+            <p className="text-2xl font-bold text-gray-800 dark:text-white/90">{totalPayments.toLocaleString("fr-FR")}</p>
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
-            <p className="text-xs text-gray-500 mb-1">Panier moyen global</p>
+            <p className="text-xs text-gray-500 mb-1">Revenu moyen / client</p>
             <p className="text-2xl font-bold text-gray-800 dark:text-white/90">
-              {fcfa(totalOrders > 0 ? totalRevenue / totalOrders : 0)}
+              {fcfa(clients.length > 0 ? totalRevenue / clients.length : 0)}
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function RevenueReport() {
             <table className="w-full text-sm">
               <thead className="border-y border-gray-100 dark:border-gray-800">
                 <tr>
-                  {["Restaurant","Commandes","Revenu total","Panier moyen","Tables","Clients"].map((h) => (
+                  {["Restaurant","Plan","Statut","Paiements","Revenu total","Expiration"].map((h) => (
                     <th key={h} className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400">{h}</th>
                   ))}
                 </tr>
@@ -71,11 +71,13 @@ export default function RevenueReport() {
                 {clients.sort((a,b) => b.total_revenue - a.total_revenue).map((c) => (
                   <tr key={c.tenant_id} className="hover:bg-gray-50 dark:hover:bg-white/[0.02]">
                     <td className="px-6 py-3 font-medium text-gray-800 dark:text-white/90">{c.business_name}</td>
-                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{c.total_orders.toLocaleString("fr-FR")}</td>
+                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{c.plan_name}</td>
+                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300 capitalize">{c.subscription_status}</td>
+                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{c.payment_count.toLocaleString("fr-FR")}</td>
                     <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{fcfa(c.total_revenue)}</td>
-                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{fcfa(c.avg_order)}</td>
-                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{c.total_tables}</td>
-                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">{c.total_customers}</td>
+                    <td className="px-6 py-3 text-gray-600 dark:text-gray-300">
+                      {c.end_date ? new Date(c.end_date).toLocaleDateString("fr-FR") : "—"}
+                    </td>
                   </tr>
                 ))}
               </tbody>

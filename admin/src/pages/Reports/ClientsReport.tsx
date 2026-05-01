@@ -25,7 +25,7 @@ export default function ClientsReport() {
       <div className="space-y-6">
         <div>
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white/90">Rapport des clients</h2>
-          <p className="text-sm text-gray-500 mt-1">Activité et démographie par restaurant</p>
+          <p className="text-sm text-gray-500 mt-1">Abonnements et paiements par restaurant</p>
         </div>
 
         <div className="grid grid-cols-12 gap-6">

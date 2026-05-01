@@ -1,16 +1,13 @@
-Options -MultiViews +FollowSymLinks
+Alias /admin/dist /var/www/bonresto/admin/dist
 
-AddType application/javascript .js .mjs
-AddType text/css               .css
-AddType image/svg+xml          .svg
-AddType image/png              .png
-AddType image/webp             .webp
-AddType font/woff2             .woff2
-AddType font/woff              .woff
+<Directory /var/www/bonresto/admin/dist>
+    Options -MultiViews
+    AllowOverride All
+    Require all granted
 
-RewriteEngine On
-RewriteBase /
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [L]
+    RewriteEngine On
+    RewriteBase /admin/dist/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /admin/dist/index.html [L]
+</Directory>

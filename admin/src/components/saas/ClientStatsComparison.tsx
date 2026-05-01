@@ -3,12 +3,11 @@ import type { ApexOptions } from "apexcharts";
 import { useState } from "react";
 import type { ClientStats } from "../../types/saas";
 
-type Metric = "total_revenue" | "total_orders" | "total_customers";
+type Metric = "total_revenue" | "payment_count";
 
 const METRICS: { key: Metric; label: string }[] = [
-  { key: "total_revenue",   label: "Revenus (FCFA)" },
-  { key: "total_orders",    label: "Commandes" },
-  { key: "total_customers", label: "Clients" },
+  { key: "total_revenue",  label: "Revenus (FCFA)" },
+  { key: "payment_count",  label: "Paiements" },
 ];
 
 interface Props {

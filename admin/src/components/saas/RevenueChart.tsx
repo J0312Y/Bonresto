@@ -41,7 +41,7 @@ export default function RevenueChart({ stats }: Props) {
     },
     yaxis: {
       labels: {
-        formatter: (val: number) => `€${val.toLocaleString("fr-FR")}`,
+        formatter: (val: number) => `${Math.round(val).toLocaleString("fr-FR")} F`,
       },
     },
     grid: { yaxis: { lines: { show: true } } },
@@ -50,7 +50,7 @@ export default function RevenueChart({ stats }: Props) {
       x: { show: false },
       y: {
         formatter: (val: number) =>
-          new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(val),
+          `${Math.round(val).toLocaleString("fr-FR")} XAF`,
       },
     },
   };

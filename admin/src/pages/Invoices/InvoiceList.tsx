@@ -7,7 +7,7 @@ import type { Invoice, Plan, Client } from "../../types/saas";
 import { CreateInvoiceModal } from "./CreateInvoiceModal";
 import { ConfirmPaymentModal } from "./ConfirmPaymentModal";
 
-const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-FR")} FCFA`;
+const fmt = (n: number | string) => `${Math.round(Number(n)).toLocaleString("fr-FR")} FCFA`;
 
 const PAGE_SIZE = 10;
 

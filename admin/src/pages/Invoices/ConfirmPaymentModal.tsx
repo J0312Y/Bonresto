@@ -10,7 +10,7 @@ const METHODS = [
   { value: "autre",    label: "Autre",         icon: "💳" },
 ];
 
-const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-FR")} FCFA`;
+const fmt = (n: number | string) => `${Math.round(Number(n)).toLocaleString("fr-FR")} FCFA`;
 
 interface Props {
   invoice: Invoice;

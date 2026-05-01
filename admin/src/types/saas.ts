@@ -98,10 +98,13 @@ export interface ActivityLog {
 }
 
 export interface LiveStats {
-  orders_today: number;
-  revenue_today: number;
-  customers_total: number;
-  tables_total: number;
+  subscription_status: "active" | "grace" | "expired" | "suspended" | "none";
+  plan_name: string;
+  days_remaining: number;
+  total_paid: number;
+  payment_count: number;
+  max_tables: number;
+  max_users: number;
 }
 
 export interface SaasUpdate {
@@ -123,24 +126,25 @@ export interface SaasUpdate {
 }
 
 export interface RecentOrder {
-  order_id: number;
+  payment_id: number;
   tenant_id: number;
-  order_date: string;
-  order_time: string;
-  totalamount: number;
-  order_status: number | string;
+  amount: number;
+  currency: string;
+  status: "pending" | "paid" | "failed" | "refunded";
+  reference: string | null;
+  created_at: string;
   business_name: string;
-  customer_name: string | null;
+  plan_name: string | null;
 }
 
 export interface ClientStats {
   tenant_id: number;
   business_name: string;
-  total_orders: number;
+  subscription_status: "active" | "grace" | "expired" | "suspended" | "none";
+  plan_name: string;
+  end_date: string | null;
   total_revenue: number;
-  total_customers: number;
-  total_tables: number;
-  avg_order: number;
+  payment_count: number;
 }
 
 export interface ClientRevenueMonth {
@@ -149,7 +153,7 @@ export interface ClientRevenueMonth {
   month: string;
   month_key: string;
   revenue: number;
-  orders_count: number;
+  payment_count: number;
 }
 
 export interface Invoice {
