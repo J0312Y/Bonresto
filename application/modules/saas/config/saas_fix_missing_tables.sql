@@ -78,12 +78,14 @@ CREATE TABLE IF NOT EXISTS saas_settings (
 CREATE TABLE IF NOT EXISTS saas_roles (
     role_id     INT AUTO_INCREMENT PRIMARY KEY,
     role_name   VARCHAR(100) NOT NULL UNIQUE,
-    label       VARCHAR(150) NULL,
-    color       VARCHAR(100) DEFAULT 'bg-gray-100 text-gray-600',
     permissions JSON         NOT NULL DEFAULT ('[]'),
-    is_system   TINYINT      DEFAULT 0,
     created_at  DATETIME     DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Add columns that may not exist yet (table existed before with fewer columns)
+CALL _saas_add_col('saas_roles', 'label',     'VARCHAR(150) NULL AFTER role_name');
+CALL _saas_add_col('saas_roles', 'color',     "VARCHAR(100) DEFAULT 'bg-gray-100 text-gray-600'");
+CALL _saas_add_col('saas_roles', 'is_system', 'TINYINT DEFAULT 0');
 
 INSERT IGNORE INTO saas_roles (role_name, label, permissions, is_system) VALUES
 ('super_admin', 'Super Admin', '["*"]',                                                                        1),
