@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import PageMeta from "../../components/common/PageMeta";
-import ClientRevenueChart from "../../components/saas/ClientRevenueChart";
-import ClientStatsComparison from "../../components/saas/ClientStatsComparison";
 import RecentOrdersAll from "../../components/saas/RecentOrdersAll";
 import PlansBreakdown from "../../components/saas/PlansBreakdown";
 import RecentClients from "../../components/saas/RecentClients";
@@ -12,14 +10,12 @@ import {
   getDashboardStats,
   getRecentOrders,
   getClientsStats,
-  getClientsRevenue,
   getClients,
 } from "../../services/api";
 import type {
   DashboardStats,
   RecentOrder,
   ClientStats,
-  ClientRevenueMonth,
   Client,
 } from "../../types/saas";
 import {
@@ -96,7 +92,6 @@ export default function Home() {
   const [stats, setStats]                   = useState<DashboardStats>(EMPTY_STATS);
   const [orders, setOrders]                 = useState<RecentOrder[]>([]);
   const [clientStats, setClientStats]       = useState<ClientStats[]>([]);
-  const [revenue, setRevenue]               = useState<ClientRevenueMonth[]>([]);
   const [recentClients, setRecentClients]   = useState<Client[]>([]);
   const [loading, setLoading]               = useState(true);
   const [error, setError]                   = useState<string | null>(null);
@@ -106,14 +101,12 @@ export default function Home() {
       getDashboardStats(),
       getRecentOrders(),
       getClientsStats(),
-      getClientsRevenue(),
       getClients(),
     ])
-      .then(([s, o, cs, r, cl]) => {
+      .then(([s, o, cs, cl]) => {
         setStats(s);
         setOrders(o);
         setClientStats(cs);
-        setRevenue(r);
         setRecentClients(cl);
         setError(null);
       })
@@ -197,15 +190,8 @@ export default function Home() {
         {/* ── Section 2 : Revenus 12 mois (full width) ────────────── */}
         <RevenueChart stats={stats} />
 
-        {/* ── Section 3 : Revenus par client + Taux d'activation ──── */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <ClientRevenueChart data={revenue} />
-          </div>
-          <div className="lg:col-span-1">
-            <SaasTarget stats={stats} />
-          </div>
-        </div>
+        {/* ── Section 3 : Taux d'activation ───────────────────────── */}
+        <SaasTarget stats={stats} />
 
         {/* ── Section 4 : KPI secondaires ─────────────────────────── */}
         <div>
@@ -259,11 +245,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Section 6 : Comparaison + Clients récents ────────────── */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <ClientStatsComparison clients={clientStats} />
-          <RecentClients clients={recentClients} />
-        </div>
+        {/* ── Section 6 : Clients récents ──────────────────────────── */}
+        <RecentClients clients={recentClients} />
 
         {/* ── Section 7 : Toutes les commandes récentes ────────────── */}
         <RecentOrdersAll orders={orders} />
