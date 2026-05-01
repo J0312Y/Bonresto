@@ -209,9 +209,13 @@ const AppSidebar: React.FC = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Logo */}
-      <div className={`py-6 flex items-center ${!show ? "lg:justify-center" : "justify-start px-1"}`}>
+      <div className={`py-4 flex items-center ${!show ? "lg:justify-center" : "justify-start px-1"}`}>
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl">🍽</span>
+          <img
+            src="/images/logo/bonresto-logo.png"
+            alt="Bonresto"
+            className={show ? "h-10 w-10 object-contain" : "h-9 w-9 object-contain"}
+          />
           {show && (
             <span className="text-base font-bold text-white tracking-wide">
               Bonresto <span className="text-[#37a000]">SaaS</span>

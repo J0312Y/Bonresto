@@ -29,8 +29,13 @@ export default function SignInForm() {
   return (
     <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
       <div className="mb-8 text-center">
-        <h1 className="mb-2 font-bold text-gray-800 text-title-md dark:text-white/90">
-          Bonresto SaaS
+        <img
+          src="/images/logo/bonresto-logo.png"
+          alt="Bonresto"
+          className="mx-auto mb-4 h-20 w-20 object-contain"
+        />
+        <h1 className="mb-1 font-bold text-gray-800 text-title-md dark:text-white/90">
+          Bonresto <span className="text-[#37a000]">SaaS</span>
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Connectez-vous à votre espace administrateur
