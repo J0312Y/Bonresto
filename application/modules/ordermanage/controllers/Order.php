@@ -1044,6 +1044,7 @@ class Order extends MX_Controller
                 $orderid = $this->db->insert_id();
 
                 if ($this->order_model->orderitem($orderid)) {
+                    $this->_sync_enqueue_order($orderid);
                     $this->logs_model->log_recorded($logData);
                     $this->session->set_flashdata('message', display('save_successfully'));
                     $customer = $this->order_model->customerinfo($customerid);
@@ -1423,6 +1424,7 @@ class Order extends MX_Controller
                 }
 
                 if ($this->order_model->orderitem($orderid)) {
+                    $this->_sync_enqueue_order($orderid);
                     $this->logs_model->log_recorded($logData);
 
                     $customer = $this->order_model->customerinfo($customerid ?? '');
@@ -6047,5 +6049,28 @@ class Order extends MX_Controller
     {
         $data['customerorder'] = $this->order_model->read('*', 'customer_order', ['order_id' => $id]);
         echo ('window.orderinfo = ' . json_encode($data['customerorder']) . ';');
+    }
+
+    // ── Sync helper ───────────────────────────────────────────────────────────
+
+    private function _sync_enqueue_order(int $order_id): void {
+        try {
+            $order = $this->db->where('order_id', $order_id)->get('customer_order')->row_array();
+            if (!$order) return;
+            if (($order['sync_origin'] ?? 'local') === 'vps') return;
+
+            $items = $this->db->where('order_id', $order_id)->get('order_menu')->result_array();
+
+            $this->load->library('Sync_manager');
+            $this->sync_manager->enqueue(
+                'customer_order',
+                $order_id,
+                empty($order['sync_uuid']) ? 'insert' : 'update',
+                $order,
+                ['items' => $items]
+            );
+        } catch (Throwable $e) {
+            log_message('error', '[Order::_sync_enqueue_order] ' . $e->getMessage());
+        }
     }
 }
