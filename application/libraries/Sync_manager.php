@@ -572,7 +572,15 @@ class Sync_manager {
         if (!$pk) return null;
         $CI =& get_instance();
         $row = $CI->db->where($pk, $entity_id)->get($entity_type)->row_array();
-        return $row ?: null;
+        if (!$row) return null;
+
+        // Pour customer_order, attacher les articles (order_menu) comme related
+        if ($entity_type === 'customer_order') {
+            $items = $CI->db->where('order_id', $entity_id)->get('order_menu')->result_array();
+            $row['_related'] = ['items' => $items];
+        }
+
+        return $row;
     }
 
     // ── Log ───────────────────────────────────────────────────────────────────
