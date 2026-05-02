@@ -67,7 +67,7 @@ if ($this->permission->method('itemmanage', 'update')->access()): ?>
                      <input name="smallimage" type="hidden" value="<?php echo (!empty($productinfo->small_thumb) ? $productinfo->small_thumb : null) ?>" />
                      <div class="col-lg-6">
                     <div class="form-group row">
-                        <label for="category" class="col-sm-4 col-form-label"><?php echo display('category').$productinfo->CategoryID ?></label>
+                        <label for="category" class="col-sm-4 col-form-label"><?php echo display('category') ?></label>
                         <div class="col-sm-8">
                         <select name="CategoryID" class="form-control" required="">
                             <option value="" selected="selected"><?php echo display('category_name') ?></option>
@@ -77,7 +77,7 @@ foreach ($categories as $caregory) {
     ?>
                                      <option value="<?php echo $caregory->CategoryID; ?>" class='bolden' <?php
 
-    if ($productinfo->CategoryID  == $caregory->CategoryID) {echo "selected";}
+    if ($productinfo->CategoryID ?? '' == $caregory->CategoryID) {echo "selected";}
 
     ?>><strong><?php echo $caregory->Name; ?></strong></option>
                                                                                                 <?php
@@ -88,7 +88,7 @@ foreach ($categories as $caregory) {
             ?>
                                                                                                 <option value="<?php echo $subcat->CategoryID; ?>" <?php
 
-            if ($productinfo->CategoryID == $subcat->CategoryID) {echo "selected";}
+            if ($productinfo->CategoryID ?? '' == $subcat->CategoryID) {echo "selected";}
 
             ?>>&nbsp;&nbsp;&nbsp;&mdash;<?php echo $subcat->Name; ?></option>
                                                                                             <?php

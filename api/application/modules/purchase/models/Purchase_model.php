@@ -19,8 +19,6 @@ class Purchase_model extends CI_Model {
 			}
 		if($payment_type==2){
 			$bankid=$this->input->post('bank',true);
-			$bankinfo =$this->db->select('*')->from('tbl_bank')->where('bankid',$bankid)->get()->row();
-			$bankheadcode = $this->db->select('*')->from('acc_coa')->where('HeadName',$bankinfo->bank_name)->get()->row();
 		}
 		$purchase_date = str_replace('/','-',$this->input->post('purchase_date'));
 		$newdate= date('Y-m-d' , strtotime($purchase_date));
@@ -73,61 +71,6 @@ class Purchase_model extends CI_Model {
 			}
 		}
 		
-		$supinfo =$this->db->select('*')->from('supplier')->where('supid',$this->input->post('suplierid'))->get()->row();
-		$sup_head = $supinfo->suplier_code.'-'.$supinfo->supName;
-		$sup_coa = $this->db->select('*')->from('acc_coa')->where('HeadName',$sup_head)->get()->row();
-		
-		
-		// Acc transaction
-		$recv_id = date('YmdHis');
-		$receive_transection = array(
-					'VNo'            =>  $this->input->post('invoice_no',true),
-					'Vtype'          =>  'PO',
-					'VDate'          =>  $newdate,
-					'COAID'          =>  10107,
-					'Narration'      =>  'PO Receive Receive No '.$recv_id,
-					'Debit'          =>  $this->input->post('grand_total_price',true),
-					'Credit'         =>  0,
-					'StoreID'        =>  0,
-					'IsPosted'       =>  1,
-					'CreateBy'       =>  $saveid,
-					'CreateDate'     =>  $newdate,
-					'IsAppove'       =>  1
-				); 
-		$this->db->insert('acc_transaction',$receive_transection);
-		 //  Supplier credit
-		  $poCredit = array(
-			  'VNo'            =>  $this->input->post('invoice_no',true),
-			  'Vtype'          =>  'PO',
-			  'VDate'          =>  $newdate,
-			  'COAID'          =>  $sup_coa->HeadCode,
-			  'Narration'      =>  'PO received For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-			  'Debit'          =>  0,
-			  'Credit'         =>  $this->input->post('grand_total_price',true),
-			  'StoreID'        =>  0,
-			  'IsPosted'       =>  1,
-			  'CreateBy'       =>  $saveid,
-			  'CreateDate'     =>  $newdate,
-			  'IsAppove'       =>  1
-			); 
-		   $this->db->insert('acc_transaction',$poCredit);
-		   
-		
-		   
-		     // Expense for company
-         $expense = array(
-		  'VNo'            => $this->input->post('invoice_no',true),
-		  'Vtype'          => 'Purchase',
-		  'VDate'          => $newdate,
-		  'COAID'          => 407,
-		  'Narration'      => 'Company Credit For  '.$sup_coa->HeadCode,
-		  'Debit'          => $this->input->post('grand_total_price'),
-		  'Credit'         => 0,//purchase price asbe
-		  'IsPosted'       => 1,
-		  'CreateBy'       => $saveid,
-		  'CreateDate'     => $newdate,
-		  'IsAppove'       => 1
-		); 
 		 // Bank summary for credit
 		  $banksummary = array(
 					'date'          =>  $newdate,
@@ -162,78 +105,11 @@ class Purchase_model extends CI_Model {
         );
 		
 		$this->db->insert('supplier_ledger',$ledger);
-		$this->db->insert('acc_transaction',$expense);
+
 		if($payment_type==1){
-			//for cash Payment
-	   // Supplier paid amount Debit for cash Payments
-	    $podebitpaidamount = array(
-		  'VNo'            =>  $this->input->post('invoice_no',true),
-		  'Vtype'          =>  'PO',
-		  'VDate'          =>  $newdate,
-		  'COAID'          =>  $sup_coa->HeadCode,
-		  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-		  'Debit'          =>  $pamount,// paid amount*****
-		  'Credit'         =>  0,
-		  'StoreID'        =>  0,
-		  'IsPosted'       =>  1,
-		  'CreateBy'       =>  $saveid,
-		  'CreateDate'     =>  $newdate,
-		  'IsAppove'       =>  1
-    	); 
-       $this->db->insert('acc_transaction',$podebitpaidamount);
-	   
-	   //Cash in Hand  Cdedit.
-	    $podebitpaidamount = array(
-		  'VNo'            =>  $this->input->post('invoice_no',true),
-		  'Vtype'          =>  'PO',
-		  'VDate'          =>  $newdate,
-		  'COAID'          =>  1020101,
-		  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-		  'Debit'          =>  0,
-		  'Credit'         =>  $pamount,// paid amount*****
-		  'StoreID'        =>  0,
-		  'IsPosted'       =>  1,
-		  'CreateBy'       =>  $saveid,
-		  'CreateDate'     =>  $newdate,
-		  'IsAppove'       =>  1
-    	); 
-        $this->db->insert('acc_transaction',$podebitpaidamount);
-		$this->db->insert('supplier_ledger',$ledger_debit);
+			$this->db->insert('supplier_ledger',$ledger_debit);
 		}
 		if($payment_type==2){
-			// Supplier paid amount Debit for cash Payments
-			$podebitpaidamount = array(
-			  'VNo'            =>  $this->input->post('invoice_no',true),
-			  'Vtype'          =>  'PO',
-			  'VDate'          =>  $newdate,
-			  'COAID'          =>  $sup_coa->HeadCode,
-			  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-			  'Debit'          =>  $pamount,// paid amount*****
-			  'Credit'         =>  0,
-			  'StoreID'        =>  0,
-			  'IsPosted'       =>  1,
-			  'CreateBy'       =>  $saveid,
-			  'CreateDate'     =>  $newdate,
-			  'IsAppove'       =>  1
-			); 
-		   $this->db->insert('acc_transaction',$podebitpaidamount);
-	   
-	   		//Cash in Hand  Cdedit.
-			$podebitpaidamount = array(
-			  'VNo'            =>  $this->input->post('invoice_no',true),
-			  'Vtype'          =>  'PO',
-			  'VDate'          =>  $newdate,
-			  'COAID'          =>  $bankheadcode->HeadCode,
-			  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-			  'Debit'          =>  0,
-			  'Credit'         =>  $pamount,// paid amount*****
-			  'StoreID'        =>  0,
-			  'IsPosted'       =>  1,
-			  'CreateBy'       =>  $saveid,
-			  'CreateDate'     =>  $newdate,
-			  'IsAppove'       =>  1
-			); 
-			$this->db->insert('acc_transaction',$podebitpaidamount);
 			$this->db->insert('bank_summary',$banksummary);
             $this->db->insert('supplier_ledger',$ledger_debit);
 		}
@@ -274,8 +150,6 @@ class Purchase_model extends CI_Model {
 			}
 		if($payment_type==2){
 			$bankid=$this->input->post('bank',true);
-			$bankinfo =$this->db->select('*')->from('tbl_bank')->where('bankid',$bankid)->get()->row();
-			$bankheadcode = $this->db->select('*')->from('acc_coa')->where('HeadName',$bankinfo->bank_name)->get()->row();
 		}
 		$oldinvoice=$this->input->post('oldinvoice',true);
 		$oldsupplier= $this->input->post('oldsupplier',true);
@@ -380,65 +254,9 @@ class Purchase_model extends CI_Model {
 					}
 			}
 			
-			$supinfo =$this->db->select('*')->from('supplier')->where('supid',$oldsupplier)->get()->row();
-			$sup_head = $supinfo->suplier_code.'-'.$supinfo->supName;
-			$sup_coa = $this->db->select('*')->from('acc_coa')->where('HeadName',$sup_head)->get()->row();
-			
-			$this->db->where('VNo',$oldinvoice)->delete('acc_transaction');
 			$this->db->where('transaction_id',$oldinvoice)->delete('supplier_ledger');
 			$this->db->where('deposite_id',$oldinvoice)->delete('bank_summary');
-			
-			
-			// Acc transaction
-		$recv_id = date('YmdHis');
-		$receive_transection = array(
-					'VNo'            =>  $this->input->post('invoice_no',true),
-					'Vtype'          =>  'PO',
-					'VDate'          =>  $newdate,
-					'COAID'          =>  10107,
-					'Narration'      =>  'PO Receive Receive No '.$recv_id,
-					'Debit'          =>  $this->input->post('grand_total_price',true),
-					'Credit'         =>  0,
-					'StoreID'        =>  0,
-					'IsPosted'       =>  1,
-					'CreateBy'       =>  $saveid,
-					'CreateDate'     =>  $newdate,
-					'IsAppove'       =>  1
-				); 
-		$this->db->insert('acc_transaction',$receive_transection);
-		 //  Supplier credit
-		  $poCredit = array(
-			  'VNo'            =>  $this->input->post('invoice_no',true),
-			  'Vtype'          =>  'PO',
-			  'VDate'          =>  $newdate,
-			  'COAID'          =>  $sup_coa->HeadCode,
-			  'Narration'      =>  'PO received For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-			  'Debit'          =>  0,
-			  'Credit'         =>  $this->input->post('grand_total_price',true),
-			  'StoreID'        =>  0,
-			  'IsPosted'       =>  1,
-			  'CreateBy'       =>  $saveid,
-			  'CreateDate'     =>  $newdate,
-			  'IsAppove'       =>  1
-			); 
-		   $this->db->insert('acc_transaction',$poCredit);
-		   
-		
-		   
-		     // Expense for company
-         $expense = array(
-		  'VNo'            => $this->input->post('invoice_no',true),
-		  'Vtype'          => 'Purchase',
-		  'VDate'          => $newdate,
-		  'COAID'          => 407,
-		  'Narration'      => 'Company Credit For  '.$sup_coa->HeadCode,
-		  'Debit'          => $this->input->post('grand_total_price'),
-		  'Credit'         => 0,//purchase price asbe
-		  'IsPosted'       => 1,
-		  'CreateBy'       => $saveid,
-		  'CreateDate'     => $newdate,
-		  'IsAppove'       => 1
-		); 
+	 
 		 // Bank summary for credit
 		  $banksummary = array(
 					'date'          =>  $newdate,
@@ -473,84 +291,15 @@ class Purchase_model extends CI_Model {
         );
 		
 		$this->db->insert('supplier_ledger',$ledger);
-		$this->db->insert('acc_transaction',$expense);
+
 		if($payment_type==1){
-			//for cash Payment
-	   // Supplier paid amount Debit for cash Payments
-	    $podebitpaidamount = array(
-		  'VNo'            =>  $this->input->post('invoice_no',true),
-		  'Vtype'          =>  'PO',
-		  'VDate'          =>  $newdate,
-		  'COAID'          =>  $sup_coa->HeadCode,
-		  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-		  'Debit'          =>  $pamount,// paid amount*****
-		  'Credit'         =>  0,
-		  'StoreID'        =>  0,
-		  'IsPosted'       =>  1,
-		  'CreateBy'       =>  $saveid,
-		  'CreateDate'     =>  $newdate,
-		  'IsAppove'       =>  1
-    	); 
-       $this->db->insert('acc_transaction',$podebitpaidamount);
-	   
-	   //Cash in Hand  Cdedit.
-	    $podebitpaidamount = array(
-		  'VNo'            =>  $this->input->post('invoice_no',true),
-		  'Vtype'          =>  'PO',
-		  'VDate'          =>  $newdate,
-		  'COAID'          =>  1020101,
-		  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-		  'Debit'          =>  0,
-		  'Credit'         =>  $pamount,// paid amount*****
-		  'StoreID'        =>  0,
-		  'IsPosted'       =>  1,
-		  'CreateBy'       =>  $saveid,
-		  'CreateDate'     =>  $newdate,
-		  'IsAppove'       =>  1
-    	); 
-        $this->db->insert('acc_transaction',$podebitpaidamount);
-		$this->db->insert('supplier_ledger',$ledger_debit);
+			$this->db->insert('supplier_ledger',$ledger_debit);
 		}
 		if($payment_type==2){
-			// Supplier paid amount Debit for cash Payments
-			$podebitpaidamount = array(
-			  'VNo'            =>  $this->input->post('invoice_no',true),
-			  'Vtype'          =>  'PO',
-			  'VDate'          =>  $newdate,
-			  'COAID'          =>  $sup_coa->HeadCode,
-			  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-			  'Debit'          =>  $pamount,// paid amount*****
-			  'Credit'         =>  0,
-			  'StoreID'        =>  0,
-			  'IsPosted'       =>  1,
-			  'CreateBy'       =>  $saveid,
-			  'CreateDate'     =>  $newdate,
-			  'IsAppove'       =>  1
-			); 
-		   $this->db->insert('acc_transaction',$podebitpaidamount);
-	   
-	   		//Cash in Hand  Cdedit.
-			$podebitpaidamount = array(
-			  'VNo'            =>  $this->input->post('invoice_no',true),
-			  'Vtype'          =>  'PO',
-			  'VDate'          =>  $newdate,
-			  'COAID'          =>  $bankheadcode->HeadCode,
-			  'Narration'      =>  'Paid For PO No.'.$this->input->post('invoice_no',true).' Receive No.'.$recv_id,
-			  'Debit'          =>  0,
-			  'Credit'         =>  $pamount,// paid amount*****
-			  'StoreID'        =>  0,
-			  'IsPosted'       =>  1,
-			  'CreateBy'       =>  $saveid,
-			  'CreateDate'     =>  $newdate,
-			  'IsAppove'       =>  1
-			); 
-			$this->db->insert('acc_transaction',$podebitpaidamount);
 			$this->db->insert('bank_summary',$banksummary);
             $this->db->insert('supplier_ledger',$ledger_debit);
 		}
 		return true;
-	
-	
 	}
 	
 	
@@ -699,6 +448,14 @@ class Purchase_model extends CI_Model {
 			return false; 
 		}
 	}
+public function ingrediantlist()
+	{
+		 $data = $this->db->select("*")->from('ingredients')->where('is_active',1)->get()->result();
+		 //echo $this->db->last_query();
+		 return $data;
+
+		
+	}
 //item Dropdown
  public function supplier_dropdown()
 	{
@@ -794,18 +551,21 @@ public function getinvoice($id){
 				$pq = $this->input->post('total_price');
 				$rate = $this->input->post('product_rate');
 				$quantity = $this->input->post('total_qntt');
+				$p_discount = $this->input->post('discount');
 		
-				for ($i=0, $n=count($p_id); $i <= $n; $i++) {
+				for ($i = 0, $n = count($p_id); $i < $n; $i++) {
 					$product_quantity = $quantity[$i];
 					$product_rate = $rate[$i];
 					$product_id = $p_id[$i];
 					$removeprice=$pq[$i];
+					$pdiscount=$p_discount[$i];
 					if($product_quantity>0){
 					$data = array(
 					'preturn_id'        =>  $id,
 					'product_id'		=>	$product_id,
 					'qty'			    =>	$product_quantity,
 					'product_rate'	    =>	$product_rate,
+					'discount'			=>	$pdiscount
 					);
 			
 					 $this->db->insert('purchase_return_details',$data);
@@ -835,46 +595,9 @@ public function getinvoice($id){
 					  }
 					  }
 				}
-		$recv_id = date('YmdHis');
-		$supinfo =$this->db->select('*')->from('supplier')->where('supid',$this->input->post('supplier_id'))->get()->row();
-		$sup_head = $supinfo->suplier_code.'-'.$supinfo->supName;
-		$sup_coa = $this->db->select('*')->from('acc_coa')->where('HeadName',$sup_head)->get()->row();
-
-	  //  Supplier credit
-	  
-	  $poCredit = array(
-		  'VNo'            =>  $this->input->post('invoice',true),
-		  'Vtype'          =>  'PO',
-		  'VDate'          =>  $createdate,
-		  'COAID'          =>  $sup_coa->HeadCode,
-		  'Narration'      =>  'P Return For '.$po_no,
-		  'Debit'          =>  $grand_total_price,
-		  'Credit'         =>  0,
-		  'StoreID'        =>  0,
-		  'IsPosted'       =>  1,
-		  'CreateBy'       =>  $createby,
-		  'CreateDate'     =>  $createdate,
-		  'IsAppove'       =>  1
-    	); 
-       $this->db->insert('acc_transaction',$poCredit);
-	   // Acc transaction
-	   $receive_transection = array(
-					'VNo'            =>  $this->input->post('invoice',true),
-					'Vtype'          =>  'PO',
-					'VDate'          =>  $createdate,
-					'COAID'          =>  10107,
-					'Narration'      =>  'Purchase Return For PO No'.$po_no,
-					'Debit'          =>  0,
-					'Credit'         =>  $grand_total_price,
-					'StoreID'        => 0,
-					'IsPosted'       => 1,
-					'CreateBy'       => $createby,
-					'CreateDate'     => $createdate,
-					'IsAppove'       => 1
-				); 
-		$this->db->insert('acc_transaction',$receive_transection);
+		
 		return true;
-		}
+	}
 	public function readinvoice($limit = null, $start = null)
 	{
 	    $this->db->select('purchase_return.*,supplier.supName');

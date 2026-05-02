@@ -26,7 +26,6 @@ class Theme extends MX_Controller
     {
         $active_theme = $this->themes_model->get_theme();
         $themes       = $this->themes_model->get_themes();
-        $theme        = $this->themes_model->get_theme_info($active_theme);
 
         $installed_themes = $this->themes_model->get_installed_themes_ids();
         $json_theme       = $this->addons_model->search_available_themes();
@@ -41,7 +40,6 @@ class Theme extends MX_Controller
             'title'        => display('themes'),
             'active_theme' => $active_theme,
             'themes'       => $themes,
-            'theme'        => $theme,
             'new_items'    => $new_items,
             'installed'    => $installed_themes,
         ];
@@ -273,26 +271,6 @@ class Theme extends MX_Controller
         }
 
         echo $result;
-    }
-
-    public function save_colors()
-    {
-        $themename = $this->input->post('themename', true);
-
-        $data = array(
-            'primary_color'        => $this->input->post('primary_color', true),
-            'top_header_bg'        => $this->input->post('top_header_bg', true),
-            'header_bg'            => $this->input->post('header_bg', true),
-            'header_color'         => $this->input->post('header_color', true),
-            'footer_bg'            => $this->input->post('footer_bg', true),
-            'footer_color'         => $this->input->post('footer_color', true),
-        );
-
-        $this->themes_model->update_theme_colors($themename, $data);
-
-        $sdata['message'] = display("theme_colors_updated_successfully");
-        $this->session->set_userdata($sdata);
-        redirect('addon/theme');
     }
 
 }

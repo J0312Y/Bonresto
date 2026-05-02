@@ -90,56 +90,54 @@ class Appv1 extends MY_Controller
                 $str = substr($result->picture, 2);
                 $result->{"UserPictureURL"}
 
-                = base_url() . $str;
+                    = base_url() . $str;
                 $result->{"logo"}
 
-                = base_url() . $webseting->logo;
+                    = base_url() . $webseting->logo;
                 $result->{"address"}
 
-                = $webseting->address;
+                    = $webseting->address;
                 $result->{"PowerBy"}
 
-                = $webseting->powerbytxt;
+                    = $webseting->powerbytxt;
                 $result->{"currencycode"}
 
-                = $currencyinfo->currencyname;
+                    = $currencyinfo->currencyname;
                 $result->{"currencysign"}
 
-                = $currencyinfo->curr_icon;
+                    = $currencyinfo->curr_icon;
                 $result->{"servicecharge"}
 
-                = $webseting->servicecharge;
+                    = $webseting->servicecharge;
                 $result->{"service_chargeType"}
 
-                = $webseting->service_chargeType;
+                    = $webseting->service_chargeType;
                 $result->{"placeorder"}
 
-                = $placeorder;
+                    = $placeorder;
                 $result->{"quickorder"}
 
-                = $quickorder;
+                    = $quickorder;
                 $result->{"qrmodule"}
 
-                = $modulestatus;
+                    = $modulestatus;
                 $result->{"cashregisterbalance"}
 
-                = $openingbalance;
+                    = $openingbalance;
                 $result->{"counter"}
 
-                = $counter;
+                    = $counter;
                 $result->{"registerid"}
 
-                = $registerid;
+                    = $registerid;
                 $result->{"closebalance"}
 
-                = $closeinfo;
+                    = $closeinfo;
                 return $this->respondWithSuccess('Vous vous êtes connecté avec succès.', $result);
             } else {
                 return $this->respondWithError('L\'e-mail et le mot de passe que vous avez saisis ne correspondent pas.', $result);
             }
-
         }
-
     }
 
     public function printcashregister()
@@ -250,7 +248,6 @@ class Appv1 extends MY_Controller
                 $output['payment'][$k]['name']   = $amount->payment_method;
                 $output['payment'][$k]['amount'] = number_format($payamount, 2);
                 $k++;
-
             }
 
             $output['TotalPayment'] = number_format($total, 2);
@@ -260,7 +257,6 @@ class Appv1 extends MY_Controller
             $output['PrintDate']    = date('Y-m-d H:i');
             return $this->respondWithSuccess('Day Closeing Report.', $output);
         }
-
     }
 
     public function closinginfo()
@@ -279,7 +275,6 @@ class Appv1 extends MY_Controller
             $output['closebalance'] = $closeinfo;
             return $this->respondWithSuccess('All Category List.', $output);
         }
-
     }
 
     public function sign_up()
@@ -315,7 +310,7 @@ class Appv1 extends MY_Controller
         } else {
             $URL = base_url('assets/img/user/');
 
-// File Uplaod
+            // File Uplaod
             if (!empty($_FILES['UserPicture'])) {
                 $config['upload_path']   = 'assets/img/user/';
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -361,15 +356,13 @@ class Appv1 extends MY_Controller
                 $output = $this->App_android_model->read("*", 'customer_info', ['customer_id' => $insert_ID]);
                 $output->{"UserPictureURL"}
 
-                = $this->_get_user_profile_picture_url($output);
+                    = $this->_get_user_profile_picture_url($output);
 
                 return $this->respondWithSuccess('Vous vous êtes inscrit avec succès.', $output);
             } else {
                 return $this->respondWithError('Désolé, inscription annulée. Une erreur s\'est produite lors de l\'inscription. Veuillez réessayer plus tard.');
             }
-
         }
-
     }
 
     public function _get_user_profile_picture_url($data)
@@ -410,9 +403,7 @@ class Appv1 extends MY_Controller
                 //$output[0]['empty']="";
                 return $this->respondWithError('Aucune catégorie trouvée.!!!', $output);
             }
-
         }
-
     }
 
     public function checktable()
@@ -435,9 +426,7 @@ class Appv1 extends MY_Controller
                 $output['table_no'] = "";
                 return $this->respondWithError('Table non trouvée!!!', $output);
             }
-
         }
-
     }
 
     public function allfoodlist()
@@ -473,7 +462,6 @@ class Appv1 extends MY_Controller
                         $output[$fieldlebel] = $taxitem['default_value'];
                         $tx1++;
                     }
-
                 } else {
                     $output['customevat'] = 0;
                 }
@@ -516,7 +504,6 @@ class Appv1 extends MY_Controller
                             $output['foodinfo'][$k][$fieldlebel] = $productlist->$fieldlebel;
                             $tx++;
                         }
-
                     }
 
                     if ($productlist->totalvarient > 1) {
@@ -529,7 +516,6 @@ class Appv1 extends MY_Controller
                             $output['foodinfo'][$k]['varientlist'][$v]['multivariantPrice'] = $varientlist->price;
                             $v++;
                         }
-
                     } else {
                         $output['foodinfo'][$k]['varientlist'][0]['multivariantid']    = '';
                         $output['foodinfo'][$k]['varientlist'][0]['multivariantName']  = '';
@@ -555,12 +541,10 @@ class Appv1 extends MY_Controller
                                     $output['foodinfo'][$k]['addonsinfo'][$x][$fieldlebel] = $alladdons->$field_name;
                                     $txn++;
                                 }
-
                             }
 
                             $x++;
                         }
-
                     } else {
                         $output['foodinfo'][$k]['addons'] = 0;
                     }
@@ -572,9 +556,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Nourriture introuvable. !!!', $output);
             }
-
         }
-
     }
 
     public function foodlist()
@@ -593,7 +575,7 @@ class Appv1 extends MY_Controller
             $allcategory = $this->App_android_model->allsublist($CategoryID);
             $output      = $categoryIDs      = [];
 
-//if ($allcategory != FALSE) {
+            //if ($allcategory != FALSE) {
             if ($allcategory != false) {
                 $allcarlist = '';
                 foreach ($allcategory as $catid) {
@@ -624,7 +606,6 @@ class Appv1 extends MY_Controller
                         $output[$fieldlebel] = $taxitem['default_value'];
                         $tx1++;
                     }
-
                 } else {
                     $output['customevat'] = 0;
                 }
@@ -677,7 +658,6 @@ class Appv1 extends MY_Controller
                             $output['foodinfo'][$k][$fieldlebel] = $productlist->$fieldlebel;
                             $tx++;
                         }
-
                     }
 
                     if ($productlist->totalvarient > 1) {
@@ -690,7 +670,6 @@ class Appv1 extends MY_Controller
                             $output['foodinfo'][$k]['varientlist'][$v]['multivariantPrice'] = $varientlist->price;
                             $v++;
                         }
-
                     } else {
                         $output['foodinfo'][$k]['varientlist'][0]['multivariantid']    = '';
                         $output['foodinfo'][$k]['varientlist'][0]['multivariantName']  = '';
@@ -716,12 +695,10 @@ class Appv1 extends MY_Controller
                                     $output['foodinfo'][$k]['addonsinfo'][$x][$fieldlebel] = $alladdons->$field_name;
                                     $txn++;
                                 }
-
                             }
 
                             $x++;
                         }
-
                     } else {
                         $output['foodinfo'][$k]['addons'] = 0;
                     }
@@ -733,9 +710,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Nourriture introuvable. !!!', $output);
             }
-
         }
-
     }
 
     public function foodsearchbycategory()
@@ -774,7 +749,6 @@ class Appv1 extends MY_Controller
                     $output[$fieldlebel] = $taxitem['default_value'];
                     $tx1++;
                 }
-
             } else {
                 $output['customevat'] = 0;
             }
@@ -833,7 +807,6 @@ class Appv1 extends MY_Controller
                                 $output['foodinfo'][$k][$fieldlebel] = $productlist->$fieldlebel;
                                 $tx++;
                             }
-
                         }
 
                         if ($productlist->totalvarient > 1) {
@@ -846,7 +819,6 @@ class Appv1 extends MY_Controller
                                 $output['foodinfo'][$k]['varientlist'][$v]['multivariantPrice'] = $varientlist->price;
                                 $v++;
                             }
-
                         } else {
                             $output['foodinfo'][$k]['varientlist'][0]['multivariantid']    = '';
                             $output['foodinfo'][$k]['varientlist'][0]['multivariantName']  = '';
@@ -872,28 +844,23 @@ class Appv1 extends MY_Controller
                                         $output['foodinfo'][$k]['addonsinfo'][$x][$fieldlebel] = $alladdons->$field_name;
                                         $txn++;
                                     }
-
                                 }
 
                                 $x++;
                             }
-
                         } else {
                             $output['foodinfo'][$k]['addons'] = 0;
                         }
 
                         $k++;
                     }
-
                 }
 
                 return $this->respondWithSuccess('Liste des aliments de toute catégorie.', $output);
             } else {
                 return $this->respondWithError('Nourriture introuvable. !!!', $output);
             }
-
         }
-
     }
 
     public function tablelist()
@@ -923,9 +890,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Table non trouvée.!!!', $output);
             }
-
         }
-
     }
 
     public function customerlist()
@@ -952,9 +917,7 @@ class Appv1 extends MY_Controller
                 $output['CustomerName'] = "";
                 return $this->respondWithError('Identifiant client introuvable OU bloqué !!!', $output);
             }
-
         }
-
     }
 
     public function customerfullist()
@@ -990,9 +953,7 @@ class Appv1 extends MY_Controller
                 $output['phone']        = "";
                 return $this->respondWithError('Identifiant de membre introuvable OU bloqué !!!', $output);
             }
-
         }
-
     }
 
     public function allcustomertype()
@@ -1022,9 +983,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Type introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function customertype()
@@ -1049,9 +1008,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Type introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function thirdparty()
@@ -1081,9 +1038,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Type introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function waiterlist()
@@ -1120,9 +1075,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Liste de serveurs introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function waiterwithshift()
@@ -1284,16 +1237,14 @@ class Appv1 extends MY_Controller
 
                     foreach ($cart->addonsinfo as $adonsinfo) {
 
-//print_r($adonsinfo);
+                        //print_r($adonsinfo);
                         if ($adonsinfo->addonsquantity > 0) {
                             $addprice = $adonsinfo->addonsquantity * $adonsinfo->addonsprice;
                             $addonsid .= $adonsinfo->addonsid . ',';
                             $addonsqty .= $adonsinfo->addonsquantity . ',';
                             $addonsprice = $addonsprice + $addprice;
                         }
-
                     }
-
                 }
 
                 $alladdons    = trim($addonsid, ',');
@@ -1345,7 +1296,6 @@ class Appv1 extends MY_Controller
                 foreach ($allemployee as $mytoken) {
                     $senderid[] = $mytoken->waiter_kitchenToken;
                 }
-
             }
 
             $newmsg = [
@@ -1386,21 +1336,19 @@ class Appv1 extends MY_Controller
             $result2 = curl_exec($ch2);
             curl_close($ch2);
 
-//print_r($result2);
+            //print_r($result2);
             /*End Notification*/
 
             $output['orderid'] = $orderid;
             $output['token']   = $tokenno;
 
-//$this->lsoft_setting->send_sms($orderid,$customerid,$type="CompleteOrder");
+            //$this->lsoft_setting->send_sms($orderid,$customerid,$type="CompleteOrder");
             if (!empty($orderid)) {
                 return $this->respondWithSuccess('Commande passée avec succès.', $output);
             } else {
                 return $this->respondWithError('Commande non passée!!!', $output);
             }
-
         }
-
     }
 
     public function kitcheninfo($orderid)
@@ -1444,9 +1392,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function processingorder()
@@ -1477,9 +1423,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function completeorder()
@@ -1520,9 +1464,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function cancelorder()
@@ -1563,9 +1505,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function weaitercart()
@@ -1622,7 +1562,6 @@ class Appv1 extends MY_Controller
                     ];
                     $this->db->insert('tbl_waiterappcart', $data3);
                 }
-
             } else {
                 $data3 = [
                     'waiterid'          => $waiterid,
@@ -1654,7 +1593,6 @@ class Appv1 extends MY_Controller
 
             return $this->respondWithSuccess('Ajouter au panier avec succès', $output);
         }
-
     }
 
     public function cartdata()
@@ -1707,7 +1645,6 @@ class Appv1 extends MY_Controller
 
             return $this->respondWithSuccess('Liste de tous les articles du panier', $output);
         }
-
     }
 
     public function completeorcancel()
@@ -1777,7 +1714,6 @@ class Appv1 extends MY_Controller
                             $output['iteminfo'][$i]['addonsinfo'][$x]['add_on_qty'] = $addonsqty[$x];
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$i]['addons'] = 0;
                     }
@@ -1796,9 +1732,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function pendingorprocess()
@@ -1837,7 +1771,6 @@ class Appv1 extends MY_Controller
             $output['lastweekamount'] = $lasttotal;
             return $this->respondWithSuccess('Historique des commandes', $output);
         }
-
     }
 
     public function orderhistory()
@@ -1876,7 +1809,6 @@ class Appv1 extends MY_Controller
             $output['lastweekamount'] = $lasttotal;
             return $this->respondWithSuccess('Historique des commandes', $output);
         }
-
     }
 
     public function updateorder()
@@ -1942,7 +1874,6 @@ class Appv1 extends MY_Controller
                             $output['iteminfo'][$i]['addonsinfo'][$x]['addonsquantity'] = $addonsqty[$x];
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$i]['addons'] = 0;
                     }
@@ -1954,9 +1885,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande introuvable.!!!', $output);
             }
-
         }
-
     }
 
     public function updateinsert()
@@ -2033,7 +1962,6 @@ class Appv1 extends MY_Controller
                         //print_r($data3);
                         $this->db->insert('tbl_waiterappcart', $data3);
                     }
-
                 } else {
                     $data3 = [
                         'waiterid'          => $waiterid,
@@ -2071,7 +1999,6 @@ class Appv1 extends MY_Controller
 
             return $this->respondWithSuccess('Ajouter au panier avec succès', $output);
         }
-
     }
 
     public function modifyfoodcart()
@@ -2146,7 +2073,6 @@ class Appv1 extends MY_Controller
                         $addonsqty .= $adonsinfo->addonsquantity . ',';
                         $addonsprice = $addonsprice + $addprice;
                     }
-
                 }
 
                 $alladdons    = trim($addonsid, ',');
@@ -2192,9 +2118,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Commande non passée!!!', $output);
             }
-
         }
-
     }
 
     public function orderclear()
@@ -2212,7 +2136,6 @@ class Appv1 extends MY_Controller
             $this->db->where('waiterid', $waiterid)->delete('tbl_waiterappcart');
             return $this->respondWithSuccess('Liste de commandes Effacer', $output);
         }
-
     }
 
     public function allonlineorder()
@@ -2241,9 +2164,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Aucune commande entrante trouvée !!!', $output);
             }
-
         }
-
     }
 
     public function acceptorrejectorder()
@@ -2270,7 +2191,6 @@ class Appv1 extends MY_Controller
                 if ($orderstatus->order_status == 4) {
                     $this->removeformstock($orderid);
                 }
-
             } else {
 
                 if (!empty($orderinfo->marge_order_id)) {
@@ -2278,7 +2198,6 @@ class Appv1 extends MY_Controller
                     $this->db->where('order_id', $orderid);
                     $this->db->update('customer_order', $margecancel);
                 }
-
             }
 
             if ($acceptreject == 1) {
@@ -2289,7 +2208,6 @@ class Appv1 extends MY_Controller
                 } else {
                     $updatetData = ['anyreason' => $reason, 'nofification' => $status, 'orderacceptreject' => $acceptreject];
                 }
-
             } else {
                 $updatetData = ['anyreason' => $reason, 'order_status' => 5, 'nofification' => $status, 'orderacceptreject' => 0];
                 $taxinfos    = $this->taxchecking();
@@ -2298,13 +2216,11 @@ class Appv1 extends MY_Controller
                     $this->db->where('relation_id', $orderid);
                     $this->db->delete('tax_collection');
                 }
-
             }
 
             $this->db->where('order_id', $orderid);
             $this->db->update('customer_order', $updatetData);
         }
-
     }
 
     public function acceptorder()
@@ -2331,7 +2247,7 @@ class Appv1 extends MY_Controller
                 $updatetData['waiter_id'] = $waiterid;
                 $this->App_android_model->update_date('customer_order', $updatetData, 'order_id', $orderid);
 
-/*Push Notification*/
+                /*Push Notification*/
                 /*$condition="user.waiter_kitchenToken!='' AND employee_history.pos_id=1";
                 $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id,tbl_assign_kitchen.kitchen_id');
                 $this->db->from('user');
@@ -2350,7 +2266,6 @@ class Appv1 extends MY_Controller
                     foreach ($allemployee as $mytoken) {
                         $senderid[] = $mytoken->waiter_kitchenToken;
                     }
-
                 }
 
                 $newmsg = [
@@ -2436,9 +2351,7 @@ class Appv1 extends MY_Controller
                 curl_close($ch3);
                 return $this->respondWithSuccess('Attribuer la commande au serveur', $output);
             }
-
         }
-
     }
 
     public function getongoingorder()
@@ -2481,12 +2394,10 @@ class Appv1 extends MY_Controller
 
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste de commandes en cours', $output);
         }
-
     }
 
     public function todayorder()
@@ -2520,12 +2431,10 @@ class Appv1 extends MY_Controller
                     $output[$i]['paidStatus']   = $billstatus;
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste des commandes d\'aujourd\'hui', $output);
         }
-
     }
 
     public function onlinellorder()
@@ -2560,12 +2469,10 @@ class Appv1 extends MY_Controller
                     $output[$i]['Orderaccept']  = $rowdata->orderacceptreject;
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste de commande en ligne', $output);
         }
-
     }
 
     public function qrorderlist()
@@ -2599,12 +2506,10 @@ class Appv1 extends MY_Controller
                     $output[$i]['paidStatus']   = $billstatus;
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste de commandes QR', $output);
         }
-
     }
 
     public function banklist()
@@ -2626,12 +2531,10 @@ class Appv1 extends MY_Controller
                     $output[$i]['bankname'] = $bank->bank_name;
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste de toutes les banques', $output);
         }
-
     }
 
     public function terminallist()
@@ -2653,12 +2556,10 @@ class Appv1 extends MY_Controller
                     $output[$i]['terminalname'] = $terminal->terminal_name;
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste de tous les terminaux', $output);
         }
-
     }
 
     public function paymentlist()
@@ -2680,12 +2581,10 @@ class Appv1 extends MY_Controller
                     $output[$i]['payname'] = $pmethod->payment_method;
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Liste de toutes les méthodes de paiement', $output);
         }
-
     }
 
     public function kitchenstatus()
@@ -2738,7 +2637,6 @@ class Appv1 extends MY_Controller
                                 $output[$i]['iteminfo'][$k]['acepttime'] = date("H:i:s", strtotime($accepttime->accepttime));
                                 $output[$i]['iteminfo'][$k]['status']    = "Kitchen Not Accept";
                             }
-
                         }
 
                         $k++;
@@ -2746,12 +2644,10 @@ class Appv1 extends MY_Controller
 
                     $i++;
                 }
-
             }
 
             return $this->respondWithSuccess('Statut de la cuisine', $output);
         }
-
     }
 
     public function billadjustment()
@@ -2792,9 +2688,7 @@ class Appv1 extends MY_Controller
                     if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                         $getcus = $customerid;
                     }
-
                 }
-
             }
 
             if (!empty($getcus)) {
@@ -2841,7 +2735,6 @@ class Appv1 extends MY_Controller
                     $this->db->where('customerid', $isredeem);
                     $this->db->update('tbl_customerpoint', $updateredeem);
                 }
-
             }
 
             if ($discount > 0) {
@@ -2890,7 +2783,6 @@ class Appv1 extends MY_Controller
 
                         $this->db->insert('bill_card_payment', $cardinfo);
                     }
-
                 }
 
                 $i++;
@@ -2916,7 +2808,7 @@ class Appv1 extends MY_Controller
             $this->db->where('order_id', $orderid);
             $this->db->update('customer_order', $updatetData);
 
-//Update Bill Table
+            //Update Bill Table
             if ($status == 4) {
                 $updatetbill = [
                     'bill_status'       => 1,
@@ -2928,14 +2820,12 @@ class Appv1 extends MY_Controller
                 $this->db->update('bill', $updatetbill);
 
                 $this->removeformstock($orderid);
-
             }
 
             $this->savekitchenitem($orderid);
             $output['orderid'] = $orderid;
             return $this->respondWithSuccess('Paiement effectué avec succès !!', $output);
         }
-
     }
 
     public function ordercancel()
@@ -2961,7 +2851,6 @@ class Appv1 extends MY_Controller
             $this->db->update('customer_order', $updatetData);
             return $this->respondWithSuccess('Paiement annulé avec succès !!', $output);
         }
-
     }
 
     public function posorderdueinvoice($id)
@@ -3051,7 +2940,7 @@ class Appv1 extends MY_Controller
                 $this->db->where('order_id', $order_id);
                 $this->db->update('customer_order', $updatetord);
 
-//$prebill->discount+$disamount
+                //$prebill->discount+$disamount
                 if ($disamount > 0) {
                     $finaldis = $disamount;
                 } else {
@@ -3078,9 +2967,7 @@ class Appv1 extends MY_Controller
                         if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                             $getcus = $customerid;
                         }
-
                     }
-
                 }
 
                 if (!empty($getcus)) {
@@ -3124,7 +3011,6 @@ class Appv1 extends MY_Controller
                         $this->db->where('customerid', $isredeem);
                         $this->db->update('tbl_customerpoint', $updateredeem);
                     }
-
                 }
 
                 $updatetData = [
@@ -3173,12 +3059,10 @@ class Appv1 extends MY_Controller
                                 ];
                                 $this->db->insert('bill_card_payment', $cardinfo);
                             }
-
                         }
 
                         $k++;
                     }
-
                 }
 
                 if ($status == 4) {
@@ -3193,7 +3077,6 @@ class Appv1 extends MY_Controller
             $output['marge_orderid'] = $marge_order_id;
             return $this->respondWithSuccess('Paiement de marge effectué avec succès !!', $output);
         }
-
     }
 
     public function margebill($marge_order_id)
@@ -3253,7 +3136,6 @@ class Appv1 extends MY_Controller
 
                 $this->App_android_model->insert_product($item->menu_id, $item->varientid, $item->menuqty);
             }
-
         }
 
         return $possetting->productionsetting;
@@ -3288,7 +3170,6 @@ class Appv1 extends MY_Controller
             $this->db->where('order_id', $orderid);
             $this->db->update('order_menu', $updatetmenu);
         }
-
     }
 
     public function splitorder()
@@ -3304,7 +3185,7 @@ class Appv1 extends MY_Controller
             $orderid      = $this->input->post('Orderid');
             $orderdetails = $this->db->select('order_menu.*,item_foods.*,variant.variantid,variant.variantName,variant.price as vprice')->from('order_menu')->join('customer_order', 'order_menu.order_id=customer_order.order_id', 'left')->join('item_foods', 'order_menu.menu_id=item_foods.ProductsID', 'left')->join('variant', 'order_menu.varientid=variant.variantid', 'left')->where('order_menu.order_id', $orderid)->get()->result();
 
-//print_r($orderdetails);
+            //print_r($orderdetails);
 
             if (!empty($orderdetails)) {
                 $i = 0;
@@ -3335,7 +3216,6 @@ class Appv1 extends MY_Controller
                             $output['iteminfo'][$i]['addonsinfo'][$x]['addonsquantity'] = $addonsqty[$x];
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$i]['addons'] = 0;
                     }
@@ -3347,9 +3227,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Aucun aliment fractionné trouvé !!!', $output);
             }
-
         }
-
     }
 
     public function splitordernum()
@@ -3389,9 +3267,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Aucune commande fractionnée trouvée !!!', $output);
             }
-
         }
-
     }
 
     public function assignitemtosplitorder()
@@ -3444,7 +3320,6 @@ class Appv1 extends MY_Controller
                 } else {
                     $presentsub[$menuid] = 1;
                 }
-
             } else {
                 $presentsub = [$menuid => 1];
             }
@@ -3555,9 +3430,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Article non trouvé !!!', $output);
             }
-
         }
-
     }
 
     public function showsplitorder()
@@ -3588,7 +3461,6 @@ class Appv1 extends MY_Controller
 
                     $i++;
                 }
-
             }
 
             $array_bill = ['order_id' => $orderid];
@@ -3674,7 +3546,6 @@ class Appv1 extends MY_Controller
                             $SD       = $msd + $SD;
                             $z++;
                         }
-
                     }
 
                     if ($settinginfo->service_chargeType == 1) {
@@ -3694,9 +3565,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Aucun article de commande fractionné !!!', $output);
             }
-
         }
-
     }
 
     public function paysplitorder()
@@ -3770,7 +3639,6 @@ class Appv1 extends MY_Controller
 
                         $this->db->insert('bill_card_payment', $cardinfo);
                     }
-
                 }
 
                 $i++;
@@ -3812,7 +3680,6 @@ class Appv1 extends MY_Controller
             $output['orderid'] = $sub_id;
             return $this->respondWithSuccess('print Split invoice', $output);
         }
-
     }
 
     public function posprintdirectsub($id)
@@ -3871,9 +3738,7 @@ class Appv1 extends MY_Controller
             } else {
                 return $this->respondWithError('Counter Not Found.!!!', $output);
             }
-
         }
-
     }
 
     public function checkregister()
@@ -3941,9 +3806,7 @@ class Appv1 extends MY_Controller
                 $output['closing_note']    = $checkuser->closing_note;
                 return $this->respondWithSuccess('Cash register info.!!!', $output);
             }
-
         }
-
     }
 
     public function cashregisterclose()
@@ -3971,7 +3834,5 @@ class Appv1 extends MY_Controller
             //echo $this->db->last_query();
             return $this->respondWithSuccess('Cash Register Successfully synchronization', $output);
         }
-
     }
-
 }

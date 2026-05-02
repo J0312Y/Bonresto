@@ -11,7 +11,7 @@
         <p class="text-note text-center mb-3"><?php echo $storeinfo->address;?></p>
         <div>
             <p class="mb-0"><b class="text-bold"><?php echo display('recept')?>: </b> #<?php echo $orderinfo->saleinvoice;?></p>
-            <p class="mb-0"><b class="text-bold"><?php echo display('table');?>: </b> <?php echo @$tableinfo->tablename;?></p>
+            <p class="mb-0"><b class="text-bold"><?php echo display('table');?>: </b> <?php echo $tableinfo->tablename;?></p>
             <?php if($storeinfo->isvatnumshow==1){?><p class="mb-0"><b class="text-bold"><?php echo display('tinvat');?>: </b><?php echo $storeinfo->vattinno;?></p><?php } ?>
             <p class="mb-0"><b class="text-bold"><?php echo display('date');?>: </b><?php echo date("M d, Y", strtotime($orderinfo->order_date));?></p>
             <div class="d-flex justify-content-between">
@@ -181,7 +181,7 @@
 </div>
 <div class="border-top py-1">
     <p class="text-note text-primary text-center mb-0 text-bold"><?php echo display('thanks_you')?></p>
-    <p class="text-note text-primary text-center mb-0"><?php echo display('powerbylmk-tech')?></p>
+    <p class="text-note text-primary text-center mb-0"><?php echo display('powerbybdtask')?></p>
 </div>
 </div>
 

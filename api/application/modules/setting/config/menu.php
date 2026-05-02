@@ -6,8 +6,6 @@ $HmvcMenu["setting"] = array(
     "icon"           => "<i class='fa fa-gear' aria-hidden='true'></i>", 
   
  //group level name
- 
-
        "payment_setting" => array(
        "paymentmethod_list" => array(
         //menu name
@@ -28,14 +26,7 @@ $HmvcMenu["setting"] = array(
             "method"     => "index",
             "permission" => "read"
         
-    )
     ),
-    "membership_setting" => array(
-        "membership_" => array(
-            "controller" => "membership",
-            "method"     => "index",
-            "permission" => "read"
-        ),
     ),
 	//group level name
     "table_manage" => array(

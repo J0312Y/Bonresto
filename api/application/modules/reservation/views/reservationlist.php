@@ -64,7 +64,7 @@
                             </div>
                         </div>
 						<div class="form-group row">
-                        <label for="lastname" class="col-sm-4 col-form-label"><?php echo display('status');?>*</label>
+                        <label for="lastname" class="col-sm-4 col-form-label"><?php echo display('status');?></label>
                         <div class="col-sm-8 customesl">
                             <select name="status" class="form-control">
                                 <option value=""  selected="selected"><?php echo display('select_option');?></option>
@@ -172,3 +172,5 @@
         </div>
     </div>
 </div>
+
+     

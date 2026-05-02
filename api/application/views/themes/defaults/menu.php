@@ -148,7 +148,7 @@ if (!empty($deals)) {
                             <a href="<?php echo base_url() . 'details/' . $deals->ProductsID . '/' . $deals->variantid; ?>" class="h6"><?php echo $deals->ProductName ?></a>
                             <?php $ratingp = $this->hungry_model->read_average('tbl_rating', 'rating', 'proid', $deals->ProductsID);
 
-        if (!empty($ratingp)) {
+    if (!empty($ratingp)) {
         $averagerating = round(number_format($ratingp->averagerating ?? 0, 1));
         ?>
                                 <div class="rating_area">
@@ -216,6 +216,7 @@ if (!empty($deals)) {
 
     ?>
                             <p><?php
+
     if ($this->storecurrency->position == 1) {
         echo $this->storecurrency->curr_icon;
     }
@@ -284,76 +285,76 @@ if (!empty($searchresult)) {
                                 </div>
                                 <div class="item_details col-lg-6 col-sm-5 pl-0">
                                     <a href="<?php echo base_url() . 'details/' . $menuitem->ProductsID . '/' . $menuitem->variantid; ?>" class="item_title"><?php echo $menuitem->ProductName ?></a>
-                                                                  <?php $ratingpt = $this->hungry_model->read_average('tbl_rating', 'rating', 'proid', $menuitem->ProductsID);
+                                    <?php $ratingp = $this->hungry_model->read_average('tbl_rating', 'rating', 'proid', $menuitem->ProductsID);
 
-        if (!empty($ratingpt)) {
-            $averageratingt = round(number_format($ratingpt->averagerating ?? 0, 1));
+        if (!empty($ratingp)) {
+            $averageRating = round(number_format($ratingp->averagerating ?? 0, 1));
             ?>
-                                                 <div class="rating_area">
-                                                     <div class="rate-container">
-                                                         <?php
+                                        <div class="rating_area">
+                                            <div class="rate-container">
+                                                <?php
 
-            if ($averageratingt == 5) {?>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                         <?php }
+            if ($averagerating ?? '' == 5) {?>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                <?php }
 
-            if ($averageratingt == 4) {
+            if ($averagerating ?? '' == 4) {
                 ?>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                         <?php
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                <?php
 }
 
-            if ($averageratingt == 3) {
+            if ($averagerating ?? '' == 3) {
                 ?>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                         <?php
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                <?php
 }
 
-            if ($averageratingt == 2) {?>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                         <?php }
+            if ($averagerating ?? '' == 2) {?>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                <?php }
 
-            if ($averageratingt == 1) {?>
-                                                             <i class="fa fa-star"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                         <?php }
+            if ($averagerating ?? '' == 1) {?>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                <?php }
 
-            if ($averageratingt < 1) {?>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                             <i class="fa fa-star-o"></i>
-                                                         <?php }
+            if ($averagerating ?? '' < 1) {?>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                <?php }
 
             ?>
 
-                                                     </div>
-                                                 </div>
-                                             <?php
+                                            </div>
+                                        </div>
+                                    <?php
 }
 
         ?>
-							 <p><?php echo $menuitem->variantName ?></p>
+                                    <p><?php echo $menuitem->variantName ?></p>
                                     <?php
 $dayname = date('l');
         $this->db->select('*');

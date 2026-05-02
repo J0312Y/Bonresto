@@ -8,7 +8,7 @@ $HmvcConfig['setting']["_description"] = "setting method like payment,shipping,m
 // only register tables are imported while installing the module
 $HmvcConfig['setting']['_database'] = true;
 $HmvcConfig['setting']["_tables"] = array( 
-	'membership_method',
+	'membership',
 	'payment_method',
 	'shipping_method'
 );

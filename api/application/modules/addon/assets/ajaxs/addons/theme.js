@@ -33,45 +33,4 @@
          }
      });
  });
-
-
-// Show color code beside the picker
-function bindColorPicker(pickerId, codeId) {
-    var picker = document.getElementById(pickerId);
-    var code = document.getElementById(codeId);
-    code.value = picker.value; // set initial value
-    picker.addEventListener('input', function() {
-        code.value = this.value;
-    });
-}
-
-// Bind all pickers
-bindColorPicker('primaryColor', 'primaryColorCode');
-bindColorPicker('topHeaderBackgroundColor', 'topHeaderBackgroundColorCode');
-bindColorPicker('headerBackgroundColor', 'headerBackgroundColorCode');
-bindColorPicker('headerTextColor', 'headerTextColorCode');
-bindColorPicker('footerBackgroundColor', 'footerBackgroundColorCode');
-bindColorPicker('footerTextColor', 'footerTextColorCode');
-
-// Default values map
-var defaultColors = {
-    primaryColor: "#c09342",
-    topHeaderBackgroundColor: "#112a2a",
-    headerBackgroundColor: "#1f3433",
-    headerTextColor: "#ffffff",
-    footerBackgroundColor: "#081d1c",
-    footerTextColor: "#ffffff"
-};
-
-// Reset button handler
-document.getElementById('resetColors').addEventListener('click', function () {
-    for (var key in defaultColors) {
-        var picker = document.getElementById(key);
-        var code = document.getElementById(key + "Code");
-        if (picker && code) {
-            picker.value = defaultColors[key];
-            code.value = defaultColors[key];
-        }
-    }
-});
  

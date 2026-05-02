@@ -195,6 +195,7 @@ function posupdatecart(id, pid, vid, qty, status) {
         var tax = $("#tvat").val();
         var discount = $("#tdiscount").val();
         var tgtotal = $("#tgtotal").val();
+        $("#pos-subtotal").text($("#subtotal").val());
         $("#calvat").text(tax);
         $("#vat").val(tax);
         $("#invoice_discount").val(discount);
@@ -232,6 +233,7 @@ function removecart(rid) {
       var tax = $("#tvat").val();
       var discount = $("#tdiscount").val();
       var tgtotal = $("#tgtotal").val();
+      $("#pos-subtotal").text($("#subtotal").val());
       $("#calvat").text(tax);
       $("#vat").val(tax);
       $("#invoice_discount").val(discount);

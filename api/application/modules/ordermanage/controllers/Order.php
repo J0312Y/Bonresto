@@ -91,10 +91,12 @@ class Order extends MX_Controller
                     if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                         $pointsys = 1;
                     }
+
                 }
+
             }
 
-            $data['customer'] = (object) $postData = [
+            $data['customer'] = (Object) $postData = [
                 'cuntomer_no'               => $sino,
                 'membership_type'           => $pointsys,
                 'customer_name'             => $this->input->post('customer_name', true),
@@ -135,6 +137,7 @@ class Order extends MX_Controller
         } else {
             redirect("ordermanage/order/pos_invoice");
         }
+
     }
 
     public function insert_customerord()
@@ -168,7 +171,7 @@ class Order extends MX_Controller
         if ($this->form_validation->run()) {
 
             $this->permission->method('ordermanage', 'create')->redirect();
-            $data['customer'] = (object) $postData = [
+            $data['customer'] = (Object) $postData = [
                 'cuntomer_no'               => $sino,
                 'customer_name'             => $this->input->post('customer_name', true),
                 'customer_email'            => $this->input->post('email', true),
@@ -197,6 +200,7 @@ class Order extends MX_Controller
         } else {
             redirect("ordermanage/order/neworder");
         }
+
     }
 
     public function getcustomerdiscount($cid)
@@ -206,7 +210,9 @@ class Order extends MX_Controller
         $mtype        = $this->order_model->read('*', 'membership', ['id' => $customerinfo->membership_type]);
 
         if ($settinginfo->discount_type == 0) {
+
         }
+
     }
 
     public function neworder($id = null)
@@ -233,6 +239,7 @@ class Order extends MX_Controller
 
     public function pos_invoice()
     {
+
         if ($this->permission->method('ordermanage', 'create')->access() == false) {
             redirect('dashboard/home');
         }
@@ -276,15 +283,18 @@ class Order extends MX_Controller
             } else {
                 $data['ongoingorder'] = $this->order_model->get_unique_ongoingtable_id($id);
             }
+
         }
 
         $this->load->view('ongoingorder_ajax', $data);
+
     }
 
     public function kitchenstatus()
     {
         $data['kitchenorder'] = $this->order_model->get_orderlist();
         $this->load->view('kitchen_ajax', $data);
+
     }
 
     public function itemlist()
@@ -316,6 +326,7 @@ class Order extends MX_Controller
         $tablewiseorderdetails = $this->order_model->get_unique_ongoingorder($name);
 
         echo json_encode($tablewiseorderdetails);
+
     }
 
     public function ongoingtablesearch()
@@ -323,6 +334,7 @@ class Order extends MX_Controller
         $name                  = $this->input->get('q');
         $tablewiseorderdetails = $this->order_model->get_unique_ongoingtable($name);
         echo json_encode($tablewiseorderdetails);
+
     }
 
     public function getitemlist()
@@ -348,9 +360,11 @@ class Order extends MX_Controller
                 $data['page'] = "getfoodlist";
                 $this->load->view('ordermanage/getfoodlist', $data);
             }
+
         } else {
             echo 420;
         }
+
     }
 
     public function getitemlistdroup()
@@ -473,24 +487,23 @@ class Order extends MX_Controller
 
         foreach ($bag as $item) {
 
-            // check product id in session, if exist update the quantity
+// check product id in session, if exist update the quantity
             if ($item['pid'] == $pid) {
 
-                // Set value to your variable
+// Set value to your variable
                 if ($getadons == 0) {
 
-                    echo 'adons';
-                    exit;
+                    echo 'adons';exit;
 
                     // set $insert_new value to False
                     $insert_new = false;
                 } else {
-                    echo 'adons';
-                    exit;
+                    echo 'adons';exit;
                 }
 
                 break;
             }
+
         }
 
         if ($insert_new) {
@@ -513,8 +526,7 @@ class Order extends MX_Controller
                 $atprice    = '0';
             } else {
 
-                echo 'adons';
-                exit;
+                echo 'adons';exit;
             }
 
             $data_items = [
@@ -533,7 +545,7 @@ class Order extends MX_Controller
                 'itemnote'  => "",
             ];
 
-            //print_r($data_items);
+//print_r($data_items);
 
             //$this->cart->insert($data_items);
         }
@@ -618,215 +630,130 @@ class Order extends MX_Controller
 
     public function posaddtocart()
     {
-
         $this->permission->method('ordermanage', 'read')->redirect();
-
-        $catid = $this->input->post('catid');
-
-        $pid = $this->input->post('pid');
-
-        $sizeid = $this->input->post('sizeid');
-
-        $isgroup = $this->input->post('isgroup', true);
-
-        $myid = $catid . $pid . $sizeid;
-
-        $itemname = $this->input->post('itemname', true);
-
-        $size = $this->input->post('varientname', true);
-
-        $qty = $this->input->post('qty', true);
-
-        $price = $this->input->post('price', true);
-
-        $addonsid = $this->input->post('addonsid', true);
-
-        $allprice = $this->input->post('allprice', true);
-
+        $catid          = $this->input->post('catid');
+        $pid            = $this->input->post('pid');
+        $sizeid         = $this->input->post('sizeid');
+        $isgroup        = $this->input->post('isgroup', true);
+        $myid           = $catid . $pid . $sizeid;
+        $itemname       = $this->input->post('itemname', true);
+        $size           = $this->input->post('varientname', true);
+        $qty            = $this->input->post('qty', true);
+        $price          = $this->input->post('price', true);
+        $addonsid       = $this->input->post('addonsid', true);
+        $allprice       = $this->input->post('allprice', true);
         $adonsunitprice = $this->input->post('adonsunitprice', true);
-
-        $adonsqty = $this->input->post('adonsqty', true);
-
-        $adonsname = $this->input->post('adonsname', true);
-
-        $cart = $this->cart->contents();
-
-        $n = 0;
+        $adonsqty       = $this->input->post('adonsqty', true);
+        $adonsname      = $this->input->post('adonsname', true);
+        $cart           = $this->cart->contents();
+        $n              = 0;
 
         if (empty($isgroup)) {
-
             $isgroup1 = 0;
         } else {
-
             $isgroup1 = $this->input->post('isgroup', true);
         }
 
-        $new_str = str_replace(',', '0', $addonsid ?? '');
-
-        $new_str2 = str_replace(',', '0', $adonsqty ?? '');
-
-        $uaid = $pid . $new_str . $sizeid;
+        $new_str  = str_replace(',', '0', $addonsid ?? '');
+        $new_str2 = str_replace(',', '0', $adonsqty ?? 0);
+        $uaid     = $pid . $new_str . $sizeid;
 
         if (!empty($addonsid)) {
-
             $joinid = trim($addonsid, ',');
-
             //$uaid=(int)$joinid.mt_rand(1, time());
-
             $cartexist = $this->cart->contents();
 
             if (!empty($cartexist)) {
-
-                $adonsarray = explode(',', $addonsid);
-
-                $adonsqtyarray = explode(',', $adonsqty);
-
+                $adonsarray      = explode(',', $addonsid);
+                $adonsqtyarray   = explode(',', $adonsqty);
                 $adonspricearray = explode(',', $adonsunitprice);
 
-
-
-                $adqty = array();
-
-                $adprice = array();
+                $adqty   = [];
+                $adprice = [];
 
                 foreach ($cartexist as $cartinfo) {
 
                     if ($cartinfo['id'] == $myid . $uaid) {
-
-                        $adqty = explode(',', $cartinfo['addonsqty']);
-
+                        $adqty   = explode(',', $cartinfo['addonsqty']);
                         $adprice = explode(',', $cartinfo['addonupr']);
+
                     }
+
                 }
 
-                $x = 0;
-
+                $x              = 0;
                 $finaladdonsqty = '';
-
-                $finaladdonspr = 0;
+                $finaladdonspr  = 0;
 
                 foreach ($adonsarray as $singleaddons) {
-
                     $singleaddons;
-
-                    $totalaqty = @$adonsqtyarray[$x] + @$adqty[$x];
-
+                    $totalaqty = $adonsqtyarray[$x] + $adqty[$x];
                     $finaladdonsqty .= $totalaqty . ',';
-
-                    $totalaprice = $totalaqty * $adonspricearray[$x];
-
+                    $totalaprice   = $totalaqty * $adonspricearray[$x];
                     $finaladdonspr = $totalaprice + $finaladdonspr;
                     $x++;
                 }
 
-
-
                 if (!empty($adonsarray)) {
-
-                    $aids = $addonsid;
-
-                    $aqty = trim($finaladdonsqty, ',');;
-
-                    $aname = $adonsname;
-
-                    $aprice = $adonsunitprice;
-
-                    $atprice = $finaladdonspr;
-
+                    $aids       = $addonsid;
+                    $aqty       = trim($finaladdonsqty, ',');
+                    $aname      = $adonsname;
+                    $aprice     = $adonsunitprice;
+                    $atprice    = $finaladdonspr;
                     $grandtotal = $price;
                 } else {
-
-                    $aids = $addonsid;
-
-                    $aqty = $adonsqty;
-
-                    $aname = $adonsname;
-
-                    $aprice = $adonsunitprice;
-
-                    $atprice = $allprice;
-
+                    $aids       = $addonsid;
+                    $aqty       = $adonsqty;
+                    $aname      = $adonsname;
+                    $aprice     = $adonsunitprice;
+                    $atprice    = $allprice;
                     $grandtotal = $price;
                 }
+
             } else {
-
-                $aids = $addonsid;
-
-                $aqty = $adonsqty;
-
-                $aname = $adonsname;
-
-                $aprice = $adonsunitprice;
-
-                $atprice = $allprice;
-
+                $aids       = $addonsid;
+                $aqty       = $adonsqty;
+                $aname      = $adonsname;
+                $aprice     = $adonsunitprice;
+                $atprice    = $allprice;
                 $grandtotal = $price;
             }
+
         } else {
-
             $grandtotal = $price;
-
-            $aids = '';
-
-            $aqty = '';
-
-            $aname = '';
-
-            $aprice = '';
-
-            $atprice = '0';
+            $aids       = '';
+            $aqty       = '';
+            $aname      = '';
+            $aprice     = '';
+            $atprice    = '0';
         }
 
-        $myid = $catid . $pid . $sizeid . $uaid;
-
-        $data_items = array(
-
-            'id'          => $myid,
-
-            'pid'         => $pid,
-
-            'name'        => $itemname,
-
-            'sizeid'        => $sizeid,
-
-            'isgroup'    => $isgroup1,
-
-            'size'        => $size,
-
-            'qty'         => $qty,
-
-            'price'       => $grandtotal,
-
-            'addonsuid'  => $uaid,
-
-            'addonsid'   => $aids,
-
-            'addonname'  => $aname,
-
-            'addonupr'   => $aprice,
-
-            'addontpr'   => $atprice,
-
-            'addonsqty'  => $aqty,
-
-            'itemnote'    => ""
-
-        );
+        $myid       = $catid . $pid . $sizeid . $uaid;
+        $data_items = [
+            'id'        => $myid,
+            'pid'       => $pid,
+            'name'      => $itemname,
+            'sizeid'    => $sizeid,
+            'isgroup'   => $isgroup1,
+            'size'      => $size,
+            'qty'       => $qty,
+            'price'     => $grandtotal,
+            'addonsuid' => $uaid,
+            'addonsid'  => $aids,
+            'addonname' => $aname,
+            'addonupr'  => $aprice,
+            'addontpr'  => $atprice,
+            'addonsqty' => $aqty,
+            'itemnote'  => "",
+        ];
 
         $this->cart->insert($data_items);
-
-        $settinginfo = $this->order_model->settinginfo();
-
+        $settinginfo         = $this->order_model->settinginfo();
         $data['settinginfo'] = $settinginfo;
-
-        $data['currency'] = $this->order_model->currencysetting($settinginfo->currency);
-
-        $data['taxinfos'] = $this->taxchecking();
-
-        $data['module'] = "ordermanage";
-
-        $data['page']   = "poscartlist";
-
+        $data['currency']    = $this->order_model->currencysetting($settinginfo->currency);
+        $data['taxinfos']    = $this->taxchecking();
+        $data['module']      = "ordermanage";
+        $data['page']        = "poscartlist";
         $this->load->view('ordermanage/poscartlist', $data);
     }
 
@@ -1005,6 +932,7 @@ class Order extends MX_Controller
                     $vat       = $this->input->post('vat');
                     $billtotal = $this->input->post('grandtotal', true);
                     $gtotal    = $billtotal - $vat;
+
                 } else {
                     $gtotal = $this->input->post('grandtotal', true);
                 }
@@ -1044,6 +972,7 @@ class Order extends MX_Controller
                     } else {
                         redirect('ordermanage/order/neworder');
                     }
+
                 } else {
                     $this->session->set_flashdata('exception', display('please_try_again'));
                 }
@@ -1053,6 +982,7 @@ class Order extends MX_Controller
                 $this->session->set_flashdata('exception', 'Please add Some food!!');
                 redirect("ordermanage/order/neworder");
             }
+
         } else {
             $this->permission->method('ordermanage', 'read')->redirect();
             $data['categorylist']  = $this->order_model->category_dropdown();
@@ -1065,6 +995,7 @@ class Order extends MX_Controller
             $data['page']          = "addorder";
             echo Modules::run('template/layout', $data);
         }
+
     }
 
     public function pos_order($value = null)
@@ -1136,18 +1067,18 @@ class Order extends MX_Controller
                     if ($file == "loyalty") {
 
                         if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
-                            if (isset($mtype->discount) && $mtype->discount > 0) {
-                                $getdiscount = $mtype->discount * $this->input->post('subtotal') / 100;
-                            }
+                            $getdiscount = $mtype->discount * $this->input->post('subtotal') / 100;
                         }
+
                     }
+
                 }
 
                 $vat            = $this->input->post('vat');
                 $isvatinclusive = $this->db->select("*")->from('setting')->get()->row();
 
                 if ($isvatinclusive->isvatinclusive == 1) {
-                    $ordergrandt = floatval($ordergrandt) - floatval($vat);
+                    $ordergrandt = $ordergrandt - $vat;
                 }
 
                 $data2 = [
@@ -1181,9 +1112,10 @@ class Order extends MX_Controller
                     ];
                     $inserttaxdata = array_merge($inserttaxarray, $multitaxvaluedata);
                     $this->db->insert('tax_collection', $inserttaxdata);
+
                 }
 
-                /*for 02/11*/
+/*for 02/11*/
                 if ($this->input->post('ctypeid') == 1) {
                     if ($this->input->post('table_member_multi') == 0) {
                         $addtable_member = [
@@ -1211,10 +1143,12 @@ class Order extends MX_Controller
                             $this->db->insert('table_details', $addtable_member);
                             $z++;
                         }
+
                     }
+
                 }
 
-                /*enc 02/11*/
+/*enc 02/11*/
                 if ($this->input->post('delivercom', true) > 0) {
                     /*Push Notification*/
                     $this->db->select('*');
@@ -1228,26 +1162,26 @@ class Order extends MX_Controller
                     $registrationIds = $senderid;
                     $msg             =
                         [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal', true),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "admin",
-                            'tickerText' => "10",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
+                        'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal', true),
+                        'title'      => "New Order Placed",
+                        'subtitle'   => "admin",
+                        'tickerText' => "10",
+                        'vibrate'    => 1,
+                        'sound'      => 1,
+                        'largeIcon'  => "TSET",
+                        'smallIcon'  => "TSET",
+                    ];
                     $fields2 =
                         [
-                            'registration_ids' => $registrationIds,
-                            'data'             => $msg,
-                        ];
+                        'registration_ids' => $registrationIds,
+                        'data'             => $msg,
+                    ];
 
                     $headers2 =
                         [
-                            'Authorization: key=' . API_ACCESS_KEY,
-                            'Content-Type: application/json',
-                        ];
+                        'Authorization: key=' . API_ACCESS_KEY,
+                        'Content-Type: application/json',
+                    ];
 
                     $ch2 = curl_init();
                     curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -1259,7 +1193,7 @@ class Order extends MX_Controller
                     $result2 = curl_exec($ch2);
                     curl_close($ch2);
 
-                    /*End Notification*/
+/*End Notification*/
                     /*Push Notification*/
                     $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=1";
                     $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
@@ -1278,26 +1212,26 @@ class Order extends MX_Controller
                     $registrationIds5 = $senderid5;
                     $msg5             =
                         [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal', true),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "TSET",
-                            'tickerText' => "onno",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
+                        'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal', true),
+                        'title'      => "New Order Placed",
+                        'subtitle'   => "TSET",
+                        'tickerText' => "onno",
+                        'vibrate'    => 1,
+                        'sound'      => 1,
+                        'largeIcon'  => "TSET",
+                        'smallIcon'  => "TSET",
+                    ];
                     $fields5 =
                         [
-                            'registration_ids' => $registrationIds5,
-                            'data'             => $msg5,
-                        ];
+                        'registration_ids' => $registrationIds5,
+                        'data'             => $msg5,
+                    ];
 
                     $headers5 =
                         [
-                            'Authorization: key=' . API_ACCESS_KEY,
-                            'Content-Type: application/json',
-                        ];
+                        'Authorization: key=' . API_ACCESS_KEY,
+                        'Content-Type: application/json',
+                    ];
 
                     $ch5 = curl_init();
                     curl_setopt($ch5, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -1321,26 +1255,26 @@ class Order extends MX_Controller
                     $registrationIds = $senderid;
                     $msg             =
                         [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . ($ordergrandt - $getdiscount),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "admin",
-                            'tickerText' => "10",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
+                        'message'    => "Orderid:" . $orderid . ", Amount:" . ($ordergrandt - $getdiscount),
+                        'title'      => "New Order Placed",
+                        'subtitle'   => "admin",
+                        'tickerText' => "10",
+                        'vibrate'    => 1,
+                        'sound'      => 1,
+                        'largeIcon'  => "TSET",
+                        'smallIcon'  => "TSET",
+                    ];
                     $fields2 =
                         [
-                            'registration_ids' => $registrationIds,
-                            'data'             => $msg,
-                        ];
+                        'registration_ids' => $registrationIds,
+                        'data'             => $msg,
+                    ];
 
                     $headers2 =
                         [
-                            'Authorization: key=' . API_ACCESS_KEY,
-                            'Content-Type: application/json',
-                        ];
+                        'Authorization: key=' . API_ACCESS_KEY,
+                        'Content-Type: application/json',
+                    ];
 
                     $ch2 = curl_init();
                     curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -1352,7 +1286,7 @@ class Order extends MX_Controller
                     $result2 = curl_exec($ch2);
                     curl_close($ch2);
 
-                    /*End Notification*/
+/*End Notification*/
                     /*Push Notification*/
                     $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=1";
                     $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
@@ -1371,26 +1305,26 @@ class Order extends MX_Controller
                     $registrationIds5 = $senderid5;
                     $msg5             =
                         [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . ($ordergrandt - $getdiscount),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "TSET",
-                            'tickerText' => "onno",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
+                        'message'    => "Orderid:" . $orderid . ", Amount:" . ($ordergrandt - $getdiscount),
+                        'title'      => "New Order Placed",
+                        'subtitle'   => "TSET",
+                        'tickerText' => "onno",
+                        'vibrate'    => 1,
+                        'sound'      => 1,
+                        'largeIcon'  => "TSET",
+                        'smallIcon'  => "TSET",
+                    ];
                     $fields5 =
                         [
-                            'registration_ids' => $registrationIds5,
-                            'data'             => $msg5,
-                        ];
+                        'registration_ids' => $registrationIds5,
+                        'data'             => $msg5,
+                    ];
 
                     $headers5 =
                         [
-                            'Authorization: key=' . API_ACCESS_KEY2,
-                            'Content-Type: application/json',
-                        ];
+                        'Authorization: key=' . API_ACCESS_KEY2,
+                        'Content-Type: application/json',
+                    ];
 
                     $ch5 = curl_init();
                     curl_setopt($ch5, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -1417,7 +1351,9 @@ class Order extends MX_Controller
                             if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                                 $getcus = $customerid2;
                             }
+
                         }
+
                     }
 
                     if (!empty($getcus)) {
@@ -1431,6 +1367,7 @@ class Order extends MX_Controller
                             ];
                             $this->order_model->insert_data('tbl_customerpoint', $pointstable2);
                         }
+
                     }
 
                     $this->cart->destroy();
@@ -1460,8 +1397,11 @@ class Order extends MX_Controller
                                 echo $view; //work
                                 exit;
                             }
+
                         }
+
                     }
+
                 } else {
 
                     if ($isonline == 1) {
@@ -1470,7 +1410,9 @@ class Order extends MX_Controller
                     } else {
                         echo "error";
                     }
+
                 }
+
             } else {
 
                 if ($isonline == 1) {
@@ -1479,7 +1421,9 @@ class Order extends MX_Controller
                 } else {
                     echo "error";
                 }
+
             }
+
         } else {
             $this->permission->method('ordermanage', 'read')->redirect();
 
@@ -1499,7 +1443,9 @@ class Order extends MX_Controller
             } else {
                 echo "error";
             }
+
         }
+
     }
 
     public function orderlist()
@@ -1508,11 +1454,11 @@ class Order extends MX_Controller
         $data['title'] = display('order_list');
         $saveid        = $this->session->userdata('id');
 
-        #-------------------------------#
+#-------------------------------#
 
-        #
+#
 
-        #pagination starts
+#pagination starts
         #
         $config["base_url"]         = base_url('ordermanage/order/orderlist');
         $config["total_rows"]       = $this->order_model->count_order();
@@ -1543,9 +1489,9 @@ class Order extends MX_Controller
         $data["links"]    = $this->pagination->create_links();
         $data['pagenum']  = $page;
 
-        #
+#
 
-        #pagination ends
+#pagination ends
         #
         $settinginfo         = $this->order_model->settinginfo();
         $data['possetting']  = $this->order_model->read('*', 'tbl_posetting', ['possettingid' => 1]);
@@ -1555,6 +1501,7 @@ class Order extends MX_Controller
         $data['module']      = "ordermanage";
         $data['page']        = "orderlist";
         echo Modules::run('template/layout', $data);
+
     }
 
     public function allorderlist()
@@ -1569,25 +1516,15 @@ class Order extends MX_Controller
             $no++;
             $row = [];
 
-            if ($rowdata->order_status == 1) {
-                $status = display('pending');
-            }
+            if ($rowdata->order_status == 1) {$status = display('pending');}
 
-            if ($rowdata->order_status == 2) {
-                $status = display('processing');
-            }
+            if ($rowdata->order_status == 2) {$status = display('processing');}
 
-            if ($rowdata->order_status == 3) {
-                $status = "Ready";
-            }
+            if ($rowdata->order_status == 3) {$status = "Ready";}
 
-            if ($rowdata->order_status == 4) {
-                $status = display('served');
-            }
+            if ($rowdata->order_status == 4) {$status = display('served');}
 
-            if ($rowdata->order_status == 5) {
-                $status = display('cancel');
-            }
+            if ($rowdata->order_status == 5) {$status = display('cancel');}
 
             $newDate    = date("d-M-Y", strtotime($rowdata->order_date));
             $update     = '';
@@ -1635,7 +1572,9 @@ class Order extends MX_Controller
                     if ($ptype->bill_status == 0 && $rowdata->orderacceptreject != 0) {
                         $margeord = '<a href="javascript:;" onclick="createMargeorder(' . $rowdata->order_id . ',1)" id="hidecombtn_' . $rowdata->order_id . '" class="btn btn-xs btn-success btn-sm mr-1" data-toggle="tooltip" data-placement="left" title="Make Payment"><i class="fa fa-window-restore" aria-hidden="true"></i></a>&nbsp;';
                     }
+
                 }
+
             }
 
             $row[]  = $no;
@@ -1657,6 +1596,7 @@ class Order extends MX_Controller
             "data"            => $data,
         ];
         echo json_encode($output);
+
     }
 
     public function todayallorder()
@@ -1710,6 +1650,7 @@ class Order extends MX_Controller
             "data"            => $data,
         ];
         echo json_encode($output);
+
     }
 
     public function notification()
@@ -1756,8 +1697,11 @@ class Order extends MX_Controller
                     $updatetDatakitchen = ['order_status' => 1];
                     $this->db->where('order_id', $orderid);
                     $this->db->update('customer_order', $updatetDatakitchen);
+
                 }
+
             }
+
         } else {
             $mymsg   = "You Order is Rejected";
             $bodymsg = display('ordid') . $orderid . " Rejeceted with due Reason:" . $orderinfo->anyreason;
@@ -1767,6 +1711,7 @@ class Order extends MX_Controller
                 $this->db->where('order_id', $orderid);
                 $this->db->update('customer_order', $margecancel);
             }
+
         }
 
         if ($acceptreject == 1) {
@@ -1777,6 +1722,7 @@ class Order extends MX_Controller
             } else {
                 $updatetData = ['anyreason' => $reason, 'nofification' => $status, 'orderacceptreject' => $acceptreject];
             }
+
         } else {
             $updatetData = ['anyreason' => $reason, 'order_status' => 5, 'nofification' => $status, 'orderacceptreject' => 0];
             $taxinfos    = $this->taxchecking();
@@ -1785,6 +1731,7 @@ class Order extends MX_Controller
                 $this->db->where('relation_id', $orderid);
                 $this->db->delete('tax_collection');
             }
+
         }
 
         $this->db->where('order_id', $orderid);
@@ -1826,6 +1773,7 @@ class Order extends MX_Controller
             $data['page']         = "updateorderlist";
             $this->load->view('ordermanage/ongoingorder', $data);
         }
+
     }
 
     public function cancelitem()
@@ -1890,6 +1838,7 @@ class Order extends MX_Controller
                     $vatcalc = 0;
                     $tx++;
                 }
+
             } else {
                 $vatcalc = $fprice * $iteminfo->productvat / 100;
                 $pvat    = $pvat + $vatcalc;
@@ -1934,7 +1883,9 @@ class Order extends MX_Controller
                         $anonsfprm = $addonsprm + $anonsfprm;
                         $addn++;
                     }
+
                 }
+
             }
 
             $allfoods .= $foodname->ProductName . ' Varient: ' . $foodname->variantName . ",";
@@ -1957,6 +1908,7 @@ class Order extends MX_Controller
                 } else {
                     $calvat = $pvat;
                 }
+
             } else {
                 $calvat = $pvat;
             }
@@ -2080,9 +2032,7 @@ class Order extends MX_Controller
 
             if ($rowdata->bill_status == 1) {
                 $paymentyst = display("paid");
-            } else {
-                $paymentyst = display("unpaid");
-            }
+            } else { $paymentyst = display("unpaid");}
 
             $no++;
             $row        = [];
@@ -2157,6 +2107,7 @@ class Order extends MX_Controller
             "data"            => $data,
         ];
         echo json_encode($output);
+
     }
 
     public function allqrorder()
@@ -2169,9 +2120,7 @@ class Order extends MX_Controller
 
             if ($rowdata->bill_status == 1) {
                 $paymentyst = display("paid");
-            } else {
-                $paymentyst = display("unpaid");
-            }
+            } else { $paymentyst = display("unpaid");}
 
             $no++;
             $row        = [];
@@ -2229,6 +2178,7 @@ class Order extends MX_Controller
             "data"            => $data,
         ];
         echo json_encode($output);
+
     }
 
     public function pendingorder()
@@ -2239,11 +2189,11 @@ class Order extends MX_Controller
 
         $status = 1;
 
-        #-------------------------------#
+#-------------------------------#
 
-        #
+#
 
-        #pagination starts
+#pagination starts
         #
         $config["base_url"]         = base_url('ordermanage/order/orderlist');
         $config["total_rows"]       = $this->order_model->count_canorder($status);
@@ -2274,9 +2224,9 @@ class Order extends MX_Controller
         $data["links"]    = $this->pagination->create_links();
         $data['pagenum']  = $page;
 
-        #
+#
 
-        #pagination ends
+#pagination ends
         #
         $settinginfo         = $this->order_model->settinginfo();
         $data['settinginfo'] = $settinginfo;
@@ -2341,9 +2291,9 @@ class Order extends MX_Controller
         $data['taxinfos'] = $this->taxchecking();
         $data['pagenum']  = $page;
 
-        #
+#
 
-        #pagination ends
+#pagination ends
         #
         $settinginfo         = $this->order_model->settinginfo();
         $data['settinginfo'] = $settinginfo;
@@ -2361,11 +2311,11 @@ class Order extends MX_Controller
 
         $status = 5;
 
-        #-------------------------------#
+#-------------------------------#
 
-        #
+#
 
-        #pagination starts
+#pagination starts
         #
         $config["base_url"]         = base_url('ordermanage/order/orderlist');
         $config["total_rows"]       = $this->order_model->count_canorder($status);
@@ -2396,9 +2346,9 @@ class Order extends MX_Controller
         $data["links"]    = $this->pagination->create_links();
         $data['pagenum']  = $page;
 
-        #
+#
 
-        #pagination ends
+#pagination ends
         #
         $settinginfo         = $this->order_model->settinginfo();
         $data['settinginfo'] = $settinginfo;
@@ -2417,7 +2367,6 @@ class Order extends MX_Controller
         $updatetData = ['nofification' => 1];
         $this->db->where('order_id', $id);
         $this->db->update('customer_order', $updatetData);
-
 
         $customerorder           = $this->order_model->read('*', 'customer_order', ['order_id' => $id]);
         $data['categorylist']    = $this->order_model->category_dropdown();
@@ -2442,6 +2391,7 @@ class Order extends MX_Controller
         $data['taxinfos']        = $this->taxchecking();
         $data['module']          = "ordermanage";
         $this->load->view('updateorder', $data);
+
     }
 
     public function otherupdateorder($id)
@@ -2493,7 +2443,6 @@ class Order extends MX_Controller
         $dataup['totalamount']  = $this->input->post('orginattotal', true);
         $isvatinclusive         = $this->db->select("*")->from('setting')->get()->row();
 
-
         if ($isvatinclusive->isvatinclusive == 1) {
             $dataup['totalamount'] = $this->input->post('orginattotal') - $this->input->post('vat');
         } else {
@@ -2510,7 +2459,7 @@ class Order extends MX_Controller
                 $multiplletaxdata = unserialize($multiplletaxvalue);
                 $updated = $this->order_model->update_info('tax_collection', $multiplletaxdata, 'relation_id', $orderid);
             }
-        }
+        } 
 
         $this->order_model->payment_info($orderid);
 
@@ -2526,10 +2475,10 @@ class Order extends MX_Controller
         $this->session->set_flashdata('message', display('update_successfully'));
 
         $successfull = ['success' => 'success', 'msg' => display('update_successfully'), 'orderid' => $orderid, 'tokenmsg' => display('do_print_token')];
-        echo json_encode($successfull);
-        exit;
+        echo json_encode($successfull);exit;
 
         redirect("ordermanage/order/pos_invoice/" . $orderid);
+
     }
 
     public function ajaxupdateoreder()
@@ -2627,7 +2576,9 @@ class Order extends MX_Controller
 
                     $this->db->insert('bill_card_payment', $cardinfo);
                 }
+
             }
+
         }
 
         $orderinfo = $this->db->select('*')->from('customer_order')->where('order_id', $orderid)->get()->row();
@@ -2645,8 +2596,7 @@ class Order extends MX_Controller
         $data['page']         = "updateorderlist";
         $view                 = $this->posprintdirect($orderid);
 
-        echo $view;
-        exit;
+        echo $view;exit;
         $this->load->view('ordermanage/ongoingorder', $data); //work
     }
 
@@ -2680,6 +2630,7 @@ class Order extends MX_Controller
         $data['module']      = "ordermanage";
         $data['page']        = "posinvoice";
         $this->load->view('posinvoiceview', $data);
+
     }
 
     public function onprocessajax()
@@ -2716,6 +2667,7 @@ class Order extends MX_Controller
             $this->db->where('foodid', $pid);
             $this->db->where('varientid', $vid);
             $this->db->update('tbl_cancelitem', $udatacancel);
+
         }
 
         $iteminfo              = $this->order_model->customerorder($orderid);
@@ -2768,6 +2720,7 @@ class Order extends MX_Controller
         $data['module']    = "ordermanage";
         $data['page']      = "updateorderlist";
         $this->load->view('ordermanage/updateorderlist', $data);
+
     }
 
     public function addtocartupdate()
@@ -2837,6 +2790,7 @@ class Order extends MX_Controller
                     ];
                     $this->order_model->new_entry($data3);
                 }
+
             } else {
                 $groupinfo = $this->db->select('*')->from('tbl_groupitems')->where('gitemid', $pid)->get()->result();
 
@@ -2890,9 +2844,13 @@ class Order extends MX_Controller
                         $this->db->where('foodid', $pid);
                         $this->db->where('varientid', $sizeid);
                         $this->db->update('tbl_cancelitem', $udatacancel);
+
                     }
+
                 }
+
             }
+
         } else {
             $orderchecked = $this->order_model->check_order($orderid, $pid, $sizeid, $uaid);
 
@@ -2987,7 +2945,9 @@ class Order extends MX_Controller
                             $this->db->where('foodid', $pid);
                             $this->db->where('varientid', $sizeid);
                             $this->db->update('tbl_cancelitem', $udatacancel);
+
                         }
+
                     } else {
                         $data4 = [
                             'ordid'      => $orderid,
@@ -3016,12 +2976,16 @@ class Order extends MX_Controller
                             $this->db->where('foodid', $pid);
                             $this->db->where('varientid', $sizeid);
                             $this->db->update('tbl_cancelitem', $udatacancel);
+
                         }
+
                     }
 
                     $this->db->insert('tbl_updateitems', $data4);
                 }
+
             }
+
         }
 
         $existingitem = $this->order_model->customerorder($orderid);
@@ -3136,7 +3100,9 @@ class Order extends MX_Controller
                     $this->db->where('foodid', $pid);
                     $this->db->where('varientid', $sizeid);
                     $this->db->update('tbl_cancelitem', $udatacancel);
+
                 }
+
             } else {
 
                 if ($acqty > $orderchecked->qroupqty) {
@@ -3176,7 +3142,9 @@ class Order extends MX_Controller
                             $this->db->where('foodid', $pid);
                             $this->db->where('varientid', $sizeid);
                             $this->db->update('tbl_cancelitem', $udatacancel);
+
                         }
+
                     } else {
                         $data4 = [
                             'ordid'      => $orderid,
@@ -3234,6 +3202,7 @@ class Order extends MX_Controller
                 ];
                 $this->order_model->update_order($postData);
             }
+
         } else {
             $orderchecked    = $this->order_model->check_order($orderid, $pid, $sizeid, $uaid);
             $checkcancelitem = $this->order_model->check_cancelitem($orderid, $pid, $sizeid);
@@ -3266,7 +3235,9 @@ class Order extends MX_Controller
                     $this->db->where('foodid', $pid);
                     $this->db->where('varientid', $sizeid);
                     $this->db->update('tbl_cancelitem', $udatacancel);
+
                 }
+
             } else {
 
                 if ($acqty > $orderchecked->menuqty) {
@@ -3306,7 +3277,9 @@ class Order extends MX_Controller
                             $this->db->where('foodid', $pid);
                             $this->db->where('varientid', $sizeid);
                             $this->db->update('tbl_cancelitem', $udatacancel);
+
                         }
+
                     } else {
                         $data4 = [
                             'ordid'      => $orderid,
@@ -3364,6 +3337,7 @@ class Order extends MX_Controller
                 ];
                 $this->order_model->update_order($postData);
             }
+
         }
 
         $data['orderinfo'] = $this->order_model->read('*', 'customer_order', ['order_id' => $orderid]);
@@ -3411,8 +3385,7 @@ class Order extends MX_Controller
         $data['settinginfo']   = $settinginfo;
 
         if ($getadons == 1) {
-            echo 'adons';
-            exit;
+            echo 'adons';exit;
         } else {
             $grandtotal = $price;
             $aids       = '';
@@ -3420,8 +3393,7 @@ class Order extends MX_Controller
             $aname      = '';
             $aprice     = '';
             $atprice    = '0';
-            echo 'adons';
-            exit;
+            echo 'adons';exit;
         }
 
         $uaid         = $pid . $sizeid;
@@ -3466,6 +3438,7 @@ class Order extends MX_Controller
                 ];
                 $this->db->insert('tbl_updateitems', $data4);
             }
+
         }
 
         $existingitem = $this->order_model->customerorder($orderid);
@@ -3542,6 +3515,7 @@ class Order extends MX_Controller
         $data['page']         = "invoice";
 
         echo Modules::run('template/layout', $data);
+
     }
 
     /*order invoice for post*/
@@ -3564,6 +3538,7 @@ class Order extends MX_Controller
         $data['currency']     = $this->order_model->currencysetting($settinginfo->currency);
         $data['taxinfos']     = $this->taxchecking();
         $this->load->view('ordermanage/invoice_pos', $data);
+
     }
 
     public function orderdetails($id)
@@ -3581,7 +3556,6 @@ class Order extends MX_Controller
         $data['iteminfo']     = $this->order_model->customerorder($id);
         $data['billinfo']     = $this->order_model->billinfo($id);
         $settinginfo          = $this->order_model->settinginfo();
-        $data['settinginfo']    = $this->order_model->settinginfo();
         $data['storeinfo']    = $settinginfo;
         $data['currency']     = $this->order_model->currencysetting($settinginfo->currency);
 
@@ -3589,6 +3563,7 @@ class Order extends MX_Controller
         $data['module'] = "ordermanage";
         $data['page']   = "details";
         echo Modules::run('template/layout', $data);
+
     }
 
     public function orderdetailspop($id)
@@ -3606,13 +3581,13 @@ class Order extends MX_Controller
         $data['billinfo']     = $this->order_model->billinfo($id);
         $data['shipinfo']     = $this->order_model->shipinfo($id);
         $settinginfo          = $this->order_model->settinginfo();
-        //$data['settinginfo']     = $this->order_model->settinginfo();
         $data['storeinfo']    = $settinginfo;
         $data['currency']     = $this->order_model->currencysetting($settinginfo->currency);
         $data['taxinfos']     = $this->taxchecking();
         $data['module']       = "ordermanage";
         $data['page']         = "details";
         $this->load->view('ordermanage/details', $data);
+
     }
 
     /*details page for pos*/
@@ -3635,6 +3610,7 @@ class Order extends MX_Controller
         $data['currency']     = $this->order_model->currencysetting($settinginfo->currency);
         $data['taxinfos']     = $this->taxchecking();
         $this->load->view('ordermanage/details', $data);
+
     }
 
     public function posorderinvoice($id)
@@ -3669,8 +3645,8 @@ class Order extends MX_Controller
         $data['module']      = "ordermanage";
         $data['page']        = "posinvoice";
         $view                = $this->load->view('posinvoice', $data, true);
-        echo $view;
-        exit;
+        echo $view;exit;
+
     }
 
     public function posprintdirect($id = null)
@@ -3699,8 +3675,8 @@ class Order extends MX_Controller
         $data['page']         = "posinvoice";
 
         $view = $this->load->view('posinvoicedirectprint', $data, true);
-        echo $view;
-        exit;
+        echo $view;exit;
+
     }
 
     public function dueinvoice($id)
@@ -3724,8 +3700,7 @@ class Order extends MX_Controller
         $data['module']       = "ordermanage";
         $data['page']         = "posinvoice";
         $view                 = $this->load->view('dueinvoicedirectprint', $data, true);
-        echo $view;
-        exit;
+        echo $view;exit;
     }
 
     public function fwrite_stream($fp, $string)
@@ -3737,6 +3712,7 @@ class Order extends MX_Controller
             if ($fwrite === false) {
                 return $written;
             }
+
         }
 
         return $written;
@@ -3821,16 +3797,16 @@ class Order extends MX_Controller
         $customerorder = $this->order_model->read('*', 'customer_order', ['order_id' => $id]);
 
         $data['orderinfo']    = $customerorder;
-        $data['customerinfo'] = $this->order_model->read('*', 'customer_info', ['customer_id' => @$customerorder->customer_id]);
+        $data['customerinfo'] = $this->order_model->read('*', 'customer_info', ['customer_id' => $customerorder->customer_id]);
 
-        if (!empty(@$customerorder->table_no)) {
-            $data['tableinfo'] = $this->order_model->read('*', 'rest_table', ['tableid' => @$customerorder->table_no]);
+        if (!empty($customerorder->table_no)) {
+            $data['tableinfo'] = $this->order_model->read('*', 'rest_table', ['tableid' => $customerorder->table_no]);
         } else {
             $data['tableinfo'] = '';
         }
 
-        if (!empty(@$customerorder->waiter_id)) {
-            $data['waiterinfo'] = $this->order_model->read('first_name,last_name', 'employee_history', ['emp_his_id' => @$customerorder->waiter_id]);
+        if (!empty($customerorder->waiter_id)) {
+            $data['waiterinfo'] = $this->order_model->read('first_name,last_name', 'employee_history', ['emp_his_id' => $customerorder->waiter_id]);
         } else {
             $data['waiterinfo'] = '';
         }
@@ -3854,6 +3830,7 @@ class Order extends MX_Controller
         ];
         $this->db->where('order_id', $id);
         $this->db->update('order_menu', $updatetData);
+
     }
 
     public function tokenupdate($id)
@@ -3978,6 +3955,7 @@ class Order extends MX_Controller
             }
 
             $data['page'] = "checkout";
+
         } else
 
         if ($paymentid == 3) {
@@ -3988,7 +3966,9 @@ class Order extends MX_Controller
         if ($paymentid == 2) {
             $data['page'] = "2checkout";
             echo Modules::run('template/layout', $data);
+
         }
+
     }
 
     public function successful($orderid)
@@ -4031,6 +4011,7 @@ class Order extends MX_Controller
         } else {
             redirect('ordermanage/order/pos_invoice/' . $orderid);
         }
+
     }
 
     public function fail($orderid)
@@ -4045,7 +4026,7 @@ class Order extends MX_Controller
         redirect('ordermanage/order/pos_invoice');
     }
 
-   /* public function allkitchen()
+    public function allkitchen()
     {
         $this->permission->method('ordermanage', 'read')->redirect();
 
@@ -4069,17 +4050,19 @@ class Order extends MX_Controller
                     foreach ($orderinfo as $orderlist) {
                         $billtotal = round($orderlist->totalamount);
 
-                        if (($onprocess->orderacceptreject == 0 || empty($orderlist->orderacceptreject)) && ($orderlist->cutomertype == 2)) {
-                        } else {
+                        if (($onprocess->orderacceptreject == 0 || empty($orderlist->orderacceptreject)) && ($orderlist->cutomertype == 2)) {} else {
                             $data['kitcheninfo'][$i]['orderlist'][$m] = $orderlist;
                             $data['kitcheninfo'][$i]['iteminfo'][$m]  = $this->order_model->customerorderkitchen($orderlist->order_id, $kitchen->kitchen_id);
                             $m++;
                         }
+
                     }
+
                 }
 
                 $i++;
             }
+
         } else {
             $kitchenlist = $this->db->select('kitchenid as kitchen_id,kitchen_name')->from('tbl_kitchen')->order_by('kitchen_name', 'Asc')->get()->result();
             $output      = [];
@@ -4095,13 +4078,14 @@ class Order extends MX_Controller
                     foreach ($orderinfo as $orderlist) {
                         $billtotal = round($orderlist->totalamount);
 
-                        if (($orderlist->orderacceptreject == 0 || empty($orderlist->orderacceptreject)) && ($orderlist->cutomertype == 2)) {
-                        } else {
+                        if (($orderlist->orderacceptreject == 0 || empty($orderlist->orderacceptreject)) && ($orderlist->cutomertype == 2)) {} else {
                             $data['kitcheninfo'][$i]['orderlist'][$m] = $orderlist;
                             $data['kitcheninfo'][$i]['iteminfo'][$m]  = $this->order_model->customerorderkitchen($orderlist->order_id, $kitchen->kitchen_id);
                             $m++;
                         }
+
                     }
+
                 }
 
                 $i++;
@@ -4114,86 +4098,7 @@ class Order extends MX_Controller
         $data['module'] = "ordermanage";
         $data['page']   = "allkitchen";
         echo Modules::run('template/layout', $data);
-    }*/
-    public function allkitchen()
-{
-    $this->permission->method('ordermanage', 'read')->redirect();
-
-    if ($this->permission->method('ordermanage', 'read')->access() == false) {
-        redirect('dashboard/auth/logout');
     }
-
-    $uid = $this->session->userdata('id');
-    $assignketchen = $this->db->select('user.id,tbl_assign_kitchen.kitchen_id,tbl_assign_kitchen.userid,tbl_kitchen.kitchen_name')
-        ->from('tbl_assign_kitchen')
-        ->join('user', 'user.id=tbl_assign_kitchen.userid', 'left')
-        ->join('tbl_kitchen', 'tbl_kitchen.kitchenid=tbl_assign_kitchen.kitchen_id')
-        ->where('tbl_assign_kitchen.userid', $uid)
-        ->get()->result();
-
-    $i = 0;
-
-    if (!empty($assignketchen)) {
-        $data['kitchenlist'] = $assignketchen;
-
-        foreach ($assignketchen as $kitchen) {
-            $data['kitcheninfo'][$i]['kitchenid'] = $kitchen->kitchen_id;
-            $orderinfo = $this->order_model->kitchen_ongoingorder($kitchen->kitchen_id);
-
-            if (!empty($orderinfo)) {
-                $m = 0;
-                foreach ($orderinfo as $orderlist) {
-                    $billtotal = round($orderlist->totalamount);
-
-                    if (($orderlist->orderacceptreject == 0 || empty($orderlist->orderacceptreject)) && ($orderlist->cutomertype == 2)) {
-                        continue;
-                    }
-
-                    $data['kitcheninfo'][$i]['orderlist'][$m] = $orderlist;
-                    $data['kitcheninfo'][$i]['iteminfo'][$m]  = $this->order_model->customerorderkitchen($orderlist->order_id, $kitchen->kitchen_id);
-                    $m++;
-                }
-            }
-            $i++;
-        }
-    } else {
-        $kitchenlist = $this->db->select('kitchenid as kitchen_id,kitchen_name')
-            ->from('tbl_kitchen')
-            ->order_by('kitchen_name', 'Asc')
-            ->get()
-            ->result();
-
-        $i = 0;
-        foreach ($kitchenlist as $kitchen) {
-            $data['kitcheninfo'][$i]['kitchenid'] = $kitchen->kitchen_id;
-            $orderinfo = $this->order_model->kitchen_ongoingorder($kitchen->kitchen_id);
-
-            if (!empty($orderinfo)) {
-                $m = 0;
-                foreach ($orderinfo as $orderlist) {
-                    $billtotal = round($orderlist->totalamount);
-
-                    if (($orderlist->orderacceptreject == 0 || empty($orderlist->orderacceptreject)) && ($orderlist->cutomertype == 2)) {
-                        continue;
-                    }
-
-                    $data['kitcheninfo'][$i]['orderlist'][$m] = $orderlist;
-                    $data['kitcheninfo'][$i]['iteminfo'][$m]  = $this->order_model->customerorderkitchen($orderlist->order_id, $kitchen->kitchen_id);
-                    $m++;
-                }
-            }
-            $i++;
-        }
-
-        $data['kitchenlist'] = $kitchenlist;
-    }
-
-    $data['title']  = "Counter Dashboard";
-    $data['module'] = "ordermanage";
-    $data['page']   = "allkitchen";
-    echo Modules::run('template/layout', $data);
-}
-
 
     public function kitchen($kitchenid = null)
     {
@@ -4254,8 +4159,7 @@ class Order extends MX_Controller
             $vaids  = $varientids[$i];
             $isexit = $this->db->select('tbl_kitchen_order.*')->from('tbl_kitchen_order')->where('orderid', $orderid)->where('kitchenid', $kitid)->where('itemid', $sitem)->where('varient', $vaids)->get()->num_rows();
 
-            if ($isexit > 0) {
-            } else {
+            if ($isexit > 0) {} else {
                 $kitchenorder = [
                     'kitchenid' => $kitid,
                     'orderid'   => $orderid,
@@ -4286,6 +4190,7 @@ class Order extends MX_Controller
             } else {
                 $allchecked .= "0,";
             }
+
         }
 
         if (strpos($allchecked, '0') !== false) {
@@ -4302,6 +4207,7 @@ class Order extends MX_Controller
             $this->db->where('order_id', $orderid);
             $this->db->update('customer_order', $updatetData2);
         }
+
     }
 
     public function itemisready()
@@ -4348,26 +4254,26 @@ class Order extends MX_Controller
             $registrationIds = $senderid;
             $msg             =
                 [
-                    'message'    => "Orderid: " . $orderid . ", Item Name: " . $item->ProductName . " Amount:" . $orderinformation->totalamount,
-                    'title'      => "Food Is Ready.",
-                    'subtitle'   => $orderid,
-                    'tickerText' => "TSET",
-                    'vibrate'    => 1,
-                    'sound'      => 1,
-                    'largeIcon'  => "TSET",
-                    'smallIcon'  => "TSET",
-                ];
+                'message'    => "Orderid: " . $orderid . ", Item Name: " . $item->ProductName . " Amount:" . $orderinformation->totalamount,
+                'title'      => "Food Is Ready.",
+                'subtitle'   => $orderid,
+                'tickerText' => "TSET",
+                'vibrate'    => 1,
+                'sound'      => 1,
+                'largeIcon'  => "TSET",
+                'smallIcon'  => "TSET",
+            ];
             $fields2 =
                 [
-                    'registration_ids' => $registrationIds,
-                    'data'             => $msg,
-                ];
+                'registration_ids' => $registrationIds,
+                'data'             => $msg,
+            ];
 
             $headers2 =
                 [
-                    'Authorization: key=' . API_ACCESS_KEY,
-                    'Content-Type: application/json',
-                ];
+                'Authorization: key=' . API_ACCESS_KEY,
+                'Content-Type: application/json',
+            ];
 
             $ch2 = curl_init();
             curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -4387,26 +4293,26 @@ class Order extends MX_Controller
             $registrationIds = $senderid;
             $msg             =
                 [
-                    'message'    => "Orderid: " . $orderid . ", Item Name: " . $item->ProductName . " Amount:" . $orderinformation->totalamount,
-                    'title'      => display('processing'),
-                    'subtitle'   => $orderid,
-                    'tickerText' => "TSET",
-                    'vibrate'    => 1,
-                    'sound'      => 1,
-                    'largeIcon'  => "TSET",
-                    'smallIcon'  => "TSET",
-                ];
+                'message'    => "Orderid: " . $orderid . ", Item Name: " . $item->ProductName . " Amount:" . $orderinformation->totalamount,
+                'title'      => display('processing'),
+                'subtitle'   => $orderid,
+                'tickerText' => "TSET",
+                'vibrate'    => 1,
+                'sound'      => 1,
+                'largeIcon'  => "TSET",
+                'smallIcon'  => "TSET",
+            ];
             $fields2 =
                 [
-                    'registration_ids' => $registrationIds,
-                    'data'             => $msg,
-                ];
+                'registration_ids' => $registrationIds,
+                'data'             => $msg,
+            ];
 
             $headers2 =
                 [
-                    'Authorization: key=' . API_ACCESS_KEY,
-                    'Content-Type: application/json',
-                ];
+                'Authorization: key=' . API_ACCESS_KEY,
+                'Content-Type: application/json',
+            ];
 
             $ch2 = curl_init();
             curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -4421,6 +4327,7 @@ class Order extends MX_Controller
         }
 
         echo $status;
+
     }
 
     public function orderisready()
@@ -4442,11 +4349,13 @@ class Order extends MX_Controller
             $this->db->where('order_id', $orderid);
             $this->db->where('menu_id', $foodid);
             $this->db->update('order_menu', $updatetready);
+
         }
 
         $data['ongoingorder'] = $this->order_model->kitchen_ongoingorder($kid);
         $data['page']         = "kitchen_load";
         $this->load->view('ordermanage/kitchen_load', $data);
+
     }
 
     public function markasdone()
@@ -4540,6 +4449,7 @@ class Order extends MX_Controller
         } else {
             $this->load->view('ordermanage/newpaymentveiw', $data);
         }
+
     }
 
     public function mergemodal()
@@ -4568,9 +4478,9 @@ class Order extends MX_Controller
         $allorder            = $this->input->post('allorderid');
         $mergeid             = $this->input->post('mergeid');
         $data['order_info']  = $this->order_model->selectmerge($allorder);
-        $customer_info       = $this->order_model->read('*', 'customer_info', ['customer_id' => @$orderid->customer_id]);
-        $data['membership']  = @$customer_info->membership_type;
-        $data['customerid']  = @$customer_info->customer_id;
+        $customer_info       = $this->order_model->read('*', 'customer_info', ['customer_id' => $orderid->customer_id]);
+        $data['membership']  = $customer_info->membership_type;
+        $data['customerid']  = $customer_info->customer_id;
         $settinginfo         = $this->order_model->settinginfo();
         $data['settinginfo'] = $settinginfo;
         $data['currency']    = $this->order_model->currencysetting($settinginfo->currency);
@@ -4625,7 +4535,9 @@ class Order extends MX_Controller
                 if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                     $getcus = $customerid;
                 }
+
             }
+
         }
 
         if (!empty($getcus)) {
@@ -4678,9 +4590,10 @@ class Order extends MX_Controller
                 $this->db->where('customerid', $isredeem);
                 $this->db->update('tbl_customerpoint', $updateredeem);
             }
+
         }
 
-        /*******end Point**************/
+/*******end Point**************/
 
         if ($discount > 0) {
             $finaldis = $discount + $prebillinfo->discount;
@@ -4699,13 +4612,8 @@ class Order extends MX_Controller
         $billinfo = $this->db->select('*')->from('bill')->where('order_id', $orderid)->get()->row();
         foreach ($payamonts as $payamont) {
             $paidamount = $paidamount + $payamont;
-            $data_pay   = [
-                'paytype' => $paytype[$i],
-                'cterminal' => $cterminal[$i],
-                'mybank'                 => $mybank[$i],
-                'mydigit'    => $mydigit[$i],
-                'payamont' => $payamont
-            ];
+            $data_pay   = ['paytype' => $paytype[$i], 'cterminal' => $cterminal[$i],
+                'mybank'                 => $mybank[$i], 'mydigit'    => $mydigit[$i], 'payamont' => $payamont];
             $this->add_multipay($orderid, $billinfo->bill_id, $data_pay);
             $i++;
         }
@@ -4730,7 +4638,7 @@ class Order extends MX_Controller
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetData);
 
-        //Update Bill Table
+//Update Bill Table
         if ($status == 4) {
             $updatetbill = [
                 'bill_status'       => 1,
@@ -4762,11 +4670,10 @@ class Order extends MX_Controller
         $data['module']       = "ordermanage";
         $data['page']         = "updateorderlist";
 
-        //  echo $orderid;
+//  echo $orderid;
         //  die();
         $view = $this->posprintdirect($orderid);
-        echo $view;
-        exit;
+        echo $view;exit;
     }
 
     public function savekitchenitem($orderid)
@@ -4799,6 +4706,7 @@ class Order extends MX_Controller
             $this->db->where('order_id', $orderid);
             $this->db->update('order_menu', $updatetmenu);
         }
+
     }
 
     public function add_multipay($orderid, $billid, $array_post)
@@ -4823,6 +4731,7 @@ class Order extends MX_Controller
 
             $this->db->insert('bill_card_payment', $cardinfo);
         }
+
     }
 
     public function changeMargeorder()
@@ -4937,9 +4846,11 @@ class Order extends MX_Controller
                 $this->db->where('order_id', $nmpay->order_id);
                 $this->db->update('bill', ['payment_method_id' => $billinfo->payment_method_id]);
             }
+
         }
 
         echo $viewprint = $this->load->view('posmargeprint', $mydata, true);
+
     }
 
     public function changeMargedue()
@@ -5064,23 +4975,25 @@ class Order extends MX_Controller
                 if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                     $getcus = $customerid;
                 }
+
             }
+
         }
 
         if (!empty($getcus)) {
             $isexitscusp         = $this->db->select("*")->from('tbl_customerpoint')->where('customerid', $customerid)->get()->row();
-
-            if (is_array($orderamount) && count($orderamount) > 0) {
+            
+            if(is_array($orderamount) && count($orderamount) > 0){
                 $totalgrtotal = array_sum($orderamount);
                 $totalgrtotal = round($totalgrtotal);
-            } else {
+            }else{
                 $totalgrtotal = 0;
             }
 
             $checkpointcondition = "$totalgrtotal BETWEEN amountrangestpoint AND amountrangeedpoint";
             $getpoint            = $this->db->select("*")->from('tbl_pointsetting')->get()->row();
 
-            if (isset($getpoint->earnpoint) && $getpoint->earnpoint > 0) {
+            if(isset($getpoint->earnpoint) && $getpoint->earnpoint > 0){
                 $calcpoint = $getpoint->earnpoint / $getpoint->amountrangestpoint;
             } else {
                 $calcpoint = 0;
@@ -5123,6 +5036,7 @@ class Order extends MX_Controller
                 $this->db->where('customerid', $isredeem);
                 $this->db->update('tbl_customerpoint', $updateredeem);
             }
+
         }
 
         /*******end Point**************/
@@ -5177,7 +5091,9 @@ class Order extends MX_Controller
 
                     $k++;
                 }
+
             }
+
         }
 
         $orderinfo = $this->db->select('*')->from('customer_order')->where('order_id', $orderid)->get()->row();
@@ -5208,7 +5124,7 @@ class Order extends MX_Controller
     {
         $value = $this->order_model->read('person_capicity', 'rest_table', ['tableid' => $id]);
 
-        // print_r($value);
+// print_r($value);
         // exit;
         $total_sum    = $this->order_model->get_table_total_customer($id);
         $present_free = $value->person_capicity - $total_sum->total;
@@ -5257,6 +5173,7 @@ class Order extends MX_Controller
             if ($available != 1) {
                 break;
             }
+
         }
 
         echo $available;
@@ -5273,6 +5190,7 @@ class Order extends MX_Controller
 
                 $this->order_model->insert_product($item->menu_id, $item->varientid, $item->menuqty);
             }
+
         }
 
         return $possetting->productionsetting;
@@ -5308,12 +5226,14 @@ class Order extends MX_Controller
 
                 $i++;
             }
+
         }
 
         $array_bill           = ['order_id' => $orderid];
         $data['service']      = $this->order_model->read('service_charge', 'bill', $array_bill);
         $data['customerlist'] = $this->order_model->customer_dropdown();
         $this->load->view('ordermanage/splitorder', $data);
+
     }
 
     public function showsuborder($num = 1)
@@ -5336,6 +5256,7 @@ class Order extends MX_Controller
             ];
             $this->db->insert('sub_order', $sub_order);
             $insertid[$i] = $this->db->insert_id();
+
         }
 
         $data['suborderid'] = $insertid;
@@ -5374,6 +5295,7 @@ class Order extends MX_Controller
 
             ];
             $this->db->insert('check_addones', $is_addons);
+
         }
 
         if (!empty($order_sub->order_menu_id)) {
@@ -5384,6 +5306,7 @@ class Order extends MX_Controller
             } else {
                 $presentsub[$menuid] = 1;
             }
+
         } else {
             $presentsub = [$menuid => 1];
         }
@@ -5533,6 +5456,7 @@ class Order extends MX_Controller
             $this->savekitchenitem($orderid);
             $this->db->where('order_id', $order_id)->delete('table_details');
             $saveid = $this->session->userdata('id');
+
         }
 
         $data['taxinfos'] = $this->taxchecking();
@@ -5540,8 +5464,7 @@ class Order extends MX_Controller
         $data['page']     = "updateorderlist";
         $view             = $this->posprintdirectsub($orderid);
 
-        echo $view;
-        exit;
+        echo $view;exit;
     }
 
     public function posprintdirectsub($id)
@@ -5571,8 +5494,8 @@ class Order extends MX_Controller
         $data['page']        = "posinvoice";
 
         $view = $this->load->view('posprintsuborder', $data, true);
-        echo $view;
-        exit;
+        echo $view;exit;
+
     }
 
     public function showsplitorderlist($order)
@@ -5583,7 +5506,7 @@ class Order extends MX_Controller
         $this->load->view('showsuborderlist', $data);
     }
 
-    /*end split order methods*/
+/*end split order methods*/
     /**Item information for kitchen*/
     public function counterlist()
     {
@@ -5615,10 +5538,12 @@ class Order extends MX_Controller
             }
 
             redirect('ordermanage/order/counterlist');
+
         } else {
             $this->session->set_flashdata('exception', display('please_try_again'));
             redirect('ordermanage/order/counterlist');
         }
+
     }
 
     public function editcounter($id)
@@ -5642,10 +5567,12 @@ class Order extends MX_Controller
             }
 
             redirect('ordermanage/order/counterlist');
+
         } else {
             $this->session->set_flashdata('exception', display('please_try_again'));
             redirect('ordermanage/order/counterlist');
         }
+
     }
 
     public function deletecounter($menuid = null)
@@ -5677,6 +5604,7 @@ class Order extends MX_Controller
             foreach ($counterlist as $value) {
                 $list[$value->counterno] = $value->counterno;
             }
+
         }
 
         $data['allcounter'] = $list;
@@ -5690,10 +5618,8 @@ class Order extends MX_Controller
             }
 
             $this->load->view('cashregister', $data);
-        } else {
-            echo 1;
-            exit;
-        }
+        } else {echo 1;exit;}
+
     }
 
     public function addcashregister()
@@ -5726,12 +5652,13 @@ class Order extends MX_Controller
                 } else {
                     echo 0;
                 }
+
             } else {
                 echo 0;
             }
-        } else {
-            echo 0;
-        }
+
+        } else {echo 0;}
+
     }
 
     public function cashregisterclose()
@@ -5744,10 +5671,8 @@ class Order extends MX_Controller
 
         if (!empty($checkuser)) {
             $this->load->view('cashregisterclose', $data);
-        } else {
-            echo 1;
-            exit;
-        }
+        } else {echo 1;exit;}
+
     }
 
     public function closecashregister()
@@ -5772,7 +5697,9 @@ class Order extends MX_Controller
             } else {
                 echo 0;
             }
+
         }
+
     }
 
     public function closecashregisterprint()
@@ -5840,10 +5767,13 @@ class Order extends MX_Controller
                 $data['totalchange'] = $this->order_model->changecashsummery($saveid, $checkuser->opendate, $checkuser->closedate);
                 $data['itemsummery'] = $this->order_model->closingiteminfo($order_ids);
                 echo $viewprint      = $this->load->view('cashclosingsummery', $data, true);
+
             } else {
                 echo 0;
             }
+
         }
+
     }
 
     public function closecashregisterprinttest()
@@ -5910,9 +5840,11 @@ class Order extends MX_Controller
             if ($taxsetting->tax == 1) {
                 $taxinfos = $this->db->select('*')->from('tax_settings')->get()->result_array();
             }
+
         }
 
         return $taxinfos;
+
     }
 
     public function soundsetting()
@@ -5923,6 +5855,7 @@ class Order extends MX_Controller
         $data['module']       = "ordermanage";
         $data['page']         = "soundsetting";
         echo Modules::run('template/layout', $data);
+
     }
 
     public function addsound()
@@ -5985,8 +5918,7 @@ class Order extends MX_Controller
         }
 
         $currency     = $this->order_model->currencysetting($settinginfo->currency);
-        $allbasicinfo = [
-            'segment1' => $this->uri->segment(1),
+        $allbasicinfo = ['segment1' => $this->uri->segment(1),
             'segment2'                  => $this->uri->segment(2),
             'segment3'                  => $this->uri->segment(3),
             'segment4'                  => $this->uri->segment(4),
@@ -6029,4 +5961,5 @@ class Order extends MX_Controller
         $data['customerorder'] = $this->order_model->read('*', 'customer_order', ['order_id' => $id]);
         echo ('window.orderinfo = ' . json_encode($data['customerorder']) . ';');
     }
+
 }

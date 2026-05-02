@@ -21,20 +21,20 @@
                                 <input readonly="readonly" name="Menuurl" id="Menuurl" class="form-control" type="text" placeholder="<?php echo display('menu_url') ?>">
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
-                            <label for="category" class="col-sm-4 col-form-label"><?php echo display('sub_menu') ?></label>
-                            <div class="col-sm-8">
-                                <select name="menuid" class="form-control" id="menuid">
-                                    <option value="" selected="selected"><?php echo display('sub_menu') ?></option> 
-                                    <?php foreach($allmenu as $menu){?>
-                                    <option value="<?php echo $menu->menuid;?>" class='bolden'><strong><?php echo $menu->menu_name;?></strong></option>
-                                        <?php if(!empty($menu->sub)){
-                                        foreach($menu->sub as $submenu){?>
-                                        <option value="<?php echo $submenu->menuid;?>">&nbsp;&nbsp;&nbsp;&mdash;<?php echo $submenu->menu_name;?></option>
-                                    <?php } } } ?>
-                                </select>
-                            </div>
-                        </div> -->
+                        <div class="form-group row">
+                        <label for="category" class="col-sm-4 col-form-label"><?php echo display('sub_menu') ?></label>
+                        <div class="col-sm-8">
+                        <select name="menuid" class="form-control" id="menuid">
+                            <option value="" selected="selected"><?php echo display('sub_menu') ?></option> 
+                            <?php foreach($allmenu as $menu){?>
+                            <option value="<?php echo $menu->menuid;?>" class='bolden'><strong><?php echo $menu->menu_name;?></strong></option>
+                            	<?php if(!empty($menu->sub)){
+								foreach($menu->sub as $submenu){?>
+                                <option value="<?php echo $submenu->menuid;?>">&nbsp;&nbsp;&nbsp;&mdash;<?php echo $submenu->menu_name;?></option>
+                            <?php } } } ?>
+                        </select>
+                        </div>
+                    </div>
                         <div class="form-group row">
                         <label for="lastname" class="col-sm-4 col-form-label"><?php echo display('status') ?></label>
                         <div class="col-sm-8 customesl">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                         <div class="form-group text-right menu_dashboard_display"  id="upbtn">
-                            <button type="submit" class="btn btn-success w-md m-b-5" id="btnchnage" disabled><?php echo display('update') ?></button>
+                            <button type="submit" class="btn btn-success w-md m-b-5" id="btnchnage"><?php echo display('Ad') ?></button>
                         </div>
                     <?php echo form_close() ?>
                     <table class="table table-bordered table-hover" id="RoleTbl">
@@ -55,7 +55,7 @@
                                 <th><?php echo display('sl_no') ?></th>
                                 <th><?php echo display('menu_name') ?></th>
                                 <th><?php echo display('menu_url') ?></th>
-                                <th><?php echo display('menu_type') ?></th>
+                                <th><?php echo display('parent_menu') ?></th>
                                 <th><?php echo display('status') ?></th>
                                 <th><?php echo display('action') ?></th>
                             </tr>
@@ -68,15 +68,7 @@
                                 <td><?php echo $sl++; ?></td>
                                 <td><?php echo $value->menu_name; ?></td>
                                 <td><?php echo $value->menu_slug; ?></td>
-                                <td>
-                                    <?php
-                                    if ($value->is_footer == 0) {
-                                        echo display('header_menu');
-                                    } else {
-                                        echo display('footer_menu');
-                                    }
-                                    ?>
-                                </td>
+                                <td></td>
                                 <td><?php if($value->isactive==1){ echo "Active";}else{ echo "Inactive";} ?></td>
                                 <td>
                                     <a onclick="editmenu('<?php echo $value->menu_name; ?>','<?php echo $value->menu_slug; ?>','<?php echo $value->isactive; ?>',<?php echo $value->parentid; ?>,<?php echo $value->menuid; ?>)"  data-toggle="tooltip" data-placement="left" title="Update" class="btn btn-success btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a>

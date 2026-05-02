@@ -38,7 +38,6 @@ function giveselecttab(element) {
     $("#uidupdateid").val('');
     $('#onprocesslist').empty();
     window.prevsltab = $(element);
-    prevsltab = $(element);
 }
 
 function inputNumbersfocus(result) {

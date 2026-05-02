@@ -29,9 +29,11 @@ class V1 extends MY_Controller
 
 
 		if ($this->form_validation->run() == FALSE) {
+
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
 		} else {
+
 			$data['email']      = $this->input->post('email', TRUE);
 			$data['password']   = $this->input->post('password', TRUE);
 			//$token=$this->input->post('token', TRUE);
@@ -39,13 +41,13 @@ class V1 extends MY_Controller
 			$IsReg = $this->Api_v1_model->checkEmailOrPhoneIsRegistered('user', $data);
 
 			if (!$IsReg) {
-				return $this->respondUserNotReg('Cet e-mail ou ce numéro de téléphone n\'a pas encore été enregistré.');
+				return $this->respondUserNotReg('This email or phone number has not yet been registered.');
 			}
 			$result = $this->Api_v1_model->authenticate_user('user', $data);
 
 			//if(empty($result->waiter_kitchenToken)){
 			$updatetData['waiter_kitchenToken']    			= $this->input->post('token', TRUE);
-			$this->Api_v1_model->update_date('user', $updatetData, 'id', $result->id);
+			$this->Api_v1_model->update_date('user', $updatetData, 'id', $result->id ?? '');
 			//}
 
 			$webseting = $this->Api_v1_model->read('powerbytxt,currency,servicecharge,service_chargeType,vat', 'setting', array('id' => 2));
@@ -59,8 +61,8 @@ class V1 extends MY_Controller
 					$shiftcheck = $this->checkshift($result->employee_id);
 				}
 				if ($shiftcheck == true) {
-					$str = substr($result->picture, 2);
-					$result->{"UserPictureURL"} = base_url() . $str;
+					$str = substr($result->picture ?? '', 2);
+					$result->{"UserPictureURL"} = str_replace('/api/', '/', base_url($str)); //base_url() . $str;
 					$result->{"PowerBy"} = $webseting->powerbytxt;
 					$result->{"currencycode"} = $currencyinfo->currencyname;
 					$result->{"currencysign"} = $currencyinfo->curr_icon;
@@ -68,10 +70,10 @@ class V1 extends MY_Controller
 					$result->{"service_chargeType"} = $webseting->service_chargeType;
 					$result->{"tablemaping"} = $possetting->tablemaping;
 					$result->{"vat"} = $webseting->vat;
-					return $this->respondWithSuccess('Vous vous êtes connecté avec succès.', $result);
+					return $this->respondWithSuccess('You have successfully logged in.', $result);
 				} else {
-					$str = substr($result->picture, 2);
-					$result->{"UserPictureURL"} = base_url() . $str;
+					$str = substr($result->picture ?? '', 2);
+					$result->{"UserPictureURL"} = str_replace('/api/', '/', base_url($str)); //base_url() . $str;
 					$result->{"PowerBy"} = $webseting->powerbytxt;
 					$result->{"currencycode"} = $currencyinfo->currencyname;
 					$result->{"currencysign"} = $currencyinfo->curr_icon;
@@ -79,10 +81,10 @@ class V1 extends MY_Controller
 					$result->{"service_chargeType"} = $webseting->service_chargeType;
 					$result->{"tablemaping"} = $possetting->tablemaping;
 					$result->{"vat"} = $webseting->vat;
-					return $this->respondWithError('Horaire non compatible', $result);
+					return $this->respondWithSuccess('Incompatible schedule', $result);
 				}
 			} else {
-				return $this->respondWithError('L\'e-mail et le mot de passe que vous avez saisis ne correspondent pas.', $result);
+				return $this->respondWithError('The email and password you entered do not match.', $result);
 			}
 		}
 	}
@@ -100,7 +102,7 @@ class V1 extends MY_Controller
 		$today_formatted = $today->format('H:i:s');
 
 
-		if ($today_formatted >= $shift->start_Time && $today_formatted <= $shift->end_Time) {
+		if ($shift && $today_formatted >= $shift->start_Time && $today_formatted <= $shift->end_Time) {
 
 			return true;
 		} else {
@@ -123,17 +125,17 @@ class V1 extends MY_Controller
 			if ($result != FALSE) {
 				$i = 0;
 				foreach ($result as $list) {
-					$image = substr($list->CategoryImage, 2);
+					$image = substr($list->CategoryImage ?? '', 2);
 					$output[$i]['CategoryID']  		= $list->CategoryID;
 					$output[$i]['Name']  	   		= $list->Name;
-					$output[$i]['categoryimage']  	= base_url() . $image;
+					$output[$i]['categoryimage']  	= str_replace('/api/', '/', base_url($image)); //base_url() . $image;
 
 					$i++;
 				}
-				return $this->respondWithSuccess('Liste de toutes les catégories.', $output);
+				return $this->respondWithSuccess('List of all categories.', $output);
 			} else {
 
-				return $this->respondWithError('Aucune catégorie trouvée.!!!', $output);
+				return $this->respondWithError('No categories found.!!!', $output);
 			}
 		}
 	}
@@ -150,25 +152,31 @@ class V1 extends MY_Controller
 			$custinfo = $this->Api_v1_model->read('*', 'rest_table', array('tableid' => $tableid));
 			if (!empty($custinfo)) {
 				$output['table_no'] = $tableid;
-				return $this->respondWithSuccess('La table existe.', $output);
+				return $this->respondWithSuccess('The table exists.', $output);
 			} else {
 				$output['table_no'] = "";
-				return $this->respondWithError('Table non trouvée!!!', $output);
+				return $this->respondWithError('Table not found!!!', $output);
 			}
 		}
 	}
+
 	public function foodlist()
 	{
 		// TO DO /
 		$this->load->library('form_validation');
+
 		$this->form_validation->set_rules('id', 'id', 'required|xss_clean|trim');
 		$this->form_validation->set_rules('CategoryID', 'CategoryID', 'required|xss_clean|trim');
+
 		if ($this->form_validation->run() == FALSE) {
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
 		} else {
+
 			$CategoryID = $this->input->post('CategoryID', TRUE);
+
 			$allcategory = $this->Api_v1_model->allsublist($CategoryID);
+
 			$output = $categoryIDs = array();
 
 			if ($allcategory != FALSE) {
@@ -182,7 +190,9 @@ class V1 extends MY_Controller
 			} else {
 				$result = $this->Api_v1_model->foodlist($CategoryID);
 			}
+
 			if ($result != FALSE) {
+
 				$restinfo = $this->Api_v1_model->read('vat', 'setting', array('id' => 2));
 				$output['PcategoryID']  = $CategoryID;
 				if ($restinfo == FALSE) {
@@ -208,10 +218,11 @@ class V1 extends MY_Controller
 					} else {
 						$image = "assets/img/no-image.png";
 					}
+
 					$addonsinfo = $this->Api_v1_model->findaddons($productlist->ProductsID);
 					$output['foodinfo'][$k]['ProductsID']      = $productlist->ProductsID;
 					$output['foodinfo'][$k]['ProductName']      = $productlist->ProductName;
-					$output['foodinfo'][$k]['ProductImage']     =  base_url() . $image;
+					$output['foodinfo'][$k]['ProductImage']     = str_replace('/api/', '/', base_url($image)); //base_url() . $image;
 					$output['foodinfo'][$k]['component']  	 	 = $productlist->component;
 					$output['foodinfo'][$k]['destcription']  	 = $productlist->descrip;
 					$output['foodinfo'][$k]['itemnotes']  	 	 = $productlist->itemnotes;
@@ -224,8 +235,11 @@ class V1 extends MY_Controller
 					$output['foodinfo'][$k]['variantName'] 	 = $productlist->variantName;
 					$output['foodinfo'][$k]['price'] 			 = $productlist->price;
 					$output['foodinfo'][$k]['totalvariant'] 	 = $productlist->totalvarient;
-					if ($productlist->totalvarient > 1) {
+
+					if ($productlist->totalvarient >= 1) {
+
 						$allvarients = $this->Api_v1_model->read_all('*', 'variant', 'menuid', $productlist->ProductsID, 'menuid', 'ASC');
+
 						$v = 0;
 						foreach ($allvarients as $varientlist) {
 							$output['foodinfo'][$k]['varientlist'][$v]['multivariantid'] = $varientlist->variantid;
@@ -234,10 +248,15 @@ class V1 extends MY_Controller
 							$v++;
 						}
 					} else {
+						//$output['foodinfo']['varientlist'] = [];
 						$output['foodinfo'][$k]['varientlist'][0]['multivariantid'] = '';
 						$output['foodinfo'][$k]['varientlist'][0]['multivariantName'] = '';
 						$output['foodinfo'][$k]['varientlist'][0]['multivariantPrice'] = '';
 					}
+					/** Append tax info */
+					$output['foodinfo'][$k]['taxInfo'] = $productlist->taxInfo;
+					$output['foodinfo'][$k]['taxTotal'] = $productlist->taxTotal;
+
 					if ($addonsinfo != FALSE) {
 						$output['foodinfo'][$k]['addons'] 			 = 1;
 						$x = 0;
@@ -252,9 +271,9 @@ class V1 extends MY_Controller
 					}
 					$k++;
 				}
-				return $this->respondWithSuccess('Liste des aliments de toutes les catégories.', $output);
+				return $this->respondWithSuccess('List of foods from all categories.', $output);
 			} else {
-				return $this->respondWithError('Nourriture introuvable. !!!', $output);
+				return $this->respondWithError('Food not found.!!!', $output);
 			}
 		}
 	}
@@ -307,7 +326,7 @@ class V1 extends MY_Controller
 						$addonsinfo = $this->Api_v1_model->findaddons($productlist->ProductsID);
 						$output['foodinfo'][$k]['ProductsID']       = $productlist->ProductsID;
 						$output['foodinfo'][$k]['ProductName']      = $productlist->ProductName;
-						$output['foodinfo'][$k]['ProductImage']     =  base_url() . $image;
+						$output['foodinfo'][$k]['ProductImage']     = str_replace('/api/', '/', base_url($image)); //base_url() . $image;
 						$output['foodinfo'][$k]['component']  	 	 = $productlist->component;
 						$output['foodinfo'][$k]['destcription']  	 = $productlist->descrip;
 						$output['foodinfo'][$k]['itemnotes']  	 	 = $productlist->itemnotes;
@@ -349,9 +368,9 @@ class V1 extends MY_Controller
 						$k++;
 					}
 				}
-				return $this->respondWithSuccess('Liste des aliments de toutes les catégories.', $output);
+				return $this->respondWithSuccess('List of foods from all categories.', $output);
 			} else {
-				return $this->respondWithError('Nourriture introuvable. !!!', $output);
+				return $this->respondWithError('Food not found.!!!', $output);
 			}
 		}
 	}
@@ -387,9 +406,9 @@ class V1 extends MY_Controller
 					$output['tableinfo'][$i]['Booked'] = $singletable['sum'];
 					$i++;
 				}
-				return $this->respondWithSuccess('Liste de toutes les tables.', $output);
+				return $this->respondWithSuccess('List of all tables.', $output);
 			} else {
-				return $this->respondWithError('Table Non trouvée!!!', $output);
+				return $this->respondWithError('Table Not Found!!!', $output);
 			}
 		}
 	}
@@ -443,9 +462,9 @@ class V1 extends MY_Controller
 					$output['tableinfo'][$i]['Booked'] = $singletable['sum'];
 					$i++;
 				}
-				return $this->respondWithSuccess('Informations sur la table', $output);
+				return $this->respondWithSuccess('Table information', $output);
 			} else {
-				return $this->respondWithError('Aucune donnée de table trouvée', $output);
+				return $this->respondWithError('No table data found', $output);
 			}
 		}
 	}
@@ -469,9 +488,9 @@ class V1 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste de toutes les tables.', $output);
+				return $this->respondWithSuccess('List of all tables.', $output);
 			} else {
-				return $this->respondWithError('Table Non trouvée.!!!', $output);
+				return $this->respondWithError('Table Not Found.!!!', $output);
 			}
 		}
 	}
@@ -495,7 +514,7 @@ class V1 extends MY_Controller
 			} else {
 				$output['customer_id']  = "";
 				$output['CustomerName'] = "";
-				return $this->respondWithError('Identifiant client introuvable OU bloqué !!!', $output);
+				return $this->respondWithError('Customer ID not found OR blocked!!!', $output);
 			}
 		}
 	}
@@ -518,11 +537,11 @@ class V1 extends MY_Controller
 					$output[$i]['CustomerName']  = $customer->customer_name;
 					$i++;
 				}
-				return $this->respondWithSuccess('informations concernant le client.', $output);
+				return $this->respondWithSuccess('customer information.', $output);
 			} else {
 				$output['customer_id']  = "";
 				$output['CustomerName'] = "";
-				return $this->respondWithError('Identifiant de membre introuvable OU bloqué !!!', $output);
+				return $this->respondWithError('Member ID not found OR blocked!!!', $output);
 			}
 		}
 	}
@@ -543,9 +562,9 @@ class V1 extends MY_Controller
 				$output['TypeID']    = $customer->customer_type_id;
 				$output['TypeName']  = $customer->customer_type;
 
-				return $this->respondWithSuccess('Type de client.', $output);
+				return $this->respondWithSuccess('Customer type.', $output);
 			} else {
-				return $this->respondWithError('Type introuvable.!!!', $output);
+				return $this->respondWithError('Type not found.!!!', $output);
 			}
 		}
 	}
@@ -558,10 +577,10 @@ class V1 extends MY_Controller
 		$this->form_validation->set_rules('VatAmount', 'Total VAT', 'xss_clean|required|trim');
 		$this->form_validation->set_rules('TableId', 'TableId', 'xss_clean|required|trim');
 		$this->form_validation->set_rules('CustomerID', 'CustomerID', 'xss_clean|required|trim');
-
 		$this->form_validation->set_rules('Total', 'Cart Total', 'xss_clean|required|trim');
 		$this->form_validation->set_rules('Grandtotal', 'Grand Total', 'xss_clean|required|trim');
 		$this->form_validation->set_rules('foodinfo', 'foodinfo', 'xss_clean|required|trim');
+
 		if ($this->form_validation->run() == FALSE) {
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
@@ -635,7 +654,7 @@ class V1 extends MY_Controller
 					'order_id' 		=> $orderid,
 					'time_enter' 	=> date('H:i:s'),
 					'created_at'	=> $newdate,
-					'total_people' 	=> $this->input->post('totalperson'),
+					'total_people' 	=> $this->input->post('totalperson') ?? 0,
 				);
 				$this->db->insert('table_details', $addtable_member);
 			} else {
@@ -665,7 +684,8 @@ class V1 extends MY_Controller
 			$output = $categoryIDs = array();
 
 			foreach ($cartArray as $cart) {
-				$fooditeminfo = $this->db->select("kitchenid")->from('item_foods')->where('ProductsID', $cart->ProductsID)->get()->row();
+
+				$fooditeminfo = $this->db->select("kitchenid")->from('item_foods')->where('ProductsID', @$cart->ProductsID)->get()->row();
 				$addonsid = "";
 				$addonsqty = "";
 				$addonsprice = 0;
@@ -682,25 +702,28 @@ class V1 extends MY_Controller
 				}
 				$alladdons = trim($addonsid, ',');
 				$alladdonsqty = trim($addonsqty, ',');
+
 				//Insert Item information
 				$data3 = array(
-					'order_id'				=>	$orderid,
-					'menu_id'		        =>	$cart->ProductsID,
-					'menuqty'	        	=>	$cart->quantitys,
-					'notes'                 =>  $cart->itemNote,
-					'add_on_id'	        	=>	$alladdons,
-					'addonsqty'	        	=>	$alladdonsqty,
-					'varientid'		    	=>	$cart->variantid,
+					'order_id' => @$orderid,
+					'menu_id' => @$cart->ProductsID,
+					'menuqty' => @$cart->quantitys,
+					'notes' => @$cart->itemNote,
+					'add_on_id' => @$alladdons,
+					'addonsqty' => @$alladdonsqty,
+					'varientid' => @$cart->variantid,
 				);
+
 				$this->db->insert('order_menu', $data3);
 				$this->db->where('waiterid', $ID)->where('ProductsID', $cart->ProductsID)->where('variantid', $cart->variantid)->delete('tbl_waiterappcart');
 			}
+
 			$billinfo = array(
 				'customer_id'			=>	$CustomerID,
 				'order_id'		        =>	$orderid,
 				'total_amount'	        =>	$Total,
-				'discount'	            =>	$Discount,
-				'service_charge'	    =>	$ServiceCharge,
+				'discount'	            =>	$Discount ?? 0,
+				'service_charge'	    =>	$ServiceCharge ?? 0,
 				'VAT'		 	        =>  $VatAmount,
 				'bill_amount'		    =>	$Grandtotal,
 				'bill_date'		        =>	$newdate,
@@ -790,9 +813,9 @@ class V1 extends MY_Controller
 			/*Push Notification*/
 
 			if (!empty($orderid)) {
-				return $this->respondWithSuccess('Commande passée avec succès.', $output);
+				return $this->respondWithSuccess('Order placed successfully.', $output);
 			} else {
-				return $this->respondWithError('Commande non passée!!!', $output);
+				return $this->respondWithError('Order not placed!!!', $output);
 			}
 		}
 	}
@@ -806,7 +829,6 @@ class V1 extends MY_Controller
 		$query = $this->db->get();
 
 		return $kitcheninfo = $query->result();
-		print_r($kitcheninfo);
 	}
 	public function pendingorder()
 	{
@@ -829,9 +851,9 @@ class V1 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste des commandes en attente.', $output);
+				return $this->respondWithSuccess('List of pending orders.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -856,9 +878,9 @@ class V1 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste des commandes en attente.', $output);
+				return $this->respondWithSuccess('List of pending orders.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -866,6 +888,7 @@ class V1 extends MY_Controller
 	{
 		$this->form_validation->set_rules('id', 'id', 'required|xss_clean|trim');
 		$this->form_validation->set_rules('start', 'start', 'required|xss_clean|trim');
+
 		if ($this->form_validation->run() == FALSE) {
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
@@ -893,9 +916,9 @@ class V1 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste des commandes en attente.', $output);
+				return $this->respondWithSuccess('List of pending orders.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -903,6 +926,7 @@ class V1 extends MY_Controller
 	{
 		$this->form_validation->set_rules('id', 'id', 'required|xss_clean|trim');
 		$this->form_validation->set_rules('start', 'start', 'required|xss_clean|trim');
+
 		if ($this->form_validation->run() == FALSE) {
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
@@ -928,9 +952,9 @@ class V1 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste des commandes en attente.', $output);
+				return $this->respondWithSuccess('List of pending orders.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -963,9 +987,9 @@ class V1 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste des commandes en attente.', $output);
+				return $this->respondWithSuccess('List of pending orders.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -1048,7 +1072,7 @@ class V1 extends MY_Controller
 				);
 				$this->db->insert('tbl_waiterappcart', $data3);
 			}
-			return $this->respondWithSuccess('Ajouter au panier avec succès', $output);
+			return $this->respondWithSuccess('Add to cart successfully', $output);
 		}
 	}
 
@@ -1095,7 +1119,7 @@ class V1 extends MY_Controller
 				$output['foodinfo'][$i]['variantid'] = $cart->variantid;
 				$i++;
 			}
-			return $this->respondWithSuccess('Liste de tous les articles du panier', $output);
+			return $this->respondWithSuccess('List of all items in the cart', $output);
 		}
 	}
 	public function completeorcancel()
@@ -1171,9 +1195,9 @@ class V1 extends MY_Controller
 				$output['order_total']           = $billinfo->bill_amount;
 				$output['orderdate']             = $billinfo->bill_date;
 
-				return $this->respondWithSuccess('détails de la commande', $output);
+				return $this->respondWithSuccess('order details', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -1207,7 +1231,7 @@ class V1 extends MY_Controller
 			$output['Overallamount'] = $overall;
 			$output['lastweekorder'] = $lastweekorder->cnt;
 			$output['lastweekamount'] = $lasttotal;
-			return $this->respondWithSuccess('Historique des commandes', $output);
+			return $this->respondWithSuccess('Order History', $output);
 		}
 	}
 	public function orderhistory()
@@ -1240,7 +1264,7 @@ class V1 extends MY_Controller
 			$output['Overallamount'] = $overall;
 			$output['lastweekorder'] = $lastweekorder->cnt;
 			$output['lastweekamount'] = $lasttotal;
-			return $this->respondWithSuccess('Historique des commandes', $output);
+			return $this->respondWithSuccess('Order History', $output);
 		}
 	}
 	public function updateorder()
@@ -1257,6 +1281,9 @@ class V1 extends MY_Controller
 			$tableinfo = $this->Api_v1_model->read('*', 'rest_table', array('tableid' => $customerorder->table_no));
 			$typeinfo = $this->Api_v1_model->read('*', 'customer_type', array('customer_type_id' => $customerorder->cutomertype));
 
+			$taxSettings = $this->Api_v1_model->taxchecking();
+			$appSetting = $this->db->select('*')->from('setting')->get()->row();
+
 			$orderdetails = $this->db->select('order_menu.*,item_foods.*,variant.variantid,variant.variantName,variant.price')->from('order_menu')->join('customer_order', 'order_menu.order_id=customer_order.order_id', 'left')->join('item_foods', 'order_menu.menu_id=item_foods.ProductsID', 'left')->join('variant', 'order_menu.varientid=variant.variantid', 'left')->where('order_menu.order_id', $orderid)->get()->result();
 			//
 			$billinfo = $this->Api_v1_model->read('*', 'bill', array('order_id' => $orderid));
@@ -1271,6 +1298,30 @@ class V1 extends MY_Controller
 				$output['customername']   = $customerinfo->customer_name;
 				$i = 0;
 
+				$taxData = [];
+				$totalTax = 0;
+				if (count($taxSettings) <= 0 && $item->productvat <= 0) {
+					$totalTax = $appSetting->vat;
+				} else if (count($taxSettings) <= 0 && $item->productvat > 0) {
+					$totalTax = $item->productvat;
+				}
+
+				foreach ($taxSettings as $index => $tax) {
+					$taxElement = [
+						"name" => $tax->tax_name
+					];
+					$productListIndex = "tax" . $index;
+					if (isset($item->$productListIndex) && $item->$productListIndex) {
+						$taxElement["value"] = $item->$productListIndex;
+					} else {
+						$taxElement["value"] = $tax->default_value;
+					}
+					$taxData[] = $taxElement;
+					$totalTax += $taxElement["value"];
+				}
+
+
+
 				foreach ($orderdetails as $item) {
 					$output['iteminfo'][$i]['ProductsID']     = $item->ProductsID;
 					$output['iteminfo'][$i]['ProductName']    = $item->ProductName;
@@ -1283,7 +1334,7 @@ class V1 extends MY_Controller
 					$output['iteminfo'][$i]['offerstartdate']  = $item->offerstartdate;
 					$output['iteminfo'][$i]['OffersRate']      = $item->OffersRate;
 					$output['iteminfo'][$i]['offerendate']      = $item->offerendate;
-					$output['iteminfo'][$i]['ProductImage']     = base_url() . $item->ProductImage;
+					$output['iteminfo'][$i]['ProductImage']     = str_replace('/api/', '/', base_url($item->ProductImage)); //base_url() . $item->ProductImage;
 					$output['iteminfo'][$i]['Varientname']    = $item->variantName;
 					$output['iteminfo'][$i]['Varientid']      = $item->variantid;
 					$output['iteminfo'][$i]['Itemqty']        = $item->menuqty;
@@ -1303,13 +1354,16 @@ class V1 extends MY_Controller
 					} else {
 						$output['iteminfo'][$i]['addons']         = 0;
 					}
+					$output['iteminfo'][$i]['taxInfo'] = $taxData;
+					$output['iteminfo'][$i]['taxTotal'] = $totalTax;
+
 
 					$i++;
 				}
 
-				return $this->respondWithSuccess('détails de la commande', $output);
+				return $this->respondWithSuccess('order details', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -1415,7 +1469,7 @@ class V1 extends MY_Controller
 				}
 				$i++;
 			}
-			return $this->respondWithSuccess('Ajouter au panier avec succès', $output);
+			return $this->respondWithSuccess('Add to cart successfully', $output);
 		}
 	}
 
@@ -1435,7 +1489,9 @@ class V1 extends MY_Controller
 			return $this->respondWithValidationError($errors);
 		} else {
 			$json = $this->input->post('foodinfo', TRUE);
+
 			$cartArray = json_decode($json);
+
 			$orderid = $this->input->post('Orderid', TRUE);
 
 			$ID                 = $this->input->post('id', TRUE);
@@ -1449,6 +1505,7 @@ class V1 extends MY_Controller
 			$customernote       = $this->input->post('CustomerNote', TRUE);
 			$newdate = date('Y-m-d');
 			$lastid = $this->db->select("*")->from('customer_order')->where('order_id', $orderid)->get()->row();
+
 			$sino = $lastid->saleinvoice;
 			//Inser Order information 
 			$data2 = array(
@@ -1464,14 +1521,13 @@ class V1 extends MY_Controller
 
 			$this->db->where('order_id', $orderid)->delete('order_menu');
 
-
 			$output = $categoryIDs = array();
 
 			foreach ($cartArray as $cart) {
 				$addonsid = "";
 				$addonsqty = "";
 				$addonsprice = 0;
-				if ($cart->addons == 1) {
+				if ($cart->addons ?? '' == 1) {
 					foreach ($cart->addonsinfo as $adonsinfo) {
 						$addprice = $adonsinfo->addonsquantity * $adonsinfo->addonsprice;
 						$addonsid .= $adonsinfo->addonsid . ',';
@@ -1486,13 +1542,13 @@ class V1 extends MY_Controller
 					'order_id'				=>	$orderid,
 					'menu_id'		        =>	$cart->ProductsID,
 					'menuqty'	        	=>	$cart->quantitys,
-					'notes'                 =>  $cart->itemNote,
+					'notes'                 =>  $cart->itemNote ?? '',
 					'add_on_id'	        	=>	$alladdons,
 					'addonsqty'	        	=>	$alladdonsqty,
 					'varientid'		    	=>	$cart->variantid,
 				);
 				$this->db->insert('order_menu', $data3);
-				$this->db->where('orderid', $orderid)->where('ProductsID', $cart->ProductsID)->where('variantid', $cart->Varientid)->delete('tbl_waiterappcart');
+				$this->db->where('orderid', $orderid)->where('ProductsID', $cart->ProductsID ?? 0)->where('variantid', $cart->Varientid ?? 0)->delete('tbl_waiterappcart');
 			}
 			$billinfo = array(
 				'total_amount'	        =>	$Total,
@@ -1509,14 +1565,14 @@ class V1 extends MY_Controller
 			$billid = $billinfo->bill_id;
 			$cardinfo = array(
 				'card_no'		        =>	"",
-				'issuer_name'	        =>	""
+				//'issuer_name'	        =>	""//off by mehedi because this table no have this column
 			);
 			$this->db->where('bill_id', $billid);
 			$this->db->update('bill_card_payment', $cardinfo);
 			if (!empty($orderid)) {
-				return $this->respondWithSuccess('Commande passée avec succès.', $output);
+				return $this->respondWithSuccess('Order placed successfully.', $output);
 			} else {
-				return $this->respondWithError('Commande non passée!!!', $output);
+				return $this->respondWithError('Order not placed!!!', $output);
 			}
 		}
 	}
@@ -1539,6 +1595,7 @@ class V1 extends MY_Controller
 	public function allonlineorder()
 	{
 		$this->form_validation->set_rules('id', 'id', 'required|xss_clean|trim');
+
 		if ($this->form_validation->run() == FALSE) {
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
@@ -1554,9 +1611,9 @@ class V1 extends MY_Controller
 					$output['orderinfo'][$i]['amount'] = $order->totalamount;
 					$i++;
 				}
-				return $this->respondWithSuccess('Liste des commandes entrantes', $output);
+				return $this->respondWithSuccess('List of incoming orders', $output);
 			} else {
-				return $this->respondWithError('Aucune commande entrante trouvée !!!', $output);
+				return $this->respondWithError('No incoming orders found!!!', $output);
 			}
 		}
 	}
@@ -1635,7 +1692,8 @@ class V1 extends MY_Controller
 				/*PUSH Notification For Customer*/
 				$customerinfo = $this->db->select("*")->from('customer_info')->where('customer_id', $orderinfo->customer_id)->get()->row();
 				$bodymsg = "Order ID:" . $orderid . " Order amount:" . $orderinfo->totalamount;
-				$icon = base_url('assets/img/applogo.png');
+				// $icon = base_url('assets/img/applogo.png');
+				$icon = str_replace('/api/', '/', base_url('assets/img/applogo.png'));
 				$fields3 = array(
 					'to' => $customerinfo->customer_token,
 					'data' => array(
@@ -1670,7 +1728,7 @@ class V1 extends MY_Controller
 				);
 				$result3 = curl_exec($ch3);
 				curl_close($ch3);
-				return $this->respondWithSuccess('Commande Attribuer au Serveur', $output);
+				return $this->respondWithSuccess('Assign to Server Command', $output);
 			}
 		}
 	}

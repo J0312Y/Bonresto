@@ -32,8 +32,7 @@
 .ui-front {
     z-index: 9999 !important;
 }
-.header_top .navbar-nav .nav-link .badge
- {
+.header_top .navbar-nav .nav-link .badge {
     padding: 0;
 	color: #fff;	
     position: absolute;

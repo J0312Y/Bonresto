@@ -110,7 +110,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
  */
-$config['enable_hooks'] = true;
+$config['enable_hooks'] = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,9 +148,9 @@ $config['subclass_prefix'] = 'MY_';
  */
 $config['composer_autoload'] = false;
 require FCPATH . 'vendor/autoload.php';
-/*Stripe Payment Gateway — set STRIPE_KEY and STRIPE_SECRET in your server environment or .env */
-$config['stripe_key']    = getenv('STRIPE_KEY')    ?: 'pk_test_TrVFpmZBkgasCE6WTPkZgMPr00UzVVOqgp';
-$config['stripe_secret'] = getenv('STRIPE_SECRET') ?: 'sk_test_ol4WUcbGsqxNJItpeOi1ecDT00k5mDyC2G';
+/*Stripe Payment Gateway*/
+$config['stripe_key']    = 'pk_test_TrVFpmZBkgasCE6WTPkZgMPr00UzVVOqgp';
+$config['stripe_secret'] = 'sk_test_ol4WUcbGsqxNJItpeOi1ecDT00k5mDyC2G';
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
@@ -236,7 +236,7 @@ $config['allow_get_array'] = true;
 | your log files will fill up very fast.
 |
  */
-$config['log_threshold'] = (ENVIRONMENT !== 'production') ? 4 : 1;
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -337,7 +337,7 @@ $config['cache_query_string'] = false;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
  */
-$config['encryption_key'] = getenv('CI_ENCRYPTION_KEY') ?: 'MySuperEncryptionKEY2017';
+$config['encryption_key'] = 'MySuperEncryptionKEY2017';
 
 /*
 |--------------------------------------------------------------------------
@@ -394,10 +394,9 @@ $config['sess_driver']             = 'files';
 $config['sess_cookie_name']        = 'ci_session';
 $config['sess_expiration']         = 7200;
 $config['sess_save_path']          = APPPATH . 'cache/temp/';
-//$config['sess_save_path'] = sys_get_temp_dir();
 $config['sess_match_ip']           = false;
 $config['sess_time_to_update']     = 300;
-$config['sess_regenerate_destroy'] = true;
+$config['sess_regenerate_destroy'] = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -417,8 +416,8 @@ $config['sess_regenerate_destroy'] = true;
 $config['cookie_prefix']   = '';
 $config['cookie_domain']   = '';
 $config['cookie_path']     = '/';
-$config['cookie_secure']   = false; // set to true when HTTPS is enforced
-$config['cookie_httponly'] = true;
+$config['cookie_secure']   = false;
+$config['cookie_httponly'] = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -467,14 +466,8 @@ $config['csrf_token_name']   = 'csrf_test_name';
 $config['csrf_cookie_name']  = 'csrf_cookie_name';
 $config['csrf_expire']       = 7200;
 $config['csrf_regenerate']   = false;
-$config['csrf_exclude_uris'] = [
-    'dashboard/autoupdate/update',
-    'dashboard/autoupdate/updatenow',
-    'setting/restauranttable/uploadfile',
-    'checkcoupon',
-    // SaaS API — all routes handled via JWT, CSRF not needed
-    'saas/.*',
-];
+$config['csrf_exclude_uris'] = ['dashboard/autoupdate/update', 'dashboard/autoupdate/updatenow', 'setting/restauranttable/uploadfile'];
+
 if (isset($_SERVER["REQUEST_URI"])) {
 
     if ((stripos($_SERVER["REQUEST_URI"], '/v1') === false) && (stripos($_SERVER["REQUEST_URI"], '/v3') === false) && (stripos($_SERVER["REQUEST_URI"], '/android') === false) && (stripos($_SERVER["REQUEST_URI"], '/app') === false) && (stripos($_SERVER["REQUEST_URI"], '/appv1') === false) && (stripos($_SERVER["REQUEST_URI"], '/hungry') === false)) {

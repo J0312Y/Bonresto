@@ -47,6 +47,7 @@ class Reports extends MX_Controller
         $data['module']   = "report";
         $data['page']     = "getpreport";
         $this->load->view('report/getpreport', $data);
+
     }
 
     public function productwise()
@@ -154,6 +155,7 @@ class Reports extends MX_Controller
         $data['module']    = "report";
         $data['page']      = "salebydate";
         $this->load->view('report/salebydate', $data);
+
     }
 
     public function salereport()
@@ -175,6 +177,7 @@ class Reports extends MX_Controller
         $data['module']   = "report";
         $data['page']     = "ajaxsalereport";
         $this->load->view('report/ajaxsalereport', $data);
+
     }
 
     public function sellrpt2()
@@ -228,8 +231,11 @@ class Reports extends MX_Controller
                     ];
                     $this->db->insert('tbl_generatedreport', $generaterpt);
                 }
+
             }
+
         }
+
     }
 
     public function generatedrpt()
@@ -378,6 +384,7 @@ class Reports extends MX_Controller
         $data['name']       = 'Items Name';
         $data['page']       = "ajaxsalereportitems";
         $this->load->view('report/ajaxsalereportitems', $data);
+
     }
 
     public function sellrptItems()
@@ -426,6 +433,7 @@ class Reports extends MX_Controller
         $data['name']     = 'Waiter Name';
         $data['page']     = "ajaxsalereportitems";
         $this->load->view('report/ajaxsalereportitems', $data);
+
     }
 
     public function delviryReport()
@@ -446,6 +454,7 @@ class Reports extends MX_Controller
         $data['name']     = 'Delivery type';
         $data['page']     = "ajaxsalereportdelivery";
         $this->load->view('report/ajaxsalereportdelivery', $data);
+
     }
 
     public function sellrptdelvirytype()
@@ -494,6 +503,7 @@ class Reports extends MX_Controller
         $data['name']     = 'Casher name';
         $data['page']     = "ajaxsalereportitems";
         $this->load->view('report/ajaxsalereportitems', $data);
+
     }
 
     public function unpaid_sell()
@@ -528,6 +538,7 @@ class Reports extends MX_Controller
         $data['name']     = display('ordid');
         $data['page']     = "ajaxsalereportunpaid";
         $this->load->view('report/ajaxsalereportunpaid', $data);
+
     }
 
     public function showpaymentmodal($id)
@@ -604,13 +615,14 @@ class Reports extends MX_Controller
 
                         $i++;
                     }
-                    //end foreach
+//end foreach
 
                 }
 
                 $totalamount = $totalamount + $pricewithaddons + $itemprice;
+
             }
-            //end foreach
+//end foreach
             $kichendata[$y] = ['kiname' => $kitchen->kitchen_name, 'totalprice' => $totalamount];
             $y++;
         }
@@ -627,6 +639,7 @@ class Reports extends MX_Controller
         $data['name']     = 'Kitchen Name';
         $data['page']     = "kicanwiseReport";
         $this->load->view('report/kicanwiseReport', $data);
+
     }
 
     public function servicerpt()
@@ -664,6 +677,7 @@ class Reports extends MX_Controller
         $data['name']     = display('ordid');
         $data['page']     = "servicechargewisereport";
         $this->load->view('report/servicechargewisereport', $data);
+
     }
 
     #payroll commission
@@ -685,6 +699,7 @@ class Reports extends MX_Controller
         $data['view']   = 'showpayroll_commission';
         $data['page']   = "commissionReport";
         echo Modules::run('template/layout', $data);
+
     }
 
     public function showpayroll_commission()
@@ -722,6 +737,7 @@ class Reports extends MX_Controller
         $data['view']     = 'table_sale_show';
         $data['page']     = "salebytable";
         echo Modules::run('template/layout', $data);
+
     }
 
     public function table_sale_show()
@@ -756,6 +772,7 @@ class Reports extends MX_Controller
             foreach ($counterlist as $value) {
                 $list[$value->counterno] = $value->counterno;
             }
+
         }
 
         $data['allcounter'] = $list;
@@ -765,6 +782,7 @@ class Reports extends MX_Controller
             foreach ($userlist as $value) {
                 $list2[$value->userid] = $value->firstname . ' ' . $value->lastname;
             }
+
         }
 
         $data['alluser'] = $list2;
@@ -896,4 +914,5 @@ class Reports extends MX_Controller
         $data['itemsummery']  = $this->report_model->closingiteminfo($order_ids);
         echo $viewprint       = $this->load->view('cashclosingsummeryreport', $data, true);
     }
+
 }

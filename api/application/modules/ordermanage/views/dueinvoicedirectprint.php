@@ -801,7 +801,7 @@ if ($billinfo->bill_status == 1) {
       </div>
       <div class="middle-data">
         <div class="item-info gap_right">
-          <h5 class="item-title"><?php echo display('table'); ?>: <?php echo @$tableinfo->tablename ?? ''; ?></h5>
+          <h5 class="item-title"><?php echo display('table'); ?>: <?php echo $tableinfo->tablename ?? ''; ?></h5>
         </div>
         <div class="item-info">
           <h5 class="item-title"><?php echo display('orderno') ?>: <?php echo $orderinfo->order_id; ?></h5>

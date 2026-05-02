@@ -36,7 +36,7 @@
                         </div>
                         
                         <div class="form-group row">
-                        <label for="lastname" class="col-sm-4 col-form-label"><?php echo display('status');?>*</label>
+                        <label for="lastname" class="col-sm-4 col-form-label"><?php echo display('status');?></label>
                         <div class="col-sm-8">
                             <select name="status"  class="form-control">
                                 <option value=""  selected="selected"><?php echo display('select_option');?></option>
@@ -56,6 +56,5 @@
             </div>
         </div>
     </div>
-   <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
-    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<script src="<?php echo base_url('application/modules/reservation/assets/js/unavailabledit.js'); ?>" type="text/javascript"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="<?php echo base_url('application/modules/reservation/assets/js/unavailabledit.js'); ?>" type="text/javascript"></script>

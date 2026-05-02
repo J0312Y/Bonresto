@@ -43,7 +43,7 @@
                         <div class="form-group row">
                         <label for="islive" class="col-sm-4 col-form-label"><?php echo display('liveortest');?></label>
                         <div class="col-sm-8 customesl">
-                            <select name="islive" class="form-control" required>
+                            <select name="islive" class="form-control">
                                 <option value=""  selected="selected"><?php echo display('select_option');?></option>
                                  <option value="1" <?php if(!empty($intinfo)){if($intinfo->Islive==1){echo "Selected";}} ?>><?php echo display('live');?></option>
                                 <option value="0" <?php if(!empty($intinfo)){if($intinfo->Islive==0){echo "Selected";}} ?>><?php echo display('test_mode');?></option>
@@ -53,7 +53,7 @@
 						<div class="form-group row">
                         <label for="status" class="col-sm-4 col-form-label"><?php echo display('status') ?></label>
                         <div class="col-sm-8">
-                            <select name="status"  class="form-control" required>
+                            <select name="status"  class="form-control">
                                 <option value=""  selected="selected"><?php echo display('select_option');?></option>
                                 <option value="1" <?php if(!empty($intinfo)){if($intinfo->status==1){echo "Selected";}} ?>><?php echo display('active')?></option>
                                 <option value="0" <?php if(!empty($intinfo)){if($intinfo->status==0){echo "Selected";}} ?>><?php echo display('inactive')?></option>

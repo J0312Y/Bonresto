@@ -15,20 +15,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Hungry_model extends CI_Model
 {
     //put your code here
-    public function allmenu_dropdown($theme = null)
+    public function allmenu_dropdown()
     {
 
         $this->db->select('*');
         $this->db->from('top_menu');
         $this->db->where('parentid', 0);
-        $this->db->where('is_footer', 0);
         $this->db->where('isactive', 1);
-
-        // Skip menu id 6-Gallery and 7-Team if theme is not 'exclusive'
-        if ($theme != 'exclusive') {
-            $this->db->where_not_in('menuid', [6, 7]);
-        }
-
         $parent   = $this->db->get();
         $menulist = $parent->result();
         $i        = 0;
@@ -39,17 +32,6 @@ class Hungry_model extends CI_Model
         }
 
         return $menulist;
-    }
-
-    public function get_footer_menu()
-    {
-        $this->db->select('*');
-        $this->db->from('top_menu');
-        $this->db->where('parentid', 0);
-        $this->db->where('is_footer', 1);
-        $this->db->where('isactive', 1);
-        $parent = $this->db->get();
-        return $parent->result();
     }
 
     public function sub_menu($id)

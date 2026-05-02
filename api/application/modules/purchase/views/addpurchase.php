@@ -43,7 +43,7 @@
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control datepicker" name="purchase_date" data-date-format="mm/dd/yyyy" value="<?php echo date('d-m-Y');?>" id="date" required="" tabindex="2" readonly="readonly">
                                     </div>
-                                    <label for="date" class="col-sm-3 col-form-label"><?php echo display('expdate') ?> <i class="text-danger">*</i></label>
+                                    <label for="date" class="col-sm-3 col-form-label"><?php echo display('expdate') ?> <a class="" data-toggle="tooltip" data-placement="top" title="Expiry date is optional, if want to add you can add, but it has no major impact."><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control datepicker" name="expire_date" data-date-format="mm/dd/yyyy" value="<?php echo date('d-m-Y');?>" id="expire_date" required="" tabindex="2" readonly="readonly">
                                     </div>
@@ -67,7 +67,7 @@
                                     	<select name="paytype" class="form-control" required="" onchange="bank_paymet(this.value)">
                                             <option value="1"><?php echo display('casp') ?></option>
                                             <option value="2"><?php echo display('bnkp') ?></option>
-                                            <option value="3">Due Payment</option> 
+                                            <option value="3"><?php echo display('due_payment') ?></option> 
                                         </select>
                                     </div>
                                 </div> 
@@ -97,9 +97,14 @@
                                 <tbody id="addPurchaseItem">
                                     <tr>
                                         <td class="span3 supplier">
-                                       <input type="text" name="product_name" required="" class="form-control product_name" onkeypress="product_list(1);" placeholder="Item Name" id="product_name_1" tabindex="5">
-                                   <input type="hidden" class="autocomplete_hidden_value product_id_1" name="product_id[]" id="SchoolHiddenId">
-                                   <input type="hidden" class="sl" value="1">
+                                      
+                                   
+                                        <select name="product_id[]" id="product_id_1" class="postform resizeselect form-control" onchange="product_list(1)">
+                    					<option value=""><?php echo display('select');?> <?php echo display('ingredients');?></option>
+										<?php foreach ($ingrdientslist as $ingrdients) {?>
+                    							<option value="<?php echo $ingrdients->id;?>"><?php echo $ingrdients->ingredient_name;?></option>
+                    					<?php }?>
+                  						</select>
                                         </td>
 
                                        <td class="wt">
@@ -150,4 +155,8 @@
             </div>
         </div>
     </div>
+    <div id="cntra" hidden>
+    <option value=""><?php echo display('select');?> <?php echo display('ingredients');?></option>
+<?php foreach ($ingrdientslist as $ingrdients) {?><option value="<?php echo $ingrdients->id;?>"><?php echo $ingrdients->ingredient_name;?></option><?php }?>
+</div>
     <script src="<?php echo base_url('application/modules/purchase/assets/js/addpurchase_script.js'); ?>" type="text/javascript"></script>

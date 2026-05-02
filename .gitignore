@@ -20,3 +20,5 @@ application/logs/*
 application/cache/*
 .env
 application/config/license.json
+.htaccess
+application/config/license.json

@@ -37,31 +37,35 @@ class V3 extends MY_Controller
 			$IsReg = $this->Api_kitchen_model->checkEmailOrPhoneIsRegistered('user', $data);
 
 			if (!$IsReg) {
-				return $this->respondUserNotReg('Cet e-mail ou ce numéro de téléphone n\'a pas encore été enregistré.');
+				return $this->respondUserNotReg('This email or phone number has not yet been registered.');
 			}
 			$result = $this->Api_kitchen_model->authenticate_user('user', $data);
-			$updatetData['waiter_kitchenToken']    			= $this->input->post('token', TRUE);
-			$this->Api_kitchen_model->update_date('user', $updatetData, 'id', $result->id);
-			$webseting = $this->Api_kitchen_model->read('powerbytxt,currency,servicecharge', 'setting', array('id' => 2));
-			$currencyinfo = $this->Api_kitchen_model->read('currencyname,curr_icon', 'currency', array('currencyid' => $webseting->currency));
-			$kitcheninfo = $this->Api_kitchen_model->readall('kitchen_id', 'tbl_assign_kitchen', 'kitchen_id', array('userid' => $result->id));
-			$allkitchenid = '';
-			foreach ($kitcheninfo as $kitchenid) {
-				$allkitchenid .= "'" . $kitchenid->kitchen_id . "',";
-			}
-			$allkitchenid = rtrim($allkitchenid, ',');
 
 			if ($result != FALSE) {
-				$str = substr($result->picture, 2);
+
+				$updatetData['waiter_kitchenToken']    			= $this->input->post('token', TRUE);
+				$this->Api_kitchen_model->update_date('user', $updatetData, 'id', $result->id);
+
+				$webseting = $this->Api_kitchen_model->read('powerbytxt,currency,servicecharge', 'setting', array('id' => 2));
+				$currencyinfo = $this->Api_kitchen_model->read('currencyname,curr_icon', 'currency', array('currencyid' => $webseting->currency));
+				$kitcheninfo = $this->Api_kitchen_model->readall('kitchen_id', 'tbl_assign_kitchen', 'kitchen_id', array('userid' => $result->id));
+				$allkitchenid = '';
+				foreach ($kitcheninfo as $kitchenid) {
+					$allkitchenid .= "'" . $kitchenid->kitchen_id . "',";
+				}
+				$allkitchenid = rtrim($allkitchenid, ',');
+
+
+				$str = substr($result->picture ?? '', 2);
 				$result->{"UserPictureURL"} = base_url() . $str;
 				$result->{"PowerBy"} = $webseting->powerbytxt;
 				$result->{"currencycode"} = $currencyinfo->currencyname;
 				$result->{"currencysign"} = $currencyinfo->curr_icon;
 				$result->{"servicecharge"} = $webseting->servicecharge;
 				$result->{"kitchenid"} = $allkitchenid;
-				return $this->respondWithSuccess('Vous vous êtes connecté avec succès.', $result);
+				return $this->respondWithSuccess('You have successfully logged in.', $result);
 			} else {
-				return $this->respondWithError('L\'e-mail et le mot de passe que vous avez saisis ne correspondent pas.', $result);
+				return $this->respondWithError('The email and password you entered do not match.', $result);
 			}
 		}
 	}
@@ -75,15 +79,16 @@ class V3 extends MY_Controller
 			return $this->respondWithValidationError($errors);
 		} else {
 			$kitchenuserid = $this->input->post('id', TRUE);
- 			$output = array();
+			$output = array();
 			$kitcheninfo = $this->Api_kitchen_model->readallkitchen('tbl_kitchen.kitchenid,tbl_kitchen.kitchen_name,tbl_assign_kitchen.kitchen_id', 'tbl_assign_kitchen', 'tbl_assign_kitchen.kitchen_id', array('tbl_assign_kitchen.userid' => $kitchenuserid));
+
 			$i = 0;
 			foreach ($kitcheninfo as $kitchenid) {
 				$output['kitchenlist'][$i]['kitchenid'] = $kitchenid->kitchenid;
 				$output['kitchenlist'][$i]['kitchenname'] = $kitchenid->kitchen_name;
 				$i++;
 			}
-			return $this->respondWithSuccess('Toutes les listes de cuisine.', $output);
+			return $this->respondWithSuccess('All kitchen lists.', $output);
 		}
 	}
 
@@ -173,9 +178,9 @@ class V3 extends MY_Controller
 					$output['hasitem'] = 0;
 				}
 
-				return $this->respondWithSuccess('Liste des commandes en attente.', $output);
+				return $this->respondWithSuccess('List of pending orders.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -187,6 +192,8 @@ class V3 extends MY_Controller
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
 		} else {
+
+			$orderid = $this->input->post('Orderid', TRUE);
 			$updatetData = array('order_status'     => 2);
 			$this->db->where('order_id', $orderid);
 			$this->db->update('customer_order', $updatetData);
@@ -200,6 +207,7 @@ class V3 extends MY_Controller
 			$typeinfo = $this->Api_kitchen_model->read('*', 'customer_type', array('customer_type_id' => $customerorder->cutomertype));
 
 			$orderdetails = $this->db->select('order_menu.*,item_foods.ProductsID,item_foods.ProductName,variant.variantid,variant.variantName,variant.price')->from('order_menu')->join('customer_order', 'order_menu.order_id=customer_order.order_id', 'left')->join('item_foods', 'order_menu.menu_id=item_foods.ProductsID', 'left')->join('variant', 'order_menu.varientid=variant.variantid', 'left')->where('order_menu.order_id', $orderid)->where('item_foods.kitchenid', $kitchenid)->order_by('customer_order.order_id', 'desc')->get()->result();
+
 			//
 			$billinfo = $this->Api_kitchen_model->read('*', 'bill', array('order_id' => $orderid));
 
@@ -208,7 +216,7 @@ class V3 extends MY_Controller
 				$output['CustomerPhone'] = $customerinfo->customer_phone;
 				$output['CustomerEmail'] = $customerinfo->customer_email;
 				$output['CustomerType'] = $typeinfo->customer_type;
-				$output['TableName'] = $tableinfo->tablename;
+				$output['TableName'] = $tableinfo->tablename ?? '';
 				$i = 0;
 
 				foreach ($orderdetails as $item) {
@@ -246,9 +254,9 @@ class V3 extends MY_Controller
 				$output['order_total']           = $billinfo->bill_amount;
 				$output['orderdate']             = $billinfo->bill_date;
 
-				return $this->respondWithSuccess('détails de la commande', $output);
+				return $this->respondWithSuccess('order details', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -263,6 +271,7 @@ class V3 extends MY_Controller
 			$errors = $this->form_validation->error_array();
 			return $this->respondWithValidationError($errors);
 		} else {
+
 			$ProductsID = $this->input->post('ProductsID', TRUE);
 			$variantid = $this->input->post('variantid', TRUE);
 			$fisready = $this->input->post('isready', TRUE);
@@ -287,8 +296,11 @@ class V3 extends MY_Controller
 			$customerinfo = $this->Api_kitchen_model->read('*', 'customer_info', array('customer_id' => $customerorder->customer_id));
 			$tableinfo = $this->Api_kitchen_model->read('*', 'rest_table', array('tableid' => $customerorder->table_no));
 			$typeinfo = $this->Api_kitchen_model->read('*', 'customer_type', array('customer_type_id' => $customerorder->cutomertype));
+
 			$isexit = $this->db->select('*')->from('tbl_orderprepare')->where('orderid', $orderid)->where('menuid', $ProductsID)->where('varient', $variantid)->get()->row();
+
 			$orderdetails = $this->db->select('order_menu.*,item_foods.ProductsID,item_foods.ProductName,variant.variantid,variant.variantName,variant.price')->from('order_menu')->join('customer_order', 'order_menu.order_id=customer_order.order_id', 'left')->join('item_foods', 'order_menu.menu_id=item_foods.ProductsID', 'left')->join('variant', 'order_menu.varientid=variant.variantid', 'left')->where('order_menu.order_id', $orderid)->where('item_foods.kitchenid', $kitchenid)->order_by('customer_order.order_id', 'desc')->get()->result();
+
 			//
 			$billinfo = $this->Api_kitchen_model->read('*', 'bill', array('order_id' => $orderid));
 
@@ -405,9 +417,9 @@ class V3 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('détails de la commande', $output);
+				return $this->respondWithSuccess('order details', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}
@@ -425,6 +437,7 @@ class V3 extends MY_Controller
 			$vaids = $this->input->post('varientid', TRUE);
 			$allfood_id = explode(",", $allfood);
 			$m = 0;
+
 			foreach ($allfood_id as $foodid) {
 				$updatetready = array(
 					'food_status'           => 1,
@@ -434,12 +447,14 @@ class V3 extends MY_Controller
 				$this->db->where('menu_id', $foodid);
 				$this->db->update('order_menu', $updatetready);
 				$isexit = $this->db->select('*')->from('tbl_orderprepare')->where('orderid', $order_id)->where('menuid', $foodid)->where('varient', $vaids)->get()->row();
+
 				if (empty($isexit)) {
 					$ready = array(
 						'preparetime' => date('Y-m-d H:i:s'),
-						'orderid'     => $orderid,
-						'menuid'     => $menuid,
-						'varient'     => $vaids[$m]
+						'orderid'     => $order_id,
+						//'menuid'     => @$menuid,
+						'menuid'     => $foodid,
+						'varient'     => @$vaids[$m] ?? 0
 					);
 					$this->db->insert('tbl_orderprepare', $ready);
 					$m++;
@@ -450,7 +465,7 @@ class V3 extends MY_Controller
 			$this->db->where('order_id', $order_id);
 			$this->db->update('customer_order', $updatetData);
 
-			return $this->respondWithSuccess('Tous les articles sont prêts pour cette commande de cuisine', $output);
+			return $this->respondWithSuccess('All items are ready for this kitchen order', $output);
 		}
 	}
 	public function allonlineorder()
@@ -476,9 +491,9 @@ class V3 extends MY_Controller
 						$i++;
 					}
 				}
-				return $this->respondWithSuccess('Liste des commandes entrantes', $output);
+				return $this->respondWithSuccess('List of incoming orders', $output);
 			} else {
-				return $this->respondWithError('Aucune commande entrante trouvée !!!', $output);
+				return $this->respondWithError('No incoming orders found!!!', $output);
 			}
 		}
 	}
@@ -526,9 +541,9 @@ class V3 extends MY_Controller
 						$i++;
 					}
 				}
-				return $this->respondWithSuccess('Liste des commandes entrantes', $output);
+				return $this->respondWithSuccess('List of incoming orders', $output);
 			} else {
-				return $this->respondWithError('Aucune commande trouvée !!!', $output);
+				return $this->respondWithError('No orders found!!!', $output);
 			}
 		}
 	}
@@ -553,9 +568,9 @@ class V3 extends MY_Controller
 			$kitcheninfo = $this->Api_kitchen_model->allincommingkitchenview($orderid, $kitchenid, $foodid, $varientid);
 
 			if ($orderinfo->order_status == 5) {
-				return $this->respondWithError('Cette commande est annulée par l\'administrateur. Veuillez en essayer une autre !!!', $output);
+				return $this->respondWithError('This order is canceled by the administrator. Please try another one!!!', $output);
 			} else if ($kitcheninfo == 0) {
-				return $this->respondWithError('Cette commande est déjà attribuée. Veuillez en essayer une autre !!!', $output);
+				return $this->respondWithError('This order is already assigned. Please try another one!!!', $output);
 			} else {
 				$kitchenorder['kitchenid']   		    = $kitchenid;
 				$kitchenorder['orderid']   	        = $orderid;
@@ -569,7 +584,7 @@ class V3 extends MY_Controller
 					'varient'     => $varientid
 				);
 				$this->db->insert('tbl_itemaccepted', $itemaccepted);
-				return $this->respondWithSuccess('Commande Attribuer à la cuisine', $output);
+				return $this->respondWithSuccess('Order Assign to Kitchen', $output);
 			}
 		}
 	}
@@ -637,7 +652,7 @@ class V3 extends MY_Controller
 				$this->db->where('order_id', $orderid);
 				$this->db->update('customer_order', $updatetData);
 			}
-			return $this->respondWithSuccess('Commande rejetée', $output);
+			return $this->respondWithSuccess('Order rejected', $output);
 		}
 	}
 	public function completeorder()
@@ -671,9 +686,9 @@ class V3 extends MY_Controller
 					$i++;
 				}
 
-				return $this->respondWithSuccess('Liste complète de commandes.', $output);
+				return $this->respondWithSuccess('Complete list of commands.', $output);
 			} else {
-				return $this->respondWithError('Commande introuvable.!!!', $output);
+				return $this->respondWithError('Order not found.!!!', $output);
 			}
 		}
 	}

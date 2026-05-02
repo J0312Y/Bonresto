@@ -39,11 +39,11 @@ class Reservation extends MX_Controller {
         $config['next_tag_open'] = "<li>";
         $config['next_tag_close'] = "</li>";
         $config['prev_tag_open'] = "<li>";
-        $config['prev_tag_close'] = "</li>";
+        $config['prev_tagl_close'] = "</li>";
         $config['first_tag_open'] = "<li>";
-        $config['first_tag_close'] = "</li>";
+        $config['first_tagl_close'] = "</li>";
         $config['last_tag_open'] = "<li>";
-        $config['last_tag_close'] = "</li>";
+        $config['last_tagl_close'] = "</li>";
         /* ends of bootstrap */
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
@@ -89,265 +89,234 @@ class Reservation extends MX_Controller {
         $data['page']   = "reservationfrm";
 		$this->load->view('reservation/reservationfrm', $data);
 		}
-public function create($id = null)
-{
-    $this->permission->method('reservation','create')->redirect();
-    $data['title'] = display('take_reservation');
+    public function create($id = null)
+    {
+	  $this->permission->method('reservation','create')->redirect();
+	  $data['title'] = display('take_reservation');
+	  #-------------------------------#
+		$this->form_validation->set_rules('customer_name',"Customer Name",'required');
+		$this->form_validation->set_rules('tableid',"Table No"  ,'required');
+		$this->form_validation->set_rules('tablicapacity', "No. of Person" ,'required');
+		$this->form_validation->set_rules('bookfromtime', display('s_time')  ,'required');
+		$this->form_validation->set_rules('bookendtime', display('e_time')  ,'required');
+		$this->form_validation->set_rules('bookdate', display('date')  ,'required');
+		$this->form_validation->set_rules('status', display('status')  ,'required');
+	    $id=$this->input->post('reserveid');
+	   	$bookdate = str_replace('/','-',$this->input->post('bookdate',true));
+		$newdate= date('Y-m-d' , strtotime($bookdate));
+		$tableid=$this->input->post('tableid');
+		$status=$this->input->post('status');
+		$bookstatus="";
+		if($status==1){
+			$bookstatus=0;
+			}
+		if($status==2){
+			$bookstatus=1;
+			}
+		
+	  $data['intinfo']="";
+	  
+	  $udata = array('status'       => $bookstatus);
+	  if ($this->form_validation->run()) { 
+	   if (empty($this->input->post('reserveid'))) {
+		$this->permission->method('reservation','create')->redirect();
+		
+	 $logData = array(
+	   'action_page'         => "Reservation List",
+	   'action_done'     	 => "Insert Data", 
+	   'remarks'             => "New Reservation Created",
+	   'user_name'           => $this->session->userdata('fullname'),
+	   'entry_date'          => date('Y-m-d H:i:s'),
+	 );
+	  $customerData = array(
+	   'customer_name'       => $this->input->post('customer_name',true),
+	   'customer_email'      => $this->input->post('email',true), 
+	   'customer_address'    => "t",
+	   'customer_phone'      => $this->input->post('mobile',true), 
+	   'favorite_delivery_address'      => "t",
+	   'is_active'          => 1,
+	  );
+	 
+	  $mobile=$this->input->post('mobile',true);
+	  $rerturnid=$this->reservation_model->insertcustomer($customerData,$mobile);
+	  $data['units']   = (Object) $postData = array(
+	   'reserveid'     		 => $this->input->post('reserveid'),
+	   'cid' 	 			 => $rerturnid,
+	   'tableid' 	 		 => $this->input->post('tableid',true),
+	   'person_capicity' 	 => $this->input->post('tablicapacity',true),
+	   'formtime' 	 		 => $this->input->post('bookfromtime',true),
+	   'totime' 	 		 => $this->input->post('bookendtime',true),
+	   'reserveday' 	 	 => $newdate,
+	   'status' 	 	     => $this->input->post('status',true),
+	  );
+		if ($this->reservation_model->create($postData)) { 
+		$insert_id = $this->db->insert_id();
+		 $this->logs_model->log_recorded($logData);
+		 
+		 $this->db->where('tableid',$tableid);
+		 $this->db->update('rest_table',$udata);
+		 $send_email = $this->reservation_model->read('*', 'email_config', array('email_config_id' => 1));
+						$fullname=$this->input->post('customer_name',true);
+						$email=$this->input->post('email',true);
+						$text="Your Reservation is Booked.Please inform me if anything change.\r\n Thank You";
+						$phone=$this->input->post('mobile',true);
+						$evdate=$newdate;
+						$numofpeople=$this->input->post('tablicapacity',TRUE);
+						$subject="Booking Information";
+						$config = array(
+                          'protocol'  => $send_email->protocol,
+                          'smtp_host' => $send_email->smtp_host,
+                          'smtp_port' => $send_email->smtp_port,
+                          'smtp_user' => $send_email->sender,
+                          'smtp_pass' => $send_email->smtp_password,
+                          'mailtype'  => $send_email->mailtype,
+                          'charset'   => 'utf-8'
+                        );
 
-    // Validation
-    $this->form_validation->set_rules('customer_name',"Customer Name",'required');
-    $this->form_validation->set_rules('tableid',"Table No"  ,'required');
-    $this->form_validation->set_rules('tablicapacity', "No. of Person" ,'required');
-    $this->form_validation->set_rules('bookfromtime', display('s_time')  ,'required');
-    $this->form_validation->set_rules('bookendtime', display('e_time')  ,'required');
-    $this->form_validation->set_rules('bookdate', display('date')  ,'required');
-    $this->form_validation->set_rules('status', display('status')  ,'required');
 
-    $id = $this->input->post('reserveid');
+                        $this->load->library('email');
+                        $this->email->initialize($config);
+                        $this->email->set_newline("\r\n");
+                        $this->email->set_mailtype("html");
+                        $htmlContent = ReservationEmail($insert_id,$mobile);
+                        $this->email->from($send_email->sender, 'Reservation Info');
+                        $this->email->to($email);
+                        $this->email->cc($send_email->sender);
+                        $this->email->subject($subject);
+                        $this->email->message($htmlContent);
+                        $this->email->send();
+		 $this->session->set_flashdata('message', display('save_successfully'));
+		 redirect('reservation/reservation/index');
+		} else {
+		 $this->session->set_flashdata('exception',  display('please_try_again'));
+		}
+		redirect("reservation/reservation/index"); 
+	
+	   } else {
+		$this->permission->method('reservation','update')->redirect();
+		
+		  $logData = array(
+		   'action_page'         => "Reservation List",
+		   'action_done'     	 => "Update Data", 
+		   'remarks'             => "Reservation Updated",
+		   'user_name'           => $this->session->userdata('fullname'),
+		   'entry_date'          => date('Y-m-d H:i:s'),
+		  );
+	  if(!empty($id)) {
+		$data['reserveinfo']   = $this->reservation_model->findById($id);
+	   }
+	  $data['units']   = (Object) $postData = array(
+	   'reserveid'     		 => $this->input->post('reserveid'),
+	   'cid' 	 			 => $data['reserveinfo']->cid,
+	   'tableid' 	 		 => $this->input->post('tableid',true),
+	   'person_capicity' 	 => $this->input->post('tablicapacity',true),
+	   'formtime' 	 		 => $this->input->post('bookfromtime',true),
+	   'totime' 	 		 => $this->input->post('bookendtime',true),
+	   'reserveday' 	 	 => $newdate,
+	   'status' 	 	     => $this->input->post('status',true),
+	  );
+	  
+	   $userdata = array(
+				   'customer_name'        => $this->input->post('customer_name',true),
+				   'customer_email'       => $this->input->post('email',true),
+				   'customer_phone'       => $this->input->post('mobile',true),
+				  );
+	  $customerinfo=$this->db->select("*")->from('customer_info')->where('customer_id',$data['reserveinfo']->cid)->get()->row();
+	  $reservationinfo=$this->db->select("*")->from('tblreservation')->where('cid',$data['reserveinfo']->cid)->get()->row();
 
-    // ------ DATE FORMAT ------
-    $bookdate = str_replace('/','-',$this->input->post('bookdate',true));
-    $newdate = date('Y-m-d', strtotime($bookdate));
+		if ($this->reservation_model->update($postData)) { 
+		  if($this->input->post('status')==2){
+		   $send_email = $this->reservation_model->read('*', 'email_config', array('email_config_id' => 1));
+					
+						$fullname=$this->input->post('customer_name',true);
+						$email=$this->input->post('email',true);
+						$text="Your Reservation is Booked.Please inform me if anything change.\r\n Thank You";
+						$phone=$this->input->post('mobile',true);
+						$evdate=$newdate;
+						$numofpeople=$this->input->post('tablicapacity',TRUE);
+						$subject="Booking Information";
+						$config = array(
+                          'protocol'  => $send_email->protocol,
+                          'smtp_host' => $send_email->smtp_host,
+                          'smtp_port' => $send_email->smtp_port,
+                          'smtp_user' => $send_email->sender,
+                          'smtp_pass' => $send_email->smtp_password,
+                          'mailtype'  => $send_email->mailtype,
+                          'charset'   => 'utf-8'
+                        );
 
-    // ------ 🔒 CHECK UNAVAILABLE DATE ------
-    $unavailable = $this->db->select('*')
-        ->from('reservationofday')
-        ->where('DATE(offdaydate)', $newdate)
-        ->where('is_active', 1)
-        ->get()
-        ->row();
 
-    if ($unavailable) {
-        $this->session->set_flashdata('exception', 'Impossible de réserver : cette date est indisponible.');
-        redirect('reservation/reservation/index');
-        exit;
+                        $this->load->library('email');
+                        $this->email->initialize($config);
+                        $this->email->set_newline("\r\n");
+                        $this->email->set_mailtype("html");
+                        $htmlContent = ReservationEmail($id,$phone);
+                        $this->email->from($send_email->sender, 'Reservation Info');
+                        $this->email->to($email);
+                        $this->email->cc($send_email->sender);
+                        $this->email->subject($subject);
+                        $this->email->message($htmlContent);
+                        $this->email->send();
+								 /*PUSH Notification For Customer*/
+	  				$mymsg="New Reservation";
+				$bodymsg="Dear Sir/Madam ".$customerinfo->customer_name." Table:".$reservationinfo->tablename." is Reserved On ".$newdate." ".$this->input->post('bookfromtime',true);
+			  $icon=base_url('assets/img/applogo.png');
+            $content = array(
+                "en" => $bodymsg,
+            );
+            $title = array(
+                "en" => $mymsg,
+            );
+            $fields = array(
+                'app_id' => "208455d9-baca-4ed2-b6be-12b466a2efbd",
+                'include_player_ids' => array($customerinfo->customer_token), 
+                'data' => array(
+                'type' => "order place",
+                'logo' => $icon
+                ),
+                'contents' => $content,
+                'headings' => $title,
+            );
+
+            $fields = json_encode($fields);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            $response = curl_exec($ch);
+            curl_close($ch);
+	  
+		  }
+	  
+		 $this->logs_model->log_recorded($logData);
+		 $this->db->where('tableid',$tableid);
+		 $this->db->update('rest_table',$udata);
+		 $this->db->where('customer_id',$data['reserveinfo']->cid);
+		 $this->db->update('customer_info',$userdata);
+		 $this->session->set_flashdata('message', display('update_successfully'));
+		} else {
+		$this->session->set_flashdata('exception',  display('please_try_again'));
+		}
+		redirect("reservation/reservation/index");  
+	   }
+	  } else { 
+	   if(!empty($id)) {
+		$data['title'] = display('update');
+		$data['intinfo']   = $this->reservation_model->findById($id);
+		$data['customerinfo']   = $this->reservation_model->findByCusId($data['reserveinfo']->cid);
+		$data['tableinfo']   = $this->reservation_model->findBytableId($data['reserveinfo']->tableid);
+	   }
+	   
+	   $data['module'] = "reservation";
+	   $data['page']   = "reservationlist";   
+	   echo Modules::run('template/layout', $data); 
+	   }   
+ 
     }
-    // ------ END CHECK ------
-
-    $tableid = $this->input->post('tableid');
-    $status  = $this->input->post('status');
-
-    $bookstatus = ($status == 1 ? 0 : 1);
-
-    $data['intinfo'] = "";
-    $udata = array('status' => $bookstatus);
-
-    if ($this->form_validation->run()) {
-
-        // ---------------------------------------------------------
-        // 🔹 INSERT (create)
-        // ---------------------------------------------------------
-        if (empty($this->input->post('reserveid'))) {
-            $this->permission->method('reservation','create')->redirect();
-
-            $logData = array(
-                'action_page' => "Reservation List",
-                'action_done' => "Insert Data",
-                'remarks' => "New Reservation Created",
-                'user_name' => $this->session->userdata('fullname'),
-                'entry_date' => date('Y-m-d H:i:s'),
-            );
-
-            $customerData = array(
-                'customer_name' => $this->input->post('customer_name',true),
-                'customer_email' => $this->input->post('email',true),
-                'customer_address' => "t",
-                'customer_phone' => $this->input->post('mobile',true),
-                'favorite_delivery_address' => "t",
-                'is_active' => 1,
-            );
-
-            $mobile = $this->input->post('mobile',true);
-            $rerturnid = $this->reservation_model->insertcustomer($customerData,$mobile);
-
-            $data['units'] = (Object) $postData = array(
-                'reserveid' => $this->input->post('reserveid'),
-                'cid' => $rerturnid,
-                'tableid' => $this->input->post('tableid',true),
-                'person_capicity' => $this->input->post('tablicapacity',true),
-                'formtime' => $this->input->post('bookfromtime',true),
-                'totime' => $this->input->post('bookendtime',true),
-                'reserveday' => $newdate,
-                'status' => $this->input->post('status',true),
-            );
-
-            if ($this->reservation_model->create($postData)) {
-
-                $insert_id = $this->db->insert_id();
-                $this->logs_model->log_recorded($logData);
-
-                $this->db->where('tableid',$tableid);
-                $this->db->update('rest_table',$udata);
-
-                // EMAIL
-                $send_email = $this->reservation_model->read('*', 'email_config', array('email_config_id' => 1));
-
-                $config = array(
-                    'protocol'  => $send_email->protocol,
-                    'smtp_host' => $send_email->smtp_host,
-                    'smtp_port' => $send_email->smtp_port,
-                    'smtp_user' => $send_email->sender,
-                    'smtp_pass' => $send_email->smtp_password,
-                    'mailtype'  => $send_email->mailtype,
-                    'charset'   => 'utf-8'
-                );
-
-                $this->load->library('email');
-                $this->email->initialize($config);
-                $this->email->set_newline("\r\n");
-                $this->email->set_mailtype("html");
-
-                $htmlContent = ReservationEmail($insert_id,$mobile);
-                $this->email->from($send_email->sender, 'Reservation Info');
-                $this->email->to($this->input->post('email',true));
-                $this->email->cc($send_email->sender);
-                $this->email->subject("Booking Information");
-                $this->email->message($htmlContent);
-                $this->email->send();
-
-                $this->session->set_flashdata('message', display('save_successfully'));
-                redirect('reservation/reservation/index');
-            }
-
-            $this->session->set_flashdata('exception', display('please_try_again'));
-            redirect("reservation/reservation/index");
-
-        } 
-
-        // ---------------------------------------------------------
-        // 🔹 UPDATE (edit)
-        // ---------------------------------------------------------
-        else {
-            $this->permission->method('reservation','update')->redirect();
-
-            $logData = array(
-                'action_page' => "Reservation List",
-                'action_done' => "Update Data",
-                'remarks' => "Reservation Updated",
-                'user_name' => $this->session->userdata('fullname'),
-                'entry_date' => date('Y-m-d H:i:s'),
-            );
-
-            if (!empty($id)) {
-                $data['reserveinfo'] = $this->reservation_model->findById($id);
-            }
-
-            $data['units'] = (Object) $postData = array(
-                'reserveid' => $this->input->post('reserveid'),
-                'cid' => $data['reserveinfo']->cid,
-                'tableid' => $this->input->post('tableid',true),
-                'person_capicity' => $this->input->post('tablicapacity',true),
-                'formtime' => $this->input->post('bookfromtime',true),
-                'totime' => $this->input->post('bookendtime',true),
-                'reserveday' => $newdate,
-                'status' => $this->input->post('status',true),
-            );
-
-            $userdata = array(
-                'customer_name' => $this->input->post('customer_name',true),
-                'customer_email' => $this->input->post('email',true),
-                'customer_phone' => $this->input->post('mobile',true),
-            );
-
-            $customerinfo = $this->db->select("*")->from('customer_info')->where('customer_id',$data['reserveinfo']->cid)->get()->row();
-            $reservationinfo = $this->db->select("*")->from('tblreservation')->where('cid',$data['reserveinfo']->cid)->get()->row();
-
-            if ($this->reservation_model->update($postData)) {
-
-                // ------------------------- EMAIL + PUSH -------------------------
-                $this->load->helper('common_helper');
-                
-                if ($this->input->post('status') == 2) { // 2 = Confirmer/Booked
-
-                    $send_email = $this->reservation_model->read('*', 'email_config', array('email_config_id' => 1));
-
-                    $config = array(
-                        'protocol'  => $send_email->protocol,
-                        'smtp_host' => $send_email->smtp_host,
-                        'smtp_port' => $send_email->smtp_port,
-                        'smtp_user' => $send_email->sender,
-                        'smtp_pass' => $send_email->smtp_password,
-                        'mailtype'  => $send_email->mailtype,
-                        'charset'   => 'utf-8'
-                    );
-
-                    $this->load->library('email');
-                    $this->email->initialize($config);
-                    $this->email->set_newline("\r\n");
-                    $this->email->set_mailtype("html");
-
-                    //Utilisation de la fonction de confirmation
-                    $htmlContent = ReservationConfirmedEmail($id,$this->input->post('mobile',true)); 
-                    
-                    $this->email->from($send_email->sender, 'Reservation Info');
-                    $this->email->to($this->input->post('email',true));
-                    $this->email->cc($send_email->sender);
-                    $this->email->subject("Booking Confirmation"); // Subject plus clair pour la confirmation
-                    $this->email->message($htmlContent);
-                    $this->email->send();
-
-                    // ---------------- PUSH BY ONESIGNAL ----------------
-                    $mymsg="New Reservation";
-                    $bodymsg="Dear ".$customerinfo->customer_name." Table:".$reservationinfo->tablename." is Reserved On ".$newdate." ".$this->input->post('bookfromtime',true);
-                    $icon=base_url('assets/img/applogo.png');
-
-                    $content = ["en" => $bodymsg];
-                    $title = ["en" => $mymsg];
-
-                    $fields = array(
-                        'app_id' => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-                        'include_player_ids' => array($customerinfo->customer_token),
-                        'data' => array('type' => "order place",'logo' => $icon),
-                        'contents' => $content,
-                        'headings' => $title,
-                    );
-
-                    $fields = json_encode($fields);
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                    curl_setopt($ch, CURLOPT_HEADER, FALSE);
-                    curl_setopt($ch, CURLOPT_POST, TRUE);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-                    curl_exec($ch);
-                    curl_close($ch);
-                }
-                // -----------------------------------------------------
-
-                $this->logs_model->log_recorded($logData);
-
-                $this->db->where('tableid',$tableid);
-                $this->db->update('rest_table',$udata);
-                $this->db->where('customer_id',$data['reserveinfo']->cid);
-                $this->db->update('customer_info',$userdata);
-
-                $this->session->set_flashdata('message', display('update_successfully'));
-            }
-            else {
-                $this->session->set_flashdata('exception',  display('please_try_again'));
-            }
-
-            redirect("reservation/reservation/index");
-        }
-
-    }
-    else {
-        // -------- VIEW PART --------
-        if(!empty($id)) {
-            $data['title'] = display('update');
-            $data['intinfo'] = $this->reservation_model->findById($id);
-            $data['customerinfo'] = $this->reservation_model->findByCusId($data['reserveinfo']->cid);
-            $data['tableinfo'] = $this->reservation_model->findBytableId($data['reserveinfo']->tableid);
-        }
-
-        $data['module'] = "reservation";
-        $data['page'] = "reservationlist";   
-        echo Modules::run('template/layout', $data); 
-    }
-}
-
    public function updateintfrm($id){
 		$this->permission->method('reservation','update')->redirect();
 		$data['title'] = display('update');
