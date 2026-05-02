@@ -474,6 +474,9 @@ $config['csrf_exclude_uris'] = [
     'checkcoupon',
     // SaaS API — all routes handled via JWT, CSRF not needed
     'saas/.*',
+    // Sync API — authentifié par X-Sync-Key + HMAC, CSRF non applicable
+    'sync_api/.*',
+    'sync_cron/.*',
 ];
 if (isset($_SERVER["REQUEST_URI"])) {
 
