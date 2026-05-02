@@ -2863,10 +2863,6 @@ class App extends MY_Controller
      */
     private function _sync_enqueue_order(int $order_id): void {
         try {
-            @file_put_contents(APPPATH . 'logs/sync_debug.log',
-                '[' . date('Y-m-d H:i:s') . '] _sync_enqueue_order appelée pour order_id=' . $order_id . PHP_EOL,
-                FILE_APPEND);
-
             $order = $this->db->where('order_id', $order_id)->get('customer_order')->row_array();
             if (!$order) return;
 
