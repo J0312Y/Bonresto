@@ -11,7 +11,7 @@ CREATE TABLE `membership` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-tbl_customerpoint
+
 
 CREATE TABLE `payment_method` (
   `payment_method_id` int(11) NOT NULL AUTO_INCREMENT,

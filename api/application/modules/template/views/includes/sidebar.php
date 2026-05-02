@@ -397,28 +397,6 @@
                 "permission" => "create",
             ],
         ];
-        	$HmvcMenu2["accounts"] = array(
-    		"icon"           => "<i class='ti-bag'></i>", 
-   			"c_o_a" => array("controller" => "accounts","method"=> "show_tree","permission" => "read"), 
-			"supplier_payment" => array("controller" => "accounts","method" => "supplier_payments","permission" => "create"), 
-	        "cash_adjustment" => array("controller" => "accounts","method"     => "cash_adjustment","permission" => "create"), 
-      		"debit_voucher" => array("controller" => "accounts","method" => "debit_voucher","permission" => "create"), 
-            "credit_voucher" => array("controller" => "accounts","method"=> "credit_voucher","permission" => "read"), 
-            "contra_voucher" => array("controller" => "accounts","method" => "contra_voucher","permission" => "read"),
-     		"journal_voucher" => array("controller" => "accounts","method"=> "journal_voucher","permission" => "read"),  
-            "voucher_approval" => array("controller" => "accounts","method" => "aprove_v","permission" => "create"), 
-            "account_report" => array(
-		     	"voucher_report" => array("controller" => "accounts", "method"     => "voucher_report","permission" => "read"), 
-				"cash_book" => array("controller" => "accounts","method"=> "cash_book","permission" => "read"), 
-				"bank_book" => array("controller" => "accounts","method"=> "bank_book","permission" => "read"), 
-				"general_ledger" => array("controller" => "accounts","method" => "general_ledger","permission" => "read"), 
-				"trial_balance" => array("controller" => "accounts","method" => "trial_balance","permission" => "read"),
-				"profit_loss" => array("controller" => "accounts","method" => "profit_loss_report","permission" => "read"),
-				"cash_flow" => array("controller" => "accounts","method" => "cash_flow_report","permission" => "read"),
-				"coa_print" => array("controller" => "accounts","method" => "coa_print","permission" => "read"),
-				"balance_sheet" => array("controller" => "accounts","method" => "balance_sheet","permission" => "read")  
-    			), 
-		);
 
         $HmvcMenu2["hrm"] = [
             "icon"            => "<i class='fa fa-users'></i>",
@@ -593,26 +571,6 @@
                 ],
             ],
         ];
-        
-        $HmvcMenu["qrapp"] = array(
-            "icon" => "<i class='fa fa-qrcode'></i>",
-            "qr_order_list" => array(
-                "controller" => "qrorder",
-                "method"     => "index",
-                "permission" => "read"
-            ),
-            "all_table_qr" => array(
-                "controller" => "qrtable",
-                "method"     => "index",
-                "permission" => "read"
-            ),
-            "qr_payment_setting" => array(
-                "controller" => "qrpayment",
-                "method"     => "index",
-                "permission" => "read"
-            )
-        );
-
 
         $HmvcMenu2["report"] = [
             "icon"                       => "<i class='fa fa-line-chart' aria-hidden='true'></i>",
@@ -694,9 +652,8 @@
                 "method"     => "table_sale",
                 "permission" => "read",
             ],
-            
         ];
-  
+
         if (isset($HmvcMenu2) && $HmvcMenu2 != null && sizeof($HmvcMenu2) > 0) {
 
             foreach ($HmvcMenu2 as $moduleName => $moduleData) {
@@ -845,32 +802,6 @@
         }
 
         ?>
-       <?php
-    if(!empty($HmvcMenu["qrapp"])) {
-        $qrAppMenu = $HmvcMenu["qrapp"];
-        ?>
-        <li class="treeview <?php echo in_array($this->uri->segment(2), ['qrorder','qrtable','qrpayment']) ? 'active' : ''; ?>">
-            <a href="#">
-                <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
-                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-            </a>
-            <ul class="treeview-menu">
-                <li class="<?php echo $this->uri->segment(2) == 'qrorder' ? 'active' : ''; ?>">
-                    <a href="<?php echo base_url('qrapp/qrorder'); ?>">QR Order List</a>
-                </li>
-                <li class="<?php echo $this->uri->segment(2) == 'qrtable' ? 'active' : ''; ?>">
-                    <a href="<?php echo base_url('qrapp/qrtable'); ?>">All Table QR</a>
-                </li>
-                <li class="<?php echo $this->uri->segment(2) == 'qrpayment' ? 'active' : ''; ?>">
-                    <a href="<?php echo base_url('qrapp/qrpayment'); ?>">QR Payment Setting</a>
-                </li>
-            </ul>
-        </li>
-    <?php } ?>
-        <!-- *************************************
-        **********CUSTOM MODULES****************
-        ************************************* -->
-    
         <?php
         $path     = "application/modules/";
         $map      = directory_map($path);
@@ -1138,13 +1069,8 @@
         <?php
         }
         ?>
-        <li class="<?php echo ($this->uri->segment(2) == 'backup_restore' ? 'active' : ''); ?>">
-            <a href="<?php echo base_url('dashboard/backup_restore'); ?>">
-                <i class="fa fa-database"></i>
-                <span>Backup & Restore</span>
-            </a>
-        </li>
         <!-- ends of admin area -->
+
         <li class="treeview <?php echo $this->uri->segment(2) == "message"
                                 ? "active"
                                 : null; ?>">

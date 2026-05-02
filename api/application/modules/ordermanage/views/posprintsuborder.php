@@ -542,13 +542,13 @@ body
             <div class="invoice_address">
                 <div class="row-data">
                     <div class="item-info">
-                        <h5 class="item-title"><?php echo display('billing_to');?>: <?php echo @$customerinfo->customer_name;?></h5>
+                        <h5 class="item-title"><?php echo display('billing_to');?>: <?php echo $customerinfo->customer_name;?></h5>
                     </div>
-                    <h5 class="my-5"><?php echo display('bill_by');?>: <?php echo @$cashierinfo->firstname.' '.@$cashierinfo->lastname;?></h5>
+                    <h5 class="my-5"><?php echo display('bill_by');?>: <?php echo $cashierinfo->firstname.' '.$cashierinfo->lastname;?></h5>
                 </div>
                 <div class="middle-data">
                     <div class="item-info gap_right">
-                        <h5 class="item-title"><?php echo display('table');?>: <?php echo @$tableinfo->tablename ?? '';?></h5>
+                        <h5 class="item-title"><?php echo display('table');?>: <?php echo $tableinfo->tablename ?? '';?></h5>
                     </div>
                     <div class="item-info">
                         <h5 class="item-title"><?php echo display('orderno')?>:<?php echo $mainorderinfo->saleinvoice;?>(<?php echo $orderinfo->sub_id;?>)</h5>

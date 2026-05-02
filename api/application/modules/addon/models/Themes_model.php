@@ -57,17 +57,4 @@ class Themes_model extends CI_Model {
 		$theme_ids = array_column($themes, 'themename');
 		return $theme_ids;
 	}
-
-	// Update Theme Color
-	public function update_theme_colors($themename, $data)
-	{
-		$this->db->where('themename', $themename);
-		$this->db->update('themes', $data);
-	}
-
-	// Get theme info
-	public function get_theme_info($themename = 'exclusive')
-	{
-		return $this->db->get_where('themes', array('themename' => $themename))->row();
-	}
 }

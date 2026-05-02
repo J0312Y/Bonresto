@@ -20,7 +20,6 @@ class Hungry extends CI_Controller
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public $allmenu       = '';
-    public $footermenu    = '';
     public $webinfo       = '';
     public $widgetinfo    = '';
     public $settinginfo   = '';
@@ -33,9 +32,8 @@ class Hungry extends CI_Controller
         $this->load->model([
             'hungry_model',
         ]);
+        $this->allmenu       = $this->hungry_model->allmenu_dropdown();
         $this->themeinfo     = $this->db->select('*')->from('themes')->where('status', 1)->get()->row();
-        $this->allmenu       = $this->hungry_model->allmenu_dropdown($this->themeinfo->themename);
-        $this->footermenu    = $this->hungry_model->get_footer_menu();
         $this->webinfo       = $this->db->select('*')->from('common_setting')->get()->row();
         $this->settinginfo   = $this->db->select('*')->from('setting')->get()->row();
         $this->sociallink    = $this->db->select('*')->from('tbl_sociallink')->where('status', 1)->get()->result();
@@ -70,32 +68,8 @@ class Hungry extends CI_Controller
 
         $data['todaymenu_menu'] = $this->hungry_model->read_all('*', 'tbl_menutype', 'menutype', '', '', '');
         $data['openclosetime']  = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-
         $data['ourteam']        = $this->hungry_model->ourteam();
         $data['taxinfos']       = $this->taxchecking();
-
-        if ($this->themeinfo->themename == "exclusive") {
-            $data['hero_title']         = $this->hungry_model->read('widget_desc', 'tbl_widget', ['widgetid' => '28', 'status' => 1]);
-            $data['hero_sub_title']     = $this->hungry_model->read('widget_desc', 'tbl_widget', ['widgetid' => '29', 'status' => 1]);
-            $data['hero_video_link']    = $this->hungry_model->read('widget_desc', 'tbl_widget', ['widgetid' => '30', 'status' => 1]);
-            $data['welcome_text']       = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '31', 'status' => 1]);
-            $data['service_list']       = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '21');
-            $data['special']            = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '8', 'status' => 1]);
-            $data['why_choose']         = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '36', 'status' => 1]);
-            $data['testymenu']          = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '16', 'status' => 1]);
-            $data['team']               = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '10', 'status' => 1]);
-            $data['photogallery']       = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '21', 'status' => 1]);
-            $data['reservation']        = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '6', 'status' => 1]);
-            $data['testimonial_title']  = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '37', 'status' => 1]);
-            $data['testimonials']       = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '16');
-            $data['visit_text']         = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '38', 'status' => 1]);
-            $data['opening_hours']      = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '39', 'status' => 1]);
-            $data['googlemap']          = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '14', 'status' => 1]);
-            $data['choose_images']      = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '17');
-            $data['hero_images']        = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '18');
-            $data['phone']              = $this->settinginfo->phone;
-            $data['theme_name']         = $this->themeinfo->themename;
-        }
 
         if ($this->webinfo->web_onoff == 0) {
             redirect(base_url() . 'login');
@@ -238,7 +212,7 @@ $catid=trim($catid,',');*/
         #
         $config["base_url"]         = base_url('menu');
         $config["total_rows"]       = $this->hungry_model->count_totalitem($product, $category);
-        $config["per_page"]         = 15;
+        $config["per_page"]         = 20;
         $config["uri_segment"]      = 2;
         $config["last_link"]        = "Last";
         $config["first_link"]       = "First";
@@ -283,7 +257,7 @@ $catid=trim($catid,',');*/
             $initial = $page + 1;
         }
 
-        $data['showing'] = "Showing  " . $initial . " - " . $numrecord . " of " . $config['total_rows'];
+        $data['showing'] = "Montrant  " . $initial . " - " . $numrecord . " sur " . $config['total_rows'];
         $data["links"]   = $this->pagination->create_links();
 
         #
@@ -302,15 +276,6 @@ $catid=trim($catid,',');*/
 
         if ($this->themeinfo->themename == "modern") {
             redirect('');
-        }
-
-        if ($this->themeinfo->themename == "exclusive") {
-            $data['special']            = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '8', 'status' => 1]);
-            $data['special_menu']       = $this->hungry_model->specialmenu();
-            $data['testymenu']          = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '16', 'status' => 1]);
-            $data['reservation']        = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '6', 'status' => 1]);
-            $data['reservation_sl']     = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '6');
-            $data['hero_bg']            = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
         }
 
         $data['content'] = $this->load->view('themes/' . $this->themeinfo->themename . '/menu', $data, true);
@@ -422,8 +387,6 @@ $catid=trim($catid,',');*/
         $data['average']         = $this->hungry_model->read_average('tbl_rating', 'rating', 'proid', $data['iteminfo']['ProductsID']);
         $data['readreview']      = $this->hungry_model->read_review('tbl_rating', 'proid', $data['iteminfo']['ProductsID']);
         $data['varientlist']     = $this->hungry_model->findByvmenuId($pid);
-        $data['openclosetime']  = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-
         if (!empty($islogin)) {
             $data['customerinfo']  = $this->hungry_model->read('*', 'customer_info', ['customer_id' => $islogin]);
             $data['isgivenreview'] = 0;
@@ -534,37 +497,12 @@ $catid=trim($catid,',');*/
         redirect("qr-menu");
     }
 
-    /*public function savetoken()
+    public function savetoken()
     {
         $token     = $this->input->post('token', true);
         $mysesdata = ['token' => $token];
         $this->session->set_userdata($mysesdata);
-    }*/
-   public function savetoken()
-    {
-        $token = $this->input->post('token', true); // Récupère le token FCM
-
-        if (!empty($token)) {
-            // Vérifie si ce token existe déjà
-            $exists = $this->db->where('token', $token)->get('fcm_token')->row();
-
-            if ($exists) {
-                // Si le token existe déjà, on ne fait rien
-                echo json_encode(['status' => 'success', 'message' => 'Token already exists']);
-            } else {
-                // Sinon, on l'insère
-                $this->db->insert('fcm_tokens', [
-                    'token'      => $token,
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-
-                echo json_encode(['status' => 'success', 'message' => 'Token saved']);
-            }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'No token received']);
-        }
     }
-
 
     public function qrmenu()
     {
@@ -1164,14 +1102,12 @@ $catid=trim($catid,',');*/
                 $this->email->message($htmlContent);
 
                 if ($this->email->send()) {
-                    $this->session->set_flashdata('message', display('reservation_successfull'));
+                    $this->session->set_flashdata('message', display('save_successfully'));
                     redirect('reservation');
                 } else {
-                    // echo "Email sending failed. Error: " . $this->email->print_debugger();
-                    $this->session->set_flashdata('message', display('reservation_successfull'));
-                    redirect('reservation');
+                    echo "Email sending failed. Error: " . $this->email->print_debugger();
                 }
-                $this->session->set_flashdata('message', display('reservation_successfull'));
+                $this->session->set_flashdata('message', display('save_successfully'));
                 redirect('reservation');
             } else {
                 $this->session->set_flashdata('exception', display('please_try_again'));
@@ -1185,6 +1121,7 @@ $catid=trim($catid,',');*/
 
     public function reservation()
     {
+
         if ($this->webinfo->web_onoff == 0) {
             redirect(base_url() . 'login');
             exit;
@@ -1197,23 +1134,6 @@ $catid=trim($catid,',');*/
         $data['reservation_sl']     = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '6');
         $data['reservation_modern'] = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '14']);
         $data['openclosetime']      = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-
-        if ($this->themeinfo->themename == "exclusive") {
-            $data['why_choose']         = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '36', 'status' => 1]);
-            $data['choose_images']      = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '17');
-            $data['team']               = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '10', 'status' => 1]);
-            $data['ourteam']            = $this->hungry_model->ourteam();
-            $data['photogallery']       = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '21', 'status' => 1]);
-            $data['gallery']            = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '7');
-            $data['reservation']        = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '6', 'status' => 1]);
-            $data['visit_text']         = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '38', 'status' => 1]);
-            $data['opening_hours']      = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '39', 'status' => 1]);
-            $data['googlemap']          = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '14', 'status' => 1]);
-            $data['hero_bg']            = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
-            $data['phone']              = $this->settinginfo->phone;
-            $data['theme_name']         = $this->themeinfo->themename;
-        }
-
         $data['content']            = $this->load->view('themes/' . $this->themeinfo->themename . '/reservation', $data, true);
         $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
     }
@@ -1300,7 +1220,6 @@ $catid=trim($catid,',');*/
             'itemnote' => $foodnote,
         ];
         $this->cart->update($data);
-        $data['ad_img']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '19']);
         $data['shippinginfo'] = $this->hungry_model->read_all('*', 'shipping_method', 'ship_id', '', 'is_active', '1');
         $data['offerimg']     = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '9']);
         $this->load->view('themes/' . $this->themeinfo->themename . '/cartlist', $data);
@@ -1327,7 +1246,7 @@ $catid=trim($catid,',');*/
             ];
             $this->cart->update($data);
         }
-        $data['ad_img']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '19']);
+
         $data['shippinginfo'] = $this->hungry_model->read_all('*', 'shipping_method', 'ship_id', '', 'is_active', '1');
         $data['offerimg']     = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '9']);
         $data['taxinfos']     = $this->taxchecking();
@@ -1403,14 +1322,12 @@ $catid=trim($catid,',');*/
         }
 
         if (!empty($this->cart->contents())) {
-            $data['title']         = display('cart_page');
-            $data['seoterm']       = display('cart_page');
+            $data['title']         = "Page du panier";
+            $data['seoterm']       = "cart_page";
             $data['shippinginfo']  = $this->hungry_model->read_all('*', 'shipping_method', 'ship_id', '', 'is_active', '1');
             $data['offerimg']      = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '9']);
-            $data['ad_img']        = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '19']);
             $data['taxinfos']      = $this->taxchecking();
             $data['openclosetime'] = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-            $data['hero_bg']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
             $data['content']       = $this->load->view('themes/' . $this->themeinfo->themename . '/cart', $data, true);
             $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
         } else {
@@ -1457,13 +1374,8 @@ $catid=trim($catid,',');*/
     {
         $getdate     = $this->input->post('getdate');
         $time        = $this->input->post('time');
-        $coupon_code = $this->input->post('coupon_code');
         $openingtime = $this->settinginfo->opentime;
         $closetime   = $this->settinginfo->closetime;
-
-        if (!$coupon_code || empty($coupon_code)){
-            $this->session->unset_userdata(['couponcode', 'couponprice']);
-        }
 
         if (strpos($openingtime, 'AM') !== false || strpos($openingtime, 'am') !== false) {
             $starttime = strtotime($getdate . ' ' . $openingtime);
@@ -1496,7 +1408,6 @@ $catid=trim($catid,',');*/
     {
         $couponcode = $this->input->post('couponcode');
         $couponinfo = $this->hungry_model->read('*', 'tbl_token', ['tokencode' => $couponcode]);
-        $this->session->unset_userdata(['couponcode', 'couponprice']);
 
         if (!empty($couponinfo)) {
             $startdate      = strtotime($couponinfo->tokenstartdate);
@@ -1508,10 +1419,10 @@ $catid=trim($catid,',');*/
                 $sessiondata = ['couponcode' => $couponinfo->tokencode, 'couponprice' => $couponinfo->tokenrate];
                 $this->session->set_userdata($sessiondata);
             } else {
-                $this->session->set_flashdata('exception', display('this_coupon_is_expired'));
+                $this->session->set_flashdata('exception', 'This coupon is expired!');
             }
         } else {
-            $this->session->set_flashdata('exception', display('invalid_coupon'));
+            $this->session->set_flashdata('exception', display('please_try_again'));
         }
 
         if ($this->themeinfo->themename == "modern") {
@@ -1554,8 +1465,8 @@ $catid=trim($catid,',');*/
         }
 
         if (!empty($this->cart->contents())) {
-            $data['title']   = display('proceedtocart');
-            $data['seoterm'] = display('proceedtocart');
+            $data['title']   = "Paiement";
+            $data['seoterm'] = "checkout";
             $cuslomer        = $this->session->userdata('CusUserID');
 
             if (!empty($cuslomer)) {
@@ -1589,7 +1500,6 @@ $catid=trim($catid,',');*/
             $data['countryinfo']   = $this->hungry_model->read_all('*', 'tbl_country', 'countryid', '', 'status', '1');
             $data['taxinfos']      = $this->taxchecking();
             $data['openclosetime'] = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-            $data['hero_bg']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
             $data['content']       = $this->load->view('themes/' . $this->themeinfo->themename . '/checkout', $data, true);
             $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
         } else {
@@ -1630,8 +1540,8 @@ $catid=trim($catid,',');*/
 
     public function login()
     {
-        $data['title']   = display('login');
-        $data['seoterm'] = display('login');
+        $data['title']   = "Login";
+        $data['seoterm'] = "Login";
 
         if ($this->webinfo->web_onoff == 0) {
             redirect(base_url() . 'login');
@@ -2024,20 +1934,13 @@ $catid=trim($catid,',');*/
         }
 
         $memail      = $this->input->post('email', true);
-        $emailexists = $this->db
-                        ->select("*")
-                        ->from('customer_info')
-                        ->where('customer_email', $memail)
-                        ->where('customer_email IS NOT NULL', null, false)
-                        ->where('customer_email !=', '')
-                        ->get()
-                        ->row();
+        $emailexists = $this->db->select("*")->from('customer_info')->where('customer_email', $memail)->get()->row();
         $islogin     = $this->session->userdata('CusUserID');
 
         if (empty($islogin)) {
 
             if (!empty($emailexists)) {
-                $this->session->set_flashdata('exception', 'Your email already exists!!! Please try logging in or use another email address!!!');
+                $this->session->set_flashdata('exception', 'Votre email existe déjà !!! Veuillez essayer de vous connecter ou utiliser une autre adresse e-mail !!!');
                 redirect('checkout');
                 exit;
             }
@@ -3253,7 +3156,7 @@ document.getElementById("paytrack").click();
 
             $msg = [
                 'title' => 'Commande passée avec succès !!',
-                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Placé avec succès. Veuillez attendre d etre servi',
+                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Placé avec succès. Veuillez attendre servi',
                 'icon'  => 'img/icon.png',
                 'image' => 'img/d.png',
             ];
@@ -3444,18 +3347,11 @@ document.getElementById("paytrack").click();
 
     public function orderdelevered($orderid)
     {
-        $data['title']   = display('menu');
-        $data['seoterm'] = display('menu');
-
-        if ($this->themeinfo->themename == "exclusive") {
-            $data['title']   = display('online_order');
-            $data['seoterm'] = display('online_order');
-        }
+        $data['title']   = "Menu";
+        $data['seoterm'] = "menu";
+        $page = 0;
 
         $page = 0;
-        $config["total_rows"] = 1; 
-        $config["per_page"] = 10;
-        $config["uri_segment"] = 3;
 
         if (empty($this->session->userdata('categoryid'))) {
             $categoryid = $this->input->post('category_id');
@@ -3483,26 +3379,25 @@ document.getElementById("paytrack").click();
             if ($page == 0) {
                 $initial   = 1;
                 $pagenum   = 1;
-                $numrecord = $config["per_page"];
+                $numrecord = @$config["per_page"];
             } else {
-                $pageofset = $page / $config["per_page"];
+                $pageofset = $page / @$config["per_page"];
                 $pagenum   = $pageofset + 1;
-                $numrecord = $config["per_page"] * $pagenum;
+                $numrecord = @$config["per_page"] * $pagenum;
 
-                if ($config['total_rows'] < $numrecord) {
-                    $numrecord = $config['total_rows'];
+                if (@$config['total_rows'] < $numrecord) {
+                    $numrecord = @$config['total_rows'];
                 }
 
                 $initial = $page + 1;
             }
 
-            $data['showing'] = "Showing  " . $initial . " - " . $numrecord . " of " . $config['total_rows'];
+            $data['showing'] = "Montrant  " . $initial . " - " . $numrecord . " sur " . @$config['total_rows'];
         } else {
             $data['offerimg']      = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '8']);
             $data["searchresult"]  = $this->hungry_model->searchinfo($product, $category, '', '');
             $data['openclosetime'] = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
             $data['ads']           = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 4]);
-            $data['hero_bg']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
             $data["categorylist"]  = $this->hungry_model->categories();
             $data["deals"]         = $this->hungry_model->todaydeals();
             $data['totalrows']     = $this->hungry_model->count_totalitem($product, $category);
@@ -3511,20 +3406,20 @@ document.getElementById("paytrack").click();
             if ($page == 0) {
                 $initial   = 1;
                 $pagenum   = 1;
-                $numrecord = $config["per_page"];
+                $numrecord = @$config["per_page"];
             } else {
-                $pageofset = $page / $config["per_page"];
+                $pageofset = $page / @$config["per_page"];
                 $pagenum   = $pageofset + 1;
-                $numrecord = $config["per_page"] * $pagenum;
+                $numrecord = @$config["per_page"] * $pagenum;
 
-                if ($config['total_rows'] < $numrecord) {
-                    $numrecord = $config['total_rows'];
+                if (@$config['total_rows'] < $numrecord) {
+                    $numrecord = @$config['total_rows'];
                 }
 
                 $initial = $page + 1;
             }
 
-            $data['showing'] = "Showing  " . $initial . " - " . $numrecord . " of " . $config['total_rows'];
+            $data['showing'] = "Montrant  " . $initial . " - " . $numrecord . " sur " . @$config['total_rows'];
             $data["links"]   = $this->pagination->create_links();
         }
 
@@ -3563,26 +3458,6 @@ document.getElementById("paytrack").click();
         $data['banner_middle'] = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '15']);
         $data['openclosetime'] = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
         $data['ourteam']       = $this->hungry_model->ourteam();
-
-        if ($this->themeinfo->themename == "exclusive") {
-            $data['welcome_text']       = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '31', 'status' => 1]);
-            $data['service_list']       = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '21');
-            $data['why_choose']         = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '36', 'status' => 1]);
-            $data['team']               = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '10', 'status' => 1]);
-            $data['photogallery']       = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '21', 'status' => 1]);
-            $data['reservation']        = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '6', 'status' => 1]);
-            $data['reservation_sl']     = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '6');
-            $data['testimonial_title']  = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '37', 'status' => 1]);
-            $data['testimonials']       = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '16');
-            $data['visit_text']         = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '38', 'status' => 1]);
-            $data['opening_hours']      = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '39', 'status' => 1]);
-            $data['googlemap']          = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '14', 'status' => 1]);
-            $data['choose_images']      = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '17');
-            $data['hero_bg']            = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
-            $data['phone']              = $this->settinginfo->phone;
-            $data['theme_name']         = $this->themeinfo->themename;
-        }
-
         $data['content']       = $this->load->view('themes/' . $this->themeinfo->themename . '/about', $data, true);
         $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
     }
@@ -3595,12 +3470,11 @@ document.getElementById("paytrack").click();
             exit;
         }
 
-        $data['title']         = display('contact_us');
-        $data['seoterm']       = display('contact_us');
+        $data['title']         = "Contact us";
+        $data['seoterm']       = "Contact us";
         $data['slider_info']   = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '1');
         $data['contactimg']    = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => '10']);
         $data['openclosetime'] = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-        $data['hero_bg']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
         $data['content']       = $this->load->view('themes/' . $this->themeinfo->themename . '/contact', $data, true);
         $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
     }
@@ -3614,10 +3488,9 @@ document.getElementById("paytrack").click();
         $text       = $this->input->post('comments', true);
         $phone      = $this->input->post('phone', true);
         $subject    = "Demande de contact";
-	$emailtext  = '<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi I am ' . $fullname . ',</p>
-                  <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Email:' . $email . '</p>
-                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Phone:' . $phone . '</p>
-		<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">' . $text . '</p>';
+        $emailtext  = '<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ' . $fullname . ',</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Phone:' . $phone . '</p>
+						<p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">' . $text . '</p>';
         $config = [
             'protocol'  => $send_email->protocol,
             'smtp_host' => $send_email->smtp_host,
@@ -3625,22 +3498,21 @@ document.getElementById("paytrack").click();
             'smtp_user' => $send_email->sender,
             'smtp_pass' => $send_email->smtp_password,
             'mailtype'  => $send_email->mailtype,
-            'smtp_crypto'  => $send_email->smtp_crypto,
-	    'charset'   => 'utf-8',
-	    'newline'   => "\r\n",
+            'smtp_crypto'  => 'tls',
+            'charset'   => 'utf-8',
         ];
 
         $this->load->library('email');
         $this->email->initialize($config);
         $this->email->set_newline("\r\n");
         $this->email->set_mailtype("html");
-        $this->email->from($send_email->sender, 'Demande de Contact Client');
+        $this->email->from($email, 'Contact Info');
         $this->email->to($send_email->sender);
         $this->email->subject($subject);
         $this->email->message($emailtext);
         $this->email->send();
         $this->session->set_flashdata('message', display('contact_send'));
-	redirect('contact/');
+        redirect('contact/');
     }
 
     public function subscribe()
@@ -4699,94 +4571,5 @@ $routes_data = file_get_contents($config_file);*/
     //if $matches[0] is empty
     return false;
     }*/
-    }
-
-    public function gallery()
-    {
-        if ($this->webinfo->web_onoff == 0) {
-            redirect(base_url() . 'login');
-            exit;
-        }
-
-        $data['title']      = display('gallery');
-        $data['seoterm']    = display('gallery');
-        
-        $data['gallery']    = $this->hungry_model->read_all_slider('*', 'tbl_slider', 'slid', 'delation_status', 'Sltypeid', '7');
-        $data['hero_bg']    = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
-       
-        $data['content']    = $this->load->view('themes/' . $this->themeinfo->themename . '/gallery', $data, true);
-        $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
-    }
-
-    public function team()
-    {
-        if ($this->webinfo->web_onoff == 0) {
-            redirect(base_url() . 'login');
-            exit;
-        }
-
-        $data['title']      = display('team');
-        $data['seoterm']    = display('team');
-        
-        $data['team']       = $this->hungry_model->read('*', 'tbl_widget', ['widgetid' => '10', 'status' => 1]);
-        $data['hero_bg']    = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
-        $data['ourteam']    = $this->hungry_model->ourteam();
-       
-        $data['content']    = $this->load->view('themes/' . $this->themeinfo->themename . '/team', $data, true);
-        $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
-    }
-
-    public function onlineorder()
-    {
-        $data['title']   = display('online_order');
-        $data['seoterm'] = display('online_order');
-
-        $product_name = $this->input->post('product_name');
-
-        if ($product_name) {
-            $searchProduct = $this->db->select('ProductsID, CategoryID, ProductName')
-                    ->from('item_foods')
-                    ->like('ProductName', $product_name)
-                    ->get()
-                    ->row();
-
-            if ($searchProduct) {
-                $product = $searchProduct->ProductsID;
-                $category = $searchProduct->CategoryID;
-            } else {
-                $product = null;
-                $category = null;
-            }
-
-        } else {
-            $product = null;
-            $category = null;
-        }
-
-        $data["searchresult"]  = $this->hungry_model->searchinfo($product, $category);
-        $data['openclosetime'] = $this->hungry_model->read_allorderby('*', 'tbl_openclose', 'stid', 'ASC');
-        $data['hero_bg']       = $this->hungry_model->read('*', 'tbl_slider', ['Sltypeid' => 20, 'delation_status' => 0, 'status' => 1]);
-        $data['totalrows']     = $this->hungry_model->count_totalitem($product, $category);
-        $countall              = $data['totalrows'];
-        $data["categorylist"] = $this->db->select('c.*')
-                                ->from('item_category c')
-                                ->join('item_foods f', 'f.CategoryID = c.CategoryID', 'inner')
-                                ->where('c.CategoryIsActive', 1)
-                                ->group_by('c.CategoryID')
-                                ->get()
-                                ->result();
-        $data['taxinfos']     = $this->taxchecking();
-
-        if ($this->webinfo->web_onoff == 0) {
-            redirect(base_url() . 'login');
-            exit;
-        }
-
-        if ($this->themeinfo->themename == "modern") {
-            redirect('');
-        }
-
-        $data['content'] = $this->load->view('themes/' . $this->themeinfo->themename . '/online_order', $data, true);
-        $this->load->view('themes/' . $this->themeinfo->themename . '/index', $data);
     }
 }

@@ -48,23 +48,23 @@ $totalsales=$billinfo->nitamount+$billinfo->VAT+$billinfo->service_charge;
             <tbody>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left; border-top: 1px solid #000; border-top-style: dashed;">Total Net Sales :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($billinfo->nitamount ?? 0,2);?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($billinfo->nitamount,2);?></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left;">Total Tax :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($billinfo->VAT ?? 0,2);?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($billinfo->VAT,2);?></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left; border-bottom: 1px solid #000; border-bottom-style: dashed;">Total SD :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right; border-bottom: 1px solid #000; border-bottom-style: dashed;"><?php echo number_format($billinfo->service_charge ?? 0,2);?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right; border-bottom: 1px solid #000; border-bottom-style: dashed;"><?php echo number_format($billinfo->service_charge,2);?></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left;">Total Sales :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($totalsales ?? 0,2);?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($totalsales,2);?></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left;">Total Discount :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($billinfo->discount ?? 0,2);?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($billinfo->discount,2);?></td>
                 </tr>
             </tbody>
         </table>
@@ -90,7 +90,7 @@ $totalsales=$billinfo->nitamount+$billinfo->VAT+$billinfo->service_charge;
 				 ?>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left; border-top: 1px solid #000; border-top-style: dashed;"><?php echo $amount->payment_method; ?> :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($payamount ?? 0,3); ?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($payamount,3); ?></td>
                 </tr>
                 <?php } ?>
                 <tr>
@@ -98,7 +98,7 @@ $totalsales=$billinfo->nitamount+$billinfo->VAT+$billinfo->service_charge;
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left;">Total Payment :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($total ?? 0,3); ?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right;"><?php echo number_format($total,3); ?></td>
                 </tr>
             </tbody>
         </table>
@@ -111,11 +111,11 @@ $totalsales=$billinfo->nitamount+$billinfo->VAT+$billinfo->service_charge;
             <tbody>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left; border-top: 1px solid #000; border-top-style: dashed;">Day Opening :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($registerinfo->opening_balance ?? 0,3); ?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($registerinfo->opening_balance,3); ?></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left; border-bottom: 1px solid #000; border-bottom-style: dashed;">Day Closing :</td>
-                    <td style="font-size: 17px; color: #000; text-align: right; border-bottom: 1px solid #000; border-bottom-style: dashed;"><?php echo number_format($registerinfo->closing_balance ?? 0,3); ?></td>
+                    <td style="font-size: 17px; color: #000; text-align: right; border-bottom: 1px solid #000; border-bottom-style: dashed;"><?php echo number_format($registerinfo->closing_balance,3); ?></td>
                 </tr>
                 <tr>
                     <td colspan="3" style="font-size: 17px; color: #000;">&nbsp;</td>

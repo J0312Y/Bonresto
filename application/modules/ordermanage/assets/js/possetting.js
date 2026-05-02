@@ -134,7 +134,7 @@ $(document).ready(function () {
 
   $(".product-list").slimScroll({
     size: "3px",
-    height: "345px",
+    height: "calc(100vh - 444px)",
     allowPageScroll: true,
     railVisible: true,
   });
@@ -323,6 +323,8 @@ $("body").on("click", ".select_product", function (e) {
         $("#vat").val(tax) || 0;
         var discount = $("#tdiscount").val() || 0;
         var tgtotal = $("#tgtotal").val() || 0;
+        var subtotal = $("#subtotal").val() || 0;
+        $("#pos-subtotal").text(subtotal);
         $("#calvat").text(tax);
         $("#invoice_discount").val(discount) || 0;
         var sc = $("#sc").val();

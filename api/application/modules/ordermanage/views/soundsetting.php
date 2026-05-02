@@ -8,16 +8,17 @@
             </div>
             <div class="panel-body">
             		
-                <?php echo form_open_multipart('ordermanage/order/addsound','class="form-inner"') ?>
+                <?php 
+				
+				
+				echo form_open_multipart('ordermanage/order/addsound','class="form-inner"') ?>
                     <?php echo form_hidden('id',$soundsetting->soundid) ?>
                     <!-- if setting favicon is already uploaded -->
                     <?php if(!empty($soundsetting->nofitysound)) {  ?>
                     <div class="form-group row">
                         <label for="faviconPreview" class="col-xs-3 col-form-label"></label>
                         <div class="col-xs-9">
-                            <audio controls>
-                                <source src="<?php echo base_url($soundsetting->nofitysound);  ?>" type="audio/mpeg">
-                            </audio>
+                            <img src="<?php echo base_url($soundsetting->nofitysound) ?>" alt="Notify Sound" class="img-thumbnail" />
                         </div>
                     </div>
                     <?php } ?>

@@ -158,7 +158,6 @@ body.hold-transition .right-side {
   margin-right: auto;
   margin-left: auto;
   padding: 0 30px 10px;
-  /* padding: 25px 25px 10px; */
 }
 
 @media (max-width: 767px) {
@@ -462,10 +461,10 @@ hr {
   min-height: 60px;
   border-radius: 0;
   background-color: #fff;
+  border-bottom: 1px solid #e1e6ef;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f5f7fa;
 }
 .main-header .navbar::before,
 .main-header .navbar::after {
@@ -912,7 +911,7 @@ hr {
   display: block;
   color: #a6a6a6;
   position: relative;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.3px;
 }
@@ -1007,7 +1006,6 @@ hr {
 
 .sidebar-menu .treeview-menu > li > a {
   padding: 5px 5px 5px 20px;
-  font-size: 16px;
   display: block;
   color: #a6a6a6;
   letter-spacing: 0.3px;
@@ -6235,25 +6233,4 @@ pre .arg {
 }
 .bg-soft-green {
   background: #00b07426 !important;
-}
-.order-update-style {
-  background: #e0e6ef !important;
-  border: 0px;
-  border-radius: 10px;
-  padding: 12px !important;
-  height: 266px !important;
-}
-.order-update-style .kitchen-tab input[type="checkbox"] + label > .radio-shape {
-  border: 1px solid #b7b7b7 !important;
-  border-radius: 5px !important;
-}
-.order-update-style table tr td {
-  text-align: left !important;
-}
-.order-update-style table {
-  border-collapse: separate !important;
-  border-spacing: 0px 12px !important;
-}
-.gap-8 {
-  gap: 8px;
 }

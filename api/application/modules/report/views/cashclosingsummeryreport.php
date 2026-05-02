@@ -88,13 +88,12 @@ $totalsales=$billinfo->nitamount+$billinfo->VAT+$billinfo->service_charge;
 					$payamount=$amount->totalamount;
 				}
 				$total=$total+$payamount;
-                if($payamount > 0){
-				?>
+				 ?>
                 <tr>
                     <td colspan="2" style="font-size: 17px; color: #000; text-align: left; border-top: 1px solid #000; border-top-style: dashed;"><?php echo $amount->payment_method; ?> :</td>
                     <td style="font-size: 17px; color: #000; text-align: right; border-top: 1px solid #000; border-top-style: dashed;"><?php echo number_format($payamount ?? 0,3); ?></td>
                 </tr>
-                <?php } } ?>
+                <?php } ?>
                 <tr>
                     <td colspan="3" style="font-size: 17px; color: #000; text-align: left; border-bottom: 1px solid #000; border-bottom-style: dashed;">&nbsp;</td>
                 </tr>

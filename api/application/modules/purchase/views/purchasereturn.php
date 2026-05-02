@@ -19,7 +19,7 @@
                                <label for="supplier" class="col-sm-1"><?php echo display('invoice') ?>:</label>
                                <div class="col-sm-3" id="invoicelist">
                                  <select name="invoice" id="invoice" class="form-control">
-                                	<option value=""  selected="selected">Select Option</option>
+                                	<option value=""  selected="selected"><?php echo display('select_option') ?></option>
                               	 </select>
                                   </div>
                                <input name="invoiceurl" type="hidden" value="<?php echo base_url("purchase/purchase/getinvoice") ?>" id="invoiceurl" />

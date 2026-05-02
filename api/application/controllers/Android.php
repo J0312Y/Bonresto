@@ -1,7 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -28,8 +26,8 @@ class Android extends MY_Controller
     {
         // TO DO / Email or Phone only one required
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('customer_email', 'email', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|trim');
+        $this->form_validation->set_rules('customer_email', 'email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == false) {
             $errors = $this->form_validation->error_array();
@@ -41,24 +39,24 @@ class Android extends MY_Controller
             $IsReg = $this->Api_v2_model->checkEmailOrPhoneIsRegistered('customer_info', $data);
 
             if (!$IsReg) {
-                return $this->respondUserNotReg('Cet e-mail n\'a pas encore été enregistré.');
+                return $this->respondUserNotReg('This email has not yet been registered.');
             }
 
             $result                        = $this->Api_v2_model->authenticate_user('customer_info', $data);
-            $updatetData['customer_token'] = $this->input->post('token', true);
-            $this->Api_v2_model->update_date('customer_info', $updatetData, 'customer_id', $result->customer_id);
 
             if ($result != false) {
+
+                $updatetData['customer_token'] = $this->input->post('token', true);
+                $this->Api_v2_model->update_date('customer_info', $updatetData, 'customer_id', $result->customer_id);
+
                 $result->{"UserPictureURL"}
 
-                = $this->_get_user_profile_picture_url($result);
-                return $this->respondWithSuccess('Vous vous êtes connecté avec succès.', $result);
+                    = $this->_get_user_profile_picture_url($result);
+                return $this->respondWithSuccess('You have successfully logged in.', $result);
             } else {
-                return $this->respondWithError('L\'e-mail et le mot de passe que vous avez saisis ne correspondent pas.', $result);
+                return $this->respondWithError('The email and password you entered do not match.', $result);
             }
-
         }
-
     }
 
     public function sign_up()
@@ -69,7 +67,7 @@ class Android extends MY_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|is_unique[customer_info.customer_email]');
         $this->form_validation->set_rules('mobile', 'Mobile', 'required|is_unique[customer_info.customer_phone]');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_message('is_unique', 'Désolé, cette adresse %s a déjà été utilisée !');
+        $this->form_validation->set_message('is_unique', 'Sorry, this address %s has already been used!');
 
         $lastid = $this->db->select("*")->from('customer_info')->order_by('cuntomer_no', 'desc')->get()->row();
         $sl     = $lastid->cuntomer_no;
@@ -90,7 +88,7 @@ class Android extends MY_Controller
 
         if ($this->form_validation->run() == false) {
             $errors = $this->form_validation->error_array();
-            return $this->respondWithValidationregisError($errors);
+            return $this->respondWithValidationError($errors);
         } else {
             $URL      = base_url('assets/img/user/');
             $scan     = scandir('application/modules/');
@@ -104,9 +102,7 @@ class Android extends MY_Controller
                         $pointsys                = 1;
                         $data['membership_type'] = 1;
                     }
-
                 }
-
             }
 
             $imagedata = $this->input->post('UserPicture', true);
@@ -143,15 +139,13 @@ class Android extends MY_Controller
                 $output = $this->Api_v2_model->read("*", 'customer_info', ['customer_id' => $insert_ID]);
                 $output->{"UserPictureURL"}
 
-                = base_url() . $image;
+                    = base_url() . $image;
 
-                return $this->respondWithSuccess('Vous vous êtes inscrit avec succès.', $output);
+                return $this->respondWithSuccess('You have successfully registered.', $output);
             } else {
-                return $this->respondWithError('Désolé, inscription annulée. Une erreur s\'est produite lors de l\'inscription. Veuillez réessayer plus tard.');
+                return $this->respondWithError('Sorry, registration cancelled. An error occurred during registration. Please try again later.');
             }
-
         }
-
     }
 
     public function base64ToImage($imageData)
@@ -212,10 +206,9 @@ class Android extends MY_Controller
                         if ($custinfo->password == $mypassword) {
                             $psaaword = md5($this->input->post('password'));
                         } else {
-                            return $this->respondWithSuccess('Votre ancien mot de passe ne correspond pas.', $output);
+                            return $this->respondWithSuccess('Your old password does not match.', $output);
                             exit;
                         }
-
                     }
 
                     $customernum = $custinfo->cuntomer_no;
@@ -237,19 +230,18 @@ class Android extends MY_Controller
                         // print_r($output);
                         $output->{"UserPictureURL"}
 
-                                 = base_url() . $image;
+                            = base_url() . $image;
                         $newhead = $customernum . '-' . $this->input->post('customer_name');
 
-                        return $this->respondWithSuccess('Votre profil a été mis à jour avec succés.', $output);
+                        return $this->respondWithSuccess('Your profile has been successfully updated.', $output);
                     } else {
-                        return $this->respondWithSuccess('Désolé, rien n\'a été changé. Veuillez réessayer plus tard.', $output);
+                        return $this->respondWithSuccess('Sorry, nothing has been changed. Please try again later.', $output);
                     }
-
                 } else {
                     $existphone = $this->Api_v2_model->readnum('*', 'customer_info', ['customer_phone' => $this->input->post('mobile')]);
 
                     if ($existphone >= 1) {
-                        return $this->respondWithSuccess('Désolé, le numéro de téléphone ne peut pas être dupliqué.', $output);
+                        return $this->respondWithSuccess('Sorry, the phone number cannot be duplicated.', $output);
                     } else {
 
                         if ($this->input->post('password') == '') {
@@ -260,10 +252,9 @@ class Android extends MY_Controller
                             if ($custinfo->password == $mypassword) {
                                 $psaaword = md5($this->input->post('password'));
                             } else {
-                                return $this->respondWithSuccess('Votre ancien mot de passe ne correspond pas.', $output);
+                                return $this->respondWithSuccess('Your old password does not match.', $output);
                                 exit;
                             }
-
                         }
 
                         $customernum = $custinfo->cuntomer_no;
@@ -285,22 +276,17 @@ class Android extends MY_Controller
                             // print_r($output);
                             $output->{"UserPictureURL"}
 
-                                     = base_url() . $image;
+                                = base_url() . $image;
                             $newhead = $customernum . '-' . $this->input->post('customer_name');
 
-                            return $this->respondWithSuccess('Votre profil a été mis à jour avec succés.', $output);
+                            return $this->respondWithSuccess('Your profile has been successfully updated.', $output);
                         } else {
-                            return $this->respondWithSuccess('Désolé, rien n\'a été changé. Veuillez réessayer plus tard.', $output);
+                            return $this->respondWithSuccess('Sorry, nothing has been changed. Please try again later.', $output);
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     }
 
     public function customerinfo()
@@ -328,13 +314,12 @@ class Android extends MY_Controller
             } else {
                 return $this->respondWithError('Informations client Introuvable!!!', $output);
             }
-
         }
-
     }
 
     public function forgot_password()
     {
+
         $this->form_validation->set_rules('customer_email', 'customer Email', 'required|xss_clean|trim');
 
         if ($this->form_validation->run() == false) {
@@ -346,14 +331,12 @@ class Android extends MY_Controller
             $IsReg                  = $this->Api_v2_model->checkEmailOrPhoneIsRegistered('customer_info', $data);
 
             if (!$IsReg) {
-                return $this->respondWithError('L\'adresse e-mail n\'a pas été enregistrée.');
+                return $this->respondWithError('The email address has not been registered.');
             } else {
                 $this->_sendingForgotPassMail($IsReg);
-                return $this->respondWithSuccess("Nous avons reçu un e-mail à ce ($IsReg->customer_email) Adresse e-mail. Vérifiez s'il vous plaît. Merci.", $output);
+                return $this->respondWithSuccess("We have received an email at this ($IsReg->customer_email) Email Address. Please check. Thank you.", $output);
             }
-
         }
-
     }
 
     public function _sendingForgotPassMail($data)
@@ -378,13 +361,13 @@ class Android extends MY_Controller
 
         $subject   = 'Login Credential';
         $fromEmail = $email_config->sender;
-        $message   = "Suite à votre demande, nous vous avons envoyé vos identifiants de connexion -
+        $message   = "Following your request, we have sent you your login details -
 			<br><br>
-			Nom d'utilisateur : <strong>$data->customer_email</strong><br>
-			Mot de passe : <strong>$Password</strong><br>
+			User name : <strong>$data->customer_email</strong><br>
+			Password : <strong>$Password</strong><br>
 
 			<br>
-			Merci,<br>
+			THANKS,<br>
 			<br>";
 
         $this->load->library('email', $config);
@@ -413,7 +396,7 @@ class Android extends MY_Controller
     {
         // TO DO /
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('android', 'android', 'required|xss_clean|trim');
+        $this->form_validation->set_rules('android', 'android', 'required');
 
         if ($this->form_validation->run() == false) {
             $errors = $this->form_validation->error_array();
@@ -460,7 +443,6 @@ class Android extends MY_Controller
                         $output['shippinginfo'][$i]['shiptype']     = $shipment->shiptype;
                         $i++;
                     }
-
                 }
 
                 $k = 0;
@@ -480,9 +462,7 @@ class Android extends MY_Controller
                             if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                                 $habittest = 1;
                             }
-
                         }
-
                     }
 
                     if ($habittest == 1) {
@@ -491,7 +471,7 @@ class Android extends MY_Controller
                         $lastnote = ['habit' => ''];
                     }
 
-                    $rating = round($average->averagerating);
+                    $rating = round($average->averagerating ?? 0);
 
                     if (empty($productlist->price)) {
                         $proprice = 0;
@@ -503,7 +483,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['rating']           = $rating;
                     $output['iteminfo'][$k]['count']            = 1;
                     $output['iteminfo'][$k]['total']            = $proprice;
-                    $output['iteminfo'][$k]['itemnote']         = $lastnote->habit;
+                    $output['iteminfo'][$k]['itemnote']         = $lastnote->habit ?? '';
                     $output['iteminfo'][$k]['ProductsID']       = $productlist->ProductsID;
                     $output['iteminfo'][$k]['ProductName']      = $productlist->ProductName;
                     $output['iteminfo'][$k]['ProductImage']     = base_url() . $image;
@@ -517,7 +497,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['offerendate']      = $productlist->offerendate;
                     $output['iteminfo'][$k]['variantid']        = $productlist->variantid;
                     $output['iteminfo'][$k]['variantName']      = $productlist->variantName;
-                    $output['iteminfo'][$k]['price']            = $productlist->price;
+                    $output['iteminfo'][$k]['price']            = $productlist->price ?? '0.00';
 
                     if ($addonsinfo != false) {
                         $output['iteminfo'][$k]['addons'] = 1;
@@ -531,7 +511,6 @@ class Android extends MY_Controller
                             $output['iteminfo'][$k]['addonsinfo'][$x]['total']       = 0;
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$k]['addons'] = 0;
                     }
@@ -539,13 +518,11 @@ class Android extends MY_Controller
                     $k++;
                 }
 
-                return $this->respondWithSuccess('Liste de tous les aliments.', $output);
+                return $this->respondWithSuccess('List of all foods.', $output);
             } else {
-                return $this->respondWithError('Nourriture introuvable. !!!', $output);
+                return $this->respondWithError('Food not found.!!!', $output);
             }
-
         }
-
     }
 
     public function fooddetails()
@@ -573,9 +550,7 @@ class Android extends MY_Controller
                     if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                         $habittest = 1;
                     }
-
                 }
-
             }
 
             if ($habittest == 1) {
@@ -624,11 +599,10 @@ class Android extends MY_Controller
                         $output['shippinginfo'][$i]['shiptype']     = $shipment->shiptype;
                         $i++;
                     }
-
                 }
 
                 $exitcustomerinfo = $this->Api_v2_model->read('customer_email', 'customer_info', ['customer_id' => $customerid]);
-                $reviewexists     = $this->Api_v2_model->read('*', 'tbl_rating', ['proid' => $iteminfo->ProductsID, 'email' => $exitcustomerinfo->customer_email]);
+                $reviewexists     = $this->Api_v2_model->read('*', 'tbl_rating', ['proid' => $iteminfo->ProductsID, 'email' => $exitcustomerinfo->customer_email ?? '']);
 
                 if (!empty($reviewexists)) {
                     $output['isexistreview'] = 1;
@@ -638,7 +612,7 @@ class Android extends MY_Controller
 
                 $totalreview = $this->Api_v2_model->read_rating('tbl_rating', 'reviewtxt', 'proid', $iteminfo->ProductsID);
                 $average     = $this->Api_v2_model->read_average('tbl_rating', 'rating', 'proid', $iteminfo->ProductsID);
-                $rating      = round($average->averagerating);
+                $rating      = round($average->averagerating ?? 0);
 
                 if (!empty($customerid)) {
                     $allorderbycustomer = $this->Api_v2_model->read_all('*', 'customer_order', 'customer_id', $customerid, 'order_id', 'ASC');
@@ -653,13 +627,10 @@ class Android extends MY_Controller
                             } else {
                                 $output['isgivenreview'] = 0;
                             }
-
                         }
-
                     } else {
                         $output['isgivenreview'] = 0;
                     }
-
                 } else {
                     $output['isgivenreview'] = 0;
                 }
@@ -675,7 +646,7 @@ class Android extends MY_Controller
                 $output['ProductsID']       = $iteminfo->ProductsID;
                 $output['count']            = 1;
                 $output['total']            = $proprice;
-                $output['itemnote']         = $lastnote->habit;
+                $output['itemnote']         = $lastnote->habit ?? '';
                 $output['ProductName']      = $iteminfo->ProductName;
                 $output['ProductImage']     = base_url() . $image;
                 $output['component']        = $iteminfo->component;
@@ -702,30 +673,27 @@ class Android extends MY_Controller
                         $output['addonsinfo'][$x]['total']       = 0;
                         $x++;
                     }
-
                 } else {
                     $output['addons'] = 0;
                 }
 
-                return $this->respondWithSuccess('Informations sur la nourriture.', $output);
+                return $this->respondWithSuccess('Food information.', $output);
             } else {
-                return $this->respondWithError('Nourriture introuvable. !!!', $output);
+                return $this->respondWithError('Food not found.!!!', $output);
             }
-
         }
-
     }
 
-    public function categorylist($catid = null)
+    public function categorylist()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('android', 'android', 'required|xss_clean|trim');
+        $this->form_validation->set_rules('android', 'android', 'required');
 
         if ($this->form_validation->run() == false) {
             $errors = $this->form_validation->error_array();
             return $this->respondWithValidationError($errors);
         } else {
-            $result = $this->Api_v2_model->categorylist($catid);
+            $result = $this->Api_v2_model->categorylist($catid ?? '');
 
             $sliderlist  = $this->Api_v2_model->sliderlist();
             $settinginfo = $this->Api_v2_model->read('*', 'setting', ['id' => 2]);
@@ -743,14 +711,13 @@ class Android extends MY_Controller
                     $output['sliderinfo'][$k]['sliderimage'] = base_url() . $image2;
                     $k++;
                 }
-
             }
 
             if ($result != false) {
                 $i = 0;
 
                 foreach ($result as $list) {
-                    $image                                   = substr($list->CategoryImage, 2);
+                    $image                                   = substr($list->CategoryImage ?? '', 2);
                     $output["Category"][$i]['CategoryID']    = $list->CategoryID;
                     $output["Category"][$i]['Name']          = $list->Name;
                     $output["Category"][$i]['categoryimage'] = base_url() . $image;
@@ -763,14 +730,12 @@ class Android extends MY_Controller
                     $output['powertxt'] = "";
                 }
 
-                return $this->respondWithSuccess('Liste de toutes les catégories et curseur.', $output);
+                return $this->respondWithSuccess('List of all categories and slider.', $output);
             } else {
 
-                return $this->respondWithError('Aucune catégorie trouvée.!!!', $output);
+                return $this->respondWithError('No categories found.!!!', $output);
             }
-
         }
-
     }
 
     public function searchproduct()
@@ -822,7 +787,6 @@ class Android extends MY_Controller
                         $output['shippinginfo'][$i]['shiptype']     = $shipment->shiptype;
                         $i++;
                     }
-
                 }
 
                 $k = 0;
@@ -865,7 +829,6 @@ class Android extends MY_Controller
 
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$k]['addons'] = 0;
                     }
@@ -873,13 +836,11 @@ class Android extends MY_Controller
                     $k++;
                 }
 
-                return $this->respondWithSuccess('Liste de tous les aliments.', $output);
+                return $this->respondWithSuccess('List of all foods.', $output);
             } else {
-                return $this->respondWithError('Nourriture introuvable. !!!', $output);
+                return $this->respondWithError('Food not found.!!!', $output);
             }
-
         }
-
     }
 
     public function popularitem()
@@ -930,7 +891,6 @@ class Android extends MY_Controller
                         $output['shippinginfo'][$i]['shiptype']     = $shipment->shiptype;
                         $i++;
                     }
-
                 }
 
                 $k = 0;
@@ -950,9 +910,7 @@ class Android extends MY_Controller
                             if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                                 $habittest = 1;
                             }
-
                         }
-
                     }
 
                     if ($habittest == 1) {
@@ -994,7 +952,6 @@ class Android extends MY_Controller
 
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$k]['addons'] = 0;
                     }
@@ -1002,13 +959,11 @@ class Android extends MY_Controller
                     $k++;
                 }
 
-                return $this->respondWithSuccess('Liste de tous les aliments.', $output);
+                return $this->respondWithSuccess('List of all foods.', $output);
             } else {
-                return $this->respondWithError('Nourriture introuvable. !!!', $output);
+                return $this->respondWithError('Food not found.!!!', $output);
             }
-
         }
-
     }
 
     public function offeritem()
@@ -1061,7 +1016,6 @@ class Android extends MY_Controller
                         $output['shippinginfo'][$i]['shiptype']     = $shipment->shiptype;
                         $i++;
                     }
-
                 }
 
                 $k = 0;
@@ -1082,9 +1036,7 @@ class Android extends MY_Controller
                             if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                                 $habittest = 1;
                             }
-
                         }
-
                     }
 
                     if ($habittest == 1) {
@@ -1093,7 +1045,7 @@ class Android extends MY_Controller
                         $lastnote = ['habit' => ''];
                     }
 
-                    $rating = round($average->averagerating);
+                    $rating = round($average->averagerating ?? 0);
 
                     if (empty($productlist->price)) {
                         $proprice = 0;
@@ -1104,7 +1056,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['review']           = $totalreview->totalrate;
                     $output['iteminfo'][$k]['rating']           = $rating;
                     $output['iteminfo'][$k]['count']            = 1;
-                    $output['iteminfo'][$k]['itemnote']         = $lastnote->habit;
+                    $output['iteminfo'][$k]['itemnote']         = $lastnote->habit ?? '';
                     $output['iteminfo'][$k]['total']            = $proprice;
                     $output['iteminfo'][$k]['ProductsID']       = $productlist->ProductsID;
                     $output['iteminfo'][$k]['ProductName']      = $productlist->ProductName;
@@ -1134,7 +1086,6 @@ class Android extends MY_Controller
 
                             $x++;
                         }
-
                     } else {
                         $output['iteminfo'][$k]['addons'] = 0;
                     }
@@ -1146,9 +1097,7 @@ class Android extends MY_Controller
             } else {
                 return $this->respondWithError('Nourriture introuvable. !!!', $output);
             }
-
         }
-
     }
 
     public function Categorywisefoodlist()
@@ -1222,7 +1171,6 @@ class Android extends MY_Controller
                             $output[$k]['addonsinfo'][$x]['total']                   = 0;
                             $x++;
                         }
-
                     } else {
                         $output['foodinfo'][$k]['addons'] = 0;
                     }
@@ -1234,9 +1182,7 @@ class Android extends MY_Controller
             } else {
                 return $this->respondWithError('Nourriture introuvable. !!!', $output);
             }
-
         }
-
     }
 
     //reservation
@@ -1260,9 +1206,7 @@ class Android extends MY_Controller
             } else {
                 return $this->respondWithError('Restaurant info..!!!', $output);
             }
-
         }
-
     }
 
     public function myreservation()
@@ -1295,9 +1239,7 @@ class Android extends MY_Controller
             } else {
                 return $this->respondWithError('Reserver Not Found.!!!', $output);
             }
-
         }
-
     }
 
     public function reservation()
@@ -1330,13 +1272,11 @@ class Android extends MY_Controller
                     $k++;
                 }
 
-                return $this->respondWithSuccess('Toutes les tables gratuites.', $output);
+                return $this->respondWithSuccess('All tables free.', $output);
             } else {
-                return $this->respondWithError('Table introuvable.!!!', $output);
+                return $this->respondWithError('Table not found.!!!', $output);
             }
-
         }
-
     }
 
     public function booking()
@@ -1428,15 +1368,12 @@ class Android extends MY_Controller
                     $response = curl_exec($ch);
                     curl_close($ch);
                     /*Push Notification*/
-                    return $this->respondWithSuccess('Informations de réservation.', $output);
+                    return $this->respondWithSuccess('Booking information.', $output);
                 } else {
-                    return $this->respondWithError('Pas de réservation.!!!', $output);
+                    return $this->respondWithError('No reservation.!!!', $output);
                 }
-
             }
-
         }
-
     }
 
     public function paymentmethod()
@@ -1454,14 +1391,12 @@ class Android extends MY_Controller
                     $output[$i]['Pay_name'] = $method->payment_method;
                     $i++;
                 }
-
             }
 
-            return $this->respondWithSuccess('Tous les modes de paiement', $output);
+            return $this->respondWithSuccess('All payment methods', $output);
         } else {
-            return $this->respondWithError('Mode de paiement introuvable.!!!', $output);
+            return $this->respondWithError('Payment method not found.!!!', $output);
         }
-
     }
 
     public function coupon()
@@ -1487,18 +1422,15 @@ class Android extends MY_Controller
                     $output['CouponPrice'] = $couponinfo->tokenrate;
                     $output['CouponCode']  = $couponinfo->tokencode;
 
-                    return $this->respondWithSuccess('Coupon trouvé', $output);
+                    return $this->respondWithSuccess('Coupon found', $output);
                 } else {
 
-                    return $this->respondWithError('Coupon non valide !!', $output);
+                    return $this->respondWithError('Coupon not valid!!', $output);
                 }
-
             } else {
-                return $this->respondWithError('Coupon introuvable !!', $output);
+                return $this->respondWithError('Coupon not found!!', $output);
             }
-
         }
-
     }
 
     public function placeorder()
@@ -1533,7 +1465,7 @@ class Android extends MY_Controller
             $user['is_active']                 = 1;
             $customerid                        = $customerinfo->customer_id;
 
-//insert Coa for Customer Receivable
+            //insert Coa for Customer Receivable
 
             //Order insert
             $newdate     = date('Y-m-d');
@@ -1645,7 +1577,7 @@ class Android extends MY_Controller
                     $output['card_issuer']  = $this->input->post('full_name');
                     $output['total_amount'] = $this->input->post('grandtotal');
 
-                    return $this->respondWithSuccess('Commande passée avec succès', $output);
+                    return $this->respondWithSuccess('Order placed successfully', $output);
                 } else
 
                 if ($paymentsatus == 3) {
@@ -1665,7 +1597,7 @@ class Android extends MY_Controller
                     $output['first_name']    = $this->input->post('full_name');
                     $output['amount']        = $this->input->post('grandtotal');
 
-                    return $this->respondWithSuccess('Commande passée avec succès', $output);
+                    return $this->respondWithSuccess('Order placed successfully', $output);
                 } else
 
                 if ($paymentsatus == 2) {
@@ -1693,7 +1625,7 @@ class Android extends MY_Controller
                     $output['card_holder_name']   = $this->input->post('full_name');
                     $output['li_0_price']         = $this->input->post('grandtotal');
 
-                    return $this->respondWithSuccess('Commande passée avec succès', $output);
+                    return $this->respondWithSuccess('Order placed successfully', $output);
                 } else {
                     $scan     = scandir('application/modules/');
                     $pointsys = "";
@@ -1705,9 +1637,7 @@ class Android extends MY_Controller
                             if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                                 $pointsys = 1;
                             }
-
                         }
-
                     }
 
                     $output['CustomerName'] = $this->input->post('full_name');
@@ -1800,7 +1730,7 @@ class Android extends MY_Controller
                     $result2 = curl_exec($ch2);
                     curl_close($ch2);
 
-/*End Notification*/
+                    /*End Notification*/
                     /*PUSH Notification For Waiter ios*/
                     $contentsmsg   = "Numéro de commande: " . $orderid . " Montant de la commande:" . number_format($gtotal, 2);
                     $contentstitle = "Nouvelle commande passée";
@@ -1823,15 +1753,12 @@ class Android extends MY_Controller
                     $response = curl_exec($curl3);
                     curl_close($curl3);
                     /*Push Notification*/
-                    return $this->respondWithSuccess('Commande passée avec succès', $output);
+                    return $this->respondWithSuccess('Order placed successfully', $output);
                 }
-
             } else {
-                return $this->respondWithError('Commande non passée !!!', $output);
+                return $this->respondWithError('Order not placed!!!', $output);
             }
-
         }
-
     }
 
     public function onlinepayment()
@@ -1908,19 +1835,18 @@ class Android extends MY_Controller
 
                 redirect('android/fails');
             }
-
         } else
 
         if ($paymentsatus == 3) {
             $item_name = "Food List";
 
-// ---------------------
+            // ---------------------
             //Set variables for paypal form
             $returnURL = base_url() . "android/successful/" . $orderid; //payment success url
             $cancelURL = base_url() . "android/cancilorder/" . $orderid; //payment cancel url
             $notifyURL = base_url('android/ipn');
 
-//ipn url
+            //ipn url
 
             // set form auto fill data
             $this->paypal_lib->add_field('return', $returnURL);
@@ -1948,33 +1874,33 @@ class Android extends MY_Controller
                 $action_url = "https://sandbox.2checkout.com/checkout/purchase";
             }
 
-            ?>
-			<form id="payment_gw" name="payment_gw" method="POST" action="<?php echo $action_url; ?>">
-				<input type='hidden' name='sid' value='<?php echo $paymentsetup->marchantid; ?>' />
-				<input type='hidden' name='mode' value='2CO' />
-				<input type='hidden' name='li_0_type' value='product' />
-				<input type='hidden' name='li_0_name' value='<?php echo $orderid; ?>' />
-				<input type='hidden' name='x_receipt_link_url' value='<?php echo base_url(); ?>android/successful2/<?php echo $orderid; ?>' />
-				<input type='hidden' name='li_0_price' value='<?php echo $billinfo->bill_amount; ?>' />
-				<input type='hidden' name='card_holder_name' value='<?php echo $customer->customer_name; ?>' />
-				<input type='hidden' name='street_address' value='<?php echo $customer->customer_address; ?>' />
-				<input type='hidden' name='street_address2' value='<?php echo $customer->customer_address; ?>' />
-				<input type='hidden' name='city' value='NA' />
-				<input type='hidden' name='state' value='NA' />
-				<input type='hidden' name='zip' value='NA' />
-				<input type='hidden' name='country' value='NA' />
-				<input type='hidden' name='email' value='<?php echo $customer->customer_email; ?>' />
-				<input type='hidden' name='phone' value='<?php echo $customer->customer_phone; ?>' />
-				<input name='pay' class="btn btn-success btn-large cusbtn" type='submit' value='Payer' style="display:none;" />
-			</form>
+?>
+<form id="payment_gw" name="payment_gw" method="POST" action="<?php echo $action_url; ?>">
+    <input type='hidden' name='sid' value='<?php echo $paymentsetup->marchantid; ?>' />
+    <input type='hidden' name='mode' value='2CO' />
+    <input type='hidden' name='li_0_type' value='product' />
+    <input type='hidden' name='li_0_name' value='<?php echo $orderid; ?>' />
+    <input type='hidden' name='x_receipt_link_url'
+        value='<?php echo base_url(); ?>android/successful2/<?php echo $orderid; ?>' />
+    <input type='hidden' name='li_0_price' value='<?php echo $billinfo->bill_amount; ?>' />
+    <input type='hidden' name='card_holder_name' value='<?php echo $customer->customer_name; ?>' />
+    <input type='hidden' name='street_address' value='<?php echo $customer->customer_address; ?>' />
+    <input type='hidden' name='street_address2' value='<?php echo $customer->customer_address; ?>' />
+    <input type='hidden' name='city' value='NA' />
+    <input type='hidden' name='state' value='NA' />
+    <input type='hidden' name='zip' value='NA' />
+    <input type='hidden' name='country' value='NA' />
+    <input type='hidden' name='email' value='<?php echo $customer->customer_email; ?>' />
+    <input type='hidden' name='phone' value='<?php echo $customer->customer_phone; ?>' />
+    <input name='pay' class="btn btn-success btn-large cusbtn" type='submit' value='Payer' style="display:none;" />
+</form>
 <?php
-echo "<script>
+            echo "<script>
             window.onload = function(){
               document.forms['payment_gw'].submit()
             }
         </script>";
         }
-
     }
 
     public function ipn()
@@ -2008,9 +1934,7 @@ echo "<script>
                 if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                     $getcus = $customerid;
                 }
-
             }
-
         }
 
         $totalgrtotal = round($orderinfo->totalamount);
@@ -2050,7 +1974,6 @@ echo "<script>
                 $this->db->where('customer_id', $customerid);
                 $this->db->update('customer_info', $updatememsp);
             }
-
         }
 
         $updatetData = ['bill_status' => 1, 'create_at' => date('Y-m-d H:i:s')];
@@ -2166,9 +2089,7 @@ echo "<script>
                 if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                     $getcus = $customerid;
                 }
-
             }
-
         }
 
         $totalgrtotal = round($orderinfo->totalamount);
@@ -2208,7 +2129,6 @@ echo "<script>
                 $this->db->where('customer_id', $customerid);
                 $this->db->update('customer_info', $updatememsp);
             }
-
         }
 
         $updatetData = ['bill_status' => 1];
@@ -2342,23 +2262,23 @@ echo "<script>
                     $status = '';
 
                     if ($list->order_status == 1) {
-                        $status = "En cours";
+                        $status = "In progress";
                     } else
 
                     if ($list->order_status == 2) {
-                        $status = "En traitement";
+                        $status = "In processing";
                     } else
 
                     if ($list->order_status == 3) {
-                        $status = "Prêt";
+                        $status = "Ready";
                     } else
 
                     if ($list->order_status == 4) {
-                        $status = "Servie";
+                        $status = "Served";
                     } else
 
                     if ($list->order_status == 5) {
-                        $status = "Annuler";
+                        $status = "Cancel";
                     }
 
                     $output['orderinfo'][$i]['saleinvoice'] = $list->saleinvoice;
@@ -2426,21 +2346,17 @@ echo "<script>
 
                                 $k++;
                             }
-
                         }
-
                     }
 
                     $i++;
                 }
 
-                return $this->respondWithSuccess('Historique des commandes.', $output);
+                return $this->respondWithSuccess('Order history.', $output);
             } else {
-                return $this->respondWithError('Commande introuvable !!!', $output);
+                return $this->respondWithError('Order not found!!!', $output);
             }
-
         }
-
     }
 
     public function customer_review()
@@ -2466,13 +2382,11 @@ echo "<script>
 
             if ($insert_ID) {
                 $output = $this->Api_v2_model->read("*", 'tbl_rating', ['ratingid' => $insert_ID]);
-                return $this->respondWithSuccess('Vous avez passé en revue ce produit avec succès', $output);
+                return $this->respondWithSuccess('You have successfully reviewed this product', $output);
             } else {
-                return $this->respondWithError('Désolé, avis non soumis !!!');
+                return $this->respondWithError('Sorry, review not submitted!!!');
             }
-
         }
-
     }
 
     public function customer_reviewlist()
@@ -2509,13 +2423,11 @@ echo "<script>
                     $i++;
                 }
 
-                return $this->respondWithSuccess('Liste des avis trouvés', $output);
+                return $this->respondWithSuccess('List of reviews found', $output);
             } else {
-                return $this->respondWithError('Désolé, avis introuvable !!!');
+                return $this->respondWithError('Sorry, review not found!!!');
             }
-
         }
-
     }
 
     public function pointing()
@@ -2540,9 +2452,7 @@ echo "<script>
                     if (file_exists(APPPATH . 'modules/' . $file . '/assets/data/env')) {
                         $getcus = $customerid;
                     }
-
                 }
-
             }
 
             if (!empty($getcus)) {
@@ -2560,7 +2470,6 @@ echo "<script>
                     $output['membershiplabel'] = $customerlabel->membership_name;
                     $output['DiscountRate']    = 0;
                 }
-
             } else {
                 $output['pointssystem']    = "Disable";
                 $output['points']          = 0;
@@ -2570,7 +2479,5 @@ echo "<script>
 
             return $this->respondWithSuccess('Customer Point Information', $output);
         }
-
     }
-
 }

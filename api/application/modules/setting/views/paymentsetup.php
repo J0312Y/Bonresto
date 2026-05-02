@@ -55,7 +55,7 @@
                         <div class="form-group row">
                         <label for="islive" class="col-sm-4 col-form-label">Is Live or Test</label>
                         <div class="col-sm-8 customesl">
-                            <select name="islive" class="form-control" required>
+                            <select name="islive" class="form-control">
                                 <option value=""  selected="selected"><?php echo display('sl_option') ?></option>
                                 <option value="1">Live</option>
                                 <option value="0">Test Mode</option>
@@ -65,7 +65,7 @@
 						<div class="form-group row">
                         <label for="status" class="col-sm-4 col-form-label"><?php echo display('status') ?></label>
                         <div class="col-sm-8 customesl">
-                            <select name="status" class="form-control" required>
+                            <select name="status" class="form-control">
                                 <option value=""  selected="selected"><?php echo display('select_option');?></option>
                                 <option value="1"><?php echo display('active')?></option>
                                 <option value="0"><?php echo display('inactive')?></option>

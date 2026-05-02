@@ -1,22 +1,21 @@
 "use strict";
 var today = $("#today").val();
 var csrf = $("#csrf").val();
-$(document).ready(function () {
-  "use strict";
+	$(document).ready(function(){
 
-  var view_name = $("#view_name").val();
-  console.log({ view_name });
+		"use strict";
 
-  var myurl = baseurl + "report/reports/" + view_name;
-  var csrf = $("#csrfhashresarvation").val();
-  var dataString =
-    "from_date=" + today + "&to_date=" + today + "&csrf_test_name=" + csrf;
-  $.ajax({
-    type: "POST",
-    url: myurl,
-    data: dataString,
-    success: function (data) {
-      $("#getresult2").html(data);
-    },
-  });
+		var view_name=$('#view_name').val();
+
+		var myurl =baseurl+'report/reports/'+view_name;
+        var csrf = $('#csrfhashresarvation').val();
+	    var dataString = 'from_date='+today+'&to_date='+today+'&csrf_test_name='+csrf;
+		 $.ajax({
+		 type: "POST",
+		 url: myurl,
+		 data: dataString,
+		 success: function(data) {
+			$('#getresult2').html(data);
+		 }
+	});
 });

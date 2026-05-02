@@ -1,203 +1,140 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed');?>
 <link href="<?php echo base_url('application/modules/addon/assets/css/style.css'); ?>" rel="stylesheet" type="text/css"/>
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-bd">
-            <div class="panel-heading">
-                <div class="panel-title box-header">
-                    <h4><?php echo display('manage_themes') ?></h4>
-                </div>
-            </div>
-            <div class="panel-body">
-                <?php $this->load->view('template/includes/messages'); ?>
-
-                <div class="row themediv">
-                    <?php
-                    $i = 0;
-                    foreach ($themes as $single_theme) {
-                        $i++; ?>
-                        <div class="col-md-4 themebox theme_<?php echo $single_theme->themename ?>">
-                            <div class="card_item">
-                                <div class="border-box pnav" id="pnav">
-                                    <div class="img_part">
-                                        <img class="img-fluid img-thumbnail" src="<?php echo base_url() . 'application/views/themes/' . html_escape($single_theme->themename) . '/preview.png'; ?>"  
-                                             alt="<?php echo html_escape($single_theme->themename); ?>">
-                                        <?php if (@$active_theme == $single_theme->themename) { ?>
-                                            <a href="<?php echo base_url() ?>" target='__blank' class="btn btn-dtls"><?php echo display('show_theme'); ?></a>
-                                        <?php } else { ?>
-                                            <a href="<?php echo base_url('addon/theme/active_theme/' . html_escape($single_theme->themename)) ?>" target='__blank' class="btn btn-dtls"><?php echo display('active') ?></a>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-
-                                <div class="caption_part">
-                                    <h4><?php echo ucwords(str_replace('_', ' ', $single_theme->themename)); ?></h4>
-                                    <div class="caption_btn <?php echo((@$active_theme == $single_theme->themename) ? 'activated' : ''); ?>">
-                                        <?php if (@$active_theme !== $single_theme->themename) { ?>
-                                            <a href="<?php echo base_url('addon/theme/active_theme/' . html_escape($single_theme->themename)) ?>" class="btn btn-success"><?php echo display('active') ?></a>
-                                            <button data_id="<?php echo $single_theme->themename; ?>" class="btn btn-danger delete_item"><?php echo display("delete") ?></button>
-                                        <?php } else { ?>
-                                            <a href="<?php echo base_url() ?>" target='__blank' class="btn btn-success"><?php echo display('activated'); ?></a>
-                                        <?php } ?>
-                                    </div>
-                                </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-bd">
+                    <div class="panel-heading">
+                        <div class="panel-title box-header">
+                            <h4><?php echo display('manage_themes') ?></h4>
+                            <div>
+                                <a href="<?php echo base_url('addon/theme/download_theme') ?>" class="btn btn-success"><i class="ti-download"> </i> <?php echo display('download') ?></a>
                             </div>
                         </div>
-                    <?php } 
+                    </div>
+                    <div class="panel-body">
 
-                    if ($i == 0) { ?>
-                        <div class="col-md-12 text-center">
-                            <h3><?php echo display('no_theme_available') ?></h3>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
+                       <?php $this->load->view('template/includes/messages');?>
 
-        <!-- Manage Color Section for Active Theme -->
-        <?php if (isset($active_theme) && !empty($active_theme)) { ?>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title box-header">
-                                <h4><?php echo display('manage_color') ?></h4>
+                        <div class="row">
+                            <?php echo form_open_multipart('addon/theme/upload_new_theme'); ?>
+                            <div class="col-sm-3">
+                                <label><?php echo display('purchase_key') ?> <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Enter Envato purchase key or Bdtask purchase key"></span></label>
+                                <input type="text" name="purchase_key"   placeholder="<?php echo display('purchase_key') ?>" class="form-control" required/>
                             </div>
+                            <div class="col-sm-3">
+                                <label><?php echo display('theme_name') ?></label>
+                                <input type="text" name="theme_name"   placeholder="<?php echo display('theme_name') ?>" class="form-control" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label><?php echo display('upload_theme') ?></label>
+                                <input type="file" name="new_theme" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="submit" value="<?php echo display('upload_theme') ?>" name="upload_theme" class="btn btn-primary themeupload">
+                            </div>
+                        <?php echo form_close(); ?>
+                        </div>
+                        <hr/>
+                        <div class="row themediv">
+                            <!-- New Themes -->
+                            <?php
+$i = 0;
+
+if (!empty($new_items)) {
+
+    foreach ($new_items as $theme) {
+
+        if (!in_array($theme->identity, $installed)) {
+            $i++;
+
+            $theme_img = (!empty($theme->thumb) ? $theme->thumb : NO_IMAGE);
+            ?>
+                                <div class="col-md-4 themebox theme_<?php echo $theme->identity ?>">
+                                    <div class="card_item">
+                                    <div class="border-box pnav" id="pnav">
+                                        <div class="img_part">
+
+                                            <img class="img-fluid img-thumbnail" src="<?php echo (!empty($theme_img) ? $theme_img : NO_IMAGE) ?>"  alt="<?php echo html_escape($theme->theme_name) ?>">
+                                            <a href="<?php echo $theme->payment_url; ?>" target="_blank" role="button"  class="btn btn-dtls" ><?php echo display('buy_now') ?></a>
+
+                                        </div>
+                                    </div>
+                                        <div class="caption_part" >
+                                            <h4><?php echo html_escape($theme->theme_name);
+            ?></h4>
+
+                                            <div class="caption_btn activated">
+                                                <p class="price">$<?php echo number_format($theme->price, 2); ?>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+}
+
+    }
+
+}
+?>
+
+                              <!-- Downloaded Themes -->
+                              <?php
+foreach ($themes as $single_theme) {
+    $i++;?>
+                                <div class="col-md-4 themebox  theme_<?php echo $single_theme->themename ?>">
+                                    <div class="card_item">
+                                    <div class="border-box pnav" id="pnav">
+                                        <div class="img_part">
+
+                                            <img class="img-fluid img-thumbnail" src="<?php echo base_url() . 'application/views/themes/' . html_escape($single_theme->themename) . '/preview.png'; ?>"  alt="<?php echo html_escape($single_theme->themename); ?>">
+                                            <?php
+if (@$active_theme == $single_theme->themename) {?>
+                                                <a href="<?php echo base_url() ?>" target='__blank' class="btn btn-dtls">Theme Details</a>
+                                            <?php } else {?>
+                                                <a href="<?php echo base_url('addon/theme/active_theme/' . html_escape($single_theme->themename)) ?>" target='__blank' class="btn btn-dtls"><?php echo display('active') ?></a>
+                                            <?php }
+    ?>
+
+                                        </div>
+                                       </div>
+
+                                        <div class="caption_part" >
+                                            <h4><?php echo ucwords(str_replace('_', ' ', $single_theme->themename));
+    ?></h4>
+
+
+                                            <div class="caption_btn <?php echo ((@$active_theme == $single_theme->themename) ? 'activated' : ''); ?>">
+                                                <?php
+if (@$active_theme !== $single_theme->themename) {?>
+                                                <a href="<?php echo base_url('addon/theme/active_theme/' . html_escape($single_theme->themename)) ?>" class="btn btn-success"><?php echo display('active') ?></a>
+                                                <button data_id="<?php echo $single_theme->themename; ?>"  class="btn btn-danger delete_item"><?php echo display("delete") ?></button>
+
+                                                <?php } else {?>
+                                                <a href="<?php echo base_url() ?>" target='__blank' class="btn btn-success">Activated</a>
+                                            <?php }
+    ?>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+}
+?>
+
+                              <?php
+if ($i == 0) {?>
+                                    <div class="col-md-12">
+                                       <h3> <?php echo display('no_theme_available') ?></h3>
+                                    </div>
+                                <?php }
+?>
                         </div>
 
-                        <div class="panel-body">
-                            <form class="form-horizontal" action="<?php echo base_url('addon/theme/save_colors'); ?>" method="post">
-                                <!-- CSRF token -->
-                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" 
-                                       value="<?php echo $this->security->get_csrf_hash(); ?>">
-                                <!-- Theme Name -->
-                                <input type="hidden" name="themename" value="<?php echo html_escape($active_theme); ?>">
-
-                                <?php
-                                // Assurer que $theme correspond au thème actif
-                                $theme_data = null;
-                                foreach ($themes as $t) {
-                                    if ($t->themename == $active_theme) {
-                                        $theme_data = $t;
-                                        break;
-                                    }
-                                }
-                                ?>
-
-                                <div class="row">
-                                    <!-- Primary Color -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="primaryColor"><?php echo display('primary_color'); ?></label>
-                                            <div class="col-sm-3">
-                                                <input type="color" class="form-control" id="primaryColor" name="primary_color"
-                                                       value="<?php echo !empty($theme_data->primary_color) ? $theme_data->primary_color : '#c09342'; ?>">
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="primaryColorCode"
-                                                       value="<?php echo !empty($theme_data->primary_color) ? $theme_data->primary_color : '#c09342'; ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Top Header Background Color -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="topHeaderBackgroundColor"><?php echo display('top_header_bg'); ?></label>
-                                            <div class="col-sm-4">
-                                                <input type="color" class="form-control" id="topHeaderBackgroundColor" name="top_header_bg" 
-                                                       value="<?php echo !empty($theme_data->top_header_bg) ? $theme_data->top_header_bg : '#112a2a'; ?>">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="topHeaderBackgroundColorCode"
-                                                       value="<?php echo !empty($theme_data->top_header_bg) ? $theme_data->top_header_bg : '#112a2a'; ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <!-- Header Background Color -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="headerBackgroundColor"><?php echo display('header_bg'); ?></label>
-                                            <div class="col-sm-3">
-                                                <input type="color" class="form-control" id="headerBackgroundColor" name="header_bg" 
-                                                       value="<?php echo !empty($theme_data->header_bg) ? $theme_data->header_bg : '#1f3433'; ?>">
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="headerBackgroundColorCode" 
-                                                       value="<?php echo !empty($theme_data->header_bg) ? $theme_data->header_bg : '#1f3433'; ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Header Text Color -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="headerTextColor"><?php echo display('header_text_color'); ?></label>
-                                            <div class="col-sm-4">
-                                                <input type="color" class="form-control" id="headerTextColor" name="header_color" 
-                                                       value="<?php echo !empty($theme_data->header_color) ? $theme_data->header_color : '#ffffff'; ?>">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="headerTextColorCode" 
-                                                       value="<?php echo !empty($theme_data->header_color) ? $theme_data->header_color : '#ffffff'; ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <!-- Footer Background Color -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="footerBackgroundColor"><?php echo display('footer_bg'); ?></label>
-                                            <div class="col-sm-3">
-                                                <input type="color" class="form-control" id="footerBackgroundColor" name="footer_bg" 
-                                                       value="<?php echo !empty($theme_data->footer_bg) ? $theme_data->footer_bg : '#081d1c'; ?>">
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="footerBackgroundColorCode" 
-                                                       value="<?php echo !empty($theme_data->footer_bg) ? $theme_data->footer_bg : '#081d1c'; ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Footer Text Color -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="footerTextColor"><?php echo display('footer_text_color'); ?></label>
-                                            <div class="col-sm-4">
-                                                <input type="color" class="form-control" id="footerTextColor" name="footer_color" 
-                                                       value="<?php echo !empty($theme_data->footer_color) ? $theme_data->footer_color : '#ffffff'; ?>">
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="footerTextColorCode" 
-                                                       value="<?php echo !empty($theme_data->footer_color) ? $theme_data->footer_color : '#ffffff'; ?>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Submit Buttons -->
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="button" class="btn btn-default" id="resetColors"><?php echo display('reset_default') ?></button>
-                                        <button type="submit" class="btn btn-success"><?php echo display('save') ?></button>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
-        <?php } ?>
-        <!-- End Manage Color Section -->
-
-    </div>
-</div>
-
+        </div>
 <script src="<?php echo base_url() . 'application/modules/addon/assets/ajaxs/addons/theme.js' ?>"></script>

@@ -15,7 +15,7 @@
 						<div class="form-group row">
                         <label for="status" class="col-sm-4 col-form-label"><?php echo display('status') ?></label>
                         <div class="col-sm-8">
-                            <select name="status"  class="form-control" required>
+                            <select name="status"  class="form-control">
                                 <option value=""  selected="selected"><?php echo display('select_option');?></option>
                                 <option value="1" <?php if(!empty($intinfo)){if($intinfo->is_active==1){echo "Selected";}} ?>><?php echo display('active')?></option>
                                 <option value="0" <?php if(!empty($intinfo)){if($intinfo->is_active==0){echo "Selected";}} ?>><?php echo display('inactive')?></option>

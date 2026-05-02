@@ -41,7 +41,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Lic
 {
     private $domain;
-    private $localhost;
     private $full_domain;
     private $expire_date;
     private $update_day;
@@ -52,8 +51,8 @@ class Lic
     private $product_version = '3.0';
     private $log_path    = null;
     private $check_days  = array(9, 10, 11);
-    //private $api_domain  = 'secure.bdtask.com';
-    //private $api_url     = 'https://secure.bdtask.com/alpha/class.licence.php';
+    private $api_domain  = 'secure.bdtask.com';
+    private $api_url     = 'https://secure.bdtask.com/alpha/class.licence.php';
     private $whitelist   = '12ca17b49a-6d16ab695d-49960de588-6f32aa4e40-6f32aa4e40';
 
     public function __construct()
@@ -66,18 +65,18 @@ class Lic
         }
 
         // set log_path
-       /* $this->log_path = SYSDIR.'/core/compat/index.html'; 
+        $this->log_path = SYSDIR.'/core/compat/index.html'; 
 
         //set initial values
         $this->domain = $this->domain(); 
         $this->full_domain = $this->full_domain();
         //expire date
-        $this->expire_date = @date('Y-m-d', @strtotime("+20 years"));
+        $this->expire_date = @date('Y-m-d', @strtotime("+10 year"));
         //check day
         $this->update_day  = @date('d');
         
         // call main method verify();
-        $this->verify();*/
+        $this->verify();
     }
 
 
@@ -126,23 +125,23 @@ class Lic
     }
 
     //filter all input data
-   /* public function filterPurchaseKey($purchase_key)
+    public function filterPurchaseKey($purchase_key)
     { 
         $length = strlen($purchase_key);
         if($length>=20 && $length<=40){
             return TRUE;
         }
         return false;
-    }*/
-/*
+    }
+
     private function getprelicense(){
         return substr(hash('ripemd256', $this->domain), 0, 15);
     }
     private function domain_encription(){
         $en_val = hash('sha256', $this->domain);
         return substr($en_val, 0, 10);
-    }*/
-/*
+    }
+
     private function verify()
     { 
         // app in localhost
@@ -170,13 +169,8 @@ class Lic
         }
 
         //check licence
-        if (isset($_SESSION['LicSysLog']) 
-            && count((array)$_SESSION['LicSysLog']) > 0 
-            && isset($_SESSION['LicSysLog']->expire_date) 
-            && isset($_SESSION['LicSysLog']->product_key) 
-            && isset($_SESSION['LicSysLog']->licence)) {
-            
-            // call envato LicSysLog object
+        if (isset($_SESSION['LicSysLog']) && @sizeof($_SESSION['LicSysLog']) > 0 && isset($_SESSION['LicSysLog']->expire_date) && isset($_SESSION['LicSysLog']->product_key) && isset($_SESSION['LicSysLog']->licence)) {
+            //call envato LicSysLog object
             $this->envato($_SESSION['LicSysLog']);
         } else {
 
@@ -193,8 +187,8 @@ class Lic
                 $this->html($this->product_key);
             }
         }
-    }*/
-/*
+    }
+
     private function envato($LicSysLog = array())
     {
         if (strtotime($LicSysLog->expire_date) <= @strtotime(date('Y-m-d'))) {
@@ -220,9 +214,9 @@ class Lic
             }
             $_SESSION['response'] = true;
         }
-    }/*
+    }
 
-/*
+
     private function html($product_key = null)
     {
         if (isset($_POST['purchase_key']) && ($_POST['purchase_key'] != null) && $this->filterPurchaseKey($_POST['purchase_key'])) { 
@@ -255,7 +249,7 @@ class Lic
         </div>
         </form>"; 
     }
-/*
+
 
     private function response($purchase_key = null) {
 
@@ -274,8 +268,7 @@ class Lic
  
         return json_decode( curl_exec($ch) , true );
     }
-    */
-/*
+
     public function updateFile($whitelist, $product_key=false)
     {
 
@@ -318,8 +311,8 @@ class Lic
             return false;
         }
         
-    }*/
-    /*
+    }
+
     private function fileWrite($purchase_key = null)
     {
         $data = (object)array(
@@ -335,9 +328,9 @@ class Lic
         $data = json_decode($data);
         $_SESSION['LicSysLog'] = $data;
 
-    }*/
+    }
 
-    /*private function fileRead()
+    private function fileRead()
     {
         if (file_exists($this->log_path)) {
             $data = file_get_contents($this->log_path);
@@ -356,7 +349,7 @@ class Lic
         } else {
             return false;
         }
-    }*/
+    }
 
     private function serverAliveOrNot()
     {

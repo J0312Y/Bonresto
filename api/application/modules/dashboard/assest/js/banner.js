@@ -18,7 +18,6 @@ function editbanner(id){
 function edittype(typename,typeid){
 	$("#bannertype").val(typename);
 	$("#btnchnage").text("Update");
-	$("#btnchnage").prop("disabled", false);
 	$('#typeurl').attr('action', basicinfo.baseurl+"dashboard/web_setting/edittype/"+typeid);
 	}
 function editmenu(menuname,menuurl,status,parent,menuid){
@@ -27,7 +26,6 @@ function editmenu(menuname,menuurl,status,parent,menuid){
 	$("#menuid").val(parent).trigger('change');
 	$("#status").select2("val", status);
 	$("#btnchnage").text("Update");
-	$("#btnchnage").prop("disabled", false);
 	$("#upbtn").show();
 	$('#menuurl').attr('action', basicinfo.baseurl+"dashboard/web_setting/editmenu/"+menuid);
 	}

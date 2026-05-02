@@ -139,7 +139,3 @@ $(document).on('click', '.sa-clicon', function() {
 					swal("", lang.appcartempty, "warning");
 					}
 			}
-// Rendre les fonctions accessibles globalement
-window.orderlist = orderlist;
-window.gotoappcart = gotoappcart;
-//-- Data Table --//

@@ -136,7 +136,7 @@ class Item_food extends MX_Controller
 
         $uniqueStr = implode(',', array_unique(explode(',', $alltmtype)));
 
-        #-------------------------------#
+#-------------------------------#
         if ($this->form_validation->run()) {
             /****************image Upload*************/
             $config['upload_path']   = 'application/modules/itemmanage/assets/images/';
@@ -187,7 +187,7 @@ class Item_food extends MX_Controller
                 $img    = 'application/modules/itemmanage/assets/images/' . $fdata['file_name'];
             }
 
-            /****************end*********************/
+/****************end*********************/
             if (empty($this->input->post('ProductsID'))) {
                 $this->permission->method('itemmanage', 'create')->redirect();
                 $data['foodlist'] = (Object) $postData = [
@@ -254,12 +254,12 @@ class Item_food extends MX_Controller
                     file_put_contents($cache_file, $productList);
 
                     $this->session->set_flashdata('message', display('save_successfully'));
-                    redirect('itemmanage/item_food/index');
+                    redirect('itemmanage/item_food/create');
                 } else {
                     $this->session->set_flashdata('exception', display('please_try_again'));
                 }
 
-                redirect("itemmanage/item_food/index");
+                redirect("itemmanage/item_food/create");
 
             } else {
                 $this->permission->method('itemmanage', 'update')->redirect();
@@ -334,7 +334,7 @@ class Item_food extends MX_Controller
                     $this->session->set_flashdata('exception', display('please_try_again'));
                 }
 
-                redirect("itemmanage/item_food/index");
+                redirect("itemmanage/item_food/create/" . $postData['ProductsID']);
             }
 
         } else {

@@ -46,7 +46,6 @@ $acthemename = $activethemeinfo->themename;?>
                             <th class="text-center">Capacity </th>
                             <th class="text-center">Reserve Time </th>
                             <th class="text-center">Reserve Date</th>
-                            <th class="text-center">Status </th>
                             
                         </tr>
                     </thead>
@@ -62,11 +61,7 @@ $acthemename = $activethemeinfo->themename;?>
                             <td class="text-center"><?php echo $item->formtime.' - '.$item->totime;?></td>
                             <td class="text-center"><?php $originalDate = $item->reserveday;
                             echo $newDate = date("d-M-Y", strtotime($originalDate));?></td>
-                           <td class="text-center">
-                                        <?php if($item->status==1){echo "Free";}
-										if($item->status==2){echo "Booked";}
-										 ?>
-                                       </td> 
+                            
                         </tr>
                         <?php } ?>
                     </tbody>

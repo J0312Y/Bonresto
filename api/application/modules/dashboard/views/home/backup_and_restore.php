@@ -1,4 +1,3 @@
-<div id="message" style="display:none; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;"></div>
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="panel panel-bd lobidrag">
@@ -45,7 +44,7 @@
 
                 <div class="form-group row">
                     <div class="col-sm-4">  
-                    <?php echo form_open('/dashboard/backup_restore/process', "id='brFrm'") ?>
+                    <?php echo form_open('dashboard/backup_restore/process', "id='brFrm'") ?>
                         <?php if (!$backup) { ?>
                             <input type="hidden" name="input" value="1">
                             <button type="submit" id="download" class="btn btn-primary w-md m-b-5 btn-block"><i class="fa fa-download"></i> <?php echo display('backup_now') ?> </button>
@@ -53,10 +52,10 @@
                             <input type="hidden" name="input" value="2">
                             <button name="restore" type="submit" id="import" class="btn btn-info w-md m-b-5 btn-block"><i class="fa fa-database"></i> <?php echo display('restore_now') ?></button>
 
-                            <a href="<?php echo base_url('/dashboard/backup_restore/download') ?>" class="btn btn-success w-md m-b-5 btn-block" onclick="return confirm('<?php echo display("are_you_sure") ?>')"><i class="fa fa-download"></i> <?php echo display('download') ?></a>
+                            <a href="<?php echo base_url('dashboard/backup_restore/download') ?>" class="btn btn-success w-md m-b-5 btn-block" onclick="return confirm('<?php echo display("are_you_sure") ?>')"><i class="fa fa-download"></i> <?php echo display('download') ?></a>
 
                         <?php } ?> 
-                        <a href="<?php echo base_url('/dashboard/backup_restore/delete') ?>" class="btn btn-danger w-md m-b-5 btn-block" onclick="return confirm('<?php echo display("are_you_sure") ?>')"><i class="fa fa-trash"></i> <?php echo display('delete') ?></a>
+                        <a href="<?php echo base_url('dashboard/backup_restore/delete') ?>" class="btn btn-danger w-md m-b-5 btn-block" onclick="return confirm('<?php echo display("are_you_sure") ?>')"><i class="fa fa-trash"></i> <?php echo display('delete') ?></a>
                     <?php echo form_close() ?> 
                     </div>  
                 </div>  
@@ -65,4 +64,6 @@
         </div>
     </div>
 </div>
-<?php $this->load->view('backup_script');?>
+<?php $this->load->view('include/backup_script');?>
+
+

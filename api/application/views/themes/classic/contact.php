@@ -49,6 +49,7 @@ if (!empty($seoterm)) {
                     <img src="<?php echo base_url(); ?>application/views/themes/<?php echo $this->themeinfo->themename; ?>/assets_web/img/email.png" class="mr-3 max-width-60" alt="location">
                     <div class="media-body">
                         <h5 class="mt-0"><?php echo display('call_us') ?></h5>
+                        <?php echo $webinfo->email; ?><br>
                         <?php echo $webinfo->email; ?>
                     </div>
                 </div>

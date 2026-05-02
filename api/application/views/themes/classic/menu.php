@@ -169,7 +169,7 @@ foreach ($openclosetime as $timeshedule) {
              </div>
              <div class="col-xl-6 col-md-8 mainContent">
                  <div id="loaditem">
-                     <div id="loadingcon" style="text-align:center; display:none;"><img src="<?php echo base_url(); ?>view/themes/<?php echo $acthemename; ?>/assets_web/images/loader.gif" alt="loader" width="180" /></div>
+                     <div id="loadingcon" style="text-align:center; display:none;"><img src="<?php echo base_url(); ?>/view/themes/<?php echo $acthemename; ?>/assets_web/images/loader.gif" alt="loader" width="180" /></div>
                      <div class="mb-3 d-flex align-items-center justify-content-between">
                          <div class="show_results">
                              <h6 class="mb-0"><?php echo $showing; ?></h6>

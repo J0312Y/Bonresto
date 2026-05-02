@@ -53,7 +53,7 @@
                                     <div class="col-sm-3">
                                  <input type="text" class="form-control datepicker" name="purchase_date" value="<?php echo $purchasedate;?>" id="date" required="" tabindex="2">
                                     </div>
-                                     <label for="date" class="col-sm-3 col-form-label"><?php echo display('expdate') ?><i class="text-danger">*</i></label>
+                                     <label for="date" class="col-sm-3 col-form-label"><?php echo display('expdate') ?> <a class="" data-toggle="tooltip" data-placement="top" title="Expiry date is optional, if want to add you can add, but it has no major impact."><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control datepicker" name="expire_date" data-date-format="mm/dd/yyyy" value="<?php echo $expiredatedate;?>" id="expire_date" required="" tabindex="2" readonly="readonly">
                                     </div>
@@ -78,7 +78,7 @@
                                     	<select name="paytype" class="form-control" required="" onchange="bank_paymet(this.value)">
                                             <option value="1" <?php if($purchaseinfo->paymenttype==1){ echo "Selected";}?>><?php echo display('casp') ?></option>
                                             <option value="2" <?php if($purchaseinfo->paymenttype==2){ echo "Selected";}?>><?php echo display('bnkp') ?></option>
-                                            <option value="3" <?php if($purchaseinfo->paymenttype==3){ echo "Selected";}?>>Due Payment</option> 
+                                            <option value="3" <?php if($purchaseinfo->paymenttype==3){ echo "Selected";}?>><?php echo display('due_payment') ?></option> 
                                         </select>
                                     </div>
                                 </div> 
@@ -111,14 +111,18 @@
                                 </thead>
                                 <tbody id="addPurchaseItem">
                                 <?php $i=0;
+                                if($iteminfo){
 								foreach($iteminfo as $item){
 									$i++;
 									?>
                                     <tr>
                                         <td class="span3 supplier">
-                                       <input type="text" name="product_name" required="" class="form-control product_name" onkeypress="product_list(<?php echo $i;?>);" placeholder="Item Name" id="product_name_<?php echo $i;?>" value="<?php echo $item->ingredient_name;?>" tabindex="5">
-                                   <input type="hidden" class="autocomplete_hidden_value product_id_<?php echo $i;?>" name="product_id[]" id="SchoolHiddenId" value="<?php echo $item->indredientid;?>">
-                                   <input type="hidden" class="sl" value="<?php echo $i;?>">
+                                        <select name="product_id[]" id="product_id_<?php echo $i;?>" class="postform resizeselect form-control" onchange="product_list(<?php echo $i;?>)">
+                    					<option value=""><?php echo display('select');?> <?php echo display('ingredients');?></option>
+										<?php foreach ($ingrdientslist as $ingrdients) {?>
+                    							<option value="<?php echo $ingrdients->id;?>" <?php if($ingrdients->id==$item->indredientid){ echo "selected";}?>><?php echo $ingrdients->ingredient_name;?></option>
+                    					<?php }?>
+                                        </select>
                                         </td>
 
                                        <td class="wt">
@@ -140,7 +144,7 @@
                                                 <button  class="btn btn-danger red text-right" type="button" value="Delete" onclick="purchasetdeleteRow(this)" tabindex="8"><?php echo display('delete') ?></button>
                                             </td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php } } ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -170,4 +174,8 @@
             </div>
         </div>
     </div>
+     <div id="cntra" hidden>
+    <option value=""><?php echo display('select');?> <?php echo display('ingredients');?></option>
+<?php foreach ($ingrdientslist as $ingrdients) {?><option value="<?php echo $ingrdients->id;?>"><?php echo $ingrdients->ingredient_name;?></option><?php }?>
+</div>
     <script src="<?php echo base_url('application/modules/purchase/assets/js/purchaseedit_script.js'); ?>" type="text/javascript"></script>

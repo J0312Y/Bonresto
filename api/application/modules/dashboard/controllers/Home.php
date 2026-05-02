@@ -38,6 +38,7 @@ class Home extends MX_Controller
 
     public function index()
     {
+
         if ($this->permission->method('dashboard', 'read')->access() == false) {
 
             if (isset($_GET['status'])) {
@@ -130,29 +131,7 @@ class Home extends MX_Controller
         $data["onlinesaleorder"]   = trim($totalorderonline, ',');
         $data["offlinesaleamount"] = trim($salesamountoffline, ',');
         $data["offlinesaleorder"]  = trim($totalorderoffline, ',');
-        $sql                       = "SELECT 
-        order_menu.`row_id`, 
-        order_menu.`menu_id`,
-        COUNT(order_menu.`menu_id`) AS totalmenu,
-        SUM(order_menu.`menuqty`) AS qty,
-        MAX(order_menu.`menuqty`) AS max_menuqty,
-        order_menu.varientid,
-        item_foods.ProductName,
-        variant.variantName
-    FROM 
-        `order_menu`
-    LEFT JOIN 
-        item_foods 
-        ON item_foods.ProductsID = order_menu.menu_id
-    LEFT JOIN 
-        variant 
-        ON variant.variantid = order_menu.varientid
-    GROUP BY 
-        order_menu.`menu_id`, 
-        order_menu.varientid
-    ORDER BY 
-        qty DESC
-    LIMIT 15";
+        $sql                       = "SELECT order_menu.`menu_id`,count(order_menu.`menu_id`) as totalmenu,Sum(order_menu.`menuqty`) as qty,order_menu.varientid,item_foods.ProductName,variant.variantName FROM `order_menu` left join item_foods ON item_foods.ProductsID=order_menu.menu_id left join variant ON variant.variantid=order_menu.varientid group by order_menu.`menu_id`,order_menu.varientid order by `totalmenu` desc limit 15";
         $query                     = $this->db->query($sql);
         $topsell                   = $query->result();
         $data["topseller"]         = $topsell;
@@ -223,7 +202,7 @@ class Home extends MX_Controller
             $dataValue = [0, 0, 0, 0, 0, 0];
         }
 
-        $dataLavels = ['Walk-in Sale', 'Online Sale', 'Third Party Sale', 'Take Way Sale', 'QR Customer Sale'];
+        $dataLavels = ['Walking Sell', 'Online Sell', 'Third Party Sell', 'Take Way Sell', 'QR Customer Sell'];
 
         $output = ['dataValue' => $dataValue, 'lavels' => $dataLavels];
 

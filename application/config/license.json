@@ -4,57 +4,21 @@
         "plan": "Enterprise",
         "features": {
             "hrm": true,
-            "qrapp": true,
-            "coupon": true,
-            "rating": true,
-            "report": true,
-            "counter": true,
             "kitchen": true,
-            "loyalty": true,
-            "payroll": true,
             "reports": true,
-            "accounts": true,
-            "delivery": true,
-            "purchase": true,
             "qr_order": true,
-            "whatsapp": true,
-            "dashboard": true,
-            "inventory": true,
-            "sms_notif": true,
-            "api_access": true,
-            "attendance": true,
-            "itemmanage": true,
-            "production": true,
-            "online_menu": true,
-            "ordermanage": true,
-            "reservation": true,
-            "white_label": true,
-            "multi_branch": true,
-            "cash_register": true,
-            "wastemangment": true,
-            "kitchen_screen": true,
-            "online_payment": true
+            "reservation": true
         },
         "max_tables": 0,
         "max_users": 0,
         "status": "active",
-        "valid_until": "2027-04-20 23:59:59",
-        "grace_until": "2027-04-27 23:59:59",
-<<<<<<< HEAD
-        "issued_at": "2026-04-27 12:40:22",
+        "valid_until": "2028-05-01 23:59:59",
+        "grace_until": "2028-05-08 23:59:59",
+        "issued_at": "2026-05-01 21:47:50",
         "pending_updates": []
     },
-    "signature": "8aebe2fb7d92799a4285b6c8fd2cefaa84fe830304d2288e8357b59649ffd5a1",
+    "signature": "e7f27ffabb3efaeb860d47e10cac86f361c769a9a906a7a020e1115078ac4bf6",
     "client_key": "2697-DA3B-E0BB-C328",
-    "cached_at": "2026-04-29 19:36:37",
-    "last_check": "2026-04-30 15:46:06"
-=======
-        "issued_at": "2026-04-29 13:39:43",
-        "pending_updates": []
-    },
-    "signature": "455b4acd241e04237407bc2b3c5f4cc99d4dcbfa39352d6ff0b56067391884f3",
-    "client_key": "2697-DA3B-E0BB-C328",
-    "cached_at": "2026-04-29 13:39:43",
-    "last_check": "2026-04-29 16:18:55"
->>>>>>> 8ea723d6e3a12d8fd308bc3d0ba986ebac1b4bea
+    "cached_at": "2026-05-01 21:47:50",
+    "last_check": "2026-05-02 21:03:47"
 }

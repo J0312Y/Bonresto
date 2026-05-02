@@ -1,19 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
+    RewriteBase /bonresto
 
-    # Admin SaaS — fichiers statiques servis depuis admin/dist/
-    RewriteCond %{REQUEST_URI} ^/admin/(.+)
-    RewriteCond %{DOCUMENT_ROOT}/admin/dist/%1 -f
-    RewriteRule ^admin/(.+)$ /admin/dist/$1 [END]
-
-    # Admin SaaS — SPA fallback (toutes les routes → index.html)
-    RewriteCond %{REQUEST_URI} !^/admin/dist/
-    RewriteCond %{REQUEST_URI} ^/admin
-    RewriteRule ^ /admin/dist/index.html [END]
-
-    # CodeIgniter
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
+
     RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>

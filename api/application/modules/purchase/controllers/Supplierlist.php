@@ -28,7 +28,7 @@ class Supplierlist extends MX_Controller {
         $config["uri_segment"] = 4;
         $config["last_link"] = "Last"; 
         $config["first_link"] = "First"; 
-        $config['next_link'] = 'Next';
+        $config['next_link'] = display('next');
         $config['prev_link'] = 'Prev';  
         $config['full_tag_open'] = "<ul class='pagination col-xs pull-right'>";
         $config['full_tag_close'] = "</ul>";
@@ -65,14 +65,8 @@ class Supplierlist extends MX_Controller {
 	
     public function create($id = null)
     {
-	  $data['title'] = display('supplier_add');
-	    $coa = $this->supplier_model->headcode();
-        if($coa->HeadCode!=NULL){
-            $headcode=$coa->HeadCode+1;
-        }
-        else{
-            $headcode="502020501";
-        }
+	    $this->permission->method('purchase','read')->redirect();
+		$data['title'] = display('supplier_add');
 	   $lastid=$this->db->select("*")->from('supplier')
 			->order_by('suplier_code','desc')
 			->get()
@@ -98,9 +92,6 @@ class Supplierlist extends MX_Controller {
 		$this->form_validation->set_rules('suppliername',display('supplier_name'),'required|max_length[50]');
 		$this->form_validation->set_rules('mobile',display('mobile')  ,'required');
 	   $saveid=$this->session->userdata('id');
-	   
-       $c_name = $this->input->post('suppliername',true);
-       $c_acc=$sino.'-'.$c_name;
 		
 	   $data['supplier']   = (Object) $postData = array(
 		   'supid'  			 => $this->input->post('supid'),
@@ -110,38 +101,24 @@ class Supplierlist extends MX_Controller {
 		   'supMobile' 	 	     => $this->input->post('mobile',true),
 		   'supAddress' 	     => $this->input->post('address',true),
 		  ); 
-	    $data['aco']   = (Object) $postDatacoa = array(
-            'HeadCode'         => $headcode,
-            'HeadName'         => $c_acc,
-            'PHeadName'        => 'Suppliers',
-            'HeadLevel'        => '4',
-            'IsActive'         => '1',
-            'IsTransaction'    => '1',
-            'IsGL'             => '0',
-            'HeadType'         => 'L',
-            'IsBudget'         => '0',
-            'IsDepreciation'   => '0',
-            'DepreciationRate' => '0',
-            'CreateBy'         => $saveid,
-            'CreateDate'       => date('Y-m-d H:i:s'),
-        );
-	  $data['intinfo']="";
-	  if ($this->form_validation->run()) { 
-	   if(empty($this->input->post('supid'))) {
+
+		$data['intinfo']="";
+		if ($this->form_validation->run()) { 
+		if(empty($this->input->post('supid'))) {
 		$this->permission->method('purchase','create')->redirect();
 		
-	 $logData = array(
-	   'action_page'         => "Supplier List",
-	   'action_done'     	 => "Insert Data", 
-	   'remarks'             => "New Supplier Created",
-	   'user_name'           => $this->session->userdata('fullname'),
-	   'entry_date'          => date('Y-m-d H:i:s'),
-	  );
-	     $this->supplier_model->create_coa($postDatacoa);
+		$logData = array(
+		'action_page'         => display('supplier_list'),
+		'action_done'     	 => "Insert Data", 
+		'remarks'             => "New Supplier Created",
+		'user_name'           => $this->session->userdata('fullname'),
+		'entry_date'          => date('Y-m-d H:i:s'),
+		);
+
 		if ($this->supplier_model->create($postData)) { 
 		$supplier_id = $this->db->insert_id();
 		 $this->logs_model->log_recorded($logData);
-		 $this->supplier_model->previous_balance_add($this->input->post('previous_balance'), $supplier_id,$c_acc,$c_name,$sino);
+		 $this->supplier_model->previous_balance_add($this->input->post('previous_balance'), $supplier_id, $sino);
 		 $this->session->set_flashdata('message', display('save_successfully'));
 		 redirect('purchase/supplierlist/index');
 		} else {
@@ -153,28 +130,12 @@ class Supplierlist extends MX_Controller {
 		$this->permission->method('purchase','update')->redirect();
 		
 	  $logData = array(
-	   'action_page'         => "Supplier List",
+	   'action_page'         => display('supplier_list'),
 	   'action_done'     	 => "Update Data", 
 	   'remarks'             => "Supplier Updated",
 	   'user_name'           => $this->session->userdata('fullname'),
 	   'entry_date'          => date('Y-m-d H:i:s'),
 	  );
-	  $c_accup = $this->input->post('oldname');
-	  $getheadid=$this->db->select("HeadCode")->from('acc_coa')
-	  		->where('HeadName',$c_accup)
-			->get()
-			->row();
-	  if(!empty($getheadid)){
-		  $upheadcode=$getheadid->HeadCode;
-		  $acc=array(
-		   'HeadName'         => $c_acc,
-		   'UpdateBy'         => $saveid,
-		   'UpdateDate'       => date('Y-m-d H:i:s')
-		  );
-		    $this->db->where('HeadCode',$upheadcode);
-	        $this->db->update('acc_coa',$acc);
-
-		  }
 
 		if ($this->supplier_model->update($postData)) { 
 		 $this->logs_model->log_recorded($logData);
@@ -197,7 +158,6 @@ class Supplierlist extends MX_Controller {
  
     }
    public function updateintfrm($id){
-	  
 		$this->permission->method('purchase','update')->redirect();
 		$data['title'] = display('supplier_edit');
 		$data['intinfo']   = $this->supplier_model->findById($id);
@@ -211,7 +171,7 @@ class Supplierlist extends MX_Controller {
     {
         $this->permission->module('purchase','delete')->redirect();
 		$logData = array(
-	   'action_page'         => "Supplier List",
+	   'action_page'         => display('supplier_list'),
 	   'action_done'     	 => "Delete Data", 
 	   'remarks'             => "Supplier Deleted",
 	   'user_name'           => $this->session->userdata('fullname'),

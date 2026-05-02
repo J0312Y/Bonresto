@@ -3,7 +3,7 @@
             <div class="panel sms-form">
                 <div class="panel-body">
                     <p>
-                    To get <b>50</b> free sms from smsrank.com click <?php echo display('smsnotes1');?> <b><a href="http://door.smsrank.com/signup" target="_blank">here</a></b> <?php echo display('smsnotes2');?> 
+                     <?php echo display('smsnotes1');?> <b><a href="http://door.smsrank.com/signup" target="_blank">here</a></b> <?php echo display('smsnotes2');?>
                  </p>
              </div>
          </div>

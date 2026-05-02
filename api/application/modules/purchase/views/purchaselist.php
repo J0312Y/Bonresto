@@ -16,7 +16,7 @@
                     <thead>
                         <tr>
                             <th><?php echo display('Sl') ?></th>
-                            <th><?php echo "Invoice no."; ?></th>
+                            <th><?php echo display('invoice_no') ?></th>
                             <th><?php echo display('supplier_name') ?></th>
                             <th><?php echo display('date') ?></th>
                             <th><?php echo display('price') ?></th>
