@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Sync_manager {
 
     const HMAC_ALGO     = 'sha256';
-    const BATCH_SIZE    = 50;    // rows par appel push
+    const BATCH_SIZE    = 200;   // rows par appel push
     const MAX_ATTEMPTS  = 5;     // tentatives avant abandon
     const PUSH_INTERVAL = 60;    // secondes entre deux push
     const PULL_INTERVAL = 60;    // secondes entre deux pull
@@ -87,7 +87,7 @@ class Sync_manager {
     ];
 
     /** Tables gérées par enqueue() PHP (ont un sync_uuid). */
-    const TRANSACTIONAL = ['customer_order', 'order_menu', 'bill'];
+    const TRANSACTIONAL = ['customer_order', 'order_menu'];
 
     private ?object $cfg    = null;  // ligne sync_config
     private bool    $online = false;

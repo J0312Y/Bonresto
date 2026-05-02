@@ -1793,7 +1793,7 @@ class Order extends MX_Controller
         if ($acceptreject == 1) {
             $onlinebill = $this->db->select('*')->from('bill')->where('order_id', $orderid)->get()->row();
 
-            if ($onlinebill->payment_method_id == 1 || $onlinebill->payment_method_id == 4) {
+            if ($onlinebill && ($onlinebill->payment_method_id == 1 || $onlinebill->payment_method_id == 4)) {
                 $updatetData = ['anyreason' => $reason, 'nofification' => $status, 'orderacceptreject' => $acceptreject, 'order_status' => 2];
             } else {
                 $updatetData = ['anyreason' => $reason, 'nofification' => $status, 'orderacceptreject' => $acceptreject];
