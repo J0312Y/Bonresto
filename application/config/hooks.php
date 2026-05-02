@@ -27,3 +27,11 @@ $hook['post_controller_constructor'][] = [
     'filename' => 'License_check.php',
     'filepath' => 'hooks',
 ];
+
+// Sync tick — auto-triggers push/pull after each request (replaces crontab)
+$hook['post_system'][] = [
+    'class'    => 'Sync_tick',
+    'function' => 'tick',
+    'filename' => 'Sync_tick.php',
+    'filepath' => 'hooks',
+];
