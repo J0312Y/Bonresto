@@ -7,6 +7,7 @@ class License_check {
         'install', 'saas', 'dashboard/auth', 'dashboard/license',
         'login', 'logout', 'hungry', 'scanmenu', 'qrorder', 'qr-menu',
         'v1', 'v3', 'app', 'appv1', 'android',
+        'sync_api', 'sync_cron',
     ];
 
     /**

@@ -108,6 +108,14 @@ $route['reservation/getSound'] = 'reservation/getSound';
 $route['employee/get_all'] = 'employee/employeeback/get_all';
 
 
+// ── Sync API Routes (Local ↔ VPS) ────────────────────────────────────────────
+$route['sync_cron/run']['GET']              = 'sync_cron/run';
+$route['sync_api/health']['GET']            = 'sync_api/health';
+$route['sync_api/receive']['POST']          = 'sync_api/receive';
+$route['sync_api/online_orders']['GET']     = 'sync_api/online_orders';
+$route['sync_api/ack_orders']['POST']       = 'sync_api/ack_orders';
+$route['sync_api/order_status']['POST']     = 'sync_api/order_status';
+
 // License management routes
 $route['dashboard/license']                   = 'dashboard/license/index';
 $route['dashboard/license/activate']['POST']  = 'dashboard/license/activate';
