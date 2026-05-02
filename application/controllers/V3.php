@@ -190,6 +190,7 @@ class V3 extends MY_Controller
 			$updatetData = array('order_status'     => 2);
 			$this->db->where('order_id', $orderid);
 			$this->db->update('customer_order', $updatetData);
+			$this->_sync_order_status($orderid, 2);
 			$orderid = $this->input->post('Orderid', TRUE);
 			$kitchenid = $this->input->post('kitchenid', TRUE);
 			$output = $categoryIDs = array();
@@ -449,6 +450,7 @@ class V3 extends MY_Controller
 			$updatetData = array('order_status'     => 3);
 			$this->db->where('order_id', $order_id);
 			$this->db->update('customer_order', $updatetData);
+			$this->_sync_order_status($order_id, 3);
 
 			return $this->respondWithSuccess('Tous les articles sont prêts pour cette commande de cuisine', $output);
 		}
@@ -675,6 +677,31 @@ class V3 extends MY_Controller
 			} else {
 				return $this->respondWithError('Commande introuvable.!!!', $output);
 			}
+		}
+	}
+
+	// ── Sync helper ───────────────────────────────────────────────────────────
+
+	/**
+	 * Enqueue une mise à jour de statut cuisine vers le VPS.
+	 */
+	private function _sync_order_status(int $order_id, int $status): void {
+		try {
+			$order = $this->db->where('order_id', $order_id)->get('customer_order')->row_array();
+			if (!$order) return;
+
+			// Ne pas ré-envoyer les commandes originaires du VPS
+			if (($order['sync_origin'] ?? 'local') === 'vps') return;
+
+			$this->load->library('Sync_manager');
+			$this->sync_manager->enqueue(
+				'customer_order',
+				$order_id,
+				'update',
+				array_merge($order, ['order_status' => $status, 'synced_at' => date('Y-m-d H:i:s')])
+			);
+		} catch (Throwable $e) {
+			log_message('error', '[V3::_sync_order_status] ' . $e->getMessage());
 		}
 	}
 }

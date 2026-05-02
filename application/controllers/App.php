@@ -518,6 +518,9 @@ class App extends MY_Controller
 
             if ($this->App_desktop_model->orderitem($orderid, $customerid)) {
 
+                // Sync : envoyer la commande complète au VPS
+                $this->_sync_enqueue_order($orderid);
+
                 $settinginfo        = $this->App_desktop_model->read('*', 'setting', ['id' => 2]);
                 $currencyinfo       = $this->App_desktop_model->read('*', 'currency', ['currencyid' => $settinginfo->currency]);
                 $paymentsetup       = $this->App_desktop_model->read('*', 'paymentsetup', ['paymentid' => $paymentsatus]);
@@ -2850,6 +2853,55 @@ class App extends MY_Controller
 
         curl_close($curl);
         echo $response;
+    }
+
+    // ── Sync helper ───────────────────────────────────────────────────────────
+
+    /**
+     * Enqueue une commande complète (commande + articles) vers le VPS.
+     * Appelé après chaque création ou mise à jour de commande.
+     */
+    private function _sync_enqueue_order(int $order_id): void {
+        try {
+            $order = $this->db->where('order_id', $order_id)->get('customer_order')->row_array();
+            if (!$order) return;
+
+            // Ne pas ré-envoyer les commandes originaires du VPS
+            if (($order['sync_origin'] ?? 'local') === 'vps') return;
+
+            $items = $this->db->where('order_id', $order_id)->get('order_menu')->result_array();
+
+            $this->load->library('Sync_manager');
+            $this->sync_manager->enqueue(
+                'customer_order',
+                $order_id,
+                empty($order['sync_uuid']) ? 'insert' : 'update',
+                $order,
+                ['items' => $items]
+            );
+        } catch (Throwable $e) {
+            log_message('error', '[App::_sync_enqueue_order] ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Enqueue une mise à jour de statut commande vers le VPS.
+     */
+    private function _sync_enqueue_order_status(int $order_id, int $status): void {
+        try {
+            $order = $this->db->where('order_id', $order_id)->get('customer_order')->row_array();
+            if (!$order || ($order['sync_origin'] ?? 'local') === 'vps') return;
+
+            $this->load->library('Sync_manager');
+            $this->sync_manager->enqueue(
+                'customer_order',
+                $order_id,
+                'update',
+                array_merge($order, ['order_status' => $status, 'synced_at' => date('Y-m-d H:i:s')])
+            );
+        } catch (Throwable $e) {
+            log_message('error', '[App::_sync_enqueue_order_status] ' . $e->getMessage());
+        }
     }
 
 }
