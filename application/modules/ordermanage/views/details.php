@@ -256,22 +256,22 @@
 
                                 $discountpr = 0;
 
-                                if ($settinginfo->discount_type ?? '0' == 1) {
+                                if (($settinginfo->discount_type ?? '0') == 1 && !empty($billinfo) && !empty($billinfo->total_amount)) {
                                     $dispr      = $billinfo->discount * 100 / $billinfo->total_amount;
                                     $discountpr = '(' . $dispr . '%)';
                                 } else {
-                                    $discountpr = '(' . $currency->curr_icon . ')';
+                                    $discountpr = '(' . ($currency->curr_icon ?? '') . ')';
                                 }
 
                                 $sdr = 0;
 
                                 if (isset($storeinfo->service_chargeType) && $storeinfo->service_chargeType == 1) {
-                                    if (isset($billinfo->service_charge) && $billinfo->service_charge > 0) {
+                                    if (!empty($billinfo) && !empty($billinfo->total_amount) && isset($billinfo->service_charge) && $billinfo->service_charge > 0) {
                                         $sdpr = $billinfo->service_charge * 100 / $billinfo->total_amount;
                                         $sdr  = '(' . round($sdpr) . '%)';
                                     }
                                 } else {
-                                    $sdr = '(' . $currency->curr_icon . ')';
+                                    $sdr = '(' . ($currency->curr_icon ?? '') . ')';
                                 }
 
                                 $calvat = $billinfo->VAT ?? 0;
