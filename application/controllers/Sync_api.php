@@ -28,6 +28,54 @@ class Sync_api extends CI_Controller {
     const BATCH_MAX  = 200;   // max items acceptés par appel receive()
     const ORDERS_MAX = 50;    // max commandes retournées par appel online_orders()
 
+    /**
+     * Tables de référence et leurs clés primaires (côté VPS).
+     * Le VPS conserve le même PK que le local — pas d'auto_increment indépendant.
+     */
+    const TABLE_PKS = [
+        'item_category'           => 'CategoryID',
+        'item_foods'              => 'ProductsID',
+        'variant'                 => 'variantid',
+        'foodvariable'            => 'availableID',
+        'add_ons'                 => 'add_on_id',
+        'menu_add_on'             => 'row_id',
+        'check_addones'           => 'id',
+        'tbl_menutype'            => 'menutypeid',
+        'tbl_groupitems'          => 'groupid',
+        'setting'                 => 'id',
+        'common_setting'          => 'id',
+        'currency'                => 'currencyid',
+        'language'                => 'id',
+        'themes'                  => 'themeid',
+        'top_menu'                => 'menuid',
+        'tax_settings'            => 'id',
+        'payment_method'          => 'payment_method_id',
+        'paymentmethod'           => 'payment_method_id',
+        'paymentsetup'            => 'setupid',
+        'shipping_method'         => 'ship_id',
+        'tbl_delivaritime'        => 'dtimeid',
+        'tbl_notificationsetting' => 'notifid',
+        'tbl_slider'              => 'slid',
+        'tbl_slider_type'         => 'stype_id',
+        'tbl_sociallink'          => 'sid',
+        'tbl_widget'              => 'widgetid',
+        'tbl_country'             => 'countryid',
+        'tbl_state'               => 'stateid',
+        'tbl_city'                => 'cityid',
+        'customer_info'           => 'customer_id',
+        'customer_type'           => 'customer_type_id',
+        'tbl_billingaddress'      => 'billaddressid',
+        'tbl_delivaryaddress'     => 'delivaryid',
+        'tbl_shippingaddress'     => 'shipaddressid',
+        'membership'              => 'id',
+        'tbl_kitchen'             => 'kitchenid',
+        'tbl_tablefloor'          => 'tbfloorid',
+        'rest_table'              => 'tableid',
+        'tablelist'               => 'tableid',
+        'qr_tables'               => 'table_id',
+        'bill'                    => 'bill_id',
+    ];
+
     /** Config sync du tenant courant (ligne sync_config) */
     private ?object $sync_cfg = null;
 
@@ -90,15 +138,27 @@ class Sync_api extends CI_Controller {
 
         foreach ($batch as $item) {
             $entity_type = $item['entity_type'] ?? '';
+            $entity_id   = (int)($item['entity_id'] ?? 0);
             $operation   = $item['operation']   ?? 'insert';
             $sync_uuid   = $item['sync_uuid']   ?? '';
             $payload     = $item['payload']      ?? [];
 
-            if (empty($sync_uuid) || empty($entity_type) || empty($payload)) {
+            // entity_type et entity_id sont toujours requis
+            if (empty($entity_type) || !$entity_id) {
                 $skipped++;
                 continue;
             }
-
+            // Les tables transactionnelles (customer_order, order_menu) requièrent sync_uuid
+            $transactional = ['customer_order', 'order_menu'];
+            if (in_array($entity_type, $transactional) && empty($sync_uuid)) {
+                $skipped++;
+                continue;
+            }
+            // Pour les opérations non-delete, le payload doit être présent
+            if ($operation !== 'delete' && empty($payload)) {
+                $skipped++;
+                continue;
+            }
             // Ne jamais ré-importer des données originaires du VPS (évite les boucles)
             if (($payload['sync_origin'] ?? 'local') === 'vps') {
                 $skipped++;
@@ -106,11 +166,11 @@ class Sync_api extends CI_Controller {
             }
 
             try {
-                $done = $this->_upsert_entity($entity_type, $operation, $sync_uuid, $payload, $item['related'] ?? []);
+                $done = $this->_upsert_entity($entity_type, $operation, $sync_uuid, $entity_id, $payload, $item['related'] ?? []);
                 $done ? $accepted++ : $skipped++;
             } catch (Throwable $e) {
-                $errors[] = ['sync_uuid' => $sync_uuid, 'error' => $e->getMessage()];
-                log_message('error', "[Sync_api::receive] {$entity_type} {$sync_uuid}: " . $e->getMessage());
+                $errors[] = ['entity_type' => $entity_type, 'entity_id' => $entity_id, 'error' => $e->getMessage()];
+                log_message('error', "[Sync_api::receive] {$entity_type}#{$entity_id}: " . $e->getMessage());
             }
         }
 
@@ -305,18 +365,19 @@ class Sync_api extends CI_Controller {
      * Insère ou met à jour une entité reçue du local.
      * Retourne true si traité, false si ignoré.
      */
-    private function _upsert_entity(string $type, string $op, string $uuid, array $payload, array $related): bool {
+    private function _upsert_entity(string $type, string $op, string $uuid, int $entity_id, array $payload, array $related): bool {
         switch ($type) {
-            case 'customer_order': return $this->_upsert_order($op, $uuid, $payload, $related['items'] ?? []);
-            case 'order_menu':     return $this->_upsert_order_menu($op, $uuid, $payload);
-            case 'item_foods':     return $this->_upsert_simple('item_foods',    'ProductsID', $op, $uuid, $payload);
-            case 'variant':        return $this->_upsert_simple('variant',       'variantid',  $op, $uuid, $payload);
-            case 'item_category':  return $this->_upsert_simple('item_category', 'CategoryID', $op, $uuid, $payload);
-            case 'tablelist':      return $this->_upsert_simple('tablelist',     'tableid',    $op, $uuid, $payload);
-            case 'bill':           return $this->_upsert_simple('bill',          'bill_id',    $op, $uuid, $payload);
+            case 'customer_order':
+                return $this->_upsert_order($op, $uuid, $payload, $related['items'] ?? []);
+            case 'order_menu':
+                return $this->_upsert_order_menu($op, $uuid, $payload);
             default:
-                log_message('error', "[Sync_api] entity_type inconnu : {$type}");
-                return false;
+                $pk = self::TABLE_PKS[$type] ?? null;
+                if (!$pk) {
+                    log_message('error', "[Sync_api] entity_type inconnu : {$type}");
+                    return false;
+                }
+                return $this->_upsert_generic($type, $pk, $op, $entity_id, $payload);
         }
     }
 
@@ -407,28 +468,38 @@ class Sync_api extends CI_Controller {
     }
 
     /**
-     * Upsert générique pour les tables sans relation (item_foods, variant,
-     * item_category, tablelist, bill).
+     * Upsert générique pour toutes les tables de référence.
+     * Le VPS conserve le même PK que le local (pas d'auto_increment indépendant).
+     * Pas de sync_uuid sur ces tables — déduplication par PK local.
      */
-    private function _upsert_simple(string $table, string $pk, string $op, string $uuid, array $payload): bool {
-        $existing = $this->db->where('sync_uuid', $uuid)->get($table)->row();
+    private function _upsert_generic(string $table, string $pk_col, string $op, int $entity_id, array $payload): bool {
+        if (!$this->db->table_exists($table)) {
+            log_message('error', "[Sync_api::_upsert_generic] Table inexistante : {$table}");
+            return false;
+        }
 
         if ($op === 'delete') {
-            if ($existing) $this->db->where('sync_uuid', $uuid)->delete($table);
+            $this->db->where($pk_col, $entity_id)->delete($table);
             return true;
         }
 
-        $data = $payload;
-        $data['sync_uuid']     = $uuid;
-        $data['synced_to_vps'] = 1;
-        $data['synced_at']     = date('Y-m-d H:i:s');
+        if (empty($payload)) return false;
+
+        // Nettoyer les métadonnées de sync absentes des tables de référence
+        $clean = $payload;
+        unset($clean['sync_uuid'], $clean['sync_origin'], $clean['synced_to_vps'], $clean['synced_at'], $clean['_related']);
+
+        $existing = $this->db->where($pk_col, $entity_id)->get($table)->row();
 
         if ($existing) {
-            unset($data[$pk]); // ne pas modifier le PK
-            $this->db->where('sync_uuid', $uuid)->update($table, $data);
+            $update = $clean;
+            unset($update[$pk_col]); // ne jamais écraser le PK
+            if (!empty($update)) {
+                $this->db->where($pk_col, $entity_id)->update($table, $update);
+            }
         } else {
-            unset($data[$pk]); // laisse auto_increment générer le PK
-            $this->db->insert($table, $data);
+            // Insertion avec le même PK qu'en local
+            $this->db->insert($table, $clean);
         }
         return true;
     }

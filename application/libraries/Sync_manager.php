@@ -24,16 +24,70 @@ class Sync_manager {
     const CONNECT_TIMEOUT = 5;   // secondes pour le ping health
     const REQUEST_TIMEOUT = 15;  // secondes pour les appels de données
 
-    /** Tables trackées et leurs clés primaires */
+    /**
+     * Tables trackées → clé primaire.
+     * Les tables TRANSACTIONAL utilisent enqueue() PHP + sync_uuid.
+     * Les tables REFERENCE utilisent des triggers MySQL (payload=NULL, refetch au push).
+     */
     const TRACKED = [
+        // ── Transactional (enqueue PHP) ─────────────────────────────
         'customer_order' => 'order_id',
         'order_menu'     => 'row_id',
+        'bill'           => 'bill_id',
+
+        // ── Menu & Items (triggers) ──────────────────────────────────
+        'item_category'  => 'CategoryID',
         'item_foods'     => 'ProductsID',
         'variant'        => 'variantid',
-        'item_category'  => 'CategoryID',
+        'foodvariable'   => 'availableID',
+        'add_ons'        => 'add_on_id',
+        'menu_add_on'    => 'row_id',
+        'check_addones'  => 'id',
+        'tbl_menutype'   => 'menutypeid',
+        'tbl_groupitems' => 'groupid',
+
+        // ── Config (triggers) ────────────────────────────────────────
+        'setting'                 => 'id',
+        'common_setting'          => 'id',
+        'currency'                => 'currencyid',
+        'language'                => 'id',
+        'themes'                  => 'themeid',
+        'top_menu'                => 'menuid',
+        'tax_settings'            => 'id',
+        'payment_method'          => 'payment_method_id',
+        'paymentmethod'           => 'payment_method_id',
+        'paymentsetup'            => 'setupid',
+        'shipping_method'         => 'ship_id',
+        'tbl_delivaritime'        => 'dtimeid',
+        'tbl_notificationsetting' => 'notifid',
+        'tbl_slider'              => 'slid',
+        'tbl_slider_type'         => 'stype_id',
+        'tbl_sociallink'          => 'sid',
+        'tbl_widget'              => 'widgetid',
+
+        // ── Localisation (triggers) ──────────────────────────────────
+        'tbl_country' => 'countryid',
+        'tbl_state'   => 'stateid',
+        'tbl_city'    => 'cityid',
+
+        // ── Clients (triggers) ───────────────────────────────────────
+        'customer_info'           => 'customer_id',
+        'customer_type'           => 'customer_type_id',
+        'tbl_billingaddress'      => 'billaddressid',
+        'tbl_delivaryaddress'     => 'delivaryid',
+        'tbl_shippingaddress'     => 'shipaddressid',
+        'membership'              => 'id',
+
+        // ── Opérations (triggers) ────────────────────────────────────
+        'tbl_kitchen'    => 'kitchenid',
+        'tbl_tablefloor' => 'tbfloorid',
+        'rest_table'     => 'tableid',
         'tablelist'      => 'tableid',
-        'bill'           => 'bill_id',
+        'qr_tables'      => 'table_id',
     ];
+
+    /** Tables gérées par enqueue() PHP (ont un sync_uuid). */
+    const TRANSACTIONAL = ['customer_order', 'order_menu', 'bill'];
 
     private ?object $cfg    = null;  // ligne sync_config
     private bool    $online = false;
@@ -97,6 +151,8 @@ class Sync_manager {
      */
     public function enqueue(string $entity_type, int $entity_id, string $operation, array $payload, array $related = []): void {
         if (!isset(self::TRACKED[$entity_type])) return;
+        // Les tables de référence sont capturées automatiquement par triggers MySQL.
+        if (!in_array($entity_type, self::TRANSACTIONAL)) return;
 
         // Assure qu'un sync_uuid existe
         if (empty($payload['sync_uuid'])) {
@@ -137,18 +193,39 @@ class Sync_manager {
 
         if (empty($rows)) return ['sent' => 0, 'failed' => 0];
 
-        $batch    = [];
+        $batch     = [];
         $queue_ids = [];
 
         foreach ($rows as $row) {
-            $data    = json_decode($row['payload'], true) ?? [];
-            $related = $data['_related'] ?? [];
-            unset($data['_related']);
+            $entity_type = $row['entity_type'];
+            $entity_id   = (int)$row['entity_id'];
+            $operation   = $row['operation'];
 
-            $batch[]    = [
-                'entity_type' => $row['entity_type'],
-                'entity_id'   => (int)$row['entity_id'],
-                'operation'   => $row['operation'],
+            if ($row['payload'] === null) {
+                // Trigger-sourced : on relit la ligne courante depuis la table source.
+                if ($operation === 'delete') {
+                    $data    = [];   // delete : pas besoin du payload
+                    $related = [];
+                } else {
+                    $data = $this->_fetch_payload($entity_type, $entity_id);
+                    if ($data === null) {
+                        // Ligne disparue avant le push (ex: insert+delete rapide) — on skip.
+                        $CI->db->where('queue_id', $row['queue_id'])
+                               ->update('sync_queue', ['status' => 'skipped']);
+                        continue;
+                    }
+                    $related = [];
+                }
+            } else {
+                $data    = json_decode($row['payload'], true) ?? [];
+                $related = $data['_related'] ?? [];
+                unset($data['_related']);
+            }
+
+            $batch[]     = [
+                'entity_type' => $entity_type,
+                'entity_id'   => $entity_id,
+                'operation'   => $operation,
                 'sync_uuid'   => $data['sync_uuid'] ?? '',
                 'payload'     => $data,
                 'related'     => $related,
@@ -481,6 +558,21 @@ class Sync_manager {
 
     private function _sign($data): string {
         return hash_hmac(self::HMAC_ALGO, json_encode($data), $this->cfg->sync_secret);
+    }
+
+    // ── Fetch payload (trigger-sourced) ──────────────────────────────────────
+
+    /**
+     * Relit la ligne courante depuis la table source pour les entrées
+     * insérées par trigger (payload=NULL dans sync_queue).
+     * Retourne null si la ligne n'existe plus.
+     */
+    private function _fetch_payload(string $entity_type, int $entity_id): ?array {
+        $pk = self::TRACKED[$entity_type] ?? null;
+        if (!$pk) return null;
+        $CI =& get_instance();
+        $row = $CI->db->where($pk, $entity_id)->get($entity_type)->row_array();
+        return $row ?: null;
     }
 
     // ── Log ───────────────────────────────────────────────────────────────────
