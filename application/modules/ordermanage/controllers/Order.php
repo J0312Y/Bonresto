@@ -1810,6 +1810,7 @@ class Order extends MX_Controller
 
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetData);
+        $this->_sync_enqueue_order((int)$orderid);
         /*PUSH Notification For Customer*/
         $icon    = base_url('assets/img/applogo.png');
         $content = [
@@ -2652,6 +2653,7 @@ class Order extends MX_Controller
         }
 
         $orderinfo = $this->db->select('*')->from('customer_order')->where('order_id', $orderid)->get()->row();
+        $this->_sync_enqueue_order((int)$orderid);
 
         $logData = [
             'action_page' => display('order_list'),
@@ -4025,6 +4027,7 @@ class Order extends MX_Controller
         $updatetDataord = ['order_status' => 4];
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetDataord);
+        $this->_sync_enqueue_order((int)$orderid);
         $this->session->set_flashdata('message', display('order_successfully'));
 
         redirect('ordermanage/order/pos_invoice/' . $orderid);
@@ -4045,6 +4048,7 @@ class Order extends MX_Controller
         $updatetDataord = ['order_status' => 4];
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetDataord);
+        $this->_sync_enqueue_order((int)$orderid);
         $this->session->set_flashdata('message', display('order_successfully'));
 
         if (empty($this->session->userdata('id'))) {
@@ -4509,6 +4513,7 @@ class Order extends MX_Controller
         $updatetData = ['order_status' => 3];
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetData);
+        $this->_sync_enqueue_order((int)$orderid);
         $alliteminfo     = $this->order_model->customerorderkitchen($orderid, $kid);
         $singleorderinfo = $this->order_model->kitchen_ajaxorderinfoall($orderid);
 
@@ -5203,6 +5208,7 @@ class Order extends MX_Controller
 
         $orderinfo = $this->db->select('*')->from('customer_order')->where('order_id', $orderid)->get()->row();
         $this->savekitchenitem($orderid);
+        $this->_sync_enqueue_order((int)$orderid);
         $saveid = $this->session->userdata('id');
 
         $logData = [
