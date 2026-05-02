@@ -463,11 +463,10 @@ body
 			 if(empty($billinfo)){ $servicecharge;} 
 			 else{$servicecharge=$billinfo->service_charge;}
 			 
-			 $sdr=0; 
-			 if($storeinfo->service_chargeType==1){ 
-			 $sdpr=$billinfo->service_charge*100/$billinfo->total_amount;
-			 $sdr='('.round($sdpr).'%)';
-			 } 
+			 $sdr=0;
+			 if($storeinfo->service_chargeType==1){
+			 if(!empty($billinfo) && !empty($billinfo->total_amount)){$sdpr=$billinfo->service_charge*100/$billinfo->total_amount;$sdr='('.round($sdpr).'%)';}
+			 }
 			 else{$sdr='('.$currency->curr_icon.')';}
 			 
 			  $discount=0; 

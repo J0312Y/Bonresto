@@ -3711,7 +3711,7 @@ class Order extends MX_Controller
         $data['customerinfo'] = $this->order_model->read('*', 'customer_info', ['customer_id' => $customerorder->customer_id]);
         $data['iteminfo']     = $this->order_model->customerorder($id);
         $data['billinfo']     = $this->order_model->billinfo($id);
-        $data['cashierinfo']  = $this->order_model->read('*', 'user', ['id' => $data['billinfo']->create_by]);
+        $data['cashierinfo']  = $data['billinfo'] ? $this->order_model->read('*', 'user', ['id' => $data['billinfo']->create_by]) : null;
         $settinginfo          = $this->order_model->settinginfo();
         $data['tableinfo']    = $this->order_model->read('*', 'rest_table', ['tableid' => $customerorder->table_no]);
         $data['settinginfo']  = $settinginfo;
@@ -4638,7 +4638,7 @@ class Order extends MX_Controller
         }
 
         $prebillinfo     = $this->db->select('*')->from('bill')->where('order_id', $orderid)->get()->row();
-        $customerid      = $prebillinfo->customer_id;
+        $customerid      = $prebillinfo ? $prebillinfo->customer_id : null;
         $finalgrandtotal = $this->input->post('grandtotal', true);
         /***********Add pointing***********/
         $scan   = scandir('application/modules/');
@@ -4709,9 +4709,9 @@ class Order extends MX_Controller
         /*******end Point**************/
 
         if ($discount > 0) {
-            $finaldis = $discount + $prebillinfo->discount;
+            $finaldis = $discount + ($prebillinfo ? $prebillinfo->discount : 0);
         } else {
-            $finaldis = $prebillinfo->discount;
+            $finaldis = $prebillinfo ? $prebillinfo->discount : 0;
         }
 
         $updatetprebill = [
@@ -4732,7 +4732,7 @@ class Order extends MX_Controller
                 'mydigit'    => $mydigit[$i],
                 'payamont' => $payamont
             ];
-            $this->add_multipay($orderid, $billinfo->bill_id, $data_pay);
+            $this->add_multipay($orderid, $billinfo ? $billinfo->bill_id : null, $data_pay);
             $i++;
         }
 
