@@ -84,21 +84,125 @@ class License_manager {
         }
         if (!$client_key) return null;
 
+        // Try direct DB first (same server — avoids HTTP self-call issues)
+        $payload = $this->_refresh_from_db($client_key);
+        if ($payload) return $payload;
+
+        // Fallback: HTTP call to SaaS API
         $response = $this->_get('/licenses/refresh', $client_key);
         if (!$response || empty($response['payload']) || empty($response['signature'])) return null;
         if (!$this->_verify_signature($response['payload'], $response['signature'])) return null;
 
         $payload = $response['payload'];
 
-        // Apply pending updates before saving
         if (!empty($payload['pending_updates'])) {
             $this->apply_updates($payload['pending_updates'], $client_key);
-            // Remove updates from payload before caching (they're large)
             unset($payload['pending_updates']);
         }
 
         $this->_save($payload, $response['signature'], $client_key);
         return $payload;
+    }
+
+    /**
+     * Check directly in the saas DB whether license_invalidated_at > cached_at.
+     * Returns true if a refresh is needed. Falls back to false on any error.
+     */
+    private function _check_invalidated_from_db(string $client_key, string $cached_at): bool {
+        try {
+            $CI      =& get_instance();
+            $saas_db = $CI->load->database('saas', TRUE);
+
+            $key_row = $saas_db
+                ->where('client_key', strtoupper($client_key))
+                ->where('is_activated', 1)
+                ->get('saas_license_keys')->row();
+
+            if (!$key_row) return false;
+
+            $tenant = $saas_db
+                ->select('license_invalidated_at')
+                ->where('tenant_id', (int)$key_row->tenant_id)
+                ->get('saas_tenants')->row();
+
+            if (!$tenant || empty($tenant->license_invalidated_at)) return false;
+
+            return strtotime($tenant->license_invalidated_at) > strtotime($cached_at);
+
+        } catch (Throwable $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Build and save a fresh payload directly from the saas DB.
+     * Avoids HTTP self-calls which fail silently on same-server setups.
+     */
+    private function _refresh_from_db(string $client_key): ?array {
+        try {
+            $CI      =& get_instance();
+            $saas_db = $CI->load->database('saas', TRUE);
+
+            $key_row = $saas_db
+                ->where('client_key', strtoupper($client_key))
+                ->where('is_activated', 1)
+                ->get('saas_license_keys')->row();
+
+            if (!$key_row) return null;
+
+            $tid = (int)$key_row->tenant_id;
+
+            // Get subscription + plan
+            $sub = $saas_db
+                ->select('s.status, s.end_date, s.grace_end_date, p.plan_name, p.features, p.max_tables, p.max_users')
+                ->from('saas_subscriptions s')
+                ->join('saas_plans p', 'p.plan_id = s.plan_id')
+                ->where('s.tenant_id', $tid)
+                ->order_by('s.sub_id', 'DESC')
+                ->limit(1)
+                ->get()->row();
+
+            // Get pending updates
+            $raw_updates = $saas_db
+                ->select('u.update_id, u.title, u.version, u.module, u.type, u.changelog, u.payload')
+                ->from('saas_update_deliveries d')
+                ->join('saas_updates u', 'u.update_id = d.update_id')
+                ->where('d.tenant_id', $tid)
+                ->where('d.status', 'pending')
+                ->where('u.status', 'published')
+                ->get()->result_array();
+
+            $features = $sub ? (json_decode($sub->features ?? '{}', true) ?: []) : [];
+
+            $payload = [
+                'client_id'   => $tid,
+                'plan'        => $sub->plan_name ?? 'none',
+                'features'    => $features,
+                'max_tables'  => (int)($sub->max_tables ?? 0),
+                'max_users'   => (int)($sub->max_users  ?? 0),
+                'status'      => $sub->status ?? 'none',
+                'valid_until' => ($sub->end_date ?? date('Y-m-d')) . ' 23:59:59',
+                'grace_until' => ($sub->grace_end_date ?? date('Y-m-d')) . ' 23:59:59',
+                'issued_at'   => date('Y-m-d H:i:s'),
+                'pending_updates' => $raw_updates,
+            ];
+
+            $secret    = getenv('LICENSE_HMAC_SECRET') ?: self::HMAC_SECRET;
+            $signature = hash_hmac('sha256', json_encode($payload), $secret);
+
+            if (!empty($payload['pending_updates'])) {
+                $this->apply_updates($payload['pending_updates'], $client_key);
+                unset($payload['pending_updates']);
+            }
+
+            $this->_save($payload, $signature, $client_key);
+            $this->_log("License refreshed via DB for {$client_key} — status: {$payload['status']}");
+            return $payload;
+
+        } catch (Throwable $e) {
+            $this->_log("DB refresh failed: " . $e->getMessage());
+            return null;
+        }
     }
 
     public function status(?array $payload = null): string {
@@ -182,8 +286,15 @@ class License_manager {
         $data['last_check'] = date('Y-m-d H:i:s');
         file_put_contents(self::FILE, json_encode($data, JSON_PRETTY_PRINT));
 
-        // Ask the SaaS if a refresh is needed (very fast — no payload returned)
+        // Try direct DB check first (avoids HTTP self-call failures on same-server setups)
         $cached_at = $data['cached_at'] ?? '1970-01-01 00:00:00';
+        if ($this->_check_invalidated_from_db($data['client_key'], $cached_at)) {
+            $this->_log("Plan change detected via DB — refreshing license for {$data['client_key']}");
+            $this->refresh($data['client_key']);
+            return;
+        }
+
+        // Fallback: HTTP call to SaaS (for remote/multi-server setups)
         $ctx = stream_context_create(['http' => [
             'method'        => 'GET',
             'header'        => "X-Api-Key: {$data['client_key']}\r\nX-Cached-At: {$cached_at}\r\n",
@@ -195,7 +306,7 @@ class License_manager {
 
         $result = json_decode($raw, true);
         if (!empty($result['refresh_needed'])) {
-            $this->_log("Plan change detected — refreshing license for {$data['client_key']}");
+            $this->_log("Plan change detected via HTTP — refreshing license for {$data['client_key']}");
             $this->refresh($data['client_key']);
         }
     }
