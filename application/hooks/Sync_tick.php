@@ -66,14 +66,15 @@ class Sync_tick {
         if (!headers_sent()) {
             header('Connection: close');
             header('Content-Encoding: none');
+            $size = ob_get_length();
+            if ($size !== false) {
+                header('Content-Length: ' . $size);
+            }
         }
 
-        $size = ob_get_length();
-        if ($size !== false) {
-            header('Content-Length: ' . $size);
+        if (ob_get_level() > 0) {
+            ob_end_flush();
         }
-
-        ob_end_flush();
         flush();
     }
 }
