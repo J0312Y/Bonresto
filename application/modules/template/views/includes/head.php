@@ -49,6 +49,7 @@
 <link href="<?php echo base_url('assets/sweetalert/sweetalert.css') ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/toastr/toastr.css') ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/css/kitchen.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('application/modules/ordermanage/assets/css/kitchen_ajax.css') ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/css/print.css') ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/css/extra.css') ?>" rel="stylesheet" type="text/css" />
 <!-- End Global Mandatory Style
