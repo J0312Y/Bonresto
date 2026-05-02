@@ -195,8 +195,8 @@ class Sync_manager {
         'subscribe_emaillist'     => 'emailid',
         'tbl_seoption'            => 'id',
         'tbl_soundsetting'        => 'soundid',
-        'tbl_generatedreport'     => 'generateid',
-        'tbl_module_purchasekey'  => 'mpid',
+        // tbl_generatedreport : rapports locaux uniquement, pas syncé
+        // tbl_module_purchasekey : licences propres à chaque instance, pas syncé
     ];
 
     /** Tables gérées par enqueue() PHP (ont un sync_uuid). */
