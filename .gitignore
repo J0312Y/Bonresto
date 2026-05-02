@@ -19,3 +19,4 @@ application/config/config.php
 application/logs/*
 application/cache/*
 .env
+application/config/license.json
