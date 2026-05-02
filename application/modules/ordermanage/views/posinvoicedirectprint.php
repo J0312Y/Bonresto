@@ -492,7 +492,7 @@ body
                     <div class="item-info">
                         <h5 class="item-title"><?php echo display('subtotal')?></h5>
                     </div>
-                    <h5 class="my-5"><?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $billinfo->total_amount;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></h5>
+                    <h5 class="my-5"><?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo !empty($billinfo) ? $billinfo->total_amount : 0;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></h5>
                 </div>
                 <?php if(empty($taxinfos)){?>
       <div class="row-data">
@@ -540,9 +540,9 @@ body
                     <div class="item-info">
                         <h5 class="item-title text-bold"><?php echo display('grand_total')?></h5>
                     </div>
-                    <h5 class="my-5"><?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo $billinfo->bill_amount;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></h5>
+                    <h5 class="my-5"><?php if($currency->position==1){echo $currency->curr_icon;}?> <?php echo !empty($billinfo) ? $billinfo->bill_amount : 0;?> <?php if($currency->position==2){echo $currency->curr_icon;}?></h5>
                 </div>
-                <?php 
+                <?php
 			if($orderinfo->customerpaid>0){
 				$customepaid=$orderinfo->customerpaid;
 				$changes=$customepaid-$orderinfo->totalamount;
@@ -551,7 +551,7 @@ body
 				$customepaid=$orderinfo->totalamount;
 				$changes=0;
 				}
-			if($billinfo->bill_status==1){?>
+			if(!empty($billinfo) && $billinfo->bill_status==1){?>
                 <div class="row-data">
                     <div class="item-info">
                         <h5 class="item-title"><?php echo display('customer_paid_amount')?></h5>
@@ -576,7 +576,7 @@ body
                     <div class="item-info">
                         <h5 class="item-title"><?php echo display('totalpayment')?></h5>
                     </div>
-                    <h5 class="my-5"> <?php if($billinfo->bill_status==1){if($currency->position==1){echo $currency->curr_icon;} echo $customepaid; if($currency->position==2){echo $currency->curr_icon;} } else{ if($currency->position==1){echo $currency->curr_icon;} echo $customepaid;if($currency->position==2){echo $currency->curr_icon;} }?></h5>
+                    <h5 class="my-5"> <?php if(!empty($billinfo) && $billinfo->bill_status==1){if($currency->position==1){echo $currency->curr_icon;} echo $customepaid; if($currency->position==2){echo $currency->curr_icon;} } else{ if($currency->position==1){echo $currency->curr_icon;} echo $customepaid;if($currency->position==2){echo $currency->curr_icon;} }?></h5>
                 </div>
             </div>
             
@@ -598,7 +598,7 @@ body
                 <div class="middle-data">
                   <div class="text-center">
                     <h5 class="item-title" style="font-size:18px; font-weight:bold;"><?php echo display('payment_status');?>: <?php 
-                    if($billinfo->bill_status == 1){
+                    if(!empty($billinfo) && $billinfo->bill_status == 1){
                         echo 'Paid';
                     }else{
                         if($orderinfo->order_status == 5){
