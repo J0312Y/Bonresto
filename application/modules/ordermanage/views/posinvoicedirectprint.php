@@ -473,13 +473,12 @@ body
 			 if(empty($billinfo)){ $discount;} 
 			 else{$discount=$billinfo->discount;}
 			 
-			 $discountpr=0; 
-			 if($storeinfo->discount_type==1){ 
-			 $dispr=$billinfo->discount*100/$billinfo->total_amount;
-			 $discountpr='('.round($dispr).'%)';
-			 } 
+			 $discountpr=0;
+			 if($storeinfo->discount_type==1){
+			 if(!empty($billinfo) && !empty($billinfo->total_amount)){$dispr=$billinfo->discount*100/$billinfo->total_amount;$discountpr='('.round($dispr).'%)';}
+			 }
 			 else{$discountpr='('.$currency->curr_icon.')';}
-			  $calvat=$billinfo->VAT;
+			  $calvat=!empty($billinfo) ? $billinfo->VAT : 0;
 			 ?>
                         
                         
