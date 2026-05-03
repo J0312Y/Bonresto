@@ -1,0 +1,473 @@
+-- ============================================================================
+-- NETTOYAGE DU SYSTEME DE SYNC LOCAL->VPS
+-- A executer sur la DB du VPS via phpMyAdmin
+-- ============================================================================
+
+-- 1. Supprimer les triggers de sync
+-- (tous les triggers trg_* crees par sync_triggers.sql et sync_triggers_v2.sql)
+
+DROP TRIGGER IF EXISTS trg_item_category_ins;
+DROP TRIGGER IF EXISTS trg_item_category_upd;
+DROP TRIGGER IF EXISTS trg_item_category_del;
+DROP TRIGGER IF EXISTS trg_item_foods_ins;
+DROP TRIGGER IF EXISTS trg_item_foods_upd;
+DROP TRIGGER IF EXISTS trg_item_foods_del;
+DROP TRIGGER IF EXISTS trg_variant_ins;
+DROP TRIGGER IF EXISTS trg_variant_upd;
+DROP TRIGGER IF EXISTS trg_variant_del;
+DROP TRIGGER IF EXISTS trg_tablelist_ins;
+DROP TRIGGER IF EXISTS trg_tablelist_upd;
+DROP TRIGGER IF EXISTS trg_tablelist_del;
+DROP TRIGGER IF EXISTS trg_rest_table_ins;
+DROP TRIGGER IF EXISTS trg_rest_table_upd;
+DROP TRIGGER IF EXISTS trg_rest_table_del;
+DROP TRIGGER IF EXISTS trg_add_ons_ins;
+DROP TRIGGER IF EXISTS trg_add_ons_upd;
+DROP TRIGGER IF EXISTS trg_add_ons_del;
+DROP TRIGGER IF EXISTS trg_check_addones_ins;
+DROP TRIGGER IF EXISTS trg_check_addones_upd;
+DROP TRIGGER IF EXISTS trg_check_addones_del;
+DROP TRIGGER IF EXISTS trg_common_setting_ins;
+DROP TRIGGER IF EXISTS trg_common_setting_upd;
+DROP TRIGGER IF EXISTS trg_common_setting_del;
+DROP TRIGGER IF EXISTS trg_currency_ins;
+DROP TRIGGER IF EXISTS trg_currency_upd;
+DROP TRIGGER IF EXISTS trg_currency_del;
+DROP TRIGGER IF EXISTS trg_customer_info_ins;
+DROP TRIGGER IF EXISTS trg_customer_info_upd;
+DROP TRIGGER IF EXISTS trg_customer_info_del;
+DROP TRIGGER IF EXISTS trg_customer_type_ins;
+DROP TRIGGER IF EXISTS trg_customer_type_upd;
+DROP TRIGGER IF EXISTS trg_customer_type_del;
+DROP TRIGGER IF EXISTS trg_foodvariable_ins;
+DROP TRIGGER IF EXISTS trg_foodvariable_upd;
+DROP TRIGGER IF EXISTS trg_foodvariable_del;
+DROP TRIGGER IF EXISTS trg_language_ins;
+DROP TRIGGER IF EXISTS trg_language_upd;
+DROP TRIGGER IF EXISTS trg_language_del;
+DROP TRIGGER IF EXISTS trg_membership_ins;
+DROP TRIGGER IF EXISTS trg_membership_upd;
+DROP TRIGGER IF EXISTS trg_membership_del;
+DROP TRIGGER IF EXISTS trg_menu_add_on_ins;
+DROP TRIGGER IF EXISTS trg_menu_add_on_upd;
+DROP TRIGGER IF EXISTS trg_menu_add_on_del;
+DROP TRIGGER IF EXISTS trg_payment_method_ins;
+DROP TRIGGER IF EXISTS trg_payment_method_upd;
+DROP TRIGGER IF EXISTS trg_payment_method_del;
+DROP TRIGGER IF EXISTS trg_paymentmethod_ins;
+DROP TRIGGER IF EXISTS trg_paymentmethod_upd;
+DROP TRIGGER IF EXISTS trg_paymentmethod_del;
+DROP TRIGGER IF EXISTS trg_paymentsetup_ins;
+DROP TRIGGER IF EXISTS trg_paymentsetup_upd;
+DROP TRIGGER IF EXISTS trg_paymentsetup_del;
+DROP TRIGGER IF EXISTS trg_qr_tables_ins;
+DROP TRIGGER IF EXISTS trg_qr_tables_upd;
+DROP TRIGGER IF EXISTS trg_qr_tables_del;
+DROP TRIGGER IF EXISTS trg_setting_ins;
+DROP TRIGGER IF EXISTS trg_setting_upd;
+DROP TRIGGER IF EXISTS trg_setting_del;
+DROP TRIGGER IF EXISTS trg_shipping_method_ins;
+DROP TRIGGER IF EXISTS trg_shipping_method_upd;
+DROP TRIGGER IF EXISTS trg_shipping_method_del;
+DROP TRIGGER IF EXISTS trg_tax_settings_ins;
+DROP TRIGGER IF EXISTS trg_tax_settings_upd;
+DROP TRIGGER IF EXISTS trg_tax_settings_del;
+DROP TRIGGER IF EXISTS trg_tbl_billingaddress_ins;
+DROP TRIGGER IF EXISTS trg_tbl_billingaddress_upd;
+DROP TRIGGER IF EXISTS trg_tbl_billingaddress_del;
+DROP TRIGGER IF EXISTS trg_tbl_city_ins;
+DROP TRIGGER IF EXISTS trg_tbl_city_upd;
+DROP TRIGGER IF EXISTS trg_tbl_city_del;
+DROP TRIGGER IF EXISTS trg_tbl_country_ins;
+DROP TRIGGER IF EXISTS trg_tbl_country_upd;
+DROP TRIGGER IF EXISTS trg_tbl_country_del;
+DROP TRIGGER IF EXISTS trg_tbl_delivaritime_ins;
+DROP TRIGGER IF EXISTS trg_tbl_delivaritime_upd;
+DROP TRIGGER IF EXISTS trg_tbl_delivaritime_del;
+DROP TRIGGER IF EXISTS trg_tbl_delivaryaddress_ins;
+DROP TRIGGER IF EXISTS trg_tbl_delivaryaddress_upd;
+DROP TRIGGER IF EXISTS trg_tbl_delivaryaddress_del;
+DROP TRIGGER IF EXISTS trg_tbl_groupitems_ins;
+DROP TRIGGER IF EXISTS trg_tbl_groupitems_upd;
+DROP TRIGGER IF EXISTS trg_tbl_groupitems_del;
+DROP TRIGGER IF EXISTS trg_tbl_kitchen_ins;
+DROP TRIGGER IF EXISTS trg_tbl_kitchen_upd;
+DROP TRIGGER IF EXISTS trg_tbl_kitchen_del;
+DROP TRIGGER IF EXISTS trg_tbl_menutype_ins;
+DROP TRIGGER IF EXISTS trg_tbl_menutype_upd;
+DROP TRIGGER IF EXISTS trg_tbl_menutype_del;
+DROP TRIGGER IF EXISTS trg_tbl_notificationsetting_ins;
+DROP TRIGGER IF EXISTS trg_tbl_notificationsetting_upd;
+DROP TRIGGER IF EXISTS trg_tbl_notificationsetting_del;
+DROP TRIGGER IF EXISTS trg_tbl_shippingaddress_ins;
+DROP TRIGGER IF EXISTS trg_tbl_shippingaddress_upd;
+DROP TRIGGER IF EXISTS trg_tbl_shippingaddress_del;
+DROP TRIGGER IF EXISTS trg_tbl_slider_ins;
+DROP TRIGGER IF EXISTS trg_tbl_slider_upd;
+DROP TRIGGER IF EXISTS trg_tbl_slider_del;
+DROP TRIGGER IF EXISTS trg_tbl_slider_type_ins;
+DROP TRIGGER IF EXISTS trg_tbl_slider_type_upd;
+DROP TRIGGER IF EXISTS trg_tbl_slider_type_del;
+DROP TRIGGER IF EXISTS trg_tbl_sociallink_ins;
+DROP TRIGGER IF EXISTS trg_tbl_sociallink_upd;
+DROP TRIGGER IF EXISTS trg_tbl_sociallink_del;
+DROP TRIGGER IF EXISTS trg_tbl_state_ins;
+DROP TRIGGER IF EXISTS trg_tbl_state_upd;
+DROP TRIGGER IF EXISTS trg_tbl_state_del;
+DROP TRIGGER IF EXISTS trg_tbl_tablefloor_ins;
+DROP TRIGGER IF EXISTS trg_tbl_tablefloor_upd;
+DROP TRIGGER IF EXISTS trg_tbl_tablefloor_del;
+DROP TRIGGER IF EXISTS trg_tbl_widget_ins;
+DROP TRIGGER IF EXISTS trg_tbl_widget_upd;
+DROP TRIGGER IF EXISTS trg_tbl_widget_del;
+DROP TRIGGER IF EXISTS trg_themes_ins;
+DROP TRIGGER IF EXISTS trg_themes_upd;
+DROP TRIGGER IF EXISTS trg_themes_del;
+DROP TRIGGER IF EXISTS trg_top_menu_ins;
+DROP TRIGGER IF EXISTS trg_top_menu_upd;
+DROP TRIGGER IF EXISTS trg_top_menu_del;
+DROP TRIGGER IF EXISTS trg_acc_account_name_ins;
+DROP TRIGGER IF EXISTS trg_acc_account_name_upd;
+DROP TRIGGER IF EXISTS trg_acc_account_name_del;
+DROP TRIGGER IF EXISTS trg_acn_account_transaction_ins;
+DROP TRIGGER IF EXISTS trg_acn_account_transaction_upd;
+DROP TRIGGER IF EXISTS trg_acn_account_transaction_del;
+DROP TRIGGER IF EXISTS trg_award_ins;
+DROP TRIGGER IF EXISTS trg_award_upd;
+DROP TRIGGER IF EXISTS trg_award_del;
+DROP TRIGGER IF EXISTS trg_bill_card_payment_ins;
+DROP TRIGGER IF EXISTS trg_bill_card_payment_upd;
+DROP TRIGGER IF EXISTS trg_bill_card_payment_del;
+DROP TRIGGER IF EXISTS trg_candidate_basic_info_ins;
+DROP TRIGGER IF EXISTS trg_candidate_basic_info_upd;
+DROP TRIGGER IF EXISTS trg_candidate_basic_info_del;
+DROP TRIGGER IF EXISTS trg_candidate_education_info_ins;
+DROP TRIGGER IF EXISTS trg_candidate_education_info_upd;
+DROP TRIGGER IF EXISTS trg_candidate_education_info_del;
+DROP TRIGGER IF EXISTS trg_candidate_interview_ins;
+DROP TRIGGER IF EXISTS trg_candidate_interview_upd;
+DROP TRIGGER IF EXISTS trg_candidate_interview_del;
+DROP TRIGGER IF EXISTS trg_candidate_selection_ins;
+DROP TRIGGER IF EXISTS trg_candidate_selection_upd;
+DROP TRIGGER IF EXISTS trg_candidate_selection_del;
+DROP TRIGGER IF EXISTS trg_candidate_shortlist_ins;
+DROP TRIGGER IF EXISTS trg_candidate_shortlist_upd;
+DROP TRIGGER IF EXISTS trg_candidate_shortlist_del;
+DROP TRIGGER IF EXISTS trg_candidate_workexperience_ins;
+DROP TRIGGER IF EXISTS trg_candidate_workexperience_upd;
+DROP TRIGGER IF EXISTS trg_candidate_workexperience_del;
+DROP TRIGGER IF EXISTS trg_customer_membership_map_ins;
+DROP TRIGGER IF EXISTS trg_customer_membership_map_upd;
+DROP TRIGGER IF EXISTS trg_customer_membership_map_del;
+DROP TRIGGER IF EXISTS trg_department_ins;
+DROP TRIGGER IF EXISTS trg_department_upd;
+DROP TRIGGER IF EXISTS trg_department_del;
+DROP TRIGGER IF EXISTS trg_duty_type_ins;
+DROP TRIGGER IF EXISTS trg_duty_type_upd;
+DROP TRIGGER IF EXISTS trg_duty_type_del;
+DROP TRIGGER IF EXISTS trg_email_config_ins;
+DROP TRIGGER IF EXISTS trg_email_config_upd;
+DROP TRIGGER IF EXISTS trg_email_config_del;
+DROP TRIGGER IF EXISTS trg_emp_attendance_ins;
+DROP TRIGGER IF EXISTS trg_emp_attendance_upd;
+DROP TRIGGER IF EXISTS trg_emp_attendance_del;
+DROP TRIGGER IF EXISTS trg_employee_benifit_ins;
+DROP TRIGGER IF EXISTS trg_employee_benifit_upd;
+DROP TRIGGER IF EXISTS trg_employee_benifit_del;
+DROP TRIGGER IF EXISTS trg_employee_history_ins;
+DROP TRIGGER IF EXISTS trg_employee_history_upd;
+DROP TRIGGER IF EXISTS trg_employee_history_del;
+DROP TRIGGER IF EXISTS trg_employee_performance_ins;
+DROP TRIGGER IF EXISTS trg_employee_performance_upd;
+DROP TRIGGER IF EXISTS trg_employee_performance_del;
+DROP TRIGGER IF EXISTS trg_employee_salary_payment_ins;
+DROP TRIGGER IF EXISTS trg_employee_salary_payment_upd;
+DROP TRIGGER IF EXISTS trg_employee_salary_payment_del;
+DROP TRIGGER IF EXISTS trg_employee_salary_setup_ins;
+DROP TRIGGER IF EXISTS trg_employee_salary_setup_upd;
+DROP TRIGGER IF EXISTS trg_employee_salary_setup_del;
+DROP TRIGGER IF EXISTS trg_expense_ins;
+DROP TRIGGER IF EXISTS trg_expense_upd;
+DROP TRIGGER IF EXISTS trg_expense_del;
+DROP TRIGGER IF EXISTS trg_expense_item_ins;
+DROP TRIGGER IF EXISTS trg_expense_item_upd;
+DROP TRIGGER IF EXISTS trg_expense_item_del;
+DROP TRIGGER IF EXISTS trg_facebook_settings_ins;
+DROP TRIGGER IF EXISTS trg_facebook_settings_upd;
+DROP TRIGGER IF EXISTS trg_facebook_settings_del;
+DROP TRIGGER IF EXISTS trg_gender_ins;
+DROP TRIGGER IF EXISTS trg_gender_upd;
+DROP TRIGGER IF EXISTS trg_gender_del;
+DROP TRIGGER IF EXISTS trg_grand_loan_ins;
+DROP TRIGGER IF EXISTS trg_grand_loan_upd;
+DROP TRIGGER IF EXISTS trg_grand_loan_del;
+DROP TRIGGER IF EXISTS trg_ingradient_food_waste_ins;
+DROP TRIGGER IF EXISTS trg_ingradient_food_waste_upd;
+DROP TRIGGER IF EXISTS trg_ingradient_food_waste_del;
+DROP TRIGGER IF EXISTS trg_ingredients_ins;
+DROP TRIGGER IF EXISTS trg_ingredients_upd;
+DROP TRIGGER IF EXISTS trg_ingredients_del;
+DROP TRIGGER IF EXISTS trg_items_food_waste_ins;
+DROP TRIGGER IF EXISTS trg_items_food_waste_upd;
+DROP TRIGGER IF EXISTS trg_items_food_waste_del;
+DROP TRIGGER IF EXISTS trg_leave_apply_ins;
+DROP TRIGGER IF EXISTS trg_leave_apply_upd;
+DROP TRIGGER IF EXISTS trg_leave_apply_del;
+DROP TRIGGER IF EXISTS trg_leave_type_ins;
+DROP TRIGGER IF EXISTS trg_leave_type_upd;
+DROP TRIGGER IF EXISTS trg_leave_type_del;
+DROP TRIGGER IF EXISTS trg_loan_installment_ins;
+DROP TRIGGER IF EXISTS trg_loan_installment_upd;
+DROP TRIGGER IF EXISTS trg_loan_installment_del;
+DROP TRIGGER IF EXISTS trg_marital_info_ins;
+DROP TRIGGER IF EXISTS trg_marital_info_upd;
+DROP TRIGGER IF EXISTS trg_marital_info_del;
+DROP TRIGGER IF EXISTS trg_module_ins;
+DROP TRIGGER IF EXISTS trg_module_upd;
+DROP TRIGGER IF EXISTS trg_module_del;
+DROP TRIGGER IF EXISTS trg_module_permission_ins;
+DROP TRIGGER IF EXISTS trg_module_permission_upd;
+DROP TRIGGER IF EXISTS trg_module_permission_del;
+DROP TRIGGER IF EXISTS trg_multipay_bill_ins;
+DROP TRIGGER IF EXISTS trg_multipay_bill_upd;
+DROP TRIGGER IF EXISTS trg_multipay_bill_del;
+DROP TRIGGER IF EXISTS trg_packaging_food_waste_ins;
+DROP TRIGGER IF EXISTS trg_packaging_food_waste_upd;
+DROP TRIGGER IF EXISTS trg_packaging_food_waste_del;
+DROP TRIGGER IF EXISTS trg_pay_frequency_ins;
+DROP TRIGGER IF EXISTS trg_pay_frequency_upd;
+DROP TRIGGER IF EXISTS trg_pay_frequency_del;
+DROP TRIGGER IF EXISTS trg_payment_transactions_ins;
+DROP TRIGGER IF EXISTS trg_payment_transactions_upd;
+DROP TRIGGER IF EXISTS trg_payment_transactions_del;
+DROP TRIGGER IF EXISTS trg_payroll_commission_setting_ins;
+DROP TRIGGER IF EXISTS trg_payroll_commission_setting_upd;
+DROP TRIGGER IF EXISTS trg_payroll_commission_setting_del;
+DROP TRIGGER IF EXISTS trg_payroll_holiday_ins;
+DROP TRIGGER IF EXISTS trg_payroll_holiday_upd;
+DROP TRIGGER IF EXISTS trg_payroll_holiday_del;
+DROP TRIGGER IF EXISTS trg_payroll_tax_setup_ins;
+DROP TRIGGER IF EXISTS trg_payroll_tax_setup_upd;
+DROP TRIGGER IF EXISTS trg_payroll_tax_setup_del;
+DROP TRIGGER IF EXISTS trg_position_ins;
+DROP TRIGGER IF EXISTS trg_position_upd;
+DROP TRIGGER IF EXISTS trg_position_del;
+DROP TRIGGER IF EXISTS trg_production_ins;
+DROP TRIGGER IF EXISTS trg_production_upd;
+DROP TRIGGER IF EXISTS trg_production_del;
+DROP TRIGGER IF EXISTS trg_production_details_ins;
+DROP TRIGGER IF EXISTS trg_production_details_upd;
+DROP TRIGGER IF EXISTS trg_production_details_del;
+DROP TRIGGER IF EXISTS trg_purchase_details_ins;
+DROP TRIGGER IF EXISTS trg_purchase_details_upd;
+DROP TRIGGER IF EXISTS trg_purchase_details_del;
+DROP TRIGGER IF EXISTS trg_purchase_return_ins;
+DROP TRIGGER IF EXISTS trg_purchase_return_upd;
+DROP TRIGGER IF EXISTS trg_purchase_return_del;
+DROP TRIGGER IF EXISTS trg_purchaseitem_ins;
+DROP TRIGGER IF EXISTS trg_purchaseitem_upd;
+DROP TRIGGER IF EXISTS trg_purchaseitem_del;
+DROP TRIGGER IF EXISTS trg_qr_orders_ins;
+DROP TRIGGER IF EXISTS trg_qr_orders_upd;
+DROP TRIGGER IF EXISTS trg_qr_orders_del;
+DROP TRIGGER IF EXISTS trg_qr_payments_ins;
+DROP TRIGGER IF EXISTS trg_qr_payments_upd;
+DROP TRIGGER IF EXISTS trg_qr_payments_del;
+DROP TRIGGER IF EXISTS trg_rate_type_ins;
+DROP TRIGGER IF EXISTS trg_rate_type_upd;
+DROP TRIGGER IF EXISTS trg_rate_type_del;
+DROP TRIGGER IF EXISTS trg_reservationofday_ins;
+DROP TRIGGER IF EXISTS trg_reservationofday_upd;
+DROP TRIGGER IF EXISTS trg_reservationofday_del;
+DROP TRIGGER IF EXISTS trg_role_permission_ins;
+DROP TRIGGER IF EXISTS trg_role_permission_upd;
+DROP TRIGGER IF EXISTS trg_role_permission_del;
+DROP TRIGGER IF EXISTS trg_salary_setup_header_ins;
+DROP TRIGGER IF EXISTS trg_salary_setup_header_upd;
+DROP TRIGGER IF EXISTS trg_salary_setup_header_del;
+DROP TRIGGER IF EXISTS trg_salary_sheet_generate_ins;
+DROP TRIGGER IF EXISTS trg_salary_sheet_generate_upd;
+DROP TRIGGER IF EXISTS trg_salary_sheet_generate_del;
+DROP TRIGGER IF EXISTS trg_salary_type_ins;
+DROP TRIGGER IF EXISTS trg_salary_type_upd;
+DROP TRIGGER IF EXISTS trg_salary_type_del;
+DROP TRIGGER IF EXISTS trg_sec_menu_item_ins;
+DROP TRIGGER IF EXISTS trg_sec_menu_item_upd;
+DROP TRIGGER IF EXISTS trg_sec_menu_item_del;
+DROP TRIGGER IF EXISTS trg_sec_role_permission_ins;
+DROP TRIGGER IF EXISTS trg_sec_role_permission_upd;
+DROP TRIGGER IF EXISTS trg_sec_role_permission_del;
+DROP TRIGGER IF EXISTS trg_sec_role_tbl_ins;
+DROP TRIGGER IF EXISTS trg_sec_role_tbl_upd;
+DROP TRIGGER IF EXISTS trg_sec_role_tbl_del;
+DROP TRIGGER IF EXISTS trg_sec_user_access_tbl_ins;
+DROP TRIGGER IF EXISTS trg_sec_user_access_tbl_upd;
+DROP TRIGGER IF EXISTS trg_sec_user_access_tbl_del;
+DROP TRIGGER IF EXISTS trg_shift_assign_ins;
+DROP TRIGGER IF EXISTS trg_shift_assign_upd;
+DROP TRIGGER IF EXISTS trg_shift_assign_del;
+DROP TRIGGER IF EXISTS trg_shift_management_ins;
+DROP TRIGGER IF EXISTS trg_shift_management_upd;
+DROP TRIGGER IF EXISTS trg_shift_management_del;
+DROP TRIGGER IF EXISTS trg_sms_template_ins;
+DROP TRIGGER IF EXISTS trg_sms_template_upd;
+DROP TRIGGER IF EXISTS trg_sms_template_del;
+DROP TRIGGER IF EXISTS trg_sub_order_ins;
+DROP TRIGGER IF EXISTS trg_sub_order_upd;
+DROP TRIGGER IF EXISTS trg_sub_order_del;
+DROP TRIGGER IF EXISTS trg_subscribe_emaillist_ins;
+DROP TRIGGER IF EXISTS trg_subscribe_emaillist_upd;
+DROP TRIGGER IF EXISTS trg_subscribe_emaillist_del;
+DROP TRIGGER IF EXISTS trg_supplier_ins;
+DROP TRIGGER IF EXISTS trg_supplier_upd;
+DROP TRIGGER IF EXISTS trg_supplier_del;
+DROP TRIGGER IF EXISTS trg_supplier_ledger_ins;
+DROP TRIGGER IF EXISTS trg_supplier_ledger_upd;
+DROP TRIGGER IF EXISTS trg_supplier_ledger_del;
+DROP TRIGGER IF EXISTS trg_table_details_ins;
+DROP TRIGGER IF EXISTS trg_table_details_upd;
+DROP TRIGGER IF EXISTS trg_table_details_del;
+DROP TRIGGER IF EXISTS trg_table_setting_ins;
+DROP TRIGGER IF EXISTS trg_table_setting_upd;
+DROP TRIGGER IF EXISTS trg_table_setting_del;
+DROP TRIGGER IF EXISTS trg_tbl_assign_kitchen_ins;
+DROP TRIGGER IF EXISTS trg_tbl_assign_kitchen_upd;
+DROP TRIGGER IF EXISTS trg_tbl_assign_kitchen_del;
+DROP TRIGGER IF EXISTS trg_tbl_bank_ins;
+DROP TRIGGER IF EXISTS trg_tbl_bank_upd;
+DROP TRIGGER IF EXISTS trg_tbl_bank_del;
+DROP TRIGGER IF EXISTS trg_tbl_cancelitem_ins;
+DROP TRIGGER IF EXISTS trg_tbl_cancelitem_upd;
+DROP TRIGGER IF EXISTS trg_tbl_cancelitem_del;
+DROP TRIGGER IF EXISTS trg_tbl_card_terminal_ins;
+DROP TRIGGER IF EXISTS trg_tbl_card_terminal_upd;
+DROP TRIGGER IF EXISTS trg_tbl_card_terminal_del;
+DROP TRIGGER IF EXISTS trg_tbl_cashcounter_ins;
+DROP TRIGGER IF EXISTS trg_tbl_cashcounter_upd;
+DROP TRIGGER IF EXISTS trg_tbl_cashcounter_del;
+DROP TRIGGER IF EXISTS trg_tbl_cashregister_ins;
+DROP TRIGGER IF EXISTS trg_tbl_cashregister_upd;
+DROP TRIGGER IF EXISTS trg_tbl_cashregister_del;
+DROP TRIGGER IF EXISTS trg_tbl_customerpoint_ins;
+DROP TRIGGER IF EXISTS trg_tbl_customerpoint_upd;
+DROP TRIGGER IF EXISTS trg_tbl_customerpoint_del;
+DROP TRIGGER IF EXISTS trg_tbl_generatedreport_ins;
+DROP TRIGGER IF EXISTS trg_tbl_generatedreport_upd;
+DROP TRIGGER IF EXISTS trg_tbl_generatedreport_del;
+DROP TRIGGER IF EXISTS trg_tbl_itemaccepted_ins;
+DROP TRIGGER IF EXISTS trg_tbl_itemaccepted_upd;
+DROP TRIGGER IF EXISTS trg_tbl_itemaccepted_del;
+DROP TRIGGER IF EXISTS trg_tbl_kitchen_order_ins;
+DROP TRIGGER IF EXISTS trg_tbl_kitchen_order_upd;
+DROP TRIGGER IF EXISTS trg_tbl_kitchen_order_del;
+DROP TRIGGER IF EXISTS trg_tbl_module_purchasekey_ins;
+DROP TRIGGER IF EXISTS trg_tbl_module_purchasekey_upd;
+DROP TRIGGER IF EXISTS trg_tbl_module_purchasekey_del;
+DROP TRIGGER IF EXISTS trg_tbl_openclose_ins;
+DROP TRIGGER IF EXISTS trg_tbl_openclose_upd;
+DROP TRIGGER IF EXISTS trg_tbl_openclose_del;
+DROP TRIGGER IF EXISTS trg_tbl_orderprepare_ins;
+DROP TRIGGER IF EXISTS trg_tbl_orderprepare_upd;
+DROP TRIGGER IF EXISTS trg_tbl_orderprepare_del;
+DROP TRIGGER IF EXISTS trg_tbl_posetting_ins;
+DROP TRIGGER IF EXISTS trg_tbl_posetting_upd;
+DROP TRIGGER IF EXISTS trg_tbl_posetting_del;
+DROP TRIGGER IF EXISTS trg_tbl_quickordersetting_ins;
+DROP TRIGGER IF EXISTS trg_tbl_quickordersetting_upd;
+DROP TRIGGER IF EXISTS trg_tbl_quickordersetting_del;
+DROP TRIGGER IF EXISTS trg_tbl_rating_ins;
+DROP TRIGGER IF EXISTS trg_tbl_rating_upd;
+DROP TRIGGER IF EXISTS trg_tbl_rating_del;
+DROP TRIGGER IF EXISTS trg_tbl_room_ins;
+DROP TRIGGER IF EXISTS trg_tbl_room_upd;
+DROP TRIGGER IF EXISTS trg_tbl_room_del;
+DROP TRIGGER IF EXISTS trg_tbl_seoption_ins;
+DROP TRIGGER IF EXISTS trg_tbl_seoption_upd;
+DROP TRIGGER IF EXISTS trg_tbl_seoption_del;
+DROP TRIGGER IF EXISTS trg_tbl_soundsetting_ins;
+DROP TRIGGER IF EXISTS trg_tbl_soundsetting_upd;
+DROP TRIGGER IF EXISTS trg_tbl_soundsetting_del;
+DROP TRIGGER IF EXISTS trg_tbl_updateitems_ins;
+DROP TRIGGER IF EXISTS trg_tbl_updateitems_upd;
+DROP TRIGGER IF EXISTS trg_tbl_updateitems_del;
+DROP TRIGGER IF EXISTS trg_tblreservation_ins;
+DROP TRIGGER IF EXISTS trg_tblreservation_upd;
+DROP TRIGGER IF EXISTS trg_tblreservation_del;
+DROP TRIGGER IF EXISTS trg_tblserver_ins;
+DROP TRIGGER IF EXISTS trg_tblserver_upd;
+DROP TRIGGER IF EXISTS trg_tblserver_del;
+DROP TRIGGER IF EXISTS trg_unit_of_measurement_ins;
+DROP TRIGGER IF EXISTS trg_unit_of_measurement_upd;
+DROP TRIGGER IF EXISTS trg_unit_of_measurement_del;
+DROP TRIGGER IF EXISTS trg_usedcoupon_ins;
+DROP TRIGGER IF EXISTS trg_usedcoupon_upd;
+DROP TRIGGER IF EXISTS trg_usedcoupon_del;
+DROP TRIGGER IF EXISTS trg_user_ins;
+DROP TRIGGER IF EXISTS trg_user_upd;
+DROP TRIGGER IF EXISTS trg_user_del;
+DROP TRIGGER IF EXISTS trg_waste_tracking_ins;
+DROP TRIGGER IF EXISTS trg_waste_tracking_upd;
+DROP TRIGGER IF EXISTS trg_waste_tracking_del;
+DROP TRIGGER IF EXISTS trg_weekly_holiday_ins;
+DROP TRIGGER IF EXISTS trg_weekly_holiday_upd;
+DROP TRIGGER IF EXISTS trg_weekly_holiday_del;
+DROP TRIGGER IF EXISTS trg_bill_ins;
+DROP TRIGGER IF EXISTS trg_bill_upd;
+DROP TRIGGER IF EXISTS trg_bill_del;
+DROP TRIGGER IF EXISTS trg_customer_order_ins;
+DROP TRIGGER IF EXISTS trg_customer_order_upd;
+DROP TRIGGER IF EXISTS trg_customer_order_del;
+DROP TRIGGER IF EXISTS trg_order_menu_ins;
+DROP TRIGGER IF EXISTS trg_order_menu_upd;
+DROP TRIGGER IF EXISTS trg_order_menu_del;
+
+-- 2. Supprimer les 4 tables de sync
+
+DROP TABLE IF EXISTS `sync_queue`;
+DROP TABLE IF EXISTS `sync_online_orders`;
+DROP TABLE IF EXISTS `sync_config`;
+DROP TABLE IF EXISTS `sync_log`;
+
+-- 3. Supprimer les colonnes sync ajoutees aux tables existantes
+-- Note: DROP COLUMN IF EXISTS requiert MySQL 8.0+
+-- Si MySQL 5.7 : ignorer les erreurs "Can't DROP, check that column exists"
+
+ALTER TABLE `customer_order`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `sync_origin`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`,
+  DROP COLUMN IF EXISTS `vps_order_id`,
+  DROP COLUMN IF EXISTS `ack_by_local_at`;
+
+ALTER TABLE `order_menu`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`;
+
+ALTER TABLE `item_foods`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`;
+
+ALTER TABLE `variant`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`;
+
+ALTER TABLE `item_category`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`;
+
+ALTER TABLE `tablelist`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`;
+
+ALTER TABLE `bill`
+  DROP COLUMN IF EXISTS `sync_uuid`,
+  DROP COLUMN IF EXISTS `synced_to_vps`,
+  DROP COLUMN IF EXISTS `synced_at`;
+
+-- FIN DU NETTOYAGE
