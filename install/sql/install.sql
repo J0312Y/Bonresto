@@ -5122,3 +5122,70 @@ CREATE TABLE IF NOT EXISTS `weekly_holiday` (
 --
 
 INSERT INTO `weekly_holiday` (`wk_id`, `dayname`) VALUES(1, 'Friday,Satarday,Sunday');
+
+-- ── Tables ajoutées par les modules (absentes de l'install original) ─────────
+
+CREATE TABLE IF NOT EXISTS `facebook_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_id` varchar(100) DEFAULT NULL,
+  `app_secret` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `tbl_habittrack` (
+  `htid` int(11) NOT NULL AUTO_INCREMENT,
+  `cusid` int(11) NOT NULL,
+  `itemid` int(11) NOT NULL,
+  `varient` int(11) NOT NULL,
+  `habit` varchar(200) NOT NULL,
+  PRIMARY KEY (`htid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `packaging_food_waste` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `order_id` int(10) NOT NULL,
+  `ingradient_id` int(6) NOT NULL,
+  `qnty` int(6) NOT NULL,
+  `l_price` int(11) NOT NULL,
+  `note` varchar(255) NULL DEFAULT NULL,
+  `createdby` int(7) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `ingradient_food_waste` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `ingradient_id` int(6) NOT NULL,
+  `check_by` int(6) NOT NULL,
+  `qnty` decimal(10,3) NOT NULL,
+  `l_price` decimal(10,4) NOT NULL,
+  `note` varchar(255) NULL DEFAULT NULL,
+  `createdby` int(7) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `items_food_waste` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `itms_id` int(6) NOT NULL,
+  `wvarientid` int(11) NOT NULL,
+  `check_by` int(6) NOT NULL,
+  `qnty` decimal(10,3) NOT NULL,
+  `l_price` decimal(10,4) NOT NULL,
+  `note` varchar(255) NULL DEFAULT NULL,
+  `createdby` int(7) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `whatsapp_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `whatsapp_number` varchar(100) DEFAULT NULL,
+  `chatenable` int(11) DEFAULT 0,
+  `orderenable` int(11) DEFAULT 0,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
