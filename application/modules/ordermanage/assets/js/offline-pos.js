@@ -53,51 +53,52 @@
     // ── Bandeau offline ───────────────────────────────────────────────────────
 
     function injectOfflineUI() {
-        // Bandeau
+        // Pill flottante en bas à gauche — ne bloque aucun menu
         const banner = document.createElement('div');
         banner.id    = 'offline-banner';
         banner.innerHTML =
-            '<i class="fa fa-wifi"></i> ' +
-            '<strong>Mode hors-ligne</strong> — Les commandes sont sauvegardées localement.' +
+            '<i class="fa fa-wifi" style="margin-right:6px;"></i>' +
+            '<strong>Hors-ligne</strong>' +
             '<span id="offline-queue-count"></span>';
         Object.assign(banner.style, {
             display:        'none',
             position:       'fixed',
-            top:            '0',
-            left:           '0',
-            right:          '0',
+            bottom:         '16px',
+            left:           '16px',
             zIndex:         '99999',
             background:     '#e74c3c',
             color:          '#fff',
-            padding:        '10px 20px',
-            textAlign:      'center',
-            fontSize:       '14px',
+            padding:        '8px 16px',
+            borderRadius:   '20px',
+            fontSize:       '13px',
             fontWeight:     '500',
-            boxShadow:      '0 2px 8px rgba(0,0,0,.3)',
+            boxShadow:      '0 3px 12px rgba(0,0,0,.35)',
+            pointerEvents:  'none',
+            whiteSpace:     'nowrap',
         });
-        document.body.prepend(banner);
+        document.body.appendChild(banner);
 
-        // Badge dans le menu (si le sélecteur existe)
-        const badge = document.createElement('span');
+        // Badge commandes en attente — en bas à droite
+        const badge = document.createElement('div');
         badge.id    = 'offline-badge';
+        badge.title = 'Commandes en attente de sync';
         Object.assign(badge.style, {
             display:      'none',
             position:     'fixed',
-            bottom:       '20px',
-            right:        '20px',
-            background:   '#e74c3c',
+            bottom:       '16px',
+            right:        '16px',
+            background:   '#e67e22',
             color:        '#fff',
             borderRadius: '50%',
-            width:        '40px',
-            height:       '40px',
-            lineHeight:   '40px',
+            width:        '42px',
+            height:       '42px',
+            lineHeight:   '42px',
             textAlign:    'center',
             fontWeight:   'bold',
             fontSize:     '14px',
-            zIndex:       '99998',
-            boxShadow:    '0 2px 8px rgba(0,0,0,.4)',
-            cursor:       'pointer',
-            title:        'Commandes en attente de sync',
+            zIndex:       '99999',
+            boxShadow:    '0 3px 12px rgba(0,0,0,.35)',
+            cursor:       'default',
         });
         document.body.appendChild(badge);
     }
@@ -110,11 +111,8 @@
 
         if (!online) {
             banner.style.display = 'block';
-            // Ajouter marge au body pour que le contenu ne passe pas sous le bandeau
-            document.body.style.paddingTop = '44px';
         } else {
             banner.style.display = 'none';
-            document.body.style.paddingTop = '';
         }
         updateQueueBadge();
     }
