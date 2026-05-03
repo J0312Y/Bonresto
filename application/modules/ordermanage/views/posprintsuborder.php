@@ -493,7 +493,7 @@ body
 			 
 			 $discountpr=0; 
 			 if($storeinfo->discount_type==1){ 
-			 $dispr=$billinfo->discount*100/$billinfo->total_amount;
+			 $dispr=(!empty($billinfo->total_amount))?$billinfo->discount*100/$billinfo->total_amount:0;
 			 $discountpr='('.round($dispr).'%)';
 			 } 
 			 else{$discountpr='('.$currency->curr_icon.')';}

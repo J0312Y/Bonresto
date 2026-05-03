@@ -601,7 +601,7 @@ $catid=trim($catid,',');*/
     {
         $id                   = $this->input->post('pid');
         $sid                  = $this->input->post('sid');
-        echo $data['orderid'] = $this->input->post('orderid');
+        $data['orderid'] = $this->input->post('orderid', TRUE);
         $data['type']         = $this->input->post('type');
         $data['item']         = $this->hungry_model->finditem($id, $sid);
         $data['addonslist']   = $this->hungry_model->findaddons($id);

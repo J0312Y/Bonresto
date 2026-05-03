@@ -94,7 +94,7 @@
 			 
 			 $sdr=0; 
 			 if($storeinfo->service_chargeType==1){ 
-			 $sdpr=$billinfo->service_charge*100/$billinfo->total_amount;
+			 $sdpr=(!empty($billinfo->total_amount))?$billinfo->service_charge*100/$billinfo->total_amount:0;
 			 $sdr='('.round($sdpr).'%)';
 			 } 
 			 else{$sdr='('.$currency->curr_icon.')';}
@@ -105,7 +105,7 @@
 			 
 			 $discountpr=0; 
 			 if($storeinfo->discount_type==1){ 
-			 $dispr=$billinfo->discount*100/$billinfo->total_amount;
+			 $dispr=(!empty($billinfo->total_amount))?$billinfo->discount*100/$billinfo->total_amount:0;
 			 $discountpr='('.round($dispr).'%)';
 			 } 
 			 else{$discountpr='('.$currency->curr_icon.')';}

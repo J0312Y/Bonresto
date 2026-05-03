@@ -149,8 +149,8 @@ $config['subclass_prefix'] = 'MY_';
 $config['composer_autoload'] = false;
 require FCPATH . 'vendor/autoload.php';
 /*Stripe Payment Gateway — set STRIPE_KEY and STRIPE_SECRET in your server environment or .env */
-$config['stripe_key']    = getenv('STRIPE_KEY')    ?: 'pk_test_TrVFpmZBkgasCE6WTPkZgMPr00UzVVOqgp';
-$config['stripe_secret'] = getenv('STRIPE_SECRET') ?: 'sk_test_ol4WUcbGsqxNJItpeOi1ecDT00k5mDyC2G';
+$config['stripe_key']    = getenv('STRIPE_KEY')    ?: '';
+$config['stripe_secret'] = getenv('STRIPE_SECRET') ?: '';
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
@@ -474,9 +474,6 @@ $config['csrf_exclude_uris'] = [
     'checkcoupon',
     // SaaS API — all routes handled via JWT, CSRF not needed
     'saas/.*',
-    // Sync API — authentifié par X-Sync-Key + HMAC, CSRF non applicable
-    'sync_api/.*',
-    'sync_cron/.*',
 ];
 if (isset($_SERVER["REQUEST_URI"])) {
 

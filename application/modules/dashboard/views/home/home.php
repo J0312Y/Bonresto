@@ -418,7 +418,7 @@
 <?php
 
 if (isset($_GET['status'])) { ?>
-    <input name="registerclose" id="registerclose" type="hidden" value="<?php echo $_GET['status']; ?>" />
+    <input name="registerclose" id="registerclose" type="hidden" value="<?php echo htmlspecialchars($_GET['status'], ENT_QUOTES, 'UTF-8'); ?>" />
 <?php }
 
 ?>

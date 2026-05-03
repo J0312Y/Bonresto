@@ -245,7 +245,7 @@
 													$service_chrg_data =$SD;
 													}
 												else{
-												$service_chrg_data = $service->service_charge/$count;
+												$service_chrg_data = (!empty($count))?$service->service_charge/$count:0;
 												}
 												if(empty($taxinfos)){
 														  if($settinginfo->vat>0 ){

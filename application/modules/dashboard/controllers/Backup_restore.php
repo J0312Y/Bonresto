@@ -16,7 +16,7 @@ class Backup_restore extends MX_Controller {
 
         // Assure que le dossier existe
         if (!is_dir($this->savePath)) {
-            mkdir($this->savePath, 0777, true);
+            mkdir($this->savePath, 0750, true);
         }
     }
 

@@ -25,7 +25,7 @@ $config['saas_email'] = [
 ];
 
 // Clé secrète pour le cron automatique (changer avant mise en production)
-$config['saas_cron_key'] = 'bonresto-cron-secret-2026';
+$config['saas_cron_key'] = getenv('SAAS_CRON_KEY') ?: 'bonresto-cron-secret-2026';
 
 // Infos de la société pour les factures et emails
 $config['saas_company'] = [

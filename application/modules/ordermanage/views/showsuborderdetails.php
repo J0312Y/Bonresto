@@ -146,7 +146,7 @@
 												}
 											else{
 												 $count =count($suborder_info);
-												  $service_chrg_data = $SDtotal->service_charge/$count;
+												  $service_chrg_data = (!empty($count))?$SDtotal->service_charge/$count:0;
 												}
 												if(empty($taxinfos)){
 														  if($settinginfo->vat>0 ){

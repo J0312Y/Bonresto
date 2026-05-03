@@ -86,7 +86,25 @@
       "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SHOW COLUMNS FROM setting LIKE '%licen%';\")",
       "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SHOW COLUMNS FROM setting;\")",
       "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SELECT license_invalidated_at FROM setting LIMIT 1;\")",
-      "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"DESCRIBE setting;\")"
+      "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"DESCRIBE setting;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot -e \"SHOW DATABASES;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant -e \"SELECT status, COUNT\\(*\\) as cnt FROM sync_queue GROUP BY status;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SELECT status, COUNT\\(*\\) as cnt FROM sync_queue GROUP BY status;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SELECT status, COUNT\\(*\\) as cnt FROM sync_online_orders GROUP BY status;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SHOW TABLES LIKE 'sync%';\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1)",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SELECT * FROM sync_log ORDER BY log_id DESC LIMIT 10;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SELECT * FROM sync_config;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SELECT * FROM synchronizer_setting;\")",
+      "Bash(\"/c/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SHOW TABLES LIKE 'tbl_posetting';\")",
+      "Bash(awk -F'|' '{print $1}')",
+      "Bash(awk '{print $3}')",
+      "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot --sql-mode=\"\" restaurant1)",
+      "Bash(\"C:/MAMP/bin/mysql/bin/mysql.exe\" -u root -proot restaurant1 -e \"SET GLOBAL sql_mode=''; SET SESSION sql_mode=''; SOURCE C:/MAMP/htdocs/bonresto/application/migrations/cleanup_sync_system.sql;\")",
+      "Bash(sed -n '615,640p' \"C:/MAMP/htdocs/bonresto/application/models/App_android_model.php\")",
+      "Bash(sed -n '860,910p' \"C:/MAMP/htdocs/bonresto/application/models/App_android_model.php\")",
+      "Bash(sed -n '130,145p' \"C:/MAMP/htdocs/bonresto/application/modules/ordermanage/views/invoice.php\")",
+      "Bash(sed -n '94,112p' \"C:/MAMP/htdocs/bonresto/application/modules/ordermanage/views/dueinvoiceprint.php\")"
     ]
   }
 }

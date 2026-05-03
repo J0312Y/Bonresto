@@ -591,7 +591,8 @@ public function journal()
     }
     //al hassan working
     public  function get_vouchar_view($date){
-        $sql="SELECT acc_income_expence.COAID,SUM(acc_income_expence.Amount) AS Amount, acc_coa.HeadName FROM acc_income_expence INNER JOIN acc_coa ON acc_coa.HeadCode=acc_income_expence.COAID WHERE Date='$date' AND acc_income_expence.IsApprove=1 AND acc_income_expence.Paymode='Cash' GROUP BY acc_income_expence.COAID, acc_coa.HeadName ORDER BY acc_coa.HeadName";
+        $date = $this->db->escape($date);
+        $sql="SELECT acc_income_expence.COAID,SUM(acc_income_expence.Amount) AS Amount, acc_coa.HeadName FROM acc_income_expence INNER JOIN acc_coa ON acc_coa.HeadCode=acc_income_expence.COAID WHERE Date={$date} AND acc_income_expence.IsApprove=1 AND acc_income_expence.Paymode='Cash' GROUP BY acc_income_expence.COAID, acc_coa.HeadName ORDER BY acc_coa.HeadName";
         $query = $this->db->query($sql);
         return $query->result();
     }
@@ -620,13 +621,12 @@ public function journal()
     //al hassan working
     public function general_led_get($Headid){
 
-        $sql="SELECT * FROM acc_coa WHERE HeadCode='$Headid' ";
-        $query = $this->db->query($sql);
+        $sql="SELECT * FROM acc_coa WHERE HeadCode=? ";
+        $query = $this->db->query($sql, [$Headid]);
         $rs=$query->row();
 
-
-        $sql="SELECT * FROM acc_coa WHERE IsTransaction=1 AND PHeadName='".$rs->HeadName."' ORDER BY HeadName";
-        $query = $this->db->query($sql);
+        $sql="SELECT * FROM acc_coa WHERE IsTransaction=1 AND PHeadName=? ORDER BY HeadName";
+        $query = $this->db->query($sql, [$rs->HeadName]);
         return $query->result();
     }
     public function voucher_report_serach($vouchar){
