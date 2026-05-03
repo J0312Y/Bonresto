@@ -1061,6 +1061,7 @@ th {
     height: calc(-444px + 100vh) !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
+    padding-bottom: 20px !important;
   }
   /* Products grid area — shrinks to content, scrolls when many products */
   .leftSidebarPosMain.bg-alice-blue {
