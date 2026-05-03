@@ -228,16 +228,25 @@ class License_manager {
      * Core modules (ordermanage, itemmanage, dashboard) are always allowed.
      */
     public function has_module(string $module): bool {
-        static $core = ['ordermanage', 'itemmanage', 'dashboard', 'template', 'install', 'saas'];
+        // Core modules always available regardless of plan
+        static $core = ['ordermanage', 'itemmanage', 'dashboard', 'template', 'install', 'saas',
+                         'purchase', 'production', 'accounts'];
 
         if (in_array($module, $core)) return true;
+
+        // Aliases: sidebar module name => feature key in license.json
+        static $aliases = [
+            'report' => 'reports',
+            'qrapp'  => 'qr_order',
+        ];
 
         $payload = $this->load();
         if (!$payload) return false;
         if (!$this->is_allowed()) return false;
 
         $features = $payload['features'] ?? [];
-        return !empty($features[$module]);
+        $key = $aliases[$module] ?? $module;
+        return !empty($features[$key]);
     }
 
     /**
