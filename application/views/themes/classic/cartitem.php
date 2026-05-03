@@ -35,10 +35,10 @@ if ($cart = $this->cart->contents()) {
 
                 if (!empty($iteminfo->$fildname)) {
                     $vatcalc                 = $itemvalprice * $iteminfo->$fildname / 100;
-                    $multiplletax[$fildname] = @$multiplletax[$fildname] + $vatcalc;
+                    $multiplletax[$fildname] = ($multiplletax[$fildname] ?? 0) + $vatcalc;
                 } else {
                     $vatcalc                 = $itemvalprice * $taxinfo['default_value'] / 100;
-                    $multiplletax[$fildname] = @$multiplletax[$fildname] + $vatcalc;
+                    $multiplletax[$fildname] = ($multiplletax[$fildname] ?? 0) + $vatcalc;
 
                 }
 

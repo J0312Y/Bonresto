@@ -713,9 +713,11 @@ $isvatinclusive = $this->db->select("*")->from('setting')->get()->row();
 
                  </ul>
                  <div class="ad_area">
-                     <a href="<?php $offerimg->slink;?>">
-                         <img src="<?php echo base_url(); ?><?php echo $offerimg->image; ?>" alt="">
+                     <?php if (!empty($offerimg)) { ?>
+                     <a href="<?php echo htmlspecialchars($offerimg->slink, ENT_QUOTES, 'UTF-8'); ?>">
+                         <img src="<?php echo base_url(); ?><?php echo htmlspecialchars($offerimg->image, ENT_QUOTES, 'UTF-8'); ?>" alt="">
                      </a>
+                     <?php } ?>
                  </div>
              </div>
          </div>

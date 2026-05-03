@@ -33,11 +33,11 @@ if(!empty($this->cart->contents())){ $totalqty= count($this->cart->contents());}
                                       $fildname='tax'.$tx;
                                       if(!empty($iteminfo->$fildname)){
                                       $vatcalc=$itemvalprice*$iteminfo->$fildname/100;
-                                       $multiplletax[$fildname] = @$multiplletax[$fildname]+$vatcalc;
+                                       $multiplletax[$fildname] = ($multiplletax[$fildname] ?? 0)+$vatcalc;
                                       }
                                       else{
-                                        $vatcalc=$itemvalprice*$taxinfo['default_value']/100; 
-                                         $multiplletax[$fildname] = @$multiplletax[$fildname]+$vatcalc; 
+                                        $vatcalc=$itemvalprice*$taxinfo['default_value']/100;
+                                         $multiplletax[$fildname] = ($multiplletax[$fildname] ?? 0)+$vatcalc; 
 
                                       }
 
@@ -118,7 +118,7 @@ if(!empty($this->cart->contents())){ $totalqty= count($this->cart->contents());}
                                         <button onclick="updatecart('<?php echo $item['rowid']?>',<?php echo $item['qty'];?>,'add')" class="increase items-count" type="button">
                                             <i class="fa fa-plus"></i>
                                         </button>
-                                        <a class="serach cart_padding_15px" onclick="itemnote('<?php echo $item['rowid']?>','<?php echo $item['itemnote']?>')" title="<?php echo display('foodnote') ?>">
+                                        <a class="serach cart_padding_15px" onclick="itemnote('<?php echo $item['rowid']?>','<?php echo htmlspecialchars($item['itemnote'], ENT_QUOTES, 'UTF-8') ?>')" title="<?php echo display('foodnote') ?>">
                                         <i class="fa fa-sticky-note" aria-hidden="true"></i>
                                     </a>
                                     </div>
@@ -256,9 +256,11 @@ if(!empty($this->cart->contents())){ $totalqty= count($this->cart->contents());}
                     </div>
                     <?php } ?>
                     <div class="ad_area mt-4">
-                        <a href="<?php $offerimg->slink;?>">
-                            <img src="<?php echo base_url();?><?php echo $offerimg->image;?>" alt="">
+                        <?php if (!empty($offerimg)) { ?>
+                        <a href="<?php echo htmlspecialchars($offerimg->slink, ENT_QUOTES, 'UTF-8'); ?>">
+                            <img src="<?php echo base_url();?><?php echo htmlspecialchars($offerimg->image, ENT_QUOTES, 'UTF-8'); ?>" alt="">
                         </a>
+                        <?php } ?>
                     </div>
                 </div>
                 <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/cartlist.js"></script>

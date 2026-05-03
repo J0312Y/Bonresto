@@ -453,7 +453,7 @@ if (!empty($seoterm)) {
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/plugins/clockpicker/clockpicker.min.js"></script>
     <!--===== ACTIVE JS=====-->
-    <script src="<?php echo base_url(); ?>application/views/themes/classic/assets_web/plugins/fancybox/dist/jquery.fancybox.js"></script>
+    <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/plugins/fancybox/dist/jquery.fancybox.js"></script>
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/custom.js"></script>
    <!-- get js from here  -->
    <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/qrapp_main.js"></script>

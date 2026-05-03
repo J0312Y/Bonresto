@@ -223,7 +223,7 @@
                                                    </button>
 
                                                    <a class="serach cart_padding_15px"
-                                                       onclick="itemnote('<?php echo $item['rowid'] ?>','<?php echo $item['itemnote'] ?>')"
+                                                       onclick="itemnote('<?php echo $item['rowid'] ?>','<?php echo htmlspecialchars($item['itemnote'], ENT_QUOTES, 'UTF-8') ?>')"
                                                        title="<?php echo display('foodnote') ?>">
                                                        <i class="fa fa-sticky-note" aria-hidden="true"></i>
                                                    </a>

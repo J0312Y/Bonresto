@@ -144,7 +144,7 @@ if(!empty($this->cart->contents())){ $totalqty= count($this->cart->contents());}
                                         <button onclick="updatecart('<?php echo $item['rowid']?>',<?php echo $item['qty'];?>,'add')" class="increase items-count" type="button">
                                             <i class="fa fa-plus"></i>
                                         </button>
-                                        <a class="serach cart_padding_15px" onclick="itemnote('<?php echo $item['rowid']?>','<?php echo $item['itemnote']?>')"  title="<?php echo display('foodnote') ?>">
+                                        <a class="serach cart_padding_15px" onclick="itemnote('<?php echo $item['rowid']?>','<?php echo htmlspecialchars($item['itemnote'], ENT_QUOTES, 'UTF-8') ?>')"  title="<?php echo display('foodnote') ?>">
                                         <i class="fa fa-sticky-note" aria-hidden="true"></i>
                                     </a>
                                     <?php if(!empty($item['itemnote'])){?><p><?php echo display('foodnote') ?>: <?php echo $item['itemnote']?></p><?php } ?>

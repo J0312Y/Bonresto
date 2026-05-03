@@ -104,7 +104,8 @@
       "Bash(sed -n '615,640p' \"C:/MAMP/htdocs/bonresto/application/models/App_android_model.php\")",
       "Bash(sed -n '860,910p' \"C:/MAMP/htdocs/bonresto/application/models/App_android_model.php\")",
       "Bash(sed -n '130,145p' \"C:/MAMP/htdocs/bonresto/application/modules/ordermanage/views/invoice.php\")",
-      "Bash(sed -n '94,112p' \"C:/MAMP/htdocs/bonresto/application/modules/ordermanage/views/dueinvoiceprint.php\")"
+      "Bash(sed -n '94,112p' \"C:/MAMP/htdocs/bonresto/application/modules/ordermanage/views/dueinvoiceprint.php\")",
+      "Bash([ -f \"C:/MAMP/htdocs/bonresto/$dir/.htaccess\" ])"
     ]
   }
 }

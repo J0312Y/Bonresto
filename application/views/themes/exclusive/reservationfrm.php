@@ -8,7 +8,7 @@ $acthemename = $activethemeinfo->themename;?>
     <div class="form-group row bookinfo">
         <label for="selecttable" class="col-sm-4 col-form-label"><?php echo "Table Name."; ?>*</label>
         <div class="col-sm-8">
-            <?php echo @$tableinfo->tablename;?>
+            <?php echo $tableinfo->tablename ?? ''; ?>
             <input name="tableid" type="hidden" id="selecttable" value="<?php echo $tableno;?>" />
         </div>
     </div>
