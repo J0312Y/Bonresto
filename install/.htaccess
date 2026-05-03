@@ -1,3 +1,0 @@
-# Installation already complete — block all direct web access
-Order deny,allow
-Deny from all

@@ -127,11 +127,15 @@ class FileWrite
         }
 
         if (!file_exists("./../env")) {
-            
+
             //create a env file in root directory
             file_put_contents('./../env', date('d-m-Y h:i:s a'));
 
         }
+
+        // Lock the installer permanently — block all web access
+        $htaccess = "# Installer locked after successful installation\nOrder deny,allow\nDeny from all\n";
+        file_put_contents(__DIR__ . '/../.htaccess', $htaccess);
     }
 
 }
