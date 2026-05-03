@@ -281,6 +281,48 @@ class Order extends MX_Controller
         $this->load->view('ongoingorder_ajax', $data);
     }
 
+    /**
+     * GET ordermanage/order/pos_offline_data
+     * Retourne un snapshot JSON de toutes les données nécessaires au POS offline.
+     * Mis en cache par le Service Worker dans IndexedDB.
+     */
+    public function pos_offline_data()
+    {
+        if ($this->permission->method('ordermanage', 'create')->access() == false) {
+            http_response_code(403);
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Forbidden']);
+            return;
+        }
+
+        $settinginfo = $this->order_model->settinginfo();
+        $currency    = $this->order_model->currencysetting($settinginfo->currency ?? 1);
+
+        $data = [
+            'cached_at'     => date('Y-m-d H:i:s'),
+            'categories'    => $this->_rows_to_array($this->order_model->allcat_dropdown()),
+            'items'         => $this->_rows_to_array($this->order_model->allfood2()),
+            'tables'        => $this->_rows_to_array($this->order_model->table_dropdown()),
+            'customers'     => $this->_rows_to_array($this->order_model->customer_dropdown()),
+            'customer_types'=> $this->_rows_to_array($this->order_model->ctype_dropdown()),
+            'payment_methods'=> $this->_rows_to_array($this->order_model->pmethod_dropdown()),
+            'waiters'       => $this->_rows_to_array($this->order_model->waiter_dropdown()),
+            'currency'      => $currency ? (array)$currency : [],
+            'setting'       => $settinginfo ? (array)$settinginfo : [],
+        ];
+
+        header('Content-Type: application/json');
+        header('Cache-Control: no-store'); // Le SW gère le cache, pas le navigateur
+        echo json_encode($data);
+    }
+
+    /** Convertit un tableau d'objets en tableau de tableaux pour JSON. */
+    private function _rows_to_array($rows)
+    {
+        if (empty($rows)) return [];
+        return array_map(function($r) { return is_object($r) ? (array)$r : $r; }, $rows);
+    }
+
     public function getongoingorder_pos_json()
     {
         $orders = $this->order_model->get_ongoingorder();
