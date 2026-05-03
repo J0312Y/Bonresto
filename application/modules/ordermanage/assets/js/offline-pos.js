@@ -273,42 +273,82 @@
         }, true); // ← capture phase
     }
 
-    // ── Interception soumission commande ──────────────────────────────────────
+    // ── Interception soumission commande (wrapper placeorder) ────────────────
+    //
+    // possetting.js appelle placeorder() qui tire $.ajax() directement —
+    // pas de form submit. On wrappe la fonction globale après le chargement
+    // de possetting.js pour intercepter quand offline.
 
-    function interceptOrderForms() {
-        document.addEventListener('submit', function(e) {
+    function wrapPlaceorder() {
+        if (typeof window.placeorder !== 'function') return;
+        var _orig = window.placeorder;
+
+        window.placeorder = function() {
             if (!isOnline) {
-                var form = e.target;
-                if (form && form.action && form.action.indexOf('pos_order') !== -1) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    saveOrderOffline(form);
+                // Vérification minimale : panier non vide
+                if (OfflineCart.items.length === 0) {
+                    alert('Please add Some Food!!!');
+                    return false;
                 }
-            }
-        }, true);
-    }
 
-    function saveOrderOffline(form) {
-        var formData = new FormData(form);
-        var order    = {};
-        formData.forEach(function(v, k) { order[k] = v; });
-        order._form_action = form.action;
-        Object.assign(order, OfflineCart.toOrderData());
+                // Collecter les données du formulaire POS
+                var order = {
+                    customer_name:    ($('#customer_name').val()      || ''),
+                    ctypeid:          ($('#ctypeid').val()             || ''),
+                    waiter:           ($('#waiter').val()              || ''),
+                    tableid:          ($('#tableid').val()             || ''),
+                    grandtotal:       ($('#grandtotal').val()          || OfflineCart.total().toFixed(0)),
+                    subtotal:         ($('#subtotal').val()            || OfflineCart.total().toFixed(0)),
+                    totalitem:        ($('#totalitem').val()           || OfflineCart.items.length),
+                    order_date:       ($('#order_date').val()          || ''),
+                    invoice_discount: ($('#invoice_discount').val()    || '0'),
+                    service_charge:   ($('#service_charge').val()      || '0'),
+                    vat:              ($('#vat').val()                  || '0'),
+                    cookedtime:       ($('#cookedtime').val()           || ''),
+                    multiplletaxvalue:($('#multiplletaxvalue').val()   || ''),
+                    isonline:         ($('#isonline').val()             || '0'),
+                    _form_action:     (typeof basicinfo !== 'undefined' ? basicinfo.baseurl : BASE_URL) + 'ordermanage/order/pos_order',
+                };
+                Object.assign(order, OfflineCart.toOrderData());
 
-        if (typeof BonrestoDB === 'undefined') return;
-        BonrestoDB.saveOfflineOrder(order).then(function(localId) {
-            updateQueueBadge();
-            OfflineCart.items = [];
-            document.getElementById('addfoodlist').innerHTML = OfflineCart.buildHtml();
-            OfflineCart._refreshTotals();
-            if (window.toastr) {
-                toastr.warning(
-                    'Commande #' + localId + ' sauvegardée hors-ligne. Envoi automatique à la reconnexion.',
-                    'Hors-ligne',
-                    { timeOut: 7000 }
-                );
+                if (typeof BonrestoDB === 'undefined') {
+                    if (window.toastr) toastr.error('IndexedDB non disponible.', 'Erreur offline');
+                    return false;
+                }
+
+                BonrestoDB.saveOfflineOrder(order).then(function(localId) {
+                    updateQueueBadge();
+
+                    // Vider le panier offline
+                    OfflineCart.items = [];
+                    document.getElementById('addfoodlist').innerHTML = OfflineCart.buildHtml();
+                    OfflineCart._refreshTotals();
+
+                    // Remettre à zéro les champs POS comme le ferait possetting.js
+                    $('#getitemp').val('0');
+                    $('#calvat').text('0');
+                    $('#vat').val('0');
+                    $('#invoice_discount').val('0');
+                    $('#caltotal').text('');
+                    $('#grandtotal').val('');
+                    $('#waiter').val('');
+                    $('#tableid').val('');
+
+                    if (window.toastr) {
+                        toastr.success(
+                            'Commande #' + localId + ' sauvegardée hors-ligne. Envoi automatique à la reconnexion.',
+                            'Hors-ligne',
+                            { timeOut: 7000 }
+                        );
+                    }
+                });
+
+                return false; // bloquer l'appel original (pas d'AJAX vers le serveur)
             }
-        });
+
+            // En ligne → comportement normal
+            return _orig.apply(this, arguments);
+        };
     }
 
     // ── Sync au retour en ligne ───────────────────────────────────────────────
@@ -364,7 +404,7 @@
         registerSW();
         injectOfflineUI();
         setupOfflineClickHandler();
-        interceptOrderForms();
+        wrapPlaceorder();
         setOnlineState(navigator.onLine);
 
         window.addEventListener('online', function() {
