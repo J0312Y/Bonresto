@@ -1287,20 +1287,6 @@ foreach ($scan as $file) {
                                                             <div class="summary-bg p-10 mb-13">
                                                                 <table
                                                                     class="table table-bordered footersumtotal summary-table">
-                                                                    <tr class="subtotal-row">
-                                                                        <td>
-                                                                            <label class="mb-0">Sub Total :</label>
-                                                                        </td>
-                                                                        <td class="text-end fs-17">
-                                                                            <label class="mb-0">
-                                                                                <strong>
-                                                                                    <?php if ($currency->position == 1) { echo $currency->curr_icon; } ?>
-                                                                                    <span id="pos-subtotal"><?php echo number_format((float)$subtotal, 0); ?></span>
-                                                                                    <?php if ($currency->position == 2) { echo ' ' . $currency->curr_icon; } ?>
-                                                                                </strong>
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
                                                                     <tr>
                                                                         <td>
                                                                             <label for="date"
