@@ -1,46 +1,44 @@
 /**
- * Bonresto — POS Offline Manager v2
+ * Bonresto — POS Offline Manager v4
  *
- * 1. Enregistre le Service Worker
- * 2. Détecte online/offline → pill flottante
- * 3. Intercepte jQuery AJAX (posaddtocart, posupdatecart, removecart)
- *    → gère le panier 100% en JS quand offline
- * 4. Intercepte la soumission de commande → IndexedDB
+ * 1. Service Worker registration
+ * 2. Détection online/offline → pill flottante
+ * 3. Capture-phase click interceptor : quand offline, intercepte le clic sur
+ *    .select_product AVANT que possetting.js ne déclenche son AJAX, et gère
+ *    le panier 100% en JS
+ * 4. Soumission commande offline → IndexedDB
  * 5. Sync automatique au retour en ligne
  */
 
 (function () {
     'use strict';
 
-    const BASE_URL = window.BONRESTO_BASE_URL || '/';
-    const SW_URL   = BASE_URL + 'sw.js';
-    const DATA_URL = BASE_URL + 'ordermanage/order/pos_offline_data';
-    const SYNC_URL = BASE_URL + 'ordermanage/order/sync_offline_orders';
+    var BASE_URL = window.BONRESTO_BASE_URL || '/';
+    var SW_URL   = BASE_URL + 'sw.js';
+    var DATA_URL = BASE_URL + 'ordermanage/order/pos_offline_data';
+    var SYNC_URL = BASE_URL + 'ordermanage/order/sync_offline_orders';
 
-    let isOnline = navigator.onLine;
-
-    // Cache des items menu pour lookup offline (pid → item)
-    let _menuIndex = {};
+    var isOnline = navigator.onLine;
 
     // ── Service Worker ────────────────────────────────────────────────────────
 
     function registerSW() {
         if (!('serviceWorker' in navigator)) return;
         navigator.serviceWorker.register(SW_URL, { scope: BASE_URL })
-            .then(reg => {
-                reg.addEventListener('updatefound', () => {
+            .then(function(reg) {
+                reg.addEventListener('updatefound', function() {
                     var newSW = reg.installing;
-                    newSW.addEventListener('statechange', () => {
+                    newSW.addEventListener('statechange', function() {
                         if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
                             navigator.serviceWorker.controller.postMessage('SKIP_WAITING');
                         }
                     });
                 });
             })
-            .catch(e => console.error('[Offline] SW:', e));
+            .catch(function(e) { console.warn('[Offline] SW:', e); });
     }
 
-    // ── UI offline ────────────────────────────────────────────────────────────
+    // ── UI ────────────────────────────────────────────────────────────────────
 
     function injectOfflineUI() {
         var banner = document.createElement('div');
@@ -65,7 +63,7 @@
             background: '#e67e22', color: '#fff', borderRadius: '50%',
             width: '42px', height: '42px', lineHeight: '42px', textAlign: 'center',
             fontWeight: 'bold', fontSize: '14px', zIndex: '99999',
-            boxShadow: '0 3px 12px rgba(0,0,0,.35)', cursor: 'default',
+            boxShadow: '0 3px 12px rgba(0,0,0,.35)',
         });
         document.body.appendChild(badge);
     }
@@ -97,198 +95,194 @@
     var OfflineCart = {
         items: [],  // [{rowid, pid, name, price, qty, sizeid, size}]
 
-        _rowid: function(pid, sizeid) {
-            return 'off_' + pid + '_' + (sizeid || 0) + '_' + Date.now();
-        },
-
-        add: function(pid, price, sizeid, catid) {
-            pid    = parseInt(pid)   || 0;
-            sizeid = parseInt(sizeid)|| 0;
+        add: function(pid, itemname, varientname, price, sizeid) {
+            pid    = parseInt(pid)     || 0;
+            sizeid = parseInt(sizeid)  || 0;
             price  = parseFloat(price) || 0;
+            // Raw strings from DOM — no URL-decoding needed
+            var name = String(itemname   || '').trim() || ('Item #' + pid);
+            var size = String(varientname || '').trim();
 
-            // Lookup name depuis le cache menu
-            var meta = _menuIndex[pid] || {};
-            var name = meta.ProductsName || meta.name || ('Item #' + pid);
-            var size = '';
-            if (meta.variant && sizeid) {
-                var v = (meta.variant || []).find(function(vv){ return parseInt(vv.variantid) === sizeid; });
-                if (v) { size = v.variantname || ''; price = parseFloat(v.price) || price; }
-            }
-
-            var existing = this.items.find(function(i){ return i.pid === pid && i.sizeid === sizeid; });
+            var existing = this.items.find(function(i) {
+                return i.pid === pid && i.sizeid === sizeid;
+            });
             if (existing) {
                 existing.qty++;
             } else {
                 this.items.push({
-                    rowid: this._rowid(pid, sizeid),
+                    rowid: 'off_' + pid + '_' + sizeid + '_' + Date.now(),
                     pid: pid, name: name, price: price,
                     qty: 1, sizeid: sizeid, size: size
                 });
             }
-            this.render();
         },
 
         update: function(rowid, action) {
-            var item = this.items.find(function(i){ return i.rowid === rowid; });
-            if (!item) return;
+            var idx = this.items.findIndex(function(i) { return i.rowid === rowid; });
+            if (idx === -1) return;
             if (action === 'add') {
-                item.qty++;
+                this.items[idx].qty++;
             } else {
-                item.qty--;
-                if (item.qty <= 0) {
-                    this.items = this.items.filter(function(i){ return i.rowid !== rowid; });
-                }
+                this.items[idx].qty--;
+                if (this.items[idx].qty <= 0) this.items.splice(idx, 1);
             }
-            this.render();
         },
 
         remove: function(rowid) {
-            this.items = this.items.filter(function(i){ return i.rowid !== rowid; });
-            this.render();
+            this.items = this.items.filter(function(i) { return i.rowid !== rowid; });
         },
 
         total: function() {
-            return this.items.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
+            return this.items.reduce(function(s, i) { return s + i.price * i.qty; }, 0);
         },
 
-        render: function() {
-            var rows = '';
-            var i = 0;
+        /**
+         * Génère le HTML identique à poscartlist.php.
+         * possetting.js lit les hidden inputs pour mettre à jour les totaux.
+         */
+        buildHtml: function() {
+            var rows  = '';
+            var count = 0;
             var total = this.total();
 
             this.items.forEach(function(item) {
-                i++;
+                count++;
                 var lineTotal = (item.price * item.qty).toFixed(0);
+                var SVG_DELETE =
+                    '<svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                    '<path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.9975C0 3.65763 0.27552 3.38212 0.615385 3.38212H15.3846C15.7245 3.38212 16 3.65763 16 3.9975C16 4.33737 15.7245 4.61289 15.3846 4.61289H0.615385C0.27552 4.61289 0 4.33737 0 3.9975Z" fill="#D43407"/>' +
+                    '<path fill-rule="evenodd" clip-rule="evenodd" d="M13.8323 11.8018C13.5918 13.9802 13.4715 15.0694 12.8566 15.8213C12.6415 16.0842 12.3871 16.3121 12.1021 16.497C11.2873 17.0256 10.1915 17.0256 7.9998 17.0256C5.80824 17.0256 4.71244 17.0256 3.89755 16.497C3.61262 16.3121 3.35811 16.0842 3.14311 15.8213C2.5282 15.0694 2.4079 13.9801 2.16731 11.8018L1.24268 3.43009H14.757L13.8323 11.8018Z" fill="#D43407"/>' +
+                    '</svg>';
+
                 rows +=
-                    '<tr id="' + i + '">' +
-                    '<th>' + item.name + ' <i class="fa fa-sticky-note pl-15" aria-hidden="true"></i></th>' +
+                    '<tr id="' + count + '">' +
+                    '<th id="product_name_MFU4E">' + item.name +
+                        '<a class="serach pl-15" title="Note"><i class="fa fa-sticky-note" aria-hidden="true"></i></a>' +
+                    '</th>' +
                     '<td>' + item.size + '</td>' +
                     '<td>' + item.price + '</td>' +
-                    '<td>' +
+                    '<td scope="row">' +
                         '<a class="btn btn-info btn-sm btn-incriment btnleftalign" ' +
-                            'onclick="OfflineCart.update(\'' + item.rowid + '\',\'add\')">' +
+                            'onclick="OfflineCart.updateAndRefresh(\'' + item.rowid + '\',\'add\')">' +
                             '<i class="fa fa-plus" aria-hidden="true"></i></a>' +
                         ' <span id="productionsetting-' + item.pid + '-' + item.sizeid + '">' + item.qty + '</span> ' +
                         '<a class="btn btn-danger btn-sm btn-dicriment btnrightalign" ' +
-                            'onclick="OfflineCart.update(\'' + item.rowid + '\',\'del\')">' +
+                            'onclick="OfflineCart.updateAndRefresh(\'' + item.rowid + '\',\'del\')">' +
                             '<i class="fa fa-minus" aria-hidden="true"></i></a>' +
                     '</td>' +
                     '<td>' + lineTotal + '</td>' +
-                    '<td>' +
-                        '<a href="javascript:void(0);" class="btnrightalign" ' +
-                            'onclick="OfflineCart.remove(\'' + item.rowid + '\')">' +
-                            '<svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-                            '<path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.9975C0 3.65763 0.27552 3.38212 0.615385 3.38212H15.3846C15.7245 3.38212 16 3.65763 16 3.9975C16 4.33737 15.7245 4.61289 15.3846 4.61289H0.615385C0.27552 4.61289 0 4.33737 0 3.9975Z" fill="#D43407"/>' +
-                            '<path fill-rule="evenodd" clip-rule="evenodd" d="M13.8323 11.8018C13.5918 13.9802 13.4715 15.0694 12.8566 15.8213C12.6415 16.0842 12.3871 16.3121 12.1021 16.497C11.2873 17.0256 10.1915 17.0256 7.9998 17.0256C5.80824 17.0256 4.71244 17.0256 3.89755 16.497C3.61262 16.3121 3.35811 16.0842 3.14311 15.8213C2.5282 15.0694 2.4079 13.9801 2.16731 11.8018L1.24268 3.43009H14.757L13.8323 11.8018Z" fill="#D43407"/>' +
-                            '</svg>' +
-                        '</a>' +
-                    '</td>' +
+                    '<td><a href="javascript:void(0);" class="btnrightalign" ' +
+                        'onclick="OfflineCart.removeAndRefresh(\'' + item.rowid + '\')">' +
+                        SVG_DELETE + '</a></td>' +
                     '</tr>';
             });
 
-            // Hidden inputs nécessaires pour la soumission du formulaire
+            // Hidden inputs identiques à poscartlist.php
             var hiddens =
+                '<input name="grandtotal" id="grtotal" type="hidden" value="' + total.toFixed(0) + '">' +
                 '<input name="subtotal" id="subtotal" type="hidden" value="' + total.toFixed(0) + '">' +
-                '<input name="totalitem" id="totalitem" type="hidden" value="' + i + '">' +
+                '<input name="totalitem" id="totalitem" type="hidden" value="' + count + '">' +
                 '<input name="multiplletaxvalue" id="multiplletaxvalue" type="hidden" value="">' +
                 '<input name="tvat" type="hidden" value="0" id="tvat">' +
                 '<input name="sc" type="hidden" value="0" id="sc">' +
                 '<input name="tdiscount" type="hidden" value="0" id="tdiscount">' +
-                '<input name="tgtotal" type="hidden" value="' + total.toFixed(0) + '" id="tgtotal">' +
-                '<input name="grandtotal" id="grtotal" type="hidden" value="' + total.toFixed(0) + '">';
+                '<input name="tgtotal" type="hidden" value="' + total.toFixed(0) + '" id="tgtotal">';
 
-            // Table
-            var tableHtml = i > 0
-                ? '<table class="table item-table border-none wpr_100 mb-0" border="1" id="addinvoice">' +
-                  '<thead><tr>' +
-                  '<th>Item</th><th>Variant</th><th>Price</th><th class="text-center">Qnt.</th><th>Total</th><th>Action</th>' +
-                  '</tr></thead><tbody class="itemNumber">' + rows + hiddens + '</tbody></table>'
-                : hiddens;
+            if (count === 0) return hiddens;
 
-            $('#addfoodlist').html(tableHtml);
+            return '<table class="table item-table border-none wpr_100 mb-0" border="1" id="addinvoice">' +
+                   '<thead><tr>' +
+                   '<th>Item</th><th>Variant</th><th>Price</th>' +
+                   '<th class="text-center">Qnt.</th><th>Total</th><th>Action</th>' +
+                   '</tr></thead>' +
+                   '<tbody class="itemNumber">' + rows + hiddens + '</tbody>' +
+                   '</table>';
+        },
 
-            // Mettre à jour les totaux affichés
-            $('#item-number').text(i);
-            $('#getitemp').val(i);
-            $('#calvat').text(0);
-            $('#vat').val(0);
-            $('#invoice_discount').val(0);
-            $('#service_charge').val(0);
+        // Appelés depuis les onclick inline du HTML généré
+        updateAndRefresh: function(rowid, action) {
+            this.update(rowid, action);
+            $('#addfoodlist').html(this.buildHtml());
+            this._refreshTotals();
+        },
+
+        removeAndRefresh: function(rowid) {
+            this.remove(rowid);
+            $('#addfoodlist').html(this.buildHtml());
+            this._refreshTotals();
+        },
+
+        _refreshTotals: function() {
+            var total     = parseFloat($('#tgtotal').val())  || 0;
+            var totalitem = parseInt($('#totalitem').val())  || 0;
+            $('#item-number').text(totalitem);
+            $('#getitemp').val(totalitem);
             $('#caltotal').text(total.toFixed(0));
             $('#grandtotal').val(total.toFixed(0));
             $('#orggrandTotal').val(total.toFixed(0));
             $('#orginattotal').val(total.toFixed(0));
         },
 
-        // Sérialiser pour la sauvegarde offline
         toOrderData: function() {
             return {
-                offline_cart: JSON.stringify(this.items),
-                offline_total: this.total().toFixed(0),
+                offline_cart:        JSON.stringify(this.items),
+                offline_total:       this.total().toFixed(0),
                 offline_items_count: this.items.length,
             };
         }
     };
 
-    // Exposer globalement pour les onclick inline
     window.OfflineCart = OfflineCart;
 
-    // ── Interception jQuery AJAX ──────────────────────────────────────────────
+    // ── Capture-phase click interceptor ───────────────────────────────────────
+    //
+    // possetting.js uses: $("body").on("click", ".select_product", fn)
+    // That handler is in the BUBBLE phase.
+    // We use the CAPTURE phase (3rd arg = true) so our handler fires FIRST.
+    // When offline, we stopPropagation() so possetting.js never sees the click.
 
-    function interceptAjax() {
-        if (typeof $ === 'undefined') return;
+    function setupOfflineClickHandler() {
+        document.addEventListener('click', function(e) {
+            if (isOnline) return; // Let possetting.js handle normally when online
 
-        var _origAjax = $.ajax;
-        $.ajax = function(settings) {
-            if (!isOnline && settings && settings.url) {
-                var url = settings.url;
-
-                // Ajout au panier
-                if (url.indexOf('posaddtocart') !== -1) {
-                    var params = parseQueryString(settings.data || '');
-                    OfflineCart.add(params.pid, params.price, params.sizeid, params.catid);
-                    return $.Deferred().resolve('').promise();
-                }
-
-                // Mise à jour quantité (posupdatecart ou poscartupdate)
-                if (url.indexOf('posupdatecart') !== -1 || url.indexOf('poscartupdate') !== -1) {
-                    var params = parseQueryString(settings.data || '');
-                    // rowid peut être dans params.cartid ou params.rowid
-                    var rowid  = params.cartid || params.rowid || '';
-                    var action = params.action || params.type || 'add';
-                    // Trouver le rowid offline correspondant au pid+sizeid
-                    var item = OfflineCart.items.find(function(i){
-                        return String(i.pid) === String(params.pid || params.product_id || '');
-                    });
-                    if (item) OfflineCart.update(item.rowid, action);
-                    return $.Deferred().resolve('').promise();
-                }
-
-                // Suppression du panier
-                if (url.indexOf('removecart') !== -1 || url.indexOf('posclear') !== -1) {
-                    var params = parseQueryString(settings.data || '');
-                    var rowid  = params.cartid || params.rowid || '';
-                    // Chercher par rowid ou par pid
-                    var item = OfflineCart.items.find(function(i){
-                        return i.rowid === rowid || String(i.pid) === String(params.pid || '');
-                    });
-                    if (item) OfflineCart.remove(item.rowid);
-                    return $.Deferred().resolve('').promise();
-                }
+            // Walk up the DOM to find the .select_product ancestor
+            var panel = e.target;
+            while (panel && panel !== document) {
+                if (panel.classList && panel.classList.contains('select_product')) break;
+                panel = panel.parentNode;
             }
-            return _origAjax.apply(this, arguments);
-        };
-        $.ajax.ajaxSetup = _origAjax.ajaxSetup;
-    }
+            if (!panel || panel === document) return;
 
-    function parseQueryString(qs) {
-        if (typeof qs === 'object') return qs;
-        var params = {};
-        String(qs).split('&').forEach(function(pair) {
-            var kv = pair.split('=');
-            if (kv[0]) params[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || '');
-        });
-        return params;
+            // Block the click from reaching possetting.js
+            e.stopPropagation();
+            e.preventDefault();
+
+            // Check item type — only handle simple items (no add-ons, single variant)
+            var hasaddons    = parseInt((panel.querySelector('input[name=select_addons]')    || {}).value) || 0;
+            var totalvarient = parseInt((panel.querySelector('input[name=select_totalvarient]') || {}).value) || 1;
+            var customqty    = parseInt((panel.querySelector('input[name=select_iscustomeqty]') || {}).value) || 0;
+
+            if (hasaddons !== 0 || totalvarient !== 1 || customqty !== 0) {
+                if (window.toastr) {
+                    toastr.warning('Cet article a des options — connexion requise.', 'Hors-ligne');
+                }
+                return;
+            }
+
+            // Extract item data directly from the hidden inputs in the panel
+            var pid        = (panel.querySelector('input[name=select_product_id]')    || {}).value || 0;
+            var sizeid     = (panel.querySelector('input[name=select_product_size]')   || {}).value || 0;
+            var itemname   = (panel.querySelector('input[name=select_product_name]')   || {}).value || '';
+            var varientname = (panel.querySelector('input[name=select_varient_name]')  || {}).value || '';
+            var price      = (panel.querySelector('input[name=select_product_price]')  || {}).value || 0;
+
+            OfflineCart.add(pid, itemname, varientname, price, sizeid);
+
+            var html = OfflineCart.buildHtml();
+            document.getElementById('addfoodlist').innerHTML = html;
+            OfflineCart._refreshTotals();
+
+        }, true); // ← capture phase
     }
 
     // ── Interception soumission commande ──────────────────────────────────────
@@ -311,18 +305,21 @@
         var order    = {};
         formData.forEach(function(v, k) { order[k] = v; });
         order._form_action = form.action;
-        // Ajouter le panier offline
-        var cartData = OfflineCart.toOrderData();
-        Object.assign(order, cartData);
+        Object.assign(order, OfflineCart.toOrderData());
 
+        if (typeof BonrestoDB === 'undefined') return;
         BonrestoDB.saveOfflineOrder(order).then(function(localId) {
             updateQueueBadge();
-            if (window.toastr) {
-                toastr.warning('Commande #' + localId + ' sauvegardée hors-ligne. Envoi automatique à la reconnexion.', 'Hors-ligne', { timeOut: 7000 });
-            }
-            // Vider le panier offline local
             OfflineCart.items = [];
-            OfflineCart.render();
+            document.getElementById('addfoodlist').innerHTML = OfflineCart.buildHtml();
+            OfflineCart._refreshTotals();
+            if (window.toastr) {
+                toastr.warning(
+                    'Commande #' + localId + ' sauvegardée hors-ligne. Envoi automatique à la reconnexion.',
+                    'Hors-ligne',
+                    { timeOut: 7000 }
+                );
+            }
         });
     }
 
@@ -355,7 +352,9 @@
                         BonrestoDB.markOrderFailed(order.local_id, data.message || 'Erreur');
                     }
                 })
-                .catch(function(e) { BonrestoDB.markOrderFailed(order.local_id, e.message); });
+                .catch(function(e) {
+                    BonrestoDB.markOrderFailed(order.local_id, e.message);
+                });
             });
         });
     }
@@ -367,22 +366,8 @@
             .then(function(res) { return res.json(); })
             .then(function(data) {
                 if (typeof BonrestoDB !== 'undefined') BonrestoDB.saveMenuData(data);
-                // Indexer les items par pid pour lookup rapide offline
-                _menuIndex = {};
-                (data.items || []).forEach(function(item) {
-                    _menuIndex[parseInt(item.ProductsID || item.id || 0)] = item;
-                });
             })
-            .catch(function() {
-                // Offline — charger depuis IndexedDB
-                if (typeof BonrestoDB !== 'undefined') {
-                    BonrestoDB.getMenuData('items').then(function(items) {
-                        (items || []).forEach(function(item) {
-                            _menuIndex[parseInt(item.ProductsID || item.id || 0)] = item;
-                        });
-                    });
-                }
-            });
+            .catch(function() {});
     }
 
     // ── Init ──────────────────────────────────────────────────────────────────
@@ -390,18 +375,8 @@
     function init() {
         registerSW();
         injectOfflineUI();
-
-        // Attendre jQuery avant d'intercepter
-        if (typeof $ !== 'undefined') {
-            interceptAjax();
-            interceptOrderForms();
-        } else {
-            document.addEventListener('DOMContentLoaded', function() {
-                interceptAjax();
-                interceptOrderForms();
-            });
-        }
-
+        setupOfflineClickHandler();
+        interceptOrderForms();
         setOnlineState(navigator.onLine);
 
         window.addEventListener('online', function() {
@@ -413,8 +388,6 @@
 
         window.addEventListener('offline', function() {
             setOnlineState(false);
-            // Charger le menu depuis IndexedDB pour les lookups offline
-            cacheMenuData();
             if (window.toastr) toastr.warning('Mode hors-ligne activé. Le panier fonctionne localement.', 'Offline');
         });
 
