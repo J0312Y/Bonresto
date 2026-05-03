@@ -428,46 +428,55 @@ DROP TABLE IF EXISTS `sync_online_orders`;
 DROP TABLE IF EXISTS `sync_config`;
 DROP TABLE IF EXISTS `sync_log`;
 
--- 3. Supprimer les colonnes sync ajoutees aux tables existantes
--- Note: DROP COLUMN IF EXISTS requiert MySQL 8.0+
--- Si MySQL 5.7 : ignorer les erreurs "Can't DROP, check that column exists"
+-- 3. Supprimer les colonnes sync (compatible MySQL 5.7)
 
-ALTER TABLE `customer_order`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `sync_origin`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`,
-  DROP COLUMN IF EXISTS `vps_order_id`,
-  DROP COLUMN IF EXISTS `ack_by_local_at`;
+DROP PROCEDURE IF EXISTS drop_col_if_exists;
+DELIMITER //
+CREATE PROCEDURE drop_col_if_exists(tbl VARCHAR(64), col VARCHAR(64))
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = tbl AND COLUMN_NAME = col
+  ) THEN
+    SET @sql = CONCAT('ALTER TABLE `', tbl, '` DROP COLUMN `', col, '`');
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+  END IF;
+END //
+DELIMITER ;
 
-ALTER TABLE `order_menu`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`;
+CALL drop_col_if_exists('customer_order', 'sync_uuid');
+CALL drop_col_if_exists('customer_order', 'sync_origin');
+CALL drop_col_if_exists('customer_order', 'synced_to_vps');
+CALL drop_col_if_exists('customer_order', 'synced_at');
+CALL drop_col_if_exists('customer_order', 'vps_order_id');
+CALL drop_col_if_exists('customer_order', 'ack_by_local_at');
 
-ALTER TABLE `item_foods`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`;
+CALL drop_col_if_exists('order_menu', 'sync_uuid');
+CALL drop_col_if_exists('order_menu', 'synced_to_vps');
+CALL drop_col_if_exists('order_menu', 'synced_at');
 
-ALTER TABLE `variant`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`;
+CALL drop_col_if_exists('item_foods', 'sync_uuid');
+CALL drop_col_if_exists('item_foods', 'synced_to_vps');
+CALL drop_col_if_exists('item_foods', 'synced_at');
 
-ALTER TABLE `item_category`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`;
+CALL drop_col_if_exists('variant', 'sync_uuid');
+CALL drop_col_if_exists('variant', 'synced_to_vps');
+CALL drop_col_if_exists('variant', 'synced_at');
 
-ALTER TABLE `tablelist`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`;
+CALL drop_col_if_exists('item_category', 'sync_uuid');
+CALL drop_col_if_exists('item_category', 'synced_to_vps');
+CALL drop_col_if_exists('item_category', 'synced_at');
 
-ALTER TABLE `bill`
-  DROP COLUMN IF EXISTS `sync_uuid`,
-  DROP COLUMN IF EXISTS `synced_to_vps`,
-  DROP COLUMN IF EXISTS `synced_at`;
+CALL drop_col_if_exists('tablelist', 'sync_uuid');
+CALL drop_col_if_exists('tablelist', 'synced_to_vps');
+CALL drop_col_if_exists('tablelist', 'synced_at');
+
+CALL drop_col_if_exists('bill', 'sync_uuid');
+CALL drop_col_if_exists('bill', 'synced_to_vps');
+CALL drop_col_if_exists('bill', 'synced_at');
+
+DROP PROCEDURE IF EXISTS drop_col_if_exists;
 
 -- FIN DU NETTOYAGE
