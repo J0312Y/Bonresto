@@ -10,11 +10,6 @@
     href="<?php echo base_url((!empty($setting->favicon)?$setting->favicon:'assets/img/icons/favicon.png')) ?>"
     type="image/x-icon">
 
-<!-- PWA Manifest -->
-<link rel="manifest" href="<?php echo base_url('manifest.json'); ?>">
-<meta name="theme-color" content="#e74c3c">
-
-
 <!-- Start Global Mandatory Style -->
 <!-- jquery-ui css -->
 <link href="<?php echo base_url('assets/css/jquery-ui.min.css') ?>" rel="stylesheet" type="text/css" />

@@ -1680,8 +1680,3 @@ foreach ($scan1 as $file) {
 <script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js?v=1.8'); ?>" type="text/javascript">
 </script>
 
-<!-- ── Offline POS ──────────────────────────────────────────────────────── -->
-<script>window.BONRESTO_BASE_URL = '<?php echo base_url(); ?>';</script>
-<script src="<?php echo base_url('application/modules/ordermanage/assets/js/offline-db.js?v=1.0'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('application/modules/ordermanage/assets/js/offline-pos.js?v=4.0'); ?>" type="text/javascript"></script>
-<!-- ── /Offline POS ─────────────────────────────────────────────────────── -->
