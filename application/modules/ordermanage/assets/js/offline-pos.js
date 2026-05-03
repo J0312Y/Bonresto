@@ -257,18 +257,6 @@
             e.stopPropagation();
             e.preventDefault();
 
-            // Check item type — only handle simple items (no add-ons, single variant)
-            var hasaddons    = parseInt((panel.querySelector('input[name=select_addons]')    || {}).value) || 0;
-            var totalvarient = parseInt((panel.querySelector('input[name=select_totalvarient]') || {}).value) || 1;
-            var customqty    = parseInt((panel.querySelector('input[name=select_iscustomeqty]') || {}).value) || 0;
-
-            if (hasaddons !== 0 || totalvarient !== 1 || customqty !== 0) {
-                if (window.toastr) {
-                    toastr.warning('Cet article a des options — connexion requise.', 'Hors-ligne');
-                }
-                return;
-            }
-
             // Extract item data directly from the hidden inputs in the panel
             var pid        = (panel.querySelector('input[name=select_product_id]')    || {}).value || 0;
             var sizeid     = (panel.querySelector('input[name=select_product_size]')   || {}).value || 0;
