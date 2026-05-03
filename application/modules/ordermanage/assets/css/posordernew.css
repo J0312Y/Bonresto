@@ -1061,7 +1061,10 @@ th {
     height: calc(-444px + 100vh) !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    padding-bottom: 20px !important;
+  }
+  /* Espace en bas du contenu scrollable pour ne pas finir sous .fixedclasspos */
+  #addfoodlist {
+    padding-bottom: 200px !important;
   }
   /* Products grid area — shrinks to content, scrolls when many products */
   .leftSidebarPosMain.bg-alice-blue {
