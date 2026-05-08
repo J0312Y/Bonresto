@@ -1293,30 +1293,31 @@ class Android extends MY_Controller
 
         if ($this->form_validation->run() == false) {
             $errors = $this->form_validation->error_array();
+
             return $this->respondWithValidationError($errors);
         } else {
-            $person      = $this->input->post('person');
+            $person = $this->input->post('person');
             $reservedate = $this->input->post('reservedate');
             $reservetime = $this->input->post('reservetime');
-            $endtime     = $this->input->post('endtime');
-            $Name        = $this->input->post('Name');
-            $Phone       = $this->input->post('Phone');
-            $email       = $this->input->post('email');
-            $tableid     = $this->input->post('Tableid');
-            $customerid  = $this->input->post('customer_id');
-            $status      = 1;
-            $udata       = ['status' => 1];
+            $endtime = $this->input->post('endtime');
+            $Name = $this->input->post('Name');
+            $Phone = $this->input->post('Phone');
+            $email = $this->input->post('email');
+            $tableid = $this->input->post('Tableid');
+            $customerid = $this->input->post('customer_id');
+            $status = 1;
+            $udata = ['status' => 1];
 
             $rerturnid = $customerid;
-            $postData  = [
-                'cid'             => $rerturnid,
-                'tableid'         => $tableid,
+            $postData = [
+                'cid' => $rerturnid,
+                'tableid' => $tableid,
                 'person_capicity' => $person,
-                'formtime'        => $reservetime,
-                'totime'          => $endtime,
-                'reserveday'      => $reservedate,
-                'customer_notes'  => $this->input->post('message'),
-                'status'          => 1,
+                'formtime' => $reservetime,
+                'totime' => $endtime,
+                'reserveday' => $reservedate,
+                'customer_notes' => $this->input->post('message'),
+                'status' => 1,
             ];
 
             $this->db->insert('tblreservation', $postData);
@@ -1325,41 +1326,69 @@ class Android extends MY_Controller
             if (!empty($reserveid)) {
                 $this->db->where('tableid', $tableid);
                 $this->db->update('rest_table', $udata);
-                $output          = $categoryIDs          = [];
-                $customerinfo    = $this->db->select("*")->from('customer_info')->where('customer_id', $rerturnid)->get()->row();
+                $output = $categoryIDs = [];
+                $customerinfo = $this->db->select('*')->from('customer_info')->where('customer_id', $rerturnid)->get()->row();
                 $reservationinfo = $this->Api_v2_model->bookinginfo($reserveid);
 
                 if ($reservationinfo != false) {
-                    $output['TableID']        = $reservationinfo->tableid;
-                    $output['TableName']      = $reservationinfo->tablename;
-                    $output['Capacity']       = $reservationinfo->person_capicity;
-                    $output['Reservedate']    = $reservationinfo->reserveday;
-                    $output['Starttime']      = $reservationinfo->formtime;
-                    $output['Endtime']        = $reservationinfo->totime;
+                    $output['TableID'] = $reservationinfo->tableid;
+                    $output['TableName'] = $reservationinfo->tablename;
+                    $output['Capacity'] = $reservationinfo->person_capicity;
+                    $output['Reservedate'] = $reservationinfo->reserveday;
+                    $output['Starttime'] = $reservationinfo->formtime;
+                    $output['Endtime'] = $reservationinfo->totime;
                     $output['customer_notes'] = $reservationinfo->customer_notes;
-                    /*PUSH Notification For Customer*/
-                    $icon    = base_url('assets/img/applogo.png');
-                    $content = [
-                        "en" => "Cher Monsieur / Madame" . $customerinfo->customer_name . " Table:" . $reservationinfo->tablename . " Votre réservation en cours...",
+                    /* PUSH Notification For Customer */
+                    $icon = base_url('assets/img/applogo.png');
+
+                    $fcm_key = 'AIzaSyAJLvrL5S_irADwYWUALu8JNig_GXCQm3w';
+
+                    /**
+                     * $content = [
+                     * "en" => "Cher Monsieur / Madame" . $customerinfo->customer_name . " Table:" . $reservationinfo->tablename . " Votre réservation en cours...",
+                     * ];
+                     * $title = [
+                     * "en" => "Nouvelle réservation",
+                     * ];.
+                     *
+                     * $fields = [
+                     * 'app_id' => '208455d9-baca-4ed2-b6be-12b466a2efbd',
+                     * 'include_player_ids' => [$customerinfo->customer_token],
+                     * 'data' => [
+                     * 'type' => 'order place',
+                     * 'logo' => $icon,
+                     * ],
+                     * 'contents' => $content,
+                     * 'headings' => $title,
+                     * ];
+                     */
+                    $notification = [
+                        'title' => 'Nouvelle réservation',
+                        'body' => 'Cher Monsieur / Madame'.$customerinfo->customer_name.', votre table '.$reservationinfo->tablename.' est en cours de confirmation.',
+                        'icon' => base_url('assets/img/applogo.png'),
+                        'sound' => 'default',
                     ];
-                    $title = [
-                        "en" => "Nouvelle réservation",
-                    ];
+
                     $fields = [
-                        'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-                        'include_player_ids' => [$customerinfo->customer_token],
-                        'data'               => [
-                            'type' => "order place",
-                            'logo' => $icon,
+                        'to' => $customerinfo->customer_token,
+                        'notification' => $notification,
+                        'priority' => 'high',
+                        'data' => [
+                            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+                            'id' => $reserveid,
+                            'type' => 'booking',
                         ],
-                        'contents'           => $content,
-                        'headings'           => $title,
+                    ];
+
+                    $headers = [
+                        'Authorization: key='.$fcm_key,
+                        'Content-Type: application/json',
                     ];
 
                     $fields = json_encode($fields);
-                    $ch     = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                     curl_setopt($ch, CURLOPT_HEADER, false);
                     curl_setopt($ch, CURLOPT_POST, true);
@@ -1367,7 +1396,8 @@ class Android extends MY_Controller
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                     $response = curl_exec($ch);
                     curl_close($ch);
-                    /*Push Notification*/
+
+                    /* Push Notification */
                     return $this->respondWithSuccess('Booking information.', $output);
                 } else {
                     return $this->respondWithError('No reservation.!!!', $output);
@@ -1376,6 +1406,8 @@ class Android extends MY_Controller
         }
     }
 
+
+    
     public function paymentmethod()
     {
         $output        = $categoryIDs        = [];
