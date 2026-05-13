@@ -144,3 +144,9 @@ ERROR - 2026-05-02 19:32:07 --> Severity: Warning --> include(): Failed opening 
 ERROR - 2026-05-02 19:32:08 --> 404 Page Not Found: /index
 ERROR - 2026-05-02 19:32:08 --> Severity: Warning --> include(/var/www/bonresto/api/application//errors/html/error_404.php): Failed to open stream: No such file or directory /var/www/bonresto/api/system/core/Exceptions.php 182
 ERROR - 2026-05-02 19:32:08 --> Severity: Warning --> include(): Failed opening '/var/www/bonresto/api/application//errors/html/error_404.php' for inclusion (include_path='.:/usr/share/php') /var/www/bonresto/api/system/core/Exceptions.php 182
+ERROR - 2026-05-02 20:04:38 --> Severity: error --> Exception: syntax error, unexpected token "===", expecting end of file /var/www/bonresto/api/application/config/routes.php 140
+ERROR - 2026-05-02 20:04:38 --> Severity: error --> Exception: syntax error, unexpected token "===", expecting end of file /var/www/bonresto/api/application/config/routes.php 140
+ERROR - 2026-05-02 20:04:38 --> Severity: error --> Exception: syntax error, unexpected token "===", expecting end of file /var/www/bonresto/api/application/config/routes.php 140
+ERROR - 2026-05-02 20:05:17 --> Severity: error --> Exception: syntax error, unexpected token "===", expecting end of file /var/www/bonresto/api/application/config/routes.php 140
+ERROR - 2026-05-02 20:06:45 --> Severity: error --> Exception: syntax error, unexpected token "===", expecting end of file /var/www/bonresto/api/application/config/routes.php 140
+ERROR - 2026-05-02 20:06:48 --> Severity: error --> Exception: syntax error, unexpected token "===", expecting end of file /var/www/bonresto/api/application/config/routes.php 140

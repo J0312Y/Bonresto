@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
@@ -31,9 +32,9 @@ if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] 
     $protocol = 'http://';
 }
 
-$dirname            = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') . '/';
-$root               = $protocol . $_SERVER['HTTP_HOST'] . $dirname;
-$config["base_url"] = $root;
+$dirname = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/').'/';
+$root = $protocol.$_SERVER['HTTP_HOST'].$dirname;
+$config['base_url'] = $root;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,9 +148,9 @@ $config['subclass_prefix'] = 'MY_';
 |    autoloading (application/config/autoload.php)
  */
 $config['composer_autoload'] = false;
-require FCPATH . 'vendor/autoload.php';
-/*Stripe Payment Gateway*/
-$config['stripe_key']    = 'pk_test_TrVFpmZBkgasCE6WTPkZgMPr00UzVVOqgp';
+require FCPATH.'vendor/autoload.php';
+/* Stripe Payment Gateway */
+$config['stripe_key'] = 'pk_test_TrVFpmZBkgasCE6WTPkZgMPr00UzVVOqgp';
 $config['stripe_secret'] = 'sk_test_ol4WUcbGsqxNJItpeOi1ecDT00k5mDyC2G';
 /*
 |--------------------------------------------------------------------------
@@ -196,9 +197,9 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 |
  */
 $config['enable_query_strings'] = false;
-$config['controller_trigger']   = 'c';
-$config['function_trigger']     = 'm';
-$config['directory_trigger']    = 'd';
+$config['controller_trigger'] = 'c';
+$config['function_trigger'] = 'm';
+$config['directory_trigger'] = 'd';
 
 /*
 |--------------------------------------------------------------------------
@@ -390,12 +391,12 @@ $config['encryption_key'] = 'MySuperEncryptionKEY2017';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
  */
-$config['sess_driver']             = 'files';
-$config['sess_cookie_name']        = 'ci_session';
-$config['sess_expiration']         = 7200;
-$config['sess_save_path']          = APPPATH . 'cache/temp/';
-$config['sess_match_ip']           = false;
-$config['sess_time_to_update']     = 300;
+$config['sess_driver'] = 'files';
+$config['sess_cookie_name'] = 'ci_session';
+$config['sess_expiration'] = 7200;
+$config['sess_save_path'] = APPPATH.'cache/temp/';
+$config['sess_match_ip'] = false;
+$config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = false;
 
 /*
@@ -413,10 +414,10 @@ $config['sess_regenerate_destroy'] = false;
 |       'cookie_httponly') will also affect sessions.
 |
  */
-$config['cookie_prefix']   = '';
-$config['cookie_domain']   = '';
-$config['cookie_path']     = '/';
-$config['cookie_secure']   = false;
+$config['cookie_prefix'] = '';
+$config['cookie_domain'] = '';
+$config['cookie_path'] = '/';
+$config['cookie_secure'] = false;
 $config['cookie_httponly'] = false;
 
 /*
@@ -461,21 +462,19 @@ $config['global_xss_filtering'] = false;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
  */
-$config['csrf_protection']   = true;
-$config['csrf_token_name']   = 'csrf_test_name';
-$config['csrf_cookie_name']  = 'csrf_cookie_name';
-$config['csrf_expire']       = 7200;
-$config['csrf_regenerate']   = false;
+$config['csrf_protection'] = true;
+$config['csrf_token_name'] = 'csrf_test_name';
+$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_expire'] = 7200;
+$config['csrf_regenerate'] = false;
 $config['csrf_exclude_uris'] = ['dashboard/autoupdate/update', 'dashboard/autoupdate/updatenow', 'setting/restauranttable/uploadfile'];
 
-if (isset($_SERVER["REQUEST_URI"])) {
-
-    if ((stripos($_SERVER["REQUEST_URI"], '/v1') === false) && (stripos($_SERVER["REQUEST_URI"], '/v3') === false) && (stripos($_SERVER["REQUEST_URI"], '/android') === false) && (stripos($_SERVER["REQUEST_URI"], '/app') === false) && (stripos($_SERVER["REQUEST_URI"], '/appv1') === false) && (stripos($_SERVER["REQUEST_URI"], '/hungry') === false)) {
+if (isset($_SERVER['REQUEST_URI'])) {
+    if ((stripos($_SERVER['REQUEST_URI'], '/v1') === false) && (stripos($_SERVER['REQUEST_URI'], '/v3') === false) && (stripos($_SERVER['REQUEST_URI'], '/android') === false) && (stripos($_SERVER['REQUEST_URI'], '/app') === false) && (stripos($_SERVER['REQUEST_URI'], '/appv1') === false) && (stripos($_SERVER['REQUEST_URI'], '/hungry') === false)) {
         $config['csrf_protection'] = true;
     } else {
         $config['csrf_protection'] = false;
     }
-
 } else {
     $config['csrf_protection'] = true;
 }
@@ -546,3 +545,6 @@ $config['rewrite_short_tags'] = false;
 | Array:        array('10.0.1.200', '192.168.5.0/24')
  */
 $config['proxy_ips'] = '';
+
+// onesignal key
+$config['oneSignalKey'] = 'os_v2_app_pdwtqs3k2jd5bg2xzfco4sreoakffv5kk5buax5i7o74t7wdmlhv4dbz4mmynltvg5qcbhu5hxlvayaaoiq7lsccnj53xljwpbyophq';
