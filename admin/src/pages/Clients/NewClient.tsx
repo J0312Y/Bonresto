@@ -67,12 +67,12 @@ export default function NewClient() {
 
       <div className="max-w-2xl">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Nouveau client</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Créer un compte restaurant dans le SaaS.</p>
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Nouveau client</h2>
+          <p className="text-sm text-gray-500 text-gray-400">Créer un compte restaurant dans le SaaS.</p>
         </div>
 
         {error && (
-          <div className="mb-4 rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
+          <div className="mb-4 rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-700 bg-red-500/10 text-red-400">
             {error}
           </div>
         )}
@@ -80,8 +80,8 @@ export default function NewClient() {
         <form onSubmit={submit} className="space-y-6">
 
           {/* ── Logo ── */}
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
-            <h3 className="mb-4 text-sm font-semibold text-gray-700 dark:text-gray-200">Logo du restaurant</h3>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 border-gray-800 bg-white/[0.03]">
+            <h3 className="mb-4 text-sm font-semibold text-gray-700 text-gray-200">Logo du restaurant</h3>
             <div className="flex items-center gap-5">
               <div className="relative group cursor-pointer" onClick={() => fileRef.current?.click()}>
                 <ClientAvatar
@@ -97,7 +97,7 @@ export default function NewClient() {
                 <button
                   type="button"
                   onClick={() => fileRef.current?.click()}
-                  className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                  className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 border-gray-700 text-gray-300 hover:bg-gray-800"
                 >
                   Choisir un logo
                 </button>
@@ -113,12 +113,12 @@ export default function NewClient() {
           </div>
 
           {/* ── Infos principales ── */}
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
-            <h3 className="mb-4 text-sm font-semibold text-gray-700 dark:text-gray-200">Informations du restaurant</h3>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 border-gray-800 bg-white/[0.03]">
+            <h3 className="mb-4 text-sm font-semibold text-gray-700 text-gray-200">Informations du restaurant</h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {FIELDS.map((field) => (
                 <div key={field.name} className={field.name === "business_name" || field.name === "address" ? "sm:col-span-2" : ""}>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  <label className="block text-sm font-medium text-gray-700 text-gray-300 mb-1.5">
                     {field.label}
                   </label>
                   <input
@@ -128,7 +128,7 @@ export default function NewClient() {
                     onChange={handle}
                     placeholder={field.placeholder}
                     required={field.required}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 border-gray-700 bg-gray-800 text-white"
                   />
                 </div>
               ))}
@@ -136,15 +136,15 @@ export default function NewClient() {
           </div>
 
           {/* ── Notes ── */}
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
-            <h3 className="mb-4 text-sm font-semibold text-gray-700 dark:text-gray-200">Notes internes</h3>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 border-gray-800 bg-white/[0.03]">
+            <h3 className="mb-4 text-sm font-semibold text-gray-700 text-gray-200">Notes internes</h3>
             <textarea
               name="notes"
               value={form.notes}
               onChange={handle}
               rows={3}
               placeholder="Informations complémentaires, contexte commercial..."
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white resize-none"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 border-gray-700 bg-gray-800 text-white resize-none"
             />
           </div>
 
@@ -160,7 +160,7 @@ export default function NewClient() {
             <button
               type="button"
               onClick={() => navigate("/clients")}
-              className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300"
+              className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 border-gray-700 text-gray-300"
             >
               Annuler
             </button>

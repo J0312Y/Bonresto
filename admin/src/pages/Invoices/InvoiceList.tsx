@@ -15,19 +15,19 @@ function Pagination({ page, total, pageSize, onChange }: { page: number; total: 
   const pages = Math.ceil(total / pageSize);
   if (pages <= 1) return null;
   return (
-    <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 dark:border-gray-800">
+    <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 border-gray-800">
       <span className="text-xs text-gray-400">{total} résultat{total !== 1 ? "s" : ""}</span>
       <div className="flex gap-1">
         <button disabled={page === 1} onClick={() => onChange(page - 1)}
-          className="px-3 py-1 text-xs rounded border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5">‹</button>
+          className="px-3 py-1 text-xs rounded border border-gray-200 border-gray-700 disabled:opacity-40 hover:bg-gray-50 hover:bg-white/5">‹</button>
         {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
           <button key={p} onClick={() => onChange(p)}
-            className={`px-3 py-1 text-xs rounded border ${p === page ? "bg-[#37a000] text-white border-[#37a000]" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/5"}`}>
+            className={`px-3 py-1 text-xs rounded border ${p === page ? "bg-[#37a000] text-white border-[#37a000]" : "border-gray-200 border-gray-700 hover:bg-gray-50 hover:bg-white/5"}`}>
             {p}
           </button>
         ))}
         <button disabled={page === pages} onClick={() => onChange(page + 1)}
-          className="px-3 py-1 text-xs rounded border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5">›</button>
+          className="px-3 py-1 text-xs rounded border border-gray-200 border-gray-700 disabled:opacity-40 hover:bg-gray-50 hover:bg-white/5">›</button>
       </div>
     </div>
   );
@@ -141,13 +141,13 @@ export default function InvoiceList() {
 
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Factures</h2>
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Factures</h2>
           <p className="text-sm text-gray-500">{invoices.length} facture{invoices.length !== 1 ? "s" : ""}</p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => exportInvoices().catch(() => {})}
-            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5"
+            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 border-gray-600 px-3 py-2 text-sm font-medium text-gray-600 text-gray-300 hover:bg-gray-50 hover:bg-white/5"
           >
             ↓ CSV
           </button>
@@ -173,7 +173,7 @@ export default function InvoiceList() {
           placeholder="Rechercher par client, numéro, plan…"
           value={search}
           onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-          className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] border-gray-700 bg-gray-800 text-white"
         />
       </div>
 
@@ -192,7 +192,7 @@ export default function InvoiceList() {
             className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
               filter === key
                 ? "bg-[#37a000] text-white border-[#37a000]"
-                : "bg-white text-gray-600 border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
+                : "bg-white text-gray-600 border-gray-300 hover:bg-gray-50 bg-gray-800 text-gray-300 border-gray-600"
             }`}
           >
             {label}
@@ -200,7 +200,7 @@ export default function InvoiceList() {
         ))}
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
         {loading ? (
           <div className="p-8 text-center text-gray-400">Chargement...</div>
         ) : filtered.length === 0 ? (
@@ -212,26 +212,26 @@ export default function InvoiceList() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800 text-left">
+                <tr className="border-b border-gray-100 border-gray-800 text-left">
                   {["Numéro", "Client", "Plan", "Montant", "Période", "Statut", "Méthode", "Actions"].map((h) => (
-                    <th key={h} className="px-5 py-3 text-xs font-medium text-gray-500 dark:text-gray-400">{h}</th>
+                    <th key={h} className="px-5 py-3 text-xs font-medium text-gray-500 text-gray-400">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+              <tbody className="divide-y divide-gray-100 divide-gray-800">
                 {paginated.map((inv) => (
-                  <tr key={inv.invoice_id} className="hover:bg-gray-50 dark:hover:bg-white/5">
-                    <td className="px-5 py-3 font-mono text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">
+                  <tr key={inv.invoice_id} className="hover:bg-gray-50 hover:bg-white/5">
+                    <td className="px-5 py-3 font-mono text-xs text-gray-600 text-gray-400 whitespace-nowrap">
                       {inv.invoice_number}
                     </td>
                     <td className="px-5 py-3">
-                      <Link to={`/clients/${inv.tenant_id}`} className="font-medium text-gray-800 dark:text-white hover:text-[#37a000] dark:hover:text-[#37a000]">
+                      <Link to={`/clients/${inv.tenant_id}`} className="font-medium text-gray-800 text-white hover:text-[#37a000] hover:text-[#37a000]">
                         {inv.business_name}
                       </Link>
                       <p className="text-xs text-gray-400">{inv.client_email}</p>
                     </td>
                     <td className="px-5 py-3 text-gray-500">{inv.plan_name ?? "—"}</td>
-                    <td className="px-5 py-3 font-semibold text-gray-800 dark:text-white whitespace-nowrap">
+                    <td className="px-5 py-3 font-semibold text-gray-800 text-white whitespace-nowrap">
                       {fmt(inv.amount)}
                     </td>
                     <td className="px-5 py-3 text-gray-500 whitespace-nowrap text-xs">

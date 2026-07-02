@@ -7,51 +7,61 @@ include ('Class/CAccount.php');
 ?>
 
 <?php
-if(isset($_POST['btnSave']))
+$FromDate = '';
+$ToDate = '';
+$PreBalance = 0;
+$TotalCredit = 0;
+$TotalDebit = 0;
+$VNo = '';
+$CountingNo = 1;
+$oResult = null;
+
+if (isset($_POST['btnSave']))
 {
 
-    $oAccount=new CAccount();
-    $oResult=new CResult();
-    $Semester='';
-    $Department='';
+    $oAccount = new CAccount();
+    $oResult = new CResult();
+    $Semester = '';
+    $Department = '';
 
-    if(isset($_POST['cmbSemester']))
-        $Semester=$_POST['cmbSemester'];
-    if(isset($_POST['cmbDepartment']))
-        $Department=$_POST['cmbDepartment'];
-
-    $HeadCode=$_POST['txtCode'];
-    $HeadName=$_POST['txtName'];
-    $FromDate=$_POST['dtpFromDate'];
-    $ToDate=$_POST['dtpToDate'];
-
-
-    $sql="SELECT SUM(Debit) Debit, SUM(Credit) Credit, IsAppove, COAID FROM acc_transaction
-              WHERE VDate < '$FromDate' AND COAID LIKE '$HeadCode%' AND IsAppove =1 ";
-    $sql.="GROUP BY IsAppove, COAID";
-    $oResult=$oAccount->SqlQuery($sql);
-    $PreBalance=0;
-
-    if($oResult->num_rows>0)
-    {
-        $PreBalance=$oResult->row['Debit'];
-        $PreBalance=$PreBalance- $oResult->row['Credit'];
+    if (isset($_POST['cmbSemester'])) {
+        $Semester = $_POST['cmbSemester'];
+    }
+    if (isset($_POST['cmbDepartment'])) {
+        $Department = $_POST['cmbDepartment'];
     }
 
-    $sql="SELECT acc_transaction.VNo, acc_transaction.Vtype, acc_transaction.VDate, acc_transaction.Debit, acc_transaction.Credit, acc_transaction.IsAppove, acc_transaction.COAID, acc_coa.HeadName, acc_coa.PHeadName, acc_coa.HeadType, acc_transaction.Narration 
+    $HeadCode = $_POST['txtCode'];
+    $HeadName = $_POST['txtName'];
+    $FromDate = $_POST['dtpFromDate'];
+    $ToDate = $_POST['dtpToDate'];
+
+    $sql = "SELECT SUM(Debit) Debit, SUM(Credit) Credit, IsAppove, COAID FROM acc_transaction
+              WHERE VDate < '$FromDate' AND COAID LIKE '$HeadCode%' AND IsAppove =1 ";
+    $sql .= "GROUP BY IsAppove, COAID";
+    $oResult = $oAccount->SqlQuery($sql);
+    $PreBalance = 0;
+
+    if ($oResult && isset($oResult->num_rows) && $oResult->num_rows > 0) {
+        $PreBalance = (float) $oResult->row['Debit'];
+        $PreBalance -= (float) $oResult->row['Credit'];
+    }
+
+    $sql = "SELECT acc_transaction.VNo, acc_transaction.Vtype, acc_transaction.VDate, acc_transaction.Debit, acc_transaction.Credit, acc_transaction.IsAppove, acc_transaction.COAID, acc_coa.HeadName, acc_coa.PHeadName, acc_coa.HeadType, acc_transaction.Narration 
 		FROM acc_transaction INNER JOIN acc_coa ON acc_transaction.COAID = acc_coa.HeadCode
         WHERE acc_transaction.IsAppove =1 AND acc_transaction.VDate BETWEEN '$FromDate' AND '$ToDate' AND acc_transaction.COAID LIKE '$HeadCode%' ";
 
- 
-  
-    $sql.="GROUP BY acc_transaction.VNo, acc_transaction.Vtype, acc_transaction.VDate, acc_transaction.IsAppove, acc_transaction.COAID, acc_coa.HeadName, acc_coa.PHeadName, acc_coa.HeadType, acc_transaction.Narration
+    $sql .= "GROUP BY acc_transaction.VNo, acc_transaction.Vtype, acc_transaction.VDate, acc_transaction.IsAppove, acc_transaction.COAID, acc_coa.HeadName, acc_coa.PHeadName, acc_coa.HeadType, acc_transaction.Narration
                HAVING SUM(acc_transaction.Debit)-SUM(acc_transaction.Credit)<>0
                ORDER BY  acc_transaction.VDate, acc_transaction.VNo";
 
-    $oResult=$oAccount->SqlQuery($sql);
- 
+    $oResult = $oAccount->SqlQuery($sql);
 
-   
+    if (!$oResult) {
+        $oResult = new stdClass();
+        $oResult->num_rows = 0;
+        $oResult->rows = array();
+    }
 }
 ?>
 
@@ -139,11 +149,8 @@ if(isset($_POST['btnSave']))
                             <td align="right" ><strong><?php echo display('balance')?></strong></td>
                         </tr>
                         <?php
-                        $TotalCredit=0;
-                        $TotalDebit=0;
-                        $VNo="";
-                        $CountingNo=1;
-                        for($i=0;$i<$oResult->num_rows;$i++)
+                        $totalRows = ($oResult && isset($oResult->num_rows)) ? (int) $oResult->num_rows : 0;
+                        for($i=0; $i < $totalRows; $i++)
                         {
                             if($i&1)
                                 $bg="#F8F8F8";
@@ -191,13 +198,15 @@ if(isset($_POST['btnSave']))
                                 ?>
                                 <td align="justify" bgcolor="<?php echo $bg; ?>"><?php echo $oResult->rows[$i]['HeadName'];?></td>
                                 <td align="right" bgcolor="<?php echo $bg; ?>"><?php
-                                    $TotalDebit += $oResult->rows[$i]['Debit'];
-                                    $PreBalance += $oResult->rows[$i]['Debit'];
-                                    echo number_format($oResult->rows[$i]['Debit'],2,'.',',');?></td>
+                                    $debit = isset($oResult->rows[$i]['Debit']) ? (float) $oResult->rows[$i]['Debit'] : 0;
+                                    $credit = isset($oResult->rows[$i]['Credit']) ? (float) $oResult->rows[$i]['Credit'] : 0;
+                                    $TotalDebit += $debit;
+                                    $PreBalance += $debit;
+                                    echo number_format($debit,2,'.',',');?></td>
                                 <td  align="right" bgcolor="<?php echo $bg; ?>"><?php
-                                    $TotalCredit += $oResult->rows[$i]['Credit'];
-                                    $PreBalance -= $oResult->rows[$i]['Credit'];
-                                    echo number_format($oResult->rows[$i]['Credit'],2,'.',',');?></td>
+                                    $TotalCredit += $credit;
+                                    $PreBalance -= $credit;
+                                    echo number_format($credit,2,'.',',');?></td>
                                 <td align="right" bgcolor="<?php echo $bg; ?>"><?php echo number_format($PreBalance,2,'.',','); ?></td>
                             </tr>
                             <?php

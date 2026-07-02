@@ -81,12 +81,12 @@ export default function ClientRevenueChart({ data }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6">
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 border-gray-800 bg-white/[0.03] sm:px-6 sm:pt-6">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+        <h3 className="text-lg font-semibold text-gray-800 text-white/90">
           Revenus mensuels par restaurant
         </h3>
-        <span className="text-sm text-gray-400 dark:text-gray-500">6 mois</span>
+        <span className="text-sm text-gray-400 text-gray-500">6 mois</span>
       </div>
 
       {series.length === 0 ? (

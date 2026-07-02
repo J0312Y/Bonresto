@@ -718,76 +718,9 @@ class V1 extends MY_Controller
 				'issuer_name'	        =>	""
 			);
 
-			/*Push Notification*/
-			$senderid = array();
-			$kinfo = $this->kitcheninfo($orderid);
-			foreach ($kinfo as $kitcheninfo) {
-				$allemployee = $this->db->select('user.*,tbl_assign_kitchen.userid')->from('tbl_assign_kitchen')->join('user', 'user.id=tbl_assign_kitchen.userid', 'left')->where('tbl_assign_kitchen.kitchen_id', $kitcheninfo->kitchenid)->get()->result();
-				foreach ($allemployee as $mytoken) {
-					$senderid[] = $mytoken->waiter_kitchenToken;
-				}
-			}
-			$newmsg = array(
-				'tag'						=> "Nouvelle commande passée",
-				'orderid'					=> $orderid,
-				'amount'					=> $Grandtotal
-			);
-			$message = json_encode($newmsg);
-			define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-			$registrationIds = $senderid;
-			$msg = array(
-				'message' 					=> "Numéro de commande : " . $orderid . ", Montant:" . number_format($gtotal, 2),
-				'title'						=> "Nouvelle commande passée",
-
-				'subtitle'					=> "TSET",
-				'tickerText'				=> "TSET",
-				'vibrate'					=> 1,
-				'sound'						=> 1,
-				'largeIcon'					=> "TSET",
-				'smallIcon'					=> "TSET"
-			);
-			$fields2 = array(
-				'registration_ids' 	=> $registrationIds,
-				'data'			=> $msg
-			);
-
-			$headers2 = array(
-				'Authorization: key=' . API_ACCESS_KEY,
-				'Content-Type: application/json'
-			);
-
-			$ch2 = curl_init();
-			curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-			curl_setopt($ch2, CURLOPT_POST, true);
-			curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-			curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-			$result2 = curl_exec($ch2);
-			curl_close($ch2);
-
-			/*PUSH Notification For Waiter ios*/
-			$contentsmsg = "numéro de commande: " . $orderid . " Montant de la commande:" . number_format($gtotal, 2);
-			$contentstitle = "Nouvelle commande passée";
-			$curlios = curl_init();
-			curl_setopt_array($curlios, array(
-				CURLOPT_URL => 'https://onesignal.com/api/v1/notifications',
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_ENCODING => '',
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST => 'POST',
-				CURLOPT_POSTFIELDS => '{"app_id": "4e1150f3-03c8-4de3-ab57-79ca27da1b8e","included_segments": ["All"],"data": {"type": "order place"},"contents": {"en": "' . $contentsmsg . '"},"headings": {"en": "' . $contentstitle . '"}}',
-				CURLOPT_HTTPHEADER => array(
-					'Content-Type: application/json',
-					'Authorization: Basic ZTUwMmM2OWEtM2MxYy00NTY2LWJiYWUtZDRkODE4MjNhMDUx'
-				),
-			));
-			$response = curl_exec($curlios);
-			curl_close($curlios);
-			/*Push Notification*/
+			/* Notification commande passée */
+			$this->load->library('notification');
+			$this->notification->notify_staff_new_order($orderid, $gtotal);
 
 			if (!empty($orderid)) {
 				return $this->respondWithSuccess('Commande passée avec succès.', $output);
@@ -1579,97 +1512,16 @@ class V1 extends MY_Controller
 			} else {
 				$updatetData['waiter_id']    			= $waiterid;
 				$this->Api_v1_model->update_date('customer_order', $updatetData, 'order_id', $orderid);
-				/*Push Notification*/
+				/* Notification staff + commande acceptée */
+				$this->load->library('notification');
+				$this->notification->notify_staff_new_order($orderid, $orderinfo->totalamount);
 
-				$senderid = array();
-
-				$kitcheninfo = $this->db->select('order_menu.*,item_foods.ProductsID,item_foods.kitchenid')->from('order_menu')->join('item_foods', 'order_menu.menu_id=item_foods.ProductsID', 'left')->where('order_menu.order_id', $orderid)->group_by('item_foods.kitchenid')->get()->result();
-				foreach ($kitcheninfo as $kitchenid) {
-					$allemployee = $this->db->select('user.*,tbl_assign_kitchen.userid')->from('tbl_assign_kitchen')->join('user', 'user.id=tbl_assign_kitchen.userid', 'left')->where('tbl_assign_kitchen.kitchen_id', $kitchenid->kitchenid)->get()->result();
-					foreach ($allemployee as $mytoken) {
-						$senderid[] = $mytoken->waiter_kitchenToken;
-					}
-				}
-				$newmsg = array(
-					'tag'						=> "Nouvelle commande passée",
-					'orderid'					=> $orderid,
-					'amount'					=> $orderinfo->totalamount
-				);
-				$message = json_encode($newmsg);
-				define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-				$registrationIds = $senderid;
-				$msg = array(
-					'message' 					=> "Numéro de commande : " . $orderid . ", Montant :" . $orderinfo->totalamount,
-					'title'						=> "Nouvelle commande passée",
-					'subtitle'					=> "TSET",
-					'tickerText'				=> "TSET",
-					'vibrate'					=> 1,
-					'sound'						=> 1,
-					'largeIcon'					=> "TSET",
-					'smallIcon'					=> "TSET"
-				);
-				$fields2 = array(
-					'registration_ids' 	=> $registrationIds,
-					'data'			=> $msg
-				);
-
-				$headers2 = array(
-					'Authorization: key=' . API_ACCESS_KEY,
-					'Content-Type: application/json'
-				);
-
-				$ch2 = curl_init();
-				curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-				curl_setopt($ch2, CURLOPT_POST, true);
-				curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-				curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-				curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-				$result2 = curl_exec($ch2);
-
-				curl_close($ch2);
-				/*End Notification*/
 				$updatetData = array('nofification' => 1, 'orderacceptreject' => 1, 'order_status' => 2);
 				$this->db->where('order_id', $orderid);
 				$this->db->update('customer_order', $updatetData);
-				/*PUSH Notification For Customer*/
+
 				$customerinfo = $this->db->select("*")->from('customer_info')->where('customer_id', $orderinfo->customer_id)->get()->row();
-				$bodymsg = "Order ID:" . $orderid . " Order amount:" . $orderinfo->totalamount;
-				$icon = base_url('assets/img/applogo.png');
-				$fields3 = array(
-					'to' => $customerinfo->customer_token,
-					'data' => array(
-						'title' => "Votre commande est acceptée",
-						'body' => $bodymsg,
-						'image' => $icon,
-						'media_type' => "image",
-						'message' => "test",
-						"action" => "1",
-					),
-					'notification' => array(
-						'sound' => "default",
-						'title' => "Votre commande est acceptée",
-						'body' => $bodymsg,
-						'image' => $icon,
-					)
-				);
-				$post_data3 = json_encode($fields3);
-				$url = "https://fcm.googleapis.com/fcm/send";
-				$ch3  = curl_init($url);
-				curl_setopt($ch3, CURLOPT_FAILONERROR, TRUE);
-				curl_setopt($ch3, CURLOPT_RETURNTRANSFER, TRUE);
-				curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);
-				curl_setopt($ch3, CURLOPT_POSTFIELDS, $post_data3);
-				curl_setopt(
-					$ch3,
-					CURLOPT_HTTPHEADER,
-					array(
-						'Authorization: Key=AAAAmN4ekRg:APA91bHDg_gr99QlnGtHD_exg-QuhRc_45Xluti4dmaNGSD0jfuXi3-3M_wv01TihrHlUAWUDI-dlJqr-_wEHeYigIXSjEbsXJfxI4J9x7ugZDOBv07FhAlWIdDvl8zWcKoeeqqPT9Gw',
-						'Content-Type: application/json'
-					)
-				);
-				$result3 = curl_exec($ch3);
-				curl_close($ch3);
+				$this->notification->order_accepted($orderid, $orderinfo->totalamount, $customerinfo->customer_token);
 				return $this->respondWithSuccess('Commande Attribuer au Serveur', $output);
 			}
 		}

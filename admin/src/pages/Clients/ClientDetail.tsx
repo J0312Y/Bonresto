@@ -228,10 +228,10 @@ export default function ClientDetail() {
             >
               ← Retour aux clients
             </button>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">
+            <h2 className="text-2xl font-bold text-gray-800 text-white/90">
               {client.business_name}
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-500 text-gray-400">
               {client.email} · {client.country}
             </p>
             {client.logo_url && (
@@ -254,14 +254,14 @@ export default function ClientDetail() {
           {client.is_active ? (
             <button
               onClick={handleSuspend}
-              className="rounded-xl border border-red-300 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/20"
+              className="rounded-xl border border-red-300 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 border-red-800 text-red-400 hover:bg-red-900/20"
             >
               Suspendre
             </button>
           ) : (
             <button
               onClick={handleReactivate}
-              className="rounded-xl border border-green-300 px-3 py-1.5 text-sm text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-400 dark:hover:bg-green-900/20"
+              className="rounded-xl border border-green-300 px-3 py-1.5 text-sm text-green-700 hover:bg-green-50 border-green-700 text-green-400 hover:bg-green-900/20"
             >
               Réactiver
             </button>
@@ -284,10 +284,10 @@ export default function ClientDetail() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-white/[0.03]"
+                className="rounded-2xl border border-gray-200 bg-white p-4 border-gray-800 bg-white/[0.03]"
               >
-                <p className="text-xs text-gray-500 dark:text-gray-400">{stat.label}</p>
-                <p className="mt-1 text-2xl font-bold text-gray-800 dark:text-white/90">
+                <p className="text-xs text-gray-500 text-gray-400">{stat.label}</p>
+                <p className="mt-1 text-2xl font-bold text-gray-800 text-white/90">
                   {stat.value}
                 </p>
               </div>
@@ -296,9 +296,9 @@ export default function ClientDetail() {
         )}
 
         {/* ── Info panel ── */}
-        <div className="lg:col-span-3 rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-          <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-5 py-4">
-            <h3 className="font-semibold text-gray-700 dark:text-gray-200">Informations du restaurant</h3>
+        <div className="lg:col-span-3 rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
+          <div className="flex items-center justify-between border-b border-gray-100 border-gray-800 px-5 py-4">
+            <h3 className="font-semibold text-gray-700 text-gray-200">Informations du restaurant</h3>
             <div className="flex items-center gap-3">
               {infoMsg && (
                 <span className={`text-xs px-3 py-1 rounded-full ${
@@ -331,22 +331,22 @@ export default function ClientDetail() {
                 { label: "Site web",            key: "website",       type: "url"  },
               ].map(({ label, key, type }) => (
                 <div key={key} className={key === "business_name" || key === "address" ? "sm:col-span-2" : ""}>
-                  <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{label}</label>
+                  <label className="block text-xs font-medium text-gray-500 text-gray-400 mb-1">{label}</label>
                   <input
                     type={type}
                     value={(infoForm[key as keyof typeof infoForm] as string) ?? ""}
                     onChange={(e) => setInfoForm((f) => ({ ...f, [key]: e.target.value }))}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] dark:border-gray-700 dark:bg-white/5 dark:text-gray-300"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] border-gray-700 bg-white/5 text-gray-300"
                   />
                 </div>
               ))}
               <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Notes internes</label>
+                <label className="block text-xs font-medium text-gray-500 text-gray-400 mb-1">Notes internes</label>
                 <textarea
                   value={(infoForm.notes as string) ?? ""}
                   onChange={(e) => setInfoForm((f) => ({ ...f, notes: e.target.value }))}
                   rows={3}
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] dark:border-gray-700 dark:bg-white/5 dark:text-gray-300 resize-none"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] border-gray-700 bg-white/5 text-gray-300 resize-none"
                 />
               </div>
             </div>
@@ -354,30 +354,30 @@ export default function ClientDetail() {
         </div>
 
         {/* Subscription panel */}
-        <div className="lg:col-span-1 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
-          <h3 className="mb-4 font-semibold text-gray-700 dark:text-gray-200">Abonnement</h3>
+        <div className="lg:col-span-1 rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03]">
+          <h3 className="mb-4 font-semibold text-gray-700 text-gray-200">Abonnement</h3>
 
           {sub ? (
             <dl className="mb-4 space-y-2 text-sm">
               <div className="flex justify-between">
                 <dt className="text-gray-500">Plan</dt>
-                <dd className="font-medium text-gray-800 dark:text-white/80">{sub.plan_name}</dd>
+                <dd className="font-medium text-gray-800 text-white/80">{sub.plan_name}</dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-gray-500">Début</dt>
-                <dd className="text-gray-700 dark:text-gray-300">
+                <dd className="text-gray-700 text-gray-300">
                   {new Date(sub.start_date).toLocaleDateString("fr-FR")}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-gray-500">Fin</dt>
-                <dd className="text-gray-700 dark:text-gray-300">
+                <dd className="text-gray-700 text-gray-300">
                   {new Date(sub.end_date).toLocaleDateString("fr-FR")}
                 </dd>
               </div>
               <div className="flex justify-between">
                 <dt className="text-gray-500">Grâce jusqu'au</dt>
-                <dd className="text-gray-700 dark:text-gray-300">
+                <dd className="text-gray-700 text-gray-300">
                   {new Date(sub.grace_end_date).toLocaleDateString("fr-FR")}
                 </dd>
               </div>
@@ -392,7 +392,7 @@ export default function ClientDetail() {
               <select
                 value={planId}
                 onChange={(e) => setPlanId(Number(e.target.value))}
-                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 dark:border-gray-700 dark:bg-white/5 dark:text-gray-300"
+                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 border-gray-700 bg-white/5 text-gray-300"
               >
                 <option value={0}>-- Choisir --</option>
                 {plans.map((p) => (
@@ -410,7 +410,7 @@ export default function ClientDetail() {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 dark:border-gray-700 dark:bg-white/5 dark:text-gray-300"
+                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 border-gray-700 bg-white/5 text-gray-300"
               />
             </div>
             <button
@@ -424,8 +424,8 @@ export default function ClientDetail() {
             {saveMsg && (
               <p className={`mt-2 text-xs rounded-lg px-3 py-2 ${
                 saveMsg.startsWith("Erreur")
-                  ? "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                  : "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400"
+                  ? "bg-red-50 text-red-600 bg-red-900/20 text-red-400"
+                  : "bg-green-50 text-green-700 bg-green-900/20 text-green-400"
               }`}>
                 {saveMsg}
               </p>
@@ -434,28 +434,28 @@ export default function ClientDetail() {
         </div>
 
         {/* Activity log */}
-        <div className="lg:col-span-2 rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-          <div className="border-b border-gray-100 px-5 py-4 dark:border-gray-800">
-            <h3 className="font-semibold text-gray-700 dark:text-gray-200">
+        <div className="lg:col-span-2 rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
+          <div className="border-b border-gray-100 px-5 py-4 border-gray-800">
+            <h3 className="font-semibold text-gray-700 text-gray-200">
               Activité récente
             </h3>
           </div>
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader className="border-b border-gray-100 dark:border-gray-800">
+              <TableHeader className="border-b border-gray-100 border-gray-800">
                 <TableRow>
-                  <TableCell isHeader className="py-3 px-5 font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                  <TableCell isHeader className="py-3 px-5 font-medium text-gray-500 text-theme-xs text-gray-400">
                     Date
                   </TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">
                     Action
                   </TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">
                     Détails
                   </TableCell>
                 </TableRow>
               </TableHeader>
-              <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
+              <TableBody className="divide-y divide-gray-100 divide-gray-800">
                 {activity.map((log) => (
                   <TableRow key={log.log_id}>
                     <TableCell className="py-3 px-5 text-xs text-gray-400 whitespace-nowrap">
@@ -466,10 +466,10 @@ export default function ClientDetail() {
                         minute: "2-digit",
                       })}
                     </TableCell>
-                    <TableCell className="py-3 text-sm font-medium text-gray-700 dark:text-gray-200">
+                    <TableCell className="py-3 text-sm font-medium text-gray-700 text-gray-200">
                       {log.action}
                     </TableCell>
-                    <TableCell className="py-3 text-sm text-gray-500 dark:text-gray-400">
+                    <TableCell className="py-3 text-sm text-gray-500 text-gray-400">
                       {log.description}
                     </TableCell>
                   </TableRow>
@@ -487,9 +487,9 @@ export default function ClientDetail() {
         </div>
 
         {/* ── Factures ── */}
-        <div className="lg:col-span-3 rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-          <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-5 py-4">
-            <h3 className="font-semibold text-gray-700 dark:text-gray-200">
+        <div className="lg:col-span-3 rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
+          <div className="flex items-center justify-between border-b border-gray-100 border-gray-800 px-5 py-4">
+            <h3 className="font-semibold text-gray-700 text-gray-200">
               Factures
               {invoices.length > 0 && (
                 <span className="ml-2 text-xs font-normal text-gray-400">({invoices.length})</span>
@@ -509,17 +509,17 @@ export default function ClientDetail() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-100 dark:border-gray-800 text-left">
+                  <tr className="border-b border-gray-100 border-gray-800 text-left">
                     {["Numéro", "Montant", "Période", "Statut", "Méthode", ""].map((h) => (
                       <th key={h} className="px-5 py-3 text-xs font-medium text-gray-500">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                <tbody className="divide-y divide-gray-100 divide-gray-800">
                   {invoices.map((inv) => (
-                    <tr key={inv.invoice_id} className="hover:bg-gray-50 dark:hover:bg-white/5">
+                    <tr key={inv.invoice_id} className="hover:bg-gray-50 hover:bg-white/5">
                       <td className="px-5 py-3 font-mono text-xs text-gray-500">{inv.invoice_number}</td>
-                      <td className="px-5 py-3 font-semibold text-gray-800 dark:text-white">{fmt(inv.amount)}</td>
+                      <td className="px-5 py-3 font-semibold text-gray-800 text-white">{fmt(inv.amount)}</td>
                       <td className="px-5 py-3 text-xs text-gray-400">
                         {inv.period_start && inv.period_end
                           ? `${new Date(inv.period_start).toLocaleDateString("fr-FR")} → ${new Date(inv.period_end).toLocaleDateString("fr-FR")}`

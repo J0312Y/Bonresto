@@ -257,38 +257,9 @@ class Reservation extends MX_Controller {
                         $this->email->subject($subject);
                         $this->email->message($htmlContent);
                         $this->email->send();
-								 /*PUSH Notification For Customer*/
-	  				$mymsg="New Reservation";
-				$bodymsg="Dear Sir/Madam ".$customerinfo->customer_name." Table:".$reservationinfo->tablename." is Reserved On ".$newdate." ".$this->input->post('bookfromtime',true);
-			  $icon=base_url('assets/img/applogo.png');
-            $content = array(
-                "en" => $bodymsg,
-            );
-            $title = array(
-                "en" => $mymsg,
-            );
-            $fields = array(
-                'app_id' => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-                'include_player_ids' => array($customerinfo->customer_token), 
-                'data' => array(
-                'type' => "order place",
-                'logo' => $icon
-                ),
-                'contents' => $content,
-                'headings' => $title,
-            );
-
-            $fields = json_encode($fields);
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, FALSE);
-            curl_setopt($ch, CURLOPT_POST, TRUE);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-            $response = curl_exec($ch);
-            curl_close($ch);
+								 /* Notification réservation confirmée */
+				$this->load->library('notification');
+				$this->notification->reservation_confirmed($customerinfo->customer_name, $reservationinfo->tablename, $customerinfo->customer_token);
 	  
 		  }
 	  

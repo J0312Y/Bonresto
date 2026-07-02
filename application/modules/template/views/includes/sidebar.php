@@ -94,6 +94,11 @@
                 "method"     => "soundsetting",
                 "permission" => "read",
             ],
+            "waiter_calls"      => [
+                "controller" => "order",
+                "method"     => "waitercalls",
+                "permission" => "read",
+            ],
         ];
         $HmvcMenu2["reservation"] = [
             "icon"              => "<i class='fa fa-tags' aria-hidden='true'></i>",

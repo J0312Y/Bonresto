@@ -39,22 +39,22 @@ export default function SubscriptionsReport() {
       <PageMeta title="Rapport Abonnements — Bonresto SaaS" description="" />
       <div className="space-y-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white/90">Rapport des abonnements</h2>
+          <h2 className="text-xl font-semibold text-gray-800 text-white/90">Rapport des abonnements</h2>
           <p className="text-sm text-gray-500 mt-1">État des abonnements par client</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03]">
             <p className="text-xs text-gray-500 mb-1">Abonnements actifs</p>
             <p className="text-2xl font-bold text-green-600">{stats.active_subscriptions}</p>
           </div>
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03]">
             <p className="text-xs text-gray-500 mb-1">Expirent dans 7 jours</p>
-            <p className={`text-2xl font-bold ${stats.expiring_soon > 0 ? "text-yellow-600" : "text-gray-800 dark:text-white/90"}`}>
+            <p className={`text-2xl font-bold ${stats.expiring_soon > 0 ? "text-yellow-600" : "text-gray-800 text-white/90"}`}>
               {stats.expiring_soon}
             </p>
           </div>
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03]">
             <p className="text-xs text-gray-500 mb-1">Taux d'activation</p>
             <p className="text-2xl font-bold text-brand-500">
               {stats.total_clients > 0 ? Math.round((stats.active_subscriptions / stats.total_clients) * 100) : 0}%
@@ -65,28 +65,28 @@ export default function SubscriptionsReport() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <PlansBreakdown stats={stats} />
 
-          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
             <div className="px-6 pt-5 pb-3">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-white/90">Statuts par client</h3>
+              <h3 className="text-base font-semibold text-gray-800 text-white/90">Statuts par client</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="border-y border-gray-100 dark:border-gray-800">
+                <thead className="border-y border-gray-100 border-gray-800">
                   <tr>
                     {["Restaurant","Plan","Début","Fin","Statut"].map((h) => (
-                      <th key={h} className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400">{h}</th>
+                      <th key={h} className="px-4 py-3 text-left text-xs font-medium text-gray-500 text-gray-400">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                <tbody className="divide-y divide-gray-100 divide-gray-800">
                   {clients.map((c) => (
-                    <tr key={c.client_id} className="hover:bg-gray-50 dark:hover:bg-white/[0.02]">
-                      <td className="px-4 py-3 font-medium text-gray-800 dark:text-white/90">{c.business_name}</td>
-                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{c.subscription?.plan_name ?? "—"}</td>
-                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
+                    <tr key={c.client_id} className="hover:bg-gray-50 hover:bg-white/[0.02]">
+                      <td className="px-4 py-3 font-medium text-gray-800 text-white/90">{c.business_name}</td>
+                      <td className="px-4 py-3 text-gray-500 text-gray-400">{c.subscription?.plan_name ?? "—"}</td>
+                      <td className="px-4 py-3 text-gray-500 text-gray-400">
                         {c.subscription?.start_date ? new Date(c.subscription.start_date).toLocaleDateString("fr-FR") : "—"}
                       </td>
-                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
+                      <td className="px-4 py-3 text-gray-500 text-gray-400">
                         {c.subscription?.end_date ? new Date(c.subscription.end_date).toLocaleDateString("fr-FR") : "—"}
                       </td>
                       <td className="px-4 py-3">

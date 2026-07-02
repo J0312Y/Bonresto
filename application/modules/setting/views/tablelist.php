@@ -3,7 +3,8 @@
 <a href="<?php echo base_url()?>setting/restauranttable/floorlist" class="btn btn-primary btn-md" ><i class="fa fa-plus-circle" aria-hidden="true"></i>
 <?php echo display('add_floor')?></a> 
 <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal"  ><i class="fa fa-plus-circle" aria-hidden="true"></i>
-<?php echo display('add_new_table')?></button> 
+<?php echo display('add_new_table')?></button>
+<a href="<?php echo base_url('setting/restauranttable/generateallqr'); ?>" class="btn btn-success btn-md" onclick="return confirm('Generate QR codes for all tables?')"><i class="fa fa-qrcode" aria-hidden="true"></i> Generate All QR</a>
 <?php endif; ?>
 
 </div>
@@ -175,6 +176,7 @@
                             <th><?php echo display('table_name') ?></th>
                             <th><?php echo display('capacity') ?></th>
                             <th><?php echo display('icon') ?></th>
+                            <th>QR Code</th>
                             <th><?php echo display('action') ?></th> 
                            
                         </tr>
@@ -188,6 +190,13 @@
                                     <td><?php echo $table->tablename; ?></td>
                                     <td><?php echo $table->person_capicity; ?></td>
                                     <td><img src="<?php echo base_url(!empty($table->table_icon)?$table->table_icon:'assets/img/icons/table/default.jpg'); ?>" class="img-thumbnail tablelist-img"/></td>
+                                    <td class="text-center">
+                                    <?php if (!empty($table->qr_code) && file_exists(FCPATH . 'uploads/qrcodes/' . $table->qr_code)) { ?>
+                                        <img src="<?php echo base_url('uploads/qrcodes/' . $table->qr_code); ?>" alt="QR" width="50" height="50" style="cursor:pointer" onclick="showQrModal('<?php echo $table->tableid; ?>', '<?php echo addslashes($table->tablename); ?>', '<?php echo base_url('uploads/qrcodes/' . $table->qr_code); ?>')"/>
+                                    <?php } else { ?>
+                                        <a href="<?php echo base_url('setting/restauranttable/generateqr/' . $table->tableid); ?>" class="btn btn-warning btn-xs"><i class="fa fa-qrcode"></i> Generate</a>
+                                    <?php } ?>
+                                    </td>
                                    <td class="center">
                                     <?php if($this->permission->method('setting','update')->access()): ?>
                                     <input name="url" type="hidden" id="url_<?php echo $table->tableid; ?>" value="<?php echo base_url("setting/restauranttable/updateintfrm") ?>" />
@@ -209,6 +218,26 @@
             </div>
         </div>
         
+    </div>
+</div>
+<!-- QR Code Modal -->
+<div id="qrmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <strong>QR Code - Table <span id="qr-table-name"></span></strong>
+            </div>
+            <div class="modal-body text-center" id="qr-print-area">
+                <img id="qr-modal-img" src="" alt="QR Code" style="width:100%;max-width:300px;"/>
+                <p class="mt-2"><strong>Table: <span id="qr-table-name2"></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <a id="qr-download-btn" href="#" class="btn btn-primary"><i class="fa fa-download"></i> Download</a>
+                <button type="button" class="btn btn-info" onclick="printQr()"><i class="fa fa-print"></i> Print</button>
+                <a id="qr-regenerate-btn" href="#" class="btn btn-warning"><i class="fa fa-refresh"></i> Regenerate</a>
+            </div>
+        </div>
     </div>
 </div>
 <script src="<?php echo base_url('application/modules/setting/assets/js/tablelist_script.js'); ?>" type="text/javascript"></script>

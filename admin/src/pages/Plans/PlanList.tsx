@@ -197,7 +197,7 @@ export default function PlanList() {
 
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Plans d'abonnement</h2>
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Plans d'abonnement</h2>
           <p className="text-sm text-gray-500">{plans.length} plan{plans.length !== 1 ? "s" : ""} configuré{plans.length !== 1 ? "s" : ""}</p>
         </div>
         <button onClick={openCreate} className="rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600">
@@ -207,9 +207,9 @@ export default function PlanList() {
 
       {/* ── Form ────────────────────────────────────────────────── */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
+        <form onSubmit={handleSubmit} className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 border-gray-800 bg-white/[0.03]">
           <div className="flex items-center justify-between mb-5">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+            <h3 className="text-lg font-semibold text-gray-800 text-white/90">
               {editPlan ? `Modifier "${editPlan.plan_name}"` : "Nouveau plan"}
             </h3>
             <button type="button" onClick={() => setShowForm(false)} className="text-xs text-gray-400 hover:text-gray-600">✕ Annuler</button>
@@ -218,65 +218,65 @@ export default function PlanList() {
           {/* Basic info */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-6">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Nom du plan</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Nom du plan</label>
               <input
                 required value={form.plan_name}
                 onChange={(e) => setForm((f) => ({ ...f, plan_name: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                 placeholder="Basic, Pro, Enterprise..."
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Cycle de facturation</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Cycle de facturation</label>
               <select
                 value={form.billing_cycle}
                 onChange={(e) => setForm((f) => ({ ...f, billing_cycle: e.target.value as "monthly" | "annual" }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
               >
                 <option value="monthly">Mensuel</option>
                 <option value="annual">Annuel</option>
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">
                 Prix (FCFA / {form.billing_cycle === "annual" ? "an" : "mois"})
               </label>
               <input
                 required type="number" min="0" value={form.price}
                 onChange={(e) => setForm((f) => ({ ...f, price: +e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                 placeholder="0"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Max tables (0 = illimité)</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Max tables (0 = illimité)</label>
               <input
                 type="number" min="0" value={form.max_tables}
                 onChange={(e) => setForm((f) => ({ ...f, max_tables: +e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Max utilisateurs (0 = illimité)</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Max utilisateurs (0 = illimité)</label>
               <input
                 type="number" min="0" value={form.max_users}
                 onChange={(e) => setForm((f) => ({ ...f, max_users: +e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
             </div>
           </div>
 
           {/* Module selector */}
           <div>
-            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Modules inclus</p>
+            <p className="text-sm font-semibold text-gray-700 text-gray-300 mb-3">Modules inclus</p>
             <div className="space-y-5">
               {MODULE_GROUPS.map((group) => {
                 const nonCore = group.modules.filter((m) => !ALWAYS_ON.includes(m.key));
                 const allChecked = nonCore.every((m) => !!form.features[m.key]);
                 return (
-                  <div key={group.group} className="rounded-xl border border-gray-100 dark:border-gray-800 p-4">
+                  <div key={group.group} className="rounded-xl border border-gray-100 border-gray-800 p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 text-gray-400">
                         {group.group}
                       </p>
                       {!group.always && nonCore.length > 0 && (
@@ -301,8 +301,8 @@ export default function PlanList() {
                             key={mod.key}
                             className={`flex items-center gap-2 rounded-lg px-3 py-2 cursor-pointer transition-colors ${
                               checked
-                                ? "bg-brand-50 dark:bg-brand-500/10"
-                                : "hover:bg-gray-50 dark:hover:bg-white/[0.02]"
+                                ? "bg-brand-50 bg-brand-500/10"
+                                : "hover:bg-gray-50 hover:bg-white/[0.02]"
                             } ${isAlways ? "opacity-70 cursor-default" : ""}`}
                           >
                             <input
@@ -312,7 +312,7 @@ export default function PlanList() {
                               onChange={(e) => toggleFeature(mod.key, e.target.checked)}
                               className="accent-brand-500 w-4 h-4 flex-shrink-0"
                             />
-                            <span className={`text-sm ${checked ? "text-gray-800 dark:text-white/90 font-medium" : "text-gray-500 dark:text-gray-400"}`}>
+                            <span className={`text-sm ${checked ? "text-gray-800 text-white/90 font-medium" : "text-gray-500 text-gray-400"}`}>
                               {mod.label}
                             </span>
                           </label>
@@ -332,7 +332,7 @@ export default function PlanList() {
             >
               {saving ? "Enregistrement..." : editPlan ? "Mettre à jour" : "Créer le plan"}
             </button>
-            <button type="button" onClick={() => setShowForm(false)} className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400">
+            <button type="button" onClick={() => setShowForm(false)} className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 border-gray-700 text-gray-400">
               Annuler
             </button>
           </div>
@@ -347,10 +347,10 @@ export default function PlanList() {
           {plans.map((plan) => {
             const activeModules = ALL_MODULES.filter((m) => ALWAYS_ON.includes(m.key) || !!plan.features[m.key]);
             return (
-              <div key={plan.plan_id} className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03] flex flex-col">
+              <div key={plan.plan_id} className="rounded-2xl border border-gray-200 bg-white p-6 border-gray-800 bg-white/[0.03] flex flex-col">
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 dark:text-white/90">{plan.plan_name}</h3>
+                    <h3 className="text-lg font-bold text-gray-800 text-white/90">{plan.plan_name}</h3>
                     <p className="text-xl font-bold text-brand-500 mt-1">{fcfa(plan.price, plan.billing_cycle)}</p>
                   </div>
                   <div className="flex gap-2">
@@ -380,7 +380,7 @@ export default function PlanList() {
                         <p className="text-[10px] uppercase font-semibold text-gray-400 mb-1">{group.group}</p>
                         <div className="flex flex-wrap gap-1">
                           {enabled.map((m) => (
-                            <span key={m.key} className="inline-block px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700 dark:bg-green-500/10 dark:text-green-400">
+                            <span key={m.key} className="inline-block px-2 py-0.5 rounded-full text-xs bg-green-50 text-green-700 bg-green-500/10 text-green-400">
                               {m.label}
                             </span>
                           ))}

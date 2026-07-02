@@ -33,21 +33,21 @@ function Pagination({ page, total, pageSize, onChange }: { page: number; total: 
   const pages = Math.ceil(total / pageSize);
   if (pages <= 1) return null;
   return (
-    <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 dark:border-gray-800">
+    <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 border-gray-800">
       <span className="text-xs text-gray-400">{total} résultat{total !== 1 ? "s" : ""}</span>
       <div className="flex gap-1">
         <button disabled={page === 1} onClick={() => onChange(page - 1)}
-          className="px-3 py-1 text-xs rounded border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5">
+          className="px-3 py-1 text-xs rounded border border-gray-200 border-gray-700 disabled:opacity-40 hover:bg-gray-50 hover:bg-white/5">
           ‹
         </button>
         {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
           <button key={p} onClick={() => onChange(p)}
-            className={`px-3 py-1 text-xs rounded border ${p === page ? "bg-[#37a000] text-white border-[#37a000]" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/5"}`}>
+            className={`px-3 py-1 text-xs rounded border ${p === page ? "bg-[#37a000] text-white border-[#37a000]" : "border-gray-200 border-gray-700 hover:bg-gray-50 hover:bg-white/5"}`}>
             {p}
           </button>
         ))}
         <button disabled={page === pages} onClick={() => onChange(page + 1)}
-          className="px-3 py-1 text-xs rounded border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5">
+          className="px-3 py-1 text-xs rounded border border-gray-200 border-gray-700 disabled:opacity-40 hover:bg-gray-50 hover:bg-white/5">
           ›
         </button>
       </div>
@@ -112,15 +112,15 @@ export default function ClientList() {
 
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Clients</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Clients</h2>
+          <p className="text-sm text-gray-500 text-gray-400">
             {clients.length} restaurant{clients.length !== 1 ? "s" : ""} enregistré{clients.length !== 1 ? "s" : ""}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => exportClients().catch(() => {})}
-            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5"
+            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 border-gray-600 px-3 py-2 text-sm font-medium text-gray-600 text-gray-300 hover:bg-gray-50 hover:bg-white/5"
           >
             ↓ CSV
           </button>
@@ -134,7 +134,7 @@ export default function ClientList() {
       </div>
 
       {actionMsg && (
-        <div className="mb-4 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 p-4 text-sm text-blue-800 dark:text-blue-300">
+        <div className="mb-4 rounded-xl bg-blue-50 bg-blue-500/10 border border-blue-200 p-4 text-sm text-blue-800 text-blue-300">
           {actionMsg}
           <button onClick={() => setActionMsg(null)} className="ml-3 text-blue-500 underline">×</button>
         </div>
@@ -162,23 +162,23 @@ export default function ClientList() {
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
         {loading ? (
           <div className="p-8 text-center text-gray-400">Chargement...</div>
         ) : (
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader className="border-gray-100 dark:border-gray-800 border-y">
+              <TableHeader className="border-gray-100 border-gray-800 border-y">
                 <TableRow>
-                  <TableCell isHeader className="py-3 px-6 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Restaurant</TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Contact</TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Plan</TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Expire le</TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Statut</TableCell>
-                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Actions</TableCell>
+                  <TableCell isHeader className="py-3 px-6 font-medium text-gray-500 text-theme-xs text-gray-400">Restaurant</TableCell>
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Contact</TableCell>
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Plan</TableCell>
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Expire le</TableCell>
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Statut</TableCell>
+                  <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Actions</TableCell>
                 </TableRow>
               </TableHeader>
-              <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
+              <TableBody className="divide-y divide-gray-100 divide-gray-800">
                 {paginated.map((client) => (
                   <TableRow key={client.client_id}>
                     <TableCell className="py-3 px-6">
@@ -189,23 +189,23 @@ export default function ClientList() {
                           size={36}
                         />
                         <div>
-                          <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
+                          <p className="font-medium text-gray-800 text-theme-sm text-white/90">
                             {client.business_name}
                           </p>
                           <span className="text-gray-400 text-theme-xs">{client.country}</span>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                    <TableCell className="py-3 text-gray-500 text-theme-sm text-gray-400">
                       <div>
                         <p>{client.email}</p>
                         <p className="text-xs text-gray-400">{client.phone}</p>
                       </div>
                     </TableCell>
-                    <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                    <TableCell className="py-3 text-gray-500 text-theme-sm text-gray-400">
                       {client.subscription?.plan_name ?? <span className="text-gray-300">—</span>}
                     </TableCell>
-                    <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                    <TableCell className="py-3 text-gray-500 text-theme-sm text-gray-400">
                       {client.subscription
                         ? new Date(client.subscription.end_date).toLocaleDateString("fr-FR")
                         : "—"}

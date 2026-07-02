@@ -132,11 +132,12 @@ class Restauranttable extends MX_Controller {
 	   'entry_date'          => date('Y-m-d H:i:s'),
 	  ];
 	  $lastid=$this->restable_model->create($postData);
-		if($lastid) { 
+		if($lastid) {
 		$rowdata=[
 		'tableid'         => $lastid,
 		];
 		 $this->restable_model->addrow($rowdata);
+		 $this->_generate_table_qr($lastid);
 		 $this->logs_model->log_recorded($logData);
 		 $this->session->set_flashdata('message', display('save_successfully'));
 		 redirect('setting/restauranttable/index');
@@ -212,6 +213,97 @@ class Restauranttable extends MX_Controller {
 		}
 		redirect('setting/restauranttable/index');
     }
+	// =========================================================================
+	//  QR CODE GENERATION
+	// =========================================================================
+
+	public function generateqr($tableid = null)
+	{
+		$this->permission->method('setting','update')->redirect();
+
+		if (empty($tableid)) {
+			$this->session->set_flashdata('exception', display('please_try_again'));
+			redirect('setting/restauranttable/index');
+		}
+
+		$table = $this->restable_model->findById($tableid);
+		if (empty($table)) {
+			$this->session->set_flashdata('exception', display('please_try_again'));
+			redirect('setting/restauranttable/index');
+		}
+
+		$qr_path = $this->_generate_table_qr($tableid);
+
+		if ($this->input->is_ajax_request()) {
+			echo json_encode([
+				'status'  => 'success',
+				'qr_url'  => base_url($qr_path),
+				'qr_path' => $qr_path
+			]);
+			return;
+		}
+
+		$this->session->set_flashdata('message', 'QR Code generated successfully');
+		redirect('setting/restauranttable/index');
+	}
+
+	public function generateallqr()
+	{
+		$this->permission->method('setting','update')->redirect();
+
+		$tables = $this->restable_model->readAll();
+		$count = 0;
+		if (!empty($tables)) {
+			foreach ($tables as $table) {
+				$this->_generate_table_qr($table->tableid);
+				$count++;
+			}
+		}
+
+		$this->session->set_flashdata('message', $count . ' QR Code(s) generated successfully');
+		redirect('setting/restauranttable/index');
+	}
+
+	public function downloadqr($tableid = null)
+	{
+		if (empty($tableid)) {
+			redirect('setting/restauranttable/index');
+		}
+
+		$table = $this->restable_model->findById($tableid);
+		$file_path = FCPATH . 'uploads/qrcodes/table_' . $tableid . '.png';
+
+		if (!file_exists($file_path)) {
+			$this->_generate_table_qr($tableid);
+		}
+
+		$this->load->helper('download');
+		$name = 'QR_Table_' . (!empty($table) ? $table->tablename : $tableid) . '.png';
+		force_download($name, file_get_contents($file_path));
+	}
+
+	private function _generate_table_qr($tableid)
+	{
+		$this->load->library('ciqrcode');
+
+		$dir = FCPATH . 'uploads/qrcodes/';
+		if (!file_exists($dir)) {
+			mkdir($dir, 0777, true);
+		}
+
+		$file_name = 'table_' . $tableid . '.png';
+		$params = [
+			'data'     => base_url('scanmenu/' . $tableid),
+			'level'    => 'H',
+			'size'     => 10,
+			'savename' => $dir . $file_name
+		];
+		$this->ciqrcode->generate($params);
+		$this->restable_model->updateQrCode($tableid, $file_name);
+
+		return $file_name;
+	}
+
 	public function tablesetting(){
 			$this->permission->method('setting','read')->redirect();
 		    $data['title'] = display('setting');

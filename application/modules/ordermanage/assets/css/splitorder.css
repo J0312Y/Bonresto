@@ -212,6 +212,20 @@
             border: 1px solid #de2222;
         }
 
+        /* Reserved table — orange */
+        .reserved .table-info {
+            background: #f0ad4e;
+            border: solid 1px #f0ad4e;
+        }
+
+        .reserved .table-bordered>thead>tr>th {
+            color: #fff;
+        }
+
+        .reserved .table-info tbody tr td {
+            border: 1px solid #f0ad4e;
+        }
+
 
         /*        New Css  */
 

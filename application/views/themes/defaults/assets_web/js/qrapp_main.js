@@ -325,3 +325,27 @@
 					swal("", lang.appcartempty, "warning");
 					}
 			}
+
+		function callWaiter(callType) {
+			var url = (callType === 'bill') ? basicinfo.baseurl + 'request-bill' : basicinfo.baseurl + 'call-waiter';
+			var msg = (callType === 'bill') ? 'Envoyer la demande d\'addition ?' : 'Appeler le serveur ?';
+			swal({
+				title: msg,
+				type: 'info',
+				showCancelButton: true,
+				confirmButtonText: 'Oui',
+				cancelButtonText: 'Non'
+			}, function(confirmed) {
+				if (!confirmed) return;
+				$.ajax({
+					url: url, type: 'POST', dataType: 'json',
+					data: 'csrf_test_name=' + basicinfo.csrftokeng,
+					success: function(r) {
+						swal(r.status === 'success' ? 'Envoyé !' : 'Erreur', r.message, r.status === 'success' ? 'success' : 'warning');
+					},
+					error: function(xhr) {
+						swal('Erreur', xhr.responseText ? xhr.responseText.substring(0, 200) : 'Impossible de contacter le serveur.', 'error');
+					}
+				});
+			});
+		}

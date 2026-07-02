@@ -397,6 +397,7 @@ if (!empty($seoterm)) {
           if ($this->cart->contents() > 0) {
           	$totalqty = count($this->cart->contents());
           } ?>
+<style>.bell-dropdown{display:none;position:absolute;bottom:50px;right:0;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.18);min-width:200px;z-index:999;}.bell-dropdown.bell-open{display:block;}.bell-dropdown a{display:block;padding:10px 15px;color:#333;text-decoration:none;font-size:14px;}.bell-dropdown a:hover{background:#f5f5f5;}</style>
 <div class="fixed_area only-sm">
         <div class="container-fluid">
             <div class="row">
@@ -425,13 +426,24 @@ if (!empty($seoterm)) {
                                                             } ?>;"></i><span id="badgeshow" class="<?php if($totalqty>0){ echo "badgedisplayblock";}else{ echo "badgedisplaynone";}?> classic-badge2"><?php echo $totalqty;?></span>
                       		</button>   
                       	</div>
+                        <?php if ($this->session->userdata('tableid')) { ?>
+                        <div class="icon" style="position:relative;">
+                            <button class="btn btn-transparent" onclick="document.getElementById('bellMenu').classList.toggle('bell-open');">
+                                <i class="ti-bell" style="color:<?php if (!empty($webinfo->qrheaderfontcolor)) { echo $webinfo->qrheaderfontcolor; } ?>;"></i>
+                            </button>
+                            <div id="bellMenu" class="bell-dropdown">
+                                <a href="#" onclick="callWaiter('waiter'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-hand-paper-o"></i> Appeler le serveur</a>
+                                <a href="#" onclick="callWaiter('bill'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-file-text-o"></i> Demander l'addition</a>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <div class="sidebar-toggle-btn icon">
                         <button type="button" id="sidebarCollapse" class="btn btn-transparent">
                             <i class="ti-menu" style="color:<?php if (!empty($webinfo->qrheaderfontcolor)) {
                                                                 echo $webinfo->qrheaderfontcolor;
                                                             } ?>;"></i>
                         </button>
-                      		 
+
                       	</div>
                     </div>
                 </div>

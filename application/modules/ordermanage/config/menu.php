@@ -42,12 +42,18 @@ $HmvcMenu["ordermanage"] = array(
 		"method"=> "counterboard",
 		"permission" => "read"
 		), 
-	"dashboard" => array( 
+	"dashboard" => array(
         "controller" => "dashboard",
         "method"     => "home",
         "permission" => "read"
     ),
-	 
+	"waiter_calls" => array(
+        "controller" => "order",
+        "method"     => "waitercalls",
+        "permission" => "read",
+        "menu_name"  => "Appels serveur"
+    ),
+
 );
    
 

@@ -41,9 +41,17 @@ class License_manager {
     // ── Public API ────────────────────────────────────────────────────────────
 
     public function activate(string $client_key, string $server_url = ''): ?array {
+        $client_key = strtoupper(trim($client_key));
+        $server_url = $server_url ?: base_url();
+
+        // Try direct DB first (avoids HTTP self-call issues on same-server setups)
+        $payload = $this->_activate_from_db($client_key, $server_url);
+        if ($payload) return $payload;
+
+        // Fallback: HTTP call to SaaS API
         $response = $this->_post('/licenses/activate', [
-            'client_key' => strtoupper(trim($client_key)),
-            'server_url' => $server_url ?: base_url(),
+            'client_key' => $client_key,
+            'server_url' => $server_url,
         ]);
 
         if (!$response || empty($response['payload']) || empty($response['signature'])) {
@@ -52,7 +60,7 @@ class License_manager {
         if (!$this->_verify_signature($response['payload'], $response['signature'])) {
             return null;
         }
-        $this->_save($response['payload'], $response['signature'], strtoupper(trim($client_key)));
+        $this->_save($response['payload'], $response['signature'], $client_key);
         return $response['payload'];
     }
 
@@ -201,6 +209,67 @@ class License_manager {
 
         } catch (Throwable $e) {
             $this->_log("DB refresh failed: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Activate a license key directly from the saas DB.
+     * Avoids HTTP self-calls which fail on same-server setups (session lock, port mismatch).
+     */
+    private function _activate_from_db(string $client_key, string $server_url): ?array {
+        try {
+            $CI      =& get_instance();
+            $saas_db = $CI->load->database('saas', TRUE);
+
+            $key_row = $saas_db
+                ->where('client_key', $client_key)
+                ->get('saas_license_keys')->row();
+
+            if (!$key_row) return null;
+
+            // Mark key as activated
+            $saas_db->where('key_id', (int)$key_row->key_id)->update('saas_license_keys', [
+                'is_activated' => 1,
+                'activated_at' => date('Y-m-d H:i:s'),
+                'server_url'   => $server_url,
+            ]);
+
+            $tid = (int)$key_row->tenant_id;
+
+            // Get subscription + plan
+            $sub = $saas_db
+                ->select('s.status, s.end_date, s.grace_end_date, p.plan_name, p.features, p.max_tables, p.max_users')
+                ->from('saas_subscriptions s')
+                ->join('saas_plans p', 'p.plan_id = s.plan_id')
+                ->where('s.tenant_id', $tid)
+                ->order_by('s.sub_id', 'DESC')
+                ->limit(1)
+                ->get()->row();
+
+            $features = $sub ? (json_decode($sub->features ?? '{}', true) ?: []) : [];
+
+            $payload = [
+                'client_id'   => $tid,
+                'plan'        => $sub->plan_name ?? 'none',
+                'features'    => $features,
+                'max_tables'  => (int)($sub->max_tables ?? 0),
+                'max_users'   => (int)($sub->max_users  ?? 0),
+                'status'      => $sub->status ?? 'none',
+                'valid_until' => ($sub->end_date ?? date('Y-m-d')) . ' 23:59:59',
+                'grace_until' => ($sub->grace_end_date ?? date('Y-m-d')) . ' 23:59:59',
+                'issued_at'   => date('Y-m-d H:i:s'),
+            ];
+
+            $secret    = getenv('LICENSE_HMAC_SECRET') ?: self::HMAC_SECRET;
+            $signature = hash_hmac('sha256', json_encode($payload), $secret);
+
+            $this->_save($payload, $signature, $client_key);
+            $this->_log("License activated via DB for {$client_key} — plan: {$payload['plan']}");
+            return $payload;
+
+        } catch (Throwable $e) {
+            $this->_log("DB activation failed: " . $e->getMessage());
             return null;
         }
     }

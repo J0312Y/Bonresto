@@ -308,88 +308,16 @@ class V3 extends MY_Controller
 							);
 							$this->db->insert('tbl_orderprepare', $ready);
 						}
-						//push 
-						$waiteridp = $customerorder->waiter_id;
-						$this->db->select('*');
-						$this->db->from('user');
-						$this->db->where('id', $waiteridp);
-						$query = $this->db->get();
-						$allemployee = $query->row();
-						$senderid[] = $allemployee->waiter_kitchenToken;
-						define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-						$registrationIds = $senderid;
-						$msg = array(
-							'message' 					=> "Numéro de commande : " . $orderid . ", Nom de l'article : " . $item->ProductName . " Montant:" . $customerorder->totalamount,
-							'title'						=> "La nourriture est prête.",
-							'subtitle'					=> $orderid,
-							'tickerText'				=> "TSET",
-							'vibrate'					=> 1,
-							'sound'						=> 1,
-							'largeIcon'					=> "TSET",
-							'smallIcon'					=> "TSET"
-						);
-						$fields2 = array(
-							'registration_ids' 	=> $registrationIds,
-							'data'			=> $msg
-						);
-
-						$headers2 = array(
-							'Authorization: key=' . API_ACCESS_KEY,
-							'Content-Type: application/json'
-						);
-
-						$ch2 = curl_init();
-						curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-						curl_setopt($ch2, CURLOPT_POST, true);
-						curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-						curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-						curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-						curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-						$result2 = curl_exec($ch2);
-						curl_close($ch2);
-						/*End Notification*/
+						/* Notification nourriture prête — serveur + client */
+						$this->load->library('notification');
+						$waiter_token = $this->notification->get_waiter_token($customerorder->waiter_id);
+						$this->notification->food_ready($orderid, $item->ProductName, $customerorder->totalamount, $waiter_token, $customerinfo->customer_token);
 					} else {
 						$ready = "Food Is Cooking";
-						//push 
-						$waiteridp = $customerorder->waiter_id;
-						$this->db->select('*');
-						$this->db->from('user');
-						$this->db->where('id', $waiteridp);
-						$query = $this->db->get();
-						$allemployee = $query->row();
-						$senderid[] = $allemployee->waiter_kitchenToken;
-						define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-						$registrationIds = $senderid;
-						$msg = array(
-							'message' 					=> "Numéro de commande : " . $orderid . ", Nom de l'article : " . $item->ProductName . " Montant:" . $customerorder->totalamount,
-							'title'						=> "En cours traitement",
-							'subtitle'					=> $orderid,
-							'tickerText'				=> "TSET",
-							'vibrate'					=> 1,
-							'sound'						=> 1,
-							'largeIcon'					=> "TSET",
-							'smallIcon'					=> "TSET"
-						);
-						$fields2 = array(
-							'registration_ids' 	=> $registrationIds,
-							'data'			=> $msg
-						);
-
-						$headers2 = array(
-							'Authorization: key=' . API_ACCESS_KEY,
-							'Content-Type: application/json'
-						);
-
-						$ch2 = curl_init();
-						curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-						curl_setopt($ch2, CURLOPT_POST, true);
-						curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-						curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-						curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-						curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-						$result2 = curl_exec($ch2);
-						curl_close($ch2);
-						/*End Notification*/
+						/* Notification en cours de préparation — serveur + client */
+						$this->load->library('notification');
+						$waiter_token = $this->notification->get_waiter_token($customerorder->waiter_id);
+						$this->notification->order_preparing($orderid, $item->ProductName, $customerorder->totalamount, $waiter_token, $customerinfo->customer_token);
 					}
 					if (!empty($item->add_on_id)) {
 
@@ -592,46 +520,24 @@ class V3 extends MY_Controller
 
 			$foodname = $this->db->select("ProductName")->from('item_foods')->where('ProductsID', $itemId)->get()->row();
 
-			$mymsg = "Votre commande est rejetée";
-			$bodymsg = "Numéro de commande : " . $orderid . " Nom de l'article : " . $foodname->ProductName . " Refusé en raison de :" . $reason;
-
 			/*PUSH Notification For Customer*/
 			$customerinfo = $this->db->select("*")->from('customer_info')->where('customer_id', $orderinfo->customer_id)->get()->row();
-			$icon = base_url('assets/img/applogo.png');
-			$fields3 = array(
-				'to' => $customerinfo->customer_token,
-				'data' => array(
-					'title' => $mymsg,
-					'body' => $bodymsg,
-					'image' => $icon,
-					'media_type' => "image",
-					'message' => "test",
-					"action" => "1",
-				),
-				'notification' => array(
-					'sound' => "default",
-					'title' => $mymsg,
-					'body' => $bodymsg,
-					'image' => $icon,
-				)
-			);
-			$post_data3 = json_encode($fields3);
-			$url = "https://fcm.googleapis.com/fcm/send";
-			$ch3  = curl_init($url);
-			curl_setopt($ch3, CURLOPT_FAILONERROR, TRUE);
-			curl_setopt($ch3, CURLOPT_RETURNTRANSFER, TRUE);
-			curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);
-			curl_setopt($ch3, CURLOPT_POSTFIELDS, $post_data3);
-			curl_setopt(
-				$ch3,
-				CURLOPT_HTTPHEADER,
-				array(
-					'Authorization: Key=AAAAmN4ekRg:APA91bHDg_gr99QlnGtHD_exg-QuhRc_45Xluti4dmaNGSD0jfuXi3-3M_wv01TihrHlUAWUDI-dlJqr-_wEHeYigIXSjEbsXJfxI4J9x7ugZDOBv07FhAlWIdDvl8zWcKoeeqqPT9Gw',
-					'Content-Type: application/json'
-				)
-			);
-			$result3 = curl_exec($ch3);
-			curl_close($ch3);
+			$this->load->library('notification');
+			$this->notification->order_rejected($orderid, $foodname->ProductName, $reason, $customerinfo->customer_token);
+			/* Restore stock for cancelled item if stock was already deducted
+			   and the item has NOT been cooked yet */
+			if ($orderinfo->orderacceptreject == 1) {
+				$possetting = $this->db->select('productionsetting')->from('tbl_posetting')->where('possettingid', 1)->get()->row();
+				if ($possetting->productionsetting == 1) {
+					$this->load->model('App_android_model');
+					$olditm = $this->db->select('menuqty,varientid,food_status')->from('order_menu')->where('order_id', $orderid)->where('menu_id', $itemId)->get()->row();
+					if ($olditm && (empty($olditm->food_status) || $olditm->food_status == 0)) {
+						$cancelqty = !empty($olditm->menuqty) ? $olditm->menuqty : 1;
+						$cancelvid = $olditm->varientid;
+						$this->App_android_model->restore_product($itemId, $cancelvid, $cancelqty);
+					}
+				}
+			}
 			$this->db->where('order_id', $orderid)->where('menu_id', $itemId)->delete('order_menu');
 			$afterorderinfo = $this->db->select("*")->from('order_menu')->where('order_id', $orderid)->get()->row();
 			if (empty($afterorderinfo)) {

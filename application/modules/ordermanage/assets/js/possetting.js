@@ -968,6 +968,9 @@ function placeorder() {
       type: "POST",
       url: basicinfo.baseurl + "ordermanage/order/pos_order",
       data: dataString,
+      error: function(xhr, status, error) {
+        swal(lang.ord_failed || "Error", lang.failed_msg || "Server error", "error");
+      },
       success: function (data) {
         $("#addfoodlist").empty();
         $("#getitemp").val("0");
@@ -1029,14 +1032,16 @@ function placeorder() {
                 closeOnCancel: true,
               },
               function (isConfirm) {
-                if (isConfirm) {
-                  printRawHtml(data);
-                } else {
-                  $("#waiter").select2("data", null);
-                  $("#tableid").select2("data", null);
-                  $("#waiter").val("");
-                  $("#tableid").val("");
-                }
+                try {
+                  if (isConfirm) {
+                    printRawHtml(data);
+                  } else {
+                    $("#waiter").select2("data", null);
+                    $("#tableid").select2("data", null);
+                    $("#waiter").val("");
+                    $("#tableid").val("");
+                  }
+                } catch(e) { console.error("placeorder callback error:", e); }
               }
             );
           }
@@ -1279,14 +1284,16 @@ function quickorder() {
               closeOnCancel: true,
             },
             function (isConfirm) {
-              if (isConfirm) {
-                createMargeorder(data, 1);
-              } else {
-                $("#waiter").select2("data", null);
-                $("#tableid").select2("data", null);
-                $("#waiter").val("");
-                $("#tableid").val("");
-              }
+              try {
+                if (isConfirm) {
+                  createMargeorder(data, 1);
+                } else {
+                  $("#waiter").select2("data", null);
+                  $("#tableid").select2("data", null);
+                  $("#waiter").val("");
+                  $("#tableid").val("");
+                }
+              } catch(e) { console.error("margeorder callback error:", e); }
             }
           );
         }
@@ -1347,36 +1354,38 @@ function postupdateorder_ajax() {
           closeOnCancel: true,
         },
         function (isConfirm) {
-          if (isConfirm) {
-            $.ajax({
-              type: "GET",
-              url: "postokengenerateupdate/" + result.orderid + "/1",
-              success: function (data) {
-                printRawHtml(data);
-                $(".maindashboard").removeClass("disabled");
-                $("#fhome").removeClass("disabled");
-                $("#kitchenorder").removeClass("disabled");
-                $("#todayqrorder").removeClass("disabled");
-                $("#todayonlieorder").removeClass("disabled");
-                $("#todayorder").removeClass("disabled");
-                $("#ongoingorder").removeClass("disabled");
-              },
-            });
-          } else {
-            $.ajax({
-              type: "GET",
-              url: "tokenupdate/" + result.orderid,
-              success: function (data) {
-                $(".maindashboard").removeClass("disabled");
-                $("#fhome").removeClass("disabled");
-                $("#kitchenorder").removeClass("disabled");
-                $("#todayqrorder").removeClass("disabled");
-                $("#todayonlieorder").removeClass("disabled");
-                $("#todayorder").removeClass("disabled");
-                $("#ongoingorder").removeClass("disabled");
-              },
-            });
-          }
+          try {
+            if (isConfirm) {
+              $.ajax({
+                type: "GET",
+                url: "postokengenerateupdate/" + result.orderid + "/1",
+                success: function (data) {
+                  printRawHtml(data);
+                  $(".maindashboard").removeClass("disabled");
+                  $("#fhome").removeClass("disabled");
+                  $("#kitchenorder").removeClass("disabled");
+                  $("#todayqrorder").removeClass("disabled");
+                  $("#todayonlieorder").removeClass("disabled");
+                  $("#todayorder").removeClass("disabled");
+                  $("#ongoingorder").removeClass("disabled");
+                },
+              });
+            } else {
+              $.ajax({
+                type: "GET",
+                url: "tokenupdate/" + result.orderid,
+                success: function (data) {
+                  $(".maindashboard").removeClass("disabled");
+                  $("#fhome").removeClass("disabled");
+                  $("#kitchenorder").removeClass("disabled");
+                  $("#todayqrorder").removeClass("disabled");
+                  $("#todayonlieorder").removeClass("disabled");
+                  $("#todayorder").removeClass("disabled");
+                  $("#ongoingorder").removeClass("disabled");
+                },
+              });
+            }
+          } catch(e) { console.error("postupdateorder callback error:", e); }
         }
       );
       setTimeout(function () {
@@ -1387,7 +1396,9 @@ function postupdateorder_ajax() {
           timeOut: 4000,
         };
         toastr.success(result.msg, "Success");
-        prevsltab.trigger("click");
+        if (typeof prevsltab !== "undefined" && prevsltab) {
+          prevsltab.trigger("click");
+        }
       }, 300);
     },
     error: function (a) {},
@@ -1485,9 +1496,13 @@ function orderconfirmorcancel(status, orderid) {
             closeOnConfirm: true,
           },
           function () {
-            prevsltab.trigger("click");
-            $("#paidamount").val("");
-            $("#payprint").modal("hide");
+            try {
+              if (typeof prevsltab !== "undefined" && prevsltab) {
+                prevsltab.trigger("click");
+              }
+              $("#paidamount").val("");
+              $("#payprint").modal("hide");
+            } catch(e) { console.error("orderconfirm callback error:", e); }
           }
         );
       }
@@ -1516,11 +1531,11 @@ function load_unseen_notification(view = "") {
     success: function (data) {
       if (data.unseen_notification > 0) {
         $(".count").html(data.unseen_notification);
-        if (soundenable == 1) {
-          myAudio.play();
+        if (soundenable == 1 && myAudio) {
+          myAudio.play().catch(function(){});
         }
       } else {
-        if (soundenable == 1) {
+        if (soundenable == 1 && myAudio) {
           myAudio.pause();
         }
         $(".count").html(data.unseen_notification);

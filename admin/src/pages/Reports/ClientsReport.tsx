@@ -24,7 +24,7 @@ export default function ClientsReport() {
       <PageMeta title="Rapport Clients — Bonresto SaaS" description="" />
       <div className="space-y-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white/90">Rapport des clients</h2>
+          <h2 className="text-xl font-semibold text-gray-800 text-white/90">Rapport des clients</h2>
           <p className="text-sm text-gray-500 mt-1">Abonnements et paiements par restaurant</p>
         </div>
 

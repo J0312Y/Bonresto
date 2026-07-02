@@ -26,18 +26,18 @@ interface Props {
 export default function ClientDemographics({ clients }: Props) {
   if (clients.length === 0) {
     return (
-      <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6 flex items-center justify-center h-full">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03] md:p-6 flex items-center justify-center h-full">
         <p className="text-sm text-gray-400">Aucune donnée</p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
-      <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90 mb-1">
+    <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03] md:p-6">
+      <h3 className="text-lg font-semibold text-gray-800 text-white/90 mb-1">
         Aperçu des abonnements
       </h3>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
+      <p className="text-sm text-gray-500 text-gray-400 mb-5">
         Statut par restaurant
       </p>
 
@@ -45,10 +45,10 @@ export default function ClientDemographics({ clients }: Props) {
         {clients.map((c) => (
           <div
             key={c.tenant_id}
-            className="rounded-xl border border-gray-100 dark:border-gray-800 p-4"
+            className="rounded-xl border border-gray-100 border-gray-800 p-4"
           >
             <div className="flex items-center justify-between mb-3">
-              <p className="font-semibold text-gray-800 dark:text-white/90 text-sm truncate">
+              <p className="font-semibold text-gray-800 text-white/90 text-sm truncate">
                 {c.business_name}
               </p>
               <Badge size="sm" color={subColor(c.subscription_status)}>
@@ -57,21 +57,21 @@ export default function ClientDemographics({ clients }: Props) {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-500/10">
+                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-blue-50 bg-blue-500/10">
                   <CheckCircleIcon className="text-blue-500 size-4" />
                 </span>
                 <div>
                   <p className="text-xs text-gray-400">Plan</p>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{c.plan_name}</p>
+                  <p className="text-sm font-semibold text-gray-800 text-white/90">{c.plan_name}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-green-50 dark:bg-green-500/10">
+                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-green-50 bg-green-500/10">
                   <DollarLineIcon className="text-green-500 size-4" />
                 </span>
                 <div>
                   <p className="text-xs text-gray-400">Total payé</p>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-white/90">{fcfa(c.total_revenue)}</p>
+                  <p className="text-sm font-semibold text-gray-800 text-white/90">{fcfa(c.total_revenue)}</p>
                 </div>
               </div>
             </div>

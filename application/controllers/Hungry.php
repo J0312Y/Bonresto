@@ -459,7 +459,7 @@ $catid=trim($catid,',');*/
         $data['title']           = "Food details";
         $islogin                 = $this->session->userdata('CusUserID');
         $data['customerislogin'] = $islogin;
-        $data['iteminfo']        = $this->hungry_model->detailsinfo($pid, $vid);
+        $data['iteminfo']        = (object) $this->hungry_model->detailsinfo($pid, $vid);
         $data['category']        = $this->hungry_model->read('*', 'item_category', ['CategoryID' => $data['iteminfo']->CategoryID]);
         $data['related']         = $this->hungry_model->relateditem($data['iteminfo']->CategoryID, $data['iteminfo']->ProductsID, $data['iteminfo']->variantid);
         $data['totalreview']     = $this->hungry_model->read_rating('tbl_rating', 'reviewtxt', 'proid', $data['iteminfo']->ProductsID);
@@ -497,7 +497,7 @@ $catid=trim($catid,',');*/
         $data['orderinfo']       = $customerorder;
         $islogin                 = $this->session->userdata('CusUserID');
         $data['customerislogin'] = $islogin;
-        $data['iteminfo']        = $this->hungry_model->detailsinfo($pid, $vid);
+        $data['iteminfo']        = (object) $this->hungry_model->detailsinfo($pid, $vid);
         $data['category']        = $this->hungry_model->read('*', 'item_category', ['CategoryID' => $data['iteminfo']->CategoryID]);
         $data['related']         = $this->hungry_model->relateditem($data['iteminfo']->CategoryID, $data['iteminfo']->ProductsID, $data['iteminfo']->variantid);
         $data['totalreview']     = $this->hungry_model->read_rating('tbl_rating', 'reviewtxt', 'proid', $data['iteminfo']->ProductsID);
@@ -565,6 +565,128 @@ $catid=trim($catid,',');*/
         }
     }
 
+
+    public function ordertracking($orderid = null)
+    {
+        if (empty($orderid)) {
+            redirect('qr-menu');
+        }
+
+        $order = $this->db->select('customer_order.*, rest_table.tablename')
+            ->from('customer_order')
+            ->join('rest_table', 'rest_table.tableid = customer_order.table_no', 'left')
+            ->where('customer_order.order_id', $orderid)
+            ->get()->row();
+
+        if (empty($order)) {
+            redirect('qr-menu');
+        }
+
+        $items = $this->db->select('order_menu.menuqty as qty, order_menu.price, item_foods.ProductName as product_name')
+            ->from('order_menu')
+            ->join('item_foods', 'item_foods.ProductsID = order_menu.menu_id', 'left')
+            ->where('order_menu.order_id', $orderid)
+            ->where('order_menu.isgroup', 0)
+            ->get()->result();
+
+        $data['title']     = 'Suivi commande #' . $order->saleinvoice;
+        $data['order']     = $order;
+        $data['tablename'] = !empty($order->tablename) ? $order->tablename : 'N/A';
+        $data['items']     = $items;
+
+        $this->load->view('themes/' . $this->themeinfo->themename . '/appordertracking', $data);
+    }
+
+    public function orderstatusapi($orderid = null)
+    {
+        if (empty($orderid)) {
+            echo json_encode(['error' => 'Missing order ID']);
+            return;
+        }
+
+        $order = $this->db->select('order_status')
+            ->from('customer_order')
+            ->where('order_id', $orderid)
+            ->get()->row();
+
+        if (empty($order)) {
+            echo json_encode(['error' => 'Order not found']);
+            return;
+        }
+
+        $statuses = [
+            1 => 'En attente',
+            2 => 'En préparation',
+            3 => 'Prêt',
+            4 => 'Servi',
+            5 => 'Annulé'
+        ];
+
+        echo json_encode([
+            'order_status' => $order->order_status,
+            'status_text'  => isset($statuses[$order->order_status]) ? $statuses[$order->order_status] : 'Inconnu'
+        ]);
+    }
+
+    public function callwaiter()
+    {
+        header('Content-Type: application/json');
+        $table_id = $this->session->userdata('tableid');
+        if (empty($table_id)) {
+            echo json_encode(['status' => 'error', 'message' => 'Table non identifiée']);
+            return;
+        }
+
+        $this->load->model('ordermanage/waitercall_model');
+
+        if ($this->waitercall_model->hasRecentCall($table_id, 'waiter')) {
+            echo json_encode(['status' => 'error', 'message' => 'Un appel est déjà en cours. Veuillez patienter.']);
+            return;
+        }
+
+        $this->waitercall_model->create([
+            'table_id'    => $table_id,
+            'customer_id' => $this->session->userdata('CusUserID'),
+            'call_type'   => 'waiter',
+            'status'      => 0,
+            'created_at'  => date('Y-m-d H:i:s')
+        ]);
+
+        $this->load->library('notification');
+        $this->notification->waiter_called($table_id, 'waiter');
+
+        echo json_encode(['status' => 'success', 'message' => 'Le serveur a été appelé !']);
+    }
+
+    public function requestbill()
+    {
+        header('Content-Type: application/json');
+        $table_id = $this->session->userdata('tableid');
+        if (empty($table_id)) {
+            echo json_encode(['status' => 'error', 'message' => 'Table non identifiée']);
+            return;
+        }
+
+        $this->load->model('ordermanage/waitercall_model');
+
+        if ($this->waitercall_model->hasRecentCall($table_id, 'bill')) {
+            echo json_encode(['status' => 'error', 'message' => 'Demande d\'addition déjà envoyée. Veuillez patienter.']);
+            return;
+        }
+
+        $this->waitercall_model->create([
+            'table_id'    => $table_id,
+            'customer_id' => $this->session->userdata('CusUserID'),
+            'call_type'   => 'bill',
+            'status'      => 0,
+            'created_at'  => date('Y-m-d H:i:s')
+        ]);
+
+        $this->load->library('notification');
+        $this->notification->waiter_called($table_id, 'bill');
+
+        echo json_encode(['status' => 'success', 'message' => 'Demande d\'addition envoyée !']);
+    }
 
     public function qrmenu()
     {
@@ -2244,59 +2366,9 @@ $catid=trim($catid,',');*/
             $this->session->unset_userdata('shippingrate');
             $this->session->unset_userdata('couponcode');
             $this->session->unset_userdata('couponprice');
-            /*Push Notification*/
-            $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=6";
-            $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-            $this->db->from('user');
-            $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-            $this->db->where($condition);
-            $query       = $this->db->get();
-            $allemployee = $query->result();
-            $senderid    = [];
-
-            foreach ($allemployee as $mytoken) {
-                $senderid[] = $mytoken->waiter_kitchenToken;
-            }
-
-            $newmsg = [
-                'tag'     => "incoming_request",
-                'orderid' => "875765",
-                'amount'  => "200",
-            ];
-            $message = json_encode($newmsg);
-            define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-            $registrationIds = $senderid;
-            $msg             = [
-                'message'    => "New Order Placed",
-                'title'      => "TSET",
-                'subtitle'   => "TSET",
-                'tickerText' => "TSET",
-                'vibrate'    => 1,
-                'sound'      => 1,
-                'largeIcon'  => "TSET",
-                'smallIcon'  => "TSET",
-            ];
-            $fields2 = [
-                'registration_ids' => $registrationIds,
-                'data'             => $msg,
-            ];
-
-            $headers2 = [
-                'Authorization: key=' . API_ACCESS_KEY,
-                'Content-Type: application/json',
-            ];
-
-            $ch2 = curl_init();
-            curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-            curl_setopt($ch2, CURLOPT_POST, true);
-            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-            $result2 = curl_exec($ch2);
-            curl_close($ch2);
-
-            /*End Notification*/
+            /* Notification commande passée — staff */
+            $this->load->library('notification');
+            $this->notification->notify_staff_new_order($orderid, $grandtotal);
             if ($paymentsatus == 5) {
                 redirect('hungry/paymentgateway/' . $orderid . '/' . $paymentsatus . '/2');
             } else if ($paymentsatus == 8) {
@@ -2428,7 +2500,7 @@ document.getElementById("paytrack").click();
             $customerName = $this->input->post('customerName', true);
             $phone        = $this->input->post('phone', true);
             $mytoken      = $this->session->userdata('token');
-            $emailexists  = $this->db->select("*")->from('customer_info')->where('customer_name', $customerName)->where('customer_phone', $phone)->where('customer_token', $mytoken)->get()->row();
+            $emailexists  = $this->db->select("*")->from('customer_info')->where('customer_phone', $phone)->get()->row();
 
             if (empty($emailexists)) {
 
@@ -2618,43 +2690,8 @@ document.getElementById("paytrack").click();
                     $senderid[] = $mytoken->waiter_kitchenToken;
                 }
 
-                $newmsg = [
-                    'tag'     => "incoming_request",
-                    'orderid' => "875765",
-                    'amount'  => "200",
-                ];
-                $message = json_encode($newmsg);
-                define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                $registrationIds = $senderid;
-                $msg             = [
-                    'message'    => "New Order Placed",
-                    'title'      => "TSET",
-                    'subtitle'   => "TSET",
-                    'tickerText' => "TSET",
-                    'vibrate'    => 1,
-                    'sound'      => 1,
-                    'largeIcon'  => "TSET",
-                    'smallIcon'  => "TSET",
-                ];
-                $fields2 = [
-                    'registration_ids' => $registrationIds,
-                    'data'             => $msg,
-                ];
-
-                $headers2 = [
-                    'Authorization: key=' . API_ACCESS_KEY,
-                    'Content-Type: application/json',
-                ];
-
-                $ch2 = curl_init();
-                curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                curl_setopt($ch2, CURLOPT_POST, true);
-                curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-                curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-                $result2 = curl_exec($ch2);
-                curl_close($ch2);
+                $this->load->library('notification');
+                $this->notification->notify_staff_new_order($orderid, $Grandtotal);
 
                 /*End Notification*/
 
@@ -2771,44 +2808,13 @@ document.getElementById("paytrack").click();
 
         $orderinfor   = $this->hungry_model->read('*', 'customer_order', ['order_id' => $orderid]);
         $customerinfo = $this->hungry_model->read('*', 'customer_info', ['customer_id' => $orderinfor->customer_id]);
-        $icon         = base_url('assets/img/applogo.png');
-        $fields3      = [
-            'to'           => $customerinfo->customer_token,
-            'data'         => [
-                'title'      => 'Commande passée avec succès !!',
-                'body'       => 'Votre identifiant de commande: ' . $orderid . ' Placé avec succès. Veuillez attendre servi',
-                'image'      => $icon,
-                'media_type' => "image",
-                'message'    => "test",
-                "action"     => "1",
-            ],
-            'notification' => [
-                'sound' => "default",
-                'title' => 'Commande passée avec succès !!',
-                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Placé avec succès. Veuillez attendre servi',
-                'image' => $icon,
-            ],
-        ];
-        $post_data3 = json_encode($fields3);
-        $url        = "https://fcm.googleapis.com/fcm/send";
-        $ch3        = curl_init($url);
-        curl_setopt($ch3, CURLOPT_FAILONERROR, true);
-        curl_setopt($ch3, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch3, CURLOPT_POSTFIELDS, $post_data3);
-        curl_setopt(
-            $ch3,
-            CURLOPT_HTTPHEADER,
-            [
-                'Authorization: Key=AAAA4j0CZSQ:APA91bGhEmG9eS2IUjPam6jpDtfBEyvLXGccd_BWGeGolN2pXiVrJ9d06wNut4sXN698cGTgIimXhC6S1CXRnXxRaGmF7n_OvZBK0e3zwqJ1CA6zwRqMaajfxtekvcbaGNfUZmWuRjHZ',
-                'Content-Type: application/json',
-            ]
-        );
-        $result3 = curl_exec($ch3);
-        curl_close($ch3);
+
+        /* Notification commande confirmée — client */
+        $this->load->library('notification');
+        $this->notification->order_confirmed($orderid, $customerinfo->customer_token);
 
         $this->session->set_flashdata('message', display('order_successfully_placed'));
-        redirect('qr-menu');
+        redirect('order-tracking/' . $orderid);
     }
 
     public function payments($orderid, $page = null)
@@ -3245,44 +3251,10 @@ document.getElementById("paytrack").click();
         $this->session->set_flashdata('message', display('order_successfully'));
 
         if ($page == 1) {
-            $registrationIds[] = $cusinfo->customer_token;
-            $header            = [
-                'Authorization: Key=AAAA4j0CZSQ:APA91bGhEmG9eS2IUjPam6jpDtfBEyvLXGccd_BWGeGolN2pXiVrJ9d06wNut4sXN698cGTgIimXhC6S1CXRnXxRaGmF7n_OvZBK0e3zwqJ1CA6zwRqMaajfxtekvcbaGNfUZmWuRjHZ',
-                'Content-Type: Application/json',
-            ];
+            $this->load->library('notification');
+            $this->notification->order_confirmed($orderid, $cusinfo->customer_token);
 
-            $msg = [
-                'title' => 'Commande passée avec succès !!',
-                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Placé avec succès. Veuillez attendre d etre servi',
-                'icon'  => 'img/icon.png',
-                'image' => 'img/d.png',
-            ];
-
-            $payload = [
-                'registration_ids' => $registrationIds,
-                'data'             => $msg,
-            ];
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, [
-                CURLOPT_URL            => "https://fcm.googleapis.com/fcm/send",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST  => "POST",
-                CURLOPT_POSTFIELDS     => json_encode($payload),
-                CURLOPT_HTTPHEADER     => $header,
-            ]);
-
-            $response = curl_exec($curl);
-            $err      = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-            } else {
-            }
-
-            redirect('qr-menu');
+            redirect('order-tracking/' . $orderid);
         } else {
 
             $WhatsApp       = $this->db->where('directory', 'whatsapp')->where('status', 1)->get('module');
@@ -3374,44 +3346,10 @@ document.getElementById("paytrack").click();
         $this->session->set_flashdata('message', display('order_successfully'));
 
         if ($page == 1) {
-            $registrationIds[] = $cusinfo->customer_token;
-            $header            = [
-                'Authorization: Key=AAAA4j0CZSQ:APA91bGhEmG9eS2IUjPam6jpDtfBEyvLXGccd_BWGeGolN2pXiVrJ9d06wNut4sXN698cGTgIimXhC6S1CXRnXxRaGmF7n_OvZBK0e3zwqJ1CA6zwRqMaajfxtekvcbaGNfUZmWuRjHZ',
-                'Content-Type: Application/json',
-            ];
+            $this->load->library('notification');
+            $this->notification->order_confirmed($orderid, $cusinfo->customer_token);
 
-            $msg = [
-                'title' => 'Commande passée avec succès !!',
-                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Placé avec succès. Veuillez attendre servi',
-                'icon'  => 'img/icon.png',
-                'image' => 'img/d.png',
-            ];
-
-            $payload = [
-                'registration_ids' => $registrationIds,
-                'data'             => $msg,
-            ];
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, [
-                CURLOPT_URL            => "https://fcm.googleapis.com/fcm/send",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST  => "POST",
-                CURLOPT_POSTFIELDS     => json_encode($payload),
-                CURLOPT_HTTPHEADER     => $header,
-            ]);
-
-            $response = curl_exec($curl);
-            $err      = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-            } else {
-            }
-
-            redirect('qr-menu');
+            redirect('order-tracking/' . $orderid);
         } else {
 
             $WhatsApp       = $this->db->where('directory', 'whatsapp')->where('status', 1)->get('module');
@@ -4503,44 +4441,10 @@ document.getElementById("paytrack").click();
         $this->session->set_flashdata('message', display('order_successfully'));
 
         if ($page == 1) {
-            $registrationIds[] = $cusinfo->customer_token;
-            $header            = [
-                'Authorization: Key=AAAA4j0CZSQ:APA91bGhEmG9eS2IUjPam6jpDtfBEyvLXGccd_BWGeGolN2pXiVrJ9d06wNut4sXN698cGTgIimXhC6S1CXRnXxRaGmF7n_OvZBK0e3zwqJ1CA6zwRqMaajfxtekvcbaGNfUZmWuRjHZ',
-                'Content-Type: Application/json',
-            ];
+            $this->load->library('notification');
+            $this->notification->order_updated($orderid, $cusinfo->customer_token);
 
-            $msg = [
-                'title' => 'Mise à jour de la commande réussie !!',
-                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Mise à jour réussie. Veuillez patienter',
-                'icon'  => 'img/icon.png',
-                'image' => 'img/d.png',
-            ];
-
-            $payload = [
-                'registration_ids' => $registrationIds,
-                'data'             => $msg,
-            ];
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, [
-                CURLOPT_URL            => "https://fcm.googleapis.com/fcm/send",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST  => "POST",
-                CURLOPT_POSTFIELDS     => json_encode($payload),
-                CURLOPT_HTTPHEADER     => $header,
-            ]);
-
-            $response = curl_exec($curl);
-            $err      = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-            } else {
-            }
-
-            redirect('apporedrlist');
+            redirect('order-tracking/' . $orderid);
         } else {
             redirect('qr-menu');
         }
@@ -4559,44 +4463,10 @@ document.getElementById("paytrack").click();
         $this->session->set_flashdata('message', display('order_successfully'));
 
         if ($page == 1) {
-            $registrationIds[] = $cusinfo->customer_token;
-            $header            = [
-                'Authorization: Key=AAAA4j0CZSQ:APA91bGhEmG9eS2IUjPam6jpDtfBEyvLXGccd_BWGeGolN2pXiVrJ9d06wNut4sXN698cGTgIimXhC6S1CXRnXxRaGmF7n_OvZBK0e3zwqJ1CA6zwRqMaajfxtekvcbaGNfUZmWuRjHZ',
-                'Content-Type: Application/json',
-            ];
+            $this->load->library('notification');
+            $this->notification->order_updated($orderid, $cusinfo->customer_token);
 
-            $msg = [
-                'title' => 'Mise à jour de la commande réussie !!',
-                'body'  => 'Votre identifiant de commande: ' . $orderid . ' Mise à jour réussie. Veuillez patienter',
-                'icon'  => 'img/icon.png',
-                'image' => 'img/d.png',
-            ];
-
-            $payload = [
-                'registration_ids' => $registrationIds,
-                'data'             => $msg,
-            ];
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, [
-                CURLOPT_URL            => "https://fcm.googleapis.com/fcm/send",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST  => "POST",
-                CURLOPT_POSTFIELDS     => json_encode($payload),
-                CURLOPT_HTTPHEADER     => $header,
-            ]);
-
-            $response = curl_exec($curl);
-            $err      = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-            } else {
-            }
-
-            redirect('apporedrlist');
+            redirect('order-tracking/' . $orderid);
         } else {
             redirect('qr-menu');
         }

@@ -1397,37 +1397,9 @@ class Android extends MY_Controller
                     $output['Starttime']      = $reservationinfo->formtime;
                     $output['Endtime']        = $reservationinfo->totime;
                     $output['customer_notes'] = $reservationinfo->customer_notes;
-                    /*PUSH Notification For Customer*/
-                    $icon    = base_url('assets/img/applogo.png');
-                    $content = [
-                        "en" => "Cher Monsieur / Madame" . $customerinfo->customer_name . " Table:" . $reservationinfo->tablename . " Votre réservation en cours...",
-                    ];
-                    $title = [
-                        "en" => "Nouvelle réservation",
-                    ];
-                    $fields = [
-                        'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-                        'include_player_ids' => [$customerinfo->customer_token],
-                        'data'               => [
-                            'type' => "order place",
-                            'logo' => $icon,
-                        ],
-                        'contents'           => $content,
-                        'headings'           => $title,
-                    ];
-
-                    $fields = json_encode($fields);
-                    $ch     = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_HEADER, false);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    $response = curl_exec($ch);
-                    curl_close($ch);
-                    /*Push Notification*/
+                    /* Notification réservation */
+                    $this->load->library('notification');
+                    $this->notification->new_reservation($customerinfo->customer_name, $reservationinfo->tablename, $customerinfo->customer_token);
                     return $this->respondWithSuccess('Informations de réservation.', $output);
                 } else {
                     return $this->respondWithError('Pas de réservation.!!!', $output);
@@ -1717,112 +1689,10 @@ class Android extends MY_Controller
                     $output['phone']        = $this->input->post('phone');
                     $output['address']      = $this->input->post('billing_address');
 
-                    /*PUSH Notification For Customer*/
-                    $gtotal  = $this->input->post('grandtotal', true);
-                    $icon    = base_url('assets/img/applogo.png');
-                    $content = [
-                        "en" => "Numéro de commande: " . $orderid . " Montant de la commande:" . number_format($gtotal, 2),
-                    ];
-                    $title = [
-                        "en" => "Nouvelle commande passée",
-                    ];
-                    $fields = [
-                        'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-                        'include_player_ids' => [$customerinfo->customer_token],
-                        'data'               => [
-                            'type' => "order place",
-                            'logo' => $icon,
-                        ],
-                        'contents'           => $content,
-                        'headings'           => $title,
-                    ];
-
-                    $fields = json_encode($fields);
-                    $ch     = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_HEADER, false);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                    $response = curl_exec($ch);
-                    curl_close($ch);
-                    /*Push Notification*/
-                    $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=6";
-                    $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-                    $this->db->from('user');
-                    $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-                    $this->db->where($condition);
-                    $query       = $this->db->get();
-                    $allemployee = $query->result();
-                    $senderid    = [];
-
-                    foreach ($allemployee as $mytoken) {
-                        $senderid[] = $mytoken->waiter_kitchenToken;
-                    }
-
-                    $newmsg = [
-                        'tag'     => "incoming_request",
-                        'orderid' => $orderid,
-                        'amount'  => $this->input->post('grandtotal'),
-                    ];
-                    $message = json_encode($newmsg);
-                    define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                    $registrationIds = $senderid;
-                    $msg             = [
-                        'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal'),
-                        'title'      => "New Order Placed",
-                        'subtitle'   => "TSET",
-                        'tickerText' => "TSET",
-                        'vibrate'    => 1,
-                        'sound'      => 1,
-                        'largeIcon'  => "TSET",
-                        'smallIcon'  => "TSET",
-                    ];
-                    $fields2 = [
-                        'registration_ids' => $registrationIds,
-                        'data'             => $msg,
-                    ];
-
-                    $headers2 = [
-                        'Authorization: key=' . API_ACCESS_KEY,
-                        'Content-Type: application/json',
-                    ];
-
-                    $ch2 = curl_init();
-                    curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                    curl_setopt($ch2, CURLOPT_POST, true);
-                    curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-                    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-                    $result2 = curl_exec($ch2);
-                    curl_close($ch2);
-
-/*End Notification*/
-                    /*PUSH Notification For Waiter ios*/
-                    $contentsmsg   = "Numéro de commande: " . $orderid . " Montant de la commande:" . number_format($gtotal, 2);
-                    $contentstitle = "Nouvelle commande passée";
-                    $curl3         = curl_init();
-                    curl_setopt_array($curl3, [
-                        CURLOPT_URL            => 'https://onesignal.com/api/v1/notifications',
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING       => '',
-                        CURLOPT_MAXREDIRS      => 10,
-                        CURLOPT_TIMEOUT        => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST  => 'POST',
-                        CURLOPT_POSTFIELDS     => '{"app_id": "4e1150f3-03c8-4de3-ab57-79ca27da1b8e","included_segments": ["All"],"data": {"type": "order place"},"contents": {"en": "' . $contentsmsg . '"},"headings": {"en": "' . $contentstitle . '"}}',
-                        CURLOPT_HTTPHEADER     => [
-                            'Content-Type: application/json',
-                            'Authorization: Basic ZTUwMmM2OWEtM2MxYy00NTY2LWJiYWUtZDRkODE4MjNhMDUx',
-                        ],
-                    ]);
-                    $response = curl_exec($curl3);
-                    curl_close($curl3);
-                    /*Push Notification*/
+                    /* Notification commande passée */
+                    $this->load->library('notification');
+                    $gtotal = $this->input->post('grandtotal', true);
+                    $this->notification->order_placed($orderid, $gtotal, $customerinfo->customer_token);
                     return $this->respondWithSuccess('Commande passée avec succès', $output);
                 }
 
@@ -2063,89 +1933,9 @@ echo "<script>
         $customerinfo = $this->Api_v2_model->read('*', 'customer_info', ['customer_id' => $customerid]);
 
         $output = $categoryIDs = [];
-        /*PUSH Notification For Customer*/
-
-        $icon    = base_url('assets/img/applogo.png');
-        $content = [
-            "en" => "Numéro de commande: " . $orderid . " Montant de la commande:" . number_format($orderinfo->totalamount, 2),
-        ];
-        $title = [
-            "en" => "Nouvelle commande passée",
-        ];
-        $fields = [
-            'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-            'include_player_ids' => [$customerinfo->customer_token],
-            'data'               => [
-                'type' => "order place",
-                'logo' => $icon,
-            ],
-            'contents'           => $content,
-            'headings'           => $title,
-        ];
-
-        $fields = json_encode($fields);
-        $ch     = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        /*Push Notification*/
-        $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=6";
-        $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-        $this->db->from('user');
-        $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-        $this->db->where($condition);
-        $query       = $this->db->get();
-        $allemployee = $query->result();
-        $senderid    = [];
-
-        foreach ($allemployee as $mytoken) {
-            $senderid[] = $mytoken->waiter_kitchenToken;
-        }
-
-        $newmsg = [
-            'tag'     => "incoming_request",
-            'orderid' => $orderid,
-            'amount'  => $orderinfo->totalamount,
-        ];
-        $message = json_encode($newmsg);
-        define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-        $registrationIds = $senderid;
-        $msg             = [
-            'message'    => "Numéro de commande:" . $orderid . ", Montant:" . $orderinfo->totalamount,
-            'title'      => "Nouvelle commande passée",
-            'subtitle'   => "TSET",
-            'tickerText' => "TSET",
-            'vibrate'    => 1,
-            'sound'      => 1,
-            'largeIcon'  => "TSET",
-            'smallIcon'  => "TSET",
-        ];
-        $fields2 = [
-            'registration_ids' => $registrationIds,
-            'data'             => $msg,
-        ];
-
-        $headers2 = [
-            'Authorization: key=' . API_ACCESS_KEY,
-            'Content-Type: application/json',
-        ];
-
-        $ch2 = curl_init();
-        curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch2, CURLOPT_POST, true);
-        curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-        $result2 = curl_exec($ch2);
-        curl_close($ch2);
-        /*End Notification*/
+        /* Notification paiement confirmé */
+        $this->load->library('notification');
+        $this->notification->order_placed($orderid, $orderinfo->totalamount, $customerinfo->customer_token);
         echo '<img style="inline-size: 100%;" src="' . base_url() . '/assets/img/icons/order1.jpg"/>';
     }
 
@@ -2221,89 +2011,9 @@ echo "<script>
         $customerinfo = $this->Api_v2_model->read('*', 'customer_info', ['customer_id' => $customerid]);
 
         $output = $categoryIDs = [];
-        /*PUSH Notification For Customer*/
-
-        $icon    = base_url('assets/img/applogo.png');
-        $content = [
-            "en" => "Numéro de commande: " . $orderid . " Montant de la commande:" . number_format($orderinfo->totalamount, 2),
-        ];
-        $title = [
-            "en" => "Nouvelle commande passée",
-        ];
-        $fields = [
-            'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-            'include_player_ids' => [$customerinfo->customer_token],
-            'data'               => [
-                'type' => "order place",
-                'logo' => $icon,
-            ],
-            'contents'           => $content,
-            'headings'           => $title,
-        ];
-
-        $fields = json_encode($fields);
-        $ch     = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        /*Push Notification*/
-        $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=6";
-        $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-        $this->db->from('user');
-        $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-        $this->db->where($condition);
-        $query       = $this->db->get();
-        $allemployee = $query->result();
-        $senderid    = [];
-
-        foreach ($allemployee as $mytoken) {
-            $senderid[] = $mytoken->waiter_kitchenToken;
-        }
-
-        $newmsg = [
-            'tag'     => "incoming_request",
-            'orderid' => $orderid,
-            'amount'  => $orderinfo->totalamount,
-        ];
-        $message = json_encode($newmsg);
-        define('API_ACCESS_KEY', 'AAAAW3kqYNI:AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-        $registrationIds = $senderid;
-        $msg             = [
-            'message'    => "Numéro de commande :" . $orderid . ", Montant:" . $orderinfo->totalamount,
-            'title'      => "Nouvelle commande passée",
-            'subtitle'   => "TSET",
-            'tickerText' => "TSET",
-            'vibrate'    => 1,
-            'sound'      => 1,
-            'largeIcon'  => "TSET",
-            'smallIcon'  => "TSET",
-        ];
-        $fields2 = [
-            'registration_ids' => $registrationIds,
-            'data'             => $msg,
-        ];
-
-        $headers2 = [
-            'Authorization: key=' . API_ACCESS_KEY,
-            'Content-Type: application/json',
-        ];
-
-        $ch2 = curl_init();
-        curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch2, CURLOPT_POST, true);
-        curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-        $result2 = curl_exec($ch2);
-        curl_close($ch2);
-        /*End Notification*/
+        /* Notification paiement confirmé */
+        $this->load->library('notification');
+        $this->notification->order_placed($orderid, $orderinfo->totalamount, $customerinfo->customer_token);
 
         $output = $categoryIDs = [];
         echo '<img style="inline-size: 100%;" src="' . base_url() . '/assets/img/icons/order1.jpg"/>';

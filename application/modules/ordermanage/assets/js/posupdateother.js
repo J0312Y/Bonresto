@@ -470,34 +470,36 @@ function postupdateorder_ajax() {
           closeOnCancel: true,
         },
         function (isConfirm) {
-          if (isConfirm) {
-            $.ajax({
-              type: "GET",
-              data: { csrf_test_name: csrf },
-              url:
-                basicinfo.baseurl +
-                "ordermanage/order/postokengenerateupdate/" +
-                result.orderid +
-                "/1",
-              success: function (data) {
-                printRawHtml(data);
-              },
-            });
-          } else {
-            $.ajax({
-              type: "GET",
-              data: { csrf_test_name: csrf },
-              url:
-                basicinfo.baseurl +
-                "ordermanage/order/tokenupdate/" +
-                result.orderid,
-              success: function (data) {
-                console.log("done");
-                window.location.href =
-                  basicinfo.baseurl + "ordermanage/order/orderlist";
-              },
-            });
-          }
+          try {
+            if (isConfirm) {
+              $.ajax({
+                type: "GET",
+                data: { csrf_test_name: csrf },
+                url:
+                  basicinfo.baseurl +
+                  "ordermanage/order/postokengenerateupdate/" +
+                  result.orderid +
+                  "/1",
+                success: function (data) {
+                  printRawHtml(data);
+                },
+              });
+            } else {
+              $.ajax({
+                type: "GET",
+                data: { csrf_test_name: csrf },
+                url:
+                  basicinfo.baseurl +
+                  "ordermanage/order/tokenupdate/" +
+                  result.orderid,
+                success: function (data) {
+                  console.log("done");
+                  window.location.href =
+                    basicinfo.baseurl + "ordermanage/order/orderlist";
+                },
+              });
+            }
+          } catch(e) { console.error("posupdateother callback error:", e); }
         }
       );
       setTimeout(function () {

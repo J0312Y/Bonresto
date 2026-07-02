@@ -47,7 +47,7 @@ function NotifAvatar({ icon, color, logoUrl }: { icon: string; color: string; lo
       <img
         src={logoUrl}
         alt=""
-        className="h-10 w-10 shrink-0 rounded-full object-cover border border-gray-200 dark:border-gray-700"
+        className="h-10 w-10 shrink-0 rounded-full object-cover border border-gray-200 border-gray-700"
         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
       />
     );
@@ -127,7 +127,7 @@ export default function NotificationDropdown() {
     <div className="relative">
       {/* Bell button */}
       <button
-        className="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full dropdown-toggle hover:text-gray-700 h-11 w-11 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+        className="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full dropdown-toggle hover:text-gray-700 h-11 w-11 hover:bg-gray-100 border-gray-800 bg-gray-900 text-gray-400 hover:bg-gray-800 hover:text-white"
         onClick={handleOpen}
         aria-label="Notifications"
       >
@@ -158,12 +158,12 @@ export default function NotificationDropdown() {
       <Dropdown
         isOpen={isOpen}
         onClose={closeDropdown}
-        className="absolute -right-[240px] mt-2 flex w-[360px] flex-col rounded-2xl border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-900 overflow-hidden sm:w-[370px] lg:right-0"
+        className="absolute -right-[240px] mt-2 flex w-[360px] flex-col rounded-2xl border border-gray-200 bg-white shadow-xl border-gray-700 bg-gray-900 overflow-hidden sm:w-[370px] lg:right-0"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 dark:border-gray-800">
+        <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 border-gray-800">
           <div className="flex items-center gap-2">
-            <h5 className="text-base font-semibold text-gray-800 dark:text-white">
+            <h5 className="text-base font-semibold text-gray-800 text-white">
               Notifications
             </h5>
             {unread > 0 && (
@@ -177,7 +177,7 @@ export default function NotificationDropdown() {
           </div>
           <button
             onClick={closeDropdown}
-            className="flex items-center justify-center h-7 w-7 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300 transition-colors"
+            className="flex items-center justify-center h-7 w-7 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 hover:bg-gray-800 hover:text-gray-300 transition-colors"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -196,7 +196,7 @@ export default function NotificationDropdown() {
 
           {!loading && notifications.length === 0 && (
             <li className="flex flex-col items-center justify-center py-14 text-gray-400 text-sm gap-3">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-2xl">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 bg-gray-800 text-2xl">
                 🔔
               </span>
               <span>Aucune notification récente</span>
@@ -210,20 +210,20 @@ export default function NotificationDropdown() {
                 <Link
                   to={`/clients/${n.link.split("/").pop()}`}
                   onClick={closeDropdown}
-                  className={`flex gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors border-b border-gray-50 dark:border-gray-800/60 ${!isRead ? "bg-brand-50/40 dark:bg-brand-500/5" : ""}`}
+                  className={`flex gap-3 px-4 py-3 hover:bg-gray-50 hover:bg-white/5 transition-colors border-b border-gray-50 border-gray-800/60 ${!isRead ? "bg-brand-50/40 bg-brand-500/5" : ""}`}
                 >
                   <NotifAvatar icon={n.icon} color={n.color} logoUrl={n.logo_url} />
 
                   <span className="flex flex-col min-w-0 flex-1">
                     <span className="flex items-center justify-between gap-2 mb-0.5">
-                      <span className="font-semibold text-sm text-gray-800 dark:text-white truncate">
+                      <span className="font-semibold text-sm text-gray-800 text-white truncate">
                         {n.title}
                       </span>
                       {!isRead && (
                         <span className={`shrink-0 h-2 w-2 rounded-full ${DOT_MAP[n.color] ?? "bg-brand-500"}`} />
                       )}
                     </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 leading-snug line-clamp-2">
+                    <span className="text-xs text-gray-500 text-gray-400 leading-snug line-clamp-2">
                       {n.message}
                     </span>
                     <span className="flex items-center gap-1.5 mt-1.5">
@@ -240,11 +240,11 @@ export default function NotificationDropdown() {
         </ul>
 
         {/* Footer */}
-        <div className="px-3 py-2.5 border-t border-gray-100 dark:border-gray-800">
+        <div className="px-3 py-2.5 border-t border-gray-100 border-gray-800">
           <Link
             to="/notifications"
             onClick={closeDropdown}
-            className="flex items-center justify-center gap-2 w-full rounded-xl py-2 text-sm font-medium text-brand-600 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10 transition-colors"
+            className="flex items-center justify-center gap-2 w-full rounded-xl py-2 text-sm font-medium text-brand-600 hover:bg-brand-50 text-brand-400 hover:bg-brand-500/10 transition-colors"
           >
             Voir toutes les notifications
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

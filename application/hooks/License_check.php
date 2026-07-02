@@ -6,6 +6,9 @@ class License_check {
     const BYPASS = [
         'install', 'saas', 'dashboard/auth', 'dashboard/license',
         'login', 'logout', 'hungry', 'scanmenu', 'qrorder', 'qr-menu',
+        'call-waiter', 'request-bill', 'order-tracking', 'order-status-api',
+        'apporedrlist', 'qr-app-cart', 'addtocartqr', 'paymentsqr',
+        'payment-processqr', 'app-details', 'app-details-update', 'update-summery',
         'v1', 'v3', 'app', 'appv1', 'android',
         'sync_api', 'sync_cron',
     ];

@@ -24,26 +24,26 @@ interface CardProps {
 
 function MetricCard({ label, value, sub, trend, icon, iconBg }: CardProps) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
+    <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03] md:p-6">
       <div className={`flex items-center justify-center w-12 h-12 rounded-xl ${iconBg}`}>
         {icon}
       </div>
       <div className="flex items-end justify-between mt-5">
         <div>
-          <span className="text-sm text-gray-500 dark:text-gray-400">{label}</span>
-          <h4 className="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">
+          <span className="text-sm text-gray-500 text-gray-400">{label}</span>
+          <h4 className="mt-2 font-bold text-gray-800 text-title-sm text-white/90">
             {value}
           </h4>
           {sub && (
-            <span className="text-xs text-gray-400 dark:text-gray-500">{sub}</span>
+            <span className="text-xs text-gray-400 text-gray-500">{sub}</span>
           )}
         </div>
         {trend && (
           <span
             className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
               trend.up
-                ? "bg-success-50 text-success-600 dark:bg-success-500/15 dark:text-success-400"
-                : "bg-error-50 text-error-600 dark:bg-error-500/15 dark:text-error-400"
+                ? "bg-success-50 text-success-600 bg-success-500/15 text-success-400"
+                : "bg-error-50 text-error-600 bg-error-500/15 text-error-400"
             }`}
           >
             {trend.up ? (
@@ -76,22 +76,22 @@ export default function SaasMetrics({ stats }: { stats: DashboardStats }) {
             ? { label: `${stats.new_clients_this_month} nouveaux`, up: true }
             : undefined
         }
-        icon={<GroupIcon className="text-blue-600 size-6 dark:text-blue-400" />}
-        iconBg="bg-blue-50 dark:bg-blue-500/10"
+        icon={<GroupIcon className="text-blue-600 size-6 text-blue-400" />}
+        iconBg="bg-blue-50 bg-blue-500/10"
       />
       <MetricCard
         label="Abonnements actifs"
         value={stats.active_subscriptions}
         sub={`sur ${stats.total_clients} clients`}
-        icon={<CheckCircleIcon className="text-green-600 size-6 dark:text-green-400" />}
-        iconBg="bg-green-50 dark:bg-green-500/10"
+        icon={<CheckCircleIcon className="text-green-600 size-6 text-green-400" />}
+        iconBg="bg-green-50 bg-green-500/10"
       />
       <MetricCard
         label="Revenus du mois"
         value={fcfa(stats.revenue_this_month)}
         trend={{ label: "ce mois", up: true }}
-        icon={<DollarLineIcon className="text-purple-600 size-6 dark:text-purple-400" />}
-        iconBg="bg-purple-50 dark:bg-purple-500/10"
+        icon={<DollarLineIcon className="text-purple-600 size-6 text-purple-400" />}
+        iconBg="bg-purple-50 bg-purple-500/10"
       />
       <MetricCard
         label="MRR"
@@ -102,8 +102,8 @@ export default function SaasMetrics({ stats }: { stats: DashboardStats }) {
             ? { label: `${stats.mrr_trend > 0 ? "+" : ""}${stats.mrr_trend}% vs mois dernier`, up: stats.mrr_trend >= 0 }
             : undefined
         }
-        icon={<ShootingStarIcon className="text-orange-500 size-6 dark:text-orange-400" />}
-        iconBg="bg-orange-50 dark:bg-orange-500/10"
+        icon={<ShootingStarIcon className="text-orange-500 size-6 text-orange-400" />}
+        iconBg="bg-orange-50 bg-orange-500/10"
       />
       <MetricCard
         label="Expirent bientôt"
@@ -114,15 +114,15 @@ export default function SaasMetrics({ stats }: { stats: DashboardStats }) {
             ? { label: "attention", up: false }
             : undefined
         }
-        icon={<AlertIcon className="text-yellow-600 size-6 dark:text-yellow-400" />}
-        iconBg="bg-yellow-50 dark:bg-yellow-500/10"
+        icon={<AlertIcon className="text-yellow-600 size-6 text-yellow-400" />}
+        iconBg="bg-yellow-50 bg-yellow-500/10"
       />
       <MetricCard
         label="Taux d'activation"
         value={`${activationRate}%`}
         sub="clients avec abonnement actif"
-        icon={<PieChartIcon className="text-pink-600 size-6 dark:text-pink-400" />}
-        iconBg="bg-pink-50 dark:bg-pink-500/10"
+        icon={<PieChartIcon className="text-pink-600 size-6 text-pink-400" />}
+        iconBg="bg-pink-50 bg-pink-500/10"
       />
       <MetricCard
         label="Taux de churn"
@@ -133,8 +133,8 @@ export default function SaasMetrics({ stats }: { stats: DashboardStats }) {
             ? { label: "élevé", up: false }
             : { label: "faible", up: true }
         }
-        icon={<ArrowDownIcon className="text-red-500 size-6 dark:text-red-400" />}
-        iconBg="bg-red-50 dark:bg-red-500/10"
+        icon={<ArrowDownIcon className="text-red-500 size-6 text-red-400" />}
+        iconBg="bg-red-50 bg-red-500/10"
       />
       <MetricCard
         label="Recouvrement factures"
@@ -145,8 +145,8 @@ export default function SaasMetrics({ stats }: { stats: DashboardStats }) {
             ? { label: "bon", up: true }
             : { label: "à améliorer", up: false }
         }
-        icon={<CheckCircleIcon className="text-teal-500 size-6 dark:text-teal-400" />}
-        iconBg="bg-teal-50 dark:bg-teal-500/10"
+        icon={<CheckCircleIcon className="text-teal-500 size-6 text-teal-400" />}
+        iconBg="bg-teal-50 bg-teal-500/10"
       />
     </div>
   );

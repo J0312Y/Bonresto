@@ -603,58 +603,9 @@ class App extends MY_Controller
                     $output['phone']        = $this->input->post('phone');
                     $output['address']      = $this->input->post('billing_address');
 
-                    /*Push Notification*/
-                    $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=6";
-                    $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-                    $this->db->from('user');
-                    $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-                    $this->db->where($condition);
-                    $query       = $this->db->get();
-                    $allemployee = $query->result();
-                    $senderid    = [];
-
-                    foreach ($allemployee as $mytoken) {
-                        $senderid[] = $mytoken->waiter_kitchenToken;
-                    }
-
-                    $newmsg = [
-                        'tag'     => "incoming_request",
-                        'orderid' => $orderid,
-                        'amount'  => $this->input->post('grandtotal'),
-                    ];
-                    $message = json_encode($newmsg);
-                    define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                    $registrationIds = $senderid;
-                    $msg             = [
-                        'message'    => "Numéro de commande:" . $orderid . ", Montant:" . $this->input->post('grandtotal'),
-                        'title'      => "New Order Placed",
-                        'subtitle'   => "TSET",
-                        'tickerText' => "TSET",
-                        'vibrate'    => 1,
-                        'sound'      => 1,
-                        'largeIcon'  => "TSET",
-                        'smallIcon'  => "TSET",
-                    ];
-                    $fields2 = [
-                        'registration_ids' => $registrationIds,
-                        'data'             => $msg,
-                    ];
-
-                    $headers2 = [
-                        'Authorization: key=' . API_ACCESS_KEY,
-                        'Content-Type: application/json',
-                    ];
-
-                    $ch2 = curl_init();
-                    curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                    curl_setopt($ch2, CURLOPT_POST, true);
-                    curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-                    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-                    $result2 = curl_exec($ch2);
-                    curl_close($ch2);
-                    /*End Notification*/
+                    /* Notification commande passée */
+                    $this->load->library('notification');
+                    $this->notification->notify_staff_new_order($orderid, $this->input->post('grandtotal'));
 
                     return $this->respondWithSuccess('Commande passée avec succès', $output);
                 }

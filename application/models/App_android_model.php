@@ -636,10 +636,10 @@ class App_android_model extends CI_Model
 				$this->db->where('pvarientid',$groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 					 foreach($productiondetails as $productiondetail){
-							$r_stock = $productiondetail->qty*($foodqty*$groupitem->item_qty);
+							$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
 							/*add stock in ingredients*/
-							$this->db->set('stock_qty', 'stock_qty-'.$r_stock, FALSE);
-							$this->db->where('id', $productiondetail->ingredientid);
+							$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+							$this->db->where('id', intval($productiondetail->ingredientid));
 							$this->db->update('ingredients');
 							/*end add ingredients*/
 					 }
@@ -651,10 +651,10 @@ class App_android_model extends CI_Model
 				$this->db->where('pvarientid',$fvid);
 				$productiondetails = $this->db->get()->result();
 				foreach($productiondetails as $productiondetail){
-					$r_stock = $productiondetail->qty*$foodqty;
+					$r_stock = intval($productiondetail->qty) * intval($foodqty);
 					/*add stock in ingredients*/
-						$this->db->set('stock_qty', 'stock_qty-'.$r_stock, FALSE);
-						$this->db->where('id', $productiondetail->ingredientid);
+						$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+						$this->db->where('id', intval($productiondetail->ingredientid));
 						$this->db->update('ingredients');
 						/*end add ingredients*/
 				}
@@ -683,6 +683,45 @@ class App_android_model extends CI_Model
 		return true;
 	
 	}
+	#restore stock when order is cancelled (mirror of checkproductiondetails)
+	public function restoreproductiondetails($foodid, $fvid, $foodqty)
+	{
+		$checksetitem = $this->db->select('ProductsID,isgroup')->from('item_foods')->where('ProductsID', $foodid)->where('isgroup', 1)->get()->row();
+		if (!empty($checksetitem)) {
+			$groupitemlist = $this->db->select('items,varientid,item_qty')->from('tbl_groupitems')->where('gitemid', $checksetitem->ProductsID)->get()->result();
+			foreach ($groupitemlist as $groupitem) {
+				$this->db->select('*');
+				$this->db->from('production_details');
+				$this->db->where('foodid', $groupitem->items);
+				$this->db->where('pvarientid', $groupitem->varientid);
+				$productiondetails = $this->db->get()->result();
+				foreach ($productiondetails as $productiondetail) {
+					$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
+					$this->db->set('stock_qty', 'stock_qty+'.intval($r_stock), FALSE);
+					$this->db->where('id', intval($productiondetail->ingredientid));
+					$this->db->update('ingredients');
+				}
+			}
+		} else {
+			$this->db->select('*');
+			$this->db->from('production_details');
+			$this->db->where('foodid', $foodid);
+			$this->db->where('pvarientid', $fvid);
+			$productiondetails = $this->db->get()->result();
+			foreach ($productiondetails as $productiondetail) {
+				$r_stock = intval($productiondetail->qty) * intval($foodqty);
+				$this->db->set('stock_qty', 'stock_qty+'.intval($r_stock), FALSE);
+				$this->db->where('id', intval($productiondetail->ingredientid));
+				$this->db->update('ingredients');
+			}
+		}
+	}
+	#restore product stock (mirror of insert_product)
+	public function restore_product($foodid, $vid, $foodqty)
+	{
+		$this->restoreproductiondetails($foodid, $vid, $foodqty);
+	}
+
 	public function margeview($id){
 		$this->db->select('customer_order.*,order_menu.*,item_foods.ProductName,variant.variantid,variant.variantName,variant.price');
         $this->db->from('customer_order');		

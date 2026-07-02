@@ -1,7 +1,6 @@
 import React from "react";
 import GridShape from "../../components/common/GridShape";
 import { Link } from "react-router";
-import ThemeTogglerTwo from "../../components/common/ThemeTogglerTwo";
 
 export default function AuthLayout({
   children,
@@ -9,10 +8,10 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative p-6 bg-white z-1 dark:bg-gray-900 sm:p-0">
-      <div className="relative flex flex-col justify-center w-full h-screen lg:flex-row dark:bg-gray-900 sm:p-0">
+    <div className="relative p-6 bg-white z-1 bg-gray-900 sm:p-0">
+      <div className="relative flex flex-col justify-center w-full h-screen lg:flex-row bg-gray-900 sm:p-0">
         {children}
-        <div className="items-center hidden w-full h-full lg:w-1/2 bg-brand-950 dark:bg-white/5 lg:grid">
+        <div className="items-center hidden w-full h-full lg:w-1/2 bg-brand-950 bg-white/5 lg:grid">
           <div className="relative flex items-center justify-center z-1">
             {/* <!-- ===== Common Grid Shape Start ===== --> */}
             <GridShape />
@@ -29,15 +28,13 @@ export default function AuthLayout({
               <p className="text-xl font-bold text-white tracking-wide">
                 Bonresto <span className="text-[#37a000]">SaaS</span>
               </p>
-              <p className="mt-2 text-center text-sm text-gray-400 dark:text-white/60">
+              <p className="mt-2 text-center text-sm text-gray-400 text-white/60">
                 Plateforme de gestion pour restaurants
               </p>
             </div>
           </div>
         </div>
-        <div className="fixed z-50 hidden bottom-6 right-6 sm:block">
-          <ThemeTogglerTwo />
-        </div>
+        <div className="fixed z-50 hidden bottom-6 right-6 sm:block" />
       </div>
     </div>
   );

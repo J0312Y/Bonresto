@@ -154,6 +154,9 @@ if (!empty($seoterm)) {
                                                                                                     } ?> </td>
                                     <td class="text-center">
                                         <a onclick="vieworderinfo(<?php echo $item->order_id; ?>)" class="btn btn-xs btn-success apporedrlist_fff" data-toggle="modal" data-target="#vieworder" data-dismiss="modal"><?php echo display('view') ?></a>
+                                        <?php if ($item->order_status >= 1 && $item->order_status <= 3) { ?>
+                                            <a href="<?php echo base_url('order-tracking/' . $item->order_id); ?>" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="left"><i class="fa fa-map-marker"></i> Suivi</a>
+                                        <?php } ?>
                                         <?php if (($item->order_status == 1 || $item->order_status == 2 || $item->order_status == 3 || $item->cutomertype == 99) && ($item->order_date == $today) && ($item->order_status != 4) && ($item->order_status != 5)) { ?>
                                             <a href="<?php echo base_url(); ?>updatemyorder/<?php echo $item->order_id; ?>" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="left"><?php echo display('edit') ?></a>
                                         <?php } ?>

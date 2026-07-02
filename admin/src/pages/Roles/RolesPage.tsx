@@ -90,15 +90,15 @@ const PERM_GROUPS = [
 ];
 
 const COLOR_OPTIONS = [
-  { value: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",       label: "Bleu" },
-  { value: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300", label: "Violet" },
-  { value: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",   label: "Vert" },
-  { value: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300", label: "Orange" },
-  { value: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",           label: "Rouge" },
-  { value: "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300",       label: "Teal" },
-  { value: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300", label: "Jaune" },
-  { value: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",       label: "Rose" },
-  { value: "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300",          label: "Gris" },
+  { value: "bg-blue-100 text-blue-700 bg-blue-900/30 text-blue-300",       label: "Bleu" },
+  { value: "bg-purple-100 text-purple-700 bg-purple-900/30 text-purple-300", label: "Violet" },
+  { value: "bg-green-100 text-green-700 bg-green-900/30 text-green-300",   label: "Vert" },
+  { value: "bg-orange-100 text-orange-700 bg-orange-900/30 text-orange-300", label: "Orange" },
+  { value: "bg-red-100 text-red-700 bg-red-900/30 text-red-300",           label: "Rouge" },
+  { value: "bg-teal-100 text-teal-700 bg-teal-900/30 text-teal-300",       label: "Teal" },
+  { value: "bg-yellow-100 text-yellow-700 bg-yellow-900/30 text-yellow-300", label: "Jaune" },
+  { value: "bg-pink-100 text-pink-700 bg-pink-900/30 text-pink-300",       label: "Rose" },
+  { value: "bg-gray-100 text-gray-600 bg-gray-700 text-gray-300",          label: "Gris" },
 ];
 
 const EMPTY_FORM = {
@@ -203,7 +203,7 @@ export default function RolesPage() {
 
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Rôles & Permissions</h2>
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Rôles & Permissions</h2>
           <p className="text-sm text-gray-500">{roles.length} rôle{roles.length !== 1 ? "s" : ""}</p>
         </div>
         {isSuperAdmin && (
@@ -227,7 +227,7 @@ export default function RolesPage() {
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {roles.map((r) => (
-            <div key={r.role_id} className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] p-5 flex flex-col gap-3">
+            <div key={r.role_id} className="rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03] p-5 flex flex-col gap-3">
               <div className="flex items-start justify-between">
                 <div>
                   <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${r.color}`}>
@@ -236,7 +236,7 @@ export default function RolesPage() {
                   <p className="mt-1.5 text-xs text-gray-400 font-mono">{r.name}</p>
                 </div>
                 {r.is_system ? (
-                  <span className="text-[10px] font-medium text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">Système</span>
+                  <span className="text-[10px] font-medium text-gray-400 bg-gray-100 bg-gray-800 px-2 py-0.5 rounded-full">Système</span>
                 ) : isSuperAdmin && (
                   <div className="flex gap-2">
                     <button onClick={() => openEdit(r)} className="text-xs text-blue-500 hover:underline">Modifier</button>
@@ -256,12 +256,12 @@ export default function RolesPage() {
               {!r.permissions.includes("*") && r.permissions.length > 0 && (
                 <div className="flex flex-wrap gap-1">
                   {r.permissions.slice(0, 8).map((p) => (
-                    <span key={p} className="px-1.5 py-0.5 rounded text-[10px] bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 font-mono">
+                    <span key={p} className="px-1.5 py-0.5 rounded text-[10px] bg-gray-100 text-gray-600 bg-gray-800 text-gray-400 font-mono">
                       {p}
                     </span>
                   ))}
                   {r.permissions.length > 8 && (
-                    <span className="px-1.5 py-0.5 rounded text-[10px] bg-gray-100 text-gray-500 dark:bg-gray-800">
+                    <span className="px-1.5 py-0.5 rounded text-[10px] bg-gray-100 text-gray-500 bg-gray-800">
                       +{r.permissions.length - 8}
                     </span>
                   )}
@@ -284,9 +284,9 @@ export default function RolesPage() {
       {/* ── Modal ─────────────────────────────────────────────────────────── */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="w-full max-w-2xl rounded-2xl bg-white dark:bg-gray-900 shadow-xl my-8">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
-              <h3 className="font-semibold text-gray-800 dark:text-white">
+          <div className="w-full max-w-2xl rounded-2xl bg-white bg-gray-900 shadow-xl my-8">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 border-gray-800">
+              <h3 className="font-semibold text-gray-800 text-white">
                 {editing ? `Modifier "${editing.label}"` : "Nouveau rôle"}
               </h3>
               <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
@@ -306,7 +306,7 @@ export default function RolesPage() {
                       value={form.name}
                       onChange={(e) => setForm((f) => ({ ...f, name: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, "") }))}
                       placeholder="ex: billing"
-                      className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40 font-mono"
+                      className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40 font-mono"
                     />
                     <p className="mt-1 text-[10px] text-gray-400">Minuscules, chiffres et _ uniquement</p>
                   </div>
@@ -319,7 +319,7 @@ export default function RolesPage() {
                     value={form.label}
                     onChange={(e) => setForm((f) => ({ ...f, label: e.target.value }))}
                     placeholder="ex: Facturation"
-                    className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
+                    className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
                   />
                 </div>
                 <div>
@@ -327,7 +327,7 @@ export default function RolesPage() {
                   <select
                     value={form.color}
                     onChange={(e) => setForm((f) => ({ ...f, color: e.target.value }))}
-                    className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
+                    className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
                   >
                     {COLOR_OPTIONS.map((c) => (
                       <option key={c.value} value={c.value}>{c.label}</option>
@@ -344,7 +344,7 @@ export default function RolesPage() {
               {/* Permissions — hidden for system roles */}
               {(!editing || !editing.is_system) && (
                 <div>
-                  <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                  <p className="text-sm font-semibold text-gray-700 text-gray-300 mb-3">
                     Permissions
                     <span className="ml-2 text-xs font-normal text-gray-400">
                       ({form.permissions.length} sélectionnée{form.permissions.length !== 1 ? "s" : ""})
@@ -355,7 +355,7 @@ export default function RolesPage() {
                       const keys = g.perms.map((p) => p.key);
                       const allChecked = keys.every((k) => form.permissions.includes(k));
                       return (
-                        <div key={g.group} className="rounded-xl border border-gray-100 dark:border-gray-800 p-3">
+                        <div key={g.group} className="rounded-xl border border-gray-100 border-gray-800 p-3">
                           <div className="flex items-center justify-between mb-2">
                             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">{g.group}</p>
                             <button
@@ -373,7 +373,7 @@ export default function RolesPage() {
                                 <label
                                   key={p.key}
                                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 cursor-pointer transition-colors ${
-                                    checked ? "bg-green-50 dark:bg-green-900/20" : "hover:bg-gray-50 dark:hover:bg-white/[0.02]"
+                                    checked ? "bg-green-50 bg-green-900/20" : "hover:bg-gray-50 hover:bg-white/[0.02]"
                                   }`}
                                 >
                                   <input
@@ -383,7 +383,7 @@ export default function RolesPage() {
                                     className="accent-[#37a000] w-4 h-4 flex-shrink-0"
                                   />
                                   <div>
-                                    <span className={`text-sm ${checked ? "text-gray-800 dark:text-white/90 font-medium" : "text-gray-500 dark:text-gray-400"}`}>
+                                    <span className={`text-sm ${checked ? "text-gray-800 text-white/90 font-medium" : "text-gray-500 text-gray-400"}`}>
                                       {p.label}
                                     </span>
                                     <span className="ml-1.5 text-[10px] text-gray-400 font-mono">{p.key}</span>
@@ -400,12 +400,12 @@ export default function RolesPage() {
               )}
 
               {editing?.is_system && (
-                <div className="rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 px-4 py-3 text-sm text-blue-700 dark:text-blue-300">
+                <div className="rounded-xl bg-blue-50 bg-blue-900/20 border border-blue-200 border-blue-800 px-4 py-3 text-sm text-blue-700 text-blue-300">
                   Les permissions des rôles système ne peuvent pas être modifiées. Seuls le libellé et la couleur sont éditables.
                 </div>
               )}
 
-              <div className="pt-2 flex gap-3 justify-end border-t border-gray-100 dark:border-gray-800">
+              <div className="pt-2 flex gap-3 justify-end border-t border-gray-100 border-gray-800">
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}

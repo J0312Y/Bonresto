@@ -22,3 +22,5 @@ application/cache/*
 application/config/license.json
 .htaccess
 application/config/license.json
+*.bak
+*.bak1

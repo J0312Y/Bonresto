@@ -7,6 +7,7 @@ class Production_model extends CI_Model {
  
 	public function create()
 	{
+		$this->db->trans_start();
 		$saveid=$this->session->userdata('id');
 		$p_id = $this->input->post('product_id');
 		$purchase_date = str_replace('/','-',$this->input->post('production_date',true));
@@ -24,12 +25,20 @@ class Production_model extends CI_Model {
 			'saveddate'	              =>	$newdate,
 			'productionexpiredate'	  =>	$exdate
 		);
+		/* Server-side stock validation before deducting */
+		$stockCheck = $this->checkingredientstock($foodid, $fvid, $foodqty);
+		if ($stockCheck !== 1 && $stockCheck !== '1') {
+			$this->db->trans_complete();
+			return false;
+		}
+
 		$this->checkproductiondetails($foodid,$fvid,$foodqty);
 		$this->db->insert('production',$data);
 
 		$returnid = $this->db->insert_id();
-		return true;
-	
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+
 	}
 
 	#check productiondetails
@@ -45,10 +54,10 @@ class Production_model extends CI_Model {
 				$this->db->where('pvarientid',$groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 					 foreach($productiondetails as $productiondetail){
-							$r_stock = $productiondetail->qty*($foodqty*$groupitem->item_qty);
+							$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
 							/*add stock in ingredients*/
-							$this->db->set('stock_qty', 'stock_qty-'.$r_stock, FALSE);
-							$this->db->where('id', $productiondetail->ingredientid);
+							$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+							$this->db->where('id', intval($productiondetail->ingredientid));
 							$this->db->update('ingredients');
 							/*end add ingredients*/
 					 }
@@ -60,10 +69,10 @@ class Production_model extends CI_Model {
 				$this->db->where('pvarientid',$fvid);
 				$productiondetails = $this->db->get()->result();
 				foreach($productiondetails as $productiondetail){
-					$r_stock = $productiondetail->qty*$foodqty;
+					$r_stock = intval($productiondetail->qty) * intval($foodqty);
 					/*add stock in ingredients*/
-						$this->db->set('stock_qty', 'stock_qty-'.$r_stock, FALSE);
-						$this->db->where('id', $productiondetail->ingredientid);
+						$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+						$this->db->where('id', intval($productiondetail->ingredientid));
 						$this->db->update('ingredients');
 						/*end add ingredients*/
 				}
@@ -76,17 +85,59 @@ class Production_model extends CI_Model {
 	
 	public function delete($id = null)
 	{
-		$this->db->where('purID',$id)
-			->delete($this->table);
+		$this->db->trans_start();
+		/* Get production run details to restore stock */
+		$production = $this->db->select('itemid, itemvid, itemquantity')
+			->from('production')
+			->where('productionid', $id)
+			->get()->row();
 
-		$this->db->where('purchaseid',$id)
-			->delete('purchase_details');
+		if ($production) {
+			/* Restore ingredient stock that was deducted during this production run */
+			$checksetitem = $this->db->select('ProductsID,isgroup')
+				->from('item_foods')
+				->where('ProductsID', $production->itemid)
+				->where('isgroup', 1)
+				->get()->row();
 
-		if ($this->db->affected_rows()) {
-			return true;
-		} else {
-			return false;
+			if (!empty($checksetitem)) {
+				$groupitemlist = $this->db->select('items,varientid,item_qty')
+					->from('tbl_groupitems')
+					->where('gitemid', $checksetitem->ProductsID)
+					->get()->result();
+				foreach ($groupitemlist as $groupitem) {
+					$productiondetails = $this->db->select('ingredientid, qty')
+						->from('production_details')
+						->where('foodid', $groupitem->items)
+						->where('pvarientid', $groupitem->varientid)
+						->get()->result();
+					foreach ($productiondetails as $detail) {
+						$restore_qty = intval($detail->qty) * (intval($production->itemquantity) * intval($groupitem->item_qty));
+						$this->db->set('stock_qty', 'stock_qty+'.intval($restore_qty), FALSE);
+						$this->db->where('id', intval($detail->ingredientid));
+						$this->db->update('ingredients');
+					}
+				}
+			} else {
+				$productiondetails = $this->db->select('ingredientid, qty')
+					->from('production_details')
+					->where('foodid', $production->itemid)
+					->where('pvarientid', $production->itemvid)
+					->get()->result();
+				foreach ($productiondetails as $detail) {
+					$restore_qty = intval($detail->qty) * intval($production->itemquantity);
+					$this->db->set('stock_qty', 'stock_qty+'.intval($restore_qty), FALSE);
+					$this->db->where('id', intval($detail->ingredientid));
+					$this->db->update('ingredients');
+				}
+			}
 		}
+
+		$this->db->where('productionid', $id)
+			->delete('production');
+
+		$this->db->trans_complete();
+		return $this->db->trans_status();
 	} 
 
     public function deleteitem($id = null,$qid=null)
@@ -431,17 +482,11 @@ public function suplierinfo($id){
 	}
 public function countlist()
 	{
-		
-	    $this->db->select('production_details.foodid,item_foods.ProductName');
-        $this->db->from('production_details');
+		$this->db->select('COUNT(DISTINCT production_details.pvarientid) as total', FALSE);
+		$this->db->from('production_details');
 		$this->db->join('item_foods','item_foods.ProductsID = production_details.foodid','Inner');
-        $this->db->group_by('production_details.foodid'); 
-		
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();  
-        }
-        return false;
+		$query = $this->db->get()->row();
+		return $query ? (int)$query->total : 0;
 	}
 #check stock
 	public function checkingredientstock($foodid,$vid,$foodqty){

@@ -33,17 +33,9 @@
                                 <div class="form-group row">
                                     <label for="name"
                                         class="col-sm-3 col-form-label"><?php echo display('name') ?></label>
-                                    <div class="col-sm-9"> 
-                                    	<select name="name" class="form-control" id="name">
-                                        	<option value=""><?php echo display('name') ?></option>
-                                            <?php if(!empty($emplist)){
-												foreach($emplist as $emp){
-												?>
-                                            <option value="<?php echo $emp->employee_id;?>"><?php echo $emp->first_name.' '.$emp->last_name;?></option>
-                                            <?php }
-											}
-											?>
-                                        </select>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="name" id="name"
+                                            placeholder="Ex: Paie Juin 2026" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">

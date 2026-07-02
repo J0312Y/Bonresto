@@ -15,7 +15,7 @@ export default function SaasTarget({ stats }: Props) {
   const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-FR")} FCFA`;
 
   const options: ApexOptions = {
-    colors: ["#465FFF"],
+    colors: ["#37a000"],
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "radialBar",
@@ -28,7 +28,7 @@ export default function SaasTarget({ stats }: Props) {
         endAngle: 85,
         hollow: { size: "80%" },
         track: {
-          background: "#E4E7EC",
+          background: "#e5e7eb",
           strokeWidth: "100%",
           margin: 5,
         },
@@ -44,35 +44,36 @@ export default function SaasTarget({ stats }: Props) {
         },
       },
     },
-    fill: { type: "solid", colors: ["#465FFF"] },
+    fill: { type: "solid", colors: ["#37a000"] },
     stroke: { lineCap: "round" },
     labels: ["Activation"],
   };
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
-      <div className="px-5 pt-5 bg-white shadow-default rounded-2xl pb-11 dark:bg-gray-900 sm:px-6 sm:pt-6">
-        <div className="flex justify-between">
+    <div className="overflow-hidden rounded-[28px] border border-gray-200/80 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)] border-gray-800 bg-gray-900/80">
+      <div className="rounded-[28px] bg-gradient-to-br from-white to-emerald-50/60 px-5 pb-10 pt-5 from-gray-900 to-gray-900 sm:px-6 sm:pt-6">
+        <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#37a000]">Système de santé</p>
+            <h3 className="mt-1 text-lg font-semibold text-gray-900 text-white/90">
               Taux d'activation
             </h3>
-            <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
+            <p className="mt-1 text-sm text-gray-500 text-gray-400">
               Clients avec un abonnement actif
             </p>
           </div>
-        </div>
-
-        <div className="relative">
-          <div className="max-h-[330px]">
-            <Chart options={options} series={[rate]} type="radialBar" height={330} />
-          </div>
-          <span className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-[95%] rounded-full bg-success-50 px-3 py-1 text-xs font-medium text-success-600 dark:bg-success-500/15 dark:text-success-500">
+          <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
             {stats.active_subscriptions} actifs
           </span>
         </div>
 
-        <p className="mx-auto mt-10 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
+        <div className="relative mt-4">
+          <div className="max-h-[330px]">
+            <Chart options={options} series={[rate]} type="radialBar" height={330} />
+          </div>
+        </div>
+
+        <p className="mx-auto mt-2 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
           {stats.new_clients_this_month > 0
             ? `+${stats.new_clients_this_month} nouveau${stats.new_clients_this_month > 1 ? "x" : ""} client${stats.new_clients_this_month > 1 ? "s" : ""} ce mois. Continuez sur cette lancée !`
             : "Suivez vos abonnements et relancez les clients inactifs."}
@@ -81,32 +82,32 @@ export default function SaasTarget({ stats }: Props) {
 
       <div className="flex items-center justify-center gap-5 px-6 py-3.5 sm:gap-8 sm:py-5">
         <div>
-          <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
+          <p className="mb-1 text-center text-gray-500 text-theme-xs text-gray-400 sm:text-sm">
             MRR
           </p>
-          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
+          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 text-white/90 sm:text-lg">
             {fmt(stats.mrr)}
           </p>
         </div>
 
-        <div className="w-px bg-gray-200 h-7 dark:bg-gray-800" />
+        <div className="w-px bg-gray-200 h-7 bg-gray-800" />
 
         <div>
-          <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
+          <p className="mb-1 text-center text-gray-500 text-theme-xs text-gray-400 sm:text-sm">
             Ce mois
           </p>
-          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
+          <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 text-white/90 sm:text-lg">
             {fmt(stats.revenue_this_month)}
           </p>
         </div>
 
-        <div className="w-px bg-gray-200 h-7 dark:bg-gray-800" />
+        <div className="w-px bg-gray-200 h-7 bg-gray-800" />
 
         <div>
-          <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
+          <p className="mb-1 text-center text-gray-500 text-theme-xs text-gray-400 sm:text-sm">
             Expirent
           </p>
-          <p className={`flex items-center justify-center gap-1 text-base font-semibold sm:text-lg ${stats.expiring_soon > 0 ? "text-warning-600 dark:text-warning-400" : "text-gray-800 dark:text-white/90"}`}>
+          <p className={`flex items-center justify-center gap-1 text-base font-semibold sm:text-lg ${stats.expiring_soon > 0 ? "text-warning-600 text-warning-400" : "text-gray-800 text-white/90"}`}>
             {stats.expiring_soon}
           </p>
         </div>

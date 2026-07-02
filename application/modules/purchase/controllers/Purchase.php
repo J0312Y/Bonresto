@@ -227,7 +227,7 @@ class Purchase extends MX_Controller
 
     public function delete($id = null)
     {
-        $this->permission->module('purchase', 'delete')->redirect();
+        $this->permission->method('purchase', 'delete')->redirect();
         $logData = [
             'action_page' => "Purchase List",
             'action_done' => "Delete Data",
@@ -349,6 +349,7 @@ class Purchase extends MX_Controller
 
     public function purchase_return_entry()
     {
+        $this->permission->method('purchase', 'create')->redirect();
         $data['title'] = display('purchase_return');
 
         if ($this->purchase_model->pur_return_insert()) {

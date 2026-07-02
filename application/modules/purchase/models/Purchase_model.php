@@ -7,6 +7,7 @@ class Purchase_model extends CI_Model {
  
 	public function create()
 	{
+		$this->db->trans_start();
 		$saveid=$this->session->userdata('id');
 		$p_id = $this->input->post('product_id');
 		$payment_type=$this->input->post('paytype',true);
@@ -63,8 +64,8 @@ class Purchase_model extends CI_Model {
 			if(!empty($quantity))
 			{
 				/*add stock in ingredients*/
-				$this->db->set('stock_qty', 'stock_qty+'.$product_quantity, FALSE);
-				$this->db->where('id', $product_id);
+				$this->db->set('stock_qty', 'stock_qty+'.intval($product_quantity), FALSE);
+				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
 				/*end add ingredients*/
 				$this->db->insert('purchase_details',$data1);
@@ -113,30 +114,43 @@ class Purchase_model extends CI_Model {
 			$this->db->insert('bank_summary',$banksummary);
             $this->db->insert('supplier_ledger',$ledger_debit);
 		}
-		return true;
-	
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+
 	}
-	
+
 	public function delete($id = null)
 	{
+		$this->db->trans_start();
+		/* Reverse stock before deleting purchase details */
+		$details = $this->db->select('indredientid, quantity')
+			->from('purchase_details')
+			->where('purchaseid', $id)
+			->get()
+			->result();
+
+		foreach ($details as $detail) {
+			$this->db->set('stock_qty', 'stock_qty-'.intval($detail->quantity), FALSE);
+			$this->db->where('id', intval($detail->indredientid));
+			$this->db->update('ingredients');
+		}
+
 		$this->db->where('purID',$id)
 			->delete($this->table);
 
 		$this->db->where('purchaseid',$id)
 			->delete('purchase_details');
 
-		if ($this->db->affected_rows()) {
-			return true;
-		} else {
-			return false;
-		}
-	} 
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+	}
 
 
 
 
 	public function update()
 	{
+		$this->db->trans_start();
 		$id=$this->input->post('purID');
 		$saveid=$this->session->userdata('id');
 		$p_id = $this->input->post('product_id',true);
@@ -206,9 +220,9 @@ class Purchase_model extends CI_Model {
 					
 					/*add stock in ingredients*/
 					$olderqty = $query->row();
-					$addv = $product_quantity-$olderqty->quantity;
-				$this->db->set('stock_qty', 'stock_qty+'.$addv, FALSE);
-				$this->db->where('id', $product_id);
+					$addv = intval($product_quantity) - intval($olderqty->quantity);
+				$this->db->set('stock_qty', 'stock_qty+'.intval($addv), FALSE);
+				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
 				/*end add ingredients*/
 					$this->db->where('purchaseid', $id);
@@ -228,7 +242,11 @@ class Purchase_model extends CI_Model {
 				);
 				if(!empty($quantity))
 				{
-					
+					/*add stock in ingredients for new line item*/
+					$this->db->set('stock_qty', 'stock_qty+'.intval($product_quantity), FALSE);
+					$this->db->where('id', intval($product_id));
+					$this->db->update('ingredients');
+					/*end add ingredients*/
 					$this->db->insert('purchase_details',$data1);
 				}
 			}
@@ -248,9 +266,20 @@ class Purchase_model extends CI_Model {
 			$result=array_diff($test,$p_id);
 			if(!empty($result)){
 				foreach($result as $delval){
+					/* Reverse stock for removed line items */
+					$removedRow = $this->db->select('quantity')
+						->from('purchase_details')
+						->where('indredientid', $delval)
+						->where('purchaseid', $id)
+						->get()->row();
+					if ($removedRow) {
+						$this->db->set('stock_qty', 'stock_qty-'.intval($removedRow->quantity), FALSE);
+						$this->db->where('id', intval($delval));
+						$this->db->update('ingredients');
+					}
 					$this->db->where('indredientid', $delval);
 					$this->db->where('purchaseid',$id);
-					$del=$this->db->delete('purchase_details'); 
+					$del=$this->db->delete('purchase_details');
 					}
 			}
 			
@@ -299,10 +328,11 @@ class Purchase_model extends CI_Model {
 			$this->db->insert('bank_summary',$banksummary);
             $this->db->insert('supplier_ledger',$ledger_debit);
 		}
-		return true;
+		$this->db->trans_complete();
+		return $this->db->trans_status();
 	}
-	
-	
+
+
 	public function makeproduction()
 	{
 		$saveid=$this->session->userdata('id');
@@ -333,11 +363,16 @@ class Purchase_model extends CI_Model {
 
 			if(!empty($quantity))
 			{
+				/*deduct stock for production ingredients*/
+				$this->db->set('stock_qty', 'stock_qty-'.intval($product_quantity), FALSE);
+				$this->db->where('id', intval($product_id));
+				$this->db->update('ingredients');
+				/*end deduct ingredients*/
 				$this->db->insert('production_details',$data1);
 			}
 		}
 		return true;
-	
+
 	}
 
     public function read($limit = null, $start = null)
@@ -482,17 +517,7 @@ public function suplierinfo($id){
 	}
 public function countlist()
 	{
-		
-	    $this->db->select('purchaseitem.*,supplier.supName');
-        $this->db->from($this->table);
-		$this->db->join('supplier','purchaseitem.suplierID = supplier.supid','left');
-
-		
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();  
-        }
-        return false;
+		return $this->db->count_all_results($this->table);
 	}
  public function invoicebysupplier($id){
 	 	 $this->db->select('*');
@@ -515,6 +540,7 @@ public function getinvoice($id){
         return false;
 	 }
 	public function pur_return_insert(){
+				$this->db->trans_start();
 				/*purchase Return Insert*/
 				$po_no =  $this->input->post('invoice');
 				$createby=$this->session->userdata('id');
@@ -583,20 +609,21 @@ public function getinvoice($id){
 					'quantity'   =>	$adjustqty,
 					'totalprice'   => $qtotalpr);
 			
-						/*add stock in ingredients*/
-					
-				$this->db->set('stock_qty', 'stock_qty-'.$product_quantity, FALSE);
-				$this->db->where('id', $product_id);
+						/*deduct stock in ingredients (prevent negative) */
+
+				$this->db->set('stock_qty', 'GREATEST(stock_qty-'.intval($product_quantity).',0)', FALSE);
+				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
-				/*end add ingredients*/
+				/*end deduct ingredients*/
 					 $this->db->where('purchaseid',$purchaseid)
 					->where('indredientid',$product_id)
 					->update('purchase_details', $qtyData);
 					  }
 					  }
 				}
-		
-		return true;
+
+		$this->db->trans_complete();
+		return $this->db->trans_status();
 	}
 	public function readinvoice($limit = null, $start = null)
 	{
@@ -613,15 +640,7 @@ public function getinvoice($id){
 	} 	
 	public function countreturnlist()
 	{
-		
-	    $this->db->select('purchase_return.*,supplier.supName');
-        $this->db->from('purchase_return');
-		$this->db->join('supplier','purchase_return.supplier_id = supplier.supid','left');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();  
-        }
-        return false;
+		return $this->db->count_all_results('purchase_return');
 	}
   public function findByreturnId($id = null)
 	{ 

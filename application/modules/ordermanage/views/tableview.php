@@ -7,7 +7,17 @@
                             foreach($tableinfo as $table){?>
 
                           <div class="col-md-4">
-                                <div class="info_part <?php if($table['sum'] >= $table['person_capicity']){ echo 'booked';}?>">
+                                <?php
+                                    // status: 0=libre, 1=réservé, 2=occupé
+                                    $table_status = isset($table['status']) ? (int)$table['status'] : 0;
+                                    $css_class = '';
+                                    if ($table_status == 2 || $table['sum'] >= $table['person_capicity']) {
+                                        $css_class = 'booked'; // rouge - occupé
+                                    } elseif ($table_status == 1) {
+                                        $css_class = 'reserved'; // orange - réservé
+                                    }
+                                ?>
+                                <div class="info_part <?php echo $css_class; ?>">
                                     <div class="table-topper">
                                         <div class="">
                                             <input id="chkboxmap-<?php echo

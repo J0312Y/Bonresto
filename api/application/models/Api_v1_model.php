@@ -116,8 +116,7 @@ class Api_v1_model extends CI_Model
 		$this->db->where('user.email', $data['email']);
 		$this->db->where("(user.password = '" . $Password . "' OR user.password =  '" . md5($Password) . "')", NULL, TRUE);
 		$query = $this->db->get($table)->row();
-		$num_rows = $this->db->count_all_results();
-		if ($num_rows > 0) {
+		if ($query) {
 			return $query;
 		} else {
 			return FALSE;
@@ -129,9 +128,7 @@ class Api_v1_model extends CI_Model
 		$this->db->select('email, password');
 		$this->db->where('email', $data['email']);
 		$query = $this->db->get($table)->row();
-		$num_rows = $this->db->count_all_results();
-
-		if ($num_rows > 0) {
+		if ($query) {
 			return $query;
 		} else {
 			return FALSE;

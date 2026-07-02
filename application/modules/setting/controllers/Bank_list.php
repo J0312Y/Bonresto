@@ -63,6 +63,11 @@ class Bank_list extends MX_Controller {
     }
 	
 	
+    public function bank_list($id = null)
+    {
+        return $this->index($id);
+    }
+
     public function create($id = null)
     {
 	  $this->permission->method('setting','create')->redirect();

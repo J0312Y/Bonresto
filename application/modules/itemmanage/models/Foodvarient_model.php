@@ -32,10 +32,12 @@ class Foodvarient_model extends MX_Controller {
         $this->db->from($this->table);
 		$this->db->join('item_foods','variant.menuid = item_foods.ProductsID','left');
         $this->db->order_by('variantid', 'desc');
-    
+        if ($limit !== null) {
+            $this->db->limit($limit, $start);
+        }
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return $query->result();    
+            return $query->result();
         }
         return false;
 	} 
@@ -50,14 +52,7 @@ class Foodvarient_model extends MX_Controller {
  
 public function count_varient()
 	{
-		$this->db->select('variant.*,item_foods.ProductName');
-        $this->db->from($this->table);
-		$this->db->join('item_foods','variant.menuid = item_foods.ProductsID','left');
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();  
-        }
-        return false;
+		return $this->db->count_all_results($this->table);
 	}
     
 }

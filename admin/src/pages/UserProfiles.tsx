@@ -65,23 +65,23 @@ export default function UserProfiles() {
       <div className="max-w-2xl mx-auto space-y-6">
 
         {/* Identity card */}
-        <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] p-6 flex items-center gap-5">
+        <div className="rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03] p-6 flex items-center gap-5">
           <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[#37a000] text-white text-2xl font-bold flex-shrink-0">
             {initials}
           </div>
           <div>
-            <p className="text-lg font-bold text-gray-800 dark:text-white">{admin?.name}</p>
+            <p className="text-lg font-bold text-gray-800 text-white">{admin?.name}</p>
             <p className="text-sm text-gray-500">{admin?.email}</p>
-            <span className="mt-1 inline-block text-xs font-medium text-[#37a000] bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
+            <span className="mt-1 inline-block text-xs font-medium text-[#37a000] bg-green-50 bg-green-900/20 px-2 py-0.5 rounded-full">
               Administrateur SaaS
             </span>
           </div>
         </div>
 
         {/* Name edit */}
-        <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800">
-            <h3 className="font-semibold text-gray-800 dark:text-white">Modifier le nom</h3>
+        <div className="rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03] overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-100 border-gray-800">
+            <h3 className="font-semibold text-gray-800 text-white">Modifier le nom</h3>
             <p className="text-xs text-gray-400 mt-0.5">Nom affiché dans la barre latérale et le profil</p>
           </div>
           <form onSubmit={handleNameSubmit} className="p-6 space-y-4">
@@ -95,13 +95,13 @@ export default function UserProfiles() {
               </div>
             )}
             <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">Nom complet</label>
+              <label className="block text-xs font-medium text-gray-500 text-gray-400 mb-1.5">Nom complet</label>
               <input
                 type="text"
                 required
                 value={nameForm.name}
                 onChange={(e) => setNameForm({ name: e.target.value })}
-                className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
+                className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
                 placeholder="Votre nom complet"
               />
             </div>
@@ -118,9 +118,9 @@ export default function UserProfiles() {
         </div>
 
         {/* Password change */}
-        <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03] overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800">
-            <h3 className="font-semibold text-gray-800 dark:text-white">Changer le mot de passe</h3>
+        <div className="rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03] overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-100 border-gray-800">
+            <h3 className="font-semibold text-gray-800 text-white">Changer le mot de passe</h3>
             <p className="text-xs text-gray-400 mt-0.5">Minimum 8 caractères</p>
           </div>
 
@@ -136,7 +136,7 @@ export default function UserProfiles() {
             )}
 
             <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+              <label className="block text-xs font-medium text-gray-500 text-gray-400 mb-1.5">
                 Mot de passe actuel
               </label>
               <input
@@ -145,12 +145,12 @@ export default function UserProfiles() {
                 onChange={(e) => set("current_password", e.target.value)}
                 required
                 autoComplete="current-password"
-                className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
+                className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+              <label className="block text-xs font-medium text-gray-500 text-gray-400 mb-1.5">
                 Nouveau mot de passe
               </label>
               <input
@@ -160,12 +160,12 @@ export default function UserProfiles() {
                 required
                 minLength={8}
                 autoComplete="new-password"
-                className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
+                className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+              <label className="block text-xs font-medium text-gray-500 text-gray-400 mb-1.5">
                 Confirmer le nouveau mot de passe
               </label>
               <input
@@ -174,7 +174,7 @@ export default function UserProfiles() {
                 onChange={(e) => set("confirm_password", e.target.value)}
                 required
                 autoComplete="new-password"
-                className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
+                className="w-full rounded-lg border border-gray-300 border-gray-600 bg-white bg-gray-800 px-3 py-2 text-sm text-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#37a000]/40"
               />
             </div>
 

@@ -119,7 +119,7 @@ const AppSidebar: React.FC = () => {
   // text default  : #a6a6a6  active: #fff
 
   const renderMenuItems = (items: NavItem[], menuType: "main" | "others") => (
-    <ul className="flex flex-col gap-1">
+    <ul className="flex flex-col gap-1.5">
       {items.map((nav, index) => {
         const isOpen = openSubmenu?.type === menuType && openSubmenu?.index === index;
         const active = nav.path ? isActive(nav.path) : false;
@@ -135,17 +135,19 @@ const AppSidebar: React.FC = () => {
                       : { type: menuType, index }
                   )
                 }
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
                   ${isOpen
-                    ? "bg-[#33383e] text-white"
-                    : "text-[#a6a6a6] hover:bg-[#33383e] hover:text-white"}
-                  ${!show ? "lg:justify-center" : "justify-start"}`}
+                    ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+                    : "text-[#c8ceda] hover:bg-white/8 hover:text-white"}
+                  ${!show ? "justify-center px-2.5" : "justify-start"}`}
               >
-                <span className="size-5 flex-shrink-0">{nav.icon}</span>
+                <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 transition-all ${isOpen ? "bg-[#37a000]/20 text-[#37a000]" : "bg-white/6 text-[#aeb5c3] group-hover:bg-white/10 group-hover:text-white"}`}>
+                  {nav.icon}
+                </span>
                 {show && <span className="flex-1 text-left">{nav.name}</span>}
                 {show && (
                   <ChevronDownIcon
-                    className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#37a000]" : ""}`}
+                    className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#37a000]" : "text-[#8a92a3]"}`}
                   />
                 )}
               </button>
@@ -153,13 +155,13 @@ const AppSidebar: React.FC = () => {
               nav.path && (
                 <Link
                   to={nav.path}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                  className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
                     ${active
-                      ? "bg-[#33383e] text-white border-l-4 border-[#37a000]"
-                      : "text-[#a6a6a6] hover:bg-[#33383e] hover:text-white border-l-4 border-transparent"}
-                    ${!show ? "lg:justify-center" : ""}`}
+                      ? "bg-gradient-to-r from-[#37a000]/20 to-[#37a000]/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+                      : "text-[#c8ceda] hover:bg-white/8 hover:text-white"}
+                    ${!show ? "justify-center px-2.5" : ""}`}
                 >
-                  <span className={`size-5 flex-shrink-0 ${active ? "text-[#37a000]" : ""}`}>
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 transition-all ${active ? "bg-[#37a000]/20 text-[#37a000]" : "bg-white/6 text-[#aeb5c3] group-hover:bg-white/10 group-hover:text-white"}`}>
                     {nav.icon}
                   </span>
                   {show && <span>{nav.name}</span>}
@@ -175,15 +177,15 @@ const AppSidebar: React.FC = () => {
                   height: isOpen ? `${subMenuHeight[`${menuType}-${index}`] ?? 0}px` : "0px",
                 }}
               >
-                <ul className="mt-1 ml-8 space-y-1 border-l border-[#33383e] pl-3">
+                <ul className="mt-1 ml-3 space-y-1 rounded-xl border border-white/8 bg-black/10 p-2">
                   {nav.subItems.map((sub) => (
                     <li key={sub.name}>
                       <Link
                         to={sub.path}
-                        className={`block rounded-lg px-3 py-2 text-sm transition-colors
+                        className={`block rounded-lg px-3 py-2 text-sm transition-all
                           ${isActive(sub.path)
-                            ? "text-[#37a000] font-semibold"
-                            : "text-[#a6a6a6] hover:text-white"}`}
+                            ? "bg-[#37a000]/15 text-[#7ce45b] font-semibold"
+                            : "text-[#9aa4b2] hover:bg-white/8 hover:text-white"}`}
                       >
                         {sub.name}
                       </Link>
@@ -204,37 +206,50 @@ const AppSidebar: React.FC = () => {
         ${isExpanded || isMobileOpen ? "w-[270px]" : isHovered ? "w-[270px]" : "w-[78px]"}
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
-      style={{ backgroundColor: "#2c3136", borderRight: "1px solid #33383e" }}
+      style={{ background: "linear-gradient(180deg, #252a30 0%, #1f2328 100%)", borderRight: "1px solid rgba(255,255,255,0.08)" }}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Logo */}
-      <div className={`py-4 flex items-center ${!show ? "lg:justify-center" : "justify-start px-1"}`}>
-        <Link to="/" className="flex items-center gap-2">
-          <img
-            src="/images/logo/bonresto-logo.png"
-            alt="Bonresto"
-            className={show ? "h-10 w-10 object-contain" : "h-9 w-9 object-contain"}
-          />
+      <div className={`py-4 ${!show ? "lg:justify-center" : "px-1"}`}>
+        <Link
+          to="/"
+          className={`flex items-center ${show ? "gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 shadow-[0_8px_30px_rgba(0,0,0,0.2)]" : "justify-center rounded-2xl border border-white/10 bg-white/5 p-2.5"}`}
+        >
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#37a000] to-[#2d8700] shadow-lg shadow-[#37a000]/20">
+            <img
+              src="/images/logo/bonresto-logo.png"
+              alt="Bonresto"
+              className={show ? "h-8 w-8 object-contain" : "h-7 w-7 object-contain"}
+            />
+          </div>
           {show && (
-            <span className="text-base font-bold text-white tracking-wide">
-              Bonresto <span className="text-[#37a000]">SaaS</span>
-            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-white">
+                Bonresto <span className="text-[#37a000]">SaaS</span>
+              </p>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-[#8a92a3]">
+                Administration
+              </p>
+            </div>
           )}
         </Link>
       </div>
 
-      {/* Nav */}
       <div className="flex flex-col flex-1 overflow-y-auto no-scrollbar">
-        <nav className="mb-6 space-y-6">
+        <nav className="mb-6 space-y-5">
           <div>
             {show && (
-              <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-[#5c6370]">
-                Menu
-              </p>
+              <div className="mb-2 flex items-center justify-between px-3">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#5c6370]">
+                  Menu
+                </p>
+                <span className="rounded-full bg-[#37a000]/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#7ce45b]">
+                  Live
+                </span>
+              </div>
             )}
             {!show && (
-              <div className="flex justify-center mb-2">
+              <div className="mb-2 flex justify-center">
                 <HorizontaLDots className="size-5 text-[#5c6370]" />
               </div>
             )}
@@ -243,12 +258,12 @@ const AppSidebar: React.FC = () => {
 
           <div>
             {show && (
-              <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-widest text-[#5c6370]">
+              <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#5c6370]">
                 Autres
               </p>
             )}
             {!show && (
-              <div className="flex justify-center mb-2">
+              <div className="mb-2 flex justify-center">
                 <HorizontaLDots className="size-5 text-[#5c6370]" />
               </div>
             )}
@@ -257,24 +272,26 @@ const AppSidebar: React.FC = () => {
         </nav>
       </div>
 
-      {/* Bottom admin info */}
       {show && admin && (
-        <div className="pb-5 pt-4 border-t border-[#33383e]">
-          <div className="flex items-center gap-3 px-1">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#37a000] text-white text-xs font-bold flex-shrink-0">
-              {admin.name?.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2) ?? "AD"}
+        <div className="pb-4 pt-3">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 shadow-[0_12px_32px_rgba(0,0,0,0.2)]">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#37a000] to-[#2d8700] text-sm font-bold text-white">
+                {admin.name?.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2) ?? "AD"}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-white">{admin.name}</p>
+                <p className="truncate text-xs text-[#a6a6a6]">{admin.email}</p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">{admin.name}</p>
-              <p className="text-xs text-[#a6a6a6] truncate">{admin.email}</p>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="mt-3 flex w-full items-center gap-2 rounded-lg border border-red-400/20 bg-red-400/10 px-2.5 py-2 text-left text-xs font-medium text-red-300 transition-colors hover:bg-red-400/20"
+            >
+              <span>↩</span>
+              <span>Se déconnecter</span>
+            </button>
           </div>
-          <button
-            onClick={handleLogout}
-            className="mt-3 w-full text-left px-1 text-xs text-[#a6a6a6] hover:text-red-400 transition-colors"
-          >
-            → Se déconnecter
-          </button>
         </div>
       )}
     </aside>
