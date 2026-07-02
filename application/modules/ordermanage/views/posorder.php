@@ -1677,6 +1677,6 @@ foreach ($scan1 as $file) {
 
 <script src="<?php echo base_url('ordermanage/order/possettingjs') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('ordermanage/order/quickorderjs') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js?v=1.8'); ?>" type="text/javascript">
+<script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js?v=2.3'); ?>" type="text/javascript">
 </script>
 

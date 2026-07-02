@@ -254,6 +254,10 @@ function oredrisready(orderid){
 			success: function(data){
 				$('#kitchenload').html(data);
 				$('#edit').modal('hide');
+			},
+			error: function(){
+				$('#edit').modal('hide');
+				swal("Error", "Failed to update order status", "error");
 			}
 		});
 	}

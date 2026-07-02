@@ -37,7 +37,7 @@ $acthemename     = $activethemeinfo->themename;?>
                  </div>
                  <div class="form-group row mb-2">
                      <label for="phone" class="col-sm-4 col-form-label"><?php echo display('password') ?></label>
-                     <div class="col-sm-8"><input type="text" name="password" class="form-control" id="password" placeholder="<?php echo display('password') ?>" value=""></div>
+                     <div class="col-sm-8"><input type="password" name="password" class="form-control" id="password" placeholder="<?php echo display('password') ?>" value=""></div>
                  </div>
                  <div class="form-group row mb-2">
                      <label for="phone" class="col-sm-4 col-form-label"><?php echo display('profile_picture') ?></label>

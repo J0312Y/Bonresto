@@ -1180,9 +1180,8 @@ class Hungry_model extends CI_Model
         $this->db->select('*');
         $this->db->where('customer_email', $data['customer_email']);
         $query    = $this->db->get($table)->row();
-        $num_rows = $this->db->count_all_results();
 
-        if ($num_rows > 0) {
+        if ($query) {
             return $query;
         } else {
             return false;

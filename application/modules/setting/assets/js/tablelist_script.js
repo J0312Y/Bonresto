@@ -59,7 +59,7 @@ $(document).ready(function(){
 });
 });
 $(function(){
-	var url      = window.location.href; 
+	var url      = window.location.href;
     var pieces = url.split("?");
 	if(pieces[1]=='table'){
 		$("#add0").modal('show');
@@ -67,3 +67,22 @@ $(function(){
 		}
 
 });
+
+function showQrModal(tableid, tablename, imgurl) {
+	$('#qr-table-name').text(tablename);
+	$('#qr-table-name2').text(tablename);
+	$('#qr-modal-img').attr('src', imgurl + '?t=' + Date.now());
+	$('#qr-download-btn').attr('href', basicinfo.baseurl + 'setting/restauranttable/downloadqr/' + tableid);
+	$('#qr-regenerate-btn').attr('href', basicinfo.baseurl + 'setting/restauranttable/generateqr/' + tableid);
+	$('#qrmodal').modal('show');
+}
+
+function printQr() {
+	var content = document.getElementById('qr-print-area').innerHTML;
+	var win = window.open('', '_blank');
+	win.document.write('<html><head><title>QR Code</title><style>body{text-align:center;font-family:Arial,sans-serif;padding:40px}img{max-width:400px}</style></head><body>');
+	win.document.write(content);
+	win.document.write('</body></html>');
+	win.document.close();
+	win.print();
+}

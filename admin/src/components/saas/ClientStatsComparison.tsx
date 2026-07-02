@@ -72,13 +72,13 @@ export default function ClientStatsComparison({ clients }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6">
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 border-gray-800 bg-white/[0.03] sm:px-6 sm:pt-6">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+          <h3 className="text-lg font-semibold text-gray-800 text-white/90">
             Comparaison des restaurants
           </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-gray-500 text-gray-400">
             Classement par indicateur
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function ClientStatsComparison({ clients }: Props) {
               className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
                 metric === m.key
                   ? "bg-brand-500 text-white"
-                  : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
+                  : "bg-gray-100 text-gray-600 bg-gray-800 text-gray-400 hover:bg-gray-200 hover:bg-gray-700"
               }`}
             >
               {m.label}

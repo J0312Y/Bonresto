@@ -13,6 +13,7 @@ class Order extends MX_Controller
             'logs_model',
         ]);
         $this->load->library('cart');
+        $this->load->library('notification');
     }
 
     public function possetting()
@@ -1257,6 +1258,8 @@ class Order extends MX_Controller
                             'total_people' => $this->input->post('tablemember', true),
                         ];
                         $this->db->insert('table_details', $addtable_member);
+                        // Mark table as occupied
+                        $this->db->where('tableid', $this->input->post('tableid'))->update('rest_table', ['status' => 2]);
                     } else {
                         $multipay_inserts          = explode(',', $this->input->post('table_member_multi'));
                         $table_member_multi_person = explode(',', $this->input->post('table_member_multi_person', true));
@@ -1271,6 +1274,8 @@ class Order extends MX_Controller
                                 'total_people' => $table_member_multi_person[$z],
                             ];
                             $this->db->insert('table_details', $addtable_member);
+                            // Mark each table as occupied
+                            $this->db->where('tableid', $multipay_insert)->update('rest_table', ['status' => 2]);
                             $z++;
                         }
                     }
@@ -1278,191 +1283,21 @@ class Order extends MX_Controller
 
                 /*enc 02/11*/
                 if ($this->input->post('delivercom', true) > 0) {
-                    /*Push Notification*/
-                    $this->db->select('*');
-                    $this->db->from('user');
-                    $this->db->where('id', $this->input->post('waiter', true));
-                    $query       = $this->db->get();
-                    $allemployee = $query->row();
-                    $senderid    = [];
-                    $senderid[]  = $allemployee->waiter_kitchenToken;
-                    define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                    $registrationIds = $senderid;
-                    $msg             =
-                        [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal', true),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "admin",
-                            'tickerText' => "10",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
-                    $fields2 =
-                        [
-                            'registration_ids' => $registrationIds,
-                            'data'             => $msg,
-                        ];
-
-                    $headers2 =
-                        [
-                            'Authorization: key=' . API_ACCESS_KEY,
-                            'Content-Type: application/json',
-                        ];
-
-                    $ch2 = curl_init();
-                    curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                    curl_setopt($ch2, CURLOPT_POST, true);
-                    curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-                    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-                    $result2 = curl_exec($ch2);
-                    curl_close($ch2);
-
-                    /*End Notification*/
-                    /*Push Notification*/
-                    $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=1";
-                    $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-                    $this->db->from('user');
-                    $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-                    $this->db->where($condition);
-                    $query      = $this->db->get();
-                    $allkitchen = $query->result();
-                    $senderid5  = [];
-
-                    foreach ($allkitchen as $mytoken) {
-                        $senderid5[] = $mytoken->waiter_kitchenToken;
+                    /*Push Notification — waiter + staff */
+                    $waiter_token = $this->notification->get_waiter_token($this->input->post('waiter', true));
+                    $amount = $this->input->post('grandtotal', true);
+                    $this->notification->order_placed($orderid, $amount, null);
+                    if ($waiter_token) {
+                        $this->notification->order_preparing($orderid, '', $amount, $waiter_token);
                     }
-
-                    defined('API_ACCESS_KEY') || define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                    $registrationIds5 = $senderid5;
-                    $msg5             =
-                        [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . $this->input->post('grandtotal', true),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "TSET",
-                            'tickerText' => "onno",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
-                    $fields5 =
-                        [
-                            'registration_ids' => $registrationIds5,
-                            'data'             => $msg5,
-                        ];
-
-                    $headers5 =
-                        [
-                            'Authorization: key=' . API_ACCESS_KEY,
-                            'Content-Type: application/json',
-                        ];
-
-                    $ch5 = curl_init();
-                    curl_setopt($ch5, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                    curl_setopt($ch5, CURLOPT_POST, true);
-                    curl_setopt($ch5, CURLOPT_HTTPHEADER, $headers5);
-                    curl_setopt($ch5, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch5, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch5, CURLOPT_POSTFIELDS, json_encode($fields5));
-                    $result5 = curl_exec($ch5);
-                    curl_close($ch5);
                 } else {
-                    /*Push Notification*/
-                    $this->db->select('*');
-                    $this->db->from('user');
-                    $this->db->where('id', $this->input->post('waiter', true));
-                    $query       = $this->db->get();
-                    $allemployee = $query->row();
-                    $senderid    = [];
-                    $senderid[]  = $allemployee->waiter_kitchenToken ?? '';
-                    define('API_ACCESS_KEY', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                    $registrationIds = $senderid;
-                    $msg             =
-                        [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . ($ordergrandt - $getdiscount),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "admin",
-                            'tickerText' => "10",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
-                    $fields2 =
-                        [
-                            'registration_ids' => $registrationIds,
-                            'data'             => $msg,
-                        ];
-
-                    $headers2 =
-                        [
-                            'Authorization: key=' . API_ACCESS_KEY,
-                            'Content-Type: application/json',
-                        ];
-
-                    $ch2 = curl_init();
-                    curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                    curl_setopt($ch2, CURLOPT_POST, true);
-                    curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-                    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-                    $result2 = curl_exec($ch2);
-                    curl_close($ch2);
-
-                    /*End Notification*/
-                    /*Push Notification*/
-                    $condition = "user.waiter_kitchenToken!='' AND employee_history.pos_id=1";
-                    $this->db->select('user.*,employee_history.emp_his_id,employee_history.employee_id,employee_history.pos_id ');
-                    $this->db->from('user');
-                    $this->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-                    $this->db->where($condition);
-                    $query      = $this->db->get();
-                    $allkitchen = $query->result();
-                    $senderid5  = [];
-
-                    foreach ($allkitchen as $mytoken) {
-                        $senderid5[] = $mytoken->waiter_kitchenToken;
+                    /*Push Notification — waiter + staff */
+                    $waiter_token = $this->notification->get_waiter_token($this->input->post('waiter', true));
+                    $amount = ($ordergrandt - $getdiscount);
+                    $this->notification->order_placed($orderid, $amount, null);
+                    if ($waiter_token) {
+                        $this->notification->order_preparing($orderid, '', $amount, $waiter_token);
                     }
-
-                    define('API_ACCESS_KEY2', 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX');
-                    $registrationIds5 = $senderid5;
-                    $msg5             =
-                        [
-                            'message'    => "Orderid:" . $orderid . ", Amount:" . ($ordergrandt - $getdiscount),
-                            'title'      => "New Order Placed",
-                            'subtitle'   => "TSET",
-                            'tickerText' => "onno",
-                            'vibrate'    => 1,
-                            'sound'      => 1,
-                            'largeIcon'  => "TSET",
-                            'smallIcon'  => "TSET",
-                        ];
-                    $fields5 =
-                        [
-                            'registration_ids' => $registrationIds5,
-                            'data'             => $msg5,
-                        ];
-
-                    $headers5 =
-                        [
-                            'Authorization: key=' . API_ACCESS_KEY2,
-                            'Content-Type: application/json',
-                        ];
-
-                    $ch5 = curl_init();
-                    curl_setopt($ch5, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-                    curl_setopt($ch5, CURLOPT_POST, true);
-                    curl_setopt($ch5, CURLOPT_HTTPHEADER, $headers5);
-                    curl_setopt($ch5, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch5, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($ch5, CURLOPT_POSTFIELDS, json_encode($fields5));
-                    $result5 = curl_exec($ch5);
-                    curl_close($ch5);
                 }
 
                 if ($this->order_model->orderitem($orderid)) {
@@ -1825,6 +1660,11 @@ class Order extends MX_Controller
             $mymsg   = "You Order is Rejected";
             $bodymsg = display('ordid') . $orderid . " Rejeceted with due Reason:" . $orderinfo->anyreason;
 
+            /* Restore stock if it was already deducted (order was previously accepted) */
+            if ($orderinfo->orderacceptreject == 1) {
+                $this->restoretostock($orderid);
+            }
+
             if (!empty($orderinfo->marge_order_id)) {
                 $margecancel = ['marge_order_id' => null];
                 $this->db->where('order_id', $orderid);
@@ -1853,36 +1693,12 @@ class Order extends MX_Controller
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetData);
         $this->_sync_enqueue_order((int)$orderid);
-        /*PUSH Notification For Customer*/
-        $icon    = base_url('assets/img/applogo.png');
-        $content = [
-            "en" => $bodymsg,
-        ];
-        $title = [
-            "en" => $mymsg,
-        ];
-        $fields = [
-            'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-            'include_player_ids' => [$customerinfo->customer_token],
-            'data'               => [
-                'type' => "order place",
-                'logo' => $icon,
-            ],
-            'contents'           => $content,
-            'headings'           => $title,
-        ];
-
-        $fields = json_encode($fields);
-        $ch     = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
+        /*Push Notification For Customer*/
+        if ($acceptreject == 1) {
+            $this->notification->order_accepted($orderid, $orderinfo->totalamount, $customerinfo->customer_token ?? '');
+        } else {
+            $this->notification->order_rejected($orderid, '', $orderinfo->anyreason, $customerinfo->customer_token ?? '');
+        }
 
         if ($onprocesstab == 1) {
             $data['ongoingorder'] = $this->order_model->get_ongoingorder();
@@ -2002,6 +1818,15 @@ class Order extends MX_Controller
             }
 
             $allfoods .= $foodname->ProductName . ' Varient: ' . $foodname->variantName . ",";
+            /* Restore stock for this cancelled item if stock was already deducted
+               and the item has NOT been cooked yet (food_status == 0) */
+            if ($orderinfo->orderacceptreject == 1 && (empty($olditm->food_status) || $olditm->food_status == 0)) {
+                $possetting = $this->db->select('productionsetting')->from('tbl_posetting')->where('possettingid', 1)->get()->row();
+                if ($possetting->productionsetting == 1) {
+                    $cancelqty = !empty($olditm->menuqty) ? $olditm->menuqty : 1;
+                    $this->order_model->restore_product($sitem, $vaids, $cancelqty);
+                }
+            }
             $this->db->where('order_id', $orderid)->where('menu_id', $sitem)->where('varientid', $vaids)->delete('order_menu');
 
             $finalbillinfo = $this->db->select("*")->from('bill')->where('order_id', $orderid)->get()->row();
@@ -2042,38 +1867,8 @@ class Order extends MX_Controller
 
         $allfoods     = trim($allfoods, ',');
         $customerinfo = $this->db->select("*")->from('customer_info')->where('customer_id', $orderinfo->customer_id)->get()->row();
-        $mymsg        = "You Item is Rejected";
-        $bodymsg      = display('ordid') . $orderid . " Item Name: " . $allfoods . " Rejeceted with due Reason:" . $reason;
-        /*PUSH Notification For Customer*/
-        $icon    = base_url('assets/img/applogo.png');
-        $content = [
-            "en" => $bodymsg,
-        ];
-        $title = [
-            "en" => $mymsg,
-        ];
-        $fields = [
-            'app_id'             => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-            'include_player_ids' => [$customerinfo->customer_token],
-            'data'               => [
-                'type' => "order place",
-                'logo' => $icon,
-            ],
-            'contents'           => $content,
-            'headings'           => $title,
-        ];
-
-        $fields = json_encode($fields);
-        $ch     = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json; charset=utf-8']);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
+        /*Push Notification For Customer — item rejected*/
+        $this->notification->order_rejected($orderid, $allfoods, $reason, $customerinfo->customer_token ?? '');
 
         $afterorderinfo = $this->db->select("*")->from('order_menu')->where('order_id', $orderid)->get()->row();
 
@@ -4409,82 +4204,13 @@ class Order extends MX_Controller
                 $this->db->insert('tbl_orderprepare', $ready);
             }
 
-            //push
-            $senderid[] = $allemployee->waiter_kitchenToken;
-            define('API_ACCESS_KEY', 'AAAAvWuiU2I:APA91bGGr8XSrxX1A_XkpbFkKu8KjT-UU0wgCjar1mHKVkT575rgq5cVUcqj2-2p-eEzHV-GtEH04d75yAccgoyZ3DM5YZPfp6OxYSMs-c_9nTVQLNOMksM9rWRv5zmBUpDqnPgLFj-E');
-            $registrationIds = $senderid;
-            $msg             =
-                [
-                    'message'    => "Orderid: " . $orderid . ", Item Name: " . $item->ProductName . " Amount:" . $orderinformation->totalamount,
-                    'title'      => "Food Is Ready.",
-                    'subtitle'   => $orderid,
-                    'tickerText' => "TSET",
-                    'vibrate'    => 1,
-                    'sound'      => 1,
-                    'largeIcon'  => "TSET",
-                    'smallIcon'  => "TSET",
-                ];
-            $fields2 =
-                [
-                    'registration_ids' => $registrationIds,
-                    'data'             => $msg,
-                ];
-
-            $headers2 =
-                [
-                    'Authorization: key=' . API_ACCESS_KEY,
-                    'Content-Type: application/json',
-                ];
-
-            $ch2 = curl_init();
-            curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-            curl_setopt($ch2, CURLOPT_POST, true);
-            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-            $result2 = curl_exec($ch2);
-            curl_close($ch2);
+            //push — food is ready
+            $this->notification->food_ready($orderid, $item->ProductName, $orderinformation->totalamount, $allemployee->waiter_kitchenToken ?? null);
         } else {
             $ready = "Food Is Cooking";
             $this->db->where('orderid', $orderid)->where('menuid', $menuid)->where('varient', $varient)->delete('tbl_orderprepare');
-            //push
-            $senderid[] = $allemployee->waiter_kitchenToken;
-            define('API_ACCESS_KEY', 'AAAAvWuiU2I:APA91bGGr8XSrxX1A_XkpbFkKu8KjT-UU0wgCjar1mHKVkT575rgq5cVUcqj2-2p-eEzHV-GtEH04d75yAccgoyZ3DM5YZPfp6OxYSMs-c_9nTVQLNOMksM9rWRv5zmBUpDqnPgLFj-E');
-            $registrationIds = $senderid;
-            $msg             =
-                [
-                    'message'    => "Orderid: " . $orderid . ", Item Name: " . $item->ProductName . " Amount:" . $orderinformation->totalamount,
-                    'title'      => display('processing'),
-                    'subtitle'   => $orderid,
-                    'tickerText' => "TSET",
-                    'vibrate'    => 1,
-                    'sound'      => 1,
-                    'largeIcon'  => "TSET",
-                    'smallIcon'  => "TSET",
-                ];
-            $fields2 =
-                [
-                    'registration_ids' => $registrationIds,
-                    'data'             => $msg,
-                ];
-
-            $headers2 =
-                [
-                    'Authorization: key=' . API_ACCESS_KEY,
-                    'Content-Type: application/json',
-                ];
-
-            $ch2 = curl_init();
-            curl_setopt($ch2, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-            curl_setopt($ch2, CURLOPT_POST, true);
-            curl_setopt($ch2, CURLOPT_HTTPHEADER, $headers2);
-            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch2, CURLOPT_POSTFIELDS, json_encode($fields2));
-            $result2 = curl_exec($ch2);
-            curl_close($ch2);
-            /*End Notification*/
+            //push — order preparing
+            $this->notification->order_preparing($orderid, $item->ProductName, $orderinformation->totalamount, $allemployee->waiter_kitchenToken ?? null);
         }
 
         echo $status;
@@ -5249,6 +4975,23 @@ class Order extends MX_Controller
         }
 
         $orderinfo = $this->db->select('*')->from('customer_order')->where('order_id', $orderid)->get()->row();
+
+        // After bill is paid: free the table and clean up table_details
+        if (!empty($orderinfo->table_no) && $orderinfo->table_no > 0) {
+            $table_id = $orderinfo->table_no;
+            // Remove table_details entries for this order
+            $this->db->where('order_id', $orderid)->delete('table_details');
+            // Check if table still has other active orders today
+            $active = $this->db->from('customer_order')
+                ->where('table_no', $table_id)
+                ->where('order_date', date('Y-m-d'))
+                ->where_in('order_status', [1, 2, 3])
+                ->count_all_results();
+            if ($active == 0) {
+                $this->db->where('tableid', $table_id)->update('rest_table', ['status' => 0]);
+            }
+        }
+
         $this->savekitchenitem($orderid);
         $this->_sync_enqueue_order((int)$orderid);
         $saveid = $this->session->userdata('id');
@@ -5307,6 +5050,8 @@ class Order extends MX_Controller
     public function delete_table_details_all($id)
     {
         $this->db->where('table_id', $id)->delete('table_details');
+        // Free the table when all details are cleared
+        $this->db->where('tableid', $id)->update('rest_table', ['status' => 0]);
         echo '1';
     }
 
@@ -5341,6 +5086,25 @@ class Order extends MX_Controller
             foreach ($items as $item) {
 
                 $this->order_model->insert_product($item->menu_id, $item->varientid, $item->menuqty);
+            }
+        }
+
+        return $possetting->productionsetting;
+    }
+
+    public function restoretostock($orderid)
+    {
+        $possetting = $this->db->select('*')->from('tbl_posetting')->where('possettingid', 1)->get()->row();
+
+        if ($possetting->productionsetting == 1) {
+            $items = $this->order_model->customerorder($orderid);
+
+            foreach ($items as $item) {
+                /* Only restore stock for items NOT yet cooked.
+                   Cooked items = ingredients physically consumed = no restoration */
+                if (empty($item->food_status) || $item->food_status == 0) {
+                    $this->order_model->restore_product($item->menu_id, $item->varientid, $item->menuqty);
+                }
             }
         }
 
@@ -6097,6 +5861,79 @@ class Order extends MX_Controller
     {
         $data['customerorder'] = $this->order_model->read('*', 'customer_order', ['order_id' => $id]);
         echo ('window.orderinfo = ' . json_encode($data['customerorder']) . ';');
+    }
+
+    // ── Waiter Call management ───────────────────────────────────────────────
+
+    public function waitercalls()
+    {
+        $this->load->model('waitercall_model');
+        $data['title']         = 'Appels serveur';
+        $data['calls']         = $this->waitercall_model->getAll();
+        $data['pending_count'] = $this->waitercall_model->getPendingCount();
+        $data['module']        = 'ordermanage';
+        $data['page']          = 'waitercalls';
+        echo Modules::run('template/layout', $data);
+    }
+
+    public function acknowledgecall($id)
+    {
+        $this->load->model('waitercall_model');
+        $user_id = $this->session->userdata('user_id');
+        $this->waitercall_model->acknowledge($id, $user_id);
+        echo json_encode(['status' => 'success']);
+    }
+
+    public function completecall($id)
+    {
+        $this->load->model('waitercall_model');
+        $this->waitercall_model->complete($id);
+        echo json_encode(['status' => 'success']);
+    }
+
+    public function waitercalls_ajax()
+    {
+        $this->load->model('waitercall_model');
+        $calls = $this->waitercall_model->getAll();
+        $html = '';
+        if (!empty($calls)) {
+            foreach ($calls as $call) {
+                $cls = $call->status == 0 ? 'warning' : ($call->status == 1 ? 'info' : '');
+                $tablename = !empty($call->tablename) ? htmlspecialchars($call->tablename) : 'Table #' . $call->table_id;
+                $type_label = $call->call_type == 'waiter'
+                    ? '<span class="label label-primary"><i class="fa fa-hand-paper-o"></i> Serveur</span>'
+                    : '<span class="label label-warning"><i class="fa fa-file-text-o"></i> Addition</span>';
+                $status_label = '';
+                $action = '';
+                if ($call->status == 0) {
+                    $status_label = '<span class="label label-danger">En attente</span>';
+                    $action = '<button class="btn btn-sm btn-info" onclick="acknowledgeCall(' . $call->id . ')"><i class="fa fa-check"></i> Accepter</button>';
+                } elseif ($call->status == 1) {
+                    $status_label = '<span class="label label-info">Accepté</span>';
+                    $action = '<button class="btn btn-sm btn-success" onclick="completeCall(' . $call->id . ')"><i class="fa fa-check-circle"></i> Terminer</button>';
+                } else {
+                    $status_label = '<span class="label label-success">Terminé</span>';
+                    $action = '<span class="text-muted">-</span>';
+                }
+                $html .= '<tr class="' . $cls . '">';
+                $html .= '<td>' . $call->id . '</td>';
+                $html .= '<td><strong>' . $tablename . '</strong></td>';
+                $html .= '<td>' . $type_label . '</td>';
+                $html .= '<td>' . date('H:i:s', strtotime($call->created_at)) . '</td>';
+                $html .= '<td>' . $status_label . '</td>';
+                $html .= '<td>' . $action . '</td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html = '<tr><td colspan="6" class="text-center">Aucun appel</td></tr>';
+        }
+        echo $html;
+    }
+
+    public function waitercalls_count()
+    {
+        $this->load->model('waitercall_model');
+        echo json_encode(['count' => $this->waitercall_model->getPendingCount()]);
     }
 
     // ── Sync helper ───────────────────────────────────────────────────────────

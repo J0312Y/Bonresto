@@ -19,19 +19,19 @@ const ACTION_LABELS: Record<string, string> = {
 };
 
 const ACTION_COLORS: Record<string, string> = {
-  tenant_created:       "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  subscription_updated: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
-  tenant_suspended:     "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  auto_suspended:       "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  license_generated:    "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-  license_activated:    "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  payment_recorded:     "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  reminder_sent:        "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
+  tenant_created:       "bg-blue-100 text-blue-700 bg-blue-900/30 text-blue-400",
+  subscription_updated: "bg-purple-100 text-purple-700 bg-purple-900/30 text-purple-400",
+  tenant_suspended:     "bg-red-100 text-red-700 bg-red-900/30 text-red-400",
+  auto_suspended:       "bg-red-100 text-red-700 bg-red-900/30 text-red-400",
+  license_generated:    "bg-yellow-100 text-yellow-700 bg-yellow-900/30 text-yellow-400",
+  license_activated:    "bg-green-100 text-green-700 bg-green-900/30 text-green-400",
+  payment_recorded:     "bg-emerald-100 text-emerald-700 bg-emerald-900/30 text-emerald-400",
+  reminder_sent:        "bg-orange-100 text-orange-700 bg-orange-900/30 text-orange-400",
 };
 
 function ActionBadge({ action }: { action: string }) {
   const label = ACTION_LABELS[action] ?? action;
-  const cls = ACTION_COLORS[action] ?? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400";
+  const cls = ACTION_COLORS[action] ?? "bg-gray-100 text-gray-600 bg-gray-800 text-gray-400";
   return (
     <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${cls}`}>
       {label}
@@ -45,19 +45,19 @@ function Pagination({ page, total, pageSize, onChange }: { page: number; total: 
   const pages = Math.ceil(total / pageSize);
   if (pages <= 1) return null;
   return (
-    <div className="flex items-center justify-between px-6 py-3 border-t border-gray-100 dark:border-gray-800">
+    <div className="flex items-center justify-between px-6 py-3 border-t border-gray-100 border-gray-800">
       <span className="text-xs text-gray-400">{total} entrée{total !== 1 ? "s" : ""}</span>
       <div className="flex gap-1">
         <button disabled={page === 1} onClick={() => onChange(page - 1)}
-          className="px-3 py-1 text-xs rounded border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5">‹</button>
+          className="px-3 py-1 text-xs rounded border border-gray-200 border-gray-700 disabled:opacity-40 hover:bg-gray-50 hover:bg-white/5">‹</button>
         {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
           <button key={p} onClick={() => onChange(p)}
-            className={`px-3 py-1 text-xs rounded border ${p === page ? "bg-[#37a000] text-white border-[#37a000]" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-white/5"}`}>
+            className={`px-3 py-1 text-xs rounded border ${p === page ? "bg-[#37a000] text-white border-[#37a000]" : "border-gray-200 border-gray-700 hover:bg-gray-50 hover:bg-white/5"}`}>
             {p}
           </button>
         ))}
         <button disabled={page === pages} onClick={() => onChange(page + 1)}
-          className="px-3 py-1 text-xs rounded border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-white/5">›</button>
+          className="px-3 py-1 text-xs rounded border border-gray-200 border-gray-700 disabled:opacity-40 hover:bg-gray-50 hover:bg-white/5">›</button>
       </div>
     </div>
   );
@@ -100,15 +100,15 @@ export default function ActivityList() {
 
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Journal d'activité</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Journal d'activité</h2>
+          <p className="text-sm text-gray-500 text-gray-400">
             {filtered.length} entrée{filtered.length !== 1 ? "s" : ""}
             {filtered.length !== logs.length && ` sur ${logs.length}`}
           </p>
         </div>
         <button
           onClick={() => exportActivity().catch(() => {})}
-          className="inline-flex items-center gap-2 rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5"
+          className="inline-flex items-center gap-2 rounded-lg border border-gray-300 border-gray-600 px-3 py-2 text-sm font-medium text-gray-600 text-gray-300 hover:bg-gray-50 hover:bg-white/5"
         >
           ↓ CSV
         </button>
@@ -121,7 +121,7 @@ export default function ActivityList() {
           placeholder="Rechercher par client ou description…"
           value={search}
           onChange={(e) => handleSearchChange(e.target.value)}
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+          className="flex-1 rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#37a000] border-gray-700 bg-gray-800 text-white"
         />
         <select
           value={action}
@@ -136,24 +136,24 @@ export default function ActivityList() {
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white border-gray-800 bg-white/[0.03]">
         {loading ? (
           <div className="p-8 text-center text-gray-400">Chargement...</div>
         ) : (
           <>
             <div className="overflow-x-auto">
               <Table>
-                <TableHeader className="border-y border-gray-100 dark:border-gray-800">
+                <TableHeader className="border-y border-gray-100 border-gray-800">
                   <TableRow>
-                    <TableCell isHeader className="py-3 px-6 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Date</TableCell>
-                    <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Client</TableCell>
-                    <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Action</TableCell>
-                    <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs dark:text-gray-400">Détails</TableCell>
+                    <TableCell isHeader className="py-3 px-6 font-medium text-gray-500 text-theme-xs text-gray-400">Date</TableCell>
+                    <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Client</TableCell>
+                    <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Action</TableCell>
+                    <TableCell isHeader className="py-3 font-medium text-gray-500 text-theme-xs text-gray-400">Détails</TableCell>
                   </TableRow>
                 </TableHeader>
-                <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
+                <TableBody className="divide-y divide-gray-100 divide-gray-800">
                   {paginated.map((log) => (
-                    <TableRow key={log.log_id} className="hover:bg-gray-50 dark:hover:bg-white/[0.02]">
+                    <TableRow key={log.log_id} className="hover:bg-gray-50 hover:bg-white/[0.02]">
                       <TableCell className="py-3 px-6 text-xs text-gray-400 whitespace-nowrap">
                         {new Date(log.created_at).toLocaleString("fr-FR", {
                           day: "2-digit", month: "2-digit", year: "numeric",
@@ -161,19 +161,19 @@ export default function ActivityList() {
                         })}
                       </TableCell>
                       <TableCell className="py-3">
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                        <span className="text-sm font-medium text-gray-700 text-gray-200">
                           {log.business_name ?? `Tenant #${log.tenant_id}`}
                         </span>
                       </TableCell>
                       <TableCell className="py-3">
                         <ActionBadge action={log.action} />
                       </TableCell>
-                      <TableCell className="py-3 text-sm text-gray-500 dark:text-gray-400">
+                      <TableCell className="py-3 text-sm text-gray-500 text-gray-400">
                         {log.description}
                         {log.meta && Object.keys(log.meta).length > 0 && (
                           <details className="mt-1">
                             <summary className="cursor-pointer text-xs text-gray-400 hover:text-gray-600">Métadonnées</summary>
-                            <pre className="mt-1 rounded bg-gray-50 p-2 text-xs text-gray-600 dark:bg-gray-900 dark:text-gray-400 overflow-auto max-w-xs">
+                            <pre className="mt-1 rounded bg-gray-50 p-2 text-xs text-gray-600 bg-gray-900 text-gray-400 overflow-auto max-w-xs">
                               {JSON.stringify(log.meta, null, 2)}
                             </pre>
                           </details>

@@ -61,8 +61,8 @@ function statusBadge(s: string): "success" | "warning" | "info" | "error" {
 
 function typeBadge(t: string) {
   return t === "code"
-    ? <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-500/10 dark:text-purple-400">Code PHP</span>
-    : <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400">Config</span>;
+    ? <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700 bg-purple-500/10 text-purple-400">Code PHP</span>
+    : <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 bg-blue-500/10 text-blue-400">Config</span>;
 }
 
 export default function UpdatesList() {
@@ -175,7 +175,7 @@ export default function UpdatesList() {
 
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white/90">Mises à jour</h2>
+          <h2 className="text-2xl font-bold text-gray-800 text-white/90">Mises à jour</h2>
           <p className="text-sm text-gray-500">Déployez des configs ou du code PHP sur vos clients</p>
         </div>
         <button
@@ -188,11 +188,11 @@ export default function UpdatesList() {
 
       {/* ── Create Form ─────────────────────────────────────────────────────── */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03] space-y-5">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">Nouvelle mise à jour</h3>
+        <form onSubmit={handleSubmit} className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 border-gray-800 bg-white/[0.03] space-y-5">
+          <h3 className="text-lg font-semibold text-gray-800 text-white/90">Nouvelle mise à jour</h3>
 
           {error && (
-            <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-400">
+            <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700 bg-red-500/10 text-red-400">
               {error}
             </div>
           )}
@@ -200,21 +200,21 @@ export default function UpdatesList() {
           {/* Row 1: title + version */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="lg:col-span-2">
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Titre</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Titre</label>
               <input required value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                 placeholder="Fix bug POS, Nouveau module HRM v2..." />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Version</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Version</label>
               <input required value={form.version} onChange={(e) => setForm((f) => ({ ...f, version: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                 placeholder="1.0.0" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Type</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Type</label>
               <select value={form.type} onChange={(e) => setForm((f) => ({ ...f, type: e.target.value as "config" | "code" }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
                 <option value="config">Config (JSON)</option>
                 <option value="code">Code PHP</option>
               </select>
@@ -224,16 +224,16 @@ export default function UpdatesList() {
           {/* Row 2: module + target */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Module concerné</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Module concerné</label>
               <select value={form.module} onChange={(e) => setForm((f) => ({ ...f, module: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
                 {ALL_MODULES.map((m) => <option key={m.key} value={m.key}>{m.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Cible</label>
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Cible</label>
               <select value={form.target_type} onChange={(e) => setForm((f) => ({ ...f, target_type: e.target.value as "all"|"plan"|"tenant", target_id: "" }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
                 <option value="all">Tous les clients</option>
                 <option value="plan">Un plan spécifique</option>
                 <option value="tenant">Un client spécifique</option>
@@ -241,9 +241,9 @@ export default function UpdatesList() {
             </div>
             {form.target_type === "plan" && (
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Plan</label>
+                <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Plan</label>
                 <select required value={form.target_id} onChange={(e) => setForm((f) => ({ ...f, target_id: e.target.value }))}
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
                   <option value="">-- Choisir --</option>
                   {plans.map((p) => <option key={p.plan_id} value={p.plan_id}>{p.plan_name}</option>)}
                 </select>
@@ -251,9 +251,9 @@ export default function UpdatesList() {
             )}
             {form.target_type === "tenant" && (
               <div>
-                <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Client</label>
+                <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Client</label>
                 <select required value={form.target_id} onChange={(e) => setForm((f) => ({ ...f, target_id: e.target.value }))}
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
                   <option value="">-- Choisir --</option>
                   {clients.map((c) => <option key={c.client_id} value={c.client_id}>{c.business_name}</option>)}
                 </select>
@@ -263,21 +263,21 @@ export default function UpdatesList() {
 
           {/* Changelog */}
           <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Changelog / Notes</label>
+            <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">Changelog / Notes</label>
             <textarea rows={3} value={form.changelog} onChange={(e) => setForm((f) => ({ ...f, changelog: e.target.value }))}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
               placeholder="Décrivez les changements apportés par cette mise à jour..." />
           </div>
 
           {/* Config payload */}
           {form.type === "config" && (
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-1">
                 Payload JSON (configuration à appliquer)
               </label>
               <textarea rows={6} value={form.config_json}
                 onChange={(e) => setForm((f) => ({ ...f, config_json: e.target.value }))}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                 placeholder={'{\n  "setting_key": "new_value",\n  "max_tables": 50\n}'} />
               <p className="mt-1 text-xs text-gray-400">Ce JSON sera mergé dans <code>application/config/saas_config.php</code> sur l'installation cliente.</p>
             </div>
@@ -286,11 +286,11 @@ export default function UpdatesList() {
           {/* Code files */}
           {form.type === "code" && (
             <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">
+              <label className="block text-xs font-medium text-gray-600 text-gray-400 mb-2">
                 Fichiers PHP à déployer
               </label>
               <div className="mb-3">
-                <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-brand-400 text-sm text-brand-500 cursor-pointer hover:bg-brand-50 dark:hover:bg-brand-500/10">
+                <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-brand-400 text-sm text-brand-500 cursor-pointer hover:bg-brand-50 hover:bg-brand-500/10">
                   <span>+ Ajouter des fichiers</span>
                   <input type="file" multiple accept=".php,.js,.css,.json" className="hidden" onChange={handleFileUpload} />
                 </label>
@@ -300,9 +300,9 @@ export default function UpdatesList() {
               )}
               <div className="space-y-3">
                 {form.files.map((f) => (
-                  <div key={f.filename} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+                  <div key={f.filename} className="rounded-lg border border-gray-200 border-gray-700 p-3">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{f.filename}</span>
+                      <span className="text-sm font-medium text-gray-700 text-gray-300">{f.filename}</span>
                       <button type="button" onClick={() => removeFile(f.filename)} className="text-xs text-red-400 hover:text-red-600">✕ Retirer</button>
                     </div>
                     <div>
@@ -311,7 +311,7 @@ export default function UpdatesList() {
                         required
                         value={f.path}
                         onChange={(e) => updateFilePath(f.filename, e.target.value)}
-                        className="w-full rounded border border-gray-300 px-3 py-1.5 text-xs font-mono dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-500"
+                        className="w-full rounded border border-gray-300 px-3 py-1.5 text-xs font-mono border-gray-700 bg-gray-800 text-white focus:outline-none focus:ring-1 focus:ring-brand-500"
                         placeholder="application/modules/hrm/controllers/Employees.php"
                       />
                     </div>
@@ -330,7 +330,7 @@ export default function UpdatesList() {
               {saving ? "Création..." : "Créer (brouillon)"}
             </button>
             <button type="button" onClick={() => { setShowForm(false); setError(null); }}
-              className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400">
+              className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm text-gray-600 hover:bg-gray-50 border-gray-700 text-gray-400">
               Annuler
             </button>
           </div>
@@ -346,25 +346,25 @@ export default function UpdatesList() {
         <div className="space-y-4">
           {updates.map((u) => (
             <div key={u.update_id}
-              className={`rounded-2xl border bg-white dark:bg-white/[0.03] p-5 ${u.status === "archived" ? "opacity-60 border-gray-100 dark:border-gray-800/50" : "border-gray-200 dark:border-gray-800"}`}>
+              className={`rounded-2xl border bg-white bg-white/[0.03] p-5 ${u.status === "archived" ? "opacity-60 border-gray-100 border-gray-800/50" : "border-gray-200 border-gray-800"}`}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h3 className="font-semibold text-gray-800 dark:text-white/90">{u.title}</h3>
+                    <h3 className="font-semibold text-gray-800 text-white/90">{u.title}</h3>
                     <span className="text-xs text-gray-400">v{u.version}</span>
                     {typeBadge(u.type)}
                     <Badge size="sm" color={statusBadge(u.status)}>
                       {u.status === "draft" ? "Brouillon" : u.status === "published" ? "Publié" : "Archivé"}
                     </Badge>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 text-gray-400">
                     Module : <strong>{u.module}</strong>
                     {" · "}
                     Cible : {u.target_type === "all" ? "Tous les clients" : u.target_type === "plan" ? `Plan : ${u.target_plan ?? u.target_id}` : `Client : ${u.target_name ?? u.target_id}`}
                     {u.published_at && ` · Publié le ${new Date(u.published_at).toLocaleDateString("fr-FR")}`}
                   </p>
                   {u.changelog && (
-                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{u.changelog}</p>
+                    <p className="mt-2 text-sm text-gray-600 text-gray-400 line-clamp-2">{u.changelog}</p>
                   )}
                 </div>
 
@@ -378,7 +378,7 @@ export default function UpdatesList() {
                   )}
                   {u.status === "published" && (
                     <button onClick={() => handleArchive(u.update_id)}
-                      className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-500 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400">
+                      className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-500 hover:bg-gray-50 border-gray-700 text-gray-400">
                       Archiver
                     </button>
                   )}
@@ -387,7 +387,7 @@ export default function UpdatesList() {
 
               {/* Delivery stats */}
               {u.status === "published" && u.delivery && (
-                <div className="mt-3 flex items-center gap-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+                <div className="mt-3 flex items-center gap-4 pt-3 border-t border-gray-100 border-gray-800">
                   <span className="text-xs text-gray-400">Livraison :</span>
                   <span className="flex items-center gap-1 text-xs font-medium text-yellow-600">
                     <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block" />

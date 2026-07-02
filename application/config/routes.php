@@ -92,6 +92,10 @@ $route['app-details-update/(:any)/(:any)/(:any)'] = "hungry/appdetailsedit/$1/$2
 $route['paymentsqr/(:any)/(:any)/(:any)'] = "hungry/paymentsqr/$1/$2/$3";
 $route['payment-processqr'] = "hungry/payments_processqr";
 $route['apporedrlist'] = "hungry/apporedrlist";
+$route['order-tracking/(:num)'] = "hungry/ordertracking/$1";
+$route['order-status-api/(:num)'] = "hungry/orderstatusapi/$1";
+$route['call-waiter'] = "hungry/callwaiter";
+$route['request-bill'] = "hungry/requestbill";
 $route['updatemyorder/(:any)'] = "hungry/updatemyorder/$1";
 $route['update-summery/(:any)'] = "hungry/update_summery/$1";
 
@@ -206,6 +210,17 @@ $route['saas/settings/test-smtp']['POST']   = 'saas/settings/test_smtp';
 
 // Cron (protected by secret key)
 $route['saas/cron/run']['GET'] = 'saas/cron/run';
+
+// Bank list module routes
+$route['setting/bank_list'] = 'setting/bank_list/index';
+$route['setting/bank_list/index'] = 'setting/bank_list/index';
+$route['setting/bank_list/create'] = 'setting/bank_list/create';
+$route['setting/bank_list/updateintfrm/(:num)'] = 'setting/bank_list/updateintfrm/$1';
+$route['setting/bank_list/delete/(:num)'] = 'setting/bank_list/delete/$1';
+$route['setting/bank_list/bank_transaction'] = 'setting/bank_list/bank_transaction';
+$route['setting/bank_list/bank_debit_credit_manage_add'] = 'setting/bank_list/bank_debit_credit_manage_add';
+$route['setting/bank_list/bank_ledger/(:num)'] = 'setting/bank_list/bank_ledger/$1';
+
 //set modules/config/routes.php
 $modules_path = APPPATH.'modules/';     
 $modules = scandir($modules_path);

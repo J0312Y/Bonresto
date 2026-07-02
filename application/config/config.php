@@ -472,12 +472,16 @@ $config['csrf_exclude_uris'] = [
     'dashboard/autoupdate/updatenow',
     'setting/restauranttable/uploadfile',
     'checkcoupon',
+    // QR public routes — protected by session tableid, no CSRF needed
+    'call-waiter',
+    'request-bill',
+    'order-status-api/.*',
     // SaaS API — all routes handled via JWT, CSRF not needed
     'saas/.*',
 ];
 if (isset($_SERVER["REQUEST_URI"])) {
 
-    if ((stripos($_SERVER["REQUEST_URI"], '/v1') === false) && (stripos($_SERVER["REQUEST_URI"], '/v3') === false) && (stripos($_SERVER["REQUEST_URI"], '/android') === false) && (stripos($_SERVER["REQUEST_URI"], '/app') === false) && (stripos($_SERVER["REQUEST_URI"], '/appv1') === false) && (stripos($_SERVER["REQUEST_URI"], '/hungry') === false)) {
+    if ((stripos($_SERVER["REQUEST_URI"], '/v1') === false) && (stripos($_SERVER["REQUEST_URI"], '/v3') === false) && (stripos($_SERVER["REQUEST_URI"], '/android') === false) && (stripos($_SERVER["REQUEST_URI"], '/app') === false) && (stripos($_SERVER["REQUEST_URI"], '/appv1') === false) && (stripos($_SERVER["REQUEST_URI"], '/hungry') === false) && (stripos($_SERVER["REQUEST_URI"], '/saas') === false)) {
         $config['csrf_protection'] = true;
     } else {
         $config['csrf_protection'] = false;

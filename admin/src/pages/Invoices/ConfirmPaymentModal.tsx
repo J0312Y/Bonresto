@@ -38,24 +38,24 @@ export function ConfirmPaymentModal({ invoice, onConfirmed, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-gray-900 shadow-xl">
+      <div className="w-full max-w-md rounded-2xl bg-white bg-gray-900 shadow-xl">
 
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-6 py-4">
-          <h3 className="text-lg font-bold text-gray-800 dark:text-white">Confirmer le paiement</h3>
+        <div className="flex items-center justify-between border-b border-gray-100 border-gray-800 px-6 py-4">
+          <h3 className="text-lg font-bold text-gray-800 text-white">Confirmer le paiement</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl font-bold">×</button>
         </div>
 
         <div className="px-6 py-5 space-y-5">
           {/* Invoice recap */}
-          <div className="rounded-xl bg-gray-50 dark:bg-gray-800 px-4 py-3 space-y-1.5 text-sm">
+          <div className="rounded-xl bg-gray-50 bg-gray-800 px-4 py-3 space-y-1.5 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-500">Facture</span>
-              <span className="font-mono font-semibold text-gray-800 dark:text-white">{invoice.invoice_number}</span>
+              <span className="font-mono font-semibold text-gray-800 text-white">{invoice.invoice_number}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Client</span>
-              <span className="font-medium text-gray-700 dark:text-gray-200">{invoice.business_name}</span>
+              <span className="font-medium text-gray-700 text-gray-200">{invoice.business_name}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Montant</span>
@@ -64,7 +64,7 @@ export function ConfirmPaymentModal({ invoice, onConfirmed, onClose }: Props) {
             {invoice.plan_name && (
               <div className="flex justify-between">
                 <span className="text-gray-500">Plan</span>
-                <span className="text-gray-700 dark:text-gray-300">{invoice.plan_name}</span>
+                <span className="text-gray-700 text-gray-300">{invoice.plan_name}</span>
               </div>
             )}
           </div>
@@ -80,8 +80,8 @@ export function ConfirmPaymentModal({ invoice, onConfirmed, onClose }: Props) {
                   onClick={() => setMethod(m.value)}
                   className={`flex flex-col items-center gap-1.5 rounded-xl border-2 px-3 py-3 text-sm font-medium transition-colors ${
                     method === m.value
-                      ? "border-[#37a000] bg-green-50 text-[#37a000] dark:bg-green-900/20"
-                      : "border-gray-200 text-gray-600 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400"
+                      ? "border-[#37a000] bg-green-50 text-[#37a000] bg-green-900/20"
+                      : "border-gray-200 text-gray-600 hover:border-gray-300 border-gray-700 text-gray-400"
                   }`}
                 >
                   <span className="text-xl">{m.icon}</span>
@@ -102,7 +102,7 @@ export function ConfirmPaymentModal({ invoice, onConfirmed, onClose }: Props) {
               {saving ? "Confirmation..." : "✓ Confirmer le paiement"}
             </button>
             <button onClick={onClose}
-              className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300">
+              className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 border-gray-700 text-gray-300">
               Annuler
             </button>
           </div>

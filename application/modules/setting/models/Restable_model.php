@@ -189,5 +189,18 @@ public function updateroom($data = array())
 			return false;
 		}
 	}
-    
+
+	public function updateQrCode($tableid, $qr_path)
+	{
+		return $this->db->where('tableid', $tableid)
+			->update($this->table, ['qr_code' => $qr_path]);
+	}
+
+	public function readAll()
+	{
+		return $this->db->select('*')->from($this->table)
+			->order_by('tableid', 'asc')
+			->get()->result();
+	}
+
 }

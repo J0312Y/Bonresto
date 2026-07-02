@@ -60,8 +60,8 @@ export default function PlansBreakdown({ stats }: Props) {
 
   if (plans.length === 0) {
     return (
-      <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6 h-full flex flex-col">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90 mb-4">
+      <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03] md:p-6 h-full flex flex-col">
+        <h3 className="text-lg font-semibold text-gray-800 text-white/90 mb-4">
           Répartition des plans
         </h3>
         <div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
@@ -72,11 +72,11 @@ export default function PlansBreakdown({ stats }: Props) {
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
-      <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90 mb-2">
+    <div className="rounded-2xl border border-gray-200 bg-white p-5 border-gray-800 bg-white/[0.03] md:p-6">
+      <h3 className="text-lg font-semibold text-gray-800 text-white/90 mb-2">
         Répartition des plans
       </h3>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+      <p className="text-sm text-gray-500 text-gray-400 mb-4">
         Abonnements actifs par offre
       </p>
       <Chart options={options} series={series} type="donut" height={280} />

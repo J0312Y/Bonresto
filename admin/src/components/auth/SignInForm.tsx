@@ -34,23 +34,23 @@ export default function SignInForm() {
           alt="Bonresto"
           className="mx-auto mb-4 h-20 w-20 object-contain"
         />
-        <h1 className="mb-1 font-bold text-gray-800 text-title-md dark:text-white/90">
+        <h1 className="mb-1 font-bold text-gray-800 text-title-md text-white/90">
           Bonresto <span className="text-[#37a000]">SaaS</span>
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-500 text-gray-400">
           Connectez-vous à votre espace administrateur
         </p>
       </div>
 
       {error && (
-        <div className="mb-4 rounded-xl bg-red-50 border border-red-200 dark:bg-red-500/10 dark:border-red-500/20 p-4 text-sm text-red-700 dark:text-red-400">
+        <div className="mb-4 rounded-xl bg-red-50 border border-red-200 bg-red-500/10 border-red-500/20 p-4 text-sm text-red-700 text-red-400">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          <label className="block text-sm font-medium text-gray-700 text-gray-300 mb-1.5">
             Email <span className="text-red-500">*</span>
           </label>
           <input
@@ -59,12 +59,12 @@ export default function SignInForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="admin@bonresto.com"
             required
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 border-gray-700 bg-gray-800 text-white"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          <label className="block text-sm font-medium text-gray-700 text-gray-300 mb-1.5">
             Mot de passe <span className="text-red-500">*</span>
           </label>
           <div className="relative">
@@ -74,7 +74,7 @@ export default function SignInForm() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 pr-10 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 pr-10 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 border-gray-700 bg-gray-800 text-white"
             />
             <button
               type="button"

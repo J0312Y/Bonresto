@@ -390,7 +390,6 @@ class Saas_model extends CI_Model {
 
     public function activate_license(string $client_key, string $server_url = ''): ?array {
         $key = $this->db->where('client_key', $client_key)
-                        ->where('status', 'active')
                         ->get('saas_license_keys')->row();
         if (!$key) return null;
 

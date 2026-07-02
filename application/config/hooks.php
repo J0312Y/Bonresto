@@ -28,10 +28,10 @@ $hook['post_controller_constructor'][] = [
     'filepath' => 'hooks',
 ];
 
-// Sync tick — auto-triggers push/pull after each request (replaces crontab)
-$hook['post_system'][] = [
-    'class'    => 'Sync_tick',
-    'function' => 'tick',
-    'filename' => 'Sync_tick.php',
-    'filepath' => 'hooks',
-];
+// Sync tick — DISABLED: Sync_manager library does not exist yet
+// $hook['post_system'][] = [
+//     'class'    => 'Sync_tick',
+//     'function' => 'tick',
+//     'filename' => 'Sync_tick.php',
+//     'filepath' => 'hooks',
+// ];

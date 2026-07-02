@@ -286,33 +286,9 @@ public function create($id = null)
                     $this->email->message($htmlContent);
                     $this->email->send();
 
-                    // ---------------- PUSH BY ONESIGNAL ----------------
-                    $mymsg="New Reservation";
-                    $bodymsg="Dear ".$customerinfo->customer_name." Table:".$reservationinfo->tablename." is Reserved On ".$newdate." ".$this->input->post('bookfromtime',true);
-                    $icon=base_url('assets/img/applogo.png');
-
-                    $content = ["en" => $bodymsg];
-                    $title = ["en" => $mymsg];
-
-                    $fields = array(
-                        'app_id' => "208455d9-baca-4ed2-b6be-12b466a2efbd",
-                        'include_player_ids' => array($customerinfo->customer_token),
-                        'data' => array('type' => "order place",'logo' => $icon),
-                        'contents' => $content,
-                        'headings' => $title,
-                    );
-
-                    $fields = json_encode($fields);
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                    curl_setopt($ch, CURLOPT_HEADER, FALSE);
-                    curl_setopt($ch, CURLOPT_POST, TRUE);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-                    curl_exec($ch);
-                    curl_close($ch);
+                    // ---------------- PUSH NOTIFICATION ----------------
+                    $this->load->library('notification');
+                    $this->notification->reservation_confirmed($customerinfo->customer_name, $reservationinfo->tablename, $customerinfo->customer_token);
                 }
                 // -----------------------------------------------------
 
@@ -373,7 +349,14 @@ public function create($id = null)
 	   'user_name'           => $this->session->userdata('fullname'),
 	   'entry_date'          => date('Y-m-d H:i:s'),
 	  );
+		// Get reservation's table ID before deleting so we can free the table
+		$reservation = $this->db->select('tableid')->from('tblreservation')->where('reserveid', $category)->get()->row();
+
 		if ($this->reservation_model->delete($category)) {
+			// Free the table when reservation is deleted
+			if (!empty($reservation->tableid)) {
+				$this->db->where('tableid', $reservation->tableid)->update('rest_table', ['status' => 0]);
+			}
 			#Store data to log table.
 			 $this->logs_model->log_recorded($logData);
 			#set success message

@@ -44,10 +44,12 @@ class Category_model extends CI_Model {
 	   $this->db->select('*');
         $this->db->from($this->table);
         $this->db->order_by('CategoryID', 'desc');
-     
+        if ($limit !== null) {
+            $this->db->limit($limit, $start);
+        }
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return $query->result();    
+            return $query->result();
         }
         return false;
 	} 
@@ -126,13 +128,7 @@ class Category_model extends CI_Model {
 	
 public function count_category()
 	{
-		$this->db->select('*');
-        $this->db->from($this->table);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->num_rows();  
-        }
-        return false;
+		return $this->db->count_all_results($this->table);
 	}
     
 }

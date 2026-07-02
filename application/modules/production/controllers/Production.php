@@ -241,7 +241,7 @@ class Production extends MX_Controller
 	}
 	public function delete($id = null)
 	{
-		$this->permission->module('production', 'delete')->redirect();
+		$this->permission->method('production', 'delete')->redirect();
 		$logData = array(
 			'action_page'         => "production List",
 			'action_done'     	 => "Delete Data",

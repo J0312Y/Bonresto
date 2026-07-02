@@ -57,10 +57,10 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-gray-900 shadow-xl">
+      <div className="w-full max-w-lg rounded-2xl bg-white bg-gray-900 shadow-xl">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-6 py-4">
-          <h3 className="text-lg font-bold text-gray-800 dark:text-white">Nouvelle facture</h3>
+        <div className="flex items-center justify-between border-b border-gray-100 border-gray-800 px-6 py-4">
+          <h3 className="text-lg font-bold text-gray-800 text-white">Nouvelle facture</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl font-bold">×</button>
         </div>
 
@@ -76,7 +76,7 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
                 value={form.tenant_id}
                 onChange={handle}
                 required
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white"
               >
                 <option value={0}>-- Choisir un client --</option>
                 {clients.map((c) => (
@@ -93,7 +93,7 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
               name="plan_id"
               value={form.plan_id}
               onChange={handlePlanChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white"
             >
               <option value={0}>-- Sans plan spécifique --</option>
               {plans.map((p) => (
@@ -113,7 +113,7 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
               required
               min={0}
               placeholder="50000"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white"
             />
           </div>
 
@@ -122,12 +122,12 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">Début de période</label>
               <input type="date" name="period_start" value={form.period_start} onChange={handle}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white" />
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">Fin de période</label>
               <input type="date" name="period_end" value={form.period_end} onChange={handle}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm border-gray-700 bg-gray-800 text-white" />
             </div>
           </div>
 
@@ -140,7 +140,7 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
               onChange={handle}
               rows={2}
               placeholder="Renouvellement abonnement mensuel..."
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm resize-none dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm resize-none border-gray-700 bg-gray-800 text-white"
             />
           </div>
 
@@ -153,7 +153,7 @@ export function CreateInvoiceModal({ clients, plans, tenantId, onCreated, onClos
               {saving ? "Création..." : "Créer la facture"}
             </button>
             <button type="button" onClick={onClose}
-              className="rounded-lg border border-gray-300 px-5 py-2.5 text-sm text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300">
+              className="rounded-lg border border-gray-300 px-5 py-2.5 text-sm text-gray-600 hover:bg-gray-50 border-gray-700 text-gray-300">
               Annuler
             </button>
           </div>
