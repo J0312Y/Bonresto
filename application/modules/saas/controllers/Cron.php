@@ -27,8 +27,8 @@ class Cron extends Saas_base {
 
     /** GET /saas/cron/run?key=... */
     public function run() {
-        $key = $this->input->get('key');
-        if ($key !== $this->secret) {
+        $key = $this->input->get('key') ?: ($_SERVER['HTTP_X_CRON_KEY'] ?? null);
+        if (!cle_cron_valide($this->secret, $key)) {
             $this->output->set_status_header(403);
             exit('Forbidden');
         }

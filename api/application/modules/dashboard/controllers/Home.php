@@ -11,7 +11,7 @@ class Home extends MX_Controller
         $this->load->model([
             'home_model',
         ]);
-        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 
         if (!$this->session->userdata('isLogIn')) {
             redirect('login');

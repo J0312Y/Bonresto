@@ -10,7 +10,7 @@ class Auth extends MX_Controller {
  		$this->load->model(array(
  			'auth_model' 
  		));
-		$this->db->query('SET SESSION sql_mode = ""');
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 		$this->load->helper('captcha');
  	}
  
@@ -105,7 +105,7 @@ class Auth extends MX_Controller {
 
 				     $sData = array(
 					'isLogIn' 	  => true,
-					'isAdmin' 	  => (($user->row()->is_admin == 1)?true:false),
+					'isAdmin' 	  => in_array($user->row()->is_admin, [1, 3]),
 					'user_type'   => $user->row()->is_admin,
 					'id' 		  => $user->row()->id,
 					'client_id'   => @$row->client_id,

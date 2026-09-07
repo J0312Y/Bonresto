@@ -16,7 +16,7 @@ $VNo = '';
 $CountingNo = 1;
 $oResult = null;
 
-if (isset($_POST['btnSave']))
+if ($this->input->post('btnSave') !== NULL)
 {
 
     $oAccount = new CAccount();
@@ -24,17 +24,17 @@ if (isset($_POST['btnSave']))
     $Semester = '';
     $Department = '';
 
-    if (isset($_POST['cmbSemester'])) {
-        $Semester = $_POST['cmbSemester'];
+    if ($this->input->post('cmbSemester') !== NULL) {
+        $Semester = $this->input->post('cmbSemester', TRUE);
     }
-    if (isset($_POST['cmbDepartment'])) {
-        $Department = $_POST['cmbDepartment'];
+    if ($this->input->post('cmbDepartment') !== NULL) {
+        $Department = $this->input->post('cmbDepartment', TRUE);
     }
 
-    $HeadCode = $_POST['txtCode'];
-    $HeadName = $_POST['txtName'];
-    $FromDate = $_POST['dtpFromDate'];
-    $ToDate = $_POST['dtpToDate'];
+    $HeadCode = $this->input->post('txtCode', TRUE);
+    $HeadName = $this->input->post('txtName', TRUE);
+    $FromDate = $this->input->post('dtpFromDate', TRUE);
+    $ToDate = $this->input->post('dtpToDate', TRUE);
 
     $sql = "SELECT SUM(Debit) Debit, SUM(Credit) Credit, IsAppove, COAID FROM acc_transaction
               WHERE VDate < '$FromDate' AND COAID LIKE '$HeadCode%' AND IsAppove =1 ";

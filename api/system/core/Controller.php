@@ -87,7 +87,7 @@ class CI_Controller extends Lic {
         $stinfo = $CI->db->select("*")->from('setting')->get()->row();
         date_default_timezone_set($stinfo->timezone);
 		log_message('info', 'Controller Class Initialized');
-		$CI->db->query('SET SESSION sql_mode = ""');
+		$CI->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 	}
 
 	// --------------------------------------------------------------------

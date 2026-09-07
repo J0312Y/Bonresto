@@ -6,7 +6,7 @@ class Country_city_list extends MX_Controller {
     public function __construct()
     {
         parent::__construct();
-		$this->db->query('SET SESSION sql_mode = ""');
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 		$this->load->model(array(
 			'countrycity_model',
 			'logs_model'

@@ -48,39 +48,120 @@ class MobilePayment extends CI_Controller {
         echo json_encode($result);
     }
 
-    public function webhook_airtel() {
-        // Implement Airtel Money webhook handler
-        $json = file_get_contents('php://input');
-        log_message('debug', 'Airtel Money Webhook Received: ' . $json);
+    /**
+     * Audit F-08 — verification d'un rappel de fournisseur de paiement.
+     *
+     * Les deux webhooks ci-dessous n'avaient aucun controle : n'importe qui
+     * pouvait poster un JSON et reecrire l'etat de n'importe quelle
+     * transaction. Ils exigent desormais un secret partage, transmis par
+     * l'en-tete X-Webhook-Secret, compare a temps constant.
+     *
+     * Ce n'est PAS une verification de signature cryptographique : chaque
+     * operateur a la sienne (Airtel, MTN), et l'implementer demande leur
+     * documentation. C'est le minimum qui ferme l'acces anonyme ; la signature
+     * du fournisseur reste a brancher ici quand le contrat sera disponible.
+     */
+    private function _rappel_authentifie($operateur)
+    {
+        $attendu = getenv('WEBHOOK_' . strtoupper($operateur) . '_SECRET')
+            ?: getenv('WEBHOOK_SECRET');
 
+        if (empty($attendu)) {
+            log_message('error', "Webhook {$operateur} : aucun secret configure, rappel refuse.");
+            return false;
+        }
+
+        $fourni = $_SERVER['HTTP_X_WEBHOOK_SECRET'] ?? '';
+        if (!is_string($fourni) || $fourni === '') {
+            return false;
+        }
+
+        return hash_equals((string) $attendu, $fourni);
+    }
+
+    private function _refuser($operateur)
+    {
+        log_message('error', "Webhook {$operateur} : rappel non authentifie depuis "
+            . ($this->input->ip_address() ?: 'ip inconnue'));
+        $this->output->set_status_header(401);
+        echo json_encode(['status' => 'error', 'message' => 'Unauthorized']);
+    }
+
+    public function webhook_airtel() {
+        if (!$this->_rappel_authentifie('airtel')) {
+            return $this->_refuser('airtel');
+        }
+
+        $json = file_get_contents('php://input');
         $data = json_decode($json, true);
+
         if (!$data) {
-            log_message('error', 'Airtel webhook: invalid JSON');
-            http_response_code(400);
+            log_message('error', 'Airtel webhook : JSON invalide');
+            $this->output->set_status_header(400);
             echo json_encode(['status' => 'error', 'message' => 'Invalid JSON']);
             return;
         }
 
-        // Example expected payload handling: adapt based on Airtel's webhook structure
         $transactionId = $data['transaction_id'] ?? null;
-        $status = $data['status'] ?? null;
+        $status        = $data['status'] ?? null;
 
-        if ($transactionId) {
-            // update mobile_transactions table if present
-            if ($this->App_android_model->db->table_exists('mobile_transactions')) {
-                $update = ['status' => $status ?? 'unknown', 'updated_at' => date('Y-m-d H:i:s')];
-                $this->App_android_model->db->where('transaction_id', $transactionId)->update('mobile_transactions', $update);
-            }
+        // Audit F-08 : le statut etait recopie tel quel. On n'accepte plus que
+        // des valeurs connues, et seulement pour une transaction qui existe.
+        $statuts_admis = ['pending', 'success', 'failed', 'cancelled', 'expired'];
+
+        if (!$transactionId || !in_array(strtolower((string) $status), $statuts_admis, true)) {
+            $this->output->set_status_header(400);
+            echo json_encode(['status' => 'error', 'message' => 'Invalid payload']);
+            return;
         }
 
-        // Respond with 200 OK to acknowledge receipt
+        $db = $this->App_android_model->db;
+
+        // Audit F-08 : si la table manque, on ne peut rien enregistrer. Repondre
+        // « ok » ferait cesser les reessais de l'operateur et perdrait le
+        // paiement en silence — comme le faisait le webhook MTN.
+        if (!$db->table_exists('mobile_transactions')) {
+            log_message('error', 'Webhook airtel : table mobile_transactions absente.');
+            $this->output->set_status_header(500);
+            echo json_encode(['status' => 'error', 'message' => 'Storage unavailable']);
+            return;
+        }
+
+        {
+            $existe = $db->where('transaction_id', $transactionId)
+                ->count_all_results('mobile_transactions');
+
+            if ($existe === 0) {
+                log_message('error', 'Airtel webhook : transaction inconnue');
+                $this->output->set_status_header(404);
+                echo json_encode(['status' => 'error', 'message' => 'Unknown transaction']);
+                return;
+            }
+
+            $db->where('transaction_id', $transactionId)->update('mobile_transactions', [
+                'status'     => strtolower((string) $status),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+        }
+
         echo json_encode(['status' => 'ok']);
     }
 
     public function webhook_mtn() {
-        // TODO: Implémenter le webhook MTN Money
-        $json = file_get_contents('php://input');
-        log_message('debug', 'MTN Money Webhook: ' . $json);
-        echo "OK";
+        if (!$this->_rappel_authentifie('mtn')) {
+            return $this->_refuser('mtn');
+        }
+
+        // Audit F-08 : cette methode se contentait d'un « OK ». Elle indiquait
+        // donc a MTN que le rappel avait ete traite, ce qui met fin aux
+        // reessais cote operateur — un paiement confirme pouvait ainsi etre
+        // perdu sans trace. Tant que le traitement n'est pas ecrit, on
+        // repond 501 : MTN reessaiera, et l'absence de traitement se voit.
+        log_message('error', 'Webhook MTN appele mais non implemente.');
+        $this->output->set_status_header(501);
+        echo json_encode([
+            'status'  => 'error',
+            'message' => 'MTN webhook not implemented',
+        ]);
     }
 }

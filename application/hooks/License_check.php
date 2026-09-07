@@ -10,13 +10,18 @@ class License_check {
         'apporedrlist', 'qr-app-cart', 'addtocartqr', 'paymentsqr',
         'payment-processqr', 'app-details', 'app-details-update', 'update-summery',
         'v1', 'v3', 'app', 'appv1', 'android',
-        'sync_api', 'sync_cron',
+        'sync_api', 'sync_cron', 'stock_alert_cron',
+        // Audit F-08 : rappels des operateurs de paiement. Les bloquer sur
+        // l'etat de la licence fait perdre un paiement deja confirme cote
+        // operateur, qui cesse de reessayer apres une reponse 3xx.
+        'mobilepayment',
     ];
 
     /**
      * Maps URI module segment → feature key in plan.
      * If a module is listed here, access is blocked unless the feature is enabled.
      */
+    // feature key (in license.json) => module folder name
     const MODULE_MAP = [
         'reservation'   => 'reservation',
         'qrapp'         => 'qrapp',
@@ -27,6 +32,20 @@ class License_check {
         'accounts'      => 'accounts',
         'report'        => 'report',
         'whatsapp'      => 'whatsapp',
+        'loyalty'       => 'loyalty',
+        'shiftmangment' => 'shiftmangment',
+        'tax'           => 'tax',
+        // Agent conversationnel WhatsApp. A ne pas confondre avec 'whatsapp'
+        // ci-dessus, qui est la pastille click-to-chat du site : ce sont deux
+        // produits distincts, vendus separement.
+        //
+        // Gate ici = la licence s'applique aussi a l'API de l'agent
+        // (agentapi/v1/*). Un client dont le plan n'inclut pas le module voit
+        // son agent recevoir un 403 JSON — a condition qu'il envoie bien
+        // l'en-tete Accept: application/json, ce que fait agent/bonresto.py.
+        // Sans cet en-tete, _is_api() ne le reconnait pas et repond par une
+        // redirection HTML que l'agent ne saurait pas interpreter.
+        'agentapi'      => 'agentapi',
     ];
 
     public function check() {
@@ -81,11 +100,8 @@ class License_check {
                     ]);
                     exit;
                 }
-                // Show friendly upgrade page
-                $CI->session->set_flashdata('error',
-                    "Le module <strong>" . htmlspecialchars($module) . "</strong> n'est pas inclus dans votre plan actuel. " .
-                    "Contactez votre administrateur SaaS pour mettre à niveau votre abonnement.");
-                redirect('dashboard/home');
+                // Show dedicated "module locked" page
+                redirect('dashboard/license/module_locked?module=' . urlencode($module));
                 return;
             }
         }

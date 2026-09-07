@@ -639,6 +639,8 @@ class App_android_model extends CI_Model
 	#check productiondetails
 	public function checkproductiondetails($foodid,$fvid,$foodqty)
 	{
+		$suffisant = true;
+
 		$checksetitem=$this->db->select('ProductsID,isgroup')->from('item_foods')->where('ProductsID',$foodid)->where('isgroup',1)->get()->row();
 		if(!empty($checksetitem)){
 			$groupitemlist=$this->db->select('items,varientid,item_qty')->from('tbl_groupitems')->where('gitemid',$checksetitem->ProductsID)->get()->result();
@@ -651,9 +653,20 @@ class App_android_model extends CI_Model
 					 foreach($productiondetails as $productiondetail){
 							$r_stock = (float)($productiondetail->qty) * ((float)($foodqty) * (float)($groupitem->item_qty));
 							/*add stock in ingredients*/
+							// Audit F-17 : le controle de disponibilite et le decompte etaient
+							// deux instructions distinctes. Deux caisses enregistrant en meme
+							// temps le dernier plat passaient toutes deux le controle. La
+							// condition portee par l'UPDATE lui-meme rend l'operation atomique.
 							$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 							$this->db->where('id', intval($productiondetail->ingredientid));
+							$this->db->where('stock_qty >=', $r_stock);
 							$this->db->update('ingredients');
+
+							if ($this->db->affected_rows() < 1) {
+								log_message('error', 'Stock insuffisant : ingredient '
+									. intval($productiondetail->ingredientid) . ', demande ' . $r_stock);
+								$suffisant = false;
+							}
 							/*end add ingredients*/
 					 }
 				}
@@ -666,14 +679,27 @@ class App_android_model extends CI_Model
 				foreach($productiondetails as $productiondetail){
 					$r_stock = (float)($productiondetail->qty) * (float)($foodqty);
 					/*add stock in ingredients*/
+						// Audit F-17 : le controle de disponibilite et le decompte etaient
+						// deux instructions distinctes. Deux caisses enregistrant en meme
+						// temps le dernier plat passaient toutes deux le controle. La
+						// condition portee par l'UPDATE lui-meme rend l'operation atomique.
 						$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 						$this->db->where('id', intval($productiondetail->ingredientid));
+						$this->db->where('stock_qty >=', $r_stock);
 						$this->db->update('ingredients');
+
+						if ($this->db->affected_rows() < 1) {
+							log_message('error', 'Stock insuffisant : ingredient '
+								. intval($productiondetail->ingredientid) . ', demande ' . $r_stock);
+							$suffisant = false;
+						}
 						/*end add ingredients*/
 				}
 			}
 
 
+	
+		return $suffisant;
 	}
 	public function insert_product($foodid,$vid,$foodqty)
 	{
@@ -689,7 +715,10 @@ class App_android_model extends CI_Model
 			'saveddate'	              =>	$newdate,
 			'productionexpiredate'	  =>	$exdate
 		);
-		$this->checkproductiondetails($foodid,$vid,$foodqty);
+		// Audit F-17 : idem cote application mobile.
+		if (!$this->checkproductiondetails($foodid,$vid,$foodqty)) {
+			return false;
+		}
 		 $this->db->insert('production',$data);
 
 		$returnid = $this->db->insert_id();

@@ -6,15 +6,15 @@ include ('Class/Ccommon.php');
 ?>
 
 <?php
-if(isset($_POST['btnSave']))
+if($this->input->post('btnSave') !== NULL)
 {
 
     $oAccount=new CAccount();
     $oResult=new CResult();
-    $HeadCode=$_POST['txtCode'];
-    $HeadName=$_POST['txtName'];
-    $FromDate=$_POST['dtpFromDate'];
-    $ToDate=$_POST['dtpToDate'];
+    $HeadCode=$this->input->post('txtCode', TRUE);
+    $HeadName=$this->input->post('txtName', TRUE);
+    $FromDate=$this->input->post('dtpFromDate', TRUE);
+    $ToDate=$this->input->post('dtpToDate', TRUE);
 
 
     $sql=$this->accounts_model->bankbook_firstqury($FromDate,$HeadCode);

@@ -10,7 +10,7 @@ class Data_synchronizer extends MX_Controller {
 			'synchronizer/SyncData',
 			'synchronizer/SyncManager',
 		));
-		$this->db->query('SET SESSION sql_mode = ""');
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 		$this->load->model(array('synchronizer_model'));
 		
 		if (! $this->session->userdata('isAdmin'))

@@ -11,9 +11,11 @@ class Web_setting extends MX_Controller {
 			'websetting_model',
 			'basicsetting_model',
 		));
-		$this->db->query('SET SESSION sql_mode = ""');
-		if (!$this->session->userdata('isAdmin')) 
-		redirect('login'); 
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
+		if (!$this->session->userdata('isAdmin'))
+		redirect('login');
+		$this->load->helper('tenant');
+		if (!is_superadmin()) show_error('Accès réservé au super administrateur.', 403);
 	}
 	// Common Setting
 		public function index()

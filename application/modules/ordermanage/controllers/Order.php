@@ -6,7 +6,7 @@ class Order extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
         $this->load->library('lsoft_setting');
         $this->load->model([
             'order_model',
@@ -1047,12 +1047,12 @@ class Order extends MX_Controller
                     ->order_by('order_id', 'desc')
                     ->get()
                     ->row();
-                $sl = $lastid->order_id ?? '';
+                $sl = $lastid->order_id ?? 0;
 
                 if (empty($sl)) {
                     $sl = 1;
                 } else {
-                    $sl = $sl + 1;
+                    $sl = (int)$sl + 1;
                 }
 
                 $si_length = strlen((int) $sl);
@@ -1154,12 +1154,12 @@ class Order extends MX_Controller
                 $purchase_date = str_replace('/', '-', $this->input->post('order_date'));
                 $newdate       = date('Y-m-d', strtotime($purchase_date));
                 $lastid        = $this->db->select("*")->from('customer_order')->order_by('order_id', 'desc')->get()->row();
-                $sl            = $lastid->order_id ?? '';
+                $sl            = $lastid->order_id ?? 0;
 
                 if (empty($sl)) {
                     $sl = 1;
                 } else {
-                    $sl = $sl + 1;
+                    $sl = (int)$sl + 1;
                 }
 
                 $si_length = strlen((int) $sl);
@@ -1174,7 +1174,7 @@ class Order extends MX_Controller
                 if (empty($todaystoken)) {
                     $mytoken = 1;
                 } else {
-                    $mytoken = $todaystoken->tokenno + 1;
+                    $mytoken = (int)$todaystoken->tokenno + 1;
                 }
 
                 $token_length = strlen((int) $mytoken);
@@ -4050,6 +4050,15 @@ class Order extends MX_Controller
         $data['kitchenlist'] = $kitchenlist;
     }
 
+    // Load upcoming reservation pre-orders per kitchen for preview
+    $this->load->model('reservation/reservation_model');
+    $data['upcoming_preorders'] = [];
+    $allKitchens = isset($data['kitchenlist']) ? $data['kitchenlist'] : [];
+    foreach ($allKitchens as $kit) {
+        $kid = $kit->kitchen_id;
+        $data['upcoming_preorders'][$kid] = $this->order_model->get_upcoming_preorders_for_kitchen($kid);
+    }
+
     $data['title']  = "Counter Dashboard";
     $data['module'] = "ordermanage";
     $data['page']   = "allkitchen";
@@ -4187,8 +4196,11 @@ class Order extends MX_Controller
         $this->db->where('order_id', $orderid);
         $this->db->update('customer_order', $updatetData2);
         $orderinformation = $this->order_model->read('*', 'customer_order', ['order_id' => $orderid]);
-        $allemployee      = $this->db->select('*')->from('user')->where('id', $orderinformation->waiter_id)->get()->row();
+        if (empty($orderinformation)) { echo 0; return; }
+        $allemployee      = !empty($orderinformation->waiter_id) ? $this->db->select('*')->from('user')->where('id', $orderinformation->waiter_id)->get()->row() : null;
         $item             = $this->order_model->read('*', 'item_foods', ['ProductsID' => $menuid]);
+        $productName      = !empty($item) ? $item->ProductName : 'Unknown';
+        $totalAmount      = $orderinformation->totalamount ?? 0;
         $isexit           = $this->db->select('*')->from('tbl_orderprepare')->where('orderid', $orderid)->where('menuid', $menuid)->where('varient', $varient)->get()->row();
 
         if ($status == 1) {
@@ -4205,12 +4217,12 @@ class Order extends MX_Controller
             }
 
             //push — food is ready
-            $this->notification->food_ready($orderid, $item->ProductName, $orderinformation->totalamount, $allemployee->waiter_kitchenToken ?? null);
+            $this->notification->food_ready($orderid, $productName, $totalAmount, $allemployee->waiter_kitchenToken ?? null);
         } else {
             $ready = "Food Is Cooking";
             $this->db->where('orderid', $orderid)->where('menuid', $menuid)->where('varient', $varient)->delete('tbl_orderprepare');
             //push — order preparing
-            $this->notification->order_preparing($orderid, $item->ProductName, $orderinformation->totalamount, $allemployee->waiter_kitchenToken ?? null);
+            $this->notification->order_preparing($orderid, $productName, $totalAmount, $allemployee->waiter_kitchenToken ?? null);
         }
 
         echo $status;
@@ -5732,19 +5744,29 @@ class Order extends MX_Controller
 
     private function taxchecking()
     {
-        $taxinfos = '';
-
-        if ($this->db->table_exists('tbl_tax')) {
-            $taxsetting = $this->db->select('*')->from('tbl_tax')->get()->row();
+        // New tax module: tbl_tax_config (enable flag) + tbl_tax (individual taxes)
+        if ($this->db->table_exists('tbl_tax_config') && $this->db->table_exists('tbl_tax')) {
+            $config = $this->db->get('tbl_tax_config')->row();
+            if (!empty($config) && $config->is_enabled == 1) {
+                // Alias tax_value → default_value so existing views don't need changes
+                return $this->db
+                    ->select('id, tax_name, tax_value AS default_value, reg_no, is_show, sort_order')
+                    ->where('is_show', 1)
+                    ->order_by('sort_order', 'ASC')
+                    ->get('tbl_tax')
+                    ->result_array();
+            }
+            return '';
         }
 
-        if (!empty($taxsetting)) {
-
-            if ($taxsetting->tax == 1) {
+        // Legacy fallback (old tax_settings table)
+        $taxinfos = '';
+        if ($this->db->table_exists('tbl_tax')) {
+            $taxsetting = $this->db->select('*')->from('tbl_tax')->get()->row();
+            if (!empty($taxsetting) && isset($taxsetting->tax) && $taxsetting->tax == 1) {
                 $taxinfos = $this->db->select('*')->from('tax_settings')->get()->result_array();
             }
         }
-
         return $taxinfos;
     }
 

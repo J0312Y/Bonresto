@@ -10,7 +10,7 @@ class Permission_setup extends MX_Controller {
  			'module_permission_model',
  			'module_model'
  		));
- 		$this->db->query('SET SESSION sql_mode = ""');
+ 		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 		if (! $this->session->userdata('isAdmin'))
 			redirect('login');
  	}

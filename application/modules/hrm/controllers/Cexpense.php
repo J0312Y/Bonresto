@@ -7,7 +7,7 @@ class Cexpense extends MX_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
         $this->load->model('Expense_model');
     }
 

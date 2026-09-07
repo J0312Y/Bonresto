@@ -46,6 +46,13 @@ class Licenses extends Saas_base {
      * This endpoint is PUBLIC (no JWT required).
      */
     public function activate() {
+        // Audit F-24 : point d'entree public, identifie par la seule client_key.
+        // Sans limite, ces cles sont enumerables. 30 appels par minute et par
+        // adresse suffisent largement a un serveur client qui synchronise.
+        if (!limite_debit('licences:' . $this->input->ip_address(), 30, 60)) {
+            $this->_abort(429, 'Trop de requetes. Reessayez dans une minute.');
+        }
+
         $body       = $this->_body();
         $client_key = strtoupper(trim($body['client_key'] ?? ''));
         $server_url = trim($body['server_url'] ?? '');
@@ -88,6 +95,13 @@ class Licenses extends Saas_base {
      * Authenticated with X-Api-Key header.
      */
     public function updates_info() {
+        // Audit F-24 : point d'entree public, identifie par la seule client_key.
+        // Sans limite, ces cles sont enumerables. 30 appels par minute et par
+        // adresse suffisent largement a un serveur client qui synchronise.
+        if (!limite_debit('licences:' . $this->input->ip_address(), 30, 60)) {
+            $this->_abort(429, 'Trop de requetes. Reessayez dans une minute.');
+        }
+
         $client_key = strtoupper(trim($_SERVER['HTTP_X_API_KEY'] ?? ''));
         if (!$client_key) $this->_abort(401, 'X-Api-Key requis.');
 
@@ -126,6 +140,13 @@ class Licenses extends Saas_base {
      * Accepts X-Cached-At header (datetime) to compare against invalidation timestamp.
      */
     public function check() {
+        // Audit F-24 : point d'entree public, identifie par la seule client_key.
+        // Sans limite, ces cles sont enumerables. 30 appels par minute et par
+        // adresse suffisent largement a un serveur client qui synchronise.
+        if (!limite_debit('licences:' . $this->input->ip_address(), 30, 60)) {
+            $this->_abort(429, 'Trop de requetes. Reessayez dans une minute.');
+        }
+
         $client_key = strtoupper(trim($_SERVER['HTTP_X_API_KEY'] ?? ''));
         $cached_at  = $_SERVER['HTTP_X_CACHED_AT'] ?? '';
 
@@ -157,6 +178,13 @@ class Licenses extends Saas_base {
      * Authenticated with the client_key in X-Api-Key header.
      */
     public function refresh() {
+        // Audit F-24 : point d'entree public, identifie par la seule client_key.
+        // Sans limite, ces cles sont enumerables. 30 appels par minute et par
+        // adresse suffisent largement a un serveur client qui synchronise.
+        if (!limite_debit('licences:' . $this->input->ip_address(), 30, 60)) {
+            $this->_abort(429, 'Trop de requetes. Reessayez dans une minute.');
+        }
+
         $client_key = $_SERVER['HTTP_X_API_KEY'] ?? '';
         if (!$client_key) $this->_abort(401, 'X-Api-Key requis.');
 

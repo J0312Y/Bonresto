@@ -156,7 +156,8 @@ switch (ENVIRONMENT) {
         echo 'The application environment is not set correctly.';
         exit(1); // EXIT_ERROR
 }
-error_reporting(E_ALL);
+// Audit F-20 : error_reporting(E_ALL) figurait ici et annulait le reglage
+// choisi par le switch ci-dessus. Le niveau depend desormais de ENVIRONMENT.
 //ini_set('display_errors', 1);
 /*
  *---------------------------------------------------------------

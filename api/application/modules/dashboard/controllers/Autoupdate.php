@@ -25,7 +25,7 @@ class Autoupdate extends MX_Controller {
 	{
 		parent::__construct();
 		$this->load->library('user_agent');
-		$this->db->query('SET SESSION sql_mode = ""');
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 	
 	}
 	 public function index(){ 
@@ -453,4 +453,4 @@ public function notifyoff(){
 				$this->db->update('tbl_version_checker',$setdata);
 	}
 
-}
+}

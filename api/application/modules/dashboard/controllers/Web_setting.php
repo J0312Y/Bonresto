@@ -11,7 +11,7 @@ class Web_setting extends MX_Controller {
 			'websetting_model',
 			'basicsetting_model',
 		));
-		$this->db->query('SET SESSION sql_mode = ""');
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 		if (!$this->session->userdata('isAdmin')) 
 		redirect('login'); 
 	}

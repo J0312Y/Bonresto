@@ -18,17 +18,17 @@ class Stock_alert_cron extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
     }
 
     public function run($cli_key = null)
     {
         // Protect with cron key
-        $key = $cli_key ?: $this->input->get('key');
+        $key = $cli_key ?: ($this->input->get('key') ?: ($_SERVER['HTTP_X_CRON_KEY'] ?? null));
         $this->config->load('saas_email', true);
         $valid_key = $this->config->item('saas_cron_key', 'saas_email');
 
-        if (empty($key) || $key !== $valid_key) {
+        if (!cle_cron_valide($valid_key, $key)) {
             http_response_code(403);
             echo json_encode(['error' => 'Invalid cron key']);
             return;

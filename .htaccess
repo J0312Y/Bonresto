@@ -39,6 +39,12 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^saas-bonresto/admin/dist/(.*)$ saas-bonresto/admin/dist/index.html [L]
 
+    # Audit F-23 : l'installateur reste deploye et joignable. Il cree des
+    # comptes et ecrit la configuration : il ne doit etre accessible que
+    # pendant une installation. Commenter la ligne suivante pour reinstaller,
+    # puis la retablir.
+    RewriteRule ^install/ - [F,L]
+
     # CodeIgniter routing
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

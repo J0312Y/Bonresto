@@ -38,7 +38,7 @@ class Hungry extends CI_Controller
         $this->settinginfo   = $this->db->select('*')->from('setting')->get()->row();
         $this->sociallink    = $this->db->select('*')->from('tbl_sociallink')->where('status', 1)->get()->result();
         $this->storecurrency = $this->db->select('*')->from('currency')->where('currencyid', $this->settinginfo->currency)->get()->row();
-        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
     }
 
     public function index()

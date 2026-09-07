@@ -7,7 +7,7 @@ class Ingradient extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
         $this->load->model([
             'ingradient_model',
             'unit_model',
@@ -83,11 +83,13 @@ class Ingradient extends MX_Controller
         $this->form_validation->set_rules('status', display('status'), 'required');
 
         $data['intinfo'] = "";
+        $barcode_val = $this->input->post('barcode', true);
         $data['units']   = (Object) $postData   = [
             'id'              => $this->input->post('id'),
             'ingredient_name' => $this->input->post('ingredientname', true),
             'uom_id'          => $this->input->post('unitid', true),
             'min_stock'       => $this->input->post('min_stock', true),
+            'barcode'         => ($barcode_val !== '' && $barcode_val !== null) ? $barcode_val : null,
             'is_active'       => $this->input->post('status', true),
         ];
 

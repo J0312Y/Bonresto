@@ -1,0 +1,22 @@
+# Audit F-26 : contenu televerse par les utilisateurs. Il doit pouvoir etre
+# servi comme media, jamais execute. Sans cette regle, un fichier .php depose
+# ici par une faille de televersement s'executerait avec les droits du serveur.
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+
+<FilesMatch "\.(php|php[0-9]|phtml|phps|phar|pl|py|cgi|sh|htaccess|htpasswd)$">
+    <IfModule authz_core_module>
+        Require all denied
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+Options -ExecCGI -Indexes

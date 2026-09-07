@@ -10,7 +10,7 @@ class Auth extends MX_Controller {
  		$this->load->model(array(
  			'auth_model' 
  		));
-		$this->db->query('SET SESSION sql_mode = ""');
+		$this->db->query('SET SESSION sql_mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"');
 		$this->load->helper('captcha');
  	}
  

@@ -521,6 +521,12 @@ $config['csrf_exclude_uris'] = [
     //
     // Ici, CodeIgniter compare chaque motif à l'URI ROUTÉE, ancrée des deux
     // côtés (`^motif$`) : `hungry/panier` correspond, `dashboard/happy` non.
+    // Audit F-08 : rappels des operateurs de paiement. Machine a machine,
+    // authentifies par un secret partage (en-tete X-Webhook-Secret) : un jeton
+    // CSRF n'a pas de sens ici, et son absence les faisait echouer en silence.
+    'mobilepayment/webhook_airtel',
+    'mobilepayment/webhook_mtn',
+
     'v1(/.*)?',
     'v3(/.*)?',
     'app(/.*)?',
