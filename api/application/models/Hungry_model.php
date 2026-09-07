@@ -772,39 +772,52 @@ class Hungry_model extends CI_Model
         return false;
     }
 
-    public function checkavailtable()
+    /**
+     * Copie de application/models/Hungry_model.php — cette installation api/
+     * est un second CodeIgniter complet, joignable par le web, avec ses
+     * propres modeles. Les memes trois defauts y etaient presents :
+     *
+     * 1. valeurs concatenees dans le WHERE avec l'echappement desactive,
+     *    alors qu'elles viennent du formulaire public : injection SQL ;
+     * 2. filtre `person_capicity` en egalite stricte : une table reservee
+     *    pour 4 n'etait pas vue comme occupee par une demande pour 2 ;
+     * 3. retour en chaine "3,7,12" la ou where_not_in() attend un tableau —
+     *    MySQL convertissait la chaine en entier et n'excluait que la
+     *    premiere table de la liste.
+     */
+    public function checkavailtable($newdate = null, $gettime = null, $nopeople = null)
     {
-        $newdate   = $this->input->post('getdate');
-        $gettime   = $this->input->post('time');
-        $nopeople  = $this->input->post('people');
-        $dateRange = "reserveday='$newdate' AND formtime<='$gettime' AND totime>='$gettime' AND person_capicity='$nopeople' AND status=2";
-        $this->db->select('*');
+        $newdate = $newdate ?? $this->input->post('getdate');
+        $gettime = $gettime ?? $this->input->post('time');
+
+        $this->db->select('tableid');
         $this->db->from('tblreservation');
-        $this->db->where($dateRange, null, false);
-        $query   = $this->db->get();
-        $totalid = '';
+        $this->db->where('reserveday', $newdate);
+        $this->db->where('formtime <=', $gettime);
+        $this->db->where('totime >=', $gettime);
+        $this->db->where_in('status', RESERVATION_STATUTS_OCCUPANTS);
+        $query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            $gettable = $query->result();
+        $totalid = [];
 
-            foreach ($gettable as $selectedtable) {
-                $totalid .= $selectedtable->tableid . ",";
-            }
-
-            return $totalid = trim($totalid, ',');
+        foreach ($query->result() as $selectedtable) {
+            $totalid[] = $selectedtable->tableid;
         }
 
-        return false;
+        return $totalid;
     }
 
-    public function bookedpeople()
+    public function bookedpeople($newdate = null, $gettime = null)
     {
-        $newdate   = $this->input->post('getdate');
-        $gettime   = $this->input->post('time');
-        $dateRange = "reserveday='$newdate' AND formtime<='$gettime' AND totime>='$gettime' AND status=2";
+        $newdate = $newdate ?? $this->input->post('getdate');
+        $gettime = $gettime ?? $this->input->post('time');
+
         $this->db->select('SUM(person_capicity) as totalperson');
         $this->db->from('tblreservation');
-        $this->db->where($dateRange, null, false);
+        $this->db->where('reserveday', $newdate);
+        $this->db->where('formtime <=', $gettime);
+        $this->db->where('totime >=', $gettime);
+        $this->db->where_in('status', RESERVATION_STATUTS_OCCUPANTS);
         $query = $this->db->get();
         return $query->row();
     }
@@ -813,8 +826,13 @@ class Hungry_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('rest_table');
-        $this->db->where_not_in('tableid', $invalue);
+
+        if (!empty($invalue)) {
+            $this->db->where_not_in('tableid', (array) $invalue);
+        }
+
         $this->db->where('person_capicity>=', $person);
+        $this->db->order_by('person_capicity', 'ASC');
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
@@ -1113,9 +1131,26 @@ class Hungry_model extends CI_Model
     public function loginUser($username, $password)
     {
         $val = 0;
+        // Audit F-11 : meme base que le POS — la verification doit accepter
+        // MD5 herite et bcrypt, sinon tout compte remis a niveau ailleurs
+        // se verrait refuser ici.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('customer_id, password')
+            ->where('customer_email', $username)
+            ->where('is_active', 1)
+            ->get('customer_info')->row();
+        $valide = $compte && Saas_password::verifier($password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('customer_id', $compte->customer_id)
+                ->update('customer_info', ['password' => Saas_password::hacher($password)]);
+        }
+        if (!$valide) {
+            return $val;
+        }
+
         $this->db->select('*');
         $this->db->where('customer_email', $username);
-        $this->db->where('password', $password);
+        $this->db->where('customer_id', (int) $compte->customer_id);
         $this->db->where('is_active', 1);
         $query = $this->db->get('customer_info');
         $rows  = $query->result();

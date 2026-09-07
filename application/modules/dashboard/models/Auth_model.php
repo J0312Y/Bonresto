@@ -5,6 +5,24 @@ class Auth_model extends CI_Model {
 
 	public function checkUser($data = array())
 	{
+		// Audit F-11 : l'empreinte n'est plus comparee dans le SQL. On charge
+		// la ligne par l'adresse, on verifie en PHP — Saas_password accepte
+		// l'ancien MD5 comme le bcrypt — et on remet l'empreinte a niveau au
+		// premier succes. Personne n'a de mot de passe a changer.
+		$this->load->library('Saas_password');
+
+		$compte = $this->db->select('id, password')
+			->from('user')
+			->where('email', $data['email'])
+			->get()->row();
+
+		$valide = $compte && Saas_password::verifier($data['password'], $compte->password);
+
+		if ($valide && Saas_password::a_rehacher($compte->password)) {
+			$this->db->where('id', $compte->id)
+				->update('user', ['password' => Saas_password::hacher($data['password'])]);
+		}
+
 		return $this->db->select("
 				user.id,
 				CONCAT_WS(' ', user.firstname, user.lastname) AS fullname,
@@ -16,11 +34,13 @@ class Auth_model extends CI_Model {
 				user.counter,
 				user.status,
 				user.is_admin,
-				IF (user.is_admin=1, 'Admin', 'User') as user_level
+				IF (user.is_admin=3, 'Super Admin', IF(user.is_admin=1, 'Admin', 'User')) as user_level
 			")
 			->from('user')
-			->where('email', $data['email'])
-			->where('password', md5($data['password']))  // md5 kept for backward compat with existing hashes
+			// Echec d'authentification : on filtre sur un id impossible pour
+			// renvoyer un jeu vide, et conserver la forme de retour attendue
+			// par le controleur (num_rows() puis row()).
+			->where('user.id', $valide ? (int) $compte->id : 0)
 			->get();
 	}
 

@@ -7,6 +7,7 @@ if (!defined('BASEPATH')) {
 class Android extends MY_Controller
 {
     protected $FILE_PATH;
+    protected $SITE_URL;
 
     public function __construct()
     {
@@ -14,6 +15,8 @@ class Android extends MY_Controller
         $this->load->model('Api_v2_model');
 
         $this->FILE_PATH = base_url('assets/img/user');
+        // base_url() returns .../api/ but images are served from site root (without /api/)
+        $this->SITE_URL = str_replace('/api/', '/', base_url());
     }
 
     public function index()
@@ -47,6 +50,8 @@ class Android extends MY_Controller
             if ($result != false) {
                 $updatetData['customer_token'] = $this->input->post('token', true);
                 $this->Api_v2_model->update_date('customer_info', $updatetData, 'customer_id', $result->customer_id);
+                $this->load->library('notification');
+                $this->notification->set_external_user_id($updatetData['customer_token'], 'customer', $result->customer_id);
 
                 $result->{'UserPictureURL'}
 
@@ -115,7 +120,7 @@ class Android extends MY_Controller
             $data['cuntomer_no'] = $sino;
             $data['customer_name'] = $this->input->post('customer_name', true);
             $data['customer_email'] = $this->input->post('email', true);
-            $data['password'] = md5($this->input->post('password', true));
+            $data['password'] = Saas_password::hacher($this->input->post('password', true));
             $data['customer_address'] = $this->input->post('Address', true);
             $data['customer_phone'] = $this->input->post('mobile', true);
             $data['crdate'] = date('Y-m-d');
@@ -137,7 +142,7 @@ class Android extends MY_Controller
                 $output = $this->Api_v2_model->read('*', 'customer_info', ['customer_id' => $insert_ID]);
                 $output->{'UserPictureURL'}
 
-                    = base_url().$image;
+                    = $this->SITE_URL.$image;
 
                 return $this->respondWithSuccess('You have successfully registered.', $output);
             } else {
@@ -199,10 +204,10 @@ class Android extends MY_Controller
                     if ($this->input->post('password') == '') {
                         $psaaword = $custinfo->password;
                     } else {
-                        $mypassword = md5($this->input->post('oldpassword'));
+                        // Audit F-11 : verification acceptant les deux formats.
 
-                        if ($custinfo->password == $mypassword) {
-                            $psaaword = md5($this->input->post('password'));
+                        if (Saas_password::verifier($this->input->post('oldpassword'), $custinfo->password)) {
+                            $psaaword = Saas_password::hacher($this->input->post('password'));
                         } else {
                             return $this->respondWithSuccess('Your old password does not match.', $output);
                             exit;
@@ -228,7 +233,7 @@ class Android extends MY_Controller
                         // print_r($output);
                         $output->{'UserPictureURL'}
 
-                            = base_url().$image;
+                            = $this->SITE_URL.$image;
                         $newhead = $customernum.'-'.$this->input->post('customer_name');
 
                         return $this->respondWithSuccess('Your profile has been successfully updated.', $output);
@@ -244,10 +249,10 @@ class Android extends MY_Controller
                         if ($this->input->post('password') == '') {
                             $psaaword = $custinfo->password;
                         } else {
-                            $mypassword = md5($this->input->post('oldpassword'));
+                            // Audit F-11 : idem.
 
-                            if ($custinfo->password == $mypassword) {
-                                $psaaword = md5($this->input->post('password'));
+                            if (Saas_password::verifier($this->input->post('oldpassword'), $custinfo->password)) {
+                                $psaaword = Saas_password::hacher($this->input->post('password'));
                             } else {
                                 return $this->respondWithSuccess('Your old password does not match.', $output);
                                 exit;
@@ -273,7 +278,7 @@ class Android extends MY_Controller
                             // print_r($output);
                             $output->{'UserPictureURL'}
 
-                                = base_url().$image;
+                                = $this->SITE_URL.$image;
                             $newhead = $customernum.'-'.$this->input->post('customer_name');
 
                             return $this->respondWithSuccess('Your profile has been successfully updated.', $output);
@@ -341,7 +346,7 @@ class Android extends MY_Controller
     public function _sendingForgotPassMail($data)
     {
         $Password = $this->generateNumericOTP(6);
-        $this->Api_v2_model->update_date('customer_info', ['password' => md5($Password)], 'customer_id', $data->customer_id);
+        $this->Api_v2_model->update_date('customer_info', ['password' => Saas_password::hacher($Password)], 'customer_id', $data->customer_id);
 
         $email_config = $this->Api_v2_model->read('*', 'email_config', ['email_config_id' => 1]);
 
@@ -484,7 +489,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['itemnote'] = $lastnote->habit ?? '';
                     $output['iteminfo'][$k]['ProductsID'] = $productlist->ProductsID;
                     $output['iteminfo'][$k]['ProductName'] = $productlist->ProductName;
-                    $output['iteminfo'][$k]['ProductImage'] = base_url().$image;
+                    $output['iteminfo'][$k]['ProductImage'] = $this->SITE_URL.$image;
                     $output['iteminfo'][$k]['component'] = $productlist->component;
                     $output['iteminfo'][$k]['itemnotes'] = $productlist->itemnotes;
                     $output['iteminfo'][$k]['Description'] = $productlist->descrip;
@@ -643,7 +648,7 @@ class Android extends MY_Controller
                 $output['total'] = $proprice;
                 $output['itemnote'] = $lastnote->habit ?? '';
                 $output['ProductName'] = $iteminfo->ProductName;
-                $output['ProductImage'] = base_url().$image;
+                $output['ProductImage'] = $this->SITE_URL.$image;
                 $output['component'] = $iteminfo->component;
                 $output['itemnotes'] = $iteminfo->itemnotes;
                 $output['Description'] = $iteminfo->descrip;
@@ -704,7 +709,7 @@ class Android extends MY_Controller
                     $output['sliderinfo'][$k]['title'] = $slider->title;
                     $output['sliderinfo'][$k]['subtitle'] = $slider->subtitle;
                     $output['sliderinfo'][$k]['link'] = $slider->slink;
-                    $output['sliderinfo'][$k]['sliderimage'] = base_url().$image2;
+                    $output['sliderinfo'][$k]['sliderimage'] = $this->SITE_URL.$image2;
                     ++$k;
                 }
             }
@@ -716,7 +721,7 @@ class Android extends MY_Controller
                     $image = substr($list->CategoryImage ?? '', 2);
                     $output['Category'][$i]['CategoryID'] = $list->CategoryID;
                     $output['Category'][$i]['Name'] = $list->Name;
-                    $output['Category'][$i]['categoryimage'] = base_url().$image;
+                    $output['Category'][$i]['categoryimage'] = $this->SITE_URL.$image;
                     ++$i;
                 }
 
@@ -798,7 +803,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['total'] = $productlist->price;
                     $output['iteminfo'][$k]['ProductsID'] = $productlist->ProductsID;
                     $output['iteminfo'][$k]['ProductName'] = $productlist->ProductName;
-                    $output['iteminfo'][$k]['ProductImage'] = base_url().$image;
+                    $output['iteminfo'][$k]['ProductImage'] = $this->SITE_URL.$image;
                     $output['iteminfo'][$k]['component'] = $productlist->component;
                     $output['iteminfo'][$k]['itemnotes'] = $productlist->itemnotes;
                     $output['iteminfo'][$k]['Description'] = $productlist->descrip;
@@ -920,7 +925,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['total'] = $productlist->price;
                     $output['iteminfo'][$k]['ProductsID'] = $productlist->ProductsID;
                     $output['iteminfo'][$k]['ProductName'] = $productlist->ProductName;
-                    $output['iteminfo'][$k]['ProductImage'] = base_url().$image;
+                    $output['iteminfo'][$k]['ProductImage'] = $this->SITE_URL.$image;
                     $output['iteminfo'][$k]['component'] = $productlist->component;
                     $output['iteminfo'][$k]['itemnotes'] = $productlist->itemnotes;
                     $output['iteminfo'][$k]['Description'] = $productlist->descrip;
@@ -1052,7 +1057,7 @@ class Android extends MY_Controller
                     $output['iteminfo'][$k]['total'] = $proprice;
                     $output['iteminfo'][$k]['ProductsID'] = $productlist->ProductsID;
                     $output['iteminfo'][$k]['ProductName'] = $productlist->ProductName;
-                    $output['iteminfo'][$k]['ProductImage'] = base_url().$image;
+                    $output['iteminfo'][$k]['ProductImage'] = $this->SITE_URL.$image;
                     $output['iteminfo'][$k]['component'] = $productlist->component;
                     $output['iteminfo'][$k]['itemnotes'] = $productlist->itemnotes;
                     $output['iteminfo'][$k]['Description'] = $productlist->descrip;
@@ -1138,7 +1143,7 @@ class Android extends MY_Controller
                     $output['foodinfo'][$k]['count'] = 1;
                     $output['foodinfo'][$k]['total'] = $productlist->price;
                     $output['foodinfo'][$k]['ProductName'] = $productlist->ProductName;
-                    $output['foodinfo'][$k]['ProductImage'] = base_url().$image;
+                    $output['foodinfo'][$k]['ProductImage'] = $this->SITE_URL.$image;
                     $output['foodinfo'][$k]['component'] = $productlist->component;
                     $output['foodinfo'][$k]['destcription'] = '';
                     $output['foodinfo'][$k]['itemnotes'] = $productlist->itemnotes;
@@ -1425,7 +1430,7 @@ class Android extends MY_Controller
             $sino = $customerinfo->cuntomer_no;
             // insert Customer
             $user['cuntomer_no'] = $sino;
-            $user['password'] = md5($this->input->post('password'));
+            $user['password'] = Saas_password::hacher($this->input->post('password'));
             $user['customer_name'] = $this->input->post('full_name');
             $user['customer_email'] = $this->input->post('email');
             $user['customer_phone'] = $this->input->post('phone');

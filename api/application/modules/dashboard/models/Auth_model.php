@@ -5,6 +5,22 @@ class Auth_model extends CI_Model {
 
 	public function checkUser($data = array())
 	{
+		// Audit F-11 : verification en PHP, MD5 herite ou bcrypt, avec
+		// remise a niveau au premier succes. Meme base que le POS.
+		$this->load->library('Saas_password');
+
+		$compte = $this->db->select('id, password')
+			->from('user')
+			->where('email', $data['email'])
+			->get()->row();
+
+		$valide = $compte && Saas_password::verifier($data['password'], $compte->password);
+
+		if ($valide && Saas_password::a_rehacher($compte->password)) {
+			$this->db->where('id', $compte->id)
+				->update('user', ['password' => Saas_password::hacher($data['password'])]);
+		}
+
 		return $this->db->select("
 				user.id, 
 				CONCAT_WS(' ', user.firstname, user.lastname) AS fullname,
@@ -20,7 +36,8 @@ class Auth_model extends CI_Model {
 			")
 			->from('user')
 			->where('email', $data['email'])
-			->where('password', md5($data['password']))
+			// Id impossible en cas d'echec : jeu vide, forme de retour inchangee.
+			->where('user.id', $valide ? (int) $compte->id : 0)
 			->get();
 	}
 

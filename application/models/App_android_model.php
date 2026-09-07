@@ -110,14 +110,27 @@ class App_android_model extends CI_Model
     public function authenticate_user($table, $data)
     {
         $Password = $data['password'];
+        // Audit F-11 : verification en PHP — MD5 herite ou bcrypt — au lieu
+        // d'une comparaison d'empreinte dans le SQL. La recherche se fait
+        // AVANT de construire la requete principale : un get() intermediaire
+        // reinitialiserait le constructeur de requetes.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('id, password')
+            ->where('email', $data['email'])
+            ->get('user')->row();
+        $valide = $compte && Saas_password::verifier($Password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('id', $compte->id)
+                ->update('user', ['password' => Saas_password::hacher($Password)]);
+        }
+        if (!$valide) {
+            return FALSE;
+        }
         $this->db->select("user.id,user.firstname, user.lastname, user.email, employee_history.picture");
 		$this->db->join("employee_history",'employee_history.emp_his_id=user.id','left');
 		$this->db->where('employee_history.pos_id', 6);
 		$this->db->where('user.email', $data['email']);
-        $this->db->group_start();
-            $this->db->where('user.password', $Password);
-            $this->db->or_where('user.password', md5($Password));
-        $this->db->group_end();
+        $this->db->where('user.id', (int) $compte->id);
         $result = $this->db->get($table);
         if ($result->num_rows() > 0)
         {
@@ -636,9 +649,9 @@ class App_android_model extends CI_Model
 				$this->db->where('pvarientid',$groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 					 foreach($productiondetails as $productiondetail){
-							$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
+							$r_stock = (float)($productiondetail->qty) * ((float)($foodqty) * (float)($groupitem->item_qty));
 							/*add stock in ingredients*/
-							$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+							$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 							$this->db->where('id', intval($productiondetail->ingredientid));
 							$this->db->update('ingredients');
 							/*end add ingredients*/
@@ -651,9 +664,9 @@ class App_android_model extends CI_Model
 				$this->db->where('pvarientid',$fvid);
 				$productiondetails = $this->db->get()->result();
 				foreach($productiondetails as $productiondetail){
-					$r_stock = intval($productiondetail->qty) * intval($foodqty);
+					$r_stock = (float)($productiondetail->qty) * (float)($foodqty);
 					/*add stock in ingredients*/
-						$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+						$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 						$this->db->where('id', intval($productiondetail->ingredientid));
 						$this->db->update('ingredients');
 						/*end add ingredients*/
@@ -696,8 +709,8 @@ class App_android_model extends CI_Model
 				$this->db->where('pvarientid', $groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 				foreach ($productiondetails as $productiondetail) {
-					$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
-					$this->db->set('stock_qty', 'stock_qty+'.intval($r_stock), FALSE);
+					$r_stock = (float)($productiondetail->qty) * ((float)($foodqty) * (float)($groupitem->item_qty));
+					$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $r_stock), FALSE);
 					$this->db->where('id', intval($productiondetail->ingredientid));
 					$this->db->update('ingredients');
 				}
@@ -709,8 +722,8 @@ class App_android_model extends CI_Model
 			$this->db->where('pvarientid', $fvid);
 			$productiondetails = $this->db->get()->result();
 			foreach ($productiondetails as $productiondetail) {
-				$r_stock = intval($productiondetail->qty) * intval($foodqty);
-				$this->db->set('stock_qty', 'stock_qty+'.intval($r_stock), FALSE);
+				$r_stock = (float)($productiondetail->qty) * (float)($foodqty);
+				$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $r_stock), FALSE);
 				$this->db->where('id', intval($productiondetail->ingredientid));
 				$this->db->update('ingredients');
 			}

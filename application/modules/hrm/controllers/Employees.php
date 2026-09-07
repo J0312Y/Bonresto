@@ -554,7 +554,7 @@ class Employees extends MX_Controller
                     'firstname' => $this->input->post('first_name', true),
                     'lastname'  => $this->input->post('last_name', true),
                     'email'     => $this->input->post('email', true),
-                    'password'  => md5($this->input->post('password')),
+                    'password'  => Saas_password::hacher($this->input->post('password')),
                     'image'     => $img,
 
                 ];
@@ -888,7 +888,7 @@ class Employees extends MX_Controller
                         'firstname' => $this->input->post('first_name', true),
                         'lastname'  => $this->input->post('last_name', true),
                         'email'     => $this->input->post('email', true),
-                        'password'  => md5($this->input->post('password')),
+                        'password'  => Saas_password::hacher($this->input->post('password')),
                         'image'     => $img,
 
                     ];
@@ -899,7 +899,7 @@ class Employees extends MX_Controller
                     if (empty($password)) {
                         $userpassword = $userinfo->password;
                     } else {
-                        $userpassword = md5($this->input->post('password'));
+                        $userpassword = Saas_password::hacher($this->input->post('password'));
                     }
 
                     $userData = [

@@ -167,7 +167,86 @@ class Home extends MX_Controller
         $data["topseller"]         = $topsell;
 
         $data["monthname"] = trim($months, ',');
+
+        // Multi-site group info
+        $data['group_info'] = null;
+        $group_id  = defined('CURRENT_GROUP_ID')  ? CURRENT_GROUP_ID  : 0;
+        $tenant_id = defined('CURRENT_TENANT_ID') ? CURRENT_TENANT_ID : 0;
+
+        // Localhost fallback: detect group from any active tenant linked to this DB
+        if (!$group_id) {
+            try {
+                $saas_db = $this->load->database('saas', TRUE);
+                $current_db = $this->db->database;
+                $local_tenant = $saas_db
+                    ->where('db_name', $current_db)
+                    ->where('group_id >', 0)
+                    ->get('saas_tenants')->row();
+                if ($local_tenant) {
+                    $group_id  = (int)$local_tenant->group_id;
+                    $tenant_id = (int)$local_tenant->tenant_id;
+                }
+            } catch (Throwable $e) {
+                // silently ignore — saas DB may not be reachable
+            }
+        }
+
+        if ($group_id > 0) {
+            try {
+                if (!isset($saas_db)) $saas_db = $this->load->database('saas', TRUE);
+                $group = $saas_db->where('group_id', $group_id)->get('saas_groups')->row_array();
+                if ($group) {
+                    $outlets = $saas_db
+                        ->select('t.tenant_id, t.business_name, t.is_primary, t.slug, t.custom_domain, t.city, t.country')
+                        ->from('saas_tenants t')
+                        ->where('t.group_id', $group_id)
+                        ->where('t.status', 'active')
+                        ->order_by('t.is_primary', 'DESC')
+                        ->order_by('t.business_name', 'ASC')
+                        ->get()->result_array();
+                    $group['outlets'] = $outlets;
+                    $group['outlet_count'] = count($outlets);
+                    $group['current_tenant_id'] = $tenant_id;
+                    $data['group_info'] = $group;
+                }
+            } catch (Throwable $e) {
+                log_message('error', 'Group info load failed: ' . $e->getMessage());
+            }
+        }
+
+        // Low stock alert
+        $low_stock_query = $this->db->query("SELECT i.id, i.ingredient_name, i.stock_qty, i.min_stock, u.uom_short_code AS unit
+            FROM ingredients i
+            LEFT JOIN unit_of_measurement u ON u.id = i.uom_id
+            WHERE i.stock_qty < i.min_stock AND i.min_stock > 0
+            ORDER BY (i.stock_qty / i.min_stock) ASC
+            LIMIT 10");
+        $data["low_stock_items"] = $low_stock_query->result();
+        $low_stock_count_query = $this->db->query("SELECT COUNT(*) as cnt FROM ingredients WHERE stock_qty < min_stock AND min_stock > 0");
+        $data["low_stock_count"] = (int) $low_stock_count_query->row()->cnt;
+
         echo Modules::run('template/layout', $data);
+    }
+
+    /**
+     * AJAX endpoint for real-time low stock alerts.
+     * GET /dashboard/home/low_stock_ajax
+     */
+    public function low_stock_ajax()
+    {
+        $count_row = $this->db->query("SELECT COUNT(*) as cnt FROM ingredients WHERE stock_qty < min_stock AND min_stock > 0")->row();
+        $count = (int) $count_row->cnt;
+
+        $items = $this->db->query("SELECT i.id, i.ingredient_name, i.stock_qty, i.min_stock, u.uom_short_code
+            FROM ingredients i
+            LEFT JOIN unit_of_measurement u ON u.id = i.uom_id
+            WHERE i.stock_qty < i.min_stock AND i.min_stock > 0
+            ORDER BY (i.stock_qty / i.min_stock) ASC
+            LIMIT 5")->result();
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['count' => $count, 'items' => $items]));
     }
 
     public function onlineOfflineSalesReport($yearMonth = '')
@@ -417,7 +496,7 @@ class Home extends MX_Controller
             'firstname' => $this->input->post('firstname', true),
             'lastname'  => $this->input->post('lastname', true),
             'email'     => $this->input->post('email', true),
-            'password'  => md5($this->input->post('password') ?? ''),
+            'password'  => Saas_password::hacher($this->input->post('password') ?? ''),
             'about'     => $this->input->post('about', true),
             'image'     => (!empty($image) ? $image : $this->input->post('old_image', true)),
         ];

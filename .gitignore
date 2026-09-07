@@ -24,3 +24,7 @@ application/config/license.json
 application/config/license.json
 *.bak
 *.bak1
+
+# Sauvegardes de base — jamais a la racine web (voir audit F-03)
+/*.sql
+*.bak.*

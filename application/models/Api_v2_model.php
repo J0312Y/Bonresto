@@ -6,12 +6,25 @@ class Api_v2_model extends CI_Model
    public function authenticate_user($table, $data)
     {
         $Password = $data['password'];
+        // Audit F-11 : verification en PHP — MD5 herite ou bcrypt — au lieu
+        // d'une comparaison d'empreinte dans le SQL. La recherche se fait
+        // AVANT de construire la requete principale : un get() intermediaire
+        // reinitialiserait le constructeur de requetes.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('customer_id, password')
+            ->where('customer_email', $data['customer_email'])
+            ->get('customer_info')->row();
+        $valide = $compte && Saas_password::verifier($Password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('customer_id', $compte->customer_id)
+                ->update('customer_info', ['password' => Saas_password::hacher($Password)]);
+        }
+        if (!$valide) {
+            return FALSE;
+        }
         $this->db->select("*");
 		$this->db->where('customer_email', $data['customer_email']);
-        $this->db->group_start();
-            $this->db->where('password', $Password);
-            $this->db->or_where('password', md5($Password));
-        $this->db->group_end();
+        $this->db->where('customer_id', (int) $compte->customer_id);
         $result = $this->db->get($table);
         if ($result->num_rows() > 0)
         {
@@ -173,34 +186,40 @@ class Api_v2_model extends CI_Model
 		$itemlist=$query->result();
 	    return $itemlist;
 		}
+	// Troisieme copie de la meme logique (application Android), avec les
+	// memes trois defauts que Hungry_model : injection SQL par concatenation,
+	// filtre `person_capicity` en egalite stricte qui manquait les conflits,
+	// et retour en chaine la ou where_not_in() attend un tableau — ce dernier
+	// point annulait purement et simplement l'exclusion des tables occupees.
 	public function checkavailtable($nopeople,$newdate,$gettime){
-		$dateRange = "reserveday='$newdate' AND formtime<='$gettime' AND totime>='$gettime' AND person_capicity='$nopeople' AND status=2";
-		$this->db->select('*');
+		$this->db->select('tableid');
         $this->db->from('tblreservation');
-		$this->db->where($dateRange, NULL, FALSE); 
+		$this->db->where('reserveday', $newdate);
+		$this->db->where('formtime <=', $gettime);
+		$this->db->where('totime >=', $gettime);
+		$this->db->where_in('status', RESERVATION_STATUTS_OCCUPANTS);
 		$query = $this->db->get();
-	
-		$totalid='';
-		 if ($query->num_rows() > 0) {
-           $gettable=$query->result(); 
-		   foreach($gettable as $selectedtable){
-			   $totalid.=$selectedtable->tableid.",";
-			   } 
-			return $totalid=trim($totalid,',');    
-        }
-        return false;
+
+		$totalid = [];
+		foreach($query->result() as $selectedtable){
+			$totalid[] = $selectedtable->tableid;
+		}
+		return $totalid;
 		}
 	public function checkfree($invalue,$person){
 		$this->db->select('*');
         $this->db->from('rest_table');
-		$this->db->where_not_in('tableid', $invalue);
-		$this->db->where('person_capicity>=', $person); 
+		if (!empty($invalue)) {
+			$this->db->where_not_in('tableid', (array) $invalue);
+		}
+		$this->db->where('person_capicity>=', $person);
+		$this->db->order_by('person_capicity', 'ASC');
 		$query = $this->db->get();
 		 if ($query->num_rows() > 0) {
-            return $query->result();    
+            return $query->result();
         }
         return false;
-		} 
+		}
 
 	public function habitrecord($pid,$cid,$vid){
 		$this->db->select('habit');

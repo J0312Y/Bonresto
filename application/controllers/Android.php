@@ -120,7 +120,7 @@ class Android extends MY_Controller
             $data['cuntomer_no']               = $sino;
             $data['customer_name']             = $this->input->post('customer_name', true);
             $data['customer_email']            = $this->input->post('email', true);
-            $data['password']                  = md5($this->input->post('password', true));
+            $data['password']                  = Saas_password::hacher($this->input->post('password', true));
             $data['customer_address']          = $this->input->post('Address', true);
             $data['customer_phone']            = $this->input->post('mobile', true);
             $data['crdate']                    = date('Y-m-d');
@@ -207,10 +207,11 @@ class Android extends MY_Controller
                     if ($this->input->post('password') == '') {
                         $psaaword = $custinfo->password;
                     } else {
-                        $mypassword = md5($this->input->post('oldpassword'));
+                        // Audit F-11 : verification acceptant MD5 herite et bcrypt,
+                        // en comparaison a temps constant (hash_equals).
 
-                        if ($custinfo->password == $mypassword) {
-                            $psaaword = md5($this->input->post('password'));
+                        if (Saas_password::verifier($this->input->post('oldpassword'), $custinfo->password)) {
+                            $psaaword = Saas_password::hacher($this->input->post('password'));
                         } else {
                             return $this->respondWithSuccess('Votre ancien mot de passe ne correspond pas.', $output);
                             exit;
@@ -255,10 +256,10 @@ class Android extends MY_Controller
                         if ($this->input->post('password') == '') {
                             $psaaword = $custinfo->password;
                         } else {
-                            $mypassword = md5($this->input->post('oldpassword'));
+                            // Audit F-11 : idem — verification acceptant les deux formats.
 
-                            if ($custinfo->password == $mypassword) {
-                                $psaaword = md5($this->input->post('password'));
+                            if (Saas_password::verifier($this->input->post('oldpassword'), $custinfo->password)) {
+                                $psaaword = Saas_password::hacher($this->input->post('password'));
                             } else {
                                 return $this->respondWithSuccess('Votre ancien mot de passe ne correspond pas.', $output);
                                 exit;
@@ -359,7 +360,7 @@ class Android extends MY_Controller
     public function _sendingForgotPassMail($data)
     {
         $Password = $this->generateNumericOTP(6);
-        $this->Api_v2_model->update_date('customer_info', ['password' => md5($Password)], 'customer_id', $data->customer_id);
+        $this->Api_v2_model->update_date('customer_info', ['password' => Saas_password::hacher($Password)], 'customer_id', $data->customer_id);
 
         $email_config = $this->Api_v2_model->read('*', 'email_config', ['email_config_id' => 1]);
 
@@ -1496,7 +1497,7 @@ class Android extends MY_Controller
             $sino         = $customerinfo->cuntomer_no;
             //insert Customer
             $user['cuntomer_no']               = $sino;
-            $user['password']                  = md5($this->input->post('password'));
+            $user['password']                  = Saas_password::hacher($this->input->post('password'));
             $user['customer_name']             = $this->input->post('full_name');
             $user['customer_email']            = $this->input->post('email');
             $user['customer_phone']            = $this->input->post('phone');

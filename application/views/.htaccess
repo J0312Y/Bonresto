@@ -1,0 +1,21 @@
+# Audit F-02 : ces repertoires n'avaient aucun garde-fou propre. Ils n'etaient
+# proteges que par application/.htaccess, absent de Git alors que le
+# deploiement se fait par `git pull` — donc absent du serveur.
+<IfModule authz_core_module>
+    Require all denied
+</IfModule>
+<IfModule !authz_core_module>
+    Order allow,deny
+    Deny from all
+</IfModule>
+
+# Les assets de module (js, css, images, polices) restent servis.
+<FilesMatch "\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|map)$">
+    <IfModule authz_core_module>
+        Require all granted
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order allow,deny
+        Allow from all
+    </IfModule>
+</FilesMatch>

@@ -2,9 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Purchase_model extends CI_Model {
-	
+
 	private $table = 'purchaseitem';
- 
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('stock_movement_lib');
+		$this->load->library('batch_lib');
+	}
+
 	public function create()
 	{
 		$this->db->trans_start();
@@ -43,13 +50,24 @@ class Purchase_model extends CI_Model {
 		$rate = $this->input->post('product_rate',true);
 		$quantity = $this->input->post('product_quantity',true);
 		$t_price = $this->input->post('total_price',true);
-		
+		$item_expire_dates = $this->input->post('item_expire_date');
+
 		for ($i=0, $n=count($p_id); $i < $n; $i++) {
 			$product_quantity = $quantity[$i];
 			$product_rate = $rate[$i];
 			$product_id = $p_id[$i];
 			$total_price = $t_price[$i];
-			
+
+			// Per-item expiry date; fall back to global expiry if empty
+			$item_exdate = $exdate;
+			if (!empty($item_expire_dates[$i])) {
+				$item_exp = str_replace('/', '-', $item_expire_dates[$i]);
+				$parsed = date('Y-m-d', strtotime($item_exp));
+				if ($parsed && $parsed !== '1970-01-01') {
+					$item_exdate = $parsed;
+				}
+			}
+
 			$data1 = array(
 				'purchaseid'		=>	$returnid,
 				'indredientid'		=>	$product_id,
@@ -58,17 +76,29 @@ class Purchase_model extends CI_Model {
 				'totalprice'		=>	$total_price,
 				'purchaseby'		=>	$saveid,
 				'purchasedate'		=>	$newdate,
-				'purchaseexpiredate'=>	$exdate
+				'purchaseexpiredate'=>	$item_exdate
 			);
 
 			if(!empty($quantity))
 			{
 				/*add stock in ingredients*/
-				$this->db->set('stock_qty', 'stock_qty+'.intval($product_quantity), FALSE);
+				$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $product_quantity), FALSE);
 				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
+				$this->stock_movement_lib->record($product_id, 'purchase', +$product_quantity, $returnid, 'purchaseitem', $product_rate);
 				/*end add ingredients*/
 				$this->db->insert('purchase_details',$data1);
+				$detail_id = $this->db->insert_id();
+
+				/* Create batch for expiry tracking */
+				$this->batch_lib->add_batch(
+					$product_id,
+					$product_quantity,
+					$item_exdate,
+					$detail_id,
+					$product_rate,
+					$returnid . '-' . $i
+				);
 			}
 		}
 		
@@ -130,9 +160,10 @@ class Purchase_model extends CI_Model {
 			->result();
 
 		foreach ($details as $detail) {
-			$this->db->set('stock_qty', 'stock_qty-'.intval($detail->quantity), FALSE);
+			$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $detail->quantity), FALSE);
 			$this->db->where('id', intval($detail->indredientid));
 			$this->db->update('ingredients');
+			$this->stock_movement_lib->record($detail->indredientid, 'purchase_delete', -$detail->quantity, $id, 'purchaseitem');
 		}
 
 		$this->db->where('purID',$id)
@@ -191,19 +222,31 @@ class Purchase_model extends CI_Model {
 		$rate = $this->input->post('product_rate',true);
 		$quantity = $this->input->post('product_quantity',true);
 		$t_price = $this->input->post('total_price',true);
-		
+		$item_expire_dates = $this->input->post('item_expire_date');
+
 		for ($i=0, $n=count($p_id); $i < $n; $i++){
 			$product_quantity = $quantity[$i];
 			$product_rate = $rate[$i];
 			$product_id = $p_id[$i];
 			$total_price = $t_price[$i];
+
+			// Per-item expiry date; fall back to global expiry if empty
+			$item_exdate = $exdate;
+			if (!empty($item_expire_dates[$i])) {
+				$item_exp = str_replace('/', '-', $item_expire_dates[$i]);
+				$parsed = date('Y-m-d', strtotime($item_exp));
+				if ($parsed && $parsed !== '1970-01-01') {
+					$item_exdate = $parsed;
+				}
+			}
+
 			$this->db->select('*');
             $this->db->from('purchase_details');
             $this->db->where('purchaseid',$id);
 			$this->db->where('indredientid',$product_id);
             $query = $this->db->get();
 			if ($query->num_rows() > 0) {
-				
+
 				$dataupdate = array(
 					'purchaseid'		=>	$id,
 					'indredientid'		=>	$product_id,
@@ -212,18 +255,19 @@ class Purchase_model extends CI_Model {
 					'totalprice'		=>	$total_price,
 					'purchaseby'		=>	$saveid,
 					'purchasedate'		=>	$newdate,
-					'purchaseexpiredate'=>	$exdate
-				);	
-			
+					'purchaseexpiredate'=>	$item_exdate
+				);
+
 				if(!empty($quantity))
 				{
-					
+
 					/*add stock in ingredients*/
 					$olderqty = $query->row();
-					$addv = intval($product_quantity) - intval($olderqty->quantity);
-				$this->db->set('stock_qty', 'stock_qty+'.intval($addv), FALSE);
+					$addv = (float)($product_quantity) - (float)($olderqty->quantity);
+				$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $addv), FALSE);
 				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
+				if ($addv != 0) $this->stock_movement_lib->record($product_id, 'purchase_update', $addv, $id, 'purchaseitem', $product_rate);
 				/*end add ingredients*/
 					$this->db->where('purchaseid', $id);
 					$this->db->where('indredientid', $product_id);
@@ -238,14 +282,16 @@ class Purchase_model extends CI_Model {
 					'price'				=>	$product_rate,
 					'totalprice'		=>	$total_price,
 					'purchaseby'		=>	$saveid,
-					'purchasedate'		=>	$newdate
+					'purchasedate'		=>	$newdate,
+					'purchaseexpiredate'=>	$item_exdate
 				);
 				if(!empty($quantity))
 				{
 					/*add stock in ingredients for new line item*/
-					$this->db->set('stock_qty', 'stock_qty+'.intval($product_quantity), FALSE);
+					$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $product_quantity), FALSE);
 					$this->db->where('id', intval($product_id));
 					$this->db->update('ingredients');
+					$this->stock_movement_lib->record($product_id, 'purchase_update', +$product_quantity, $id, 'purchaseitem', $product_rate);
 					/*end add ingredients*/
 					$this->db->insert('purchase_details',$data1);
 				}
@@ -273,9 +319,10 @@ class Purchase_model extends CI_Model {
 						->where('purchaseid', $id)
 						->get()->row();
 					if ($removedRow) {
-						$this->db->set('stock_qty', 'stock_qty-'.intval($removedRow->quantity), FALSE);
+						$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $removedRow->quantity), FALSE);
 						$this->db->where('id', intval($delval));
 						$this->db->update('ingredients');
+						$this->stock_movement_lib->record($delval, 'purchase_update', -$removedRow->quantity, $id, 'purchaseitem');
 					}
 					$this->db->where('indredientid', $delval);
 					$this->db->where('purchaseid',$id);
@@ -364,7 +411,7 @@ class Purchase_model extends CI_Model {
 			if(!empty($quantity))
 			{
 				/*deduct stock for production ingredients*/
-				$this->db->set('stock_qty', 'stock_qty-'.intval($product_quantity), FALSE);
+				$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $product_quantity), FALSE);
 				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
 				/*end deduct ingredients*/
@@ -611,10 +658,20 @@ public function getinvoice($id){
 			
 						/*deduct stock in ingredients (prevent negative) */
 
-				$this->db->set('stock_qty', 'GREATEST(stock_qty-'.intval($product_quantity).',0)', FALSE);
+				$this->db->set('stock_qty', 'GREATEST(stock_qty - '.sprintf('%.4F', $product_quantity).',0)', FALSE);
 				$this->db->where('id', intval($product_id));
 				$this->db->update('ingredients');
 				/*end deduct ingredients*/
+
+				/* Log stock movement for purchase return */
+				$this->stock_movement_lib->record(
+					$product_id,
+					'purchase_return',
+					-$product_quantity,
+					$id,
+					'purchase_return',
+					$product_rate
+				);
 					 $this->db->where('purchaseid',$purchaseid)
 					->where('indredientid',$product_id)
 					->update('purchase_details', $qtyData);

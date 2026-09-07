@@ -1655,7 +1655,7 @@ $catid=trim($catid,',');*/
             $indata['membership_type']  = $pointsys;
             $indata['customer_name']    = $this->input->post('user_name', true);
             $indata['customer_email']   = $this->input->post('user_email', true);
-            $indata['password']         = md5($this->input->post('u_pass', true));
+            $indata['password']         = Saas_password::hacher($this->input->post('u_pass', true));
             $indata['customer_address'] = $this->input->post('address', true);
             $indata['customer_phone']   = $this->input->post('phone', true);
             $indata['crdate']           = date('Y-m-d');
@@ -1732,7 +1732,7 @@ $catid=trim($catid,',');*/
             $indata['membership_type']  = $pointsys;
             $indata['customer_name']    = $this->input->post('user_name', true);
             $indata['customer_email']   = $this->input->post('email', true);
-            $indata['password']         = md5($this->input->post('u_pass2', true));
+            $indata['password']         = Saas_password::hacher($this->input->post('u_pass2', true));
             $indata['customer_address'] = $this->input->post('address', true);
             $indata['customer_phone']   = $this->input->post('phone', true);
             $indata['crdate']           = date('Y-m-d');
@@ -1771,7 +1771,7 @@ $catid=trim($catid,',');*/
     public function userlogin()
     {
         $username = $this->input->post('email');
-        $password = md5($this->input->post('pass1'));
+        $password = $this->input->post('pass1'); // Audit F-11 : verification deleguee au modele
 
         $cek = $this->hungry_model->loginUser($username, $password);
 
@@ -1838,7 +1838,7 @@ $catid=trim($catid,',');*/
     public function _sendingForgotPassMail($data)
     {
         $Password     = $this->generateNumericOTP(6);
-        $updatetData2 = ['password' => md5($Password)];
+        $updatetData2 = ['password' => Saas_password::hacher($Password)];
         $this->db->where('customer_id', $data->customer_id);
         $this->db->update('customer_info', $updatetData2);
 
@@ -1977,7 +1977,7 @@ $catid=trim($catid,',');*/
             //insert Customer
             $user['cuntomer_no']               = $sino;
             $user['membership_type']           = $pointsys;
-            $user['password']                  = md5($this->input->post('password'));
+            $user['password']                  = Saas_password::hacher($this->input->post('password'));
             $user['customer_name']             = $this->input->post('f_name') . " " . $this->input->post('l_name');
             $user['customer_email']            = $this->input->post('email');
             $user['customer_phone']            = $this->input->post('phone');
@@ -2318,7 +2318,7 @@ document.getElementById("paytrack").click();
 
                 $user['cuntomer_no']               = $sino;
                 $user['membership_type']           = $pointsys;
-                $user['password']                  = md5(12345);
+                $user['password']                  = Saas_password::hacher(12345);
                 $user['customer_name']             = $this->input->post('customerName', true);
                 $user['customer_email']            = $phone . "@gmail.com";
                 $user['customer_phone']            = $this->input->post('phone', true);
@@ -3435,7 +3435,7 @@ document.getElementById("paytrack").click();
                 if ($this->input->post('password') == '') {
                     $psaaword = $custinfo->password;
                 } else {
-                    $psaaword = md5($this->input->post('password'));
+                    $psaaword = Saas_password::hacher($this->input->post('password'));
                 }
 
                 //logo upload

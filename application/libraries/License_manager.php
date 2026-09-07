@@ -14,7 +14,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class License_manager {
 
     const FILE             = APPPATH . 'config/license.json';
-    const HMAC_SECRET      = 'BonrestoLicenseSecret2024';
+    // Audit F-05 : la cle de signature etait une constante presente dans le
+    // code livre a chaque client. Elle vit desormais dans LICENSE_HMAC_SECRET,
+    // et doit porter la MEME valeur cote serveur SaaS (qui signe) et cote
+    // installation cliente (qui verifie).
     const REFRESH_INTERVAL = 86400; // 24h
     const CHECK_INTERVAL   = 300;   // 5 min — lightweight plan-change check
 
@@ -22,20 +25,33 @@ class License_manager {
     const APP_ROOT = FCPATH; // CodeIgniter's FCPATH = document root of index.php
 
     /** Allowed base paths for code updates (security: never allow outside these) */
+    // Audit F-05 : 'application/libraries/' et 'application/config/' ont ete
+    // retires. CodeIgniter charge et execute leur contenu — une mise a jour
+    // forgee y deposait du PHP, donc du code arbitraire. Les modules et les
+    // assets suffisent aux mises a jour legitimes.
     const ALLOWED_UPDATE_PATHS = [
         'application/modules/',
-        'application/libraries/',
-        'application/config/',
         'assets/',
     ];
 
     private string $saas_url;
 
     public function __construct() {
-        $this->saas_url = rtrim(
-            getenv('SAAS_URL') ?: 'http://localhost/bonresto/index.php/saas',
-            '/'
-        );
+        $url = rtrim(env_required('SAAS_URL'), '/');
+
+        // Audit F-05 : ce canal peut ecrire des fichiers sur le disque. En
+        // clair, quiconque se trouve sur le chemin reseau peut donc livrer
+        // ce contenu. L'URL par defaut etait en http://.
+        $host = parse_url($url, PHP_URL_HOST) ?: '';
+        $loopback = in_array($host, ['localhost', '127.0.0.1', '::1'], true);
+
+        if (!$loopback && stripos($url, 'https://') !== 0) {
+            throw new RuntimeException(
+                'SAAS_URL doit utiliser HTTPS en production : le canal de licence ecrit des fichiers.'
+            );
+        }
+
+        $this->saas_url = $url;
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -160,15 +176,21 @@ class License_manager {
 
             $tid = (int)$key_row->tenant_id;
 
-            // Get subscription + plan
+            // Get subscription + plan (individual first)
             $sub = $saas_db
-                ->select('s.status, s.end_date, s.grace_end_date, p.plan_name, p.features, p.max_tables, p.max_users')
+                ->select('s.plan_id, s.status, s.end_date, s.grace_end_date, p.plan_name, p.max_tables, p.max_users')
                 ->from('saas_subscriptions s')
                 ->join('saas_plans p', 'p.plan_id = s.plan_id')
                 ->where('s.tenant_id', $tid)
+                ->where_in('s.status', ['active', 'grace'])
                 ->order_by('s.sub_id', 'DESC')
                 ->limit(1)
                 ->get()->row();
+
+            // Fallback: group subscription if no individual sub
+            if (!$sub) {
+                $sub = $this->_get_group_sub($saas_db, $tid);
+            }
 
             // Get pending updates
             $raw_updates = $saas_db
@@ -180,7 +202,8 @@ class License_manager {
                 ->where('u.status', 'published')
                 ->get()->result_array();
 
-            $features = $sub ? (json_decode($sub->features ?? '{}', true) ?: []) : [];
+            // Build features from saas_plan_features table (not the legacy JSON column)
+            $features = $this->_build_features($saas_db, $sub ? (int)$sub->plan_id : 0, $tid);
 
             $payload = [
                 'client_id'   => $tid,
@@ -195,7 +218,7 @@ class License_manager {
                 'pending_updates' => $raw_updates,
             ];
 
-            $secret    = getenv('LICENSE_HMAC_SECRET') ?: self::HMAC_SECRET;
+            $secret    = env_required('LICENSE_HMAC_SECRET');
             $signature = hash_hmac('sha256', json_encode($payload), $secret);
 
             if (!empty($payload['pending_updates'])) {
@@ -237,17 +260,24 @@ class License_manager {
 
             $tid = (int)$key_row->tenant_id;
 
-            // Get subscription + plan
+            // Get subscription + plan (individual first)
             $sub = $saas_db
-                ->select('s.status, s.end_date, s.grace_end_date, p.plan_name, p.features, p.max_tables, p.max_users')
+                ->select('s.plan_id, s.status, s.end_date, s.grace_end_date, p.plan_name, p.max_tables, p.max_users')
                 ->from('saas_subscriptions s')
                 ->join('saas_plans p', 'p.plan_id = s.plan_id')
                 ->where('s.tenant_id', $tid)
+                ->where_in('s.status', ['active', 'grace'])
                 ->order_by('s.sub_id', 'DESC')
                 ->limit(1)
                 ->get()->row();
 
-            $features = $sub ? (json_decode($sub->features ?? '{}', true) ?: []) : [];
+            // Fallback: group subscription if no individual sub
+            if (!$sub) {
+                $sub = $this->_get_group_sub($saas_db, $tid);
+            }
+
+            // Build features from saas_plan_features table (not the legacy JSON column)
+            $features = $this->_build_features($saas_db, $sub ? (int)$sub->plan_id : 0, $tid);
 
             $payload = [
                 'client_id'   => $tid,
@@ -261,7 +291,7 @@ class License_manager {
                 'issued_at'   => date('Y-m-d H:i:s'),
             ];
 
-            $secret    = getenv('LICENSE_HMAC_SECRET') ?: self::HMAC_SECRET;
+            $secret    = env_required('LICENSE_HMAC_SECRET');
             $signature = hash_hmac('sha256', json_encode($payload), $secret);
 
             $this->_save($payload, $signature, $client_key);
@@ -297,16 +327,14 @@ class License_manager {
      * Core modules (ordermanage, itemmanage, dashboard) are always allowed.
      */
     public function has_module(string $module): bool {
-        // Core modules always available regardless of plan
-        static $core = ['ordermanage', 'itemmanage', 'dashboard', 'template', 'install', 'saas',
-                         'purchase', 'production', 'accounts'];
+        // Infrastructure modules — always available (not sellable separately)
+        static $core = ['ordermanage', 'itemmanage', 'dashboard', 'template', 'install', 'saas'];
 
         if (in_array($module, $core)) return true;
 
-        // Aliases: sidebar module name => feature key in license.json
+        // Aliases: HMVC module name → feature key in license.json
         static $aliases = [
-            'report' => 'reports',
-            'qrapp'  => 'qr_order',
+            'report'        => 'reports',
         ];
 
         $payload = $this->load();
@@ -518,8 +546,62 @@ class License_manager {
 
     // ── Private: HTTP + signature ─────────────────────────────────────────────
 
+    /**
+     * Build features map from saas_plan_features + saas_tenant_features (overrides).
+     * Same logic as TenantHook::detect() — single source of truth.
+     */
+    /**
+     * Check if a tenant belongs to a group with billing_model='group'
+     * and return the group's active subscription as if it were the tenant's own.
+     */
+    private function _get_group_sub($saas_db, int $tenant_id) {
+        $tenant = $saas_db
+            ->select('t.group_id, g.billing_model')
+            ->from('saas_tenants t')
+            ->join('saas_groups g', 'g.group_id = t.group_id', 'inner')
+            ->where('t.tenant_id', $tenant_id)
+            ->where('g.billing_model', 'group')
+            ->get()->row();
+
+        if (!$tenant || !$tenant->group_id) return null;
+
+        return $saas_db
+            ->select('gs.plan_id, gs.status, gs.end_date, gs.grace_end_date, p.plan_name, p.max_tables, p.max_users')
+            ->from('saas_group_subscriptions gs')
+            ->join('saas_plans p', 'p.plan_id = gs.plan_id')
+            ->where('gs.group_id', (int)$tenant->group_id)
+            ->where_in('gs.status', ['active', 'grace'])
+            ->order_by('gs.gsub_id', 'DESC')
+            ->limit(1)
+            ->get()->row();
+    }
+
+    private function _build_features($saas_db, int $plan_id, int $tenant_id): array {
+        $features = [];
+
+        // 1. Plan-level features
+        if ($plan_id > 0) {
+            $rows = $saas_db
+                ->where('plan_id', $plan_id)
+                ->get('saas_plan_features')->result_array();
+            foreach ($rows as $row) {
+                $features[$row['feature']] = (bool)$row['enabled'];
+            }
+        }
+
+        // 2. Per-tenant overrides (priority over plan)
+        $overrides = $saas_db
+            ->where('tenant_id', $tenant_id)
+            ->get('saas_tenant_features')->result_array();
+        foreach ($overrides as $row) {
+            $features[$row['feature']] = (bool)$row['enabled'];
+        }
+
+        return $features;
+    }
+
     private function _verify_signature(array $payload, string $signature): bool {
-        $expected = hash_hmac('sha256', json_encode($payload), getenv('LICENSE_HMAC_SECRET') ?: self::HMAC_SECRET);
+        $expected = hash_hmac('sha256', json_encode($payload), env_required('LICENSE_HMAC_SECRET'));
         return hash_equals($expected, $signature);
     }
 

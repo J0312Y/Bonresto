@@ -7,9 +7,24 @@ class Api_v2_model extends CI_Model
 	{
 		$Type = $data['customer_email'];
 		$Password = $data['password'];
+        // Audit F-11 : cette installation api/ partage la base du POS.
+        // Tant qu'elle comparait en MD5, tout compte remis a niveau en
+        // bcrypt par l'application principale s'y serait vu refuser.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('customer_id, password')
+            ->where('customer_email', $data['customer_email'])
+            ->get('customer_info')->row();
+        $valide = $compte && Saas_password::verifier($Password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('customer_id', $compte->customer_id)
+                ->update('customer_info', ['password' => Saas_password::hacher($Password)]);
+        }
+        if (!$valide) {
+            return FALSE;
+        }
 		$this->db->select("*");
 		$this->db->where('customer_email', $data['customer_email']);
-		$this->db->where("(password = '" . $Password . "' OR customer_info.password =  '" . md5($Password) . "')", NULL, TRUE);
+        $this->db->where('customer_id', (int) $compte->customer_id);
 		$query = $this->db->get($table)->row();
 		if ($query) {
 			return $query;
@@ -170,30 +185,35 @@ class Api_v2_model extends CI_Model
 		$itemlist = $query->result();
 		return $itemlist;
 	}
+	// Quatrieme copie de la meme logique (installation api/, application
+	// Android). Memes trois defauts corriges qu'ailleurs : injection SQL par
+	// concatenation, filtre `person_capicity` en egalite stricte, et retour
+	// en chaine la ou where_not_in() attend un tableau.
 	public function checkavailtable($nopeople, $newdate, $gettime)
 	{
-		$dateRange = "reserveday='$newdate' AND formtime<='$gettime' AND totime>='$gettime' AND person_capicity='$nopeople' AND status=2";
-		$this->db->select('*');
+		$this->db->select('tableid');
 		$this->db->from('tblreservation');
-		$this->db->where($dateRange, NULL, FALSE);
+		$this->db->where('reserveday', $newdate);
+		$this->db->where('formtime <=', $gettime);
+		$this->db->where('totime >=', $gettime);
+		$this->db->where_in('status', RESERVATION_STATUTS_OCCUPANTS);
 		$query = $this->db->get();
 
-		$totalid = '';
-		if ($query->num_rows() > 0) {
-			$gettable = $query->result();
-			foreach ($gettable as $selectedtable) {
-				$totalid .= $selectedtable->tableid . ",";
-			}
-			return $totalid = trim($totalid, ',');
+		$totalid = [];
+		foreach ($query->result() as $selectedtable) {
+			$totalid[] = $selectedtable->tableid;
 		}
-		return false;
+		return $totalid;
 	}
 	public function checkfree($invalue, $person)
 	{
 		$this->db->select('*');
 		$this->db->from('rest_table');
-		$this->db->where_not_in('tableid', $invalue);
+		if (!empty($invalue)) {
+			$this->db->where_not_in('tableid', (array) $invalue);
+		}
 		$this->db->where('person_capicity>=', $person);
+		$this->db->order_by('person_capicity', 'ASC');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result();

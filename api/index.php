@@ -38,6 +38,73 @@
 
 /*
  *---------------------------------------------------------------
+ * VARIABLES D'ENVIRONNEMENT  (audit F-01)
+ *---------------------------------------------------------------
+ *
+ * Toute la configuration sensible passait deja par getenv(), avec une valeur
+ * de repli ecrite dans le depot. Mais aucun chargeur .env n'existait : sur un
+ * serveur ou les variables ne sont pas posees par Apache (SetEnv) ou par
+ * l'hebergeur, getenv() renvoyait false et les valeurs de repli — publiques,
+ * lisibles par tout client — s'appliquaient : secret JWT, cle de chiffrement
+ * CodeIgniter, cle HMAC de licence, mot de passe MySQL.
+ *
+ * Ce bloc lit un fichier .env place a cote de index.php. Il n'est jamais
+ * versionne (.gitignore) ni servi (.htaccess racine). Les variables deja
+ * presentes dans l'environnement reel du processus gagnent toujours : un
+ * SetEnv Apache ou une variable d'hebergeur n'est jamais ecrase.
+ */
+(static function ($file) {
+    if (!is_readable($file)) {
+        return;
+    }
+    foreach (file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || $line[0] === '#' || strpos($line, '=') === false) {
+            continue;
+        }
+        list($key, $value) = explode('=', $line, 2);
+        $key   = trim($key);
+        $value = trim($value);
+
+        // Guillemets optionnels autour de la valeur
+        $len = strlen($value);
+        if ($len >= 2 && ($value[0] === '"' || $value[0] === "'") && $value[$len - 1] === $value[0]) {
+            $value = substr($value, 1, -1);
+        }
+
+        if ($key !== '' && getenv($key) === false) {
+            putenv($key . '=' . $value);
+            $_ENV[$key] = $value;
+        }
+    }
+})(is_readable(__DIR__ . '/.env') ? __DIR__ . '/.env' : dirname(__DIR__) . '/.env');
+
+/**
+ * Valeur de configuration obligatoire.
+ *
+ * Aucune valeur de repli : une installation sans secret doit s'arreter, pas
+ * demarrer silencieusement avec un secret que tout le monde peut lire.
+ */
+function env_required($key)
+{
+    $value = getenv($key);
+    if ($value === false || $value === '') {
+        http_response_code(500);
+        exit('Configuration incomplete : la variable ' . htmlspecialchars($key, ENT_QUOTES)
+            . " n'est pas definie. Copiez .env.example vers .env et renseignez-la.");
+    }
+    return $value;
+}
+
+/** Valeur de configuration facultative, avec defaut non sensible. */
+function env_get($key, $default = null)
+{
+    $value = getenv($key);
+    return ($value === false || $value === '') ? $default : $value;
+}
+
+/*
+ *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *
@@ -53,7 +120,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+define('ENVIRONMENT', $_SERVER['CI_ENV'] ?? (getenv('CI_ENV') ?: 'production'));
 
 /*
  *---------------------------------------------------------------

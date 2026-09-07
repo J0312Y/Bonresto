@@ -23,8 +23,8 @@ class DefaultHttpClient implements HttpClient
     {
         return $this->curl->exec($url, array(
             CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_SSL_VERIFYPEER=>false,
-            CURLOPT_SSL_VERIFYHOST=>false,
+            CURLOPT_SSL_VERIFYPEER=>true,
+            CURLOPT_SSL_VERIFYHOST=>2,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => false,
             CURLOPT_HEADER => false
@@ -35,8 +35,8 @@ class DefaultHttpClient implements HttpClient
     {
         return $this->curl->exec($url, array(
             CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_SSL_VERIFYPEER=>false,
-            CURLOPT_SSL_VERIFYHOST=>false,
+            CURLOPT_SSL_VERIFYPEER=>true,
+            CURLOPT_SSL_VERIFYHOST=>2,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => false,
             CURLOPT_HEADER => false,
@@ -48,8 +48,8 @@ class DefaultHttpClient implements HttpClient
     {
         return $this->curl->exec($url, array(
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_SSL_VERIFYPEER=>false,
-            CURLOPT_SSL_VERIFYHOST=>false,
+            CURLOPT_SSL_VERIFYPEER=>true,
+            CURLOPT_SSL_VERIFYHOST=>2,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $content,
             CURLOPT_RETURNTRANSFER => true,
@@ -63,8 +63,8 @@ class DefaultHttpClient implements HttpClient
     {
         return $this->curl->exec($url, array(
             CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_SSL_VERIFYPEER=>false,
-            CURLOPT_SSL_VERIFYHOST=>false,
+            CURLOPT_SSL_VERIFYPEER=>true,
+            CURLOPT_SSL_VERIFYHOST=>2,
             CURLOPT_POSTFIELDS => $content,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => false,

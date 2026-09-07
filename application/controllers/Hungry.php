@@ -529,9 +529,352 @@ $catid=trim($catid,',');*/
 
     public function scanmenu($table = null)
     {
-        $mysesdata = ['tableid' => $table];
-        $this->session->set_userdata($mysesdata);
+        if (empty($table)) {
+            show_404();
+        }
+
+        // Store table in session
+        $this->session->set_userdata('tableid', $table);
+
+        // If customer already identified in this session, check reservation then go to menu
+        if ($this->session->userdata('CusUserID')) {
+            $this->load->model('reservation/reservation_model');
+            $matching = $this->reservation_model->match_reservation_by_table($table);
+            if ($matching) {
+                // Check if this customer owns the reservation
+                $customer = $this->db->where('customer_id', $this->session->userdata('CusUserID'))->get('customer_info')->row();
+                if ($customer) {
+                    $input_phone = preg_replace('/[\s\-\.\+]/', '', $customer->customer_phone);
+                    $stored_phone = preg_replace('/[\s\-\.\+]/', '', $matching->customer_phone ?? '');
+                    if (substr($input_phone, -9) === substr($stored_phone, -9)) {
+                        // This customer owns the reservation — mark check-in
+                        if ($matching->match_type === 'on_time') {
+                            $this->db->where('reserveid', $matching->reserveid)
+                                ->update('tblreservation', ['qr_checkin_pending' => 1]);
+                        }
+                        redirect('hungry/reservation_welcome/' . $matching->reserveid);
+                    }
+                }
+                // Different customer scanning a reserved table
+                $data['reservation_id'] = $matching->reserveid;
+                $data['table_id'] = $table;
+                $data['table'] = $this->db->where('tableid', $table)->get('rest_table')->row();
+                $data['title'] = "Table reservee";
+                $data['already_identified'] = true;
+                $this->load->view('qrapp/qrpublic/reservation_verify', $data);
+                return;
+            }
+            redirect("qr-menu");
+        }
+
+        // Not identified yet — show identification screen
+        $this->load->model('reservation/reservation_model');
+        $matching = $this->reservation_model->match_reservation_by_table($table);
+
+        $data['table_id'] = $table;
+        $data['table'] = $this->db->where('tableid', $table)->get('rest_table')->row();
+        $data['has_reservation'] = !empty($matching);
+        $data['reservation_id'] = $matching ? $matching->reserveid : null;
+        $data['title'] = "Bienvenue";
+        $this->load->view('qrapp/qrpublic/customer_identify', $data);
+    }
+
+    /**
+     * Guest access to QR menu — skips identification
+     */
+    public function scanmenu_guest($table = null)
+    {
+        if (empty($table)) {
+            show_404();
+        }
+        $this->session->set_userdata('tableid', $table);
         redirect("qr-menu");
+    }
+
+    /**
+     * Customer account page — profile, loyalty, order history
+     */
+    public function my_account()
+    {
+        $customer_id = $this->session->userdata('CusUserID');
+        if (empty($customer_id)) {
+            redirect('qr-menu');
+        }
+
+        $data['customer'] = $this->db->where('customer_id', $customer_id)->get('customer_info')->row();
+        $data['points'] = $this->db->where('customerid', $customer_id)->get('tbl_customerpoint')->row();
+        $data['orders'] = $this->db->query("
+            SELECT co.*, GROUP_CONCAT(f.ProductName SEPARATOR ', ') as items_list
+            FROM customer_order co
+            LEFT JOIN order_menu om ON om.order_id = co.order_id
+            LEFT JOIN item_foods f ON f.ProductsID = om.menu_id
+            WHERE co.customer_id = ?
+            GROUP BY co.order_id
+            ORDER BY co.order_id DESC
+            LIMIT 10
+        ", [$customer_id])->result();
+        $data['membership'] = null;
+        if (!empty($data['customer']->membership_type)) {
+            $data['membership'] = $this->db->where('id', $data['customer']->membership_type)->get('membership')->row();
+        }
+        $data['title'] = 'Mon compte';
+        $this->load->view('qrapp/qrpublic/my_account', $data);
+    }
+
+    /**
+     * Identify customer by phone — creates account if new, sets session
+     */
+    public function identify_customer()
+    {
+        $phone    = $this->input->post('phone', true);
+        $name     = $this->input->post('name', true);
+        $table_id = $this->input->post('table_id', true);
+        $reservation_id = $this->input->post('reservation_id', true);
+
+        if (empty($phone)) {
+            echo json_encode(['status' => 'error', 'message' => display('phone_number_required')]);
+            return;
+        }
+
+        // Normalize phone
+        $phone_clean = preg_replace('/[\s\-\.\+]/', '', $phone);
+        $phone_suffix = substr($phone_clean, -9);
+
+        // Search customer by phone (last 9 digits match)
+        $customer = $this->db->select('*')->from('customer_info')
+            ->like('customer_phone', $phone_suffix, 'both')
+            ->get()->row();
+
+        // Verify exact suffix match (LIKE may be too broad)
+        if ($customer) {
+            $c_phone = preg_replace('/[\s\-\.\+]/', '', $customer->customer_phone);
+            if (substr($c_phone, -9) !== $phone_suffix) {
+                $customer = null;
+            }
+        }
+
+        $confirm = $this->input->post('confirm', true);
+
+        if ($customer && $confirm !== 'yes') {
+            // Customer found — return info for confirmation
+            $pts = $this->db->select('points')->where('customerid', $customer->customer_id)->get('tbl_customerpoint')->row();
+            echo json_encode([
+                'status' => 'found',
+                'customer_name' => $customer->customer_name,
+                'customer_phone' => $customer->customer_phone,
+                'points' => !empty($pts) ? (int)$pts->points : 0,
+                'member_since' => date('d/m/Y', strtotime($customer->crdate)),
+            ]);
+            return;
+        }
+
+        if ($customer && $confirm === 'yes') {
+            // Customer confirmed — set session
+            $customer_id = $customer->customer_id;
+            $this->session->set_userdata('CusUserID', $customer_id);
+            $token = $this->session->userdata('token');
+            if (!empty($token)) {
+                $this->db->where('customer_id', $customer_id)->update('customer_info', ['customer_token' => $token]);
+            }
+        } elseif (!$customer) {
+            // New customer
+            if (empty($name)) {
+                echo json_encode(['status' => 'need_name', 'message' => display('new_customer_enter_name')]);
+                return;
+            }
+
+            $lastid = $this->db->select('cuntomer_no')->from('customer_info')->order_by('customer_id', 'desc')->get()->row();
+            $sl = !empty($lastid->cuntomer_no) ? $lastid->cuntomer_no : 'cus-0000';
+            $supno = explode('-', $sl);
+            $nextno = (int)$supno[1] + 1;
+            $sino = $supno[0] . '-' . str_pad($nextno, 4, '0', STR_PAD_LEFT);
+
+            $user_data = [
+                'cuntomer_no'               => $sino,
+                'membership_type'           => 1,
+                'password'                  => Saas_password::hacher(bin2hex(random_bytes(16))),
+                'customer_name'             => $name,
+                'customer_email'            => $phone . '@qr.local',
+                'customer_phone'            => $phone,
+                'customer_token'            => $this->session->userdata('token') ?? '',
+                'customer_address'          => '',
+                'favorite_delivery_address' => '',
+                'crdate'                    => date('Y-m-d'),
+                'is_active'                 => 1,
+            ];
+            $customer_id = $this->hungry_model->insert_data('customer_info', $user_data);
+
+            // Create loyalty points entry if module exists
+            if (file_exists(APPPATH . 'modules/loyalty/assets/data/env')) {
+                $this->db->insert('tbl_customerpoint', [
+                    'customerid' => $customer_id,
+                    'amount'     => 0,
+                    'points'     => 10,
+                ]);
+            }
+
+            $this->session->set_userdata('CusUserID', $customer_id);
+        }
+
+        // Check if there's a reservation for this table
+        if (!empty($reservation_id)) {
+            $reservation = $this->db
+                ->select('r.*, c.customer_phone')
+                ->from('tblreservation r')
+                ->join('customer_info c', 'c.customer_id = r.cid', 'left')
+                ->where('r.reserveid', $reservation_id)
+                ->get()->row();
+
+            if ($reservation) {
+                $res_phone = preg_replace('/[\s\-\.\+]/', '', $reservation->customer_phone ?? '');
+                if (substr($res_phone, -9) === $phone_suffix) {
+                    // This customer owns the reservation
+                    $now_ts = time();
+                    $res_ts = strtotime(date('Y-m-d') . ' ' . $reservation->formtime);
+                    if (abs($now_ts - $res_ts) <= 1800) {
+                        $this->db->where('reserveid', $reservation_id)
+                            ->update('tblreservation', ['qr_checkin_pending' => 1]);
+                    }
+                    echo json_encode([
+                        'status' => 'ok',
+                        'redirect' => base_url('hungry/reservation_welcome/' . $reservation_id)
+                    ]);
+                    return;
+                } else {
+                    // Different person — table is reserved for someone else
+                    $res_name = $this->db->select('customer_name')->where('customer_id', $reservation->cid)->get('customer_info')->row();
+                    echo json_encode([
+                        'status' => 'reserved',
+                        'message' => display('table_reserved_for') . ' ' . mb_substr($res_name->customer_name ?? '', 0, 3) . '***. ' . display('can_still_browse_menu'),
+                        'redirect' => base_url('qr-menu')
+                    ]);
+                    return;
+                }
+            }
+        }
+
+        echo json_encode([
+            'status' => 'ok',
+            'redirect' => base_url('qr-menu')
+        ]);
+    }
+
+    /**
+     * Verify customer identity against reservation before check-in
+     */
+    public function verify_reservation()
+    {
+        $reservation_id = $this->input->post('reservation_id', true);
+        $table_id       = $this->input->post('table_id', true);
+        $phone          = $this->input->post('phone', true);
+
+        if (empty($reservation_id) || empty($table_id) || empty($phone)) {
+            echo json_encode(['status' => 'error', 'message' => display('missing_data')]);
+            return;
+        }
+
+        $this->load->model('reservation/reservation_model');
+
+        // Get reservation with customer info
+        $reservation = $this->db
+            ->select('r.*, c.customer_name, c.customer_phone, t.tablename')
+            ->from('tblreservation r')
+            ->join('customer_info c', 'c.customer_id = r.cid', 'left')
+            ->join('rest_table t', 't.tableid = r.tableid', 'left')
+            ->where('r.reserveid', $reservation_id)
+            ->get()->row();
+
+        if (!$reservation) {
+            echo json_encode(['status' => 'error', 'message' => display('reservation_not_found')]);
+            return;
+        }
+
+        // Compare phone — normalize by removing spaces, dashes, leading zeros
+        $input_phone = preg_replace('/[\s\-\.\+]/', '', $phone);
+        $stored_phone = preg_replace('/[\s\-\.\+]/', '', $reservation->customer_phone);
+
+        // Match last 9 digits to handle country code differences
+        $input_suffix  = substr($input_phone, -9);
+        $stored_suffix = substr($stored_phone, -9);
+
+        if ($input_suffix !== $stored_suffix) {
+            echo json_encode([
+                'status' => 'denied',
+                'message' => display('phone_does_not_match_reservation') . ' ' . display('table_reserved_for') . ' ' . mb_substr($reservation->customer_name, 0, 3) . '***.'
+            ]);
+            return;
+        }
+
+        // Identity verified — proceed with check-in
+        $this->session->set_userdata('tableid', $table_id);
+
+        // Determine match type
+        $now_ts = time();
+        $res_ts = strtotime(date('Y-m-d') . ' ' . $reservation->formtime);
+        $diff   = $now_ts - $res_ts;
+
+        if (abs($diff) <= 1800) {
+            $reservation->match_type = 'on_time';
+            $this->db->where('reserveid', $reservation_id)
+                ->update('tblreservation', ['qr_checkin_pending' => 1]);
+        } elseif ($diff < 0) {
+            $reservation->match_type = 'early';
+        } else {
+            $reservation->match_type = 'late';
+        }
+
+        echo json_encode([
+            'status' => 'ok',
+            'redirect' => base_url('hungry/reservation_welcome/' . $reservation_id)
+        ]);
+    }
+
+    /**
+     * Show reservation welcome page after identity verified
+     */
+    public function reservation_welcome($reservation_id = null)
+    {
+        if (empty($reservation_id)) {
+            redirect('qr-menu');
+        }
+
+        $this->load->model('reservation/reservation_model');
+
+        $reservation = $this->db
+            ->select('r.*, c.customer_name, c.customer_phone, t.tablename')
+            ->from('tblreservation r')
+            ->join('customer_info c', 'c.customer_id = r.cid', 'left')
+            ->join('rest_table t', 't.tableid = r.tableid', 'left')
+            ->where('r.reserveid', $reservation_id)
+            ->get()->row();
+
+        if (!$reservation) {
+            redirect('qr-menu');
+        }
+
+        // Determine match type
+        $now_ts = time();
+        $res_ts = strtotime(date('Y-m-d') . ' ' . $reservation->formtime);
+        $diff   = $now_ts - $res_ts;
+
+        if (abs($diff) <= 1800) {
+            $reservation->match_type = 'on_time';
+            $data['title'] = "Bienvenue !";
+        } elseif ($diff < 0) {
+            $reservation->match_type = 'early';
+            $data['title'] = "Vous êtes en avance !";
+        } else {
+            $reservation->match_type = 'late';
+            $data['title'] = "Réservation passée";
+        }
+
+        $data['reservation'] = $reservation;
+        $data['table'] = $this->db->where('tableid', $reservation->tableid)->get('rest_table')->row();
+        $data['preorder_items'] = $this->db
+            ->where('reservation_id', $reservation_id)
+            ->get('reservation_preorder')->result();
+
+        $this->load->view('qrapp/qrpublic/reservation_checkin', $data);
     }
 
     /*public function savetoken()
@@ -1090,6 +1433,26 @@ $catid=trim($catid,',');*/
     {
         $numofpeople       = $this->input->post('people');
         $newdate           = $this->input->post('getdate');
+        $time              = $this->input->post('time');
+
+        // Block past dates (use strtotime for reliable comparison)
+        $inputDateTs = strtotime($newdate);
+        $todayTs     = strtotime(date('Y-m-d'));
+        if ($inputDateTs === false || $inputDateTs < $todayTs) {
+            echo 3; // 3 = past date
+            return;
+        }
+
+        // Block past time if same day (must be at least 1 hour from now)
+        if ($inputDateTs == $todayTs && !empty($time)) {
+            $reservationTs = strtotime($newdate . ' ' . $time);
+            $minTs = time() + 3600; // now + 1 hour
+            if ($reservationTs !== false && $reservationTs < $minTs) {
+                echo 4; // 4 = past time
+                return;
+            }
+        }
+
         $gettable          = $this->hungry_model->checkavailtable();
         $data['tableinfo'] = $this->hungry_model->checkfree($gettable, $numofpeople);
         $rseting           = $this->hungry_model->read('*', 'setting', ['id' => 2]);
@@ -1178,8 +1541,27 @@ $catid=trim($catid,',');*/
         $id       = $this->input->post('reserveid');
         $newdate  = $this->input->post('bookdate');
         $tableid  = $this->input->post('tableid');
+        $booktime = $this->input->post('bookfromtime');
         $status   = 1;
         $udata    = ['status' => 1];
+
+        // Server-side: block past date or past time
+        $inputDateTs = strtotime($newdate);
+        $todayTs     = strtotime(date('Y-m-d'));
+        if ($inputDateTs === false || $inputDateTs < $todayTs) {
+            $this->session->set_flashdata('exception', display('cannot_reserve_past_date'));
+            redirect('reservation');
+            return;
+        }
+        if ($inputDateTs == $todayTs && !empty($booktime)) {
+            $reservationTs = strtotime($newdate . ' ' . $booktime);
+            if ($reservationTs !== false && $reservationTs < time() + 3600) {
+                $this->session->set_flashdata('exception', display('reservation_time_too_soon'));
+                redirect('reservation');
+                return;
+            }
+        }
+
         $scan     = scandir('application/modules/');
         $pointsys = "";
 
@@ -1867,7 +2249,7 @@ $catid=trim($catid,',');*/
             $indata['membership_type']  = $pointsys;
             $indata['customer_name']    = $this->input->post('user_name', true);
             $indata['customer_email']   = $this->input->post('user_email', true);
-            $indata['password']         = md5($this->input->post('u_pass', true));
+            $indata['password']         = Saas_password::hacher($this->input->post('u_pass', true));
             $indata['customer_address'] = $this->input->post('address', true);
             $indata['customer_phone']   = $this->input->post('phone', true);
             $indata['crdate']           = date('Y-m-d');
@@ -1944,7 +2326,7 @@ $catid=trim($catid,',');*/
             $indata['membership_type']  = $pointsys;
             $indata['customer_name']    = $this->input->post('user_name', true);
             $indata['customer_email']   = $this->input->post('email', true);
-            $indata['password']         = md5($this->input->post('u_pass2', true));
+            $indata['password']         = Saas_password::hacher($this->input->post('u_pass2', true));
             $indata['customer_address'] = $this->input->post('address', true);
             $indata['customer_phone']   = $this->input->post('phone', true);
             $indata['crdate']           = date('Y-m-d');
@@ -1983,7 +2365,7 @@ $catid=trim($catid,',');*/
     public function userlogin()
     {
         $username = $this->input->post('email');
-        $password = md5($this->input->post('pass1'));
+        $password = $this->input->post('pass1'); // Audit F-11 : verification deleguee au modele
 
         $cek = $this->hungry_model->loginUser($username, $password);
 
@@ -2050,7 +2432,7 @@ $catid=trim($catid,',');*/
     public function _sendingForgotPassMail($data)
     {
         $Password     = $this->generateNumericOTP(6);
-        $updatetData2 = ['password' => md5($Password)];
+        $updatetData2 = ['password' => Saas_password::hacher($Password)];
         $this->db->where('customer_id', $data->customer_id);
         $this->db->update('customer_info', $updatetData2);
 
@@ -2196,7 +2578,7 @@ $catid=trim($catid,',');*/
             //insert Customer
             $user['cuntomer_no']               = $sino;
             $user['membership_type']           = $pointsys;
-            $user['password']                  = md5($this->input->post('password'));
+            $user['password']                  = Saas_password::hacher($this->input->post('password'));
             $user['customer_name']             = $this->input->post('f_name') . " " . $this->input->post('l_name');
             $user['customer_email']            = $this->input->post('email');
             $user['customer_phone']            = $this->input->post('phone');
@@ -2536,7 +2918,7 @@ document.getElementById("paytrack").click();
 
                 $user['cuntomer_no']               = $sino;
                 $user['membership_type']           = $pointsys;
-                $user['password']                  = md5(bin2hex(random_bytes(16)));
+                $user['password']                  = Saas_password::hacher(bin2hex(random_bytes(16)));
                 $user['customer_name']             = $this->input->post('customerName', true);
                 $user['customer_email']            = $phone . "@gmail.com";
                 $user['customer_phone']            = $this->input->post('phone', true);
@@ -3693,7 +4075,7 @@ document.getElementById("paytrack").click();
                 if ($this->input->post('password') == '') {
                     $psaaword = $custinfo->password;
                 } else {
-                    $psaaword = md5($this->input->post('password'));
+                    $psaaword = Saas_password::hacher($this->input->post('password'));
                 }
 
                 //logo upload

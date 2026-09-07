@@ -65,6 +65,10 @@ class Theme extends MX_Controller
     #------------------------------------
     public function upload_new_theme()
     {
+        // Audit F-06 : le constructeur n'exige que addon:read. Deposer un
+        // fichier sur le disque est une ecriture — elle demande addon:create.
+        $this->permission->method('addon', 'create')->redirect();
+
 
         $this->form_validation->set_rules('purchase_key', display('purchase_key'), 'trim|required');
         $this->form_validation->set_rules('theme_name', display('theme_name'), 'trim|required');
@@ -105,10 +109,10 @@ class Theme extends MX_Controller
 
                 $config                  = [];
                 $config['upload_path']   = './application/views/themes/';
-                $config['allowed_types'] = '*';
+                $config['allowed_types'] = 'zip';
                 $config['max_size']      = 480000;
                 $config['overwrite']     = false;
-                $config['encrypt_name']  = false;
+                $config['encrypt_name']  = true;
 
                 $this->upload->initialize($config);
                 if (!$this->upload->do_upload('new_theme')) {
@@ -123,7 +127,7 @@ class Theme extends MX_Controller
                         $zip->extractTo($target_dir . '/' . $dir . '/'); // place in the directory with same name
                         $zip->close();
                         @unlink($target_dir . '/' . $filename); // delete zip file
-                        chmod($target_dir . $dir, 0777); //change uploaded file permission
+                        chmod($target_dir . $dir, 0755); //change uploaded file permission
                         $this->themes_model->store($dir); //insert store name into database
                         $sdata['message'] = display("theme_uploaded_successfully");
                     } else {

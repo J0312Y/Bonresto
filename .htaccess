@@ -1,9 +1,46 @@
+# ---------------------------------------------------------------------------
+# Fichiers qui ne doivent jamais etre servis, quelle que soit leur position.
+# Audit F-03 : quatre sauvegardes SQL completes etaient telechargeables depuis
+# la racine, dont saas_dump.sql (comptes super-admin, empreintes, SMTP).
+# ---------------------------------------------------------------------------
+<FilesMatch "\.(sql|bak|bak1|log|zip|rar|gz|tar|env|json~|ini|sh|dist)$">
+    <IfModule authz_core_module>
+        Require all denied
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Fichiers caches (.env, .git, .htpasswd...)
+<FilesMatch "^\.">
+    <IfModule authz_core_module>
+        Require all denied
+    </IfModule>
+    <IfModule !authz_core_module>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Pas de listage de repertoire
+Options -Indexes
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /bonresto
 
+    # Pass Authorization header to PHP (required for JWT with CGI/FastCGI)
+    RewriteCond %{HTTP:Authorization} .+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # SaaS Admin SPA — serve index.html for any non-file path under dist/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^saas-bonresto/admin/dist/(.*)$ saas-bonresto/admin/dist/index.html [L]
+
+    # CodeIgniter routing
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-
     RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>

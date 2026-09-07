@@ -830,7 +830,7 @@ class Order_model extends CI_Model
 		if (!empty($current_shift)) {
 			$this->db->select("emp.emp_his_id,emp.first_name,emp.last_name,emp.employee_id");
 			$this->db->from('employee_history as emp');
-			$this->db->join('shift_user as s', 'emp.employee_id=s.emp_id', 'left');
+			$this->db->join('shift_user as s', 'emp.emp_his_id=s.emp_id', 'left');
 			$this->db->where('emp.pos_id', 6);
 			$this->db->where('s.shift_id', $current_shift->id);
 			$data = $this->db->get()->result();
@@ -1251,7 +1251,7 @@ class Order_model extends CI_Model
 		$cdate = date("Y-m-d", strtotime("- 1 day"));
 		$today = date("Y-m-d");
 
-		$where = "customer_order.order_date Between '" . $cdate . "' AND '" . $today . "' AND ((customer_order.order_status = 1 OR customer_order.order_status = 2 OR customer_order.order_status = 3) AND ((customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
+		$where = "customer_order.order_date Between '" . $cdate . "' AND '" . $today . "' AND ((customer_order.order_status = 1 OR customer_order.order_status = 2 OR customer_order.order_status = 3) AND ((customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 5 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
 		$sql = "SELECT customer_order.*,customer_order.order_id as mid,customer_info.customer_name,customer_type.customer_type,employee_history.first_name,employee_history.last_name,rest_table.tablename FROM customer_order Left JOIN customer_info ON customer_order.customer_id=customer_info.customer_id Left Join customer_type ON customer_order.cutomertype=customer_type.customer_type_id left join employee_history ON customer_order.waiter_id=employee_history.emp_his_id Left Join rest_table ON customer_order.table_no=rest_table.tableid Where {$where} AND customer_order.marge_order_id IS NULL UNION SELECT customer_order.*,customer_order.order_id as mid,customer_info.customer_name,customer_type.customer_type,employee_history.first_name,employee_history.last_name,rest_table.tablename FROM customer_order Left JOIN customer_info ON customer_order.customer_id=customer_info.customer_id Left Join customer_type ON customer_order.cutomertype=customer_type.customer_type_id left join employee_history ON customer_order.waiter_id=employee_history.emp_his_id Left Join rest_table ON customer_order.table_no=rest_table.tableid Where {$where} AND customer_order.marge_order_id IS NOT NULL GROUP BY customer_order.marge_order_id order by mid desc";
 
 		$query = $this->db->query($sql);
@@ -1399,7 +1399,7 @@ class Order_model extends CI_Model
 	public function kitchen_ongoingorder($id)
 	{
 		$cdate = date('Y-m-d');
-		$where = "customer_order.order_date = '" . $cdate . "' AND order_menu.allfoodready IS NULL AND ((customer_order.order_status = 1 OR customer_order.order_status = 2) AND ((customer_order.cutomertype = 2 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
+		$where = "customer_order.order_date = '" . $cdate . "' AND order_menu.allfoodready IS NULL AND ((customer_order.order_status = 1 OR customer_order.order_status = 2) AND ((customer_order.cutomertype = 2 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 5 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
 		$this->db->select('customer_order.*,item_foods.kitchenid,order_menu.menu_id,customer_info.customer_name,customer_type.customer_type,employee_history.first_name,employee_history.last_name,rest_table.tablename');
 		$this->db->from('customer_order');
 		$this->db->join('customer_info', 'customer_order.customer_id=customer_info.customer_id', 'left');
@@ -1419,7 +1419,7 @@ class Order_model extends CI_Model
 	public function kitchen_ongoingorderall()
 	{
 		$cdate = date('Y-m-d');
-		$where = "customer_order.order_date = '" . $cdate . "' AND ((customer_order.order_status = 1 OR customer_order.order_status = 2) AND ((customer_order.cutomertype = 2 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
+		$where = "customer_order.order_date = '" . $cdate . "' AND ((customer_order.order_status = 1 OR customer_order.order_status = 2) AND ((customer_order.cutomertype = 2 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 5 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
 		$this->db->select('customer_order.*,customer_info.customer_name,customer_type.customer_type,employee_history.first_name,employee_history.last_name,rest_table.tablename');
 		$this->db->from('customer_order');
 		$this->db->join('customer_info', 'customer_order.customer_id=customer_info.customer_id', 'left');
@@ -1761,7 +1761,7 @@ class Order_model extends CI_Model
 	public function get_orderlist()
 	{
 		$cdate = date('Y-m-d');
-		$where = "customer_order.order_date = '" . $cdate . "' AND ((customer_order.order_status = 1 OR customer_order.order_status = 2 OR customer_order.order_status = 3) AND ((customer_order.cutomertype = 2 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
+		$where = "customer_order.order_date = '" . $cdate . "' AND ((customer_order.order_status = 1 OR customer_order.order_status = 2 OR customer_order.order_status = 3) AND ((customer_order.cutomertype = 2 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 99 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 5 AND customer_order.orderacceptreject = 1) || (customer_order.cutomertype = 3 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 4 || customer_order.orderacceptreject != 1) || (customer_order.cutomertype = 1 || customer_order.orderacceptreject != 1)))";
 		$this->db->select('customer_order.*,customer_info.customer_name,customer_type.customer_type,employee_history.first_name,employee_history.last_name,rest_table.tablename');
 		$this->db->from('customer_order');
 		$this->db->join('customer_info', 'customer_order.customer_id=customer_info.customer_id', 'left');
@@ -1928,9 +1928,9 @@ class Order_model extends CI_Model
 				$this->db->where('pvarientid', $groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 				foreach ($productiondetails as $productiondetail) {
-					$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
+					$r_stock = (float)($productiondetail->qty) * ((float)($foodqty) * (float)($groupitem->item_qty));
 					/*add stock in ingredients*/
-					$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+					$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 					$this->db->where('id', intval($productiondetail->ingredientid));
 					$this->db->update('ingredients');
 					/*end add ingredients*/
@@ -1943,9 +1943,9 @@ class Order_model extends CI_Model
 			$this->db->where('pvarientid', $fvid);
 			$productiondetails = $this->db->get()->result();
 			foreach ($productiondetails as $productiondetail) {
-				$r_stock = intval($productiondetail->qty) * intval($foodqty);
+				$r_stock = (float)($productiondetail->qty) * (float)($foodqty);
 				/*add stock in ingredients*/
-				$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+				$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 				$this->db->where('id', intval($productiondetail->ingredientid));
 				$this->db->update('ingredients');
 				/*end add ingredients*/
@@ -1986,8 +1986,8 @@ class Order_model extends CI_Model
 				$this->db->where('pvarientid', $groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 				foreach ($productiondetails as $productiondetail) {
-					$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
-					$this->db->set('stock_qty', 'stock_qty+'.intval($r_stock), FALSE);
+					$r_stock = (float)($productiondetail->qty) * ((float)($foodqty) * (float)($groupitem->item_qty));
+					$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $r_stock), FALSE);
 					$this->db->where('id', intval($productiondetail->ingredientid));
 					$this->db->update('ingredients');
 				}
@@ -1999,8 +1999,8 @@ class Order_model extends CI_Model
 			$this->db->where('pvarientid', $fvid);
 			$productiondetails = $this->db->get()->result();
 			foreach ($productiondetails as $productiondetail) {
-				$r_stock = intval($productiondetail->qty) * intval($foodqty);
-				$this->db->set('stock_qty', 'stock_qty+'.intval($r_stock), FALSE);
+				$r_stock = (float)($productiondetail->qty) * (float)($foodqty);
+				$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $r_stock), FALSE);
 				$this->db->where('id', intval($productiondetail->ingredientid));
 				$this->db->update('ingredients');
 			}
@@ -2244,5 +2244,403 @@ class Order_model extends CI_Model
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $orderdetails = $query->result();
+	}
+
+	// ── Reservation → Order conversion ──────────────────────────────
+
+	/**
+	 * Create a real customer_order + order_menu rows from reservation pre-order items.
+	 *
+	 * @param int   $reservation_id
+	 * @param int   $customer_id
+	 * @param int   $table_id
+	 * @param array $items  Array of objects from reservation_preorder (with product_id, variant_id, qty, price)
+	 * @param int|null $waiter_id
+	 * @return int  The new order_id
+	 */
+	public function create_order_from_preorder($reservation_id, $customer_id, $table_id, $items, $waiter_id = null)
+	{
+		// Normalisation vers le format attendu par _creer_commande().
+		$lignes = [];
+		foreach ($items as $item) {
+			$lignes[] = [
+				'menu_id'    => $item->product_id,
+				'qty'        => $item->qty,
+				'price'      => $item->price,
+				'variant_id' => $item->variant_id ?: 0,
+				'notes'      => '',
+			];
+		}
+
+		return $this->_creer_commande([
+			'customer_id'    => $customer_id,
+			'table_id'       => $table_id,
+			'lignes'         => $lignes,
+			'waiter_id'      => $waiter_id,
+			'cutomertype'    => 5, // Reservation
+			'reservation_id' => $reservation_id,
+			'tokenno'        => 'R' . $reservation_id,
+		]);
+	}
+
+	/**
+	 * Cree une commande a partir d'une conversation WhatsApp.
+	 *
+	 * `cutomertype` vaut 2 — « Online Customer ». Une commande WhatsApp EST
+	 * une commande en ligne : meme parcours, meme traitement en salle.
+	 *
+	 * Une premiere version utilisait 6, un type invente pour distinguer le
+	 * canal. Mauvaise idee : 6 n'existe pas dans `customer_type`, donc les
+	 * commandes sortaient sans libelle, et surtout la liste des commandes du
+	 * POS n'enumere que les types 99, 5, 3, 4 et 1 — elles y etaient tout
+	 * simplement invisibles. La cuisine ne les voyait jamais.
+	 *
+	 * L'origine WhatsApp reste lisible par le prefixe « W » du jeton, qui
+	 * suffit a un ticket cuisine et ne casse aucun ecran existant.
+	 *
+	 * La commande nait en statut 1 (en attente) et deja acceptee : la cuisine
+	 * la voit tout de suite. C'est le meme parti que pour les pre-commandes de
+	 * reservation ; l'inverse — attendre une validation manuelle — ferait
+	 * perdre l'interet d'une prise de commande 24 h/24.
+	 *
+	 * @param array $lignes  [['menu_id','qty','price','variant_id','notes'], ...]
+	 * @return int  L'identifiant de la commande creee
+	 */
+	public function create_order_from_agent($customer_id, $table_id, array $lignes, $notes = '')
+	{
+		return $this->_creer_commande([
+			'customer_id'    => $customer_id,
+			'table_id'       => $table_id ?: null,
+			'lignes'         => $lignes,
+			'waiter_id'      => null,
+			'cutomertype'    => 2, // Online Customer — une commande WhatsApp est une commande en ligne
+			'reservation_id' => null,
+			'tokenno'        => 'W',
+			'customer_note'  => $notes,
+		]);
+	}
+
+	/**
+	 * Creation d'une commande, partagee par tous les canaux.
+	 *
+	 * Extraite de create_order_from_preorder() pour que l'agent WhatsApp
+	 * n'en produise pas une seconde version : ce projet compte deja plusieurs
+	 * implementations divergentes de la meme logique metier, et chacune a
+	 * fini par accumuler ses propres defauts.
+	 *
+	 * Les trois ecritures — commande, lignes, facture — sont dans une
+	 * transaction : une commande sans lignes, ou sans facture, n'apparait pas
+	 * correctement en caisse et se corrige a la main.
+	 */
+	private function _creer_commande(array $p)
+	{
+		// Generate saleinvoice (same pattern as Order::placeoreder)
+		$last = $this->db->select('order_id')->from('customer_order')
+			->order_by('order_id', 'desc')->get()->row();
+		$sl = ($last && $last->order_id) ? $last->order_id + 1 : 1;
+		$sino = str_pad($sl, 4, '0', STR_PAD_LEFT);
+
+		// Calculate total
+		$total = 0;
+		foreach ($p['lignes'] as $ligne) {
+			$total += $ligne['price'] * $ligne['qty'];
+		}
+
+		$this->db->trans_start();
+
+		// Insert customer_order
+		$this->db->insert('customer_order', [
+			'saleinvoice'    => $sino,
+			'customer_id'    => $p['customer_id'],
+			'cutomertype'    => $p['cutomertype'],
+			'waiter_id'      => $p['waiter_id'],
+			'order_date'     => date('Y-m-d'),
+			'order_time'     => date('H:i:s'),
+			'totalamount'    => $total,
+			'table_no'       => $p['table_id'],
+			'order_status'   => 1, // Pending
+			'orderacceptreject' => 1, // Already accepted — send to kitchen immediately
+			'reservation_id' => $p['reservation_id'],
+			'customer_note'  => $p['customer_note'] ?? '',
+			'tokenno'        => $p['tokenno'],
+		]);
+		$order_id = $this->db->insert_id();
+
+		// Le jeton « W » seul ne distingue pas deux commandes : on le complete
+		// une fois l'identifiant connu.
+		if ($p['tokenno'] === 'W') {
+			$this->db->where('order_id', $order_id)
+				->update('customer_order', ['tokenno' => 'W' . $order_id]);
+		}
+
+		// Insert order_menu for each line
+		foreach ($p['lignes'] as $ligne) {
+			$this->db->insert('order_menu', [
+				'order_id'  => $order_id,
+				'menu_id'   => $ligne['menu_id'],
+				'menuqty'   => $ligne['qty'],
+				'price'     => $ligne['price'],
+				'varientid' => $ligne['variant_id'] ?: 0,
+				'add_on_id' => '',
+				'addonsqty' => '',
+				'notes'     => $ligne['notes'] ?? '',
+			]);
+		}
+
+		// Create bill record (unpaid) — required for POS actions to appear
+		$CI =& get_instance();
+		$uid = $CI->session->userdata('id') ?: 1;
+		$this->db->insert('bill', [
+			'customer_id'      => $p['customer_id'],
+			'order_id'         => $order_id,
+			'total_amount'     => $total,
+			'discount'         => 0,
+			'service_charge'   => 0,
+			'VAT'              => 0,
+			'bill_amount'      => $total,
+			'bill_date'        => date('Y-m-d'),
+			'bill_time'        => date('H:i:s'),
+			'bill_status'      => 0,
+			'payment_method_id'=> 1,
+			'create_by'        => $uid,
+			'create_date'      => date('Y-m-d'),
+			'update_by'        => $uid,
+			'update_date'      => date('Y-m-d'),
+		]);
+
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === false) {
+			log_message('error', 'Order_model::_creer_commande — transaction echouee');
+			return 0;
+		}
+
+		return $order_id;
+	}
+
+	/**
+	 * Get upcoming pre-order items for a specific kitchen (preview cards).
+	 * Returns items from today's confirmed reservations that haven't arrived yet.
+	 */
+	public function get_upcoming_preorders_for_kitchen($kitchen_id)
+	{
+		return $this->db
+			->select('r.reserveid, r.formtime, r.person_capicity,
+			          c.customer_name, t.tablename,
+			          p.product_name, p.variant_name, p.qty, p.price,
+			          f.kitchenid')
+			->from('tblreservation r')
+			->join('reservation_preorder p', 'p.reservation_id = r.reserveid')
+			->join('item_foods f', 'f.ProductsID = p.product_id')
+			->join('customer_info c', 'c.customer_id = r.cid', 'left')
+			->join('rest_table t', 't.tableid = r.tableid', 'left')
+			->where('r.reserveday', date('Y-m-d'))
+			->where('r.status', 2)
+			->where('r.arrival_status', 0)
+			->where('f.kitchenid', $kitchen_id)
+			->order_by('r.formtime', 'ASC')
+			->get()->result();
+	}
+
+	// ── Floor Plan methods ─────────────────────────────────────────
+
+	/**
+	 * Free tables whose reservation has expired (past totime on reserveday)
+	 * Also marks old reservations as status=3 (expired) if still pending
+	 */
+	private function _free_expired_reservations()
+	{
+		$now  = date('Y-m-d H:i:s');
+		$today = date('Y-m-d');
+
+		// Find tables that are marked reserved (status=1) but have no active future reservation
+		$reserved_tables = $this->db->select('tableid')
+			->from('rest_table')
+			->where('status', 1)
+			->get()->result();
+
+		foreach ($reserved_tables as $rt) {
+			// Check if there is an active reservation for this table that hasn't expired yet
+			// Active = status 1 (confirmed) or 2 (approved), and (reserveday > today) OR (reserveday = today AND totime > current time)
+			$active = $this->db->from('tblreservation')
+				->where('tableid', $rt->tableid)
+				->where('status !=', 3) // not cancelled
+				->where('converted_order_id IS NULL', null, false) // not already converted
+				->group_start()
+					->where('reserveday >', $today)
+					->or_group_start()
+						->where('reserveday', $today)
+						->where('totime >', date('H:i:s'))
+					->group_end()
+				->group_end()
+				->count_all_results();
+
+			if ($active == 0) {
+				// No active reservation — check there's no active order on this table either
+				$has_order = $this->db->from('customer_order')
+					->where('table_no', $rt->tableid)
+					->where('order_date', $today)
+					->where('order_status NOT IN (5)', null, false)
+					->count_all_results();
+
+				if ($has_order == 0) {
+					$this->db->where('tableid', $rt->tableid)
+						->update('rest_table', ['status' => 0]);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get all tables for a floor with their current status derived from active orders
+	 */
+	public function get_floor_tables_with_status($floor_id = null)
+	{
+		// Auto-free tables whose reservation has expired
+		$this->_free_expired_reservations();
+
+		$today = date('Y-m-d');
+		$this->db->select('
+			rt.tableid, rt.tablename, rt.person_capicity, rt.table_icon, rt.floor, rt.status as table_status,
+			ts.pos_x, ts.pos_y, ts.width, ts.height, ts.shape, ts.rotation,
+			co.order_id, co.order_status, co.totalamount, co.order_time, co.tokenno,
+			COALESCE(ci.customer_name, rc.customer_name) as customer_name,
+			CONCAT(w.first_name, " ", w.last_name) as waiter_name,
+			td_agg.total_people, td_agg.time_enter,
+			res.formtime as reservation_time, res.person_capicity as reservation_people
+		', FALSE);
+		$this->db->from('rest_table rt');
+		$this->db->join('table_setting ts', 'ts.tableid = rt.tableid', 'left');
+
+		// Subquery: latest non-cancelled order per table
+		$this->db->join('customer_order co',
+			'co.table_no = rt.tableid AND co.order_status NOT IN (5) AND co.order_date = "' . $today . '"', 'left');
+
+		$this->db->join('customer_info ci', 'ci.customer_id = co.customer_id', 'left');
+		$this->db->join('employee_history w', 'w.emp_his_id = co.waiter_id', 'left');
+
+		// Join reservation for reserved tables (to get customer name)
+		$this->db->join('tblreservation res',
+			'res.tableid = rt.tableid AND res.reserveday = "' . $today . '" AND res.status = 2 AND res.arrival_status = 0', 'left');
+		$this->db->join('customer_info rc', 'rc.customer_id = res.cid', 'left');
+
+		// Subquery: aggregate people at table from table_details
+		$this->db->join(
+			'(SELECT td.table_id, SUM(td.total_people) as total_people, MIN(td.time_enter) as time_enter FROM table_details td JOIN customer_order co2 ON co2.order_id = td.order_id AND co2.order_date = "' . date('Y-m-d') . '" WHERE td.delete_at = 0 GROUP BY td.table_id) td_agg',
+			'td_agg.table_id = rt.tableid', 'left'
+		);
+
+		if ($floor_id) {
+			$this->db->where('rt.floor', $floor_id);
+		}
+		$this->db->order_by('rt.tableid', 'asc');
+
+		$results = $this->db->get()->result();
+
+		// Group by table (a table may have multiple orders)
+		$tables = [];
+		foreach ($results as $row) {
+			$tid = $row->tableid;
+			if (!isset($tables[$tid])) {
+				// Determine status color
+				$color = 'green'; // libre
+				if ($row->table_status == 1 && empty($row->order_id)) {
+					$color = 'yellow'; // réservée
+				} elseif (!empty($row->order_id)) {
+					if (in_array($row->order_status, [1, 2])) {
+						$color = 'red'; // occupée (pending/processing)
+					} elseif (in_array($row->order_status, [3, 4])) {
+						$color = 'orange'; // attente paiement (ready/served)
+					}
+				}
+
+				$tables[$tid] = [
+					'tableid'        => $tid,
+					'tablename'      => $row->tablename,
+					'capacity'       => $row->person_capicity,
+					'table_icon'     => $row->table_icon,
+					'floor'          => $row->floor,
+					'pos_x'          => (int)($row->pos_x ?: 0),
+					'pos_y'          => (int)($row->pos_y ?: 0),
+					'width'          => (int)($row->width ?: 80),
+					'height'         => (int)($row->height ?: 80),
+					'shape'          => $row->shape ?: 'square',
+					'rotation'       => (int)($row->rotation ?: 0),
+					'color'          => $color,
+					'total_people'   => (int)($row->total_people ?: 0),
+					'time_enter'     => $row->time_enter,
+					'order_id'       => $row->order_id,
+					'order_status'   => $row->order_status,
+					'totalamount'    => $row->totalamount,
+					'customer_name'    => $row->customer_name,
+					'waiter_name'      => $row->waiter_name,
+					'tokenno'          => $row->tokenno,
+					'reservation_time' => $row->reservation_time ?? null,
+				];
+			}
+		}
+		return array_values($tables);
+	}
+
+	/**
+	 * Get active orders for a specific table
+	 */
+	public function get_table_active_orders($table_id)
+	{
+		return $this->db->select('
+			co.order_id, co.order_status, co.totalamount, co.order_time, co.order_date, co.tokenno, co.customerpaid,
+			ci.customer_name, ci.customer_phone,
+			CONCAT(w.first_name, " ", w.last_name) as waiter_name,
+			td.time_enter, td.total_people
+		')
+		->from('customer_order co')
+		->join('customer_info ci', 'ci.customer_id = co.customer_id', 'left')
+		->join('employee_history w', 'w.emp_his_id = co.waiter_id', 'left')
+		->join('table_details td', 'td.order_id = co.order_id AND td.delete_at = 0', 'left')
+		->where('co.table_no', $table_id)
+		->where('co.order_status NOT IN (5)', null, false)
+		->where('co.order_date', date('Y-m-d'))
+		->order_by('co.order_id', 'desc')
+		->get()->result();
+	}
+
+	/**
+	 * Get items for a specific order (for detail panel)
+	 */
+	public function get_order_items($order_id)
+	{
+		return $this->db->select('om.*, f.ProductName, f.ProductImage')
+			->from('order_menu om')
+			->join('item_foods f', 'f.ProductsID = om.menu_id', 'left')
+			->where('om.order_id', $order_id)
+			->get()->result();
+	}
+
+	/**
+	 * Transfer an order from one table to another
+	 */
+	public function transfer_table_order($from_table, $to_table)
+	{
+		$this->db->trans_start();
+
+		// Update customer_order
+		$this->db->where('table_no', $from_table)
+			->where('order_status NOT IN (5)', null, false)
+			->where('order_date', date('Y-m-d'))
+			->update('customer_order', ['table_no' => $to_table]);
+
+		// Update table_details
+		$this->db->where('table_id', $from_table)
+			->where('delete_at', 0)
+			->update('table_details', ['table_id' => $to_table]);
+
+		// Free old table
+		$this->db->where('tableid', $from_table)->update('rest_table', ['status' => 0]);
+
+		// Mark new table occupied
+		$this->db->where('tableid', $to_table)->update('rest_table', ['status' => 2]);
+
+		$this->db->trans_complete();
+		return $this->db->trans_status();
 	}
 }

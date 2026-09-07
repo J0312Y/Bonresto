@@ -109,14 +109,27 @@ class Api_v1_model extends CI_Model
     public function authenticate_user($table, $data)
     {
         $Password = $data['password'];
+        // Audit F-11 : verification en PHP — MD5 herite ou bcrypt — au lieu
+        // d'une comparaison d'empreinte dans le SQL. La recherche se fait
+        // AVANT de construire la requete principale : un get() intermediaire
+        // reinitialiserait le constructeur de requetes.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('id, password')
+            ->where('email', $data['email'])
+            ->get('user')->row();
+        $valide = $compte && Saas_password::verifier($Password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('id', $compte->id)
+                ->update('user', ['password' => Saas_password::hacher($Password)]);
+        }
+        if (!$valide) {
+            return FALSE;
+        }
         $this->db->select("user.id,user.firstname, user.lastname, user.email, employee_history.employee_id,employee_history.picture");
 		$this->db->join("employee_history",'employee_history.emp_his_id=user.id','left');
 		$this->db->where('employee_history.pos_id', 6);
 		$this->db->where('user.email', $data['email']);
-        $this->db->group_start();
-            $this->db->where('user.password', $Password);
-            $this->db->or_where('user.password', md5($Password));
-        $this->db->group_end();
+        $this->db->where('user.id', (int) $compte->id);
         $result = $this->db->get($table);
         if ($result->num_rows() > 0)
         {

@@ -275,7 +275,14 @@ class Module extends MX_Controller
     {
         $directory = $dirPath;
         $basePath  = "application/modules/";
-        $dirPath   = $basePath . urldecode($dirPath);
+        // Audit F-12 : le segment d'URL est deja decode par CodeIgniter.
+        // Le urldecode() supplementaire laissait un double encodage
+        // (..%252f) reconstituer ../, avant une suppression recursive.
+        if (!preg_match('/^[A-Za-z0-9_-]+$/', (string) $directory)) {
+        	show_404();
+        	return;
+        }
+        $dirPath = $basePath . $directory;
 
         if (is_dir($dirPath) && $dirPath != $basePath) {
 

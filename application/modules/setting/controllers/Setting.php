@@ -127,7 +127,9 @@ class Setting extends MX_Controller {
 			'timezone'          => $this->input->post('timezone',true),
 			'site_align'        => $this->input->post('site_align',true), 
 			'powerbytxt'        => $this->input->post('power_text', false),
-			'footer_text'       => $this->input->post('footer_text', false) 
+			'footer_text'       => $this->input->post('footer_text', false),
+			'stock_alert_enabled' => (int) $this->input->post('stock_alert_enabled', true),
+			'stock_alert_time'    => $this->input->post('stock_alert_time', true) ?: '08:00'
 		); 
 		
 		//print_r($postData);
@@ -633,9 +635,15 @@ class Setting extends MX_Controller {
 	 }
  public function checkpassword(){
 	  $this->permission->method('setting','read')->redirect();
-	  $password=md5($this->input->post('password'));
+	  // Audit F-11 : verification en PHP (MD5 herite ou bcrypt) au lieu
+	  // d'une comparaison d'empreinte dans le SQL. hash_equals cote
+	  // Saas_password evite en prime la comparaison a temps variable.
+	  $clair = $this->input->post('password');
 	  $uid=$this->session->userdata('id');
-	  $userinfo=$this->db->select('*')->from('user')->where('id',$uid)->where('password',$password)->where('is_admin',1)->get()->row();
+	  $userinfo=$this->db->select('*')->from('user')->where('id',$uid)->where('is_admin',1)->get()->row();
+	  if ($userinfo && !Saas_password::verifier($clair, $userinfo->password)) {
+	      $userinfo = null;
+	  }
 	  	if(!empty($userinfo)){
 			$stock=array(
 			'stock_qty'	        =>	0

@@ -50,6 +50,8 @@ class Appv1 extends MY_Controller
             //if(empty($result->waiter_kitchenToken)){
             $updatetData['waiter_kitchenToken'] = $this->input->post('token', true);
             $this->App_android_model->update_date('user', $updatetData, 'id', $result->id);
+            $this->load->library('notification');
+            $this->notification->set_external_user_id($updatetData['waiter_kitchenToken'], 'staff', $result->id);
             //}
 
             $webseting    = $this->App_android_model->read('powerbytxt,currency,servicecharge,logo,address,service_chargeType', 'setting', ['id' => 2]);
@@ -345,7 +347,7 @@ class Appv1 extends MY_Controller
             $data['cuntomer_no']      = $sino;
             $data['customer_name']    = $this->input->post('customer_name', true);
             $data['customer_email']   = $this->input->post('email', true);
-            $data['password']         = md5($this->input->post('password', true));
+            $data['password']         = Saas_password::hacher($this->input->post('password', true));
             $data['customer_address'] = $this->input->post('Address', true);
             $data['customer_phone']   = $this->input->post('mobile', true);
             //$data['customer_picture']            = $this->input->post('UserPicture', TRUE);
@@ -3694,4 +3696,4 @@ class Appv1 extends MY_Controller
             return $this->respondWithSuccess('Cash Register Successfully synchronization', $output);
         }
     }
-}
+}

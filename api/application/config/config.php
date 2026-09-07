@@ -337,7 +337,17 @@ $config['cache_query_string'] = false;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
  */
-$config['encryption_key'] = 'MySuperEncryptionKEY2017';
+// Même clé que l'installation principale : les deux servent le même
+// restaurant, et des clés différentes rendraient illisible d'un côté ce que
+// l'autre a chiffré.
+//
+// La valeur d'origine était 'MySuperEncryptionKEY2017', livrée avec Bhojon
+// et donc connue de quiconque possède ce script. En production, définissez
+// CI_ENCRYPTION_KEY dans l'environnement plutôt que de laisser un secret
+// dans un fichier suivi par git.
+//
+// Générer : openssl rand -hex 16
+$config['encryption_key'] = env_required('CI_ENCRYPTION_KEY');
 
 /*
 |--------------------------------------------------------------------------

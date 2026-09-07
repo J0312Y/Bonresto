@@ -2,8 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Production_model extends CI_Model {
-	
+
 	private $table = 'production_details';
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('stock_movement_lib');
+		$this->load->library('batch_lib');
+	}
  
 	public function create()
 	{
@@ -54,12 +61,24 @@ class Production_model extends CI_Model {
 				$this->db->where('pvarientid',$groupitem->varientid);
 				$productiondetails = $this->db->get()->result();
 					 foreach($productiondetails as $productiondetail){
-							$r_stock = intval($productiondetail->qty) * (intval($foodqty) * intval($groupitem->item_qty));
+							$r_stock = (float)($productiondetail->qty) * ((float)($foodqty) * (float)($groupitem->item_qty));
 							/*add stock in ingredients*/
-							$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+							$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 							$this->db->where('id', intval($productiondetail->ingredientid));
 							$this->db->update('ingredients');
 							/*end add ingredients*/
+
+							/* Log stock movement for production */
+							$this->stock_movement_lib->record(
+								$productiondetail->ingredientid,
+								'production',
+								-$r_stock,
+								$foodid,
+								'production'
+							);
+
+							/* FIFO batch deduction */
+							$this->batch_lib->deduct_fifo($productiondetail->ingredientid, $r_stock);
 					 }
 				}
 		}else{
@@ -69,12 +88,24 @@ class Production_model extends CI_Model {
 				$this->db->where('pvarientid',$fvid);
 				$productiondetails = $this->db->get()->result();
 				foreach($productiondetails as $productiondetail){
-					$r_stock = intval($productiondetail->qty) * intval($foodqty);
+					$r_stock = (float)($productiondetail->qty) * (float)($foodqty);
 					/*add stock in ingredients*/
-						$this->db->set('stock_qty', 'stock_qty-'.intval($r_stock), FALSE);
+						$this->db->set('stock_qty', 'stock_qty - '.sprintf('%.4F', $r_stock), FALSE);
 						$this->db->where('id', intval($productiondetail->ingredientid));
 						$this->db->update('ingredients');
 						/*end add ingredients*/
+
+						/* Log stock movement for production */
+						$this->stock_movement_lib->record(
+							$productiondetail->ingredientid,
+							'production',
+							-$r_stock,
+							$foodid,
+							'production'
+						);
+
+						/* FIFO batch deduction */
+						$this->batch_lib->deduct_fifo($productiondetail->ingredientid, $r_stock);
 				}
 			}
 			
@@ -112,10 +143,19 @@ class Production_model extends CI_Model {
 						->where('pvarientid', $groupitem->varientid)
 						->get()->result();
 					foreach ($productiondetails as $detail) {
-						$restore_qty = intval($detail->qty) * (intval($production->itemquantity) * intval($groupitem->item_qty));
-						$this->db->set('stock_qty', 'stock_qty+'.intval($restore_qty), FALSE);
+						$restore_qty = (float)($detail->qty) * ((float)($production->itemquantity) * (float)($groupitem->item_qty));
+						$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $restore_qty), FALSE);
 						$this->db->where('id', intval($detail->ingredientid));
 						$this->db->update('ingredients');
+
+						/* Log stock movement for production delete (restore) */
+						$this->stock_movement_lib->record(
+							$detail->ingredientid,
+							'production_delete',
+							$restore_qty,
+							$id,
+							'production'
+						);
 					}
 				}
 			} else {
@@ -125,10 +165,19 @@ class Production_model extends CI_Model {
 					->where('pvarientid', $production->itemvid)
 					->get()->result();
 				foreach ($productiondetails as $detail) {
-					$restore_qty = intval($detail->qty) * intval($production->itemquantity);
-					$this->db->set('stock_qty', 'stock_qty+'.intval($restore_qty), FALSE);
+					$restore_qty = (float)($detail->qty) * (float)($production->itemquantity);
+					$this->db->set('stock_qty', 'stock_qty + '.sprintf('%.4F', $restore_qty), FALSE);
 					$this->db->where('id', intval($detail->ingredientid));
 					$this->db->update('ingredients');
+
+					/* Log stock movement for production delete (restore) */
+					$this->stock_movement_lib->record(
+						$detail->ingredientid,
+						'production_delete',
+						$restore_qty,
+						$id,
+						'production'
+					);
 				}
 			}
 		}
@@ -621,5 +670,48 @@ public function checkingredient($nitqty,$ingredientid,$foodid,$proqty){
 			return 0;
 		}
 	}
-    
+
+	/**
+	 * Get all food items with their recipe cost vs selling price.
+	 */
+	public function food_cost_list()
+	{
+		// Get all unique food+variant combos from production_details
+		$items = $this->db->query("
+			SELECT DISTINCT pd.foodid, pd.pvarientid,
+				f.ProductName, v.variantName, v.price as selling_price
+			FROM production_details pd
+			JOIN item_foods f ON f.ProductsID = pd.foodid
+			LEFT JOIN variant v ON v.variantid = pd.pvarientid
+			ORDER BY f.ProductName, v.variantName
+		")->result();
+
+		foreach ($items as &$item) {
+			// Get recipe ingredients with avg purchase price
+			$recipe = $this->db->query("
+				SELECT pd.ingredientid, pd.qty, i.ingredient_name, u.uom_short_code,
+					COALESCE((SELECT SUM(pdet.totalprice)/SUM(pdet.quantity)
+						FROM purchase_details pdet WHERE pdet.indredientid = pd.ingredientid), 0) as unit_price
+				FROM production_details pd
+				JOIN ingredients i ON i.id = pd.ingredientid
+				LEFT JOIN unit_of_measurement u ON u.id = i.uom_id
+				WHERE pd.foodid = ? AND pd.pvarientid = ?
+			", [$item->foodid, $item->pvarientid])->result();
+
+			$total_cost = 0;
+			foreach ($recipe as $r) {
+				$r->subtotal = (float) $r->qty * (float) $r->unit_price;
+				$total_cost += $r->subtotal;
+			}
+
+			$item->recipe = $recipe;
+			$item->total_cost = $total_cost;
+			$item->food_cost_pct = ($item->selling_price > 0)
+				? round(($total_cost / $item->selling_price) * 100, 1)
+				: 0;
+		}
+
+		return $items;
+	}
+
 }

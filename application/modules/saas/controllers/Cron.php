@@ -22,7 +22,7 @@ class Cron extends Saas_base {
         parent::__construct();
         $this->config->load('saas_email');
         // Secret key: define SAAS_CRON_KEY as environment variable, or fall back to config
-        $this->secret = getenv('SAAS_CRON_KEY') ?: ($this->config->item('saas_cron_key') ?: 'changeme-cron-secret');
+        $this->secret = env_required('SAAS_CRON_KEY');
     }
 
     /** GET /saas/cron/run?key=... */

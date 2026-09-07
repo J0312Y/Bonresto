@@ -111,11 +111,26 @@ class App_android_model extends CI_Model
     {
         $Type = $data['email'];
         $Password = $data['password'];
+        // Audit F-11 : cette installation api/ partage la base du POS.
+        // Tant qu'elle comparait en MD5, tout compte remis a niveau en
+        // bcrypt par l'application principale s'y serait vu refuser.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('id, password')
+            ->where('email', $data['email'])
+            ->get('user')->row();
+        $valide = $compte && Saas_password::verifier($Password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('id', $compte->id)
+                ->update('user', ['password' => Saas_password::hacher($Password)]);
+        }
+        if (!$valide) {
+            return FALSE;
+        }
         $this->db->select("user.id,user.firstname, user.lastname, user.email, employee_history.picture");
 		$this->db->join("employee_history",'employee_history.emp_his_id=user.id','left');
 		$this->db->where('employee_history.pos_id', 6);
 		$this->db->where('user.email', $data['email']);
-        $this->db->where("(user.password = '" . $Password . "' OR user.password =  '" . md5($Password) . "')", NULL, TRUE);
+        $this->db->where('user.id', (int) $compte->id);
         $query = $this->db->get($table)->row();
         $num_rows = $this->db->count_all_results();
         if ($num_rows > 0)

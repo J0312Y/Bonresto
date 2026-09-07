@@ -33,7 +33,8 @@ class Licenses extends Saas_base {
     }
 
     /** POST /saas/licenses/{id}/revoke */
-    public function revoke(int $id) {
+    public function revoke($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->Saas_model->revoke_license($id);
         $this->_json(['success' => true]);
@@ -75,7 +76,7 @@ class Licenses extends Saas_base {
             'issued_at'   => date('Y-m-d H:i:s'),
         ];
         $payloadJson = json_encode($payload);
-        $signature   = hash_hmac('sha256', $payloadJson, getenv('LICENSE_HMAC_SECRET') ?: 'BonrestoLicenseSecret2024');
+        $signature   = hash_hmac('sha256', $payloadJson, env_required('LICENSE_HMAC_SECRET'));
 
         $this->_json(['payload' => $payload, 'signature' => $signature]);
     }
@@ -192,7 +193,7 @@ class Licenses extends Saas_base {
             'pending_updates' => $pending,
         ];
         $payloadJson = json_encode($payload);
-        $signature   = hash_hmac('sha256', $payloadJson, getenv('LICENSE_HMAC_SECRET') ?: 'BonrestoLicenseSecret2024');
+        $signature   = hash_hmac('sha256', $payloadJson, env_required('LICENSE_HMAC_SECRET'));
 
         $this->_json(['payload' => $payload, 'signature' => $signature]);
     }

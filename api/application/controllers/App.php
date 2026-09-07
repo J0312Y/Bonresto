@@ -127,7 +127,7 @@ class App extends MY_Controller
             $data['cuntomer_no']      = $sino;
             $data['customer_name']    = $this->input->post('customer_name', true);
             $data['customer_email']   = $this->input->post('email', true);
-            $data['password']         = md5($this->input->post('password', true));
+            $data['password']         = Saas_password::hacher($this->input->post('password', true));
             $data['customer_address'] = $this->input->post('Address', true);
             $data['customer_phone']   = $this->input->post('mobile', true);
 
@@ -158,7 +158,7 @@ class App extends MY_Controller
     public function _sendingForgotPassMail($data)
     {
         $Password = $this->generateNumericOTP(6);
-        $this->App_desktop_model->update_date('customer_info', ['password' => md5($Password)], 'customer_id', $data->customer_id);
+        $this->App_desktop_model->update_date('customer_info', ['password' => Saas_password::hacher($Password)], 'customer_id', $data->customer_id);
 
         $email_config = $this->App_desktop_model->read('*', 'email_config', ['email_config_id' => 1]);
 
@@ -430,7 +430,7 @@ class App extends MY_Controller
             $sino         = $customerinfo->cuntomer_no;
             //insert Customer
             $user['cuntomer_no']               = $sino;
-            $user['password']                  = md5($this->input->post('password'));
+            $user['password']                  = Saas_password::hacher($this->input->post('password'));
             $user['customer_name']             = $this->input->post('full_name');
             $user['customer_email']            = $this->input->post('email');
             $user['customer_phone']            = $this->input->post('phone');

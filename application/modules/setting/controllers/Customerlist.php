@@ -102,7 +102,7 @@ class Customerlist extends MX_Controller {
 				'customer_name'     	=> $this->input->post('customer_name',true),  
 				'customer_email'     =>$this->input->post('email',true),
 				'customer_phone'     => $this->input->post('mobile',true),
-				'password'     		=> md5($this->input->post('password')),
+				'password'     		=> Saas_password::hacher($this->input->post('password')),
 				'customer_address'   => $this->input->post('address',true),
 				'favorite_delivery_address'     =>$this->input->post('favaddress',true), 
 				'is_active'        => 1,
@@ -167,7 +167,7 @@ class Customerlist extends MX_Controller {
 		  $password=$this->input->post('oldpassword');
 		  }
 	  else{
-		  $password=md5($this->input->post('password'));
+		  $password=Saas_password::hacher($this->input->post('password'));
 		  }
 	  $data['customer']   = (Object) $postData = array(
 	   'customer_id'     	=> $this->input->post('custid'),

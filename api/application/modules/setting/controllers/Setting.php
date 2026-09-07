@@ -633,9 +633,13 @@ class Setting extends MX_Controller {
 	 }
  public function checkpassword(){
 	  $this->permission->method('setting','read')->redirect();
-	  $password=md5($this->input->post('password'));
+	  // Audit F-11 : verification en PHP, MD5 herite ou bcrypt.
+	  $clair = $this->input->post('password');
 	  $uid=$this->session->userdata('id');
-	  $userinfo=$this->db->select('*')->from('user')->where('id',$uid)->where('password',$password)->where('is_admin',1)->get()->row();
+	  $userinfo=$this->db->select('*')->from('user')->where('id',$uid)->where('is_admin',1)->get()->row();
+	  if ($userinfo && !Saas_password::verifier($clair, $userinfo->password)) {
+	      $userinfo = null;
+	  }
 	  	if(!empty($userinfo)){
 			$stock=array(
 			'stock_qty'	        =>	0

@@ -7,7 +7,7 @@ class Saas_jwt {
     private $ttl = 86400; // 24 hours
 
     public function __construct() {
-        $this->secret = getenv('SAAS_JWT_SECRET') ?: 'BonrestoSaasSecret2024!ChangeMe';
+        $this->secret = env_required('SAAS_JWT_SECRET');
     }
 
     /** Generate a signed JWT token */

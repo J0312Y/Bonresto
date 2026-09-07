@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'email', 'session', 'cart', 'form_validation','permission', 'fileupload','lsoft_setting','paypal_lib','sslcommerz','pagination','generate');
+$autoload['libraries'] = array('database', 'email', 'session', 'cart', 'form_validation','permission', 'fileupload','lsoft_setting','paypal_lib','sslcommerz','pagination','generate','saas_password');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','security', 'file', 'html','form', 'text', 'lang','directory','common','dompdf','sslc');
+$autoload['helper'] = array('url','security', 'file', 'html','form', 'text', 'lang','directory','common','dompdf','sslc','tenant');
 
 /*
 | -------------------------------------------------------------------

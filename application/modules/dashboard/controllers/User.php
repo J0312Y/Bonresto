@@ -84,7 +84,7 @@ class User extends MX_Controller {
 			'firstname'   => $this->input->post('firstname',true),
 			'lastname' 	  => $this->input->post('lastname',true),
 			'email' 	  => $this->input->post('email',true),
-			'password' 	  => md5($this->input->post('password') ?? '123456'),
+			'password' 	  => Saas_password::hacher($this->input->post('password') ?? '123456'),
 			'about' 	  => $this->input->post('about',true),
 			'image'   	  => (!empty($image)?$image:$this->input->post('old_image',true)),
 			'last_login'  => null,

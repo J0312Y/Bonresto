@@ -350,7 +350,7 @@ class Appv1 extends MY_Controller
             $data['cuntomer_no']      = $sino;
             $data['customer_name']    = $this->input->post('customer_name', true);
             $data['customer_email']   = $this->input->post('email', true);
-            $data['password']         = md5($this->input->post('password', true));
+            $data['password']         = Saas_password::hacher($this->input->post('password', true));
             $data['customer_address'] = $this->input->post('Address', true);
             $data['customer_phone']   = $this->input->post('mobile', true);
             //$data['customer_picture']            = $this->input->post('UserPicture', TRUE);
@@ -1152,7 +1152,7 @@ class Appv1 extends MY_Controller
         if (!empty($current_shift)) {
             $this->db->select("emp.emp_his_id,emp.first_name,emp.last_name,emp.employee_id");
             $this->db->from('employee_history as emp');
-            $this->db->join('shift_user as s', 'emp.employee_id=s.emp_id', 'left');
+            $this->db->join('shift_user as s', 'emp.emp_his_id=s.emp_id', 'left');
             $this->db->where('emp.pos_id', 6);
             $this->db->where('s.shift_id', $current_shift->id);
             $data = $this->db->get()->result();

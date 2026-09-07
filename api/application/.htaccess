@@ -1,0 +1,9 @@
+# Audit F-02 : repertoire sans garde-fou. api/ est une seconde installation
+# CodeIgniter complete, joignable par le web via son propre .htaccess.
+<IfModule authz_core_module>
+    Require all denied
+</IfModule>
+<IfModule !authz_core_module>
+    Order allow,deny
+    Deny from all
+</IfModule>

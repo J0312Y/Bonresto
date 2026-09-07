@@ -337,7 +337,17 @@ $config['cache_query_string'] = false;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
  */
-$config['encryption_key'] = getenv('CI_ENCRYPTION_KEY') ?: 'MySuperEncryptionKEY2017';
+// La valeur de repli était 'MySuperEncryptionKEY2017' — la clé livrée
+// d'origine avec Bhojon, donc connue de quiconque possède ce script
+// commercial. Ce n'était pas une clé faible : c'était une clé PUBLIQUE.
+//
+// EN PRODUCTION, ne comptez pas sur ce repli : définissez CI_ENCRYPTION_KEY
+// dans l'environnement du serveur, avec une valeur DIFFÉRENTE de celle-ci.
+// Un secret inscrit dans un fichier suivi par git finit tôt ou tard dans un
+// clone, une sauvegarde ou un partage d'écran.
+//
+// Générer : openssl rand -hex 16
+$config['encryption_key'] = env_required('CI_ENCRYPTION_KEY');
 
 /*
 |--------------------------------------------------------------------------
@@ -478,18 +488,46 @@ $config['csrf_exclude_uris'] = [
     'order-status-api/.*',
     // SaaS API — all routes handled via JWT, CSRF not needed
     'saas/.*',
+    // Public booking — no login, CSRF token sent via JS instead
+    'book/.*',
+    'reservation/book/.*',
+    // Agent WhatsApp — machine a machine, authentifie par jeton de service
+    // (en-tete Authorization). Un jeton CSRF n'a pas de sens ici : il protege
+    // une session de navigateur, or il n'y en a pas.
+    //
+    // Exclusion EXPLICITE : ces routes passaient deja, mais par accident —
+    // le test plus bas desactive CSRF des que l'URI contient « /v1 », ce que
+    // « agentapi/v1/... » satisfait par pure coincidence de nommage.
+    //
+    // A NE PAS etendre a agentapi/verification/* : ces routes-la confirment
+    // des paiements depuis une session du personnel, et doivent rester
+    // protegees par CSRF.
+    'agentapi/v1/.*',
+
+    // ── API machine à machine, authentifiées autrement que par session ───
+    //
+    // Ces routes figuraient auparavant dans un test `stripos` sur
+    // $_SERVER['REQUEST_URI'] qui désactivait csrf_protection GLOBALEMENT.
+    // Trois défauts, chacun suffisant :
+    //
+    //   1. `stripos` cherche N'IMPORTE OÙ dans l'URI, chaîne de requête
+    //      comprise. `/dashboard/home?retour=/app` désactivait donc CSRF
+    //      sur une page d'administration — il suffisait de faire cliquer un
+    //      administrateur sur un lien bien choisi.
+    //   2. `/app` correspond aussi à `/application`, `/apply`, et à toute
+    //      future route contenant ces quatre lettres.
+    //   3. Le test écrasait csrf_protection APRÈS coup, rendant cette liste
+    //      d'exclusions purement décorative.
+    //
+    // Ici, CodeIgniter compare chaque motif à l'URI ROUTÉE, ancrée des deux
+    // côtés (`^motif$`) : `hungry/panier` correspond, `dashboard/happy` non.
+    'v1(/.*)?',
+    'v3(/.*)?',
+    'app(/.*)?',
+    'appv1(/.*)?',
+    'android(/.*)?',
+    'hungry(/.*)?',
 ];
-if (isset($_SERVER["REQUEST_URI"])) {
-
-    if ((stripos($_SERVER["REQUEST_URI"], '/v1') === false) && (stripos($_SERVER["REQUEST_URI"], '/v3') === false) && (stripos($_SERVER["REQUEST_URI"], '/android') === false) && (stripos($_SERVER["REQUEST_URI"], '/app') === false) && (stripos($_SERVER["REQUEST_URI"], '/appv1') === false) && (stripos($_SERVER["REQUEST_URI"], '/hungry') === false) && (stripos($_SERVER["REQUEST_URI"], '/saas') === false)) {
-        $config['csrf_protection'] = true;
-    } else {
-        $config['csrf_protection'] = false;
-    }
-
-} else {
-    $config['csrf_protection'] = true;
-}
 
 /*
 |--------------------------------------------------------------------------

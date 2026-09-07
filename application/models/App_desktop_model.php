@@ -6,12 +6,25 @@ class App_desktop_model extends CI_Model
     public function authenticate_user($table, $data)
     {
         $Password = $data['password'];
+        // Audit F-11 : verification en PHP — MD5 herite ou bcrypt — au lieu
+        // d'une comparaison d'empreinte dans le SQL. La recherche se fait
+        // AVANT de construire la requete principale : un get() intermediaire
+        // reinitialiserait le constructeur de requetes.
+        $this->load->library('Saas_password');
+        $compte = $this->db->select('id, password')
+            ->where('email', $data['email'])
+            ->get('user')->row();
+        $valide = $compte && Saas_password::verifier($Password, $compte->password);
+        if ($valide && Saas_password::a_rehacher($compte->password)) {
+            $this->db->where('id', $compte->id)
+                ->update('user', ['password' => Saas_password::hacher($Password)]);
+        }
+        if (!$valide) {
+            return FALSE;
+        }
         $this->db->select("*");
         $this->db->where('email', $data['email']);
-        $this->db->group_start();
-            $this->db->where('password', $Password);
-            $this->db->or_where('password', md5($Password));
-        $this->db->group_end();
+        $this->db->where('id', (int) $compte->id);
         $result = $this->db->get($table);
 
         if ($result->num_rows() > 0) {
