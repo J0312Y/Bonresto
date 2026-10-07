@@ -5901,7 +5901,7 @@ class Order extends MX_Controller
     public function acknowledgecall($id)
     {
         $this->load->model('waitercall_model');
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('id');
         $this->waitercall_model->acknowledge($id, $user_id);
         echo json_encode(['status' => 'success']);
     }

@@ -590,7 +590,7 @@ public function update_debit_voucher(){
         $Narration = addslashes(trim($this->input->post('txtRemarks',true)));
         $IsPosted = 1;
         $IsAppove = 0;
-        $CreateBy = $this->session->userdata('user_id');
+        $CreateBy = $this->session->userdata('id');
         $createdate = date('Y-m-d H:i:s');
         if ($voucher_no) {
             $this->db->where('VNo', $voucher_no);
@@ -629,7 +629,7 @@ public function update_debit_voucher(){
         $Narration = addslashes(trim($this->input->post('txtRemarks',true)));
         $IsPosted = 1;
         $IsAppove = 0;
-        $CreateBy = $this->session->userdata('user_id');
+        $CreateBy = $this->session->userdata('id');
         $createdate = date('Y-m-d H:i:s');
         if ($voucher_no) {
 
@@ -683,10 +683,12 @@ public function update_debit_voucher(){
 
             // PDF Generator  
             $this->load->library('pdfgenerator');
-            $dompdf = new Dompdf();
+            // Audit F-25 : « new Dompdf() » sans espace de noms visait la classe
+        // globale DOMPDF de la version 0.6 vendorisee (PHP ignore la casse).
+        $dompdf = new \Dompdf\Dompdf();
             //$dompdf = new DOMPDF();
             $page = $this->load->view('accounts/trial_balance_with_opening_pdf',$data,true);
-            $dompdf->load_html($page);
+            $dompdf->loadHtml($page);
             $dompdf->render();
             $output = $dompdf->output();
             file_put_contents('assets/data/pdf/Trial Balance With Opening As On '.$dtpFromDate.' To '.$dtpToDate.'.pdf', $output);
@@ -706,10 +708,12 @@ public function update_debit_voucher(){
 
             // PDF Generator 
             $this->load->library('pdfgenerator');
-            $dompdf = new Dompdf();
+            // Audit F-25 : « new Dompdf() » sans espace de noms visait la classe
+        // globale DOMPDF de la version 0.6 vendorisee (PHP ignore la casse).
+        $dompdf = new \Dompdf\Dompdf();
             //$dompdf = new DOMPDF();
             $page = $this->load->view('accounts/trial_balance_without_opening_pdf',$data,true);
-            $dompdf->load_html($page);
+            $dompdf->loadHtml($page);
             $dompdf->render();
             $output = $dompdf->output();
             file_put_contents('assets/data/pdf/Trial Balance As On '.$dtpFromDate.' To '.$dtpToDate.'.pdf', $output);
@@ -906,9 +910,11 @@ public function update_debit_voucher(){
 
         // PDF Generator 
         $this->load->library('pdfgenerator');
-        $dompdf = new Dompdf();
+        // Audit F-25 : « new Dompdf() » sans espace de noms visait la classe
+        // globale DOMPDF de la version 0.6 vendorisee (PHP ignore la casse).
+        $dompdf = new \Dompdf\Dompdf();
         $page = $this->load->view('accounts/cash_flow_report_search_pdf',$data,true);
-        $dompdf->load_html($page);
+        $dompdf->loadHtml($page);
         $dompdf->render();
         $output = $dompdf->output();
         file_put_contents('assets/data/pdf/Cash Flow Statement '.$dtpFromDate.' To '.$dtpToDate.'.pdf', $output);

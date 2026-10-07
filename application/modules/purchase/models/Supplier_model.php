@@ -53,7 +53,7 @@ class Supplier_model extends CI_Model {
       'Debit'          =>  0,
       'Credit'         =>  $balance,
       'IsPosted'       => 1,
-      'CreateBy'       => $this->session->userdata('user_id'),
+      'CreateBy'       => $this->session->userdata('id'),
       'CreateDate'     => date('Y-m-d H:i:s'),
       'IsAppove'       => 1
     );
@@ -66,7 +66,7 @@ class Supplier_model extends CI_Model {
       'Debit'          =>  $balance,
       'Credit'         =>  0,//purchase price asbe
       'IsPosted'       => 1,
-      'CreateBy'       => $this->session->userdata('user_id'),
+      'CreateBy'       => $this->session->userdata('id'),
       'CreateDate'     => date('Y-m-d H:i:s'),
       'IsAppove'       => 1
     ); 

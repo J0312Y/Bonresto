@@ -186,6 +186,11 @@ class Stock_movement_lib {
      */
     private function _get_user_id()
     {
-        return $this->CI->session->userdata('user_id') ?: 0;
+        // La session porte l'identifiant sous la cle `id` : c'est ce
+        // qu'ecrit dashboard/controllers/Auth.php a la connexion. La cle
+        // `user_id` lue jusqu'ici n'a jamais existe, si bien que chaque
+        // mouvement partait avec created_by = 0. La piste d'audit que cette
+        // bibliotheque existe pour tenir n'attribuait donc rien a personne.
+        return $this->CI->session->userdata('id') ?: 0;
     }
 }

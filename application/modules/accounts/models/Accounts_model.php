@@ -350,7 +350,7 @@ public function voNO()
         $Narration = addslashes(trim($this->input->post('txtRemarks',true)));
         $IsPosted = 1;
         $IsAppove = 0;
-        $CreateBy = $this->session->userdata('user_id');
+        $CreateBy = $this->session->userdata('id');
         $createdate = date('Y-m-d H:i:s');
         for ($i = 0; $i < count($cAID); $i++) {
             $contrainsert = array(
@@ -383,7 +383,7 @@ public function voNO()
         $Narration = addslashes(trim($this->input->post('txtRemarks',true)));
         $IsPosted = 1;
         $IsAppove = 0;
-        $CreateBy = $this->session->userdata('user_id');
+        $CreateBy = $this->session->userdata('id');
         $createdate = date('Y-m-d H:i:s');
 
 
@@ -881,7 +881,7 @@ public function Cashvoucher()
             $Narration=$this->input->post('txtRemarks',true);
             $IsPosted=1;
             $IsAppove=1;
-            $CreateBy=$this->session->userdata('user_id');
+            $CreateBy=$this->session->userdata('id');
            $createdate=date('Y-m-d H:i:s');
  
 			 $cc = array(
