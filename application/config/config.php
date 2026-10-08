@@ -427,7 +427,12 @@ $config['sess_regenerate_destroy'] = true;
 $config['cookie_prefix']   = '';
 $config['cookie_domain']   = '';
 $config['cookie_path']     = '/';
-$config['cookie_secure']   = false; // set to true when HTTPS is enforced
+// Pilote par l'environnement : en production le trafic est redirige vers
+// HTTPS, le cookie de session doit donc porter l'attribut Secure. En
+// developpement local sur http://, un cookie Secure n'est tout simplement
+// pas emis par le navigateur et la session ne tient pas — d'ou le defaut
+// a false plutot qu'une valeur figee dans le depot.
+$config['cookie_secure']   = (bool) env_get('COOKIE_SECURE', false);
 $config['cookie_httponly'] = true;
 
 /*
