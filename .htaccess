@@ -29,7 +29,14 @@ Options -Indexes
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /bonresto
+    # Pas de RewriteBase : mod_rewrite deduit alors la base du repertoire
+    # ou vit ce .htaccess. C'est juste a la racine d'un domaine comme dans
+    # un sous-repertoire, donc portable entre le serveur et un MAMP local.
+    #
+    # La valeur codee en dur /bonresto ne valait que pour le second cas :
+    # a la racine d'un domaine elle produisait /bonresto/index.php/..., un
+    # chemin inexistant, donc une boucle de redirections internes et un 500
+    # sur TOUTE URL propre. L'app n'etait joignable qu'en /index.php/...
 
     # Pass Authorization header to PHP (required for JWT with CGI/FastCGI)
     RewriteCond %{HTTP:Authorization} .+
