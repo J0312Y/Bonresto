@@ -12,7 +12,8 @@ class Clients extends Saas_base {
     }
 
     /** GET /saas/clients/{id} */
-    public function show(int $id) {
+    public function show($id) {
+        $id = (int)$id;
         $this->require_auth();
         $tenant = $this->Saas_model->get_tenant($id);
         if (!$tenant) $this->_abort(404, 'Client introuvable.');
@@ -62,7 +63,8 @@ class Clients extends Saas_base {
     }
 
     /** PUT /saas/clients/{id} — update basic info */
-    public function update(int $id) {
+    public function update($id) {
+        $id = (int)$id;
         $this->require_auth();
         $tenant = $this->Saas_model->get_tenant($id);
         if (!$tenant) $this->_abort(404, 'Client introuvable.');
@@ -86,7 +88,8 @@ class Clients extends Saas_base {
     }
 
     /** PUT /saas/clients/{id}/subscription */
-    public function subscription(int $id) {
+    public function subscription($id) {
+        $id = (int)$id;
         $this->require_auth();
         $body = $this->_body();
 
@@ -106,13 +109,15 @@ class Clients extends Saas_base {
     }
 
     /** GET /saas/clients/{id}/live */
-    public function live(int $id) {
+    public function live($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->_json($this->Saas_model->tenant_live_stats($id));
     }
 
     /** POST /saas/clients/{id}/logo — multipart upload */
-    public function upload_logo(int $id) {
+    public function upload_logo($id) {
+        $id = (int)$id;
         $this->require_auth();
 
         if (!$this->Saas_model->get_tenant($id)) {
@@ -163,7 +168,8 @@ class Clients extends Saas_base {
     }
 
     /** DELETE /saas/clients/{id}/logo */
-    public function delete_logo(int $id) {
+    public function delete_logo($id) {
+        $id = (int)$id;
         $this->require_auth();
         $tenant = $this->Saas_model->get_tenant($id);
         if (!$tenant) $this->_abort(404, 'Client introuvable.');
@@ -180,7 +186,8 @@ class Clients extends Saas_base {
     }
 
     /** POST /saas/clients/{id}/suspend */
-    public function suspend(int $id) {
+    public function suspend($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->Saas_model->suspend_tenant($id);
         $this->Saas_model->log_activity($id, 'tenant_suspended', 'Accès suspendu', [
@@ -190,7 +197,8 @@ class Clients extends Saas_base {
     }
 
     /** POST /saas/clients/{id}/reactivate */
-    public function reactivate(int $id) {
+    public function reactivate($id) {
+        $id = (int)$id;
         $this->require_auth();
         $tenant = $this->Saas_model->get_tenant($id);
         if (!$tenant) $this->_abort(404, 'Client introuvable.');
@@ -200,6 +208,116 @@ class Clients extends Saas_base {
             'by_admin' => $this->saas_admin['email'],
         ]);
         $this->_json($this->Saas_model->get_tenant($id));
+    }
+
+    /** POST /saas/clients/:id/provision — provisionne la DB du tenant */
+    public function provision($tenant_id) {
+        $this->require_auth();
+        $body = $this->_body();
+
+        $admin_email    = trim($body['admin_email']    ?? '');
+        $admin_password = trim($body['admin_password'] ?? '');
+
+        if (!$admin_email || !$admin_password) {
+            $this->_abort(400, 'admin_email et admin_password sont requis.');
+        }
+
+        $result = $this->Saas_model->provision_new_tenant((int)$tenant_id, $admin_email, $admin_password);
+
+        if (!$result['success']) {
+            $this->_abort(500, $result['message']);
+        }
+
+        // Générer la licence automatiquement
+        $licence = $this->Saas_model->generate_license((int)$tenant_id);
+        $client_key = $licence['client_key'] ?? '—';
+
+        // Envoyer email complet : URL + credentials + licence
+        $tenant = $this->Saas_model->get_tenant((int)$tenant_id);
+        if ($tenant) {
+            try {
+                $this->load->library('Saas_mailer');
+                $this->saas_mailer->send_welcome_full([
+                    'email'         => $admin_email,
+                    'business_name' => $tenant['business_name'],
+                    'pos_url'       => 'https://' . $result['slug'] . '.bonresto.com',
+                    'admin_email'   => $admin_email,
+                    'admin_password'=> $admin_password,
+                    'licence_key'   => $client_key,
+                ]);
+            } catch (Throwable $e) {
+                log_message('error', 'Welcome email failed: ' . $e->getMessage());
+            }
+        }
+
+        $this->_json([
+            'success'     => true,
+            'slug'        => $result['slug'],
+            'db_name'     => $result['db_name'],
+            'url'         => $result['slug'] . '.bonresto.com',
+            'licence_key' => $client_key,
+            'message'     => 'Restaurant provisionné avec succès.',
+        ]);
+    }
+
+    /** POST /saas/clients/{id}/ghost-login — génère un token ghost login */
+    public function ghost_login($id) {
+        $id = (int)$id;
+        $this->require_auth();
+
+        $tenant = $this->Saas_model->get_tenant($id);
+        if (!$tenant) $this->_abort(404, 'Client introuvable.');
+        if (empty($tenant['slug']) && empty($tenant['custom_domain'])) {
+            $this->_abort(400, 'Ce restaurant n\'est pas encore provisionné.');
+        }
+
+        $token = $this->Saas_model->create_ghost_token($id, $this->saas_admin['admin_id']);
+
+        // Construire l'URL du POS
+        if (!empty($tenant['custom_domain'])) {
+            $base_url = 'https://' . $tenant['custom_domain'];
+        } elseif (!empty($tenant['slug'])) {
+            $base_url = 'https://' . $tenant['slug'] . '.bonresto.com';
+        } else {
+            $base_url = base_url(); // fallback local
+        }
+
+        $this->Saas_model->log_activity($id, 'ghost_login', 'Connexion fantôme initiée', [
+            'by_admin' => $this->saas_admin['email'],
+        ]);
+
+        $this->_json([
+            'token'    => $token,
+            'url'      => $base_url . '/ghost-login?token=' . $token,
+            'expires'  => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+        ]);
+    }
+
+    /** GET /saas/clients/{id}/features */
+    public function features($id) {
+        $id = (int)$id;
+        $this->require_auth();
+        if (!$this->Saas_model->get_tenant($id)) $this->_abort(404, 'Client introuvable.');
+        $this->_json($this->Saas_model->get_tenant_features($id));
+    }
+
+    /** PUT /saas/clients/{id}/features */
+    public function save_features($id) {
+        $id = (int)$id;
+        $this->require_auth();
+        if (!$this->Saas_model->get_tenant($id)) $this->_abort(404, 'Client introuvable.');
+
+        $body = $this->_body();
+        if (!is_array($body)) $this->_abort(400, 'Body invalide.');
+
+        $this->Saas_model->save_tenant_features($id, $body);
+
+        $this->Saas_model->log_activity($id, 'features_updated', 'Modules mis à jour', [
+            'by_admin' => $this->saas_admin['email'],
+            'changes'  => $body,
+        ]);
+
+        $this->_json($this->Saas_model->get_tenant_features($id));
     }
 
     /** GET /saas/clients/export — CSV download */

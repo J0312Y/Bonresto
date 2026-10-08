@@ -4,8 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * Notification Library
  *
- * Librairie centralisée pour l'envoi de notifications push
- * via FCM (Firebase Cloud Messaging) et OneSignal.
+ * Librairie centralisée pour l'envoi de notifications push via OneSignal.
+ *
+ * MIGRATION : L'ancienne API FCM Legacy a été désactivée par Google le 20 juin 2024.
+ * Toutes les notifications passent désormais par OneSignal.
  */
 class Notification
 {
@@ -15,6 +17,40 @@ class Notification
     {
         $this->CI =& get_instance();
         $this->CI->config->load('notification', true);
+    }
+
+    /**
+     * Associer un external_user_id à un device OneSignal (appelé au login)
+     *
+     * @param string $player_id  Le OneSignal player_id (token) envoyé par l'app
+     * @param string $role       'staff' pour waiter/kitchen, 'customer' pour client
+     * @param int    $user_id    L'ID en base (user.id ou customer_info.customer_id)
+     */
+    public function set_external_user_id($player_id, $role, $user_id)
+    {
+        if (empty($player_id) || empty($user_id)) return false;
+
+        $external_user_id = $role . '_' . $user_id;
+        $app_id  = $this->_config('onesignal_staff_app_id'); // même App ID pour tous
+        $api_key = $this->_config('onesignal_api_key');
+
+        $fields  = ['app_id' => $app_id, 'external_user_id' => $external_user_id];
+        $headers = ['Content-Type: application/json; charset=utf-8'];
+        if ($api_key) {
+            $headers[] = 'Authorization: Basic ' . $api_key;
+        }
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://onesignal.com/api/v1/players/' . $player_id);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 
     // =========================================================================
@@ -29,6 +65,8 @@ class Notification
         $title   = 'Nouvelle commande passée';
         $message = 'Numéro de commande: ' . $order_id . ' Montant de la commande: ' . number_format($amount, 2);
 
+        $this->_log_notification($order_id, $title, $message, 'order place');
+
         // Notification client (OneSignal)
         if ($customer_token) {
             $this->_send_onesignal(
@@ -40,22 +78,10 @@ class Notification
             );
         }
 
-        // Notification staff cuisine/serveurs (FCM)
-        $staff_tokens = $this->_get_staff_tokens();
-        if (!empty($staff_tokens)) {
-            $this->_send_fcm(
-                $this->_config('fcm_key_staff'),
-                $staff_tokens,
-                $title,
-                'Numéro de commande: ' . $order_id . ', Montant: ' . number_format($amount, 2)
-            );
-        }
-
-        // Notification serveurs iOS (OneSignal broadcast)
-        $this->_send_onesignal_broadcast(
-            $this->_config('onesignal_waiter_ios_app_id'),
+        // Notification staff (ciblé par external_user_id — évite le broadcast à tous)
+        $this->_send_onesignal_to_all_staff(
             $title,
-            $message,
+            'Numéro de commande: ' . $order_id . ', Montant: ' . number_format($amount, 2),
             ['type' => 'order place']
         );
     }
@@ -65,16 +91,19 @@ class Notification
      */
     public function order_accepted($order_id, $amount, $customer_token)
     {
-        if (!$customer_token) return;
-
         $title = 'Votre commande est acceptée';
         $body  = 'Numéro de commande: ' . $order_id . ' Montant: ' . number_format($amount, 2);
 
-        $this->_send_fcm_single(
-            $this->_config('fcm_key_customer'),
-            $customer_token,
+        $this->_log_notification($order_id, $title, $body, 'order accepted');
+
+        if (!$customer_token) return;
+
+        $this->_send_onesignal(
+            $this->_config('onesignal_customer_app_id'),
+            [$customer_token],
             $title,
-            $body
+            $body,
+            ['type' => 'order accepted']
         );
     }
 
@@ -86,21 +115,18 @@ class Notification
         $title = 'En cours de préparation';
         $body  = 'Numéro de commande : ' . $order_id . ', Nom de l\'article : ' . $item_name . ' Montant: ' . number_format($amount, 2);
 
-        if ($waiter_token) {
-            $this->_send_fcm(
-                $this->_config('fcm_key_staff'),
-                [$waiter_token],
-                $title,
-                $body
-            );
-        }
+        $this->_log_notification($order_id, $title, $body, 'order preparing');
+
+        // Notification staff (ciblé par external_user_id)
+        $this->_send_onesignal_to_all_staff($title, $body, ['type' => 'order preparing']);
 
         if ($customer_token) {
-            $this->_send_fcm_single(
-                $this->_config('fcm_key_customer'),
-                $customer_token,
+            $this->_send_onesignal(
+                $this->_config('onesignal_customer_app_id'),
+                [$customer_token],
                 $title,
-                $body
+                $body,
+                ['type' => 'order preparing']
             );
         }
     }
@@ -113,21 +139,18 @@ class Notification
         $title = 'La nourriture est prête';
         $body  = 'Numéro de commande : ' . $order_id . ', Nom de l\'article : ' . $item_name . ' Montant: ' . number_format($amount, 2);
 
-        if ($waiter_token) {
-            $this->_send_fcm(
-                $this->_config('fcm_key_staff'),
-                [$waiter_token],
-                $title,
-                $body
-            );
-        }
+        $this->_log_notification($order_id, $title, $body, 'food ready');
+
+        // Notification staff (ciblé par external_user_id)
+        $this->_send_onesignal_to_all_staff($title, $body, ['type' => 'food ready']);
 
         if ($customer_token) {
-            $this->_send_fcm_single(
-                $this->_config('fcm_key_customer'),
-                $customer_token,
+            $this->_send_onesignal(
+                $this->_config('onesignal_customer_app_id'),
+                [$customer_token],
                 $title,
-                $body
+                $body,
+                ['type' => 'food ready']
             );
         }
     }
@@ -137,16 +160,19 @@ class Notification
      */
     public function order_completed($order_id, $customer_token)
     {
-        if (!$customer_token) return;
-
         $title = 'Commande terminée';
         $body  = 'Votre commande #' . $order_id . ' est terminée. Merci pour votre confiance !';
 
-        $this->_send_fcm_single(
-            $this->_config('fcm_key_customer'),
-            $customer_token,
+        $this->_log_notification($order_id, $title, $body, 'order completed');
+
+        if (!$customer_token) return;
+
+        $this->_send_onesignal(
+            $this->_config('onesignal_customer_app_id'),
+            [$customer_token],
             $title,
-            $body
+            $body,
+            ['type' => 'order completed']
         );
     }
 
@@ -155,16 +181,19 @@ class Notification
      */
     public function order_confirmed($order_id, $customer_token)
     {
-        if (!$customer_token) return;
-
         $title = 'Commande passée avec succès !!';
         $body  = 'Votre identifiant de commande: ' . $order_id . ' Placé avec succès. Veuillez attendre servi';
 
-        $this->_send_fcm_single(
-            $this->_config('fcm_key_hungry'),
-            $customer_token,
+        $this->_log_notification($order_id, $title, $body, 'order confirmed');
+
+        if (!$customer_token) return;
+
+        $this->_send_onesignal(
+            $this->_config('onesignal_hungry_app_id'),
+            [$customer_token],
             $title,
-            $body
+            $body,
+            ['type' => 'order confirmed']
         );
     }
 
@@ -173,16 +202,19 @@ class Notification
      */
     public function order_rejected($order_id, $item_name, $reason, $customer_token)
     {
-        if (!$customer_token) return;
-
         $title = 'Votre commande est rejetée';
         $body  = 'Numéro de commande : ' . $order_id . ', Nom de l\'article : ' . $item_name . ' Raison: ' . $reason;
 
-        $this->_send_fcm_single(
-            $this->_config('fcm_key_customer'),
-            $customer_token,
+        $this->_log_notification($order_id, $title, $body, 'order rejected');
+
+        if (!$customer_token) return;
+
+        $this->_send_onesignal(
+            $this->_config('onesignal_customer_app_id'),
+            [$customer_token],
             $title,
-            $body
+            $body,
+            ['type' => 'order rejected']
         );
     }
 
@@ -191,16 +223,19 @@ class Notification
      */
     public function order_updated($order_id, $customer_token)
     {
-        if (!$customer_token) return;
-
         $title = 'Mise à jour de la commande réussie !!';
         $body  = 'Votre identifiant de commande: ' . $order_id . ' Mise à jour avec succès.';
 
-        $this->_send_fcm_single(
-            $this->_config('fcm_key_hungry'),
-            $customer_token,
+        $this->_log_notification($order_id, $title, $body, 'order updated');
+
+        if (!$customer_token) return;
+
+        $this->_send_onesignal(
+            $this->_config('onesignal_hungry_app_id'),
+            [$customer_token],
             $title,
-            $body
+            $body,
+            ['type' => 'order updated']
         );
     }
 
@@ -251,29 +286,43 @@ class Notification
     // =========================================================================
 
     /**
-     * Notifier uniquement le staff d'une nouvelle commande (FCM + OneSignal iOS)
+     * Notifier uniquement le staff d'une nouvelle commande (OneSignal broadcast)
      */
     public function notify_staff_new_order($order_id, $amount)
     {
         $title   = 'Nouvelle commande passée';
         $message = 'Numéro de commande: ' . $order_id . ', Montant: ' . number_format($amount, 2);
 
-        $staff_tokens = $this->_get_staff_tokens();
-        if (!empty($staff_tokens)) {
-            $this->_send_fcm(
-                $this->_config('fcm_key_staff'),
-                $staff_tokens,
-                $title,
-                $message
-            );
-        }
+        $this->_log_notification($order_id, $title, $message, 'order place');
 
-        $this->_send_onesignal_broadcast(
-            $this->_config('onesignal_waiter_ios_app_id'),
-            $title,
-            $message,
-            ['type' => 'order place']
-        );
+        // Notification staff (ciblé par external_user_id)
+        $this->_send_onesignal_to_all_staff($title, $message, ['type' => 'order place']);
+    }
+
+    /**
+     * Commande en cours de traitement — notifie le staff
+     */
+    public function notify_staff_order_processing($order_id, $amount)
+    {
+        $title   = 'Commande en cours de traitement';
+        $message = 'Numéro de commande: ' . $order_id . ', Montant: ' . number_format($amount, 2);
+
+        $this->_log_notification($order_id, $title, $message, 'order processing');
+
+        $this->_send_onesignal_to_all_staff($title, $message, ['type' => 'order processing']);
+    }
+
+    /**
+     * Tous les items sont prêts — notifie le staff
+     */
+    public function notify_staff_order_ready($order_id, $amount)
+    {
+        $title   = 'Commande prête';
+        $message = 'Numéro de commande: ' . $order_id . ', Montant: ' . number_format($amount, 2) . ' - Tous les articles sont prêts !';
+
+        $this->_log_notification($order_id, $title, $message, 'order ready');
+
+        $this->_send_onesignal_to_all_staff($title, $message, ['type' => 'order ready']);
     }
 
     /**
@@ -293,85 +342,74 @@ class Notification
             $message = $tablename . ' appelle le serveur';
         }
 
-        $staff_tokens = $this->_get_staff_tokens();
-        if (!empty($staff_tokens)) {
-            $this->_send_fcm(
-                $this->_config('fcm_key_staff'),
-                $staff_tokens,
-                $title,
-                $message
-            );
-        }
-
-        $this->_send_onesignal_broadcast(
-            $this->_config('onesignal_waiter_ios_app_id'),
+        // Notification staff (ciblé par external_user_id)
+        $this->_send_onesignal_to_all_staff(
             $title,
             $message,
-            ['type' => 'waiter_call', 'table_id' => $table_id, 'call_type' => $call_type]
+            ['type' => 'waiter_call', 'table_id' => (string)$table_id, 'call_type' => $call_type]
         );
     }
 
     // =========================================================================
-    //  MÉTHODES PRIVÉES — TRANSPORT
+    //  MÉTHODES PRIVÉES — OneSignal
     // =========================================================================
 
     /**
-     * Envoyer via FCM à plusieurs tokens (registration_ids)
+     * Récupérer tous les external_user_id du staff ayant un device enregistré
      */
-    private function _send_fcm($api_key, array $tokens, $title, $message)
+    private function _get_all_staff_external_ids()
     {
-        if (empty($tokens) || empty($api_key)) return false;
+        $rows = $this->CI->db
+            ->select('id')
+            ->from('user')
+            ->where('waiter_kitchenToken IS NOT NULL')
+            ->where('waiter_kitchenToken !=', '')
+            ->get()
+            ->result();
 
-        $fields = [
-            'registration_ids' => $tokens,
-            'data' => [
-                'message'    => $message,
-                'title'      => $title,
-                'subtitle'   => '',
-                'tickerText' => '',
-                'vibrate'    => 1,
-                'sound'      => 1,
-                'largeIcon'  => '',
-                'smallIcon'  => '',
-            ],
-        ];
-
-        return $this->_curl_post('https://fcm.googleapis.com/fcm/send', $fields, [
-            'Authorization: key=' . $api_key,
-            'Content-Type: application/json',
-        ]);
+        return array_map(function ($r) { return 'staff_' . $r->id; }, $rows);
     }
 
     /**
-     * Envoyer via FCM à un seul token (to)
+     * Envoyer à tous les membres du staff via leur external_user_id
      */
-    private function _send_fcm_single($api_key, $token, $title, $body)
+    private function _send_onesignal_to_all_staff($title, $message, $data = [])
     {
-        if (empty($token) || empty($api_key)) return false;
+        $external_ids = $this->_get_all_staff_external_ids();
+        if (empty($external_ids)) return false;
 
-        $icon   = base_url('assets/img/applogo.png');
+        return $this->_send_onesignal_by_alias(
+            $this->_config('onesignal_staff_app_id'),
+            $external_ids,
+            $title,
+            $message,
+            $data
+        );
+    }
+
+    /**
+     * Envoyer via OneSignal en ciblant par external_user_id (include_aliases)
+     */
+    private function _send_onesignal_by_alias($app_id, array $external_ids, $title, $message, $data = [])
+    {
+        if (empty($external_ids) || empty($app_id)) return false;
+
         $fields = [
-            'to' => $token,
-            'data' => [
-                'title'      => $title,
-                'body'       => $body,
-                'image'      => $icon,
-                'media_type' => 'image',
-                'message'    => 'notification',
-                'action'     => '1',
-            ],
-            'notification' => [
-                'sound' => 'default',
-                'title' => $title,
-                'body'  => $body,
-                'image' => $icon,
-            ],
+            'app_id'          => $app_id,
+            'include_aliases' => ['external_id' => $external_ids],
+            'target_channel'  => 'push',
+            'contents'        => ['en' => $message],
+            'headings'        => ['en' => $title],
+            'data'            => $data,
         ];
 
-        return $this->_curl_post('https://fcm.googleapis.com/fcm/send', $fields, [
-            'Authorization: Key=' . $api_key,
-            'Content-Type: application/json',
-        ]);
+        $api_key = $this->_config('onesignal_api_key');
+        $headers = ['Content-Type: application/json; charset=utf-8'];
+        if ($api_key) {
+            $headers[] = 'Authorization: Basic ' . $api_key;
+        }
+
+        return $this->_curl_post('https://onesignal.com/api/v1/notifications', $fields, $headers);
     }
 
     /**
@@ -423,27 +461,28 @@ class Notification
     }
 
     // =========================================================================
-    //  HELPERS
+    //  LOGGING
     // =========================================================================
 
     /**
-     * Récupérer les tokens FCM du staff cuisine/serveurs (pos_id=6)
+     * Enregistrer une notification dans la table notification_log
      */
-    private function _get_staff_tokens()
+    private function _log_notification($order_id, $title, $message, $type = '')
     {
-        $this->CI->db->select('user.waiter_kitchenToken');
-        $this->CI->db->from('user');
-        $this->CI->db->join('employee_history', 'employee_history.emp_his_id = user.id', 'left');
-        $this->CI->db->where("user.waiter_kitchenToken != ''");
-        $this->CI->db->where('employee_history.pos_id', 6);
-        $query = $this->CI->db->get();
+        if (empty($order_id)) return;
 
-        $tokens = [];
-        foreach ($query->result() as $row) {
-            $tokens[] = $row->waiter_kitchenToken;
-        }
-        return $tokens;
+        $this->CI->db->insert('notification_log', [
+            'order_id'   => $order_id,
+            'title'      => $title,
+            'message'    => $message,
+            'type'       => $type,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
     }
+
+    // =========================================================================
+    //  HELPERS
+    // =========================================================================
 
     /**
      * Récupérer le token d'un serveur spécifique

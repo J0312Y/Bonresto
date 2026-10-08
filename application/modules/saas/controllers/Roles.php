@@ -15,16 +15,17 @@ class Roles extends Saas_base {
         $this->require_auth();
         $roles = $this->Saas_model->get_all_roles();
         foreach ($roles as &$r) {
-            $r->role_id   = (int)$r->role_id;
-            $r->is_system = (int)$r->is_system;
-            $r->permissions = json_decode($r->permissions, true) ?? [];
+            $r->role_id      = (int)$r->role_id;
+            $r->is_system    = (int)$r->is_system;
+            $r->member_count = (int)$r->member_count;
+            $r->permissions  = json_decode($r->permissions, true) ?? [];
         }
         $this->_json($roles);
     }
 
     /** POST /saas/roles */
     public function create() {
-        $this->require_super_admin();
+        $this->require_auth();
         $body = $this->_body();
 
         $name  = trim(preg_replace('/[^a-z0-9_]/', '', strtolower($body['name'] ?? '')));
@@ -51,8 +52,9 @@ class Roles extends Saas_base {
     }
 
     /** PUT /saas/roles/:id */
-    public function update(int $id) {
-        $this->require_super_admin();
+    public function update($id) {
+        $id = (int)$id;
+        $this->require_auth();
         $body = $this->_body();
 
         $role = $this->Saas_model->get_role_by_id($id);
@@ -75,7 +77,8 @@ class Roles extends Saas_base {
     }
 
     /** DELETE /saas/roles/:id */
-    public function remove(int $id) {
+    public function remove($id) {
+        $id = (int)$id;
         $this->require_super_admin();
 
         $role = $this->Saas_model->get_role_by_id($id);
@@ -83,7 +86,7 @@ class Roles extends Saas_base {
         if ($role->is_system) $this->_abort(400, 'Impossible de supprimer un rôle système.');
 
         // Reassign any admins using this role to 'viewer'
-        $this->db->where('role', $role->name)
+        $this->db->where('role', $role->role_name)
                  ->update('saas_admins', ['role' => 'viewer']);
 
         $this->Saas_model->delete_role($id);

@@ -205,7 +205,7 @@ if (!empty($seoterm)) {
                                                                 echo $webinfo->qrheaderfontcolor;
                                                             } ?>;"></i>
                         </button>
-                      		 
+
                       	</div>
                     </div>
                 </div>

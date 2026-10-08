@@ -129,16 +129,23 @@ public function count_reservation()
 				
 				return $data;
 		}
-	public function bookedpeople(){
-		$newdate= $this->input->post('getdate');
-		$gettime=$this->input->post('time');
-		$dateRange = "reserveday='$newdate' AND formtime<='$gettime' AND totime>='$gettime' AND status=2";
+	// Sixieme copie de la logique de disponibilite du projet. Memes defauts
+	// corriges qu'ailleurs : injection SQL par concatenation, filtre
+	// `person_capicity` en egalite stricte, retour en chaine la ou
+	// where_not_in() attend un tableau, et checkfree() en egalite exacte
+	// sur la capacite de table.
+	public function bookedpeople($newdate = null, $gettime = null){
+		$newdate = $newdate ?? $this->input->post('getdate');
+		$gettime = $gettime ?? $this->input->post('time');
 		$this->db->select('SUM(person_capicity) as totalperson');
         $this->db->from('tblreservation');
-		$this->db->where($dateRange, NULL, FALSE); 
+		$this->db->where('reserveday', $newdate);
+		$this->db->where('formtime <=', $gettime);
+		$this->db->where('totime >=', $gettime);
+		$this->db->where_in('status', RESERVATION_STATUTS_OCCUPANTS);
 		$query = $this->db->get();
 		return $query->row();
-		} 
+		}
 	public function checktable($id){
 		$this->db->select('tableid');
         $this->db->from('rest_table');
@@ -150,37 +157,39 @@ public function count_reservation()
         }
         return false;
 		}  
-	public function checkavailtable(){
-		$bookdate = str_replace('/','-',$this->input->post('getdate'));
-		$newdate= date('Y-m-d' , strtotime($bookdate));
-		$gettime=$this->input->post('time');
-		$nopeople=$this->input->post('people');
-		$dateRange = "reserveday='$newdate' AND formtime<'$gettime' AND totime>'$gettime' AND person_capicity='$nopeople' AND status=2";
-		$this->db->select('*');
+	public function checkavailtable($newdate = null, $gettime = null, $nopeople = null){
+		if ($newdate === null) {
+			$bookdate = str_replace('/','-',$this->input->post('getdate'));
+			$newdate  = date('Y-m-d' , strtotime($bookdate));
+		}
+		$gettime = $gettime ?? $this->input->post('time');
+		$this->db->select('tableid');
         $this->db->from('tblreservation');
-		$this->db->where($dateRange, NULL, FALSE); 
+		$this->db->where('reserveday', $newdate);
+		$this->db->where('formtime <', $gettime);
+		$this->db->where('totime >', $gettime);
+		$this->db->where_in('status', RESERVATION_STATUTS_OCCUPANTS);
 		$query = $this->db->get();
-		$totalid='';
-		 if ($query->num_rows() > 0) {
-           $gettable=$query->result(); 
-		   foreach($gettable as $selectedtable){
-			   $totalid.=$selectedtable->tableid.",";
-			   } 
-			return $totalid=trim($totalid,',');    
-        }
-        return false;
+		$totalid = [];
+		foreach($query->result() as $selectedtable){
+			$totalid[] = $selectedtable->tableid;
+		}
+		return $totalid;
 		}
 	public function checkfree($invalue,$person){
 		$this->db->select('*');
         $this->db->from('rest_table');
-		$this->db->where_not_in('tableid', $invalue);
-		$this->db->where('person_capicity', $person); 
+		if (!empty($invalue)) {
+			$this->db->where_not_in('tableid', (array) $invalue);
+		}
+		$this->db->where('person_capicity>=', $person);
+		$this->db->order_by('person_capicity', 'ASC');
 		$query = $this->db->get();
 		 if ($query->num_rows() > 0) {
-            return $query->result();    
+            return $query->result();
         }
         return false;
-		}  
+		}
  public function getproduct(){
 	 
 	    $this->db->select('product_tbl.product_name,visit_comp_product_gap.product_id,visit_comp_product_gap.comp_product_name,visit_comp_product_gap.comp_product_qty');

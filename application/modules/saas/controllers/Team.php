@@ -41,7 +41,8 @@ class Team extends Saas_base {
     }
 
     /** PUT /saas/team/{id} */
-    public function update(int $id) {
+    public function update($id) {
+        $id = (int)$id;
         $this->require_super_admin();
         $body = $this->_body();
 
@@ -71,7 +72,8 @@ class Team extends Saas_base {
     }
 
     /** DELETE /saas/team/{id} */
-    public function remove(int $id) {
+    public function remove($id) {
+        $id = (int)$id;
         $this->require_super_admin();
 
         // Cannot delete yourself

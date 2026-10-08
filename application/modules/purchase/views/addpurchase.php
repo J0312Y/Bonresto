@@ -43,9 +43,9 @@
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control datepicker" name="purchase_date" data-date-format="mm/dd/yyyy" value="<?php echo date('d-m-Y');?>" id="date" required="" tabindex="2" readonly="readonly">
                                     </div>
-                                    <label for="date" class="col-sm-3 col-form-label"><?php echo display('expdate') ?> <a class="" data-toggle="tooltip" data-placement="top" title="Expiry date is optional, if want to add you can add, but it has no major impact."><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
+                                    <label for="date" class="col-sm-3 col-form-label"><?php echo display('expdate') ?> <a class="" data-toggle="tooltip" data-placement="top" title="Date d'expiration globale (utilisee si aucune date par ligne n'est renseignee)."><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control datepicker" name="expire_date" data-date-format="mm/dd/yyyy" value="<?php echo date('d-m-Y');?>" id="expire_date" required="" tabindex="2" readonly="readonly">
+                                        <input type="text" class="form-control datepicker" name="expire_date" data-date-format="mm/dd/yyyy" value="<?php echo date('d-m-Y');?>" id="expire_date" tabindex="2" readonly="readonly">
                                     </div>
                                 </div>
                             </div>
@@ -91,6 +91,7 @@
                                             <th class="text-center"><?php echo display('qty') ?> <i class="text-danger">*</i></th>
                                             <th class="text-center"><?php echo display('s_rate') ?><i class="text-danger">*</i></th>
                                             <th class="text-center"><?php echo display('total') ?></th>
+                                            <th class="text-center"><?php echo display('expdate') ?></th>
                                             <th class="text-center"></th>
                                         </tr>
                                 </thead>
@@ -123,6 +124,9 @@
                                                 <input class="form-control total_price text-right" type="text" name="total_price[]" id="total_price_1" value="0.00" readonly="readonly">
                                             </td>
                                             <td>
+                                                <input type="text" class="form-control datepicker item-expiry" name="item_expire_date[]" id="item_expire_date_1" data-date-format="mm/dd/yyyy" placeholder="JJ-MM-AAAA" readonly="readonly">
+                                            </td>
+                                            <td>
                                                 <button  class="btn btn-danger red text-right" type="button" value="Delete" onclick="purchasetdeleteRow(this)" tabindex="8"><?php echo display('delete') ?></button>
                                             </td>
                                     </tr>
@@ -132,13 +136,13 @@
                                         <td colspan="2">
                                             <input type="button" id="add_invoice_item" class="btn btn-success" name="add-invoice-item" onclick="addmore('addPurchaseItem');" value="<?php echo display('add_more') ?> <?php echo display('item') ?>" tabindex="9">
                                         </td>
-                                        <td  colspan="2" class="text-right"><b><?php echo display('grand') ?> <?php echo display('total') ?>:</b></td>
+                                        <td  colspan="3" class="text-right"><b><?php echo display('grand') ?> <?php echo display('total') ?>:</b></td>
                                         <td class="text-right">
                                             <input type="text" id="grandTotal" class="text-right form-control" name="grand_total_price" value="0.00" readonly="readonly">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4"  class="text-right"><b><?php echo display('paid') ?> <?php echo display('amount') ?>:</b></td>
+                                        <td colspan="5"  class="text-right"><b><?php echo display('paid') ?> <?php echo display('amount') ?>:</b></td>
                                         <td class="text-right">
                                             <input type="text" id="paidamount" class="text-right form-control" name="paidamount" placeholder="0.00">
                                         </td>

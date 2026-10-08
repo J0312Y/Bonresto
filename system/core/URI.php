@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
+ * Copyright (c) 2019 - 2022, CodeIgniter Foundation
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,12 +29,27 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @copyright	Copyright (c) 2019 - 2022, CodeIgniter Foundation (https://codeigniter.com/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
+/*
+ * Audit F-19 — fichier repris de CodeIgniter 3.1.13.
+ *
+ * La version 3.1.3 de ce projet en etait a des rustines locales de
+ * compatibilite PHP 8 : each() remplace a la main dans Security.php,
+ * filter_var protege dans Input.php, proprietes dynamiques declarees dans
+ * URI.php et Router.php. 3.1.13 corrige tout cela en amont, avec en prime les
+ * correctifs de securite publies entre les deux versions.
+ *
+ * Le reste de system/ n'est PAS a jour : dix-huit autres fichiers du coeur
+ * portent des modifications de l'editeur (dont core/compat/lic.php, requis
+ * par CodeIgniter.php). Une montee complete suppose de les reporter un a un.
+ */
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -46,11 +61,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	URI
  * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/uri.html
+ * @link		https://codeigniter.com/userguide3/libraries/uri.html
  */
-
  #[\AllowDynamicProperties]
-
 class CI_URI {
 
 	/**
@@ -95,17 +108,18 @@ class CI_URI {
 	protected $_permitted_uri_chars;
 
 	/**
+	 * Class constructor
+	 *
+	 * @return	void
+	 */
+
+	/**
 	 * CI_Config class object
 	 *
 	 * @var	object
 	 */
 	public $config;
 
-	/**
-	 * Class constructor
-	 *
-	 * @return	void
-	 */
 	public function __construct()
 	{
 		$this->config =& load_class('Config', 'core');

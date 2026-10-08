@@ -83,7 +83,10 @@ class Licenses extends Saas_base {
             'issued_at'   => date('Y-m-d H:i:s'),
         ];
         $payloadJson = json_encode($payload);
-        $signature   = hash_hmac('sha256', $payloadJson, env_required('LICENSE_HMAC_SECRET'));
+        // Audit F-05 : signature asymetrique. La cle privee ne quitte pas ce
+        // serveur ; le client ne recoit que la cle publique et ne peut donc
+        // plus forger de licence — ni, par ce biais, de mise a jour de code.
+        $signature   = signer_licence($payload)['signature'];
 
         $this->_json(['payload' => $payload, 'signature' => $signature]);
     }
@@ -221,7 +224,10 @@ class Licenses extends Saas_base {
             'pending_updates' => $pending,
         ];
         $payloadJson = json_encode($payload);
-        $signature   = hash_hmac('sha256', $payloadJson, env_required('LICENSE_HMAC_SECRET'));
+        // Audit F-05 : signature asymetrique. La cle privee ne quitte pas ce
+        // serveur ; le client ne recoit que la cle publique et ne peut donc
+        // plus forger de licence — ni, par ce biais, de mise a jour de code.
+        $signature   = signer_licence($payload)['signature'];
 
         $this->_json(['payload' => $payload, 'signature' => $signature]);
     }

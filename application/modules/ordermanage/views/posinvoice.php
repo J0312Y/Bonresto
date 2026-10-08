@@ -142,12 +142,12 @@
     .invoice-card {
         display: flex;
         flex-direction: column;
-        padding: 25px;
-        width: 300px;
+        padding: 5px;
+        width: 100%;
         background-color: #fff;
         border-radius: 5px;
-        /* box-shadow: 0px 10px 30px 15px rgba(0, 0, 0, 0.05);*/
-        margin: 35px auto;
+        margin: 0 auto;
+        box-sizing: border-box;
     }
 
     .invoice-head,
@@ -404,7 +404,7 @@
                 <div class="row-data">
                     <div class="item-info">
                         <h5 class="item-title"><?php echo display('date'); ?>:
-                            <?php echo date("M d, Y", strtotime($orderinfo->order_date)); ?></h5>
+                            <?php echo date("M d, Y H:i", strtotime($orderinfo->order_date)); ?></h5>
                     </div>
                     <?php
 

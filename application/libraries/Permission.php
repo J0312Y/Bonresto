@@ -138,7 +138,7 @@ class Permission
      * Vérifie si une méthode est autorisée pour un module
      * ---------------------------------------------------------------- */
     protected function checkMethod($module = null, $method = null)
-    { 
+    {
         $permission = $this->ci->session->userdata('permission');
         $isAdmin    = $this->ci->session->userdata('isAdmin');
         $isLogIn    = $this->ci->session->userdata('isLogIn');

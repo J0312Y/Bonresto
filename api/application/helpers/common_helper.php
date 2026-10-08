@@ -40,15 +40,15 @@ function RandomPassword(){
 }
 if (!function_exists('time_elapsed'))
 {
-
     function time_elapsed($datetime, $full = false)
     {
         $now = new DateTime;
         $ago = new DateTime($datetime);
         $diff = $now->diff($ago);
 
-        $diff->w = floor($diff->d / 7);
-        $diff->d -= $diff->w * 7;
+        // calculate weeks manually
+        $weeks = floor($diff->d / 7);
+        $days  = $diff->d - ($weeks * 7);
 
         $string = array(
             'y' => 'year',
@@ -60,25 +60,30 @@ if (!function_exists('time_elapsed'))
             's' => 'second',
         );
 
-        foreach ($string as $k => &$v) {
-            if ($diff->$k)
-            {
-                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        $result = [];
+
+        foreach ($string as $k => $v) {
+            $value = 0;
+
+            if ($k == 'w' && $weeks) {
+                $value = $weeks;
+            } elseif ($k == 'd' && $days) {
+                $value = $days;
+            } elseif ($k != 'w' && $k != 'd' && $diff->$k) {
+                $value = $diff->$k;
             }
-            else
-            {
-                unset($string[$k]);
+
+            if ($value) {
+                $result[] = $value . ' ' . $v . ($value > 1 ? 's' : '');
             }
         }
 
-        if (!$full)
-        {
-            $string = array_slice($string, 0, 1);
+        if (!$full) {
+            $result = array_slice($result, 0, 1);
         }
 
-        return $string ? implode(', ', $string) . ' ago' : 'just now';
+        return $result ? implode(', ', $result) . ' ago' : 'just now';
     }
-
 }
 if (!function_exists('SubscribeEmail'))
 {
@@ -180,7 +185,7 @@ $emailcontent='<!doctype html>
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                     <tr>
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi '.$email.',</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Salut '.$email.',</p>
                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks for your subscription</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
                           <tbody>
@@ -212,150 +217,235 @@ $emailcontent='<!doctype html>
 	return $emailcontent;
 	}
 }
+
+// ── Shared email layout wrapper ──────────────────────────────────────
+if (!function_exists('_reservationEmailLayout'))
+{
+    function _reservationEmailLayout($bodyContent) {
+        $ci =& get_instance();
+        $setting = $ci->db->select('storename, phone, address, logo')->from('setting')->limit(1)->get()->row();
+        $storeName = $setting ? $setting->storename : 'Notre Restaurant';
+        $storePhone = $setting ? $setting->phone : '';
+        $storeAddress = $setting ? $setting->address : '';
+        $logoUrl = ($setting && $setting->logo) ? base_url($setting->logo) : '';
+
+        $logoHtml = '';
+        if ($logoUrl) {
+            $logoHtml = '<img src="'.$logoUrl.'" alt="'.htmlspecialchars($storeName).'" style="max-width:160px;max-height:60px;margin-bottom:10px;">';
+        }
+
+return '<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+  <style>
+    @media only screen and (max-width:620px){
+      .container{width:100% !important;padding:8px !important;}
+      .main{border-radius:0 !important;}
+      .wrapper{padding:16px !important;}
+      .info-table td{display:block !important;width:100% !important;padding:6px 0 !important;}
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f0f2f5;font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f0f2f5;">
+    <tr>
+      <td align="center" style="padding:30px 10px;">
+        <table role="presentation" class="container" border="0" cellpadding="0" cellspacing="0" width="580" style="max-width:580px;width:100%;">
+
+          <!-- HEADER -->
+          <tr>
+            <td align="center" style="padding:24px 30px 18px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-radius:12px 12px 0 0;">
+              '.$logoHtml.'
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;letter-spacing:0.5px;">'.htmlspecialchars($storeName).'</p>
+            </td>
+          </tr>
+
+          <!-- BODY -->
+          <tr>
+            <td class="main" style="background:#ffffff;padding:0;border-radius:0 0 12px 12px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+              <table role="presentation" class="wrapper" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:32px 38px;">
+                <tr>
+                  <td>'.$bodyContent.'</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td align="center" style="padding:24px 30px 10px;">
+              <p style="margin:0 0 4px;font-size:13px;color:#777;font-weight:600;">'.htmlspecialchars($storeName).'</p>
+              '.($storeAddress ? '<p style="margin:0 0 4px;font-size:12px;color:#999;">'.htmlspecialchars($storeAddress).'</p>' : '').'
+              '.($storePhone ? '<p style="margin:0 0 4px;font-size:12px;color:#999;">Tel : '.htmlspecialchars($storePhone).'</p>' : '').'
+              <hr style="border:none;border-top:1px solid #e0e0e0;margin:12px 0;">
+              <p style="margin:0;font-size:11px;color:#bbb;">Cet e-mail a ete envoye automatiquement. Merci de ne pas y repondre.</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>';
+    }
+}
+
+// ── Detail info row helper ──────────────────────────────────────────
+if (!function_exists('_reservationInfoTable'))
+{
+    function _reservationInfoTable($rows) {
+        $html = '<table role="presentation" class="info-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:20px 0;border-collapse:collapse;border:1px solid #f0f0f0;border-radius:8px;">';
+        $i = 0;
+        $total = count($rows);
+        foreach ($rows as $pair) {
+            $i++;
+            $label = $pair[0];
+            $value = $pair[1];
+            $borderBottom = ($i < $total) ? 'border-bottom:1px solid #f0f0f0;' : '';
+            $html .= '<tr>
+                <td style="padding:12px 16px;'.$borderBottom.'width:40%;vertical-align:middle;background:#fafafa;">
+                    <span style="font-size:13px;color:#888;font-weight:500;">'.$label.'</span>
+                </td>
+                <td style="padding:12px 16px;'.$borderBottom.'vertical-align:middle;">
+                    <span style="font-size:14px;color:#333;font-weight:600;">'.$value.'</span>
+                </td>
+            </tr>';
+        }
+        $html .= '</table>';
+        return $html;
+    }
+}
+
+// ── 1. Reservation received (pending) ───────────────────────────────
 if (!function_exists('ReservationEmail'))
 {
-	function ReservationEmail($id,$mobile=null){
-	  $ci =& get_instance();
-	  $reservesql = $ci->db->query("SELECT * FROM tblreservation where reserveid='".$id."'"); 
-    $reserveinfo= $reservesql->row();
-    $resql = $ci->db->query("SELECT * FROM customer_info where customer_id='".$reserveinfo->cid."'");	
-	  $resinfo= $resql->row();
-	  $tablesql = $ci->db->query("SELECT * FROM rest_table where tableid='".$reserveinfo->tableid."'");	
-	  $tableinfo= $tablesql->row();
-    $newdate= date('Y-m-d' , strtotime($reserveinfo->reserveday));
+    function ReservationEmail($id, $mobile = null) {
+        $ci =& get_instance();
+        $reserveinfo = $ci->db->select('*')->from('tblreservation')->where('reserveid', $id)->get()->row();
+        $resinfo = $ci->db->select('*')->from('customer_info')->where('customer_id', $reserveinfo->cid)->get()->row();
+        $tableinfo = $ci->db->select('tablename')->from('rest_table')->where('tableid', $reserveinfo->tableid)->get()->row();
+        $dateFormatted = date('d/m/Y', strtotime($reserveinfo->reserveday));
 
-    
-$emailcontent='<!doctype html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Subscription/Contact</title>
-    <style>
-    @media only screen and (max-width: 620px) {
-      table[class=body] h1 {
-        font-size: 28px !important;
-        margin-bottom: 10px !important;
-      }
-      table[class=body] p,
-            table[class=body] ul,
-            table[class=body] ol,
-            table[class=body] td,
-            table[class=body] span,
-            table[class=body] a {
-        font-size: 16px !important;
-      }
-      table[class=body] .wrapper,
-            table[class=body] .article {
-        padding: 10px !important;
-      }
-      table[class=body] .content {
-        padding: 0 !important;
-      }
-      table[class=body] .container {
-        padding: 0 !important;
-        width: 100% !important;
-      }
-      table[class=body] .main {
-        border-left-width: 0 !important;
-        border-radius: 0 !important;
-        border-right-width: 0 !important;
-      }
-      table[class=body] .btn table {
-        width: 100% !important;
-      }
-      table[class=body] .btn a {
-        width: 100% !important;
-      }
-      table[class=body] .img-responsive {
-        height: auto !important;
-        max-width: 100% !important;
-        width: auto !important;
-      }
+        $body = '
+        <p style="margin:0 0 22px;font-size:15px;color:#333;">Bonjour <strong>'.htmlspecialchars($resinfo->customer_name).'</strong>,</p>
+
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+          <tr>
+            <td style="background:linear-gradient(135deg,#fff8e1 0%,#fff3cd 100%);border-left:4px solid #ffa726;border-radius:0 8px 8px 0;padding:18px 22px;">
+              <p style="margin:0;font-size:16px;font-weight:700;color:#e65100;">&#9203; En attente de confirmation</p>
+              <p style="margin:8px 0 0;font-size:13px;color:#795548;line-height:1.6;">Votre demande de reservation a bien ete recue. Nous vous enverrons un e-mail de confirmation dans les plus brefs delais.</p>
+            </td>
+          </tr>
+        </table>
+
+        '._reservationInfoTable([
+            ['Date',               $dateFormatted],
+            ['Horaire',            $reserveinfo->formtime.' - '.$reserveinfo->totime],
+            ['Nombre de personnes', $reserveinfo->person_capicity],
+            ['Table',              $tableinfo ? $tableinfo->tablename : '-'],
+            ['Telephone',          $mobile ?: ($resinfo->customer_phone ?: '-')],
+        ]).'
+
+        <p style="margin:24px 0 0;font-size:13px;color:#999;text-align:center;line-height:1.5;">
+            Si vous avez des questions, n\'hesitez pas a nous contacter.
+        </p>';
+
+        return _reservationEmailLayout($body);
     }
-
-    @media all {
-      .ExternalClass {
-        width: 100%;
-      }
-      .ExternalClass,
-            .ExternalClass p,
-            .ExternalClass span,
-            .ExternalClass font,
-            .ExternalClass td,
-            .ExternalClass div {
-        line-height: 100%;
-      }
-      .apple-link a {
-        color: inherit !important;
-        font-family: inherit !important;
-        font-size: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-        text-decoration: none !important;
-      }
-      .btn-primary table td:hover {
-        background-color: #34495e !important;
-      }
-      .btn-primary a:hover {
-        background-color: #34495e !important;
-        border-color: #34495e !important;
-      }
-    }
-    </style>
-  </head>
-  <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
-    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
-      <tr>
-        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
-        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
-          <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
-
-            <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">This is preheader text. Some clients will show this text as a preview.</span>
-            <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
-
-              <!-- START MAIN CONTENT AREA -->
-              <tr>
-                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
-                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
-                    <tr>
-                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi '.$resinfo->customer_name.',</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Phone:'.$mobile.'</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Date:'.$newdate.'</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Number Of People:'.$reserveinfo->person_capicity.'</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your Reservation is Booked.Please inform me if anything change.\r\n Thank You</p>
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
-                          <tbody>
-                            
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-
-            <!-- END MAIN CONTENT AREA -->
-            </table>
-
-            <!-- START FOOTER -->
-            
-            <!-- END FOOTER -->
-
-          <!-- END CENTERED WHITE CONTAINER -->
-          </div>
-        </td>
-        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
-      </tr>
-    </table>
-  </body>
-</html>';
-
-	return $emailcontent;
-	}
 }
+
+// ── 2. Reservation confirmed ────────────────────────────────────────
+if (!function_exists('ReservationConfirmedEmail'))
+{
+    function ReservationConfirmedEmail($id, $mobile = null) {
+        $ci =& get_instance();
+        $reserveinfo = $ci->db->select('*')->from('tblreservation')->where('reserveid', $id)->get()->row();
+        $resinfo = $ci->db->select('*')->from('customer_info')->where('customer_id', $reserveinfo->cid)->get()->row();
+        $tableinfo = $ci->db->select('tablename')->from('rest_table')->where('tableid', $reserveinfo->tableid)->get()->row();
+        $dateFormatted = date('d/m/Y', strtotime($reserveinfo->reserveday));
+
+        $body = '
+        <p style="margin:0 0 22px;font-size:15px;color:#333;">Bonjour <strong>'.htmlspecialchars($resinfo->customer_name).'</strong>,</p>
+
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+          <tr>
+            <td style="background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 100%);border-left:4px solid #43a047;border-radius:0 8px 8px 0;padding:18px 22px;">
+              <p style="margin:0;font-size:16px;font-weight:700;color:#2e7d32;">&#10003; Reservation confirmee</p>
+              <p style="margin:8px 0 0;font-size:13px;color:#555;line-height:1.6;">Nous avons le plaisir de vous confirmer votre reservation. Nous vous attendons avec impatience !</p>
+            </td>
+          </tr>
+        </table>
+
+        '._reservationInfoTable([
+            ['Date',               $dateFormatted],
+            ['Horaire',            $reserveinfo->formtime.' - '.$reserveinfo->totime],
+            ['Nombre de personnes', $reserveinfo->person_capicity],
+            ['Table',              $tableinfo ? $tableinfo->tablename : '-'],
+            ['Telephone',          $mobile ?: ($resinfo->customer_phone ?: '-')],
+        ]).'
+
+        <p style="margin:24px 0 0;font-size:13px;color:#999;text-align:center;line-height:1.5;">
+            En cas d\'empechement, merci de nous prevenir le plus tot possible.
+        </p>';
+
+        return _reservationEmailLayout($body);
+    }
+}
+
+// ── 3. Reservation modified ─────────────────────────────────────────
+if (!function_exists('ReservationModifiedEmail'))
+{
+    function ReservationModifiedEmail($id, $changes = []) {
+        $ci =& get_instance();
+        $reserveinfo = $ci->db->select('*')->from('tblreservation')->where('reserveid', (int)$id)->get()->row();
+        $resinfo = $ci->db->select('*')->from('customer_info')->where('customer_id', $reserveinfo->cid)->get()->row();
+        $tableinfo = $ci->db->select('tablename')->from('rest_table')->where('tableid', $reserveinfo->tableid)->get()->row();
+        $dateFormatted = date('d/m/Y', strtotime($reserveinfo->reserveday));
+
+        $changesHtml = '';
+        if (!empty($changes)) {
+            $changesHtml = '<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 20px;border-collapse:collapse;">';
+            foreach ($changes as $c) {
+                $changesHtml .= '<tr><td style="padding:9px 14px;border-bottom:1px solid #f5f5f5;font-size:13px;color:#555;">&#8594; '.htmlspecialchars($c).'</td></tr>';
+            }
+            $changesHtml .= '</table>';
+        }
+
+        $body = '
+        <p style="margin:0 0 22px;font-size:15px;color:#333;">Bonjour <strong>'.htmlspecialchars($resinfo->customer_name).'</strong>,</p>
+
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+          <tr>
+            <td style="background:linear-gradient(135deg,#fff3e0 0%,#ffe0b2 100%);border-left:4px solid #fb8c00;border-radius:0 8px 8px 0;padding:18px 22px;">
+              <p style="margin:0;font-size:16px;font-weight:700;color:#e65100;">&#9998; Reservation modifiee</p>
+              <p style="margin:8px 0 0;font-size:13px;color:#795548;line-height:1.6;">Votre reservation a ete mise a jour. Veuillez trouver ci-dessous les modifications apportees.</p>
+            </td>
+          </tr>
+        </table>
+
+        <p style="margin:0 0 10px;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;">Ce qui a change</p>
+        '.$changesHtml.'
+
+        <p style="margin:0 0 10px;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;">Nouvelles informations</p>
+        '._reservationInfoTable([
+            ['Date',               $dateFormatted],
+            ['Horaire',            $reserveinfo->formtime.' - '.$reserveinfo->totime],
+            ['Nombre de personnes', $reserveinfo->person_capicity],
+            ['Table',              $tableinfo ? $tableinfo->tablename : '-'],
+        ]).'
+
+        <p style="margin:24px 0 0;font-size:13px;color:#999;text-align:center;line-height:1.5;">
+            Si vous avez des questions, n\'hesitez pas a nous contacter.
+        </p>';
+
+        return _reservationEmailLayout($body);
+    }
+}
+
 if (!function_exists('SendorderEmail'))
 {
 	function SendorderEmail($orderid,$customerid){
@@ -502,7 +592,7 @@ $emailcontent='<!doctype html>
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                     <tr>
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi '.$resinfo->customer_name.',</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Salut '.$resinfo->customer_name.',</p>
                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks for Order.Below Your order Item information.</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
                           <tbody>

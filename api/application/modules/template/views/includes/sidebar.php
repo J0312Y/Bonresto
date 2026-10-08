@@ -49,6 +49,11 @@
                 "method"     => "pos_invoice",
                 "permission" => "read",
             ],
+            "floor_plan"        => [
+                "controller" => "floorplan",
+                "method"     => "index",
+                "permission" => "read",
+            ],
             "order_list"        => [
                 "controller" => "order",
                 "method"     => "orderlist",
@@ -92,6 +97,11 @@
             "sound_setting"     => [
                 "controller" => "order",
                 "method"     => "soundsetting",
+                "permission" => "read",
+            ],
+            "waiter_calls"      => [
+                "controller" => "order",
+                "method"     => "waitercalls",
                 "permission" => "read",
             ],
         ];
@@ -397,6 +407,28 @@
                 "permission" => "create",
             ],
         ];
+        	$HmvcMenu2["accounts"] = array(
+    		"icon"           => "<i class='ti-bag'></i>", 
+   			"c_o_a" => array("controller" => "accounts","method"=> "show_tree","permission" => "read"), 
+			"supplier_payment" => array("controller" => "accounts","method" => "supplier_payments","permission" => "create"), 
+	        "cash_adjustment" => array("controller" => "accounts","method"     => "cash_adjustment","permission" => "create"), 
+      		"debit_voucher" => array("controller" => "accounts","method" => "debit_voucher","permission" => "create"), 
+            "credit_voucher" => array("controller" => "accounts","method"=> "credit_voucher","permission" => "read"), 
+            "contra_voucher" => array("controller" => "accounts","method" => "contra_voucher","permission" => "read"),
+     		"journal_voucher" => array("controller" => "accounts","method"=> "journal_voucher","permission" => "read"),  
+            "voucher_approval" => array("controller" => "accounts","method" => "aprove_v","permission" => "create"), 
+            "account_report" => array(
+		     	"voucher_report" => array("controller" => "accounts", "method"     => "voucher_report","permission" => "read"), 
+				"cash_book" => array("controller" => "accounts","method"=> "cash_book","permission" => "read"), 
+				"bank_book" => array("controller" => "accounts","method"=> "bank_book","permission" => "read"), 
+				"general_ledger" => array("controller" => "accounts","method" => "general_ledger","permission" => "read"), 
+				"trial_balance" => array("controller" => "accounts","method" => "trial_balance","permission" => "read"),
+				"profit_loss" => array("controller" => "accounts","method" => "profit_loss_report","permission" => "read"),
+				"cash_flow" => array("controller" => "accounts","method" => "cash_flow_report","permission" => "read"),
+				"coa_print" => array("controller" => "accounts","method" => "coa_print","permission" => "read"),
+				"balance_sheet" => array("controller" => "accounts","method" => "balance_sheet","permission" => "read")  
+    			), 
+		);
 
         $HmvcMenu2["hrm"] = [
             "icon"            => "<i class='fa fa-users'></i>",
@@ -572,6 +604,69 @@
             ],
         ];
 
+        if (can_use('loyalty')) {
+            $HmvcMenu2["loyalty"] = [
+                "icon"             => "<i class='fa fa-gift'></i>",
+                "point_setting"    => ["controller" => "Loyalty", "method" => "point_setting",    "permission" => "read"],
+                "membership_list"  => ["controller" => "Loyalty", "method" => "membership",       "permission" => "read"],
+                "barcode"          => ["controller" => "Loyalty", "method" => "barcode",          "permission" => "read"],
+                "customer_points"  => ["controller" => "Loyalty", "method" => "customer_points",  "permission" => "read"],
+                "review_rating"    => ["controller" => "Loyalty", "method" => "reviews",          "permission" => "read"],
+            ];
+        }
+
+        if (can_use('shiftmangment')) {
+            $HmvcMenu2["shiftmangment"] = [
+                "icon"          => "<i class='fa fa-clock-o'></i>",
+                "shift_list"    => [
+                    "controller" => "Shiftmangment",
+                    "method"     => "index",
+                    "permission" => "read",
+                ],
+                "assign_shift"  => [
+                    "controller" => "Shiftmangment",
+                    "method"     => "assign",
+                    "permission" => "read",
+                ],
+            ];
+        }
+
+        if (can_use('tax')) {
+            $HmvcMenu2["tax"] = [
+                "icon"        => "<i class='fa fa-percent'></i>",
+                "tax_setting" => [
+                    "controller" => "Tax",
+                    "method"     => "setting",
+                    "permission" => "read",
+                ],
+                "tax_enable"  => [
+                    "controller" => "Tax",
+                    "method"     => "enable_setting",
+                    "permission" => "read",
+                ],
+            ];
+        }
+        
+        $HmvcMenu["qrapp"] = array(
+            "icon" => "<i class='fa fa-qrcode'></i>",
+            "qr_order_list" => array(
+                "controller" => "qrorder",
+                "method"     => "index",
+                "permission" => "read"
+            ),
+            "all_table_qr" => array(
+                "controller" => "qrtable",
+                "method"     => "index",
+                "permission" => "read"
+            ),
+            "qr_payment_setting" => array(
+                "controller" => "qrpayment",
+                "method"     => "index",
+                "permission" => "read"
+            )
+        );
+
+
         $HmvcMenu2["report"] = [
             "icon"                       => "<i class='fa fa-line-chart' aria-hidden='true'></i>",
             "purchase_report"            => [
@@ -652,11 +747,23 @@
                 "method"     => "table_sale",
                 "permission" => "read",
             ],
+            
         ];
+
+        // Load License_manager once for module gate checks
+        $CI_ref =& get_instance();
+        if (!isset($CI_ref->license_manager)) {
+            $CI_ref->load->library('License_manager');
+        }
 
         if (isset($HmvcMenu2) && $HmvcMenu2 != null && sizeof($HmvcMenu2) > 0) {
 
             foreach ($HmvcMenu2 as $moduleName => $moduleData) {
+
+                // ── Contrôle par plan SAAS ──────────────────────────────────
+                // Super admin voit tout. Sinon, vérifier le plan du tenant.
+                if (!can_use($moduleName)) continue;
+                // ────────────────────────────────────────────────────────────
 
                 // check module permission
                 if (
@@ -665,7 +772,8 @@
                     )
                 ) {
                     if ($this->permission->module($moduleName)->access()) {
-                        $this->permission->module($moduleName)->access(); ?>
+                        $this->permission->module($moduleName)->access();
+                        ?>
                         <li class="treeview ">
 
                             <a href="javascript:void(0)">
@@ -802,6 +910,33 @@
         }
 
         ?>
+       <?php
+    if(!empty($HmvcMenu["qrapp"]) && can_use('qrapp')) {
+        $qrAppMenu = $HmvcMenu["qrapp"];
+        { ?>
+        <li class="treeview <?php echo in_array($this->uri->segment(2), ['qrorder','qrtable','qrpayment']) ? 'active' : ''; ?>">
+            <a href="#">
+                <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
+                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="<?php echo $this->uri->segment(2) == 'qrorder' ? 'active' : ''; ?>">
+                    <a href="<?php echo base_url('qrapp/qrorder'); ?>">QR Order List</a>
+                </li>
+                <li class="<?php echo $this->uri->segment(2) == 'qrtable' ? 'active' : ''; ?>">
+                    <a href="<?php echo base_url('qrapp/qrtable'); ?>">All Table QR</a>
+                </li>
+                <li class="<?php echo $this->uri->segment(2) == 'qrpayment' ? 'active' : ''; ?>">
+                    <a href="<?php echo base_url('qrapp/qrpayment'); ?>">QR Payment Setting</a>
+                </li>
+            </ul>
+        </li>
+        <?php } ?>
+    <?php } ?>
+        <!-- *************************************
+        **********CUSTOM MODULES****************
+        ************************************* -->
+    
         <?php
         $path     = "application/modules/";
         $map      = directory_map($path);
@@ -858,6 +993,11 @@
                                 <ul class="treeview-menu">
                                     <?php foreach ($moduleData as $groupLabel => $label) {
                                     ?>
+                                        <?php
+                                        // Cacher server_setting et factory_reset aux non-superadmins
+                                        $superadmin_only_items = ['server_setting','factory_reset'];
+                                        if (in_array($groupLabel, $superadmin_only_items) && !is_superadmin()) continue;
+                                        ?>
                                         <?php if ($groupLabel != "icon") {
                                             if (
                                                 isset($label["controller"]) &&
@@ -969,6 +1109,7 @@
                 </ul>
             </li>
 
+            <?php if (is_superadmin()): ?>
             <li class="treeview"><a href="<?php echo base_url(
                                                 "addon/module/index"
                                             ); ?>"><i class="fa fa-adn"></i><span><?php echo display(
@@ -979,6 +1120,7 @@
                                             ); ?>"><i class="fa fa-adn"></i><span><?php echo display(
                                                                                         "themes"
                                                                                     ); ?></span> </a></li>
+            <?php endif; ?>
             <li class="treeview <?php echo $this->uri->segment(2) == "role" ||
                                     $this->uri->segment(2) == "module_permission"
                                     ? "active"
@@ -1009,6 +1151,7 @@
                 </ul>
             </li>
 
+            <?php if (is_superadmin()): ?>
             <li class="treeview <?php echo $this->uri->segment(2) == "setting"
                                     ? "active"
                                     : null; ?>">
@@ -1066,11 +1209,19 @@
                                                                         "autoupdate"
                                                                     ); ?></span></a>
             </li>
+            <?php endif; // end is_superadmin() for web_setting block ?>
         <?php
         }
         ?>
+        <?php if (is_superadmin()): ?>
+        <li class="<?php echo ($this->uri->segment(2) == 'backup_restore' ? 'active' : ''); ?>">
+            <a href="<?php echo base_url('dashboard/backup_restore'); ?>">
+                <i class="fa fa-database"></i>
+                <span>Backup & Restore</span>
+            </a>
+        </li>
+        <?php endif; ?>
         <!-- ends of admin area -->
-
         <li class="treeview <?php echo $this->uri->segment(2) == "message"
                                 ? "active"
                                 : null; ?>">

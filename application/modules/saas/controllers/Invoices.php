@@ -13,7 +13,8 @@ class Invoices extends Saas_base {
     }
 
     /** GET /saas/invoices/{id} */
-    public function show(int $id) {
+    public function show($id) {
+        $id = (int)$id;
         $this->require_auth();
         $invoice = $this->Saas_model->get_invoice($id);
         if (!$invoice) $this->_abort(404, 'Facture introuvable.');
@@ -21,7 +22,8 @@ class Invoices extends Saas_base {
     }
 
     /** GET /saas/invoices/{id}/pdf — streams the PDF to the browser */
-    public function pdf(int $id) {
+    public function pdf($id) {
+        $id = (int)$id;
         $this->require_auth();
         $invoice = $this->Saas_model->get_invoice($id);
         if (!$invoice) $this->_abort(404, 'Facture introuvable.');
@@ -72,7 +74,8 @@ class Invoices extends Saas_base {
     }
 
     /** POST /saas/invoices/{id}/confirm */
-    public function confirm(int $id) {
+    public function confirm($id) {
+        $id = (int)$id;
         $this->require_auth();
         $body   = $this->_body();
         $method = $body['payment_method'] ?? 'autre';
@@ -103,7 +106,8 @@ class Invoices extends Saas_base {
     }
 
     /** POST /saas/invoices/{id}/send — (re)send invoice email + set status to sent */
-    public function send(int $id) {
+    public function send($id) {
+        $id = (int)$id;
         $this->require_auth();
         $invoice = $this->Saas_model->get_invoice($id);
         if (!$invoice) $this->_abort(404, 'Facture introuvable.');
@@ -159,7 +163,8 @@ class Invoices extends Saas_base {
     }
 
     /** POST /saas/invoices/{id}/cancel */
-    public function cancel(int $id) {
+    public function cancel($id) {
+        $id = (int)$id;
         $this->require_auth();
         $invoice = $this->Saas_model->get_invoice($id);
         if (!$invoice) $this->_abort(404, 'Facture introuvable.');
@@ -180,8 +185,14 @@ class Invoices extends Saas_base {
     // ── PDF HTML template ──────────────────────────────────────────────────
 
     private function _invoice_pdf_html(array $inv): string {
-        $this->config->load('saas_email');
-        $co      = $this->config->item('saas_company');
+        $settings = $this->Saas_model->get_all_settings();
+        $co = [
+            'name'    => $settings['company_name']    ?? 'Bonresto',
+            'address' => $settings['company_address'] ?? '',
+            'email'   => $settings['company_email']   ?? '',
+            'phone'   => $settings['company_phone']   ?? '',
+            'website' => $settings['company_website'] ?? '',
+        ];
         $num     = htmlspecialchars($inv['invoice_number']);
         $name    = htmlspecialchars($inv['business_name'] ?? '');
         $email   = htmlspecialchars($inv['client_email'] ?? '');

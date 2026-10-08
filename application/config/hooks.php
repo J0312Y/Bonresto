@@ -28,6 +28,31 @@ $hook['post_controller_constructor'][] = [
     'filepath' => 'hooks',
 ];
 
+// Tenant detection — switches DB based on subdomain.
+//
+// DOIT rester sur `pre_system`, et non `pre_controller`.
+//
+// MX/Base.php (HMVC) se termine par `new CI;` : il instancie un CI_Controller
+// au chargement du fichier, ce qui declenche l'autoload de `database`. Cela se
+// produit pendant load_class('Router'), donc AVANT `pre_controller`. La
+// connexion etait alors etablie sur la base par defaut.
+//
+// Un CI_Controller classique s'en sortait — sa construction rejoue l'autoload
+// global, qui relit config/database.php une fois la bascule faite. Mais
+// MX_Controller ne rejoue que l'autoload du module : TOUS les controleurs de
+// modules (reservation, qrapp, ordermanage, report, itemmanage...) servaient
+// la base du tenant par defaut, quel que soit le sous-domaine.
+//
+// Le defaut restait invisible tant qu'un seul tenant reel pointait sur la base
+// par defaut. Au deuxieme client, son back-office aurait affiche et modifie
+// les donnees du premier.
+$hook['pre_system'][] = [
+    'class'    => 'TenantHook',
+    'function' => 'detect',
+    'filename' => 'TenantHook.php',
+    'filepath' => 'hooks',
+];
+
 // Sync tick — DISABLED: Sync_manager library does not exist yet
 // $hook['post_system'][] = [
 //     'class'    => 'Sync_tick',

@@ -12,7 +12,6 @@ class Customerlist extends MX_Controller {
 			'logs_model',
 			'ordermanage/order_model'
 		));
-		$this->load->library('excel');	
     }
  
     public function index($id = null)
@@ -226,7 +225,12 @@ class Customerlist extends MX_Controller {
         {
            $_FILES["userfile"]["name"];
             $path = $_FILES["userfile"]["tmp_name"];
-            $object = PHPExcel_IOFactory::load($path);
+        // Audit F-25 : PHPExcel est en fin de vie depuis 2017 et etait
+        // vendorise en double de PhpSpreadsheet, deja installe par Composer.
+        // Attention au changement d'API : PHPExcel indexait les colonnes a
+        // partir de 0, PhpSpreadsheet a partir de 1 — d'ou le decalage des
+        // indices ci-dessous.
+            $object = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
            
             foreach($object->getWorksheetIterator() as $sale)
             {
@@ -235,10 +239,10 @@ class Customerlist extends MX_Controller {
                 $highestColumn = $sale->getHighestColumn();
                 for($row=2; $row<=$highestRow; $row++)
                 {
-                $memberid = $sale->getCellByColumnAndRow(0, $row)->getValue();  
-                $membername = $sale->getCellByColumnAndRow(1, $row)->getValue();
-                $mobile = $sale->getCellByColumnAndRow(2, $row)->getValue();
-                $cstatus = $sale->getCellByColumnAndRow(3, $row)->getValue();
+                $memberid = $sale->getCellByColumnAndRow(1, $row)->getValue();  
+                $membername = $sale->getCellByColumnAndRow(2, $row)->getValue();
+                $mobile = $sale->getCellByColumnAndRow(3, $row)->getValue();
+                $cstatus = $sale->getCellByColumnAndRow(4, $row)->getValue();
                 if($cstatus=="Active"){$status=1;}
                 else{$status=0;}
                 
@@ -295,20 +299,5 @@ class Customerlist extends MX_Controller {
         }
     }
 	
-	public function exportcsv(){
-		$path="D:/xampp/htdocs/bhojonv2.4/Members.xlsx";
-		$new="D:/xampp/htdocs/bhojonv2.4/Members3.xlsx";
-		$getnew=$this->db->select("*")->from('customer_info')->limit(5)->get()->result();
-		$objPHPExcel = PHPExcel_IOFactory::load($path);
-		$objPHPExcel->setActiveSheetIndex(0);
-		$row = $objPHPExcel->getActiveSheet()->getHighestRow()+1;
-
-		$rowData = array( 
-			array( "70055", "Ainal Hassan", "0171246275467", "Inactive") 
-		); //fromArray allow you multi-row append
-		$objPHPExcel->getActiveSheet()->fromArray($rowData, null, 'A'.$row);
-		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-		$objWriter->save($path);
-		}
  
 }

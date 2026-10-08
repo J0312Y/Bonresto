@@ -41,7 +41,36 @@ if (!empty($seoterm)) {
 
     <link href="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/css/apporderlist.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
-   <script src="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+    <style>
+    .order-filter-bar{display:flex;gap:6px;flex-wrap:wrap;padding:0 0 12px;overflow-x:auto;}
+    .filter-status-btn{border:1px solid #e5e7eb;background:#fff;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;color:#6b7280;}
+    .filter-status-btn.active{background:#111;color:#fff;border-color:#111;}
+    .order-card{background:#fff;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.08);margin-bottom:12px;overflow:hidden;}
+    .order-card-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 8px;}
+    .order-card-id{font-weight:700;font-size:14px;color:#111;}
+    .order-status-badge{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.3px;}
+    .order-card-body{display:flex;justify-content:space-between;align-items:center;padding:0 14px 10px;border-bottom:1px solid #f3f4f6;}
+    .order-card-date{font-size:12px;color:#9ca3af;}
+    .order-card-date i{margin-right:4px;}
+    .order-card-amount{font-size:15px;font-weight:700;color:#111;}
+    .order-card-actions{display:flex;gap:6px;padding:10px 14px;flex-wrap:wrap;}
+    .btn-order-action{border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:4px;transition:opacity .2s;}
+    .btn-order-action:hover{opacity:.8;text-decoration:none;}
+    .btn-view-order{background:#111;color:#fff;}
+    .btn-track-order{background:#3b82f6;color:#fff;}
+    .btn-edit-order{background:#10b981;color:#fff;}
+    .orders-empty{text-align:center;padding:40px 20px;color:#9ca3af;}
+    .orders-empty i{font-size:36px;display:block;margin-bottom:10px;}
+    @media print{
+        body>*{display:none!important;}
+        .modal,#vieworder{display:block!important;position:static!important;}
+        .modal-dialog{margin:0;max-width:100%!important;}
+        .modal-header .close,.btn-download-receipt,.fixed_area,.header_top_area{display:none!important;}
+        .modal-backdrop{display:none!important;}
+        .modal-content{box-shadow:none;border:none;}
+    }
+    </style>
 
  
 </head>
@@ -105,70 +134,80 @@ if (!empty($seoterm)) {
 
     <div class="product_sec sec_mar only-sm">
         <div class="container-fluid">
-
             <div class="row">
                 <div class="col-12">
-                    <center class="apporder_list_center"><?php echo display('morderlist') ?></center>
-                    <table class="table datatable2 table-fixed table-bordered table-hover bg-white table-responsive text-nowrap" id="purchaseTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center"><?php echo display('status') ?></th>
-                                <th class="text-right"><?php echo display('amount') ?></th>
-                                <th class="text-center"><?php echo display('action') ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 0;
-                            $today = date('Y-m-d');
-                            foreach ($iteminfo as $item) {
-                                $i++;
-                            ?>
-                                <tr>
+                    <h5 class="text-center mb-3" style="font-weight:700;"><?php echo display('morderlist') ?></h5>
 
-                                    <td class="text-center">
-                                        <?php if ($item->order_status == 1) {
-                                            echo display('pending_ord');
-                                        }
-                                        if ($item->order_status == 2) {
-                                            echo display('Processingod');
-                                        }
-                                        if ($item->order_status == 3) {
-                                            echo display('ready');
-                                        }
-                                        if ($item->order_status == 4 && $item->orderacceptreject != 1) {
-                                            echo display('pending_ord');
-                                        }
-                                        if ($item->order_status == 4 && $item->orderacceptreject == 1) {
-                                            echo display('served');
-                                        }
-                                   
-                                        if ($item->order_status == 5) {
-                                            echo display('cancel');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td class="text-right"><?php if ($currency->position == 1) {
-                                                                echo $currency->curr_icon;
-                                                            } ?> <?php echo $item->totalamount; ?> <?php if ($currency->position == 2) {
-                                                                                                        echo $currency->curr_icon;
-                                                                                                    } ?> </td>
-                                    <td class="text-center">
-                                        <a onclick="vieworderinfo(<?php echo $item->order_id; ?>)" class="btn btn-xs btn-success apporedrlist_fff" data-toggle="modal" data-target="#vieworder" data-dismiss="modal"><?php echo display('view') ?></a>
-                                        <?php if ($item->order_status >= 1 && $item->order_status <= 3) { ?>
-                                            <a href="<?php echo base_url('order-tracking/' . $item->order_id); ?>" class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="left"><i class="fa fa-map-marker"></i> Suivi</a>
-                                        <?php } ?>
-                                        <?php if (($item->order_status == 1 || $item->order_status == 2 || $item->order_status == 3 || $item->cutomertype == 99) && ($item->order_date == $today) && ($item->order_status != 4) && ($item->order_status != 5)) { ?>
-                                            <a href="<?php echo base_url(); ?>updatemyorder/<?php echo $item->order_id; ?>" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="left"><?php echo display('edit') ?></a>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                        <tfoot>
+                    <!-- Status filter -->
+                    <div class="order-filter-bar">
+                        <button class="filter-status-btn active" onclick="filterOrderStatus(this,'all')">Tous</button>
+                        <button class="filter-status-btn" onclick="filterOrderStatus(this,'1')"><?php echo display('pending_ord') ?></button>
+                        <button class="filter-status-btn" onclick="filterOrderStatus(this,'2')"><?php echo display('Processingod') ?></button>
+                        <button class="filter-status-btn" onclick="filterOrderStatus(this,'3')"><?php echo display('ready') ?></button>
+                        <button class="filter-status-btn" onclick="filterOrderStatus(this,'4')"><?php echo display('served') ?></button>
+                        <button class="filter-status-btn" onclick="filterOrderStatus(this,'5')"><?php echo display('cancel') ?></button>
+                    </div>
 
-                        </tfoot>
-                    </table>
+                    <!-- Order cards -->
+                    <div id="orderCardsContainer">
+                    <?php
+                    $today = date('Y-m-d');
+                    $has_orders = false;
+                    foreach ($iteminfo as $item):
+                        $has_orders = true;
+                        // Effective status for filtering
+                        $eff_status = $item->order_status;
+                        if ($item->order_status == 4 && $item->orderacceptreject != 1) $eff_status = 1;
 
+                        // Status label & color
+                        if ($item->order_status == 1) { $sl = display('pending_ord'); $sc = '#f59e0b'; }
+                        elseif ($item->order_status == 2) { $sl = display('Processingod'); $sc = '#3b82f6'; }
+                        elseif ($item->order_status == 3) { $sl = display('ready'); $sc = '#10b981'; }
+                        elseif ($item->order_status == 4 && $item->orderacceptreject != 1) { $sl = display('pending_ord'); $sc = '#f59e0b'; }
+                        elseif ($item->order_status == 4 && $item->orderacceptreject == 1) { $sl = display('served'); $sc = '#6366f1'; }
+                        elseif ($item->order_status == 5) { $sl = display('cancel'); $sc = '#ef4444'; }
+                        else { $sl = '—'; $sc = '#9ca3af'; }
+                    ?>
+                    <div class="order-card" data-status="<?php echo $eff_status; ?>">
+                        <div class="order-card-header">
+                            <span class="order-card-id">#<?php echo $item->order_id; ?></span>
+                            <span class="order-status-badge" style="background:<?php echo $sc; ?>18;color:<?php echo $sc; ?>;border:1px solid <?php echo $sc; ?>44;">
+                                <?php echo $sl; ?>
+                            </span>
+                        </div>
+                        <div class="order-card-body">
+                            <span class="order-card-date"><i class="fa fa-calendar-o"></i><?php echo $item->order_date; ?></span>
+                            <span class="order-card-amount">
+                                <?php if ($currency->position == 1) echo $currency->curr_icon; ?>
+                                <?php echo number_format($item->totalamount, 0, '.', ' '); ?>
+                                <?php if ($currency->position == 2) echo $currency->curr_icon; ?>
+                            </span>
+                        </div>
+                        <div class="order-card-actions">
+                            <a onclick="vieworderinfo(<?php echo $item->order_id; ?>)" class="btn-order-action btn-view-order" data-toggle="modal" data-target="#vieworder">
+                                <i class="fa fa-eye"></i> Voir détails
+                            </a>
+                            <?php if ($item->order_status >= 1 && $item->order_status <= 3): ?>
+                            <a href="<?php echo base_url('order-tracking/' . $item->order_id); ?>" class="btn-order-action btn-track-order">
+                                <i class="fa fa-map-marker"></i> Suivi
+                            </a>
+                            <?php endif; ?>
+                            <?php if (($item->order_status == 1 || $item->order_status == 2 || $item->order_status == 3 || $item->cutomertype == 99) && ($item->order_date == $today) && ($item->order_status != 4) && ($item->order_status != 5)): ?>
+                            <a href="<?php echo base_url(); ?>updatemyorder/<?php echo $item->order_id; ?>" class="btn-order-action btn-edit-order">
+                                <i class="fa fa-pencil"></i> Modifier
+                            </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                    </div>
+
+                    <?php if (!$has_orders): ?>
+                    <div class="orders-empty">
+                        <i class="fa fa-inbox"></i>
+                        Aucune commande trouvée
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -234,6 +273,19 @@ if (!empty($seoterm)) {
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/custom.js"></script>
 
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/qrappdetails.js"></script>
+    <script>
+    function filterOrderStatus(btn, status) {
+        document.querySelectorAll('.filter-status-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelectorAll('.order-card').forEach(function(card) {
+            if (status === 'all' || card.getAttribute('data-status') === status) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    </script>
 </body>
 
 </html>

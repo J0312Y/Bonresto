@@ -13,7 +13,8 @@ class Activity extends Saas_base {
         $this->_json($this->Saas_model->get_activity(0, 100));
     }
 
-    public function tenant(int $id) {
+    public function tenant($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->_json($this->Saas_model->get_activity($id, 50));
     }

@@ -193,6 +193,70 @@ function current_version()
                 <input name="csrfhash" id="csrfhashresarvation" type="hidden"
                     value="<?php echo $this->security->get_csrf_hash(); ?>" />
             </li>
+            <!-- Stock Alert (real-time) -->
+            <?php
+            $low_stock_count = (int) $this->db->query("SELECT COUNT(*) as cnt FROM ingredients WHERE stock_qty < min_stock AND min_stock > 0")->row()->cnt;
+            $low_items = $this->db->query("SELECT ingredient_name, stock_qty, min_stock FROM ingredients WHERE stock_qty < min_stock AND min_stock > 0 ORDER BY (stock_qty / min_stock) ASC LIMIT 5")->result();
+            ?>
+            <li class="dropdown messages-menu" id="low-stock-alert" style="<?php echo ($low_stock_count == 0) ? 'display:none;' : ''; ?>">
+                <a href="<?php echo base_url('purchase/purchase/stock_out_ingredients'); ?>" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-cubes" style="color:#e74c3c;"></i>
+                    <span class="label label-danger" id="low-stock-badge"><?php echo $low_stock_count; ?></span>
+                </a>
+                <ul class="dropdown-menu" id="low-stock-dropdown" style="width:320px;padding:10px;">
+                    <li style="padding:5px 10px;border-bottom:1px solid #eee;"><strong style="color:#c0392b;"><i class="fa fa-exclamation-triangle"></i> Stock bas</strong></li>
+                    <?php foreach ($low_items as $li_item): ?>
+                    <li style="padding:5px 10px;font-size:12px;">
+                        <span><?php echo html_escape($li_item->ingredient_name); ?></span>
+                        <span style="float:right;color:<?php echo ($li_item->stock_qty <= 0) ? '#c0392b' : '#e67e22'; ?>;font-weight:600;">
+                            <?php echo number_format($li_item->stock_qty, 2); ?> / <?php echo number_format($li_item->min_stock, 2); ?>
+                        </span>
+                    </li>
+                    <?php endforeach; ?>
+                    <?php if ($low_stock_count > 5): ?>
+                    <li style="padding:8px 10px;text-align:center;border-top:1px solid #eee;">
+                        <a href="<?php echo base_url('purchase/purchase/stock_out_ingredients'); ?>">Voir tout (<span class="low-stock-total"><?php echo $low_stock_count; ?></span>)</a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+            <script>
+            (function(){
+                var stockUrl = '<?php echo base_url("dashboard/home/low_stock_ajax"); ?>';
+                function refreshLowStock(){
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', stockUrl, true);
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState===4 && xhr.status===200){
+                            try {
+                                var d = JSON.parse(xhr.responseText);
+                                var wrap = document.getElementById('low-stock-alert');
+                                var badge = document.getElementById('low-stock-badge');
+                                var dd = document.getElementById('low-stock-dropdown');
+                                if(d.count > 0){
+                                    wrap.style.display = '';
+                                    badge.textContent = d.count;
+                                    var html = '<li style="padding:5px 10px;border-bottom:1px solid #eee;"><strong style="color:#c0392b;"><i class="fa fa-exclamation-triangle"></i> Stock bas</strong></li>';
+                                    for(var i=0;i<d.items.length;i++){
+                                        var it=d.items[i];
+                                        var col = (parseFloat(it.stock_qty)<=0)?'#c0392b':'#e67e22';
+                                        html+='<li style="padding:5px 10px;font-size:12px;"><span>'+it.ingredient_name+'</span><span style="float:right;color:'+col+';font-weight:600;">'+parseFloat(it.stock_qty).toFixed(2)+' / '+parseFloat(it.min_stock).toFixed(2)+'</span></li>';
+                                    }
+                                    if(d.count>5){
+                                        html+='<li style="padding:8px 10px;text-align:center;border-top:1px solid #eee;"><a href="<?php echo base_url("purchase/purchase/stock_out_ingredients"); ?>">Voir tout ('+d.count+')</a></li>';
+                                    }
+                                    dd.innerHTML = html;
+                                } else {
+                                    wrap.style.display = 'none';
+                                }
+                            }catch(e){}
+                        }
+                    };
+                    xhr.send();
+                }
+                setInterval(refreshLowStock, 60000);
+            })();
+            </script>
             <!-- Messages -->
 
             <!-- settings -->

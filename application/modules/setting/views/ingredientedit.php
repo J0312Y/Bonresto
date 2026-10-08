@@ -27,6 +27,12 @@
                                 <input name="min_stock" class="form-control" type="text" placeholder="<?php echo display('stock_limit') ?>" id="unitname" value="<?php echo (!empty($intinfo->min_stock)?$intinfo->min_stock:null) ?>">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="barcode" class="col-sm-4 col-form-label">Code-barres</label>
+                            <div class="col-sm-8">
+                                <input name="barcode" class="form-control" type="text" placeholder="Scanner ou saisir le code-barres" value="<?php echo (!empty($intinfo->barcode)?$intinfo->barcode:null) ?>">
+                            </div>
+                        </div>
 						<div class="form-group row">
                         <label for="lastname" class="col-sm-4 col-form-label">Status</label>
                         <div class="col-sm-8">

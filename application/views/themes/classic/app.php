@@ -109,12 +109,26 @@ if (!empty($seoterm)) {
                         <img src="<?php echo base_url(!empty($webinfo->logo) ? $webinfo->logo : 'dummyimage/168x65.jpg'); ?>" alt="">
                     </a>
                     <div class="act-icon">
+                        <?php
+                        $cus_id_hdr = $this->session->userdata('CusUserID');
+                        if (!empty($cus_id_hdr)):
+                            $cus_hdr = $this->db->select('customer_name')->where('customer_id', $cus_id_hdr)->get('customer_info')->row();
+                            $pts_hdr = $this->db->select('points')->where('customerid', $cus_id_hdr)->get('tbl_customerpoint')->row();
+                        ?>
+                        <a href="<?php echo base_url('hungry/my_account'); ?>" class="qr-user-badge" style="color:<?php echo !empty($webinfo->qrheaderfontcolor) ? $webinfo->qrheaderfontcolor : '#fff'; ?>;">
+                            <i class="fa fa-user-circle"></i>
+                            <span><?php echo htmlspecialchars($cus_hdr->customer_name ?? ''); ?></span>
+                            <?php if (!empty($pts_hdr)): ?>
+                                <span class="pts-badge"><?php echo (int)$pts_hdr->points; ?> pts</span>
+                            <?php endif; ?>
+                        </a>
+                        <?php endif; ?>
                         <div class="searchIcon mr-2">
                             <i class="fa fa-search" style="color:<?php if (!empty($webinfo->qrheaderfontcolor)) {
                                                                         echo $webinfo->qrheaderfontcolor;
                                                                     } ?>;"></i>
                         </div>
-                        
+
                     </div>
 
                 </nav>
@@ -135,13 +149,12 @@ if (!empty($seoterm)) {
                         <i class="ti-close"></i>
                     </div>
                     <ul class="metismenu list-unstyled" id="mobile-menu">
+                        <?php if ($this->session->userdata('CusUserID') != ""): ?>
+                            <li><a href="<?php echo base_url('hungry/my_account'); ?>"><i class="fa fa-user-circle"></i> <?php echo display('my_account'); ?></a></li>
+                            <li><a href="<?php echo base_url() . 'apporedrlist'; ?>"><?php echo display('morderlist') ?></a></li>
+                        <?php endif; ?>
                         <li><a href="<?php echo base_url() . 'app-terms'; ?>"><?php echo display('terms_condition') ?></a></li>
                         <li><a href="<?php echo base_url() . 'app-refund-policty'; ?>"><?php echo display('refundp') ?></a></li>
-                        <?php
-                        if ($this->session->userdata('CusUserID') != "") { ?>
-                            <li><a href="<?php echo base_url() . 'apporedrlist'; ?>"><?php echo display('morderlist') ?></a></li>
-                        <?php } ?>
-
                     </ul>
                 </nav>
                 <div class="row category_menu">
@@ -426,14 +439,17 @@ if (!empty($seoterm)) {
                                                             } ?>;"></i><span id="badgeshow" class="<?php if($totalqty>0){ echo "badgedisplayblock";}else{ echo "badgedisplaynone";}?> classic-badge2"><?php echo $totalqty;?></span>
                       		</button>   
                       	</div>
-                        <?php if ($this->session->userdata('tableid')) { ?>
+                        <?php
+                        $tableid = $this->session->userdata('tableid');
+                        $has_active_order = $tableid && $this->db->where('table_no', $tableid)->where_in('order_status', [1, 2, 3])->where('order_date', date('Y-m-d'))->count_all_results('customer_order') > 0;
+                        if ($has_active_order) { ?>
                         <div class="icon" style="position:relative;">
                             <button class="btn btn-transparent" onclick="document.getElementById('bellMenu').classList.toggle('bell-open');">
                                 <i class="ti-bell" style="color:<?php if (!empty($webinfo->qrheaderfontcolor)) { echo $webinfo->qrheaderfontcolor; } ?>;"></i>
                             </button>
                             <div id="bellMenu" class="bell-dropdown">
-                                <a href="#" onclick="callWaiter('waiter'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-hand-paper-o"></i> Appeler le serveur</a>
-                                <a href="#" onclick="callWaiter('bill'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-file-text-o"></i> Demander l'addition</a>
+                                <a href="#" onclick="callWaiter('waiter'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-hand-paper-o"></i> <?php echo display('call_waiter'); ?></a>
+                                <a href="#" onclick="callWaiter('bill'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-file-text-o"></i> <?php echo display('request_bill'); ?></a>
                             </div>
                         </div>
                         <?php } ?>

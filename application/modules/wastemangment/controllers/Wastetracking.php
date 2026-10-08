@@ -9,15 +9,11 @@ class Wastetracking extends MX_Controller
 
         parent::__construct();
         $this->load->model([
+
             'wastemangment/wastemangment_model',
             'wastemangment/logs_model',
         ]);
         $this->version = 1;
-
-        $tz = $this->db->select('timezone')->get('setting')->row();
-        if (!empty($tz->timezone)) {
-            date_default_timezone_set($tz->timezone);
-        }
     }
 
     public function addpackagingfood()
@@ -62,13 +58,11 @@ class Wastetracking extends MX_Controller
         $csrf_token   = $this->security->get_csrf_hash();
         $product_name = $this->input->post('product_name');
         $product_info = $this->wastemangment_model->finditem($product_name);
-        $json_product = [];
+        //$json_product=array('csrf_token'=>$csrf_token);
+        $list[''] = '';
 
-        if ($product_info) {
-            foreach ($product_info as $value) {
-                $uprice = ($value['uquantity'] > 0) ? $value['utotalprice'] / $value['uquantity'] : 0;
-                $json_product[] = ['label' => $value['ingredient_name'], 'value' => $value['id'], 'uprice' => $uprice, 'stock_qty' => $value['stock_qty']];
-            }
+        foreach ($product_info as $value) {
+            $json_product[] = ['label' => $value['ingredient_name'], 'value' => $value['id'], 'uprice' => $value['utotalprice'] / $value['uquantity'], 'stock_qty' => $value['stock_qty']];
         }
 
         echo json_encode($json_product);
@@ -80,12 +74,11 @@ class Wastetracking extends MX_Controller
         $csrf_token   = $this->security->get_csrf_hash();
         $product_name = $this->input->post('product_name');
         $product_info = $this->wastemangment_model->findfood($product_name);
-        $json_product = [];
+        //$json_product=array('csrf_token'=>$csrf_token);
+        $list[''] = '';
 
-        if ($product_info) {
-            foreach ($product_info as $value) {
-                $json_product[] = ['label' => $value->ProductName . '-' . $value->variantName, 'value' => $value->ProductsID . '-' . $value->variantid, 'uprice' => $value->totalcost];
-            }
+        foreach ($product_info as $value) {
+            $json_product[] = ['label' => $value->ProductName . '-' . $value->variantName, 'value' => $value->ProductsID . '-' . $value->variantid, 'uprice' => $value->totalcost];
         }
 
         echo json_encode($json_product);
@@ -117,7 +110,7 @@ class Wastetracking extends MX_Controller
                 $this->session->set_flashdata('message', display('save_successfully'));
                 redirect('wastemangment/wastetracking/addpackagingfood');
             } else {
-                $this->session->set_flashdata('exception', "Order ID not found, already recorded, or no items submitted.");
+                $this->session->set_flashdata('exception', "This order id  Already Exist!!!");
                 redirect('wastemangment/wastetracking/addpackagingfood');
             }
 
@@ -245,4 +238,3 @@ class Wastetracking extends MX_Controller
     }
 
 }
-

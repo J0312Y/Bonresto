@@ -109,16 +109,47 @@ if (!empty($seoterm)) {
                     <div class="sidebar-toggle-btn">
                         
                     </div>
-                    <a class="" href="<?php echo base_url(); ?>qr-menu">
-                        <img src="<?php echo base_url(!empty($webinfo->logo) ? $webinfo->logo : 'dummyimage/168x65.jpg'); ?>" alt="">
-                    </a>
+                    <div class="d-flex align-items-center">
+                        <a class="" href="<?php echo base_url(); ?>qr-menu">
+                            <img src="<?php echo base_url(!empty($webinfo->logo) ? $webinfo->logo : 'dummyimage/168x65.jpg'); ?>" alt="">
+                        </a>
+                        <?php $tableid_hdr = $this->session->userdata('tableid'); if (!empty($tableid_hdr)):
+                            $tbl_row = $this->db->select('tablename')->where('tableid', $tableid_hdr)->get('rest_table')->row();
+                            $tbl_display = $tbl_row ? $tbl_row->tablename : $tableid_hdr;
+                        ?>
+                        <span class="table-badge-pill" style="color:<?php echo !empty($webinfo->qrheaderfontcolor) ? $webinfo->qrheaderfontcolor : '#fff'; ?>;">
+                            Table <?php echo htmlspecialchars($tbl_display); ?>
+                        </span>
+                        <?php endif; ?>
+                    </div>
                     <div class="act-icon">
+                        <?php
+                        $cus_id_hdr = $this->session->userdata('CusUserID');
+                        if (!empty($cus_id_hdr)):
+                            $cus_hdr = $this->db->select('customer_name')->where('customer_id', $cus_id_hdr)->get('customer_info')->row();
+                            $pts_hdr = $this->db->select('points')->where('customerid', $cus_id_hdr)->get('tbl_customerpoint')->row();
+                        ?>
+                        <a href="<?php echo base_url('hungry/my_account'); ?>" class="qr-user-badge" style="color:<?php echo !empty($webinfo->qrheaderfontcolor) ? $webinfo->qrheaderfontcolor : '#fff'; ?>;">
+                            <i class="fa fa-user-circle"></i>
+                            <span><?php echo htmlspecialchars($cus_hdr->customer_name ?? ''); ?></span>
+                            <?php if (!empty($pts_hdr)): ?>
+                                <span class="pts-badge"><?php echo (int)$pts_hdr->points; ?> pts</span>
+                            <?php endif; ?>
+                        </a>
+                        <?php endif; ?>
+                        <div class="view-toggle mr-2">
+                            <button class="btn-view-toggle active" id="listViewBtn" onclick="setQrView('list')" title="Vue liste">
+                                <i class="fa fa-list" style="color:<?php echo !empty($webinfo->qrheaderfontcolor) ? $webinfo->qrheaderfontcolor : '#fff'; ?>;"></i>
+                            </button>
+                            <button class="btn-view-toggle" id="gridViewBtn" onclick="setQrView('grid')" title="Vue grille">
+                                <i class="fa fa-th" style="color:<?php echo !empty($webinfo->qrheaderfontcolor) ? $webinfo->qrheaderfontcolor : '#fff'; ?>;"></i>
+                            </button>
+                        </div>
                         <div class="searchIcon mr-2">
                             <i class="fa fa-search" style="color:<?php if (!empty($webinfo->qrheaderfontcolor)) {
                                                                         echo $webinfo->qrheaderfontcolor;
                                                                     } ?>;"></i>
                         </div>
-                        
                     </div>
 
                 </nav>
@@ -139,13 +170,12 @@ if (!empty($seoterm)) {
                         <i class="ti-close"></i>
                     </div>
                     <ul class="metismenu list-unstyled" id="mobile-menu">
+                        <?php if ($this->session->userdata('CusUserID') != ""): ?>
+                            <li><a href="<?php echo base_url('hungry/my_account'); ?>"><i class="fa fa-user-circle"></i> <?php echo display('my_account'); ?></a></li>
+                            <li><a href="<?php echo base_url() . 'apporedrlist'; ?>"><?php echo display('morderlist') ?></a></li>
+                        <?php endif; ?>
                         <li><a href="<?php echo base_url() . 'app-terms'; ?>"><?php echo display('terms_condition') ?></a></li>
                         <li><a href="<?php echo base_url() . 'app-refund-policty'; ?>"><?php echo display('refundp') ?></a></li>
-                        <?php
-                        if ($this->session->userdata('CusUserID') != "") { ?>
-                            <li><a href="<?php echo base_url() . 'apporedrlist'; ?>"><?php echo display('morderlist') ?></a></li>
-                        <?php } ?>
-
                     </ul>
                 </nav>
                 <div class="row category_menu">
@@ -401,7 +431,84 @@ if (!empty($seoterm)) {
           if ($this->cart->contents() > 0) {
           	$totalqty = count($this->cart->contents());
           } ?>
-<style>.bell-dropdown{display:none;position:absolute;bottom:50px;right:0;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.18);min-width:200px;z-index:999;}.bell-dropdown.bell-open{display:block;}.bell-dropdown a{display:block;padding:10px 15px;color:#333;text-decoration:none;font-size:14px;}.bell-dropdown a:hover{background:#f5f5f5;}</style>
+<style>
+.bell-dropdown{display:none;position:absolute;bottom:50px;right:0;background:#fff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.18);min-width:200px;z-index:999;}
+.bell-dropdown.bell-open{display:block;}
+.bell-dropdown a{display:block;padding:10px 15px;color:#333;text-decoration:none;font-size:14px;}
+.bell-dropdown a:hover{background:#f5f5f5;}
+/* Table badge pill */
+.table-badge-pill{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle;letter-spacing:.3px;}
+/* View toggle */
+.view-toggle{display:flex;gap:3px;align-items:center;}
+.btn-view-toggle{background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:3px 7px;cursor:pointer;opacity:.7;transition:all .2s;line-height:1;}
+.btn-view-toggle.active{opacity:1;background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.6);}
+.btn-view-toggle i{font-size:13px;}
+/* ── Grid view ─────────────────────────────────── */
+#searchqritem.grid-view .col-12{display:flex;flex-wrap:wrap;gap:10px;}
+
+/* Card: vertical, half-width */
+#searchqritem.grid-view .product--card{
+  flex-direction:column!important;
+  align-items:stretch!important;
+  width:calc(50% - 5px);
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 1px 8px rgba(0,0,0,.09);
+  padding:0;
+  margin-bottom:0!important;
+}
+
+/* Image full width */
+#searchqritem.grid-view .product__thumbnail{width:100%;margin-right:0;}
+#searchqritem.grid-view .product__thumbnail img{
+  width:100%;height:110px;object-fit:cover;display:block;border-radius:0;
+}
+
+/* Info area */
+#searchqritem.grid-view .product_info{
+  display:flex!important;flex-direction:column!important;flex:1;
+  padding:8px 8px 8px;box-sizing:border-box;
+}
+
+/* Name: 2 lines max */
+#searchqritem.grid-view .product-desc{margin-bottom:6px;}
+#searchqritem.grid-view .menu_title{
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;font-size:12px!important;line-height:1.35;
+  word-break:break-word;color:#111;font-weight:600;
+}
+#searchqritem.grid-view .product-desc p{display:none!important;}
+
+/* Price area: column — price then button */
+#searchqritem.grid-view .price_area{
+  display:flex!important;flex-direction:column!important;
+  margin-top:auto;gap:6px;
+}
+#searchqritem.grid-view .price_area>.d-flex{
+  display:flex!important;align-items:center;gap:4px;
+}
+#searchqritem.grid-view .price_area .price{
+  font-size:13px!important;font-weight:700;margin:0;white-space:nowrap;
+}
+/* Hide variant pill — saves space */
+#searchqritem.grid-view .variant_btn{display:none!important;}
+
+/* "+" button: toujours visible en grid (override le d-none du JS), texte caché */
+#searchqritem.grid-view .simple_btn,
+#searchqritem.grid-view .simple_btn.d-none {
+  display:flex!important;align-items:center;justify-content:center;
+  width:100%!important;border-radius:8px!important;
+  padding:7px!important;cursor:pointer;box-sizing:border-box;
+}
+#searchqritem.grid-view .simple_btn span{display:none!important;}
+#searchqritem.grid-view .simple_btn::after{
+  content:'+';font-size:20px;font-weight:800;line-height:1;
+}
+
+/* Counter: toujours caché en grid — pas de – / + après ajout */
+#searchqritem.grid-view .cart_counter{display:none!important;}
+</style>
 <div class="fixed_area only-sm">
         <div class="container-fluid">
             <div class="row">
@@ -430,14 +537,17 @@ if (!empty($seoterm)) {
                                                             } ?>;"></i><span id="badgeshow" class="<?php if($totalqty>0){ echo "badgedisplayblock";}else{ echo "badgedisplaynone";}?> classic-badge2"><?php echo $totalqty;?></span>
                       		</button>   
                       	</div>
-                        <?php if ($this->session->userdata('tableid')) { ?>
+                        <?php
+                        $tableid = $this->session->userdata('tableid');
+                        $has_active_order = $tableid && $this->db->where('table_no', $tableid)->where_in('order_status', [1, 2, 3])->where('order_date', date('Y-m-d'))->count_all_results('customer_order') > 0;
+                        if ($has_active_order) { ?>
                         <div class="icon" style="position:relative;">
                             <button class="btn btn-transparent" onclick="document.getElementById('bellMenu').classList.toggle('bell-open');">
                                 <i class="ti-bell" style="color:<?php if (!empty($webinfo->qrheaderfontcolor)) { echo $webinfo->qrheaderfontcolor; } ?>;"></i>
                             </button>
                             <div id="bellMenu" class="bell-dropdown">
-                                <a href="#" onclick="callWaiter('waiter'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-hand-paper-o"></i> Appeler le serveur</a>
-                                <a href="#" onclick="callWaiter('bill'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-file-text-o"></i> Demander l'addition</a>
+                                <a href="#" onclick="callWaiter('waiter'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-hand-paper-o"></i> <?php echo display('call_waiter'); ?></a>
+                                <a href="#" onclick="callWaiter('bill'); document.getElementById('bellMenu').classList.remove('bell-open'); return false;"><i class="fa fa-file-text-o"></i> <?php echo display('request_bill'); ?></a>
                             </div>
                         </div>
                         <?php } ?>
@@ -473,7 +583,29 @@ if (!empty($seoterm)) {
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/custom.js"></script>
    <!-- get js from here  -->
    <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/qrapp_main.js"></script>
-   
+   <script>
+   function setQrView(type) {
+       var container = document.getElementById('searchqritem');
+       var listBtn = document.getElementById('listViewBtn');
+       var gridBtn = document.getElementById('gridViewBtn');
+       if (type === 'grid') {
+           container.classList.add('grid-view');
+           gridBtn.classList.add('active');
+           listBtn.classList.remove('active');
+       } else {
+           container.classList.remove('grid-view');
+           listBtn.classList.add('active');
+           gridBtn.classList.remove('active');
+       }
+       try { localStorage.setItem('qr_view_pref', type); } catch(e) {}
+   }
+   document.addEventListener('DOMContentLoaded', function() {
+       try {
+           var saved = localStorage.getItem('qr_view_pref');
+           if (saved === 'grid') setQrView('grid');
+       } catch(e) {}
+   });
+   </script>
 </body>
 
 </html>

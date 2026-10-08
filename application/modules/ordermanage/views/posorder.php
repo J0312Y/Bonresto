@@ -574,6 +574,10 @@ foreach ($scan as $file) {
                     <?php }
 
                     ?>
+                    <li><a href="#reservations" role="tab" data-toggle="tab" class="ongord newtab reservation-order-tab"
+                            id="todayreservations" onclick="giveselecttab(this)"><i
+                                class="fa fa-calendar-check-o smallview"></i> <span
+                                class="responsiveview">Réservations</span> </a> </li>
                     <li class="seelist"> <a href="#settings" role="tab" data-toggle="tab"
                             class="comorder newtab online-order-tab" id="todayonlieorder"
                             onclick="giveselecttab(this)"><i class="fa fa-shopping-bag smallview"></i> <span
@@ -1629,6 +1633,9 @@ foreach ($scan as $file) {
                 <?php }
 
                 ?>
+                <div class="tab-pane fade" id="reservations" style="overflow-y:auto;max-height:calc(100vh - 200px);padding:10px;">
+                    <div id="reservation-panel"></div>
+                </div>
                 <div class="tab-pane fade" id="settings"> </div>
                 <div class="tab-pane fade" id="messages"> </div>
             </div>
@@ -1679,4 +1686,5 @@ foreach ($scan1 as $file) {
 <script src="<?php echo base_url('ordermanage/order/quickorderjs') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('application/modules/ordermanage/assets/js/possetting.js?v=2.3'); ?>" type="text/javascript">
 </script>
+<script src="<?php echo base_url('application/modules/reservation/assets/js/pos_reservations.js?v=1.0'); ?>" type="text/javascript"></script>
 

@@ -28,6 +28,18 @@ class Saas_mailer {
         return $this->_send($tenant['email'], $subject, $body);
     }
 
+    /**
+     * Email complet après provisioning :
+     * URL d'accès + identifiants POS + clé de licence
+     *
+     * @param array $data {email, business_name, pos_url, admin_email, admin_password, licence_key}
+     */
+    public function send_welcome_full(array $data): bool {
+        $subject = '🎉 Votre restaurant Bonresto est prêt — Accès & identifiants';
+        $body    = $this->_wrap($this->_tpl_welcome_full($data));
+        return $this->_send($data['email'], $subject, $body);
+    }
+
     /** Envoi d'une facture par email (avec PDF en pièce jointe optionnel) */
     public function send_invoice(array $invoice, string $pdf_path = ''): bool {
         $subject = "Facture {$invoice['invoice_number']} — Bonresto SaaS";
@@ -169,6 +181,62 @@ HTML;
 
 <p style="color:#9ca3af;font-size:13px;margin:0;">
   Gardez cette clé en lieu sûr. En cas de problème, contactez-nous à {$this->company['email']}.
+</p>
+HTML;
+    }
+
+    private function _tpl_welcome_full(array $d): string {
+        $name    = htmlspecialchars($d['business_name']);
+        $url     = htmlspecialchars($d['pos_url']);
+        $email   = htmlspecialchars($d['admin_email']);
+        $pass    = htmlspecialchars($d['admin_password']);
+        $licence = htmlspecialchars($d['licence_key']);
+        $support = htmlspecialchars($this->company['email']);
+
+        return <<<HTML
+<h2 style="margin:0 0 8px;color:#1a202c;font-size:22px;">Bienvenue, {$name} ! 🎉</h2>
+<p style="color:#4a5568;line-height:1.7;margin:0 0 24px;">
+  Votre plateforme Bonresto est prête. Vous trouverez ci-dessous tous vos accès.
+</p>
+
+<!-- URL d'accès -->
+<div style="background:#f0fdf4;border:2px solid #22c55e;border-radius:10px;padding:20px;margin-bottom:20px;">
+  <p style="margin:0 0 6px;font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;font-weight:bold;">Votre URL d'accès</p>
+  <a href="{$url}" style="font-size:18px;font-weight:bold;color:#16a34a;font-family:monospace;text-decoration:none;">{$url}</a>
+</div>
+
+<!-- Identifiants POS -->
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin-bottom:20px;">
+  <p style="margin:0 0 12px;font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;font-weight:bold;">Identifiants de connexion</p>
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="font-size:13px;color:#6b7280;padding-bottom:8px;width:40%;">Email</td>
+      <td style="font-size:13px;font-weight:bold;color:#1a202c;font-family:monospace;">{$email}</td>
+    </tr>
+    <tr>
+      <td style="font-size:13px;color:#6b7280;">Mot de passe temporaire</td>
+      <td style="font-size:13px;font-weight:bold;color:#dc2626;font-family:monospace;">{$pass}</td>
+    </tr>
+  </table>
+  <p style="margin:12px 0 0;font-size:11px;color:#9ca3af;">⚠️ Changez ce mot de passe dès votre première connexion.</p>
+</div>
+
+<!-- Clé de licence -->
+<div style="background:#fef3f2;border:2px dashed #dc2626;border-radius:10px;padding:20px;margin-bottom:24px;text-align:center;">
+  <p style="margin:0 0 6px;font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;font-weight:bold;">Clé de licence</p>
+  <p style="margin:0;font-size:18px;font-weight:bold;color:#dc2626;letter-spacing:3px;font-family:monospace;">{$licence}</p>
+  <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;">À entrer dans Paramètres → Licence de votre tableau de bord.</p>
+</div>
+
+<!-- Bouton -->
+<div style="text-align:center;margin:24px 0;">
+  <a href="{$url}" style="background:#dc2626;color:#fff;text-decoration:none;padding:14px 32px;border-radius:8px;font-weight:bold;font-size:15px;display:inline-block;">
+    Accéder à mon tableau de bord →
+  </a>
+</div>
+
+<p style="color:#9ca3af;font-size:12px;margin:0;text-align:center;">
+  Besoin d'aide ? Contactez-nous à <a href="mailto:{$support}" style="color:#dc2626;">{$support}</a>
 </p>
 HTML;
     }

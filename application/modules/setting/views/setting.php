@@ -215,6 +215,26 @@
                         </div>
                     </div>   
 
+                    <!-- Stock Alert Settings -->
+                    <div style="border-top:1px solid #eee;margin:15px 0;padding-top:15px;">
+                        <h5 style="color:#c0392b;margin-bottom:15px;"><i class="fa fa-exclamation-triangle"></i> <?php echo display('stock_alert') ?? 'Stock Alert'; ?></h5>
+                    </div>
+                    <div class="form-group row">
+                        <label for="stock_alert_enabled" class="col-xs-3 col-form-label"><?php echo display('stock_alert') ?? 'Stock Alert'; ?></label>
+                        <div class="col-xs-9">
+                            <select name="stock_alert_enabled" class="form-control">
+                                <option value="1" <?php echo (!empty($setting->stock_alert_enabled) && $setting->stock_alert_enabled == 1) ? 'selected' : ''; ?>><?php echo display('active') ?? 'Active'; ?></option>
+                                <option value="0" <?php echo (isset($setting->stock_alert_enabled) && $setting->stock_alert_enabled == 0) ? 'selected' : ''; ?>><?php echo display('inactive') ?? 'Inactive'; ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="stock_alert_time" class="col-xs-3 col-form-label"><?php echo display('notification_time') ?? 'Notification Time'; ?></label>
+                        <div class="col-xs-9">
+                            <input name="stock_alert_time" type="time" class="form-control" value="<?php echo !empty($setting->stock_alert_time) ? $setting->stock_alert_time : '08:00'; ?>">
+                        </div>
+                    </div>
+
                     <div class="form-group text-right">
                         <button type="reset" class="btn btn-primary w-md m-b-5"><?php echo display('reset') ?></button>
                         <button type="submit" class="btn btn-success w-md m-b-5"><?php echo display('save') ?></button>

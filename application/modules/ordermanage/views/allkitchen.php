@@ -346,6 +346,66 @@ $iteminfo      = $this->ordermodel->customerorderkitchen($orderinfo->order_id, $
 
         }
 
+        // ── Reservation pre-order preview (grayed-out) ──
+        $kid = $kitchenorderinfo['kitchenid'];
+        $preorders = isset($upcoming_preorders[$kid]) ? $upcoming_preorders[$kid] : [];
+        if (!empty($preorders)) {
+            // Group by reservation
+            $grouped = [];
+            foreach ($preorders as $po) {
+                $rid = $po->reserveid;
+                if (!isset($grouped[$rid])) {
+                    $grouped[$rid] = (object)[
+                        'reservation_id' => $rid,
+                        'customer_name'  => $po->customer_name,
+                        'tablename'      => $po->tablename,
+                        'formtime'       => $po->formtime,
+                        'items'          => [],
+                    ];
+                }
+                $grouped[$rid]->items[] = $po;
+            }
+
+            foreach ($grouped as $gres) {
+                $resTime = substr($gres->formtime, 0, 5);
+        ?>
+                <div class="grid-col col-vxs-12 col-xs-6 col-md-4 col-lg-3 col-xlg-4">
+                    <div class="grid-item-content" style="opacity:0.5;border:2px dashed #ccc;background:#fafafa;">
+                        <div class="food_item">
+                            <div class="food_item_top" style="background:#fff3e0;">
+                                <div class="item_inner">
+                                    <h4 class="kf_info"><i class="fa fa-calendar-check-o"></i> Réservation <?= $resTime ?></h4>
+                                </div>
+                                <div class="item_inner">
+                                    <h4 class="kf_info"><?= display('table') ?>: <?= htmlspecialchars($gres->tablename) ?></h4>
+                                    <h4 class="kf_info"><i class="fa fa-user"></i> <?= htmlspecialchars($gres->customer_name) ?></h4>
+                                </div>
+                            </div>
+                            <div class="food_select">
+                                <?php foreach ($gres->items as $pi) { ?>
+                                <div class="single_item">
+                                    <div class="align-center justify-between item-dv">
+                                        <div>
+                                            <span class="display-block"><?= htmlspecialchars($pi->product_name) ?></span>
+                                            <?php if (!empty($pi->variant_name)) { ?>
+                                            <span class="item-span"><?= htmlspecialchars($pi->variant_name) ?></span>
+                                            <?php } ?>
+                                        </div>
+                                        <h4 class="quantity"><?= (int)$pi->qty ?>x</h4>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <div class="text-center" style="padding:8px;color:#e65100;font-size:12px;font-weight:600;">
+                                    <i class="fa fa-clock-o"></i> En attente de l'arrivée du client
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php
+            }
+        }
+
         ?>
                         </div>
                 </div>

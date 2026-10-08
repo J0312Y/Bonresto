@@ -267,7 +267,7 @@
 	font-weight:bold;
 }
 
-.seelist{position:relative;}
+.seelist, .seelist2{position:relative;}
 .notif{
     display: inline !important;
     position: absolute !important;
@@ -278,7 +278,7 @@
     border: none !important;
     box-shadow: none !important;
 }
-.notif2{
+.notif2, .notif-resa{
     display: inline !important;
     position: absolute !important;
     float: right;

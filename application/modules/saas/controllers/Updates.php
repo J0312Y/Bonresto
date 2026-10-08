@@ -17,7 +17,8 @@ class Updates extends Saas_base {
     }
 
     /** GET /saas/updates/:id */
-    public function show(int $id) {
+    public function show($id) {
+        $id = (int)$id;
         $this->require_auth();
         $update = $this->Saas_model->get_update($id);
         if (!$update) { $this->_error('Update not found', 404); return; }
@@ -40,7 +41,8 @@ class Updates extends Saas_base {
     }
 
     /** POST /saas/updates/:id/publish */
-    public function publish(int $id) {
+    public function publish($id) {
+        $id = (int)$id;
         $this->require_auth();
         if (!$this->Saas_model->publish_update($id)) {
             $this->_error('Impossible de publier (déjà publié ou inexistant)', 400);
@@ -50,7 +52,8 @@ class Updates extends Saas_base {
     }
 
     /** POST /saas/updates/:id/archive */
-    public function archive_update(int $id) {
+    public function archive_update($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->Saas_model->archive_update($id);
         $this->_json(['success' => true]);

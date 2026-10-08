@@ -355,11 +355,23 @@ if (!empty($seoterm)) {
                     </div>
                     <div class="form-group">
                         <label for="customerName" class="col-form-label"><?php echo display('customer_name') ?></label>
-                        <input type="text" class="form-control" id="customerName" name="customerName" required>
+                        <?php
+                        $prefill_name = '';
+                        $prefill_phone = '';
+                        $cus_sess_id = $this->session->userdata('CusUserID');
+                        if (!empty($cus_sess_id)) {
+                            $cus_prefill = $this->db->select('customer_name, customer_phone')->where('customer_id', $cus_sess_id)->get('customer_info')->row();
+                            if ($cus_prefill) {
+                                $prefill_name = $cus_prefill->customer_name;
+                                $prefill_phone = $cus_prefill->customer_phone;
+                            }
+                        }
+                        ?>
+                        <input type="text" class="form-control" id="customerName" name="customerName" value="<?php echo htmlspecialchars($prefill_name); ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="phone" class="col-form-label"><?php echo display('phone') ?></label>
-                        <input type="text" class="form-control" id="phone" name="phone" required>
+                        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo htmlspecialchars($prefill_phone); ?>" required>
                         <input type="hidden" class="form-control" id="grandtotal" name="grandtotal" value="<?php echo $totalamount + $calvat + $servicecharge - ($discount + $coupon); ?>">
                     </div>
                 </div>

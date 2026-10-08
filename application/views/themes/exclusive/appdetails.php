@@ -28,8 +28,8 @@ $restaurantisopen = 0;
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="<?php echo $seoinfo->description; ?>">
-        <meta name="keywords" content="<?php echo $seoinfo->keywords; ?>">
+        <meta name="description" content="<?php echo !empty($seoinfo) ? $seoinfo->description : ''; ?>">
+        <meta name="keywords" content="<?php echo !empty($seoinfo) ? $seoinfo->keywords : ''; ?>">
         <title><?php echo $title; ?></title>
         <link rel="shortcut icon" type="image/ico" href="<?php echo base_url((!empty($this->settinginfo->favicon) ? $this->settinginfo->favicon : 'application/views/themes/' . $acthemename . '/assets_web/images/favicon.png')) ?>">
         <!--====== Plugins CSS Files =======-->

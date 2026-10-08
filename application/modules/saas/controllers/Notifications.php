@@ -135,6 +135,32 @@ class Notifications extends Saas_base {
         $this->_json(array_values(array_slice($notifications, 0, 20)));
     }
 
+    /** GET /saas/notifications/persistent */
+    public function persistent() {
+        $this->require_auth();
+        $admin_id = (int)$this->saas_admin['admin_id'];
+
+        $this->_json([
+            'notifications' => $this->Saas_model->get_notifications($admin_id),
+            'unread_count'  => $this->Saas_model->get_unread_count($admin_id),
+        ]);
+    }
+
+    /** PUT /saas/notifications/{id}/read */
+    public function mark_read($id) {
+        $id = (int)$id;
+        $this->require_auth();
+        $this->Saas_model->mark_notification_read($id);
+        $this->_json(['success' => true]);
+    }
+
+    /** PUT /saas/notifications/read-all */
+    public function mark_all_read() {
+        $this->require_auth();
+        $this->Saas_model->mark_all_notifications_read((int)$this->saas_admin['admin_id']);
+        $this->_json(['success' => true]);
+    }
+
     private function _color(string $action): string {
         return match($action) {
             'license_activated'    => 'success',

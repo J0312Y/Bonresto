@@ -83,3 +83,19 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+|--------------------------------------------------------------------------
+| Reservations : statuts qui occupent une table
+|--------------------------------------------------------------------------
+|
+| Copie de la constante posee dans application/config/constants.php.
+| Cette installation api/ est un second CodeIgniter complet, avec ses
+| propres modeles : les corrections faites cote principal ne s'y
+| propagent pas et doivent y etre reportees.
+|
+| tblreservation.status : 1 = demande en attente, 2 = confirmee.
+| Une demande en attente occupe sa table, sans quoi deux clients
+| peuvent obtenir le meme creneau tant que personne n'a confirme.
+*/
+defined('RESERVATION_STATUTS_OCCUPANTS') OR define('RESERVATION_STATUTS_OCCUPANTS', [1, 2]);

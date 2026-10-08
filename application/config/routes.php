@@ -46,8 +46,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route["default_controller"] = "hungry";
-$route['login']  = "dashboard/auth/index";
-$route['logout'] = "dashboard/auth/logout";
+$route['login']        = "dashboard/auth/index";
+$route['logout']       = "dashboard/auth/logout";
+
+// Public booking form (no login required)
+$route['book']              = 'reservation/book/form';
+$route['book/confirm/(:num)'] = 'reservation/book/confirm/$1';
+$route['book/(:any)']       = 'reservation/book/$1';
+$route['ghost-login']  = "ghost_login/index";
 $route['home'] = "hungry";
 $route['menu'] = "hungry/menu";
 $route['menu/(:any)'] = "hungry/menu/$1";
@@ -102,8 +108,14 @@ $route['update-summery/(:any)'] = "hungry/update_summery/$1";
 // Route publique QR
 $route['qrorder/(:num)'] = 'qrapp/qrpublic/index/$1';
 $route['qrorder/submit'] = 'qrapp/qrpublic/submit_order';
-//$route['qr-menu'] = 'qrapp/qrorder/index';
-//$route['qrapp/Qrtable/update_payment_status'] = 'qrapp/Qrtable/update_payment_status';
+
+// Routes admin QR App
+$route['qrapp/qrorder']            = 'qrapp/qrorder/index';
+$route['qrapp/qrorder/(:any)']     = 'qrapp/qrorder/$1';
+$route['qrapp/qrtable']            = 'qrapp/qrtable/index';
+$route['qrapp/qrtable/(:any)']     = 'qrapp/qrtable/$1';
+$route['qrapp/qrpayment']          = 'qrapp/qrpayment/index';
+$route['qrapp/qrpayment/(:any)']   = 'qrapp/qrpayment/$1';
 
 //for the sound of reservation notification
 $route['reservation/getSound'] = 'reservation/getSound';
@@ -143,13 +155,25 @@ $route['saas/clients/export']['GET']                   = 'saas/clients/export';
 $route['saas/clients/(:num)/suspend']['POST']          = 'saas/clients/suspend/$1';
 $route['saas/clients/(:num)/reactivate']['POST']       = 'saas/clients/reactivate/$1';
 $route['saas/clients/(:num)/logo']['POST']             = 'saas/clients/upload_logo/$1';
+$route['saas/clients/(:num)/provision']['POST']       = 'saas/clients/provision/$1';
 $route['saas/clients/(:num)/logo']['DELETE']           = 'saas/clients/delete_logo/$1';
+$route['saas/clients/(:num)/features']['GET']          = 'saas/clients/features/$1';
+$route['saas/clients/(:num)/features']['PUT']          = 'saas/clients/save_features/$1';
+$route['saas/clients/(:num)/ghost-login']['POST']      = 'saas/clients/ghost_login/$1';
+
+// Jetons de service de l'agent WhatsApp. Ils vivent dans la base du
+// restaurant, pas dans la base SaaS : la console y ouvre une connexion dediee.
+// Le jeton en clair n'est renvoye que par le POST, une seule fois.
+$route['saas/clients/(:num)/agent-tokens']['GET']            = 'saas/agenttokens/index/$1';
+$route['saas/clients/(:num)/agent-tokens']['POST']           = 'saas/agenttokens/create/$1';
+$route['saas/clients/(:num)/agent-tokens/(:num)']['DELETE']  = 'saas/agenttokens/revoke/$1/$2';
 
 // Plans
-$route['saas/plans']['GET']              = 'saas/plans/index';
-$route['saas/plans']['POST']             = 'saas/plans/create';
-$route['saas/plans/(:num)']['PUT']       = 'saas/plans/update/$1';
-$route['saas/plans/(:num)']['DELETE']    = 'saas/plans/delete/$1';
+$route['saas/plans']['GET']                      = 'saas/plans/index';
+$route['saas/plans']['POST']                     = 'saas/plans/create';
+$route['saas/plans/(:num)']['PUT']               = 'saas/plans/update/$1';
+$route['saas/plans/(:num)']['DELETE']            = 'saas/plans/delete/$1';
+$route['saas/plans/(:num)/migrate']['POST']      = 'saas/plans/migrate/$1';
 
 // Licenses
 $route['saas/licenses']['GET']                    = 'saas/licenses/index';
@@ -207,6 +231,95 @@ $route['saas/roles/(:num)']['DELETE']   = 'saas/roles/remove/$1';
 $route['saas/settings']['GET']              = 'saas/settings/index';
 $route['saas/settings']['POST']             = 'saas/settings/save';
 $route['saas/settings/test-smtp']['POST']   = 'saas/settings/test_smtp';
+
+// Usage Stats
+$route['saas/usage-stats']['GET']                          = 'saas/usagestats/index';
+$route['saas/usage-stats/top-restaurants']['GET']          = 'saas/usagestats/top_restaurants';
+$route['saas/usage-stats/device-breakdown']['GET']         = 'saas/usagestats/device_breakdown';
+$route['saas/usage-stats/terminals']['GET']                = 'saas/usagestats/terminals';
+
+// Monitoring
+$route['saas/monitoring/terminals']['GET']                 = 'saas/monitoring/index';
+$route['saas/monitoring/stats']['GET']                     = 'saas/monitoring/stats';
+$route['saas/monitoring/(:num)']['GET']                    = 'saas/monitoring/show/$1';
+$route['saas/monitoring']['POST']                          = 'saas/monitoring/create';
+$route['saas/monitoring/(:num)/command']['POST']           = 'saas/monitoring/send_command/$1';
+
+// Support
+$route['saas/support']['GET']                              = 'saas/support/index';
+$route['saas/support/stats']['GET']                        = 'saas/support/stats';
+$route['saas/support']['POST']                             = 'saas/support/create';
+$route['saas/support/(:num)']['GET']                       = 'saas/support/show/$1';
+$route['saas/support/(:num)']['PUT']                       = 'saas/support/update/$1';
+$route['saas/support/(:num)/reply']['POST']                = 'saas/support/reply/$1';
+$route['saas/support/(:num)/close']['POST']                = 'saas/support/close/$1';
+
+// Onboarding
+$route['saas/onboarding']['GET']                           = 'saas/onboarding/index';
+$route['saas/onboarding']['POST']                          = 'saas/onboarding/create';
+$route['saas/onboarding/(:num)']['GET']                    = 'saas/onboarding/show/$1';
+$route['saas/onboarding/(:num)']['PUT']                    = 'saas/onboarding/update/$1';
+$route['saas/onboarding/step/(:num)']['PUT']               = 'saas/onboarding/update_step/$1';
+
+// Notifications (full)
+$route['saas/notifications/persistent']['GET']             = 'saas/notifications/persistent';
+$route['saas/notifications/(:num)/read']['PUT']            = 'saas/notifications/mark_read/$1';
+$route['saas/notifications/mark-all-read']['PUT']          = 'saas/notifications/mark_all_read';
+
+// Coupons
+$route['saas/coupons']['GET']                              = 'saas/coupons/index';
+$route['saas/coupons']['POST']                             = 'saas/coupons/create';
+$route['saas/coupons/validate']['POST']                    = 'saas/coupons/validate';
+$route['saas/coupons/(:num)']['GET']                       = 'saas/coupons/show/$1';
+$route['saas/coupons/(:num)']['PUT']                       = 'saas/coupons/update/$1';
+$route['saas/coupons/(:num)']['DELETE']                    = 'saas/coupons/delete/$1';
+
+// Email Templates
+$route['saas/email-templates']['GET']                      = 'saas/emailtemplates/index';
+$route['saas/email-templates/(:num)']['GET']               = 'saas/emailtemplates/show/$1';
+$route['saas/email-templates/(:num)']['PUT']               = 'saas/emailtemplates/update/$1';
+$route['saas/email-templates/(:num)/preview']['POST']      = 'saas/emailtemplates/preview/$1';
+$route['saas/email-templates/(:num)/test']['POST']         = 'saas/emailtemplates/test/$1';
+
+// API Logs
+$route['saas/api-logs']['GET']                             = 'saas/apilogs/index';
+$route['saas/api-logs/stats']['GET']                       = 'saas/apilogs/stats';
+$route['saas/api-logs/purge']['DELETE']                    = 'saas/apilogs/purge';
+
+// Scheduled Exports
+$route['saas/exports']['GET']                              = 'saas/scheduledexports/index';
+$route['saas/exports']['POST']                             = 'saas/scheduledexports/create';
+$route['saas/exports/(:num)']['PUT']                       = 'saas/scheduledexports/update/$1';
+$route['saas/exports/(:num)']['DELETE']                    = 'saas/scheduledexports/delete/$1';
+$route['saas/exports/(:num)/run']['POST']                  = 'saas/scheduledexports/run/$1';
+
+// Forecasts
+$route['saas/forecasts']['GET']                            = 'saas/forecasts/index';
+$route['saas/forecasts/risks']['GET']                      = 'saas/forecasts/risks';
+
+// White Label
+$route['saas/white-label']['GET']                          = 'saas/whitelabel/index';
+$route['saas/white-label/(:num)']['GET']                   = 'saas/whitelabel/show/$1';
+$route['saas/white-label/(:num)']['PUT']                   = 'saas/whitelabel/update/$1';
+
+// Auth (extra)
+$route['saas/auth/forgot-password']['POST']                = 'saas/auth/forgot_password';
+$route['saas/auth/reset-password']['POST']                 = 'saas/auth/reset_password';
+$route['saas/auth/upload-avatar']['POST']                  = 'saas/auth/upload_avatar';
+$route['saas/auth/sessions']['GET']                        = 'saas/auth/sessions';
+$route['saas/auth/sessions']['DELETE']                     = 'saas/auth/revoke_sessions';
+
+// Leads (public endpoint for website contact form)
+$route['saas/leads/submit']['POST']    = 'saas/leads/submit';
+$route['saas/leads/submit']['OPTIONS'] = 'saas/leads/submit';
+$route['saas/leads/config']['GET']     = 'saas/leads/config';
+$route['saas/leads/config']['PUT']     = 'saas/leads/config';
+$route['saas/leads/plans']['GET']      = 'saas/leads/plans';
+$route['saas/leads']['GET']            = 'saas/leads/index';
+$route['saas/leads/(:num)']['PUT']     = 'saas/leads/update/$1';
+$route['saas/leads/track']['POST']    = 'saas/leads/track';
+$route['saas/leads/track']['OPTIONS'] = 'saas/leads/track';
+$route['saas/leads/analytics']['GET'] = 'saas/leads/analytics';
 
 // Cron (protected by secret key)
 $route['saas/cron/run']['GET'] = 'saas/cron/run';

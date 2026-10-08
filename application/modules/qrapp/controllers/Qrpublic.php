@@ -25,6 +25,38 @@ class Qrpublic extends MX_Controller {
             show_error("Table introuvable ou QR invalide.");
         }
 
+        // ── Check for matching reservation (QR check-in) ──
+        $this->load->model('reservation/reservation_model');
+        $matching = $this->reservation_model->match_reservation_by_table($table_id);
+
+        // DEBUG — remove after testing
+        log_message('debug', 'QR CHECK-IN: table_id=' . $table_id
+            . ' | now=' . date('Y-m-d H:i:s')
+            . ' | matching=' . ($matching ? 'YES (reserveid=' . $matching->reserveid . ', match_type=' . $matching->match_type . ')' : 'NULL'));
+
+        if ($matching) {
+            $data['reservation'] = $matching;
+
+            // Load pre-order items
+            $data['preorder_items'] = $this->db
+                ->where('reservation_id', $matching->reserveid)
+                ->get('reservation_preorder')->result();
+
+            if ($matching->match_type === 'on_time') {
+                // Flag the reservation so POS gets an alert
+                $this->db->where('reserveid', $matching->reserveid)
+                    ->update('tblreservation', ['qr_checkin_pending' => 1]);
+                $data['title'] = "Bienvenue !";
+            } elseif ($matching->match_type === 'early') {
+                $data['title'] = "Vous êtes en avance !";
+            } else {
+                $data['title'] = "Réservation passée";
+            }
+
+            $this->load->view('qrapp/qrpublic/reservation_checkin', $data);
+            return;
+        }
+
         // Récupère les produits actifs (par ex. à commander)
         $data['products'] = $this->db->where('status', 1)->get('product_information')->result();
 

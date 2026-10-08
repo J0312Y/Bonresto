@@ -11,6 +11,8 @@ class Settings extends Saas_base {
         'company_name', 'company_address', 'company_email',
         'company_phone', 'company_website', 'saas_cron_key',
         'cron_hour', 'cron_minute',
+        'alert_new_client', 'alert_payment_failed', 'alert_licence_expired',
+        'alert_ticket_urgent', 'alert_weekly_report',
     ];
 
     /** GET /saas/settings */
@@ -47,12 +49,25 @@ class Settings extends Saas_base {
     public function test_smtp() {
         $this->require_auth();
 
-        $to  = $this->saas_admin['email'];
+        // Envoyer à smtp_user (adresse garantie d'exister sur le serveur)
+        // ou à l'admin si différent
+        $cfg_check = $this->Saas_model->get_all_settings();
+        $to = !empty($cfg_check['smtp_user']) ? $cfg_check['smtp_user'] : $this->saas_admin['email'];
         $cfg = $this->Saas_model->get_email_config();
 
         // Disable SSL peer verification (common issue with shared hosting certs)
         $cfg['smtp_timeout']      = 15;
         $cfg['smtp_keepalive']    = false;
+        $cfg['newline']           = "\r\n";
+        $cfg['crlf']              = "\r\n";
+        // Bypass SSL verification pour serveurs dédiés (certificats auto-signés)
+        $cfg['smtp_conn_options'] = [
+            'ssl' => [
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true,
+            ],
+        ];
 
         $this->load->library('email');
         $this->email->initialize($cfg);
@@ -66,11 +81,18 @@ class Settings extends Saas_base {
         $this->email->clear(true);
 
         if (!$ok) {
-            // Extract the last meaningful error line from CI debug output
-            preg_match_all('/\d{3}[- ].*/', strip_tags($debug), $m);
-            $last_error = !empty($m[0]) ? end($m[0]) : 'Connexion ou authentification échouée.';
-            log_message('error', 'SMTP test failed. Debug: ' . $debug);
-            $this->_abort(500, 'Échec SMTP : ' . $last_error);
+            $clean = strip_tags($debug);
+            log_message('error', 'SMTP test failed. Debug: ' . $clean);
+            // Cherche un vrai code SMTP 4xx/5xx
+            preg_match_all('/(?:^|\n)([45]\d{2}[- ][^\n]+)/m', $clean, $m);
+            if (!empty($m[1])) {
+                $last_error = trim(end($m[1]));
+            } else {
+                // Cherche la ligne "ERROR"
+                preg_match('/Unable to send[^\n]*/i', $clean, $me);
+                $last_error = !empty($me[0]) ? trim($me[0]) : 'Échec envoi — vérifiez les logs SMTP.';
+            }
+            $this->_json(['error' => $last_error, 'debug' => substr($clean, 0, 800)], 500);
         }
 
         $this->_json(['success' => true, 'sent_to' => $to]);

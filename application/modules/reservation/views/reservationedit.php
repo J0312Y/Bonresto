@@ -9,34 +9,40 @@
                 <?php echo form_hidden('reserveid', (!empty($intinfo->reserveid)?$intinfo->reserveid:null)) ?>
                 <div class="form-group row">
                     <label for="tableid" class="col-sm-4 col-form-label"><?php echo display('tabltno');?>*</label>
-                    <div class="col-sm-8 customesl">
-                        <?php echo @$tableinfo->tablename;?>
-                        <input name="tableid" type="hidden" value="<?php echo @$tableinfo->tablename;?>" />
+                    <div class="col-sm-8">
+                        <select name="tableid" id="tableid" class="form-control">
+                            <?php if(!empty($tablelist)): ?>
+                                <?php foreach($tablelist as $tid => $tname): ?>
+                                    <option value="<?php echo $tid;?>" <?php echo (!empty($intinfo) && $intinfo->tableid == $tid) ? 'selected' : '';?>>
+                                        <?php echo $tname;?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tablicapacity"
                         class="col-sm-4 col-form-label"><?php echo display('no_of_people');?>*</label>
-                    <div class="col-sm-8 customesl">
-                        <?php echo $intinfo->person_capicity;?>
-                        <input name="tablicapacity" class="form-control" type="hidden" id="tablicapacity"
+                    <div class="col-sm-8">
+                        <input name="tablicapacity" class="form-control" type="number" id="tablicapacity" min="1"
                             value="<?php echo $intinfo->person_capicity;?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="bookdate" class="col-sm-4 col-form-label"><?php echo display('date') ?> *</label>
                     <div class="col-sm-8">
-                        <?php echo $intinfo->reserveday;?>
-                        <input name="bookdate" class="form-control" type="hidden" id="bookdate"
-                            value="<?php echo (!empty($intinfo->reserveday)?$intinfo->reserveday:null) ?>">
+                        <input name="bookdate" class="form-control datepicker" type="text" id="bookdate"
+                            value="<?php echo (!empty($intinfo->reserveday)?$intinfo->reserveday:null) ?>"
+                            placeholder="<?php echo display('date') ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="bookfromtime" class="col-sm-4 col-form-label"><?php echo display('s_time') ?> *</label>
                     <div class="col-sm-8">
-                        <?php echo $intinfo->formtime;?>
-                        <input name="bookfromtime" class="form-control" type="hidden" id="booktime"
-                            value="<?php echo (!empty($intinfo->formtime)?$intinfo->formtime:null) ?>">
+                        <input name="bookfromtime" class="form-control timepicker" type="text" id="bookfromtime"
+                            value="<?php echo (!empty($intinfo->formtime)?$intinfo->formtime:null) ?>"
+                            placeholder="<?php echo display('s_time') ?>">
                     </div>
                 </div>
 
@@ -45,7 +51,7 @@
                     <label for="bookendtime" class="col-sm-4 col-form-label"><?php echo display('e_time') ?> *</label>
                     <div class="col-sm-8">
                         <input name="bookendtime" class="form-control timepicker" type="text"
-                            placeholder="<?php echo display('e_time') ?>" id="booktime"
+                            placeholder="<?php echo display('e_time') ?>" id="bookendtime"
                             value="<?php echo (!empty($intinfo->totime)?$intinfo->totime:null) ?>">
                     </div>
                 </div>

@@ -40,7 +40,8 @@ class Plans extends Saas_base {
     }
 
     /** PUT /saas/plans/{id} */
-    public function update(int $id) {
+    public function update($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->Saas_model->update_plan($id, $this->_body());
         $plan = $this->db->where('plan_id', $id)->get('saas_plans')->row_array();
@@ -52,9 +53,75 @@ class Plans extends Saas_base {
     }
 
     /** DELETE /saas/plans/{id} */
-    public function delete(int $id) {
+    public function delete($id) {
+        $id = (int)$id;
         $this->require_auth();
         $this->Saas_model->delete_plan($id);
         $this->_json(['success' => true]);
+    }
+
+    // ── Module pricing ──────────────────────────────────────────
+
+    /** GET /saas/plans/module_prices */
+    public function module_prices() {
+        $this->require_auth();
+        $modules = $this->db->order_by('sort_order', 'asc')
+            ->get('saas_module_prices')->result_array();
+        foreach ($modules as &$m) {
+            $m['price'] = (float)$m['price'];
+            $m['is_active'] = (int)$m['is_active'];
+            $m['sort_order'] = (int)$m['sort_order'];
+        }
+        $this->_json($modules);
+    }
+
+    /** PUT /saas/plans/module_prices */
+    public function update_module_prices() {
+        $this->require_auth();
+        $body = $this->_body();
+        $modules = $body['modules'] ?? [];
+
+        if (empty($modules) || !is_array($modules)) {
+            $this->_abort(400, 'modules array requis.');
+        }
+
+        $updated = 0;
+        foreach ($modules as $m) {
+            if (empty($m['module_id'])) continue;
+            $data = [];
+            if (isset($m['price'])) $data['price'] = (float)$m['price'];
+            if (isset($m['is_active'])) $data['is_active'] = (int)$m['is_active'];
+            if (isset($m['module_name'])) $data['module_name'] = $m['module_name'];
+            if (isset($m['description'])) $data['description'] = $m['description'];
+            if (isset($m['category'])) $data['category'] = $m['category'];
+            if (!empty($data)) {
+                $this->db->where('module_id', $m['module_id'])->update('saas_module_prices', $data);
+                $updated++;
+            }
+        }
+
+        $this->_json(['success' => true, 'updated' => $updated]);
+    }
+
+    /** POST /saas/plans/{id}/migrate */
+    public function migrate($id) {
+        $id   = (int)$id;
+        $this->require_auth();
+        $body = $this->_body();
+
+        if (empty($body['to_plan_id'])) {
+            $this->_abort(400, 'to_plan_id est requis.');
+        }
+
+        $to_plan_id = (int)$body['to_plan_id'];
+
+        if ($to_plan_id === $id) {
+            $this->_abort(400, 'Le plan de destination doit être différent.');
+        }
+
+        $migrated = $this->Saas_model->migrate_plan_clients($id, $to_plan_id);
+        $this->Saas_model->delete_plan($id);
+
+        $this->_json(['success' => true, 'migrated' => $migrated]);
     }
 }

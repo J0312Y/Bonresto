@@ -48,6 +48,8 @@ class V1 extends MY_Controller
 			//if(empty($result->waiter_kitchenToken)){
 			$updatetData['waiter_kitchenToken']    			= $this->input->post('token', TRUE);
 			$this->Api_v1_model->update_date('user', $updatetData, 'id', $result->id ?? '');
+			$this->load->library('notification');
+			$this->notification->set_external_user_id($updatetData['waiter_kitchenToken'], 'staff', $result->id ?? '');
 			//}
 
 			$webseting = $this->Api_v1_model->read('powerbytxt,currency,servicecharge,service_chargeType,vat', 'setting', array('id' => 2));
@@ -1580,6 +1582,40 @@ class V1 extends MY_Controller
 				$customerinfo = $this->db->select("*")->from('customer_info')->where('customer_id', $orderinfo->customer_id)->get()->row();
 				$this->notification->order_accepted($orderid, $orderinfo->totalamount, $customerinfo->customer_token);
 				return $this->respondWithSuccess('Assign to Server Command', $output);
+			}
+		}
+	}
+
+	public function notificationhistory()
+	{
+		$this->form_validation->set_rules('order_id', 'Order ID', 'required|xss_clean|trim');
+		if ($this->form_validation->run() == FALSE) {
+			$errors = $this->form_validation->error_array();
+			return $this->respondWithValidationError($errors);
+		} else {
+			$orderid = $this->input->post('order_id', TRUE);
+			$notifications = $this->db->select('id, order_id, title, message, type, created_at')
+				->from('notification_log')
+				->where('order_id', $orderid)
+				->order_by('created_at', 'DESC')
+				->get()
+				->result();
+
+			$output = array();
+			if (!empty($notifications)) {
+				foreach ($notifications as $notif) {
+					$output[] = array(
+						'id'         => $notif->id,
+						'order_id'   => $notif->order_id,
+						'title'      => $notif->title,
+						'message'    => $notif->message,
+						'type'       => $notif->type,
+						'created_at' => $notif->created_at,
+					);
+				}
+				return $this->respondWithSuccess('Notification history', $output);
+			} else {
+				return $this->respondWithError('No notifications found.', $output);
 			}
 		}
 	}

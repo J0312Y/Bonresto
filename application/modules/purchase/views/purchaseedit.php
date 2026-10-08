@@ -106,6 +106,7 @@
                                             <th class="text-center"><?php echo display('qty') ?> <i class="text-danger">*</i></th>
                                             <th class="text-center"><?php echo display('s_rate') ?><i class="text-danger">*</i></th>
                                             <th class="text-center"><?php echo display('total') ?></th>
+                                            <th class="text-center"><?php echo display('expdate') ?></th>
                                             <th class="text-center"></th>
                                         </tr>
                                 </thead>
@@ -137,6 +138,9 @@
                                                 <input class="form-control total_price text-right" type="text" name="total_price[]" id="total_price_<?php echo $i;?>" value="<?php echo $item->totalprice;?>" readonly="readonly">
                                             </td>
                                             <td>
+                                                <input type="text" class="form-control datepicker item-expiry" name="item_expire_date[]" id="item_expire_date_<?php echo $i;?>" data-date-format="mm/dd/yyyy" value="<?php echo (!empty($item->purchaseexpiredate) && $item->purchaseexpiredate != '0000-00-00') ? date('d-m-Y', strtotime($item->purchaseexpiredate)) : ''; ?>" placeholder="JJ-MM-AAAA" readonly="readonly">
+                                            </td>
+                                            <td>
                                                 <button  class="btn btn-danger red text-right" type="button" value="Delete" onclick="purchasetdeleteRow(this)" tabindex="8"><?php echo display('delete') ?></button>
                                             </td>
                                     </tr>
@@ -147,13 +151,13 @@
                                         <td colspan="2">
                                             <input type="button" id="add_invoice_item" class="btn btn-success" name="add-invoice-item" onclick="addmore('addPurchaseItem');" value="<?php echo display('add_more') ?> <?php echo display('item') ?>" tabindex="9">
                                         </td>
-                                        <td  class="text-right" colspan="2"><b><?php echo display('grand') ?> <?php echo display('total') ?>:</b></td>
+                                        <td  class="text-right" colspan="3"><b><?php echo display('grand') ?> <?php echo display('total') ?>:</b></td>
                                         <td class="text-right">
                                             <input type="text" id="grandTotal" class="text-right form-control" name="grand_total_price" value="<?php echo $purchaseinfo->total_price;?>" readonly="readonly">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" class="text-right"><b><?php echo display('paid') ?> <?php echo display('amount') ?>:</b></td>
+                                        <td colspan="5" class="text-right"><b><?php echo display('paid') ?> <?php echo display('amount') ?>:</b></td>
                                         <td class="text-right">
                                             <input type="text" id="paidamount" class="text-right form-control" name="paidamount" value="<?php echo $purchaseinfo->paid_amount;?>" placeholder="0.00">
                                         </td>

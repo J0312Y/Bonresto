@@ -36,7 +36,7 @@
   background: #f5f7fa;
   left: 0;
   right: 0;
-  padding: 12px 30px;
+  padding: 6px 20px;
   top: 0;
   transition: transform 0.3s;
 }
@@ -107,7 +107,7 @@
 }
 
 .tab-content-xs {
-  top: 60px;
+  top: 48px;
   position: relative;
   padding: 0 0 40px;
 }
@@ -293,6 +293,21 @@ listcat.listcat {
     overflow-y: hidden;
   }
 }
+.tabsection .nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-top: 6px;
+}
+.tabsection .nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+.tabsection .nav-tabs > li {
+  flex-shrink: 0;
+}
 .nav-tabs > li {
   margin-bottom: 0px !important;
 }
@@ -351,6 +366,14 @@ listcat.listcat {
 .today-order-tab {
   box-shadow: none !important;
   background-color: #2972ff !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  line-height: 23px !important;
+  margin-right: 5px !important;
+}
+.reservation-order-tab {
+  box-shadow: none !important;
+  background-color: #e65100 !important;
   border-radius: 8px !important;
   color: #fff !important;
   line-height: 23px !important;

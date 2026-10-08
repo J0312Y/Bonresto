@@ -36,6 +36,9 @@ class License_manager {
 
     private string $saas_url;
 
+    /** Niveau de la derniere signature examinee : forte | heritee | invalide. */
+    private string $dernier_niveau = 'invalide';
+
     public function __construct() {
         $url = rtrim(env_required('SAAS_URL'), '/');
 
@@ -218,8 +221,7 @@ class License_manager {
                 'pending_updates' => $raw_updates,
             ];
 
-            $secret    = env_required('LICENSE_HMAC_SECRET');
-            $signature = hash_hmac('sha256', json_encode($payload), $secret);
+            $signature = $this->_signer($payload);
 
             if (!empty($payload['pending_updates'])) {
                 $this->apply_updates($payload['pending_updates'], $client_key);
@@ -291,8 +293,7 @@ class License_manager {
                 'issued_at'   => date('Y-m-d H:i:s'),
             ];
 
-            $secret    = env_required('LICENSE_HMAC_SECRET');
-            $signature = hash_hmac('sha256', json_encode($payload), $secret);
+            $signature = $this->_signer($payload);
 
             $this->_save($payload, $signature, $client_key);
             $this->_log("License activated via DB for {$client_key} — plan: {$payload['plan']}");
@@ -490,6 +491,17 @@ class License_manager {
      * Writes PHP files to disk under strictly allowed paths only.
      */
     private function _apply_code_update(array $update): void {
+        // Audit F-05 : ce chemin ecrit des fichiers que CodeIgniter executera.
+        // Une signature HMAC ne suffit plus : la cle etant partagee, elle est
+        // detenue par le client lui-meme, donc forgeable. Seule une signature
+        // Ed25519, verifiee avec la cle publique, est acceptee ici.
+        if ($this->dernier_niveau !== 'forte') {
+            throw new Exception(
+                'Mise a jour de code refusee : signature non asymetrique ('
+                . $this->dernier_niveau . ').'
+            );
+        }
+
         $files = $update['payload'] ?? [];
         if (empty($files) || !is_array($files)) {
             throw new Exception('No files in code update payload');
@@ -600,9 +612,80 @@ class License_manager {
         return $features;
     }
 
+    /**
+     * Niveau de confiance d'une signature.
+     *
+     * Audit F-05. La signature etait un HMAC-SHA256, donc symetrique : la cle
+     * qui verifie est celle qui signe. Chaque installation cliente detenait
+     * donc de quoi fabriquer une licence — et, ce canal ecrivant des fichiers
+     * sur le disque, de quoi executer du code.
+     *
+     * Ed25519 separe les deux : le serveur SaaS garde la cle privee, le client
+     * ne recoit que la cle publique. Il peut verifier, il ne peut plus forger.
+     *
+     * Les licences deja emises restent signees en HMAC. Elles continuent d'etre
+     * acceptees pour lire un abonnement — sinon toutes les installations en
+     * place tomberaient d'un coup — mais elles ne suffisent PLUS a declencher
+     * une mise a jour de code : voir apply_updates().
+     *
+     * @return string 'forte' (Ed25519), 'heritee' (HMAC), ou 'invalide'.
+     */
+    private function _niveau_signature(array $payload, string $signature): string {
+        $corps = json_encode($payload);
+
+        $publique = getenv('LICENSE_PUBLIC_KEY');
+        if (!empty($publique) && function_exists('sodium_crypto_sign_verify_detached')) {
+            $brut = base64_decode((string) $publique, true);
+            $sig  = base64_decode($signature, true);
+
+            if ($brut !== false && $sig !== false
+                && strlen($brut) === SODIUM_CRYPTO_SIGN_PUBLICKEYBYTES
+                && strlen($sig)  === SODIUM_CRYPTO_SIGN_BYTES) {
+                try {
+                    if (sodium_crypto_sign_verify_detached($sig, $corps, $brut)) {
+                        return 'forte';
+                    }
+                } catch (Throwable $e) {
+                    // signature malformee : on retombe sur l'examen du format herite
+                }
+            }
+        }
+
+        $herite = getenv('LICENSE_HMAC_SECRET');
+        if (!empty($herite) && hash_equals(hash_hmac('sha256', $corps, $herite), $signature)) {
+            log_message('info', 'License_manager : licence encore signee en HMAC. '
+                . 'Elle sera reemise en Ed25519 au prochain rafraichissement.');
+            return 'heritee';
+        }
+
+        return 'invalide';
+    }
+
     private function _verify_signature(array $payload, string $signature): bool {
-        $expected = hash_hmac('sha256', json_encode($payload), env_required('LICENSE_HMAC_SECRET'));
-        return hash_equals($expected, $signature);
+        $this->dernier_niveau = $this->_niveau_signature($payload, $signature);
+        return $this->dernier_niveau !== 'invalide';
+    }
+
+    /**
+     * Signe un payload. Ed25519 des que la cle privee est configuree ; sinon
+     * HMAC, avec une trace, pour ne pas interrompre un serveur pas encore migre.
+     */
+    private function _signer(array $payload): string {
+        $corps = json_encode($payload);
+        $privee = getenv('LICENSE_SIGNING_KEY');
+
+        if (!empty($privee) && function_exists('sodium_crypto_sign_detached')) {
+            $brut = base64_decode((string) $privee, true);
+            if ($brut !== false && strlen($brut) === SODIUM_CRYPTO_SIGN_SECRETKEYBYTES) {
+                $this->dernier_niveau = 'forte';
+                return base64_encode(sodium_crypto_sign_detached($corps, $brut));
+            }
+        }
+
+        log_message('error', 'License_manager : LICENSE_SIGNING_KEY absente ou invalide, '
+            . 'repli sur HMAC. Les mises a jour de code seront refusees.');
+        $this->dernier_niveau = 'heritee';
+        return hash_hmac('sha256', $corps, env_required('LICENSE_HMAC_SECRET'));
     }
 
     private function _save(array $payload, string $signature, string $client_key): void {

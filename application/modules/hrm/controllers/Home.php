@@ -11,7 +11,6 @@ class Home extends MX_Controller
         $this->load->model([
             'Csv_model',
         ]);
-        $this->load->library('excel');
     }
 
     public function index()
@@ -41,7 +40,12 @@ class Home extends MX_Controller
         if (isset($_FILES["userfile"]["name"])) {
             $_FILES["userfile"]["name"];
             $path   = $_FILES["userfile"]["tmp_name"];
-            $object = PHPExcel_IOFactory::load($path);
+        // Audit F-25 : PHPExcel est en fin de vie depuis 2017 et etait
+        // vendorise en double de PhpSpreadsheet, deja installe par Composer.
+        // Attention au changement d'API : PHPExcel indexait les colonnes a
+        // partir de 0, PhpSpreadsheet a partir de 1 — d'ou le decalage des
+        // indices ci-dessous.
+            $object = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
 
             foreach ($object->getWorksheetIterator() as $sale) {
 
@@ -49,11 +53,11 @@ class Home extends MX_Controller
                 $highestColumn = $sale->getHighestColumn();
 
                 for ($row = 2; $row <= $highestRow; $row++) {
-                    $employee_id = $sale->getCellByColumnAndRow(0, $row)->getValue();
-                    $date        = $sale->getCellByColumnAndRow(1, $row)->getValue();
-                    $in          = $sale->getCellByColumnAndRow(2, $row)->getValue();
-                    $out         = $sale->getCellByColumnAndRow(3, $row)->getValue();
-                    $tsayed      = $sale->getCellByColumnAndRow(4, $row)->getValue();
+                    $employee_id = $sale->getCellByColumnAndRow(1, $row)->getValue();
+                    $date        = $sale->getCellByColumnAndRow(2, $row)->getValue();
+                    $in          = $sale->getCellByColumnAndRow(3, $row)->getValue();
+                    $out         = $sale->getCellByColumnAndRow(4, $row)->getValue();
+                    $tsayed      = $sale->getCellByColumnAndRow(5, $row)->getValue();
 
                     $attdate  = date('Y-m-d', strtotime($date));
                     $in_time  = date('H:i:s ', strtotime($in));

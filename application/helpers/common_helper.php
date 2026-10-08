@@ -758,3 +758,39 @@ if (!function_exists('limite_debit')) {
         return true;
     }
 }
+
+/**
+ * Audit F-05 — signature d'un payload de licence.
+ *
+ * Ed25519 des que LICENSE_SIGNING_KEY est configuree ; repli HMAC sinon, pour
+ * ne pas interrompre un serveur pas encore migre. Le repli est trace, et une
+ * licence ainsi signee ne peut plus declencher de mise a jour de code cote
+ * client (voir License_manager::_apply_code_update).
+ *
+ * @return array{signature:string, niveau:string}
+ */
+if (!function_exists('signer_licence')) {
+    function signer_licence(array $payload)
+    {
+        $corps  = json_encode($payload);
+        $privee = getenv('LICENSE_SIGNING_KEY');
+
+        if (!empty($privee) && function_exists('sodium_crypto_sign_detached')) {
+            $brut = base64_decode((string) $privee, true);
+            if ($brut !== false && strlen($brut) === SODIUM_CRYPTO_SIGN_SECRETKEYBYTES) {
+                return [
+                    'signature' => base64_encode(sodium_crypto_sign_detached($corps, $brut)),
+                    'niveau'    => 'forte',
+                ];
+            }
+        }
+
+        log_message('error', 'signer_licence : LICENSE_SIGNING_KEY absente ou invalide, '
+            . 'repli sur HMAC. Les mises a jour de code seront refusees cote client.');
+
+        return [
+            'signature' => hash_hmac('sha256', $corps, env_required('LICENSE_HMAC_SECRET')),
+            'niveau'    => 'heritee',
+        ];
+    }
+}

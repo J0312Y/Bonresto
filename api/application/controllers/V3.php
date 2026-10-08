@@ -45,6 +45,8 @@ class V3 extends MY_Controller
 
 				$updatetData['waiter_kitchenToken']    			= $this->input->post('token', TRUE);
 				$this->Api_kitchen_model->update_date('user', $updatetData, 'id', $result->id);
+				$this->load->library('notification');
+				$this->notification->set_external_user_id($updatetData['waiter_kitchenToken'], 'staff', $result->id);
 
 				$webseting = $this->Api_kitchen_model->read('powerbytxt,currency,servicecharge', 'setting', array('id' => 2));
 				$currencyinfo = $this->Api_kitchen_model->read('currencyname,curr_icon', 'currency', array('currencyid' => $webseting->currency));
@@ -197,6 +199,11 @@ class V3 extends MY_Controller
 			$updatetData = array('order_status'     => 2);
 			$this->db->where('order_id', $orderid);
 			$this->db->update('customer_order', $updatetData);
+
+			/* Notification commande en cours de traitement — staff */
+			$this->load->library('notification');
+			$customerorder_notif = $this->db->select('*')->from('customer_order')->where('order_id', $orderid)->get()->row();
+			$this->notification->notify_staff_order_processing($orderid, $customerorder_notif->totalamount);
 			$orderid = $this->input->post('Orderid', TRUE);
 			$kitchenid = $this->input->post('kitchenid', TRUE);
 			$output = $categoryIDs = array();
@@ -392,6 +399,13 @@ class V3 extends MY_Controller
 			$updatetData = array('order_status'     => 3);
 			$this->db->where('order_id', $order_id);
 			$this->db->update('customer_order', $updatetData);
+
+			/* Notification commande prête — staff + client */
+			$this->load->library('notification');
+			$orderinfo_notif = $this->db->select('*')->from('customer_order')->where('order_id', $order_id)->get()->row();
+			$this->notification->notify_staff_order_ready($order_id, $orderinfo_notif->totalamount);
+			$customerinfo_notif = $this->db->select('customer_token')->from('customer_info')->where('customer_id', $orderinfo_notif->customer_id)->get()->row();
+			$this->notification->order_completed($order_id, $customerinfo_notif->customer_token ?? null);
 
 			return $this->respondWithSuccess('All items are ready for this kitchen order', $output);
 		}

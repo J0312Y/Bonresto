@@ -67,23 +67,28 @@ function checkavailablity() {
     alert(lang.enter_number_of_people);
     return false;
   }
-  var currentDate = new Date();
+  var now = new Date();
   var intime = time.split(":");
-  var day = currentDate.getDate();
-  var month = currentDate.getMonth() + 1;
-  var hours = currentDate.getHours();
-  var year = currentDate.getFullYear();
-  var currentday = Date.parse(year + "-" + month + "-" + day);
-  var inutdate = Date.parse(getdate);
 
-  if (currentday == inutdate) {
-    var checkhour = currentDate.setHours(currentDate.getHours() + 1);
-    var endTimeObject = new Date(checkhour);
-    var inputtime = endTimeObject.setHours(intime[0], intime[1], 0);
-  }
-  if (checkhour >= inputtime) {
-    swal("Invalid", lang.select_after_hour_current_time, "warning");
+  // Build date objects for comparison (strip time from "today")
+  var todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var inputDateParts = getdate.split("-");
+  var inputDate = new Date(parseInt(inputDateParts[0]), parseInt(inputDateParts[1]) - 1, parseInt(inputDateParts[2]));
+
+  // Block past dates
+  if (inputDate < todayMidnight) {
+    swal(lang.invalid_date || "Invalid date", lang.cannot_reserve_past_date || "Cannot reserve for a past date.", "warning");
     return false;
+  }
+
+  // If same day, block past time (must be at least 1 hour from now)
+  if (inputDate.getTime() === todayMidnight.getTime()) {
+    var reservationTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(intime[0]), parseInt(intime[1]), 0);
+    var minTime = new Date(now.getTime() + 60 * 60 * 1000); // now + 1 hour
+    if (reservationTime < minTime) {
+      swal(lang.invalid_time || "Invalid time", lang.select_after_hour_current_time, "warning");
+      return false;
+    }
   }
 
   var dataString =
@@ -110,6 +115,10 @@ function checkavailablity() {
           lang.our_service_is_closed_on_this_date_and_time,
           "warning"
         );
+      } else if (data == 3) {
+        swal(lang.invalid_date || "Invalid date", lang.cannot_reserve_past_date || "Cannot reserve for a past date.", "warning");
+      } else if (data == 4) {
+        swal(lang.invalid_time || "Invalid time", lang.select_after_hour_current_time, "warning");
       } else {
         $("#searchreservation").html(data);
       }

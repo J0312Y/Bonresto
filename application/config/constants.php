@@ -83,3 +83,26 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+|--------------------------------------------------------------------------
+| Reservations : statuts qui occupent une table
+|--------------------------------------------------------------------------
+|
+| tblreservation.status : 1 = demande en attente, 2 = confirmee par le
+| personnel.
+|
+| Le calcul de disponibilite ne comptait que le statut 2. Une demande en
+| attente ne bloquait donc aucune table : deux clients pouvaient obtenir
+| le meme creneau tant que personne n'avait confirme. Au rythme d'une
+| saisie humaine le cas restait rare ; avec une prise de reservation
+| automatisee 24 h/24, il devient courant.
+|
+| Une demande en attente occupe desormais sa table. Pour revenir au
+| comportement precedent, remettre [2] ci-dessous — en acceptant le risque
+| de double reservation.
+|
+| A prevoir : une regle d'expiration, pour qu'une demande jamais confirmee
+| libere son creneau au lieu de le retenir indefiniment.
+*/
+defined('RESERVATION_STATUTS_OCCUPANTS') OR define('RESERVATION_STATUTS_OCCUPANTS', [1, 2]);

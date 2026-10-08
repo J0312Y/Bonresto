@@ -3,26 +3,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
-| Notification Configuration
+| Notification Configuration — 100% OneSignal
 |--------------------------------------------------------------------------
-| Clés API pour FCM (Firebase Cloud Messaging) et OneSignal
+| Toutes les notifications passent par OneSignal.
+| L'ancienne API FCM Legacy a été désactivée par Google le 20 juin 2024.
 |--------------------------------------------------------------------------
 */
 
-// FCM API Keys
-$config['fcm_key_staff']    = 'AAAAqG0NVRM:APA91bExey2V18zIHoQmCkMX08SN-McqUvI4c3CG3AnvkRHQp8S9wKn-K4Vb9G79Rfca8bQJY9pn-tTcWiXYJiqe2s63K6QHRFqIx4Oaj9MoB1uVqB7U_gNT9fiqckeWge8eVB9P5-rX';
-$config['fcm_key_customer'] = 'AAAAmN4ekRg:APA91bHDg_gr99QlnGtHD_exg-QuhRc_45Xluti4dmaNGSD0jfuXi3-3M_wv01TihrHlUAWUDI-dlJqr-_wEHeYigIXSjEbsXJfxI4J9x7ugZDOBv07FhAlWIdDvl8zWcKoeeqqPT9Gw';
-$config['fcm_key_hungry']   = 'AAAA4j0CZSQ:APA91bGhEmG9eS2IUjPam6jpDtfBEyvLXGccd_BWGeGolN2pXiVrJ9d06wNut4sXN698cGTgIimXhC6S1CXRnXxRaGmF7n_OvZBK0e3zwqJ1CA6zwRqMaajfxtekvcbaGNfUZmWuRjHZ';
-$config['fcm_key_appv1']    = 'AAAAqItjOeE:APA91bElSBCtTP-NOx3rU_afQgpk8uo7AaOgaDLsaoSFVYhGnXHXd1pEwCi63j0q42NvZp9wvR1gExuEnKZIIfU_pmNwt6N-3zLnJRtSONDUFcZQ1rERTNYmnbONnufrHShrzpne0bDY';
+// OneSignal - Même App ID pour tous (compte unique)
+$config['onesignal_staff_app_id']      = '78ed384b-6ad2-47d0-9b57-c944ee4a2470';
+$config['onesignal_waiter_ios_app_id'] = '78ed384b-6ad2-47d0-9b57-c944ee4a2470';
+$config['onesignal_customer_app_id']   = '78ed384b-6ad2-47d0-9b57-c944ee4a2470';
+$config['onesignal_hungry_app_id']     = '78ed384b-6ad2-47d0-9b57-c944ee4a2470';
 
-// OneSignal - Customer App
-$config['onesignal_customer_app_id']  = '208455d9-baca-4ed2-b6be-12b466a2efbd';
-
-// OneSignal - Staff/Waiter App
-$config['onesignal_staff_app_id']     = '78ed384b-6ad2-47d0-9b57-c944ee4a2470';
-
-// OneSignal - Waiter iOS App
-$config['onesignal_waiter_ios_app_id'] = '4e1150f3-03c8-4de3-ab57-79ca27da1b8e';
-
-// OneSignal API Keys
-$config['onesignal_api_key']          = 'ZTUwMmM2OWEtM2MxYy00NTY2LWJiYWUtZDRkODE4MjNhMDUx';
+// OneSignal REST API Key — hors du depot.
+//
+// Elle etait ecrite en clair ici, dans un fichier suivi par git et sur un
+// depot public : elle a donc fuite, et la protection de GitHub a refuse le
+// commit qui en ajoutait une nouvelle. Elle vit desormais dans .env, comme
+// les autres secrets depuis l'audit F-01.
+//
+// env_get et non env_required : une cle absente doit degrader les
+// notifications, pas empecher toute l'API de demarrer.
+$config['onesignal_api_key']           = env_get('ONESIGNAL_API_KEY', '');

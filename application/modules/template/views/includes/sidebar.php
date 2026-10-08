@@ -49,6 +49,11 @@
                 "method"     => "pos_invoice",
                 "permission" => "read",
             ],
+            "floor_plan"        => [
+                "controller" => "floorplan",
+                "method"     => "index",
+                "permission" => "read",
+            ],
             "order_list"        => [
                 "controller" => "order",
                 "method"     => "orderlist",
@@ -123,6 +128,27 @@
                 "permission" => "read",
             ],
         ];
+        // Agent WhatsApp. Le menu latéral est construit ici, en dur, et non
+        // depuis les config/menu.php des modules : une entrée ajoutée
+        // seulement dans le module resterait invisible.
+        // Agent WhatsApp. Deux choses à savoir avant d'ajouter une entrée ici :
+        //
+        // 1. Le menu latéral est construit en dur dans ce fichier, et non
+        //    depuis les config/menu.php des modules : une entrée ajoutée
+        //    seulement dans le module resterait invisible.
+        // 2. Les clés sont des PHRASES traduites par display(), qui renvoie
+        //    false quand la phrase est absente de la table `language`. Une clé
+        //    non traduite produit donc un libellé vide — un menu invisible,
+        //    sans la moindre erreur. Les clés ci-dessous sont insérées dans
+        //    `language` par assets/data/install.sql du module agentapi.
+        $HmvcMenu2["agentapi"] = [
+            "icon"                   => "<i class='fa fa-whatsapp' aria-hidden='true'></i>",
+            "paiements_a_verifier"   => [
+                "controller" => "verification",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+        ];
         $HmvcMenu2["purchase"] = [
             "icon"                  => "<i class='fa fa-shopping-cart' aria-hidden='true'></i>",
 
@@ -159,6 +185,41 @@
             "stock_out_ingredients" => [
                 "controller" => "purchase",
                 "method"     => "stock_out_ingredients",
+                "permission" => "read",
+            ],
+            "stock_adjustment" => [
+                "controller" => "stock_adjustment",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+            "physical_inventory" => [
+                "controller" => "stock_adjustment",
+                "method"     => "bulk",
+                "permission" => "update",
+            ],
+            "stock_report" => [
+                "controller" => "stock_report",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+            "reorder_suggestions" => [
+                "controller" => "reorder",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+            "expiry_tracking" => [
+                "controller" => "expiry_tracking",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+            "supplier_price_history" => [
+                "controller" => "supplier_price_history",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+            "inter_site_transfer" => [
+                "controller" => "stock_transfer",
+                "method"     => "index",
                 "permission" => "read",
             ],
         ];
@@ -247,6 +308,11 @@
                 "controller" => "production",
                 "method"     => "possetting",
                 "permission" => "create",
+            ],
+            "recipe_cost" => [
+                "controller" => "food_cost",
+                "method"     => "index",
+                "permission" => "read",
             ],
         ];
         $HmvcMenu22["setting"] = [
@@ -598,6 +664,43 @@
                 ],
             ],
         ];
+
+        $HmvcMenu2["loyalty"] = [
+            "icon"             => "<i class='fa fa-gift'></i>",
+            "point_setting"    => ["controller" => "Loyalty", "method" => "point_setting",    "permission" => "read"],
+            "membership_list"  => ["controller" => "Loyalty", "method" => "membership",       "permission" => "read"],
+            "barcode"          => ["controller" => "Loyalty", "method" => "barcode",          "permission" => "read"],
+            "customer_points"  => ["controller" => "Loyalty", "method" => "customer_points",  "permission" => "read"],
+            "review_rating"    => ["controller" => "Loyalty", "method" => "reviews",          "permission" => "read"],
+        ];
+
+        $HmvcMenu2["shiftmangment"] = [
+            "icon"          => "<i class='fa fa-clock-o'></i>",
+            "shift_list"    => [
+                "controller" => "Shiftmangment",
+                "method"     => "index",
+                "permission" => "read",
+            ],
+            "assign_shift"  => [
+                "controller" => "Shiftmangment",
+                "method"     => "assign",
+                "permission" => "read",
+            ],
+        ];
+
+        $HmvcMenu2["tax"] = [
+            "icon"        => "<i class='fa fa-percent'></i>",
+            "tax_setting" => [
+                "controller" => "Tax",
+                "method"     => "setting",
+                "permission" => "read",
+            ],
+            "tax_enable"  => [
+                "controller" => "Tax",
+                "method"     => "enable_setting",
+                "permission" => "read",
+            ],
+        ];
         
         $HmvcMenu["qrapp"] = array(
             "icon" => "<i class='fa fa-qrcode'></i>",
@@ -712,7 +815,26 @@
 
             foreach ($HmvcMenu2 as $moduleName => $moduleData) {
 
-                $module_licensed = $CI_ref->license_manager->has_module($moduleName);
+                // ── Contrôle par plan SAAS ──────────────────────────────────
+                // Super admin voit tout. Sinon, montrer verrouillé.
+                $module_locked = !can_use($moduleName);
+                if ($module_locked) {
+                    // Afficher le module grisé avec cadenas (pas de sous-menu)
+                    $lock_url = base_url('dashboard/license/module_locked?module=' . urlencode($moduleName));
+                    ?>
+                    <li class="treeview sidebar-locked-module" style="opacity:0.45;pointer-events:auto;">
+                        <a href="<?php echo $lock_url; ?>" style="cursor:pointer;" title="Module non inclus dans votre plan">
+                            <?php echo $moduleData["icon"] != null ? $moduleData["icon"] : null; ?>
+                            <span><?php echo display($moduleName); ?></span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-lock pull-right" style="color:#d97706;font-size:13px;"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <?php
+                    continue;
+                }
+                // ────────────────────────────────────────────────────────────
 
                 // check module permission
                 if (
@@ -722,20 +844,7 @@
                 ) {
                     if ($this->permission->module($moduleName)->access()) {
                         $this->permission->module($moduleName)->access();
-
-                        if (!$module_licensed) { ?>
-                        <!-- Locked module: visible but not accessible -->
-                        <li class="treeview" style="opacity:0.6; pointer-events:none;" title="Module non inclus dans votre plan">
-                            <a href="javascript:void(0)" style="cursor:not-allowed;">
-                                <?php echo $moduleData["icon"] != null ? $moduleData["icon"] : null; ?>
-                                <span><?php echo display($moduleName); ?></span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-lock pull-right" style="color:#e74c3c;" title="Non disponible dans votre plan"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <?php continue; // skip rendering the full submenu
-                        } ?>
+                        ?>
                         <li class="treeview ">
 
                             <a href="javascript:void(0)">
@@ -875,17 +984,7 @@
        <?php
     if(!empty($HmvcMenu["qrapp"])) {
         $qrAppMenu = $HmvcMenu["qrapp"];
-        $qr_licensed = $CI_ref->license_manager->has_module('qrapp');
-        if (!$qr_licensed) { ?>
-        <li class="treeview" style="opacity:0.6; pointer-events:none;" title="Module non inclus dans votre plan">
-            <a href="javascript:void(0)" style="cursor:not-allowed;">
-                <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-lock pull-right" style="color:#e74c3c;"></i>
-                </span>
-            </a>
-        </li>
-        <?php } else { ?>
+        if (can_use('qrapp')) { ?>
         <li class="treeview <?php echo in_array($this->uri->segment(2), ['qrorder','qrtable','qrpayment']) ? 'active' : ''; ?>">
             <a href="#">
                 <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
@@ -903,7 +1002,14 @@
                 </li>
             </ul>
         </li>
-        <?php } // end else (qr licensed) ?>
+        <?php } else { ?>
+        <li class="treeview sidebar-locked-module" style="opacity:0.45;">
+            <a href="<?php echo base_url('dashboard/license/module_locked?module=qrapp'); ?>" style="cursor:pointer;" title="Module non inclus dans votre plan">
+                <?php echo $qrAppMenu['icon']; ?> <span>QR App</span>
+                <span class="pull-right-container"><i class="fa fa-lock pull-right" style="color:#d97706;font-size:13px;"></i></span>
+            </a>
+        </li>
+        <?php } ?>
     <?php } ?>
         <!-- *************************************
         **********CUSTOM MODULES****************
@@ -965,6 +1071,11 @@
                                 <ul class="treeview-menu">
                                     <?php foreach ($moduleData as $groupLabel => $label) {
                                     ?>
+                                        <?php
+                                        // Cacher server_setting et factory_reset aux non-superadmins
+                                        $superadmin_only_items = ['server_setting','factory_reset'];
+                                        if (in_array($groupLabel, $superadmin_only_items) && !is_superadmin()) continue;
+                                        ?>
                                         <?php if ($groupLabel != "icon") {
                                             if (
                                                 isset($label["controller"]) &&
@@ -1076,6 +1187,7 @@
                 </ul>
             </li>
 
+            <?php if (is_superadmin()): ?>
             <li class="treeview"><a href="<?php echo base_url(
                                                 "addon/module/index"
                                             ); ?>"><i class="fa fa-adn"></i><span><?php echo display(
@@ -1086,6 +1198,7 @@
                                             ); ?>"><i class="fa fa-adn"></i><span><?php echo display(
                                                                                         "themes"
                                                                                     ); ?></span> </a></li>
+            <?php endif; ?>
             <li class="treeview <?php echo $this->uri->segment(2) == "role" ||
                                     $this->uri->segment(2) == "module_permission"
                                     ? "active"
@@ -1116,6 +1229,7 @@
                 </ul>
             </li>
 
+            <?php if (is_superadmin()): ?>
             <li class="treeview <?php echo $this->uri->segment(2) == "setting"
                                     ? "active"
                                     : null; ?>">
@@ -1173,15 +1287,18 @@
                                                                         "autoupdate"
                                                                     ); ?></span></a>
             </li>
+            <?php endif; // end is_superadmin() for web_setting block ?>
         <?php
         }
         ?>
+        <?php if (is_superadmin()): ?>
         <li class="<?php echo ($this->uri->segment(2) == 'backup_restore' ? 'active' : ''); ?>">
             <a href="<?php echo base_url('dashboard/backup_restore'); ?>">
                 <i class="fa fa-database"></i>
                 <span>Backup & Restore</span>
             </a>
         </li>
+        <?php endif; ?>
         <!-- ends of admin area -->
         <li class="treeview <?php echo $this->uri->segment(2) == "message"
                                 ? "active"

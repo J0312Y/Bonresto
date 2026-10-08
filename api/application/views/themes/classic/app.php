@@ -431,7 +431,7 @@ if (!empty($seoterm)) {
                                                                 echo $webinfo->qrheaderfontcolor;
                                                             } ?>;"></i>
                         </button>
-                      		 
+
                       	</div>
                     </div>
                 </div>
@@ -457,7 +457,7 @@ if (!empty($seoterm)) {
     <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/custom.js"></script>
    <!-- get js from here  -->
    <script src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/qrapp_main.js"></script>
-   
+
 </body>
 
 </html>

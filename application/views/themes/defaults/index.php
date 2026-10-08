@@ -597,7 +597,7 @@ if ($whatsapp_count == 1) {
 ?>
     <script src="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.js" type="text/javascript"></script>
     <script
-        src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/default_theme.js">
+        src="<?php echo base_url(); ?>application/views/themes/<?php echo $acthemename; ?>/assets_web/js/default_theme.js?v=<?php echo time(); ?>">
     </script>
 </body>
 
